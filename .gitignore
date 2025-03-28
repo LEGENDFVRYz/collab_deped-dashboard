@@ -1,0 +1,10 @@
+# Exclude all log files
+*.log
+
+# Exclude all python cache
+**/__pycache__/
+
+# Exclude any env
+.conda/
+.venv/
+
