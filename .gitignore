@@ -3,8 +3,8 @@
 
 # Exclude all python cache
 **/__pycache__/
+__pycache__/
 
 # Exclude any env
 .conda/
 .venv/
-
