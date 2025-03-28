@@ -10,7 +10,7 @@ app.layout = html.Div(
         # navigation style
         html.Div([
             html.Div([
-                html.H2("DATA DASHBOARD PUSHERIST")    
+                html.H2("DATA DASHBOARD PUSHERISTER")    
             ], className='brand-mark'),
             
             html.Div([
