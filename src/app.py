@@ -2,31 +2,104 @@ import plotly.express as px
 import dash
 from dash import Dash, dcc, html, Output, Input
 
+from src.utils import activeTab_callback
+
 # Main Applications
-app = Dash(__name__, use_pages=True)
+app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True)
 
 app.layout = html.Div(
     children=[
-        # navigation style
+        dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
+        dcc.Location(id="url"),  # Gets the current pathname
+        
+        # Navigation style
         html.Div([
             html.Div([
-                html.H2("DATA DASHBOARD")    
-            ], className='brand-mark'),
+                # DataDash Brand Mark
+                html.H2("KURU DASHBOARD")    
+            ], className='brand-section'),
+            
+            html.Div([
+                # Navigation Options
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/overview-light.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/overview-green.svg")], className='dark icon'),
+                            html.Div(['Overview'], className='text')
+                        ], href="/", className='overview nav-btn')
+                ], id='nav-1', className='item-ctn'),
+                
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                            html.Div(['Analytical Tools'], className='text')
+                        ], href='/analytics', className='overview nav-btn'),
+                ], id='nav-2', className='item-ctn'),
+                
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                            html.Div(['School-level Insights'], className='text')
+                        ], href='/school-level', className='overview nav-btn'),
+                ], id='nav-3', className='item-ctn'),
+            ], className='menu-section'),
+            
+            html.Div([
+                # Account Settings
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                            html.Div(['Updates'], className='text')
+                        ], href="/updates", className='overview nav-btn')
+                ], id='opt-1', className='item-ctn'),
+                
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                            html.Div(['Help'], className='text')
+                        ], href='/help', className='overview nav-btn'),
+                ], id='opt-2', className='item-ctn'),
+                
+                html.Div([
+                    html.Div([], className='indicator'),
+                    dcc.Link([
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                            html.Div(['Settings'], className='text')
+                        ], href='/settings', className='overview nav-btn'),
+                ], id='opt-3', className='item-ctn'),
+            ], className='settings-section'),
             
             html.Div([
                 html.Div([
-                    html.Button('Home', id='home_btn'),
-                    html.Button('Analysis', id='analysis_btn'),
-                ])
-            ], className='side-bar')
-        ], className='nav-header'),
+                    html.Div([
+                            html.Img(src="/assets/images/icons_navigation/image-circle-fill.svg")
+                        ], className='display-picture'),
+                    html.Div([
+                            html.Div([html.H4('April Kim Zurc')], className='Username'),
+                            html.Div(['aprkimzurc@gmail.com'], className='email'),
+                        ], className='details'),
+                ], className='ctn')
+            ], className='account-section')
+        ], className='navigation'),
+                
+        
         
         # output: layout pages
         html.Div([
+            # dcc.Location(id="url", refresh=False),
             dash.page_container
         ], className='content-wrapper')
     ],
-    
     className= "app-container"
 )
 
