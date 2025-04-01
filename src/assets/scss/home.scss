@@ -1,0 +1,58 @@
+// Import default styles
+@import "variables";
+
+
+.home-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .main-section{
+        // background-color: red;
+        width: 300px;
+
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+
+        .layer-1{
+            flex: 1;
+            display: flex;
+            padding: 0.5em;
+
+            .area-1{
+                flex: 1;
+            }
+            .area-2{
+                flex: 1;
+            }
+            .area-3{
+                flex: 1;
+            }
+
+        }
+        .layer-2{
+            flex: 2;
+            padding: 0.5em;
+        }
+    }
+
+    .side-section{
+        // background-color: blue;
+        width: 300px;
+
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .layer-1{
+            flex: 1;
+            padding: 0.5em;
+        }
+        
+        .layer-2{
+            flex: 1;
+            padding: 0.5em;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.home-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.home-page .main-section {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+.home-page .main-section .layer-1 {
+  flex: 1;
+  display: flex;
+  padding: 0.5em;
+}
+.home-page .main-section .layer-1 .area-1 {
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 {
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-3 {
+  flex: 1;
+}
+.home-page .main-section .layer-2 {
+  flex: 2;
+  padding: 0.5em;
+}
+.home-page .side-section {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.home-page .side-section .layer-1 {
+  flex: 1;
+  padding: 0.5em;
+}
+.home-page .side-section .layer-2 {
+  flex: 1;
+  padding: 0.5em;
+}/*# sourceMappingURL=home.css.map */
