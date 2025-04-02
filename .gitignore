@@ -8,3 +8,6 @@ __pycache__/
 # Exclude any env
 .conda/
 .venv/
+
+# Exclude css mapping
+*.css.map 

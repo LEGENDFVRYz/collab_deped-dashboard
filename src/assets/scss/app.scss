@@ -1,0 +1,326 @@
+// Import default styles
+@import "variables";
+
+
+// Reset default stylings
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans MT';
+}
+body{
+    background-color: $light-color-2;
+}
+
+
+// App Main Container - Stylings
+.app-container{
+    min-height: 100vh;
+    background-color: $light-color-2;
+    max-width: 120em; // not final
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+
+    // Side Navigations:
+    .navigation{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        max-width: 18em; // not final
+
+        background-color: $light-color-1;
+        box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
+
+        .brand-section{
+            margin-bottom: 1em;
+            text-align: center;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 6em;
+            
+            h2{
+                color: $dark-color-1;
+            }
+        }
+
+        .menu-section{
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 1em;
+
+            .item-ctn{
+                display: flex;
+                flex-direction: row;
+
+                .indicator{
+                    width:0.5em;
+                    height: 3em;
+                    border-top-right-radius: 0.5em;
+                    border-bottom-right-radius: 0.5em;
+
+                    background-color: $primary-color-1;
+                    position: absolute;
+                    left: 0;
+                }
+
+                // Actual Button Stylings
+                .nav-btn{
+                    // display: none;
+                    width: 15em;
+                    height: 3em;
+                    padding: 0.5em 1em;
+                    margin: 0 auto;
+                    border-radius: 0.5em;
+                    
+                    text-decoration: none;
+                    user-select: none;
+                    
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    
+                    .icon{
+                        display: flex;
+                        align-self: center;
+                        
+                        img{
+                            width: 1.5em;
+                            height: 1.5em;
+                        }
+                    }
+                    .text{
+                        padding-left: 1em;
+                        color: $primary-color-3;
+                        
+                        display: flex;
+                        align-self: center;
+                        font-size: 1.15em;
+                    }
+                }
+            }
+
+            .item-ctn.active{
+                .nav-btn{
+                    background-color: $primary-color-1;
+    
+                    .icon.dark{
+                        display: none;
+                    }
+                    .icon.light{
+                        display: flex;
+                    }
+                    .text{
+                        color: $light-color-1;
+                    }
+                }
+            }
+
+            .item-ctn:not(.active){
+
+                .indicator{
+                    display: none;
+                }
+
+                .nav-btn{
+                    .icon.dark{
+                        display: flex;
+                    }
+                    .icon.light{
+                        display: none;
+                    }
+                }
+            }
+
+            .item-ctn:not(.active):hover{
+                .nav-btn{
+                    background-color: $black-1;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .settings-section{
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            bottom: 0;
+            padding-bottom: 1em;
+
+            .item-ctn{
+                display: flex;
+                flex-direction: row;
+
+                .indicator{
+                    width:0.5em;
+                    height: 3em;
+                    border-top-right-radius: 0.5em;
+                    border-bottom-right-radius: 0.5em;
+
+                    background-color: $primary-color-1;
+                }
+
+                // Actual Button Stylings
+                .nav-btn{
+                    // display: none;
+                    width: 15em;
+                    height: 3em;
+                    padding: 0.5em 1em;
+                    margin: 0 auto;
+                    border-radius: 0.5em;
+                    
+                    text-decoration: none;
+                    user-select: none;
+    
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+    
+                    .icon{
+                        display: flex;
+                        align-self: center;
+                        
+                        img{
+                            width: 1.5em;
+                            height: 1.5em;
+                        }
+                    }
+                    .text{
+                        padding-left: 1em;
+                        color: $primary-color-3;
+                        
+                        display: flex;
+                        align-self: center;
+                        font-size: 1.15em;
+                    }
+                }
+            }
+
+            .item-ctn.active{
+                .nav-btn{
+                    background-color: $primary-color-1;
+    
+                    .icon.dark{
+                        display: none;
+                    }
+                    .icon.light{
+                        display: flex;
+                    }
+                    .text{
+                        color: $light-color-1;
+                    }
+                }
+            }
+
+            .item-ctn:not(.active){
+                margin-left: 0.5em;
+
+                .indicator{
+                    display: none;
+                }
+
+                .nav-btn{
+                    .icon.dark{
+                        display: flex;
+                    }
+                    .icon.light{
+                        display: none;
+                    }
+                }
+            }
+
+            .item-ctn:not(.active):hover{
+                .nav-btn{
+                    background-color: $black-1;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .account-section{
+            margin-top: 0.5em;
+            margin-bottom: 2em;
+
+            .ctn{
+                display: flex;
+                flex-direction: row;
+                margin: 0 auto;
+                padding: 0.5em 1em;
+                background-color: $light-color-2;
+                border-radius: 0.5em;
+                width: 16em;
+
+                .display-picture{
+                    padding-right: 0.5em;
+                    img {
+                        width: 3em;
+                        height: 3em;
+                        border-radius: 50%; /* Makes it circular */
+                        object-fit: cover;
+                    }
+                }
+                .details{
+                    flex: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-self: center;
+
+                    .email{
+                        font-size: 0.75em;
+                    }
+                }
+                .more-btn{
+                    display: flex;
+                    flex-direction: column;
+                    align-self: center;
+
+                    width: 1.5em;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    
+    // Contents
+    .content-wrapper{
+        padding: 1em;
+        margin: 0em 1em;
+        margin-right: 0em;
+        
+        display: flex;
+        flex: 1;
+        background-color: $light-color-2;
+        border-radius: 1.5em 0em 0em 1.5em;
+
+        > div:first-of-type {
+            flex: 1;
+            > div:first-of-type {
+                height: 100%;   
+
+                .container{
+                    display: flex;
+                    flex-direction: column;
+
+                    .content{
+                        display: flex;
+                        flex: 1;
+
+                    }
+                    .page-header{
+                        padding: 1em 1em;
+                        h1{
+                            color: $primary-color-2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

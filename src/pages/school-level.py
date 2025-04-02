@@ -5,13 +5,13 @@ from dash import html
 from src.components.card import Card
 
 # Landing page
-dash.register_page(__name__, path="/analytics")  
+dash.register_page(__name__, path="/school-level")  
 
 # Main Page
 layout = html.Div([
     ## -- Standard: Page Content Header
     html.Div([
-        html.H1('Analytical Tools')
+        html.H1('School-Level Insights:')
     ], className='page-header'),
     
     ## -- Content Container
@@ -21,4 +21,4 @@ layout = html.Div([
 
 
     ], className='content')
-], className='analytics-page container')
+], className='school-level-page container')
