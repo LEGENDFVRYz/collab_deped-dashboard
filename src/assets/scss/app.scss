@@ -257,6 +257,9 @@ body{
                 width: 16em;
 
                 .display-picture{
+                    display: flex;
+                    flex-direction: column;
+                    align-self: center;
                     padding-right: 0.5em;
                     img {
                         width: 3em;
