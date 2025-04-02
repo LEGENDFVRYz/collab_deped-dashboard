@@ -3,7 +3,6 @@
 
 
 // Reset default stylings
-
 * {
     margin: 0;
     padding: 0;
@@ -34,7 +33,7 @@ body{
         max-width: 18em; // not final
 
         background-color: $light-color-1;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); /* Right shadow */
+        box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
 
         .brand-section{
             margin-bottom: 1em;
@@ -82,11 +81,11 @@ body{
                     
                     text-decoration: none;
                     user-select: none;
-    
+                    
                     display: flex;
                     align-items: center;
                     flex-direction: row;
-    
+                    
                     .icon{
                         display: flex;
                         align-self: center;
@@ -245,7 +244,8 @@ body{
         }
 
         .account-section{
-            margin-bottom: 1.5em;
+            margin-top: 0.5em;
+            margin-bottom: 2em;
 
             .ctn{
                 display: flex;
@@ -261,6 +261,8 @@ body{
                     img {
                         width: 3em;
                         height: 3em;
+                        border-radius: 50%; /* Makes it circular */
+                        object-fit: cover;
                     }
                 }
                 .details{
@@ -273,6 +275,14 @@ body{
                     .email{
                         font-size: 0.75em;
                     }
+                }
+                .more-btn{
+                    display: flex;
+                    flex-direction: column;
+                    align-self: center;
+
+                    width: 1.5em;
+                    cursor: pointer;
                 }
             }
         }
@@ -293,6 +303,23 @@ body{
             flex: 1;
             > div:first-of-type {
                 height: 100%;   
+
+                .container{
+                    display: flex;
+                    flex-direction: column;
+
+                    .content{
+                        display: flex;
+                        flex: 1;
+
+                    }
+                    .page-header{
+                        padding: 1em 1em;
+                        h1{
+                            color: $primary-color-2;
+                        }
+                    }
+                }
             }
         }
     }

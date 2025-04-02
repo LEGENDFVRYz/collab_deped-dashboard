@@ -7,6 +7,8 @@
     height: 100%;
     display: flex;
 
+
+
     .main-section{
         // background-color: red;
         width: 300px;
@@ -56,3 +58,15 @@
         }
     }
 }
+
+// .card{
+//     background-color: $light-color-2;
+//     width: inherit;
+//     height: 100%;
+//     flex: 1;
+//     box-sizing: content-box;
+
+//     border-radius: 1em;
+//     box-shadow:  5px 5px 11px #ead7dd,
+//                 -5px -5px 11px #fffdff;
+// }
