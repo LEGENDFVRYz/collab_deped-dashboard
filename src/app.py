@@ -82,12 +82,15 @@ app.layout = html.Div(
             html.Div([
                 html.Div([
                     html.Div([
-                            html.Img(src="/assets/images/icons_navigation/image-circle-fill.svg")
+                            html.Img(src="/assets/images/icons_navigation/jaeroorette.jpg")
                         ], className='display-picture'),
                     html.Div([
                             html.Div([html.H4('April Kim Zurc')], className='Username'),
                             html.Div(['aprkimzurc@gmail.com'], className='email'),
                         ], className='details'),
+                    html.Div([
+                            html.Img(src="/assets/images/icons_navigation/more-2-fill-1.svg"),
+                        ], className='more-btn')
                 ], className='ctn')
             ], className='account-section')
         ], className='navigation'),

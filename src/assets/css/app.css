@@ -23,7 +23,7 @@ body {
   flex: 1;
   max-width: 18em;
   background-color: #FFFFFF;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); /* Right shadow */
+  box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2);
 }
 .app-container .navigation .brand-section {
   margin-bottom: 1em;
@@ -34,7 +34,7 @@ body {
   height: 6em;
 }
 .app-container .navigation .brand-section h2 {
-  color: #03624C;
+  color: #565856;
 }
 .app-container .navigation .menu-section {
   display: flex;
@@ -79,7 +79,7 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn .nav-btn .text {
   padding-left: 1em;
-  color: #6EA99A;
+  color: #2CC295;
   display: flex;
   align-self: center;
   font-size: 1.15em;
@@ -151,7 +151,7 @@ body {
 }
 .app-container .navigation .settings-section .item-ctn .nav-btn .text {
   padding-left: 1em;
-  color: #6EA99A;
+  color: #2CC295;
   display: flex;
   align-self: center;
   font-size: 1.15em;
@@ -185,7 +185,8 @@ body {
   cursor: pointer;
 }
 .app-container .navigation .account-section {
-  margin-bottom: 1.5em;
+  margin-top: 0.5em;
+  margin-bottom: 2em;
 }
 .app-container .navigation .account-section .ctn {
   display: flex;
@@ -202,6 +203,9 @@ body {
 .app-container .navigation .account-section .ctn .display-picture img {
   width: 3em;
   height: 3em;
+  border-radius: 50%; /* Makes it circular */
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .app-container .navigation .account-section .ctn .details {
   flex: 1;
@@ -211,6 +215,13 @@ body {
 }
 .app-container .navigation .account-section .ctn .details .email {
   font-size: 0.75em;
+}
+.app-container .navigation .account-section .ctn .more-btn {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 1.5em;
+  cursor: pointer;
 }
 .app-container .content-wrapper {
   padding: 1em;
@@ -226,4 +237,18 @@ body {
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type {
   height: 100%;
+}
+.app-container .content-wrapper > div:first-of-type > div:first-of-type .container {
+  display: flex;
+  flex-direction: column;
+}
+.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .content {
+  display: flex;
+  flex: 1;
+}
+.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header {
+  padding: 1em 1em;
+}
+.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header h1 {
+  color: #3E7D6E;
 }/*# sourceMappingURL=app.css.map */
