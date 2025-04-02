@@ -2,6 +2,11 @@ from dash import Output, Input, callback, dcc
 import dash
 
 
+"""
+    Created to store current tab location.
+    Also, meant to retrieve current routing page
+"""
+
 
 # Store the current pathname when the page changes
 @callback(
@@ -10,7 +15,6 @@ import dash
 )
 def update_active_tab(pathname):
     return pathname  # Save the current route 
-
 
 
 # Restore the active tab on refresh
