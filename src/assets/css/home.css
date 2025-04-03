@@ -19,7 +19,7 @@
 }
 .home-page .main-section .layer-1 .area-1 .header {
   font-size: 1.2em;
-  color: #565856;
+  color: #090909;
 }
 .home-page .main-section .layer-1 .area-1 .graph {
   flex: 1;
@@ -37,16 +37,17 @@
   flex: 1;
   display: flex;
   flex-direction: row;
+  gap: 0.25em;
+  color: #00AD7F;
 }
 .home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display {
   display: flex;
   align-self: center;
 }
 .home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display img {
-  width: 3em;
+  width: 3.5em;
 }
 .home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator {
-  flex: 1;
   display: flex;
   align-self: center;
   font-size: 1.5em;
@@ -57,6 +58,8 @@
 .home-page .main-section .layer-1 .area-2 .loc-2 {
   display: flex;
   flex: 1;
+  gap: 2em;
+  color: #3E7D6E;
 }
 .home-page .main-section .layer-1 .area-2 .loc-2 .upper {
   flex: 1;
@@ -77,6 +80,7 @@
   flex: 1;
   display: flex;
   align-self: center;
+  justify-content: right;
   font-size: 1.25em;
 }
 .home-page .main-section .layer-1 .area-2 .loc-2 .lower {
@@ -90,12 +94,12 @@
 .home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display {
   display: flex;
   align-self: center;
-  flex: 1;
 }
 .home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display img {
   width: 3em;
 }
 .home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator {
+  flex: 1;
   display: flex;
   align-self: center;
   font-size: 1.25em;
@@ -116,7 +120,7 @@
 }
 .home-page .side-section .layer-1 .header {
   font-size: 1.2em;
-  color: #565856;
+  color: #090909;
 }
 .home-page .side-section .layer-1 .graph {
   flex: 1;

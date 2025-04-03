@@ -44,16 +44,17 @@
                         flex: 1;
                         display: flex;
                         flex-direction: row;
+                        gap: 0.25em;
+                        color: $primary-color-1;
 
                         .indicator-display{
                             display: flex;
                             align-self: center;
                             img{
-                                width: 3em;
+                                width: 3.5em;
                             }
                         }
                         .indicator{
-                            flex: 1;
                             display: flex;
                             align-self: center;
                             font-size: 1.5em;
@@ -67,6 +68,8 @@
                 .loc-2{
                     display: flex;
                     flex: 1;
+                    gap: 2em;
+                    color: $primary-color-2;
 
                     .upper{
                         flex: 1;
@@ -75,6 +78,7 @@
                             flex: 1;
                             display: flex;
                             flex-direction: row;
+                            
 
                             .indicator-display{
                                 display: flex;
@@ -87,6 +91,7 @@
                                 flex: 1;
                                 display: flex;
                                 align-self: center;
+                                justify-content: right;
                                 font-size: 1.25em;
                             }
                         }
@@ -103,12 +108,12 @@
                             .indicator-display{
                                 display: flex;
                                 align-self: center;
-                                flex: 1;
                                 img{
                                     width: 3em;
                                 }
                             }
                             .indicator{
+                                flex: 1;
                                 display: flex;
                                 align-self: center;
                                 font-size: 1.25em;

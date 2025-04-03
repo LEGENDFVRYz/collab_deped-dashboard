@@ -16,7 +16,7 @@ dash.register_page(__name__, path="/")
 layout = html.Div([
     ## -- Standard: Page Content Header
     html.Div([
-        html.H1('Overview:')
+        html.H1('Overview')
     ], className='page-header'),
     
     html.Div([
@@ -41,7 +41,7 @@ layout = html.Div([
                             # -- INDICATOR: TOTAL ENROLEES IN PH
                             html.Div([
                                     html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-                                    html.Div([html.Img(src='/assets/images/icons_navigation/image-circle-fill.svg')], className='indicator-display'),
+                                    html.Div([html.Img(src='/assets/images/icons_navigation/team-fill.svg')], className='indicator-display'),
                                 ], className='display'),
                             html.Div(['TOTAL ENROLLEES'], className='details')
                         ])], className='loc-1'),
@@ -50,14 +50,14 @@ layout = html.Div([
                                 # -- INDICATOR: Most Active School Level
                                 html.Div([
                                         html.Div([html.H1(f"{format_large_number(most_active['counts'])}", className="text-center"),], className='indicator'),
-                                        html.Div([html.Img(src='/assets/images/icons_navigation/image-circle-fill.svg')], className='indicator-display'),
+                                        html.Div([html.Img(src='/assets/images/icons_navigation/arrow-right-up-fill.svg')], className='indicator-display'),
                                     ], className='display'),
                             ], className='upper'),
                         html.Div([
                                 # -- INDICATOR: Most Active School Level
                                 html.Div([
                                         html.Div([html.H1(f"{format_large_number(least_active['counts'])}", className="text-center"),], className='indicator'),
-                                        html.Div([html.Img(src='/assets/images/icons_navigation/image-circle-fill.svg')], className='indicator-display'),
+                                        html.Div([html.Img(src='/assets/images/icons_navigation/arrow-left-down-fill.svg')], className='indicator-display'),
                                     ], className='display'),
                             ], className='lower')
                     ])], className='loc-2'),
