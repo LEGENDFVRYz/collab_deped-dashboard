@@ -15,16 +15,93 @@
   padding: 0.5em;
 }
 .home-page .main-section .layer-1 .area-1 {
+  flex: 2;
+}
+.home-page .main-section .layer-1 .area-1 .header {
+  font-size: 1.2em;
+  color: #565856;
+}
+.home-page .main-section .layer-1 .area-1 .graph {
   flex: 1;
 }
 .home-page .main-section .layer-1 .area-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   flex: 1;
 }
-.home-page .main-section .layer-1 .area-3 {
+.home-page .main-section .layer-1 .area-2 .loc-1 {
   flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 .loc-1 .display {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display {
+  display: flex;
+  align-self: center;
+}
+.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display img {
+  width: 3em;
+}
+.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator {
+  flex: 1;
+  display: flex;
+  align-self: center;
+  font-size: 1.5em;
+}
+.home-page .main-section .layer-1 .area-2 .loc-1 .details {
+  text-align: center;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 {
+  display: flex;
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .upper {
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator-display {
+  display: flex;
+  align-self: center;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator-display img {
+  width: 3em;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator {
+  flex: 1;
+  display: flex;
+  align-self: center;
+  font-size: 1.25em;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .lower {
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display {
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display {
+  display: flex;
+  align-self: center;
+  flex: 1;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display img {
+  width: 3em;
+}
+.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator {
+  display: flex;
+  align-self: center;
+  font-size: 1.25em;
 }
 .home-page .main-section .layer-2 {
-  flex: 2;
+  flex: 1;
   padding: 0.5em;
 }
 .home-page .side-section {

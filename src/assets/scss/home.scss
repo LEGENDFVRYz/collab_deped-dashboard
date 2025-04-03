@@ -7,8 +7,6 @@
     height: 100%;
     display: flex;
 
-
-
     .main-section{
         // background-color: red;
         width: 300px;
@@ -23,18 +21,105 @@
             padding: 0.5em;
 
             .area-1{
-                flex: 1;
+                flex: 2;
+
+                .header{
+                    font-size: 1.2em;
+                    color: $dark-color-1;
+                }
+                .graph{
+                    flex: 1;
+                }
             }
             .area-2{
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
                 flex: 1;
-            }
-            .area-3{
-                flex: 1;
-            }
 
+                .loc-1{
+                    flex: 1;
+
+                    .display{
+                        flex: 1;
+                        display: flex;
+                        flex-direction: row;
+
+                        .indicator-display{
+                            display: flex;
+                            align-self: center;
+                            img{
+                                width: 3em;
+                            }
+                        }
+                        .indicator{
+                            flex: 1;
+                            display: flex;
+                            align-self: center;
+                            font-size: 1.5em;
+                        }
+                    }
+                    .details{
+                        text-align: center;
+                    }
+                }
+
+                .loc-2{
+                    display: flex;
+                    flex: 1;
+
+                    .upper{
+                        flex: 1;
+                        
+                        .display{
+                            flex: 1;
+                            display: flex;
+                            flex-direction: row;
+
+                            .indicator-display{
+                                display: flex;
+                                align-self: center;
+                                img{
+                                    width: 3em;
+                                }
+                            }
+                            .indicator{
+                                flex: 1;
+                                display: flex;
+                                align-self: center;
+                                font-size: 1.25em;
+                            }
+                        }
+                    }
+                    .lower{
+                        flex: 1;
+
+                        
+                        .display{
+                            flex: 1;
+                            display: flex;
+                            flex-direction: row-reverse;
+
+                            .indicator-display{
+                                display: flex;
+                                align-self: center;
+                                flex: 1;
+                                img{
+                                    width: 3em;
+                                }
+                            }
+                            .indicator{
+                                display: flex;
+                                align-self: center;
+                                font-size: 1.25em;
+                            }
+                        }
+                    }
+                }
+            }
         }
         .layer-2{
-            flex: 2;
+            flex: 1;
             padding: 0.5em;
         }
     }
@@ -50,6 +135,14 @@
         .layer-1{
             flex: 1;
             padding: 0.5em;
+
+            .header{
+                font-size: 1.2em;
+                color: $dark-color-1;
+            }
+            .graph{
+                flex: 1;
+            }
         }
         
         .layer-2{
