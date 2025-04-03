@@ -1,5 +1,5 @@
 import dash
-from dash import html
+from dash import html, dcc
 
 # src/pages/dashboard.py
 from src.components.card import Card
@@ -11,7 +11,21 @@ dash.register_page(__name__, path="/school-level")
 layout = html.Div([
     ## -- Standard: Page Content Header
     html.Div([
-        html.H1('School-Level Insights')
+        html.H1('School-Level Insights'),
+        html.Div([
+            html.Div([
+                html.Img(src="/assets/images/icons_navigation/search.svg")
+            ], className="search-icon"),
+            dcc.Input(
+                id='input-text',
+                type='text',
+                placeholder='Search here . . .',
+                className="search-input"
+            ),
+            html.Div([
+                html.Img(src="/assets/images/icons_navigation/wrongness.svg")
+            ], className="clear-button"),
+        ], className='search-bar'),
     ], className='page-header'),
     
     html.Div([

@@ -21,10 +21,10 @@
                 display: flex;
                 height: 2em;
                 align-items: center;
-                margin: 1em 0em;
+                margin: 1em 0.5em;
                 background-color: $light-color-1;
                 border-color: $primary-color-1;
-                border-radius: 1em;
+                border-radius: 0.75em;
                 justify-content: space-evenly;
                 
                 .search-icon {
@@ -33,9 +33,10 @@
                     justify-content: center;
                     align-items: center;
                     padding: 0px 8px;
+
                     img {
-                        width: 25px;
-                        height: 25px;
+                        width: 18px;
+                        height: 18px;
                     }
                 }
 
@@ -43,10 +44,25 @@
                     width: 80%;
                     height: 100%;
                     border: none;
+                    color: $black-60;
+                }
+
+                input::placeholder {
+                    font-family: "Inter Regular";
+                    color: #b6b6b6;
                 }
 
                 .clear-button {
-                    
+                    display: flex;
+                    background-color: transparent;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0px 8px;
+
+                    img {
+                        width: 10px;
+                        height: 10px;
+                    }
                 }
             }
 
@@ -100,7 +116,7 @@
                 justify-content: flex-start;
                 margin: 2em 3.4em 0em 0.5em;
                 max-height: 3em;
-                gap: 2.5em;    
+                gap: 0.5em;    
 
                 .option-1,
                 .option {
@@ -113,13 +129,14 @@
                 .option-1 {
                     height: 4.5em;
                     background-color: $light-color-1;
+                    margin-right: 0.25em;
                     flex: 8;
                 }
 
                 .option {
                     margin: 0.25em;
                     background-color: $black-5;
-                    flex: 5;
+                    flex: 6;
 
                     :hover {
                         background-color: $black-10;
