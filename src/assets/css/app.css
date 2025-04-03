@@ -199,6 +199,9 @@ body {
   width: 16em;
 }
 .app-container .navigation .account-section .ctn .display-picture {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
   padding-right: 0.5em;
 }
 .app-container .navigation .account-section .ctn .display-picture img {
