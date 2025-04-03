@@ -7,6 +7,62 @@
     height: 100%;
     display: flex;
 
+    .page-header {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+
+        .search-bar {
+            display: flex;
+            height: 2em;
+            align-items: center;
+            background-color: $light-color-1;
+            border-color: $primary-color-1;
+            border-radius: 0.75em;
+            justify-content: space-evenly;
+            width: 450px;
+            
+            .search-icon {
+                display: flex;
+                background-color: transparent;
+                justify-content: center;
+                align-items: center;
+                padding: 0px 8px;
+    
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+    
+            .search-input {
+                width: 80%;
+                height: 100%;
+                border: none;
+            }
+
+            input::placeholder {
+                font-family: "Inter Regular";
+                color: #b6b6b6;
+            }
+
+    
+            .clear-button {
+                display: flex;
+                background-color: transparent;
+                justify-content: center;
+                align-items: center;
+                padding: 0px 8px;
+    
+                img {
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+        }
+    }
+
     .buttons-level {
         display: flex;
         flex-direction: row;
