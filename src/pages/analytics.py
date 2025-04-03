@@ -18,7 +18,7 @@ layout = html.Div([
             
             html.Div([
                 html.Div([
-                    html.Img(src="/assets/images/icons_navigation/filter.svg")
+                    html.Img(src="/assets/images/icons_navigation/search.svg")
                 ], className="search-icon"),
                 dcc.Input(
                     id='input-text',
@@ -26,7 +26,9 @@ layout = html.Div([
                     placeholder='Search here . . .',
                     className="search-input"
                 ),
-                html.Div(["X"], className="clear-button")
+                html.Div([
+                    html.Img(src="/assets/images/icons_navigation/wrongness.svg")
+                ], className="clear-button")
             ], className='search-bar'),
             
             html.Div([
