@@ -1,8 +1,10 @@
+from re import X
 import dash
 from dash import dcc, html
 
 from numpy import average
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 
@@ -15,19 +17,52 @@ es_df = df1.merge(df2, on='enroll_id')
 shs_df = df1.merge(df3, on='enroll_id')
 dataframe = pd.concat([es_df, shs_df])
 
-query = dataframe.groupby('grade', as_index=False)[['counts']].sum()
+order = [
+    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
+]
 
+dataframe['school-level'] = dataframe['grade'].apply(
+    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
+)
+dataframe
+
+query = dataframe.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
+# print(dataframe.columns)
 
 # Ploting
-home_enrollment_per_region = px.bar(query, x="grade", y="counts")
+home_enrollment_per_region = px.bar(query, 
+                                    x="grade", 
+                                    y="counts",
+                                    text=None,
+                                    color='school-level',
+                                    color_discrete_map={
+                                        'ELEM': '#68d87b', 
+                                        'JHS': '#40ad62', 
+                                        'SHS': '#138954'    
+                                    }
+                            )
 home_enrollment_per_region
 
 # Layout configs
+home_enrollment_per_region.update_layout(yaxis=dict(visible=False), xaxis=dict(visible=False))
 home_enrollment_per_region.update_layout(
     autosize=True,
-    margin={"l": 16, "r": 16, "t": 16, "b": 16},  # Optional: Adjust margins
+    margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
+    paper_bgcolor='rgba(0, 0, 0, 0)', 
+    plot_bgcolor='rgba(0, 0, 0, 0)',   
+    yaxis=dict(showticklabels=False),
+    xaxis=dict(
+        categoryorder='array',
+        categoryarray=order,
+    ),
+    legend=dict(
+        orientation="h",  # Horizontal legend
+        yanchor="bottom",  # Align legend at the bottom
+        y=-0.2,  # Position it below the chart
+        xanchor="center",  # Center it horizontally
+        x=0.5  # Align it to the center
+    )
 )
-
 
 
 ## -- INDICATORS: Total Enrollees
@@ -85,11 +120,20 @@ total_enrollees_per_track
 # average_per_track
 
 # Ploting
-track_ratio_per_track = px.pie(total_enrollees_per_strand, names="strand", values="ratio")
-track_ratio_per_track
+custom_colors = ['#00AD7F', '#E0E0E0']
+explode = [0, 0.15]
+
+track_ratio_per_track = go.Figure(
+    data=[
+        go.Pie(labels=total_enrollees_per_strand['strand'], 
+               values=total_enrollees_per_strand['ratio'], 
+               marker=dict(colors=custom_colors),
+               pull=explode
+    )]
+)
 
 # Layout configs
 track_ratio_per_track.update_layout(
     autosize=True,
-    margin={"l": 16, "r": 16, "t": 16, "b": 16},  # Optional: Adjust margins
+    margin={"l": 8, "r": 8, "t": 16, "b": 0},  # Optional: Adjust margins
 )
