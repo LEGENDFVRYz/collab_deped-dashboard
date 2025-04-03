@@ -1,14 +1,20 @@
 import plotly.express as px
 import dash
 from dash import Dash, dcc, html, Output, Input
+from src.server import server
+import pandas as pd
+# from src.data import dataframe
 
+# Callbacks
 from src.utils import activeTab_callback
 
 # Main Applications
-app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True)
+app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
+
 
 app.layout = html.Div(
     children=[
+        # dcc.Store(id='df', data=dataframe.to_dict()),
         dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
         dcc.Location(id="url"),  # Gets the current pathname
         
@@ -108,4 +114,4 @@ app.layout = html.Div(
 
 # Run the script
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
