@@ -14,4 +14,4 @@ if __name__ == '__main__':
             app.run(debug=True)
         except Exception as e:
             print(f"Failed due to {e}: restarting...")
-            time.sleep(2)   
+            time.sleep(1)   
