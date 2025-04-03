@@ -1,5 +1,6 @@
 // Import default styles
 @import "variables";
+@import '../fonts/stylesheet.css';
 
 
 // Reset default stylings
@@ -7,7 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Gill Sans MT';
+    font-family: 'Inter Medium';
 }
 body{
     background-color: $light-color-2;

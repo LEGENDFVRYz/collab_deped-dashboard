@@ -1,0 +1,79 @@
+@import '../fonts/stylesheet.css';
+.school-level-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.school-level-page .buttons-level {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1em;
+  gap: 1em;
+}
+.school-level-page .buttons-level .gray-1, .school-level-page .buttons-level .gray-2, .school-level-page .buttons-level .gray-3, .school-level-page .buttons-level .filter-icon {
+  display: flex;
+  background-color: #E0E0E0;
+  border-radius: 4px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.school-level-page .buttons-level .gray-1 {
+  width: 140px;
+}
+.school-level-page .buttons-level .gray-2 {
+  width: 60px;
+}
+.school-level-page .buttons-level .gray-3 {
+  background-color: #2CC295;
+  width: 40px;
+}
+.school-level-page .buttons-level .filter-icon {
+  background-color: transparent;
+}
+.school-level-page .buttons-level .filter-icon img {
+  width: 25px;
+  height: 25px;
+}
+.school-level-page .content {
+  display: flex;
+  flex-direction: row;
+}
+.school-level-page .content .main-content {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.school-level-page .content .main-content .si-layer-1 {
+  flex: 1;
+  display: flex;
+  padding: 0.5em;
+}
+.school-level-page .content .main-content .si-layer-1 .card-1 {
+  flex: 1;
+}
+.school-level-page .content .main-content .si-layer-2 {
+  flex: 2;
+  display: flex;
+  padding: 0.5em;
+}
+.school-level-page .content .main-content .si-layer-2 .card-2 {
+  flex: 1;
+}
+.school-level-page .content .main-content .si-layer-2 .card-3 {
+  flex: 1;
+}
+.school-level-page .content .side-content {
+  width: 280px;
+  display: flex;
+}
+.school-level-page .content .side-content .si-layer-1 {
+  flex: 2;
+  display: flex;
+  padding: 0.5em;
+}
+.school-level-page .content .side-content .si-layer-1 .card-4 {
+  flex: 1;
+}/*# sourceMappingURL=school-level.css.map */
