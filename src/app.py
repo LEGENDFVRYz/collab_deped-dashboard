@@ -21,7 +21,7 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 # DataDash Brand Mark
-                html.H2("KURU DASHBOARD")    
+                html.H2("DATA DASHBOARD")    
             ], className='brand-section'),
             
             html.Div([
