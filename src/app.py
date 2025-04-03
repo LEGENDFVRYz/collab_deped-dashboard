@@ -49,7 +49,7 @@ app.layout = html.Div(
                     dcc.Link([
                             html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
                             html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
-                            html.Div(['School-level Insights'], className='text')
+                            html.Div(['School-level'], className='text')
                         ], href='/school-level', className='overview nav-btn'),
                 ], id='nav-3', className='item-ctn'),
             ], className='menu-section'),
