@@ -1,0 +1,2685 @@
+region_id,region,division,district,province
+0,BARMM,Basilan,Lantawan,BASILAN
+1,BARMM,Basilan,Maluso East,BASILAN
+2,BARMM,Basilan,Maluso West,BASILAN
+3,BARMM,Basilan,Pilas,BASILAN
+4,BARMM,Basilan,Sumisip East,BASILAN
+5,BARMM,Basilan,Sumisip North,BASILAN
+6,BARMM,Basilan,Sumisip South,BASILAN
+7,BARMM,Basilan,Tipo-Tipo East,BASILAN
+8,BARMM,Basilan,Tipo-Tipo West,BASILAN
+9,BARMM,Basilan,Tuburan,BASILAN
+10,BARMM,Cotabato City,Cotabato City District I,CITY OF COTABATO
+11,BARMM,Cotabato City,Cotabato City District II,CITY OF COTABATO
+12,BARMM,Cotabato City,Cotabato City District III,CITY OF COTABATO
+13,BARMM,Cotabato City,Cotabato City District IV,CITY OF COTABATO
+14,BARMM,Cotabato City,Cotabato City District V,CITY OF COTABATO
+15,BARMM,Cotabato City,Cotabato City District VI,CITY OF COTABATO
+16,BARMM,Cotabato City,Cotabato City District VII,CITY OF COTABATO
+17,BARMM,Cotabato City,Cotabato City District VIII,CITY OF COTABATO
+18,BARMM,Lamitan City,Lamitan Central,BASILAN
+19,BARMM,Lamitan City,Lamitan East,BASILAN
+20,BARMM,Lamitan City,Lamitan South,BASILAN
+21,BARMM,Lamitan City,Lamitan West I,BASILAN
+22,BARMM,Lamitan City,Lamitan West II,BASILAN
+23,BARMM,Lanao del Sur - I,Balindong I,LANAO DEL SUR
+24,BARMM,Lanao del Sur - I,Balindong II,LANAO DEL SUR
+25,BARMM,Lanao del Sur - I,Buadipuso-Buntong,LANAO DEL SUR
+26,BARMM,Lanao del Sur - I,Bubong I,LANAO DEL SUR
+27,BARMM,Lanao del Sur - I,Bubong II,LANAO DEL SUR
+28,BARMM,Lanao del Sur - I,Bumbaran,LANAO DEL SUR
+29,BARMM,Lanao del Sur - I,Ditsaan Ramain I,LANAO DEL SUR
+30,BARMM,Lanao del Sur - I,Ditsaan Ramain II,LANAO DEL SUR
+31,BARMM,Lanao del Sur - I,Ditsaan Ramain III,LANAO DEL SUR
+32,BARMM,Lanao del Sur - I,Kapai/Tagoloan,LANAO DEL SUR
+33,BARMM,Lanao del Sur - I,Lumba-Bayabao I,LANAO DEL SUR
+34,BARMM,Lanao del Sur - I,Lumba-Bayabao II,LANAO DEL SUR
+35,BARMM,Lanao del Sur - I,Lumba-Bayabao III,LANAO DEL SUR
+36,BARMM,Lanao del Sur - I,Maguing,LANAO DEL SUR
+37,BARMM,Lanao del Sur - I,Maguing II,LANAO DEL SUR
+38,BARMM,Lanao del Sur - I,Marantao I,LANAO DEL SUR
+39,BARMM,Lanao del Sur - I,Marantao II,LANAO DEL SUR
+40,BARMM,Lanao del Sur - I,Masiu A District,LANAO DEL SUR
+41,BARMM,Lanao del Sur - I,Masiu B District,LANAO DEL SUR
+42,BARMM,Lanao del Sur - I,Masiu I,LANAO DEL SUR
+43,BARMM,Lanao del Sur - I,Masiu II,LANAO DEL SUR
+44,BARMM,Lanao del Sur - I,Mulondo,LANAO DEL SUR
+45,BARMM,Lanao del Sur - I,Piagapo East,LANAO DEL SUR
+46,BARMM,Lanao del Sur - I,Piagapo West,LANAO DEL SUR
+47,BARMM,Lanao del Sur - I,Poona-Bayabao North,LANAO DEL SUR
+48,BARMM,Lanao del Sur - I,Poona-Bayabao South,LANAO DEL SUR
+49,BARMM,Lanao del Sur - I,Poona-Bayabao West,LANAO DEL SUR
+50,BARMM,Lanao del Sur - I,Saguiaran I,LANAO DEL SUR
+51,BARMM,Lanao del Sur - I,Saguiaran II,LANAO DEL SUR
+52,BARMM,Lanao del Sur - I,Saguiaran III,LANAO DEL SUR
+53,BARMM,Lanao del Sur - I,South Wao District,LANAO DEL SUR
+54,BARMM,Lanao del Sur - I,Tamparan District,LANAO DEL SUR
+55,BARMM,Lanao del Sur - I,Tamparan I,LANAO DEL SUR
+56,BARMM,Lanao del Sur - I,Taraka I,LANAO DEL SUR
+57,BARMM,Lanao del Sur - I,Taraka II,LANAO DEL SUR
+58,BARMM,Lanao del Sur - I,Wao I,LANAO DEL SUR
+59,BARMM,Lanao del Sur - I,Wao II,LANAO DEL SUR
+60,BARMM,Lanao del Sur - II,Bacolod,LANAO DEL SUR
+61,BARMM,Lanao del Sur - II,Binidayan,LANAO DEL SUR
+62,BARMM,Lanao del Sur - II,Butig,LANAO DEL SUR
+63,BARMM,Lanao del Sur - II,Calanogas,LANAO DEL SUR
+64,BARMM,Lanao del Sur - II,Central Ganassi,LANAO DEL SUR
+65,BARMM,Lanao del Sur - II,Central Tugaya,LANAO DEL SUR
+66,BARMM,Lanao del Sur - II,Diwan,LANAO DEL SUR
+67,BARMM,Lanao del Sur - II,East Ganassi,LANAO DEL SUR
+68,BARMM,Lanao del Sur - II,East Tugaya,LANAO DEL SUR
+69,BARMM,Lanao del Sur - II,Kalawi,LANAO DEL SUR
+70,BARMM,Lanao del Sur - II,Kapatagan,LANAO DEL SUR
+71,BARMM,Lanao del Sur - II,Lower Bayang,LANAO DEL SUR
+72,BARMM,Lanao del Sur - II,Lower Madamba,LANAO DEL SUR
+73,BARMM,Lanao del Sur - II,Lumbaca Unayan,LANAO DEL SUR
+74,BARMM,Lanao del Sur - II,Lumbatan I,LANAO DEL SUR
+75,BARMM,Lanao del Sur - II,Lumbatan II,LANAO DEL SUR
+76,BARMM,Lanao del Sur - II,Lumbayanague I,LANAO DEL SUR
+77,BARMM,Lanao del Sur - II,Lumbayanague II,LANAO DEL SUR
+78,BARMM,Lanao del Sur - II,Marogong,LANAO DEL SUR
+79,BARMM,Lanao del Sur - II,North Balabagan,LANAO DEL SUR
+80,BARMM,Lanao del Sur - II,North Madalum,LANAO DEL SUR
+81,BARMM,Lanao del Sur - II,North Malabang,LANAO DEL SUR
+82,BARMM,Lanao del Sur - II,North Pualas,LANAO DEL SUR
+83,BARMM,Lanao del Sur - II,Pagayawan,LANAO DEL SUR
+84,BARMM,Lanao del Sur - II,South Balabagan,LANAO DEL SUR
+85,BARMM,Lanao del Sur - II,South Madalum,LANAO DEL SUR
+86,BARMM,Lanao del Sur - II,South Malabang,LANAO DEL SUR
+87,BARMM,Lanao del Sur - II,South Pualas,LANAO DEL SUR
+88,BARMM,Lanao del Sur - II,Sultan Dumalondong,LANAO DEL SUR
+89,BARMM,Lanao del Sur - II,Sultan Gumander,LANAO DEL SUR
+90,BARMM,Lanao del Sur - II,Tubaran,LANAO DEL SUR
+91,BARMM,Lanao del Sur - II,Upper Bayang,LANAO DEL SUR
+92,BARMM,Lanao del Sur - II,Upper Madamba,LANAO DEL SUR
+93,BARMM,Lanao del Sur - II,West Ganassi,LANAO DEL SUR
+94,BARMM,Lanao del Sur - II,West Tugaya,LANAO DEL SUR
+95,BARMM,Maguindanao I,Ampatuan,MAGUINDANAO
+96,BARMM,Maguindanao I,Buluan,MAGUINDANAO
+97,BARMM,Maguindanao I,Datu Abdullah Sangki,MAGUINDANAO
+98,BARMM,Maguindanao I,Datu Anggal,MAGUINDANAO
+99,BARMM,Maguindanao I,Datu Hoffer Ampatuan,MAGUINDANAO
+100,BARMM,Maguindanao I,Datu Montawal(Pagagawan),MAGUINDANAO
+101,BARMM,Maguindanao I,Datu Paglas East,MAGUINDANAO
+102,BARMM,Maguindanao I,Datu Paglas North,MAGUINDANAO
+103,BARMM,Maguindanao I,Datu Paglas South,MAGUINDANAO
+104,BARMM,Maguindanao I,Datu Piang I,MAGUINDANAO
+105,BARMM,Maguindanao I,Datu Piang II,MAGUINDANAO
+106,BARMM,Maguindanao I,Datu Salibo,MAGUINDANAO
+107,BARMM,Maguindanao I,Datu Saudi Uy Ampatuan,MAGUINDANAO
+108,BARMM,Maguindanao I,Datu Unsay,MAGUINDANAO
+109,BARMM,Maguindanao I,Gen. S. K. Pendatun,MAGUINDANAO
+110,BARMM,Maguindanao I,Guindulungan,MAGUINDANAO
+111,BARMM,Maguindanao I,Mamasapano,MAGUINDANAO
+112,BARMM,Maguindanao I,Mamasapano North,MAGUINDANAO
+113,BARMM,Maguindanao I,Mangudadatu,MAGUINDANAO
+114,BARMM,Maguindanao I,Pagalungan,MAGUINDANAO
+115,BARMM,Maguindanao I,Paglat,MAGUINDANAO
+116,BARMM,Maguindanao I,Pandag,MAGUINDANAO
+117,BARMM,Maguindanao I,Rajah Buayan,MAGUINDANAO
+118,BARMM,Maguindanao I,Shariff Aguak,MAGUINDANAO
+119,BARMM,Maguindanao I,Shariff Saydona Mustapha,MAGUINDANAO
+120,BARMM,Maguindanao I,South Upi,MAGUINDANAO
+121,BARMM,Maguindanao I,Sultan Sa Barongis,MAGUINDANAO
+122,BARMM,Maguindanao I,Talayan,MAGUINDANAO
+123,BARMM,Maguindanao II,Barira,MAGUINDANAO
+124,BARMM,Maguindanao II,Barira North,MAGUINDANAO
+125,BARMM,Maguindanao II,Barira South,MAGUINDANAO
+126,BARMM,Maguindanao II,Buldon East,MAGUINDANAO
+127,BARMM,Maguindanao II,Buldon West,MAGUINDANAO
+128,BARMM,Maguindanao II,DOS North,MAGUINDANAO
+129,BARMM,Maguindanao II,DOS South,MAGUINDANAO
+130,BARMM,Maguindanao II,Datu Blah Sinsuat,MAGUINDANAO
+131,BARMM,Maguindanao II,Inter Parang,MAGUINDANAO
+132,BARMM,Maguindanao II,Kabuntalan North,MAGUINDANAO
+133,BARMM,Maguindanao II,Kabuntalan South,MAGUINDANAO
+134,BARMM,Maguindanao II,Matanog,MAGUINDANAO
+135,BARMM,Maguindanao II,Parang Bongo,MAGUINDANAO
+136,BARMM,Maguindanao II,Parang North,MAGUINDANAO
+137,BARMM,Maguindanao II,Parang South,MAGUINDANAO
+138,BARMM,Maguindanao II,Sultan Kudarat I,MAGUINDANAO
+139,BARMM,Maguindanao II,Sultan Kudarat II,MAGUINDANAO
+140,BARMM,Maguindanao II,Sultan Mastura,MAGUINDANAO
+141,BARMM,Maguindanao II,Talitay,MAGUINDANAO
+142,BARMM,Maguindanao II,Upi North,MAGUINDANAO
+143,BARMM,Maguindanao II,Upi West,MAGUINDANAO
+144,BARMM,Marawi City,Angoyao District,LANAO DEL SUR
+145,BARMM,Marawi City,Angoyao East District,LANAO DEL SUR
+146,BARMM,Marawi City,Central District,LANAO DEL SUR
+147,BARMM,Marawi City,East District,LANAO DEL SUR
+148,BARMM,Marawi City,North District,LANAO DEL SUR
+149,BARMM,Marawi City,Northeast -II District,LANAO DEL SUR
+150,BARMM,Marawi City,Northeast-I District,LANAO DEL SUR
+151,BARMM,Marawi City,Northwest District,LANAO DEL SUR
+152,BARMM,Marawi City,West District,LANAO DEL SUR
+153,BARMM,Special Geographic Area Division,(No District) - For SGA Division,NORTH COTABATO
+154,BARMM,Special Geographic Area Division,Aleosan East,NORTH COTABATO
+155,BARMM,Special Geographic Area Division,Aleosan West,NORTH COTABATO
+156,BARMM,Special Geographic Area Division,Carmen North,NORTH COTABATO
+157,BARMM,Special Geographic Area Division,Carmen South,NORTH COTABATO
+158,BARMM,Special Geographic Area Division,Kabacan North,NORTH COTABATO
+159,BARMM,Special Geographic Area Division,Kabacan West,NORTH COTABATO
+160,BARMM,Special Geographic Area Division,Midsayap North,NORTH COTABATO
+161,BARMM,Special Geographic Area Division,Midsayap South-West,NORTH COTABATO
+162,BARMM,Special Geographic Area Division,Midsayap West,NORTH COTABATO
+163,BARMM,Special Geographic Area Division,Pigcawayan North,NORTH COTABATO
+164,BARMM,Special Geographic Area Division,Pigcawayan South,NORTH COTABATO
+165,BARMM,Special Geographic Area Division,Pigcawayan West,NORTH COTABATO
+166,BARMM,Special Geographic Area Division,Pikit East,NORTH COTABATO
+167,BARMM,Special Geographic Area Division,Pikit North,NORTH COTABATO
+168,BARMM,Special Geographic Area Division,Pikit South,NORTH COTABATO
+169,BARMM,Special Geographic Area Division,Pikit West,NORTH COTABATO
+170,BARMM,Sulu,Indanan,SULU
+171,BARMM,Sulu,Jolo I,SULU
+172,BARMM,Sulu,Jolo II,SULU
+173,BARMM,Sulu,Jolo III,SULU
+174,BARMM,Sulu,Jolo IV,SULU
+175,BARMM,Sulu,Laminusa,SULU
+176,BARMM,Sulu,Lugus,SULU
+177,BARMM,Sulu,Luuk (Kalinggalan Calauang),SULU
+178,BARMM,Sulu,Maimbung,SULU
+179,BARMM,Sulu,Panamao,SULU
+180,BARMM,Sulu,Pangutaran,SULU
+181,BARMM,Sulu,Parang,SULU
+182,BARMM,Sulu,Pata,SULU
+183,BARMM,Sulu,Patikul,SULU
+184,BARMM,Sulu,Siasi I,SULU
+185,BARMM,Sulu,Siasi II,SULU
+186,BARMM,Sulu,Sibaud,SULU
+187,BARMM,Sulu,Talipao,SULU
+188,BARMM,Sulu,Tapul,SULU
+189,BARMM,Sulu,Tongkil,SULU
+190,BARMM,Tawi-Tawi,Bongao Central,TAWI-TAWI
+191,BARMM,Tawi-Tawi,Bongao I,TAWI-TAWI
+192,BARMM,Tawi-Tawi,Bongao II,TAWI-TAWI
+193,BARMM,Tawi-Tawi,Bongao III,TAWI-TAWI
+194,BARMM,Tawi-Tawi,East Sibutu I (Tando Owak),TAWI-TAWI
+195,BARMM,Tawi-Tawi,East Sibutu II (Tandubanak),TAWI-TAWI
+196,BARMM,Tawi-Tawi,East South Ubian,TAWI-TAWI
+197,BARMM,Tawi-Tawi,Languyan,TAWI-TAWI
+198,BARMM,Tawi-Tawi,Manukmangkaw,TAWI-TAWI
+199,BARMM,Tawi-Tawi,Mapun,TAWI-TAWI
+200,BARMM,Tawi-Tawi,Panglima Sugala (Balimbingan),TAWI-TAWI
+201,BARMM,Tawi-Tawi,Sapa-Sapa I,TAWI-TAWI
+202,BARMM,Tawi-Tawi,Sapa-Sapa II (Banaran),TAWI-TAWI
+203,BARMM,Tawi-Tawi,Tandubas,TAWI-TAWI
+204,BARMM,Tawi-Tawi,Tubig Indangan,TAWI-TAWI
+205,BARMM,Tawi-Tawi,West Sibutu/Sitangkai,TAWI-TAWI
+206,BARMM,Tawi-Tawi,West Simunul,TAWI-TAWI
+207,BARMM,Tawi-Tawi,West South Ubian,TAWI-TAWI
+208,CAR,Abra,Baay-Licuan,ABRA
+209,CAR,Abra,Bangued East,ABRA
+210,CAR,Abra,Bangued West,ABRA
+211,CAR,Abra,Boliney,ABRA
+212,CAR,Abra,Bucay,ABRA
+213,CAR,Abra,Bucloc,ABRA
+214,CAR,Abra,Daguioman,ABRA
+215,CAR,Abra,Danglas,ABRA
+216,CAR,Abra,Dolores,ABRA
+217,CAR,Abra,La Paz,ABRA
+218,CAR,Abra,Lacub,ABRA
+219,CAR,Abra,Lagangilang,ABRA
+220,CAR,Abra,Lagayan,ABRA
+221,CAR,Abra,Langiden,ABRA
+222,CAR,Abra,Luba,ABRA
+223,CAR,Abra,Malibcong,ABRA
+224,CAR,Abra,Manabo,ABRA
+225,CAR,Abra,Pennarubia,ABRA
+226,CAR,Abra,Pidigan,ABRA
+227,CAR,Abra,Pilar,ABRA
+228,CAR,Abra,Sallapadan,ABRA
+229,CAR,Abra,San Isidro,ABRA
+230,CAR,Abra,San Juan,ABRA
+231,CAR,Abra,San Quintin,ABRA
+232,CAR,Abra,Tayum,ABRA
+233,CAR,Abra,Tineg,ABRA
+234,CAR,Abra,Tubo,ABRA
+235,CAR,Abra,Villaviciosa,ABRA
+236,CAR,Apayao,Calanasan,APAYAO
+237,CAR,Apayao,Flora,APAYAO
+238,CAR,Apayao,Kabugao,APAYAO
+239,CAR,Apayao,Luna,APAYAO
+240,CAR,Apayao,Northern Conner,APAYAO
+241,CAR,Apayao,Pudtol,APAYAO
+242,CAR,Apayao,Southern Conner,APAYAO
+243,CAR,Apayao,Sta. Marcela,APAYAO
+244,CAR,Baguio City,District I,BENGUET
+245,CAR,Baguio City,District II,BENGUET
+246,CAR,Baguio City,District III,BENGUET
+247,CAR,Benguet,Atok,BENGUET
+248,CAR,Benguet,Bakun,BENGUET
+249,CAR,Benguet,Bokod,BENGUET
+250,CAR,Benguet,Buguias,BENGUET
+251,CAR,Benguet,Itogon I,BENGUET
+252,CAR,Benguet,Itogon II,BENGUET
+253,CAR,Benguet,Kabayan,BENGUET
+254,CAR,Benguet,Kapangan,BENGUET
+255,CAR,Benguet,Kibungan,BENGUET
+256,CAR,Benguet,La Trinidad,BENGUET
+257,CAR,Benguet,Mankayan,BENGUET
+258,CAR,Benguet,Sablan,BENGUET
+259,CAR,Benguet,Tuba,BENGUET
+260,CAR,Benguet,Tublay,BENGUET
+261,CAR,Ifugao,Aguinaldo,IFUGAO
+262,CAR,Ifugao,Alfonso Lista I,IFUGAO
+263,CAR,Ifugao,Alfonso Lista II,IFUGAO
+264,CAR,Ifugao,Asipulo,IFUGAO
+265,CAR,Ifugao,Banaue,IFUGAO
+266,CAR,Ifugao,Hingyon,IFUGAO
+267,CAR,Ifugao,Hungduan,IFUGAO
+268,CAR,Ifugao,Kiangan,IFUGAO
+269,CAR,Ifugao,Lagawe,IFUGAO
+270,CAR,Ifugao,Lamut,IFUGAO
+271,CAR,Ifugao,Mayoyao,IFUGAO
+272,CAR,Ifugao,Tinoc,IFUGAO
+273,CAR,Kalinga,Balbalan,KALINGA
+274,CAR,Kalinga,Lower Tanudan,KALINGA
+275,CAR,Kalinga,Lubuagan,KALINGA
+276,CAR,Kalinga,Northern Pinukpuk,KALINGA
+277,CAR,Kalinga,Pasil,KALINGA
+278,CAR,Kalinga,Rizal,KALINGA
+279,CAR,Kalinga,Southern Pinukpuk,KALINGA
+280,CAR,Kalinga,Tinglayan,KALINGA
+281,CAR,Kalinga,Upper Tanudan,KALINGA
+282,CAR,Mt. Province,Barlig,MOUNTAIN PROVINCE
+283,CAR,Mt. Province,Bauko I,MOUNTAIN PROVINCE
+284,CAR,Mt. Province,Bauko II,MOUNTAIN PROVINCE
+285,CAR,Mt. Province,Besao,MOUNTAIN PROVINCE
+286,CAR,Mt. Province,Bontoc,MOUNTAIN PROVINCE
+287,CAR,Mt. Province,Natonin,MOUNTAIN PROVINCE
+288,CAR,Mt. Province,Paracelis,MOUNTAIN PROVINCE
+289,CAR,Mt. Province,Sabangan,MOUNTAIN PROVINCE
+290,CAR,Mt. Province,Sadanga,MOUNTAIN PROVINCE
+291,CAR,Mt. Province,Sagada,MOUNTAIN PROVINCE
+292,CAR,Mt. Province,Tadian I,MOUNTAIN PROVINCE
+293,CAR,Mt. Province,Tadian II,MOUNTAIN PROVINCE
+294,CAR,Tabuk City,Eastern Tabuk District I,KALINGA
+295,CAR,Tabuk City,Eastern Tabuk District II,KALINGA
+296,CAR,Tabuk City,Eastern Tabuk District III,KALINGA
+297,CAR,Tabuk City,Nothern  Tabuk District I,KALINGA
+298,CAR,Tabuk City,Nothern  Tabuk District II,KALINGA
+299,CAR,Tabuk City,Southern Tabuk District I,KALINGA
+300,CAR,Tabuk City,Southern Tabuk District II,KALINGA
+301,CAR,Tabuk City,Southern Tabuk District III,KALINGA
+302,CAR,Tabuk City,Western Tabuk District I,KALINGA
+303,CAR,Tabuk City,Western Tabuk District II,KALINGA
+304,CARAGA,Agusan del Norte,Buenavista I,AGUSAN DEL NORTE
+305,CARAGA,Agusan del Norte,Buenavista II,AGUSAN DEL NORTE
+306,CARAGA,Agusan del Norte,Buenavista III,AGUSAN DEL NORTE
+307,CARAGA,Agusan del Norte,Buenavista IV,AGUSAN DEL NORTE
+308,CARAGA,Agusan del Norte,Carmen,AGUSAN DEL NORTE
+309,CARAGA,Agusan del Norte,Jabonga I,AGUSAN DEL NORTE
+310,CARAGA,Agusan del Norte,Jabonga II,AGUSAN DEL NORTE
+311,CARAGA,Agusan del Norte,Kitcharao,AGUSAN DEL NORTE
+312,CARAGA,Agusan del Norte,Las Nieves East,AGUSAN DEL NORTE
+313,CARAGA,Agusan del Norte,Las Nieves West,AGUSAN DEL NORTE
+314,CARAGA,Agusan del Norte,Magallanes,AGUSAN DEL NORTE
+315,CARAGA,Agusan del Norte,Nasipit East,AGUSAN DEL NORTE
+316,CARAGA,Agusan del Norte,Nasipit West,AGUSAN DEL NORTE
+317,CARAGA,Agusan del Norte,R.T. Romualdez,AGUSAN DEL NORTE
+318,CARAGA,Agusan del Norte,Santiago,AGUSAN DEL NORTE
+319,CARAGA,Agusan del Norte,Tubay I,AGUSAN DEL NORTE
+320,CARAGA,Agusan del Norte,Tubay II,AGUSAN DEL NORTE
+321,CARAGA,Agusan del Sur,Bunawan I,AGUSAN DEL SUR
+322,CARAGA,Agusan del Sur,Bunawan II,AGUSAN DEL SUR
+323,CARAGA,Agusan del Sur,Curriculum Implementation Division (Agusan del Sur Division),AGUSAN DEL SUR
+324,CARAGA,Agusan del Sur,Esperanza I,AGUSAN DEL SUR
+325,CARAGA,Agusan del Sur,Esperanza II,AGUSAN DEL SUR
+326,CARAGA,Agusan del Sur,Esperanza III,AGUSAN DEL SUR
+327,CARAGA,Agusan del Sur,La Paz I,AGUSAN DEL SUR
+328,CARAGA,Agusan del Sur,La Paz II,AGUSAN DEL SUR
+329,CARAGA,Agusan del Sur,Loreto North,AGUSAN DEL SUR
+330,CARAGA,Agusan del Sur,Loreto South,AGUSAN DEL SUR
+331,CARAGA,Agusan del Sur,Prosperidad I,AGUSAN DEL SUR
+332,CARAGA,Agusan del Sur,Prosperidad II,AGUSAN DEL SUR
+333,CARAGA,Agusan del Sur,Prosperidad III,AGUSAN DEL SUR
+334,CARAGA,Agusan del Sur,Prosperidad IV,AGUSAN DEL SUR
+335,CARAGA,Agusan del Sur,Rosario I,AGUSAN DEL SUR
+336,CARAGA,Agusan del Sur,Rosario II,AGUSAN DEL SUR
+337,CARAGA,Agusan del Sur,San Francisco I,AGUSAN DEL SUR
+338,CARAGA,Agusan del Sur,San Francisco II,AGUSAN DEL SUR
+339,CARAGA,Agusan del Sur,San Francisco III,AGUSAN DEL SUR
+340,CARAGA,Agusan del Sur,San Francisco IV,AGUSAN DEL SUR
+341,CARAGA,Agusan del Sur,San Luis I,AGUSAN DEL SUR
+342,CARAGA,Agusan del Sur,San Luis II,AGUSAN DEL SUR
+343,CARAGA,Agusan del Sur,Sibagat I,AGUSAN DEL SUR
+344,CARAGA,Agusan del Sur,Sibagat II,AGUSAN DEL SUR
+345,CARAGA,Agusan del Sur,Sta. Josefa,AGUSAN DEL SUR
+346,CARAGA,Agusan del Sur,Talacogon East,AGUSAN DEL SUR
+347,CARAGA,Agusan del Sur,Talacogon West,AGUSAN DEL SUR
+348,CARAGA,Agusan del Sur,Trento I,AGUSAN DEL SUR
+349,CARAGA,Agusan del Sur,Trento II,AGUSAN DEL SUR
+350,CARAGA,Agusan del Sur,Veruela I,AGUSAN DEL SUR
+351,CARAGA,Agusan del Sur,Veruela II,AGUSAN DEL SUR
+352,CARAGA,Bayugan City,Bayugan Central,AGUSAN DEL SUR
+353,CARAGA,Bayugan City,Bayugan East,AGUSAN DEL SUR
+354,CARAGA,Bayugan City,Bayugan North,AGUSAN DEL SUR
+355,CARAGA,Bayugan City,Bayugan South,AGUSAN DEL SUR
+356,CARAGA,Bayugan City,Bayugan West,AGUSAN DEL SUR
+357,CARAGA,Bislig City,Bislig City I,SURIGAO DEL SUR
+358,CARAGA,Bislig City,Bislig City II,SURIGAO DEL SUR
+359,CARAGA,Bislig City,Mangagoy I,SURIGAO DEL SUR
+360,CARAGA,Bislig City,Mangagoy II,SURIGAO DEL SUR
+361,CARAGA,Butuan City,Central Butuan District I,AGUSAN DEL NORTE
+362,CARAGA,Butuan City,Central Butuan District II,AGUSAN DEL NORTE
+363,CARAGA,Butuan City,East Butuan District I,AGUSAN DEL NORTE
+364,CARAGA,Butuan City,East Butuan District II,AGUSAN DEL NORTE
+365,CARAGA,Butuan City,North Butuan District,AGUSAN DEL NORTE
+366,CARAGA,Butuan City,Northwest Butuan District,AGUSAN DEL NORTE
+367,CARAGA,Butuan City,South Butuan District I,AGUSAN DEL NORTE
+368,CARAGA,Butuan City,South Butuan District II,AGUSAN DEL NORTE
+369,CARAGA,Butuan City,Southeast I Butuan District,AGUSAN DEL NORTE
+370,CARAGA,Butuan City,Southeast II Butuan District,AGUSAN DEL NORTE
+371,CARAGA,Butuan City,Southwest Butuan District,AGUSAN DEL NORTE
+372,CARAGA,Butuan City,West Butuan District I,AGUSAN DEL NORTE
+373,CARAGA,Butuan City,West Butuan District II,AGUSAN DEL NORTE
+374,CARAGA,Cabadbaran City,North Cabadbaran,AGUSAN DEL NORTE
+375,CARAGA,Cabadbaran City,Northwest Cabadbaran,AGUSAN DEL NORTE
+376,CARAGA,Cabadbaran City,South Cabadbaran,AGUSAN DEL NORTE
+377,CARAGA,Cabadbaran City,Southeast Cabadbaran,AGUSAN DEL NORTE
+378,CARAGA,Dinagat Island,Albor,DINAGAT ISLANDS
+379,CARAGA,Dinagat Island,Cagdianao,DINAGAT ISLANDS
+380,CARAGA,Dinagat Island,Dinagat,DINAGAT ISLANDS
+381,CARAGA,Dinagat Island,Loreto,DINAGAT ISLANDS
+382,CARAGA,Dinagat Island,Rizal,DINAGAT ISLANDS
+383,CARAGA,Dinagat Island,Rizal II,DINAGAT ISLANDS
+384,CARAGA,Dinagat Island,San Jose,DINAGAT ISLANDS
+385,CARAGA,Dinagat Island,Tubajon,DINAGAT ISLANDS
+386,CARAGA,Siargao,Burgos,SURIGAO DEL NORTE
+387,CARAGA,Siargao,Dapa East,SURIGAO DEL NORTE
+388,CARAGA,Siargao,Dapa West,SURIGAO DEL NORTE
+389,CARAGA,Siargao,General Luna,SURIGAO DEL NORTE
+390,CARAGA,Siargao,Numancia East,SURIGAO DEL NORTE
+391,CARAGA,Siargao,Numancia West,SURIGAO DEL NORTE
+392,CARAGA,Siargao,Pilar,SURIGAO DEL NORTE
+393,CARAGA,Siargao,San Benito,SURIGAO DEL NORTE
+394,CARAGA,Siargao,San Isidro,SURIGAO DEL NORTE
+395,CARAGA,Siargao,Sapao,SURIGAO DEL NORTE
+396,CARAGA,Siargao,Socorro East District,SURIGAO DEL NORTE
+397,CARAGA,Siargao,Socorro West District,SURIGAO DEL NORTE
+398,CARAGA,Surigao City,Surigao City District I,SURIGAO DEL NORTE
+399,CARAGA,Surigao City,Surigao City District II,SURIGAO DEL NORTE
+400,CARAGA,Surigao City,Surigao City District III,SURIGAO DEL NORTE
+401,CARAGA,Surigao City,Surigao City District IV,SURIGAO DEL NORTE
+402,CARAGA,Surigao City,Surigao City District V,SURIGAO DEL NORTE
+403,CARAGA,Surigao City,Surigao City District VI,SURIGAO DEL NORTE
+404,CARAGA,Surigao City,Surigao City District VII,SURIGAO DEL NORTE
+405,CARAGA,Surigao City,Surigao City District VIII,SURIGAO DEL NORTE
+406,CARAGA,Surigao del Norte,Alegria,SURIGAO DEL NORTE
+407,CARAGA,Surigao del Norte,Anao-Aon,SURIGAO DEL NORTE
+408,CARAGA,Surigao del Norte,Bacuag,SURIGAO DEL NORTE
+409,CARAGA,Surigao del Norte,Claver,SURIGAO DEL NORTE
+410,CARAGA,Surigao del Norte,Gigaquit,SURIGAO DEL NORTE
+411,CARAGA,Surigao del Norte,Mainit I,SURIGAO DEL NORTE
+412,CARAGA,Surigao del Norte,Mainit II,SURIGAO DEL NORTE
+413,CARAGA,Surigao del Norte,Malimono,SURIGAO DEL NORTE
+414,CARAGA,Surigao del Norte,Placer I,SURIGAO DEL NORTE
+415,CARAGA,Surigao del Norte,Placer II,SURIGAO DEL NORTE
+416,CARAGA,Surigao del Norte,Sison,SURIGAO DEL NORTE
+417,CARAGA,Surigao del Norte,Tagana-An,SURIGAO DEL NORTE
+418,CARAGA,Surigao del Norte,Tubod,SURIGAO DEL NORTE
+419,CARAGA,Surigao del Sur,Barobo I,SURIGAO DEL SUR
+420,CARAGA,Surigao del Sur,Barobo II,SURIGAO DEL SUR
+421,CARAGA,Surigao del Sur,Bayabas,SURIGAO DEL SUR
+422,CARAGA,Surigao del Sur,Cagwait,SURIGAO DEL SUR
+423,CARAGA,Surigao del Sur,Cantilan I,SURIGAO DEL SUR
+424,CARAGA,Surigao del Sur,Cantilan II,SURIGAO DEL SUR
+425,CARAGA,Surigao del Sur,Carmen,SURIGAO DEL SUR
+426,CARAGA,Surigao del Sur,Carrascal,SURIGAO DEL SUR
+427,CARAGA,Surigao del Sur,Cortes,SURIGAO DEL SUR
+428,CARAGA,Surigao del Sur,Hinatuan North,SURIGAO DEL SUR
+429,CARAGA,Surigao del Sur,Hinatuan South,SURIGAO DEL SUR
+430,CARAGA,Surigao del Sur,Lanuza,SURIGAO DEL SUR
+431,CARAGA,Surigao del Sur,Lianga,SURIGAO DEL SUR
+432,CARAGA,Surigao del Sur,Lingig I,SURIGAO DEL SUR
+433,CARAGA,Surigao del Sur,Lingig II,SURIGAO DEL SUR
+434,CARAGA,Surigao del Sur,Madrid,SURIGAO DEL SUR
+435,CARAGA,Surigao del Sur,Marihatag,SURIGAO DEL SUR
+436,CARAGA,Surigao del Sur,San Agustin,SURIGAO DEL SUR
+437,CARAGA,Surigao del Sur,San Miguel I,SURIGAO DEL SUR
+438,CARAGA,Surigao del Sur,San Miguel II,SURIGAO DEL SUR
+439,CARAGA,Surigao del Sur,Tagbina I,SURIGAO DEL SUR
+440,CARAGA,Surigao del Sur,Tagbina II,SURIGAO DEL SUR
+441,CARAGA,Surigao del Sur,Tago I,SURIGAO DEL SUR
+442,CARAGA,Surigao del Sur,Tago II,SURIGAO DEL SUR
+443,CARAGA,Tandag City,Tandag I,SURIGAO DEL SUR
+444,CARAGA,Tandag City,Tandag II,SURIGAO DEL SUR
+445,MIMAROPA,Calapan City,Calapan East,ORIENTAL MINDORO
+446,MIMAROPA,Calapan City,Calapan South,ORIENTAL MINDORO
+447,MIMAROPA,Calapan City,Calapan West,ORIENTAL MINDORO
+448,MIMAROPA,Marinduque,Boac North,MARINDUQUE
+449,MIMAROPA,Marinduque,Boac South,MARINDUQUE
+450,MIMAROPA,Marinduque,Buenavista,MARINDUQUE
+451,MIMAROPA,Marinduque,Gasan,MARINDUQUE
+452,MIMAROPA,Marinduque,Mogpog,MARINDUQUE
+453,MIMAROPA,Marinduque,Santa Cruz East,MARINDUQUE
+454,MIMAROPA,Marinduque,Santa Cruz North,MARINDUQUE
+455,MIMAROPA,Marinduque,Santa Cruz South,MARINDUQUE
+456,MIMAROPA,Marinduque,Torrijos,MARINDUQUE
+457,MIMAROPA,Occidental Mindoro,Abra De Ilog-Paluan,OCCIDENTAL MINDORO
+458,MIMAROPA,Occidental Mindoro,Calintaan,OCCIDENTAL MINDORO
+459,MIMAROPA,Occidental Mindoro,Looc,OCCIDENTAL MINDORO
+460,MIMAROPA,Occidental Mindoro,Lubang,OCCIDENTAL MINDORO
+461,MIMAROPA,Occidental Mindoro,Magsaysay,OCCIDENTAL MINDORO
+462,MIMAROPA,Occidental Mindoro,Mamburao,OCCIDENTAL MINDORO
+463,MIMAROPA,Occidental Mindoro,Rizal,OCCIDENTAL MINDORO
+464,MIMAROPA,Occidental Mindoro,Sablayan North,OCCIDENTAL MINDORO
+465,MIMAROPA,Occidental Mindoro,Sablayan South,OCCIDENTAL MINDORO
+466,MIMAROPA,Occidental Mindoro,San Jose East,OCCIDENTAL MINDORO
+467,MIMAROPA,Occidental Mindoro,San Jose North,OCCIDENTAL MINDORO
+468,MIMAROPA,Occidental Mindoro,San Jose South,OCCIDENTAL MINDORO
+469,MIMAROPA,Occidental Mindoro,San Jose West,OCCIDENTAL MINDORO
+470,MIMAROPA,Occidental Mindoro,Sta. Cruz,OCCIDENTAL MINDORO
+471,MIMAROPA,Oriental Mindoro,Baco,ORIENTAL MINDORO
+472,MIMAROPA,Oriental Mindoro,Bansud,ORIENTAL MINDORO
+473,MIMAROPA,Oriental Mindoro,Bongabong North,ORIENTAL MINDORO
+474,MIMAROPA,Oriental Mindoro,Bongabong South,ORIENTAL MINDORO
+475,MIMAROPA,Oriental Mindoro,Bulalacao,ORIENTAL MINDORO
+476,MIMAROPA,Oriental Mindoro,Gloria,ORIENTAL MINDORO
+477,MIMAROPA,Oriental Mindoro,Mansalay,ORIENTAL MINDORO
+478,MIMAROPA,Oriental Mindoro,Naujan East,ORIENTAL MINDORO
+479,MIMAROPA,Oriental Mindoro,Naujan South,ORIENTAL MINDORO
+480,MIMAROPA,Oriental Mindoro,Naujan West,ORIENTAL MINDORO
+481,MIMAROPA,Oriental Mindoro,Pinamalayan East,ORIENTAL MINDORO
+482,MIMAROPA,Oriental Mindoro,Pinamalayan West,ORIENTAL MINDORO
+483,MIMAROPA,Oriental Mindoro,Pola,ORIENTAL MINDORO
+484,MIMAROPA,Oriental Mindoro,Puerto Galera,ORIENTAL MINDORO
+485,MIMAROPA,Oriental Mindoro,Roxas,ORIENTAL MINDORO
+486,MIMAROPA,Oriental Mindoro,San Teodoro,ORIENTAL MINDORO
+487,MIMAROPA,Oriental Mindoro,Socorro,ORIENTAL MINDORO
+488,MIMAROPA,Oriental Mindoro,Victoria,ORIENTAL MINDORO
+489,MIMAROPA,Palawan,Aborlan Central,PALAWAN
+490,MIMAROPA,Palawan,Aborlan East,PALAWAN
+491,MIMAROPA,Palawan,Aborlan West,PALAWAN
+492,MIMAROPA,Palawan,Agutaya,PALAWAN
+493,MIMAROPA,Palawan,Araceli (Araceli-Dumaran),PALAWAN
+494,MIMAROPA,Palawan,Balabac,PALAWAN
+495,MIMAROPA,Palawan,Bataraza District I,PALAWAN
+496,MIMAROPA,Palawan,Bataraza District II,PALAWAN
+497,MIMAROPA,Palawan,Brooke'S Point II (S. Espanola),PALAWAN
+498,MIMAROPA,Palawan,Busuanga,PALAWAN
+499,MIMAROPA,Palawan,Caganyancillo,PALAWAN
+500,MIMAROPA,Palawan,Coron Coastal,PALAWAN
+501,MIMAROPA,Palawan,Coron Inland,PALAWAN
+502,MIMAROPA,Palawan,Culion,PALAWAN
+503,MIMAROPA,Palawan,Cuyo,PALAWAN
+504,MIMAROPA,Palawan,Dumaran Island District,PALAWAN
+505,MIMAROPA,Palawan,Dumaran Mainland District,PALAWAN
+506,MIMAROPA,Palawan,El Nido del Norte,PALAWAN
+507,MIMAROPA,Palawan,El Nido del Sur,PALAWAN
+508,MIMAROPA,Palawan,Linapacan,PALAWAN
+509,MIMAROPA,Palawan,Magsaysay,PALAWAN
+510,MIMAROPA,Palawan,Narra District I,PALAWAN
+511,MIMAROPA,Palawan,Narra District II,PALAWAN
+512,MIMAROPA,Palawan,North Brooke's Point,PALAWAN
+513,MIMAROPA,Palawan,Quezon North,PALAWAN
+514,MIMAROPA,Palawan,Quezon South,PALAWAN
+515,MIMAROPA,Palawan,Rizal,PALAWAN
+516,MIMAROPA,Palawan,Roxas Central,PALAWAN
+517,MIMAROPA,Palawan,Roxas North,PALAWAN
+518,MIMAROPA,Palawan,Roxas South,PALAWAN
+519,MIMAROPA,Palawan,San Vicente,PALAWAN
+520,MIMAROPA,Palawan,South Brooke's Point,PALAWAN
+521,MIMAROPA,Palawan,Taytay I,PALAWAN
+522,MIMAROPA,Palawan,Taytay II,PALAWAN
+523,MIMAROPA,Palawan,Taytay III,PALAWAN
+524,MIMAROPA,Puerto Princesa City,Puerto Princesa I District,PALAWAN
+525,MIMAROPA,Puerto Princesa City,Puerto Princesa II District,PALAWAN
+526,MIMAROPA,Puerto Princesa City,Puerto Princesa III District,PALAWAN
+527,MIMAROPA,Romblon,Alcantara,ROMBLON
+528,MIMAROPA,Romblon,Banton,ROMBLON
+529,MIMAROPA,Romblon,Cajidiocan-Magdiwang,ROMBLON
+530,MIMAROPA,Romblon,Concepcion,ROMBLON
+531,MIMAROPA,Romblon,Corcuera,ROMBLON
+532,MIMAROPA,Romblon,Looc,ROMBLON
+533,MIMAROPA,Romblon,Odiongan North,ROMBLON
+534,MIMAROPA,Romblon,Odiongan South,ROMBLON
+535,MIMAROPA,Romblon,Romblon,ROMBLON
+536,MIMAROPA,Romblon,San Agustin-Calatrava,ROMBLON
+537,MIMAROPA,Romblon,San Andres,ROMBLON
+538,MIMAROPA,Romblon,San Fernando,ROMBLON
+539,MIMAROPA,Romblon,San Jose-Santa Fe,ROMBLON
+540,NCR,Caloocan City,Aromar (Aromahan-Marulas),NCR   THIRD DISTRICT
+541,NCR,Caloocan City,Caloocan North I,NCR   THIRD DISTRICT
+542,NCR,Caloocan City,Caloocan North II,NCR   THIRD DISTRICT
+543,NCR,Caloocan City,Caloocan North III,NCR   THIRD DISTRICT
+544,NCR,Caloocan City,Caloocan North IV,NCR   THIRD DISTRICT
+545,NCR,Caloocan City,Pobcaran (Poblacion-Caliparan),NCR   THIRD DISTRICT
+546,NCR,Caloocan City,Tanque,NCR   THIRD DISTRICT
+547,NCR,City of San Juan,San Juan District I,NCR   SECOND DISTRICT
+548,NCR,City of San Juan,San Juan District II,NCR   SECOND DISTRICT
+549,NCR,Las Piñas City,Las Piñas City I,NCR   FOURTH DISTRICT
+550,NCR,Las Piñas City,Las Piñas City II,NCR   FOURTH DISTRICT
+551,NCR,Makati City,Makati City District I,NCR   FOURTH DISTRICT
+552,NCR,Makati City,Makati City District II,NCR   FOURTH DISTRICT
+553,NCR,Makati City,Makati City District III,NCR   FOURTH DISTRICT
+554,NCR,Makati City,Makati City District IV,NCR   FOURTH DISTRICT
+555,NCR,Makati City,Makati City District V,NCR   FOURTH DISTRICT
+556,NCR,Makati City,Makati City District VI,NCR   FOURTH DISTRICT
+557,NCR,Malabon City,Malabon District I,NCR   THIRD DISTRICT
+558,NCR,Malabon City,Malabon District II,NCR   THIRD DISTRICT
+559,NCR,Malabon City,Malabon District III,NCR   THIRD DISTRICT
+560,NCR,Malabon City,Malabon District IV,NCR   THIRD DISTRICT
+561,NCR,Malabon City,Malabon District V,NCR   THIRD DISTRICT
+562,NCR,Mandaluyong City,Mandaluyong City District I,NCR   SECOND DISTRICT
+563,NCR,Mandaluyong City,Mandaluyong City District II,NCR   SECOND DISTRICT
+564,NCR,Manila,Malate,"MANILA, NCR,  FIRST DISTRICT "
+565,NCR,Manila,Paco I,"MANILA, NCR,  FIRST DISTRICT "
+566,NCR,Manila,Paco II,"MANILA, NCR,  FIRST DISTRICT "
+567,NCR,Manila,Pandacan I,"MANILA, NCR,  FIRST DISTRICT "
+568,NCR,Manila,Pandacan II,"MANILA, NCR,  FIRST DISTRICT "
+569,NCR,Manila,Sampaloc I,"MANILA, NCR,  FIRST DISTRICT "
+570,NCR,Manila,Sampaloc II,"MANILA, NCR,  FIRST DISTRICT "
+571,NCR,Manila,Sampaloc III,"MANILA, NCR,  FIRST DISTRICT "
+572,NCR,Manila,Sampaloc IV,"MANILA, NCR,  FIRST DISTRICT "
+573,NCR,Manila,Sampaloc IX,"MANILA, NCR,  FIRST DISTRICT "
+574,NCR,Manila,Sampaloc V,"MANILA, NCR,  FIRST DISTRICT "
+575,NCR,Manila,Sampaloc VI,"MANILA, NCR,  FIRST DISTRICT "
+576,NCR,Manila,Sampaloc VII,"MANILA, NCR,  FIRST DISTRICT "
+577,NCR,Manila,Sampaloc VIII,"MANILA, NCR,  FIRST DISTRICT "
+578,NCR,Manila,San Andres,"MANILA, NCR,  FIRST DISTRICT "
+579,NCR,Manila,San Nicolas,"MANILA, NCR,  FIRST DISTRICT "
+580,NCR,Manila,Singalong,"MANILA, NCR,  FIRST DISTRICT "
+581,NCR,Manila,Sta. Ana I,"MANILA, NCR,  FIRST DISTRICT "
+582,NCR,Manila,Sta. Ana II,"MANILA, NCR,  FIRST DISTRICT "
+583,NCR,Manila,Sta. Ana III,"MANILA, NCR,  FIRST DISTRICT "
+584,NCR,Manila,Sta. Cruz I,"MANILA, NCR,  FIRST DISTRICT "
+585,NCR,Manila,Sta. Cruz II,"MANILA, NCR,  FIRST DISTRICT "
+586,NCR,Manila,Sta. Cruz III,"MANILA, NCR,  FIRST DISTRICT "
+587,NCR,Manila,Sta. Cruz IV,"MANILA, NCR,  FIRST DISTRICT "
+588,NCR,Manila,Sta. Cruz V,"MANILA, NCR,  FIRST DISTRICT "
+589,NCR,Manila,Tondo I,"MANILA, NCR,  FIRST DISTRICT "
+590,NCR,Manila,Tondo II,"MANILA, NCR,  FIRST DISTRICT "
+591,NCR,Manila,Tondo III,"MANILA, NCR,  FIRST DISTRICT "
+592,NCR,Manila,Tondo IV,"MANILA, NCR,  FIRST DISTRICT "
+593,NCR,Manila,Tondo IX,"MANILA, NCR,  FIRST DISTRICT "
+594,NCR,Manila,Tondo V,"MANILA, NCR,  FIRST DISTRICT "
+595,NCR,Manila,Tondo VI,"MANILA, NCR,  FIRST DISTRICT "
+596,NCR,Manila,Tondo VII,"MANILA, NCR,  FIRST DISTRICT "
+597,NCR,Manila,Tondo VIII,"MANILA, NCR,  FIRST DISTRICT "
+598,NCR,Manila,Tondo X,"MANILA, NCR,  FIRST DISTRICT "
+599,NCR,Manila,Tondo XI,"MANILA, NCR,  FIRST DISTRICT "
+600,NCR,Manila,Tondo XII,"MANILA, NCR,  FIRST DISTRICT "
+601,NCR,Manila,Tondo XIII,"MANILA, NCR,  FIRST DISTRICT "
+602,NCR,Manila,Tondo XIV,"MANILA, NCR,  FIRST DISTRICT "
+603,NCR,Marikina City,Marikina City District I,NCR   SECOND DISTRICT
+604,NCR,Marikina City,Marikina City District II,NCR   SECOND DISTRICT
+605,NCR,Muntinlupa City,Muntinlupa City District I,NCR   FOURTH DISTRICT
+606,NCR,Muntinlupa City,Muntinlupa City District II,NCR   FOURTH DISTRICT
+607,NCR,Navotas,Navotas District I,NCR   THIRD DISTRICT
+608,NCR,Navotas,Navotas District II,NCR   THIRD DISTRICT
+609,NCR,Paranaque City,Paranaque City District I,NCR   FOURTH DISTRICT
+610,NCR,Paranaque City,Paranaque City District II,NCR   FOURTH DISTRICT
+611,NCR,Paranaque City,Paranaque City District III,NCR   FOURTH DISTRICT
+612,NCR,Pasay City,Pasay City East District,NCR   FOURTH DISTRICT
+613,NCR,Pasay City,Pasay City North District,NCR   FOURTH DISTRICT
+614,NCR,Pasay City,Pasay City South District,NCR   FOURTH DISTRICT
+615,NCR,Pasay City,Pasay City West District,NCR   FOURTH DISTRICT
+616,NCR,Pasig City,Pasig City District I,NCR   SECOND DISTRICT
+617,NCR,Pasig City,Pasig City District II,NCR   SECOND DISTRICT
+618,NCR,Pasig City,Pasig City District III,NCR   SECOND DISTRICT
+619,NCR,Pasig City,Pasig City District IV,NCR   SECOND DISTRICT
+620,NCR,Pasig City,Pasig City District V,NCR   SECOND DISTRICT
+621,NCR,Quezon City,School District I,NCR   SECOND DISTRICT
+622,NCR,Quezon City,School District II,NCR   SECOND DISTRICT
+623,NCR,Quezon City,School District III,NCR   SECOND DISTRICT
+624,NCR,Quezon City,School District IV,NCR   SECOND DISTRICT
+625,NCR,Quezon City,School District IX,NCR   SECOND DISTRICT
+626,NCR,Quezon City,School District V,NCR   SECOND DISTRICT
+627,NCR,Quezon City,School District VI,NCR   SECOND DISTRICT
+628,NCR,Quezon City,School District VII,NCR   SECOND DISTRICT
+629,NCR,Quezon City,School District VIII,NCR   SECOND DISTRICT
+630,NCR,Quezon City,School District X,NCR   SECOND DISTRICT
+631,NCR,Quezon City,School District XI,NCR   SECOND DISTRICT
+632,NCR,Quezon City,School District XII,NCR   SECOND DISTRICT
+633,NCR,Quezon City,School District XIII,NCR   SECOND DISTRICT
+634,NCR,Quezon City,School District XIV,NCR   SECOND DISTRICT
+635,NCR,Quezon City,School District XIX,NCR   SECOND DISTRICT
+636,NCR,Quezon City,School District XV,NCR   SECOND DISTRICT
+637,NCR,Quezon City,School District XVI,NCR   SECOND DISTRICT
+638,NCR,Quezon City,School District XVII,NCR   SECOND DISTRICT
+639,NCR,Quezon City,School District XVIII,NCR   SECOND DISTRICT
+640,NCR,Quezon City,School District XX,NCR   SECOND DISTRICT
+641,NCR,Taguig City and Pateros,Makati City District I,NCR   FOURTH DISTRICT
+642,NCR,Taguig City and Pateros,Makati City District II,NCR   FOURTH DISTRICT
+643,NCR,Taguig City and Pateros,Makati City District V,NCR   FOURTH DISTRICT
+644,NCR,Taguig City and Pateros,Pateros,NCR   FOURTH DISTRICT
+645,NCR,Taguig City and Pateros,Taguig District I,NCR   FOURTH DISTRICT
+646,NCR,Taguig City and Pateros,Taguig District II,NCR   FOURTH DISTRICT
+647,NCR,Taguig City and Pateros,Taguig District III,NCR   FOURTH DISTRICT
+648,NCR,Valenzuela City,Valenzuela City Central District,NCR   THIRD DISTRICT
+649,NCR,Valenzuela City,Valenzuela City East District,NCR   THIRD DISTRICT
+650,NCR,Valenzuela City,Valenzuela City North District,NCR   THIRD DISTRICT
+651,NCR,Valenzuela City,Valenzuela City South District,NCR   THIRD DISTRICT
+652,PSO,East Timor,Dili,NCR   SECOND DISTRICT
+653,PSO,Greece,Athens,NCR   SECOND DISTRICT
+654,PSO,Italy,Lazio,NCR   SECOND DISTRICT
+655,PSO,Kingdom of Bahrain,A' Ali,NCR   SECOND DISTRICT
+656,PSO,Kingdom of Saudi Arabia,Al-Khobar,NCR   SECOND DISTRICT
+657,PSO,Kingdom of Saudi Arabia,Al-Qassim,NCR   SECOND DISTRICT
+658,PSO,Kingdom of Saudi Arabia,Jeddah,NCR   SECOND DISTRICT
+659,PSO,Kingdom of Saudi Arabia,Riyadh,NCR   SECOND DISTRICT
+660,PSO,Qatar,Ain Khalid,NCR   SECOND DISTRICT
+661,PSO,Qatar,Doha,NCR   SECOND DISTRICT
+662,PSO,State of Kuwait,Fahaheel,NCR   SECOND DISTRICT
+663,PSO,State of Kuwait,Jleeb Al-Shuyoukh,NCR   SECOND DISTRICT
+664,PSO,Sultanate of Oman,Muscat,NCR   SECOND DISTRICT
+665,PSO,United Arab Emirates,Abu Dhabi,NCR   SECOND DISTRICT
+666,PSO,United Arab Emirates,Dubai,NCR   SECOND DISTRICT
+667,PSO,United Arab Emirates,Sharjah,NCR   SECOND DISTRICT
+668,Region I,Alaminos City,District I,PANGASINAN
+669,Region I,Alaminos City,District II,PANGASINAN
+670,Region I,Alaminos City,District III,PANGASINAN
+671,Region I,Batac City,Batac I,ILOCOS NORTE
+672,Region I,Batac City,Batac II,ILOCOS NORTE
+673,Region I,Candon City,District I,ILOCOS SUR
+674,Region I,Candon City,District II,ILOCOS SUR
+675,Region I,Dagupan City,Dagupan City District I,PANGASINAN
+676,Region I,Dagupan City,Dagupan City District II,PANGASINAN
+677,Region I,Dagupan City,Dagupan City District III,PANGASINAN
+678,Region I,Dagupan City,Dagupan City District IV,PANGASINAN
+679,Region I,Ilocos Norte,Adams-Pagudpud,ILOCOS NORTE
+680,Region I,Ilocos Norte,Bacarra I,ILOCOS NORTE
+681,Region I,Ilocos Norte,Bacarra II,ILOCOS NORTE
+682,Region I,Ilocos Norte,Badoc,ILOCOS NORTE
+683,Region I,Ilocos Norte,Bangui,ILOCOS NORTE
+684,Region I,Ilocos Norte,Banna (Espiritu),ILOCOS NORTE
+685,Region I,Ilocos Norte,Burgos,ILOCOS NORTE
+686,Region I,Ilocos Norte,Currimao,ILOCOS NORTE
+687,Region I,Ilocos Norte,Dingras I,ILOCOS NORTE
+688,Region I,Ilocos Norte,Dingras II,ILOCOS NORTE
+689,Region I,Ilocos Norte,Marcos-Nueva Era,ILOCOS NORTE
+690,Region I,Ilocos Norte,Paoay,ILOCOS NORTE
+691,Region I,Ilocos Norte,Pasuquin,ILOCOS NORTE
+692,Region I,Ilocos Norte,Piddig,ILOCOS NORTE
+693,Region I,Ilocos Norte,Pinili,ILOCOS NORTE
+694,Region I,Ilocos Norte,San Nicolas,ILOCOS NORTE
+695,Region I,Ilocos Norte,Sarrat,ILOCOS NORTE
+696,Region I,Ilocos Norte,Solsona,ILOCOS NORTE
+697,Region I,Ilocos Norte,Vintar I,ILOCOS NORTE
+698,Region I,Ilocos Norte,Vintar II,ILOCOS NORTE
+699,Region I,Ilocos Sur,Alilem-Sugpon,ILOCOS SUR
+700,Region I,Ilocos Sur,Banayoyo-Lidlidda-San Emilio,ILOCOS SUR
+701,Region I,Ilocos Sur,Bantay,ILOCOS SUR
+702,Region I,Ilocos Sur,Burgos-San Esteban,ILOCOS SUR
+703,Region I,Ilocos Sur,Cabugao,ILOCOS SUR
+704,Region I,Ilocos Sur,Caoayan,ILOCOS SUR
+705,Region I,Ilocos Sur,Cervantes-Quirino,ILOCOS SUR
+706,Region I,Ilocos Sur,Magsingal,ILOCOS SUR
+707,Region I,Ilocos Sur,Narvacan North,ILOCOS SUR
+708,Region I,Ilocos Sur,Narvacan South-Nagbukel,ILOCOS SUR
+709,Region I,Ilocos Sur,Salcedo-Galimuyod-Sigay-Del Pilar,ILOCOS SUR
+710,Region I,Ilocos Sur,San Juan,ILOCOS SUR
+711,Region I,Ilocos Sur,San Vicente,ILOCOS SUR
+712,Region I,Ilocos Sur,Santa,ILOCOS SUR
+713,Region I,Ilocos Sur,Santiago,ILOCOS SUR
+714,Region I,Ilocos Sur,Sinait,ILOCOS SUR
+715,Region I,Ilocos Sur,Sta. Catalina,ILOCOS SUR
+716,Region I,Ilocos Sur,Sta. Cruz,ILOCOS SUR
+717,Region I,Ilocos Sur,Sta. Lucia,ILOCOS SUR
+718,Region I,Ilocos Sur,Sta. Maria,ILOCOS SUR
+719,Region I,Ilocos Sur,Sto. Domingo-San Ildefonso,ILOCOS SUR
+720,Region I,Ilocos Sur,Suyo,ILOCOS SUR
+721,Region I,Ilocos Sur,Tagudin,ILOCOS SUR
+722,Region I,La Union,Agoo East,LA UNION
+723,Region I,La Union,Agoo West,LA UNION
+724,Region I,La Union,Aringay,LA UNION
+725,Region I,La Union,Bacnotan,LA UNION
+726,Region I,La Union,Bagulin,LA UNION
+727,Region I,La Union,Balaoan,LA UNION
+728,Region I,La Union,Bangar,LA UNION
+729,Region I,La Union,Bauang North,LA UNION
+730,Region I,La Union,Bauang South,LA UNION
+731,Region I,La Union,Burgos,LA UNION
+732,Region I,La Union,Caba,LA UNION
+733,Region I,La Union,Luna I,LA UNION
+734,Region I,La Union,Luna II,LA UNION
+735,Region I,La Union,Naguilian,LA UNION
+736,Region I,La Union,Pugo,LA UNION
+737,Region I,La Union,Rosario,LA UNION
+738,Region I,La Union,San Gabriel,LA UNION
+739,Region I,La Union,San Juan,LA UNION
+740,Region I,La Union,Santol,LA UNION
+741,Region I,La Union,Sto. Tomas,LA UNION
+742,Region I,La Union,Sudipen,LA UNION
+743,Region I,La Union,Tubao,LA UNION
+744,Region I,Laoag City,Laoag City District I,ILOCOS NORTE
+745,Region I,Laoag City,Laoag City District II,ILOCOS NORTE
+746,Region I,Laoag City,Laoag City District III,ILOCOS NORTE
+747,Region I,"Pangasinan I, Lingayen",Agno,PANGASINAN
+748,Region I,"Pangasinan I, Lingayen",Aguilar,PANGASINAN
+749,Region I,"Pangasinan I, Lingayen",Anda,PANGASINAN
+750,Region I,"Pangasinan I, Lingayen",Bani,PANGASINAN
+751,Region I,"Pangasinan I, Lingayen",Basista,PANGASINAN
+752,Region I,"Pangasinan I, Lingayen",Bayambang I,PANGASINAN
+753,Region I,"Pangasinan I, Lingayen",Bayambang II,PANGASINAN
+754,Region I,"Pangasinan I, Lingayen",Binmaley I,PANGASINAN
+755,Region I,"Pangasinan I, Lingayen",Binmaley II,PANGASINAN
+756,Region I,"Pangasinan I, Lingayen",Bolinao,PANGASINAN
+757,Region I,"Pangasinan I, Lingayen",Bugallon I,PANGASINAN
+758,Region I,"Pangasinan I, Lingayen",Bugallon II,PANGASINAN
+759,Region I,"Pangasinan I, Lingayen",Burgos,PANGASINAN
+760,Region I,"Pangasinan I, Lingayen",Calasiao I,PANGASINAN
+761,Region I,"Pangasinan I, Lingayen",Calasiao II,PANGASINAN
+762,Region I,"Pangasinan I, Lingayen",Dasol,PANGASINAN
+763,Region I,"Pangasinan I, Lingayen",Infanta,PANGASINAN
+764,Region I,"Pangasinan I, Lingayen",Labrador,PANGASINAN
+765,Region I,"Pangasinan I, Lingayen",Lingayen I,PANGASINAN
+766,Region I,"Pangasinan I, Lingayen",Lingayen II,PANGASINAN
+767,Region I,"Pangasinan I, Lingayen",Lingayen III,PANGASINAN
+768,Region I,"Pangasinan I, Lingayen",Mabini,PANGASINAN
+769,Region I,"Pangasinan I, Lingayen",Malasiqui I,PANGASINAN
+770,Region I,"Pangasinan I, Lingayen",Malasiqui II,PANGASINAN
+771,Region I,"Pangasinan I, Lingayen",Mangatarem I,PANGASINAN
+772,Region I,"Pangasinan I, Lingayen",Mangatarem II,PANGASINAN
+773,Region I,"Pangasinan I, Lingayen",Mapandan,PANGASINAN
+774,Region I,"Pangasinan I, Lingayen",Sta. Barbara I,PANGASINAN
+775,Region I,"Pangasinan I, Lingayen",Sta. Barbara II,PANGASINAN
+776,Region I,"Pangasinan I, Lingayen",Sual,PANGASINAN
+777,Region I,"Pangasinan I, Lingayen",Urbiztondo,PANGASINAN
+778,Region I,"Pangasinan II, Binalonan",Alcala,PANGASINAN
+779,Region I,"Pangasinan II, Binalonan",Asingan I,PANGASINAN
+780,Region I,"Pangasinan II, Binalonan",Asingan II,PANGASINAN
+781,Region I,"Pangasinan II, Binalonan",Balungao,PANGASINAN
+782,Region I,"Pangasinan II, Binalonan",Bautista,PANGASINAN
+783,Region I,"Pangasinan II, Binalonan",Binalonan I,PANGASINAN
+784,Region I,"Pangasinan II, Binalonan",Binalonan II,PANGASINAN
+785,Region I,"Pangasinan II, Binalonan",Laoac,PANGASINAN
+786,Region I,"Pangasinan II, Binalonan",Manaoag,PANGASINAN
+787,Region I,"Pangasinan II, Binalonan",Mangaldan I,PANGASINAN
+788,Region I,"Pangasinan II, Binalonan",Mangaldan II,PANGASINAN
+789,Region I,"Pangasinan II, Binalonan",Natividad,PANGASINAN
+790,Region I,"Pangasinan II, Binalonan",Pozorrubio I,PANGASINAN
+791,Region I,"Pangasinan II, Binalonan",Pozorrubio II,PANGASINAN
+792,Region I,"Pangasinan II, Binalonan",Rosales I,PANGASINAN
+793,Region I,"Pangasinan II, Binalonan",Rosales II,PANGASINAN
+794,Region I,"Pangasinan II, Binalonan",San Fabian I,PANGASINAN
+795,Region I,"Pangasinan II, Binalonan",San Fabian II,PANGASINAN
+796,Region I,"Pangasinan II, Binalonan",San Jacinto,PANGASINAN
+797,Region I,"Pangasinan II, Binalonan",San Manuel,PANGASINAN
+798,Region I,"Pangasinan II, Binalonan",San Nicolas I,PANGASINAN
+799,Region I,"Pangasinan II, Binalonan",San Nicolas II,PANGASINAN
+800,Region I,"Pangasinan II, Binalonan",San Quintin,PANGASINAN
+801,Region I,"Pangasinan II, Binalonan",Sison,PANGASINAN
+802,Region I,"Pangasinan II, Binalonan",Sta. Maria,PANGASINAN
+803,Region I,"Pangasinan II, Binalonan",Sto. Tomas,PANGASINAN
+804,Region I,"Pangasinan II, Binalonan",Tayug I,PANGASINAN
+805,Region I,"Pangasinan II, Binalonan",Tayug II,PANGASINAN
+806,Region I,"Pangasinan II, Binalonan",Umingan I,PANGASINAN
+807,Region I,"Pangasinan II, Binalonan",Umingan II,PANGASINAN
+808,Region I,"Pangasinan II, Binalonan",Villasis I,PANGASINAN
+809,Region I,"Pangasinan II, Binalonan",Villasis II,PANGASINAN
+810,Region I,San Carlos City,San Carlos City District I,PANGASINAN
+811,Region I,San Carlos City,San Carlos City District II,PANGASINAN
+812,Region I,San Carlos City,San Carlos City District III,PANGASINAN
+813,Region I,San Carlos City,San Carlos City District IV,PANGASINAN
+814,Region I,San Fernando City,San Fernando I,LA UNION
+815,Region I,San Fernando City,San Fernando II,LA UNION
+816,Region I,Urdaneta City,Urdaneta City District I,PANGASINAN
+817,Region I,Urdaneta City,Urdaneta City District II,PANGASINAN
+818,Region I,Vigan City,District I,ILOCOS SUR
+819,Region I,Vigan City,District II,ILOCOS SUR
+820,Region I,Vigan City,District III,ILOCOS SUR
+821,Region II,Batanes,Basco,BATANES
+822,Region II,Batanes,Itbayat,BATANES
+823,Region II,Batanes,Ivana-Uyugan,BATANES
+824,Region II,Batanes,Mahatao,BATANES
+825,Region II,Batanes,Sabtang,BATANES
+826,Region II,Cagayan,Abulug,CAGAYAN
+827,Region II,Cagayan,Alcala East,CAGAYAN
+828,Region II,Cagayan,Alcala West,CAGAYAN
+829,Region II,Cagayan,Allacapan North,CAGAYAN
+830,Region II,Cagayan,Allacapan South,CAGAYAN
+831,Region II,Cagayan,Amulung East,CAGAYAN
+832,Region II,Cagayan,Amulung West,CAGAYAN
+833,Region II,Cagayan,Aparri East,CAGAYAN
+834,Region II,Cagayan,Aparri South Educational Zone,CAGAYAN
+835,Region II,Cagayan,Aparri West,CAGAYAN
+836,Region II,Cagayan,Baggao East,CAGAYAN
+837,Region II,Cagayan,Baggao North,CAGAYAN
+838,Region II,Cagayan,Baggao South,CAGAYAN
+839,Region II,Cagayan,Baggao West,CAGAYAN
+840,Region II,Cagayan,Ballesteros,CAGAYAN
+841,Region II,Cagayan,Buguey North,CAGAYAN
+842,Region II,Cagayan,Buguey South,CAGAYAN
+843,Region II,Cagayan,Calayan East,CAGAYAN
+844,Region II,Cagayan,Calayan West,CAGAYAN
+845,Region II,Cagayan,Camalaniugan,CAGAYAN
+846,Region II,Cagayan,Claveria East,CAGAYAN
+847,Region II,Cagayan,Enrile East,CAGAYAN
+848,Region II,Cagayan,Enrile West,CAGAYAN
+849,Region II,Cagayan,Gattaran Central,CAGAYAN
+850,Region II,Cagayan,Gattaran East,CAGAYAN
+851,Region II,Cagayan,Gattaran West,CAGAYAN
+852,Region II,Cagayan,Gonzaga East,CAGAYAN
+853,Region II,Cagayan,Gonzaga West,CAGAYAN
+854,Region II,Cagayan,Iguig,CAGAYAN
+855,Region II,Cagayan,Lal-lo Central,CAGAYAN
+856,Region II,Cagayan,Lal-lo North,CAGAYAN
+857,Region II,Cagayan,Lal-lo South,CAGAYAN
+858,Region II,Cagayan,Lasam East,CAGAYAN
+859,Region II,Cagayan,Lasam West,CAGAYAN
+860,Region II,Cagayan,Pamplona,CAGAYAN
+861,Region II,Cagayan,Penablanca East,CAGAYAN
+862,Region II,Cagayan,Penablanca West,CAGAYAN
+863,Region II,Cagayan,Piat,CAGAYAN
+864,Region II,Cagayan,Rizal,CAGAYAN
+865,Region II,Cagayan,Sanchez Mira,CAGAYAN
+866,Region II,Cagayan,Solana North,CAGAYAN
+867,Region II,Cagayan,Solana South,CAGAYAN
+868,Region II,Cagayan,Solana West Educational Zone,CAGAYAN
+869,Region II,Cagayan,Sta. Ana,CAGAYAN
+870,Region II,Cagayan,Sta. Praxedes,CAGAYAN
+871,Region II,Cagayan,Sta. Teresita,CAGAYAN
+872,Region II,Cagayan,Sto. Nino,CAGAYAN
+873,Region II,Cagayan,Tuao East,CAGAYAN
+874,Region II,Cagayan,Tuao West,CAGAYAN
+875,Region II,Cauayan City,Cauayan East District,ISABELA
+876,Region II,Cauayan City,Cauayan North District,ISABELA
+877,Region II,Cauayan City,Cauayan Northeast District,ISABELA
+878,Region II,Cauayan City,Cauayan South District,ISABELA
+879,Region II,Cauayan City,Cauayan West District,ISABELA
+880,Region II,City of Ilagan,East,ISABELA
+881,Region II,City of Ilagan,North,ISABELA
+882,Region II,City of Ilagan,Northwest,ISABELA
+883,Region II,City of Ilagan,San Antonio,ISABELA
+884,Region II,City of Ilagan,South,ISABELA
+885,Region II,City of Ilagan,West,ISABELA
+886,Region II,Isabela,Alicia East,ISABELA
+887,Region II,Isabela,Alicia North,ISABELA
+888,Region II,Isabela,Alicia South,ISABELA
+889,Region II,Isabela,Angadanan East,ISABELA
+890,Region II,Isabela,Angadanan West,ISABELA
+891,Region II,Isabela,Aurora,ISABELA
+892,Region II,Isabela,Benito Soliven,ISABELA
+893,Region II,Isabela,Burgos,ISABELA
+894,Region II,Isabela,Cabagan,ISABELA
+895,Region II,Isabela,Cabatuan East,ISABELA
+896,Region II,Isabela,Cabatuan West,ISABELA
+897,Region II,Isabela,Cordon North,ISABELA
+898,Region II,Isabela,Cordon South,ISABELA
+899,Region II,Isabela,Delfin Albano,ISABELA
+900,Region II,Isabela,Echague East,ISABELA
+901,Region II,Isabela,Echague South,ISABELA
+902,Region II,Isabela,Echague West,ISABELA
+903,Region II,Isabela,Gamu,ISABELA
+904,Region II,Isabela,Jones East,ISABELA
+905,Region II,Isabela,Jones West,ISABELA
+906,Region II,Isabela,Luna,ISABELA
+907,Region II,Isabela,Mallig,ISABELA
+908,Region II,Isabela,Naguilian,ISABELA
+909,Region II,Isabela,Palanan,ISABELA
+910,Region II,Isabela,Quezon,ISABELA
+911,Region II,Isabela,Quirino,ISABELA
+912,Region II,Isabela,Ramon,ISABELA
+913,Region II,Isabela,Reina Mercedes,ISABELA
+914,Region II,Isabela,Roxas East,ISABELA
+915,Region II,Isabela,Roxas West,ISABELA
+916,Region II,Isabela,San Agustin,ISABELA
+917,Region II,Isabela,San Guillermo,ISABELA
+918,Region II,Isabela,San Isidro,ISABELA
+919,Region II,Isabela,San Manuel,ISABELA
+920,Region II,Isabela,San Mariano I,ISABELA
+921,Region II,Isabela,San Mariano II,ISABELA
+922,Region II,Isabela,San Mateo North,ISABELA
+923,Region II,Isabela,San Mateo South,ISABELA
+924,Region II,Isabela,San Pablo,ISABELA
+925,Region II,Isabela,Sta. Maria,ISABELA
+926,Region II,Isabela,Sto. Tomas,ISABELA
+927,Region II,Isabela,Tumauini North,ISABELA
+928,Region II,Isabela,Tumauini South,ISABELA
+929,Region II,Nueva Vizcaya,Alfonso Castañeda,NUEVA VIZCAYA
+930,Region II,Nueva Vizcaya,Ambaguio,NUEVA VIZCAYA
+931,Region II,Nueva Vizcaya,Aritao East,NUEVA VIZCAYA
+932,Region II,Nueva Vizcaya,Aritao West,NUEVA VIZCAYA
+933,Region II,Nueva Vizcaya,Bagabag I,NUEVA VIZCAYA
+934,Region II,Nueva Vizcaya,Bagabag II,NUEVA VIZCAYA
+935,Region II,Nueva Vizcaya,Bambang I,NUEVA VIZCAYA
+936,Region II,Nueva Vizcaya,Bambang II,NUEVA VIZCAYA
+937,Region II,Nueva Vizcaya,Bayombong I,NUEVA VIZCAYA
+938,Region II,Nueva Vizcaya,Bayombong II,NUEVA VIZCAYA
+939,Region II,Nueva Vizcaya,Diadi,NUEVA VIZCAYA
+940,Region II,Nueva Vizcaya,Dupax del Norte I,NUEVA VIZCAYA
+941,Region II,Nueva Vizcaya,Dupax del Norte II,NUEVA VIZCAYA
+942,Region II,Nueva Vizcaya,Dupax del Sur,NUEVA VIZCAYA
+943,Region II,Nueva Vizcaya,Eastern Kayapa,NUEVA VIZCAYA
+944,Region II,Nueva Vizcaya,Kasibu East,NUEVA VIZCAYA
+945,Region II,Nueva Vizcaya,Kasibu West,NUEVA VIZCAYA
+946,Region II,Nueva Vizcaya,Quezon,NUEVA VIZCAYA
+947,Region II,Nueva Vizcaya,Solano I,NUEVA VIZCAYA
+948,Region II,Nueva Vizcaya,Solano II,NUEVA VIZCAYA
+949,Region II,Nueva Vizcaya,Sta. Fe,NUEVA VIZCAYA
+950,Region II,Nueva Vizcaya,Villaverde,NUEVA VIZCAYA
+951,Region II,Nueva Vizcaya,Western Kayapa,NUEVA VIZCAYA
+952,Region II,Quirino,Aglipay,QUIRINO
+953,Region II,Quirino,Cabarroguis,QUIRINO
+954,Region II,Quirino,Diffun I,QUIRINO
+955,Region II,Quirino,Diffun II,QUIRINO
+956,Region II,Quirino,Maddela Zone I,QUIRINO
+957,Region II,Quirino,Maddela Zone II,QUIRINO
+958,Region II,Quirino,Nagtipunan,QUIRINO
+959,Region II,Quirino,Saguday,QUIRINO
+960,Region II,Santiago City,Santiago East,ISABELA
+961,Region II,Santiago City,Santiago North,ISABELA
+962,Region II,Santiago City,Santiago South,ISABELA
+963,Region II,Santiago City,Santiago West,ISABELA
+964,Region II,Tuguegarao City,Tuguegarao East Educational Zone,CAGAYAN
+965,Region II,Tuguegarao City,Tuguegarao North Educational Zone,CAGAYAN
+966,Region II,Tuguegarao City,Tuguegarao Northeast Educational Zone,CAGAYAN
+967,Region II,Tuguegarao City,Tuguegarao West Educational Zone,CAGAYAN
+968,Region III,Angeles City,East District,PAMPANGA
+969,Region III,Angeles City,North District,PAMPANGA
+970,Region III,Angeles City,South District,PAMPANGA
+971,Region III,Angeles City,West District,PAMPANGA
+972,Region III,Aurora,Baler,AURORA
+973,Region III,Aurora,Casiguran,AURORA
+974,Region III,Aurora,Dilasag,AURORA
+975,Region III,Aurora,Dinalungan,AURORA
+976,Region III,Aurora,Dingalan,AURORA
+977,Region III,Aurora,Dipaculao,AURORA
+978,Region III,Aurora,Ma. Aurora,AURORA
+979,Region III,Aurora,San Luis,AURORA
+980,Region III,Balanga City,Balanga City East,BATAAN
+981,Region III,Balanga City,Balanga City West,BATAAN
+982,Region III,Bataan,Abucay,BATAAN
+983,Region III,Bataan,Bagac,BATAAN
+984,Region III,Bataan,Dinalupihan East,BATAAN
+985,Region III,Bataan,Dinalupihan West,BATAAN
+986,Region III,Bataan,Hermosa,BATAAN
+987,Region III,Bataan,Limay,BATAAN
+988,Region III,Bataan,Mariveles,BATAAN
+989,Region III,Bataan,Morong,BATAAN
+990,Region III,Bataan,Orani,BATAAN
+991,Region III,Bataan,Orion,BATAAN
+992,Region III,Bataan,Pilar,BATAAN
+993,Region III,Bataan,Samal,BATAAN
+994,Region III,Bulacan,Angat,BULACAN
+995,Region III,Bulacan,Balagtas,BULACAN
+996,Region III,Bulacan,Baliuag North,BULACAN
+997,Region III,Bulacan,Baliuag South,BULACAN
+998,Region III,Bulacan,Bocaue,BULACAN
+999,Region III,Bulacan,Bulacan,BULACAN
+1000,Region III,Bulacan,Bustos,BULACAN
+1001,Region III,Bulacan,Calumpit,BULACAN
+1002,Region III,Bulacan,Dona Remedios Trinidad,BULACAN
+1003,Region III,Bulacan,Guiguinto,BULACAN
+1004,Region III,Bulacan,Hagonoy East,BULACAN
+1005,Region III,Bulacan,Hagonoy West,BULACAN
+1006,Region III,Bulacan,Marilao,BULACAN
+1007,Region III,Bulacan,Norzagaray,BULACAN
+1008,Region III,Bulacan,Obando,BULACAN
+1009,Region III,Bulacan,Pandi,BULACAN
+1010,Region III,Bulacan,Paombong,BULACAN
+1011,Region III,Bulacan,Plaridel,BULACAN
+1012,Region III,Bulacan,Pulilan,BULACAN
+1013,Region III,Bulacan,San Ildefonso North,BULACAN
+1014,Region III,Bulacan,San Ildefonso South,BULACAN
+1015,Region III,Bulacan,San Miguel North,BULACAN
+1016,Region III,Bulacan,San Miguel South,BULACAN
+1017,Region III,Bulacan,San Rafael,BULACAN
+1018,Region III,Bulacan,Sta. Maria,BULACAN
+1019,Region III,Cabanatuan City,Cabanatuan City East District,NUEVA ECIJA
+1020,Region III,Cabanatuan City,Cabanatuan City North District,NUEVA ECIJA
+1021,Region III,Cabanatuan City,Cabanatuan City South District,NUEVA ECIJA
+1022,Region III,Cabanatuan City,Cabanatuan City West District,NUEVA ECIJA
+1023,Region III,City of San Jose Del Monte,San Jose Del Monte East,BULACAN
+1024,Region III,City of San Jose Del Monte,San Jose Del Monte West,BULACAN
+1025,Region III,Gapan City,Gapan North,NUEVA ECIJA
+1026,Region III,Gapan City,Gapan South,NUEVA ECIJA
+1027,Region III,Mabalacat City,Mabalacat East,PAMPANGA
+1028,Region III,Mabalacat City,Mabalacat North,PAMPANGA
+1029,Region III,Mabalacat City,Mabalacat South,PAMPANGA
+1030,Region III,Malolos City,North District,BULACAN
+1031,Region III,Malolos City,South District,BULACAN
+1032,Region III,Meycauayan City,Meycauayan East,BULACAN
+1033,Region III,Meycauayan City,Meycauayan West,BULACAN
+1034,Region III,Nueva Ecija,Aliaga,NUEVA ECIJA
+1035,Region III,Nueva Ecija,Bongabon,NUEVA ECIJA
+1036,Region III,Nueva Ecija,Cabiao,NUEVA ECIJA
+1037,Region III,Nueva Ecija,Carranglan,NUEVA ECIJA
+1038,Region III,Nueva Ecija,Cuyapo,NUEVA ECIJA
+1039,Region III,Nueva Ecija,Gabaldon,NUEVA ECIJA
+1040,Region III,Nueva Ecija,Gen. M. Natividad,NUEVA ECIJA
+1041,Region III,Nueva Ecija,Gen. Tinio,NUEVA ECIJA
+1042,Region III,Nueva Ecija,Guimba East,NUEVA ECIJA
+1043,Region III,Nueva Ecija,Guimba West,NUEVA ECIJA
+1044,Region III,Nueva Ecija,Jaen,NUEVA ECIJA
+1045,Region III,Nueva Ecija,Laur,NUEVA ECIJA
+1046,Region III,Nueva Ecija,Licab,NUEVA ECIJA
+1047,Region III,Nueva Ecija,Llanera,NUEVA ECIJA
+1048,Region III,Nueva Ecija,Lupao,NUEVA ECIJA
+1049,Region III,Nueva Ecija,Nampicuan,NUEVA ECIJA
+1050,Region III,Nueva Ecija,Palayan City,NUEVA ECIJA
+1051,Region III,Nueva Ecija,Pantabangan,NUEVA ECIJA
+1052,Region III,Nueva Ecija,Penaranda,NUEVA ECIJA
+1053,Region III,Nueva Ecija,Quezon,NUEVA ECIJA
+1054,Region III,Nueva Ecija,Rizal,NUEVA ECIJA
+1055,Region III,Nueva Ecija,San Antonio,NUEVA ECIJA
+1056,Region III,Nueva Ecija,San Isidro,NUEVA ECIJA
+1057,Region III,Nueva Ecija,San Leonardo,NUEVA ECIJA
+1058,Region III,Nueva Ecija,Sta. Rosa,NUEVA ECIJA
+1059,Region III,Nueva Ecija,Sto. Domingo,NUEVA ECIJA
+1060,Region III,Nueva Ecija,Talavera North,NUEVA ECIJA
+1061,Region III,Nueva Ecija,Talavera South,NUEVA ECIJA
+1062,Region III,Nueva Ecija,Talugtug,NUEVA ECIJA
+1063,Region III,Nueva Ecija,Zaragoza,NUEVA ECIJA
+1064,Region III,Olongapo City,Olongapo City District I,ZAMBALES
+1065,Region III,Olongapo City,Olongapo City District II,ZAMBALES
+1066,Region III,Olongapo City,Olongapo City District III,ZAMBALES
+1067,Region III,Olongapo City,Olongapo City District IV,ZAMBALES
+1068,Region III,Pampanga,Apalit,PAMPANGA
+1069,Region III,Pampanga,Arayat East,PAMPANGA
+1070,Region III,Pampanga,Arayat West,PAMPANGA
+1071,Region III,Pampanga,Bacolor North,PAMPANGA
+1072,Region III,Pampanga,Bacolor South,PAMPANGA
+1073,Region III,Pampanga,Candaba East,PAMPANGA
+1074,Region III,Pampanga,Candaba North,PAMPANGA
+1075,Region III,Pampanga,Candaba West,PAMPANGA
+1076,Region III,Pampanga,Floridablanca East,PAMPANGA
+1077,Region III,Pampanga,Floridablanca West,PAMPANGA
+1078,Region III,Pampanga,Guagua East,PAMPANGA
+1079,Region III,Pampanga,Guagua West,PAMPANGA
+1080,Region III,Pampanga,Lubao East,PAMPANGA
+1081,Region III,Pampanga,Lubao North,PAMPANGA
+1082,Region III,Pampanga,Lubao West,PAMPANGA
+1083,Region III,Pampanga,Macabebe East,PAMPANGA
+1084,Region III,Pampanga,Macabebe West,PAMPANGA
+1085,Region III,Pampanga,Magalang North,PAMPANGA
+1086,Region III,Pampanga,Magalang South,PAMPANGA
+1087,Region III,Pampanga,Masantol North,PAMPANGA
+1088,Region III,Pampanga,Masantol South,PAMPANGA
+1089,Region III,Pampanga,Mexico North,PAMPANGA
+1090,Region III,Pampanga,Mexico South,PAMPANGA
+1091,Region III,Pampanga,Mexico West,PAMPANGA
+1092,Region III,Pampanga,Minalin,PAMPANGA
+1093,Region III,Pampanga,Porac East,PAMPANGA
+1094,Region III,Pampanga,Porac West,PAMPANGA
+1095,Region III,Pampanga,San Luis,PAMPANGA
+1096,Region III,Pampanga,San Simon,PAMPANGA
+1097,Region III,Pampanga,Sasmuan,PAMPANGA
+1098,Region III,Pampanga,Sta. Ana,PAMPANGA
+1099,Region III,Pampanga,Sta. Rita,PAMPANGA
+1100,Region III,Pampanga,Sto. Tomas,PAMPANGA
+1101,Region III,San Fernando City,San Fernando East,PAMPANGA
+1102,Region III,San Fernando City,San Fernando North,PAMPANGA
+1103,Region III,San Fernando City,San Fernando West,PAMPANGA
+1104,Region III,San Jose City,San Jose City East,NUEVA ECIJA
+1105,Region III,San Jose City,San Jose City West,NUEVA ECIJA
+1106,Region III,Science City of Muñoz,Munoz,NUEVA ECIJA
+1107,Region III,Tarlac,Anao,TARLAC
+1108,Region III,Tarlac,Bamban,TARLAC
+1109,Region III,Tarlac,Camiling Central,TARLAC
+1110,Region III,Tarlac,Camiling East,TARLAC
+1111,Region III,Tarlac,Camiling West,TARLAC
+1112,Region III,Tarlac,Capas East,TARLAC
+1113,Region III,Tarlac,Capas West,TARLAC
+1114,Region III,Tarlac,Concepcion East,TARLAC
+1115,Region III,Tarlac,Concepcion North,TARLAC
+1116,Region III,Tarlac,Concepcion South,TARLAC
+1117,Region III,Tarlac,Concepcion West,TARLAC
+1118,Region III,Tarlac,Gerona North,TARLAC
+1119,Region III,Tarlac,Gerona South,TARLAC
+1120,Region III,Tarlac,La Paz North,TARLAC
+1121,Region III,Tarlac,La Paz South,TARLAC
+1122,Region III,Tarlac,Mayantoc,TARLAC
+1123,Region III,Tarlac,Moncada North,TARLAC
+1124,Region III,Tarlac,Moncada South,TARLAC
+1125,Region III,Tarlac,Paniqui North,TARLAC
+1126,Region III,Tarlac,Paniqui South,TARLAC
+1127,Region III,Tarlac,Pura,TARLAC
+1128,Region III,Tarlac,Ramos,TARLAC
+1129,Region III,Tarlac,San Clemente,TARLAC
+1130,Region III,Tarlac,San Jose,TARLAC
+1131,Region III,Tarlac,San Manuel,TARLAC
+1132,Region III,Tarlac,Sta. Ignacia,TARLAC
+1133,Region III,Tarlac,Victoria East,TARLAC
+1134,Region III,Tarlac,Victoria West,TARLAC
+1135,Region III,Tarlac City,Tarlac Central District,TARLAC
+1136,Region III,Tarlac City,Tarlac East District,TARLAC
+1137,Region III,Tarlac City,Tarlac North District A,TARLAC
+1138,Region III,Tarlac City,Tarlac North District B,TARLAC
+1139,Region III,Tarlac City,Tarlac South District A,TARLAC
+1140,Region III,Tarlac City,Tarlac South District B,TARLAC
+1141,Region III,Tarlac City,Tarlac West District A,TARLAC
+1142,Region III,Tarlac City,Tarlac West District B,TARLAC
+1143,Region III,Tarlac City,Tarlac West District C,TARLAC
+1144,Region III,Zambales,Botolan North,ZAMBALES
+1145,Region III,Zambales,Botolan South,ZAMBALES
+1146,Region III,Zambales,Cabangan,ZAMBALES
+1147,Region III,Zambales,Candelaria,ZAMBALES
+1148,Region III,Zambales,Castillejos,ZAMBALES
+1149,Region III,Zambales,Iba,ZAMBALES
+1150,Region III,Zambales,Masinloc,ZAMBALES
+1151,Region III,Zambales,Palauig,ZAMBALES
+1152,Region III,Zambales,San Antonio,ZAMBALES
+1153,Region III,Zambales,San Felipe,ZAMBALES
+1154,Region III,Zambales,San Marcelino,ZAMBALES
+1155,Region III,Zambales,San Narciso,ZAMBALES
+1156,Region III,Zambales,Sta. Cruz North,ZAMBALES
+1157,Region III,Zambales,Sta. Cruz South,ZAMBALES
+1158,Region III,Zambales,Subic,ZAMBALES
+1159,Region IV-A,Antipolo City,District I-A,RIZAL
+1160,Region IV-A,Antipolo City,District I-B,RIZAL
+1161,Region IV-A,Antipolo City,District I-C,RIZAL
+1162,Region IV-A,Antipolo City,District II-A,RIZAL
+1163,Region IV-A,Antipolo City,District II-B,RIZAL
+1164,Region IV-A,Antipolo City,District II-C,RIZAL
+1165,Region IV-A,Antipolo City,District II-D,RIZAL
+1166,Region IV-A,Bacoor City,Bacoor I,CAVITE
+1167,Region IV-A,Bacoor City,Bacoor II,CAVITE
+1168,Region IV-A,Batangas,Agoncillo,BATANGAS
+1169,Region IV-A,Batangas,Alitagtag,BATANGAS
+1170,Region IV-A,Batangas,Balayan East,BATANGAS
+1171,Region IV-A,Batangas,Balayan West,BATANGAS
+1172,Region IV-A,Batangas,Balete,BATANGAS
+1173,Region IV-A,Batangas,Bauan,BATANGAS
+1174,Region IV-A,Batangas,Calaca,BATANGAS
+1175,Region IV-A,Batangas,Calatagan,BATANGAS
+1176,Region IV-A,Batangas,Cuenca,BATANGAS
+1177,Region IV-A,Batangas,Ibaan,BATANGAS
+1178,Region IV-A,Batangas,Laurel,BATANGAS
+1179,Region IV-A,Batangas,Lemery,BATANGAS
+1180,Region IV-A,Batangas,Lian,BATANGAS
+1181,Region IV-A,Batangas,Lobo,BATANGAS
+1182,Region IV-A,Batangas,Mabini,BATANGAS
+1183,Region IV-A,Batangas,Malvar,BATANGAS
+1184,Region IV-A,Batangas,Mataas Na Kahoy,BATANGAS
+1185,Region IV-A,Batangas,Nasugbu East,BATANGAS
+1186,Region IV-A,Batangas,Nasugbu North,BATANGAS
+1187,Region IV-A,Batangas,Nasugbu West,BATANGAS
+1188,Region IV-A,Batangas,Padre Garcia,BATANGAS
+1189,Region IV-A,Batangas,Rosario East,BATANGAS
+1190,Region IV-A,Batangas,Rosario West,BATANGAS
+1191,Region IV-A,Batangas,San Jose,BATANGAS
+1192,Region IV-A,Batangas,San Juan East,BATANGAS
+1193,Region IV-A,Batangas,San Juan West,BATANGAS
+1194,Region IV-A,Batangas,San Luis,BATANGAS
+1195,Region IV-A,Batangas,San Nicolas,BATANGAS
+1196,Region IV-A,Batangas,San Pascual,BATANGAS
+1197,Region IV-A,Batangas,Sta. Teresita,BATANGAS
+1198,Region IV-A,Batangas,Taal,BATANGAS
+1199,Region IV-A,Batangas,Talisay,BATANGAS
+1200,Region IV-A,Batangas,Taysan,BATANGAS
+1201,Region IV-A,Batangas,Tingloy,BATANGAS
+1202,Region IV-A,Batangas,Tuy,BATANGAS
+1203,Region IV-A,Batangas City,Batangas City Coastal District,BATANGAS
+1204,Region IV-A,Batangas City,Batangas City East District,BATANGAS
+1205,Region IV-A,Batangas City,Batangas City New District,BATANGAS
+1206,Region IV-A,Batangas City,Batangas City North District,BATANGAS
+1207,Region IV-A,Batangas City,Batangas City South District,BATANGAS
+1208,Region IV-A,Batangas City,Batangas City Verde Island District,BATANGAS
+1209,Region IV-A,Batangas City,Batangas City West District,BATANGAS
+1210,Region IV-A,Binan City,Binan,LAGUNA
+1211,Region IV-A,Cabuyao City,District I,LAGUNA
+1212,Region IV-A,Cabuyao City,District II,LAGUNA
+1213,Region IV-A,Cabuyao City,District III,LAGUNA
+1214,Region IV-A,Cabuyao City,District IV,LAGUNA
+1215,Region IV-A,Cabuyao City,District V,LAGUNA
+1216,Region IV-A,Calamba City,Calamba City East I,LAGUNA
+1217,Region IV-A,Calamba City,Calamba City East II,LAGUNA
+1218,Region IV-A,Calamba City,Calamba City West,LAGUNA
+1219,Region IV-A,Cavite,Alfonso,CAVITE
+1220,Region IV-A,Cavite,Amadeo,CAVITE
+1221,Region IV-A,Cavite,Carmona,CAVITE
+1222,Region IV-A,Cavite,General E. Aguinaldo,CAVITE
+1223,Region IV-A,Cavite,General Mariano Alvarez,CAVITE
+1224,Region IV-A,Cavite,Indang I,CAVITE
+1225,Region IV-A,Cavite,Indang II,CAVITE
+1226,Region IV-A,Cavite,Kawit,CAVITE
+1227,Region IV-A,Cavite,Magallanes,CAVITE
+1228,Region IV-A,Cavite,Maragondon,CAVITE
+1229,Region IV-A,Cavite,Mendez,CAVITE
+1230,Region IV-A,Cavite,Naic I,CAVITE
+1231,Region IV-A,Cavite,Naic II,CAVITE
+1232,Region IV-A,Cavite,Noveleta,CAVITE
+1233,Region IV-A,Cavite,Rosario,CAVITE
+1234,Region IV-A,Cavite,Silang I,CAVITE
+1235,Region IV-A,Cavite,Silang II,CAVITE
+1236,Region IV-A,Cavite,Tagaytay City,CAVITE
+1237,Region IV-A,Cavite,Tanza,CAVITE
+1238,Region IV-A,Cavite,Ternate,CAVITE
+1239,Region IV-A,Cavite,Trece Martirez City,CAVITE
+1240,Region IV-A,Cavite City,Cavite City I District,CAVITE
+1241,Region IV-A,Cavite City,Cavite City II District,CAVITE
+1242,Region IV-A,Cavite City,Cavite City III District,CAVITE
+1243,Region IV-A,Dasmarinas City,Dasmariñas I,CAVITE
+1244,Region IV-A,Dasmarinas City,Dasmariñas II,CAVITE
+1245,Region IV-A,General Trias City,General Trias I,CAVITE
+1246,Region IV-A,General Trias City,General Trias II,CAVITE
+1247,Region IV-A,Imus City,Imus I,CAVITE
+1248,Region IV-A,Imus City,Imus II,CAVITE
+1249,Region IV-A,Laguna,Alaminos,LAGUNA
+1250,Region IV-A,Laguna,Bay,LAGUNA
+1251,Region IV-A,Laguna,Calauan,LAGUNA
+1252,Region IV-A,Laguna,Cavinti,LAGUNA
+1253,Region IV-A,Laguna,Famy-Mabitac,LAGUNA
+1254,Region IV-A,Laguna,Liliw,LAGUNA
+1255,Region IV-A,Laguna,Los Baños,LAGUNA
+1256,Region IV-A,Laguna,Luisiana,LAGUNA
+1257,Region IV-A,Laguna,Lumban-Kalayaan,LAGUNA
+1258,Region IV-A,Laguna,Magdalena,LAGUNA
+1259,Region IV-A,Laguna,Majayjay,LAGUNA
+1260,Region IV-A,Laguna,Nagcarlan-Rizal,LAGUNA
+1261,Region IV-A,Laguna,Paete,LAGUNA
+1262,Region IV-A,Laguna,Pagsanjan,LAGUNA
+1263,Region IV-A,Laguna,Pangil-Pakil,LAGUNA
+1264,Region IV-A,Laguna,Pila,LAGUNA
+1265,Region IV-A,Laguna,Santa Cruz,LAGUNA
+1266,Region IV-A,Laguna,Santa Maria,LAGUNA
+1267,Region IV-A,Laguna,Siniloan,LAGUNA
+1268,Region IV-A,Laguna,Victoria,LAGUNA
+1269,Region IV-A,Lipa City,Lipa City East District,BATANGAS
+1270,Region IV-A,Lipa City,Lipa City North Disrict,BATANGAS
+1271,Region IV-A,Lipa City,Lipa City South District,BATANGAS
+1272,Region IV-A,Lipa City,Lipa City West District,BATANGAS
+1273,Region IV-A,Lucena City,Lucena East District,QUEZON
+1274,Region IV-A,Lucena City,Lucena North District,QUEZON
+1275,Region IV-A,Lucena City,Lucena South District,QUEZON
+1276,Region IV-A,Lucena City,Lucena West District,QUEZON
+1277,Region IV-A,Quezon,Alabat,QUEZON
+1278,Region IV-A,Quezon,Atimonan,QUEZON
+1279,Region IV-A,Quezon,Buenavista,QUEZON
+1280,Region IV-A,Quezon,Burdeos,QUEZON
+1281,Region IV-A,Quezon,Calauag East,QUEZON
+1282,Region IV-A,Quezon,Calauag West,QUEZON
+1283,Region IV-A,Quezon,Candelaria East,QUEZON
+1284,Region IV-A,Quezon,Candelaria West,QUEZON
+1285,Region IV-A,Quezon,Catanauan,QUEZON
+1286,Region IV-A,Quezon,Dolores,QUEZON
+1287,Region IV-A,Quezon,Gen. Luna,QUEZON
+1288,Region IV-A,Quezon,Gen. Nakar,QUEZON
+1289,Region IV-A,Quezon,Guinayangan,QUEZON
+1290,Region IV-A,Quezon,Gumaca East,QUEZON
+1291,Region IV-A,Quezon,Gumaca West,QUEZON
+1292,Region IV-A,Quezon,Infanta,QUEZON
+1293,Region IV-A,Quezon,Lopez East,QUEZON
+1294,Region IV-A,Quezon,Lopez West,QUEZON
+1295,Region IV-A,Quezon,Lucban,QUEZON
+1296,Region IV-A,Quezon,Macalelon,QUEZON
+1297,Region IV-A,Quezon,Mauban North,QUEZON
+1298,Region IV-A,Quezon,Mauban South,QUEZON
+1299,Region IV-A,Quezon,Mulanay,QUEZON
+1300,Region IV-A,Quezon,Padre Burgos-Agdangan,QUEZON
+1301,Region IV-A,Quezon,Pagbilao,QUEZON
+1302,Region IV-A,Quezon,Panukulan,QUEZON
+1303,Region IV-A,Quezon,Patnanungan-Jomalig,QUEZON
+1304,Region IV-A,Quezon,Perez,QUEZON
+1305,Region IV-A,Quezon,Pitogo,QUEZON
+1306,Region IV-A,Quezon,Plaridel,QUEZON
+1307,Region IV-A,Quezon,Polillo,QUEZON
+1308,Region IV-A,Quezon,Quezon,QUEZON
+1309,Region IV-A,Quezon,Real,QUEZON
+1310,Region IV-A,Quezon,Sampaloc,QUEZON
+1311,Region IV-A,Quezon,San Andres,QUEZON
+1312,Region IV-A,Quezon,San Antonio,QUEZON
+1313,Region IV-A,Quezon,San Francisco,QUEZON
+1314,Region IV-A,Quezon,San Narciso,QUEZON
+1315,Region IV-A,Quezon,Sariaya East,QUEZON
+1316,Region IV-A,Quezon,Sariaya West,QUEZON
+1317,Region IV-A,Quezon,Tagkawayan,QUEZON
+1318,Region IV-A,Quezon,Tiaong,QUEZON
+1319,Region IV-A,Quezon,Unisan,QUEZON
+1320,Region IV-A,Rizal,Angono,RIZAL
+1321,Region IV-A,Rizal,Baras,RIZAL
+1322,Region IV-A,Rizal,Binangonan I,RIZAL
+1323,Region IV-A,Rizal,Binangonan II,RIZAL
+1324,Region IV-A,Rizal,Binangonan III,RIZAL
+1325,Region IV-A,Rizal,Cainta I (Cainta),RIZAL
+1326,Region IV-A,Rizal,Cainta II,RIZAL
+1327,Region IV-A,Rizal,Cardona,RIZAL
+1328,Region IV-A,Rizal,Jalajala,RIZAL
+1329,Region IV-A,Rizal,Morong,RIZAL
+1330,Region IV-A,Rizal,Pililla,RIZAL
+1331,Region IV-A,Rizal,Rodriguez I (Rodriguez),RIZAL
+1332,Region IV-A,Rizal,Rodriguez II,RIZAL
+1333,Region IV-A,Rizal,San Mateo,RIZAL
+1334,Region IV-A,Rizal,Tanay I,RIZAL
+1335,Region IV-A,Rizal,Tanay II,RIZAL
+1336,Region IV-A,Rizal,Taytay I,RIZAL
+1337,Region IV-A,Rizal,Taytay II,RIZAL
+1338,Region IV-A,Rizal,Teresa,RIZAL
+1339,Region IV-A,San Pablo City,Ambray,LAGUNA
+1340,Region IV-A,San Pablo City,Dapdapan,LAGUNA
+1341,Region IV-A,San Pablo City,Del Remedio,LAGUNA
+1342,Region IV-A,San Pablo City,Fule Almeda,LAGUNA
+1343,Region IV-A,San Pablo City,Lakeside,LAGUNA
+1344,Region IV-A,San Pablo City,San Francisco,LAGUNA
+1345,Region IV-A,San Pablo City,Sto. Angel,LAGUNA
+1346,Region IV-A,San Pedro City,San Pedro,LAGUNA
+1347,Region IV-A,Sta. Rosa City,City of Sta. Rosa District I,LAGUNA
+1348,Region IV-A,Sta. Rosa City,City of Sta. Rosa District II,LAGUNA
+1349,Region IV-A,Sta. Rosa City,City of Sta. Rosa District III,LAGUNA
+1350,Region IV-A,Sto. Tomas City,Sto. Tomas North,BATANGAS
+1351,Region IV-A,Sto. Tomas City,Sto. Tomas South,BATANGAS
+1352,Region IV-A,Tanauan City,Tanauan City East I,BATANGAS
+1353,Region IV-A,Tanauan City,Tanauan City East II,BATANGAS
+1354,Region IV-A,Tanauan City,Tanauan City East III,BATANGAS
+1355,Region IV-A,Tanauan City,Tanauan City North I,BATANGAS
+1356,Region IV-A,Tanauan City,Tanauan City North II,BATANGAS
+1357,Region IV-A,Tanauan City,Tanauan City North III,BATANGAS
+1358,Region IV-A,Tanauan City,Tanauan City South I,BATANGAS
+1359,Region IV-A,Tanauan City,Tanauan City South II,BATANGAS
+1360,Region IV-A,Tanauan City,Tanauan City West I,BATANGAS
+1361,Region IV-A,Tanauan City,Tanauan City West II,BATANGAS
+1362,Region IV-A,Tayabas City,Tayabas East,QUEZON
+1363,Region IV-A,Tayabas City,Tayabas West,QUEZON
+1364,Region IX,Dapitan City,Barcelona,ZAMBOANGA DEL NORTE
+1365,Region IX,Dapitan City,Baylimango,ZAMBOANGA DEL NORTE
+1366,Region IX,Dapitan City,Dapitan Central,ZAMBOANGA DEL NORTE
+1367,Region IX,Dapitan City,Potungan,ZAMBOANGA DEL NORTE
+1368,Region IX,Dapitan City,Sulangon,ZAMBOANGA DEL NORTE
+1369,Region IX,Dipolog City,Dipolog City East,ZAMBOANGA DEL NORTE
+1370,Region IX,Dipolog City,Dipolog City North,ZAMBOANGA DEL NORTE
+1371,Region IX,Dipolog City,Dipolog City South,ZAMBOANGA DEL NORTE
+1372,Region IX,Dipolog City,Dipolog City West,ZAMBOANGA DEL NORTE
+1373,Region IX,Isabela City,Isabela City East District,CITY OF ISABELA
+1374,Region IX,Isabela City,Isabela City Island District,CITY OF ISABELA
+1375,Region IX,Isabela City,Isabela City North District,CITY OF ISABELA
+1376,Region IX,Isabela City,Isabela City West District,CITY OF ISABELA
+1377,Region IX,Pagadian City,Pagadian City Central District,ZAMBOANGA DEL SUR
+1378,Region IX,Pagadian City,Pagadian City East District,ZAMBOANGA DEL SUR
+1379,Region IX,Pagadian City,Pagadian City North District,ZAMBOANGA DEL SUR
+1380,Region IX,Pagadian City,Pagadian City South District,ZAMBOANGA DEL SUR
+1381,Region IX,Pagadian City,Pagadian City West District,ZAMBOANGA DEL SUR
+1382,Region IX,Zamboanga City,Ayala,ZAMBOANGA DEL SUR
+1383,Region IX,Zamboanga City,Baliwasan,ZAMBOANGA DEL SUR
+1384,Region IX,Zamboanga City,Curuan,ZAMBOANGA DEL SUR
+1385,Region IX,Zamboanga City,Labuan,ZAMBOANGA DEL SUR
+1386,Region IX,Zamboanga City,Manicahan,ZAMBOANGA DEL SUR
+1387,Region IX,Zamboanga City,Mercedes,ZAMBOANGA DEL SUR
+1388,Region IX,Zamboanga City,Putik,ZAMBOANGA DEL SUR
+1389,Region IX,Zamboanga City,Sta. Maria,ZAMBOANGA DEL SUR
+1390,Region IX,Zamboanga City,Talon-Talon,ZAMBOANGA DEL SUR
+1391,Region IX,Zamboanga City,Tetuan,ZAMBOANGA DEL SUR
+1392,Region IX,Zamboanga City,Vitali,ZAMBOANGA DEL SUR
+1393,Region IX,Zamboanga City,Zamboanga Central District,ZAMBOANGA DEL SUR
+1394,Region IX,Zamboanga Sibugay,Alicia,ZAMBOANGA SIBUGAY
+1395,Region IX,Zamboanga Sibugay,Buug,ZAMBOANGA SIBUGAY
+1396,Region IX,Zamboanga Sibugay,Diplahan,ZAMBOANGA SIBUGAY
+1397,Region IX,Zamboanga Sibugay,Imelda,ZAMBOANGA SIBUGAY
+1398,Region IX,Zamboanga Sibugay,Ipil,ZAMBOANGA SIBUGAY
+1399,Region IX,Zamboanga Sibugay,Kabasalan,ZAMBOANGA SIBUGAY
+1400,Region IX,Zamboanga Sibugay,Mabuhay,ZAMBOANGA SIBUGAY
+1401,Region IX,Zamboanga Sibugay,Malangas,ZAMBOANGA SIBUGAY
+1402,Region IX,Zamboanga Sibugay,Naga,ZAMBOANGA SIBUGAY
+1403,Region IX,Zamboanga Sibugay,Olutanga,ZAMBOANGA SIBUGAY
+1404,Region IX,Zamboanga Sibugay,Payao,ZAMBOANGA SIBUGAY
+1405,Region IX,Zamboanga Sibugay,R.T. Lim,ZAMBOANGA SIBUGAY
+1406,Region IX,Zamboanga Sibugay,Siay,ZAMBOANGA SIBUGAY
+1407,Region IX,Zamboanga Sibugay,Talusan,ZAMBOANGA SIBUGAY
+1408,Region IX,Zamboanga Sibugay,Titay,ZAMBOANGA SIBUGAY
+1409,Region IX,Zamboanga Sibugay,Tungawan,ZAMBOANGA SIBUGAY
+1410,Region IX,Zamboanga del Norte,Bacungan (Leon Postigo),ZAMBOANGA DEL NORTE
+1411,Region IX,Zamboanga del Norte,Baliguian,ZAMBOANGA DEL NORTE
+1412,Region IX,Zamboanga del Norte,Godod,ZAMBOANGA DEL NORTE
+1413,Region IX,Zamboanga del Norte,Gutalac I,ZAMBOANGA DEL NORTE
+1414,Region IX,Zamboanga del Norte,Gutalac II,ZAMBOANGA DEL NORTE
+1415,Region IX,Zamboanga del Norte,Kalawit,ZAMBOANGA DEL NORTE
+1416,Region IX,Zamboanga del Norte,Katipunan I,ZAMBOANGA DEL NORTE
+1417,Region IX,Zamboanga del Norte,Katipunan II,ZAMBOANGA DEL NORTE
+1418,Region IX,Zamboanga del Norte,La Libertad,ZAMBOANGA DEL NORTE
+1419,Region IX,Zamboanga del Norte,Labason,ZAMBOANGA DEL NORTE
+1420,Region IX,Zamboanga del Norte,Liloy I,ZAMBOANGA DEL NORTE
+1421,Region IX,Zamboanga del Norte,Liloy II,ZAMBOANGA DEL NORTE
+1422,Region IX,Zamboanga del Norte,Manukan I,ZAMBOANGA DEL NORTE
+1423,Region IX,Zamboanga del Norte,Manukan II,ZAMBOANGA DEL NORTE
+1424,Region IX,Zamboanga del Norte,Mutia,ZAMBOANGA DEL NORTE
+1425,Region IX,Zamboanga del Norte,Piñan,ZAMBOANGA DEL NORTE
+1426,Region IX,Zamboanga del Norte,Polanco I,ZAMBOANGA DEL NORTE
+1427,Region IX,Zamboanga del Norte,Polanco II,ZAMBOANGA DEL NORTE
+1428,Region IX,Zamboanga del Norte,Ponot (Jose Dalman),ZAMBOANGA DEL NORTE
+1429,Region IX,Zamboanga del Norte,Rizal,ZAMBOANGA DEL NORTE
+1430,Region IX,Zamboanga del Norte,Roxas I (Manuel A. Roxas),ZAMBOANGA DEL NORTE
+1431,Region IX,Zamboanga del Norte,Roxas II (Manuel A. Roxas),ZAMBOANGA DEL NORTE
+1432,Region IX,Zamboanga del Norte,Salug I,ZAMBOANGA DEL NORTE
+1433,Region IX,Zamboanga del Norte,Salug II,ZAMBOANGA DEL NORTE
+1434,Region IX,Zamboanga del Norte,Sergio Osmeña I,ZAMBOANGA DEL NORTE
+1435,Region IX,Zamboanga del Norte,Sergio Osmeña II,ZAMBOANGA DEL NORTE
+1436,Region IX,Zamboanga del Norte,Siayan,ZAMBOANGA DEL NORTE
+1437,Region IX,Zamboanga del Norte,Sibuco,ZAMBOANGA DEL NORTE
+1438,Region IX,Zamboanga del Norte,Sibutad,ZAMBOANGA DEL NORTE
+1439,Region IX,Zamboanga del Norte,Sindangan Central,ZAMBOANGA DEL NORTE
+1440,Region IX,Zamboanga del Norte,Sindangan North,ZAMBOANGA DEL NORTE
+1441,Region IX,Zamboanga del Norte,Sindangan South,ZAMBOANGA DEL NORTE
+1442,Region IX,Zamboanga del Norte,Siocon,ZAMBOANGA DEL NORTE
+1443,Region IX,Zamboanga del Norte,Sirawai,ZAMBOANGA DEL NORTE
+1444,Region IX,Zamboanga del Norte,Tampilisan,ZAMBOANGA DEL NORTE
+1445,Region IX,Zamboanga del Sur,Aurora East,ZAMBOANGA DEL SUR
+1446,Region IX,Zamboanga del Sur,Aurora West,ZAMBOANGA DEL SUR
+1447,Region IX,Zamboanga del Sur,Bayog,ZAMBOANGA DEL SUR
+1448,Region IX,Zamboanga del Sur,Dimataling,ZAMBOANGA DEL SUR
+1449,Region IX,Zamboanga del Sur,Dinas,ZAMBOANGA DEL SUR
+1450,Region IX,Zamboanga del Sur,Dumalinao,ZAMBOANGA DEL SUR
+1451,Region IX,Zamboanga del Sur,Dumingag I,ZAMBOANGA DEL SUR
+1452,Region IX,Zamboanga del Sur,Dumingag II,ZAMBOANGA DEL SUR
+1453,Region IX,Zamboanga del Sur,Guipos,ZAMBOANGA DEL SUR
+1454,Region IX,Zamboanga del Sur,Josefina,ZAMBOANGA DEL SUR
+1455,Region IX,Zamboanga del Sur,Kumalarang,ZAMBOANGA DEL SUR
+1456,Region IX,Zamboanga del Sur,Labangan I,ZAMBOANGA DEL SUR
+1457,Region IX,Zamboanga del Sur,Labangan II,ZAMBOANGA DEL SUR
+1458,Region IX,Zamboanga del Sur,Lakewood,ZAMBOANGA DEL SUR
+1459,Region IX,Zamboanga del Sur,Lapuyan,ZAMBOANGA DEL SUR
+1460,Region IX,Zamboanga del Sur,Mahayag North,ZAMBOANGA DEL SUR
+1461,Region IX,Zamboanga del Sur,Mahayag South,ZAMBOANGA DEL SUR
+1462,Region IX,Zamboanga del Sur,Margosatubig,ZAMBOANGA DEL SUR
+1463,Region IX,Zamboanga del Sur,Midsalip,ZAMBOANGA DEL SUR
+1464,Region IX,Zamboanga del Sur,Molave East,ZAMBOANGA DEL SUR
+1465,Region IX,Zamboanga del Sur,Molave West,ZAMBOANGA DEL SUR
+1466,Region IX,Zamboanga del Sur,Pitogo,ZAMBOANGA DEL SUR
+1467,Region IX,Zamboanga del Sur,Ramon Magsaysay,ZAMBOANGA DEL SUR
+1468,Region IX,Zamboanga del Sur,San Miguel,ZAMBOANGA DEL SUR
+1469,Region IX,Zamboanga del Sur,San Pablo,ZAMBOANGA DEL SUR
+1470,Region IX,Zamboanga del Sur,Sominot,ZAMBOANGA DEL SUR
+1471,Region IX,Zamboanga del Sur,Tabina,ZAMBOANGA DEL SUR
+1472,Region IX,Zamboanga del Sur,Tambulig,ZAMBOANGA DEL SUR
+1473,Region IX,Zamboanga del Sur,Tigbao,ZAMBOANGA DEL SUR
+1474,Region IX,Zamboanga del Sur,Tukuran East,ZAMBOANGA DEL SUR
+1475,Region IX,Zamboanga del Sur,Tukuran West,ZAMBOANGA DEL SUR
+1476,Region IX,Zamboanga del Sur,Vincenzo Sagun,ZAMBOANGA DEL SUR
+1477,Region V,Albay,Bacacay East,ALBAY
+1478,Region V,Albay,Bacacay South,ALBAY
+1479,Region V,Albay,Bacacay West,ALBAY
+1480,Region V,Albay,Camalig North,ALBAY
+1481,Region V,Albay,Camalig South,ALBAY
+1482,Region V,Albay,Daraga North,ALBAY
+1483,Region V,Albay,Daraga South,ALBAY
+1484,Region V,Albay,Guinobatan East,ALBAY
+1485,Region V,Albay,Guinobatan West,ALBAY
+1486,Region V,Albay,Jovellar,ALBAY
+1487,Region V,Albay,Libon East,ALBAY
+1488,Region V,Albay,Libon West,ALBAY
+1489,Region V,Albay,Malilipot,ALBAY
+1490,Region V,Albay,Malinao,ALBAY
+1491,Region V,Albay,Manito,ALBAY
+1492,Region V,Albay,Oas North,ALBAY
+1493,Region V,Albay,Oas South,ALBAY
+1494,Region V,Albay,Pioduran East (Pioduran South),ALBAY
+1495,Region V,Albay,Pioduran West (Pioduran North),ALBAY
+1496,Region V,Albay,Polangui North,ALBAY
+1497,Region V,Albay,Polangui South,ALBAY
+1498,Region V,Albay,Rapu-Rapu East (Rapu-Rapu),ALBAY
+1499,Region V,Albay,Rapu-Rapu West,ALBAY
+1500,Region V,Albay,Sto. Domingo,ALBAY
+1501,Region V,Albay,Tiwi,ALBAY
+1502,Region V,Camarines Norte,Basud,CAMARINES NORTE
+1503,Region V,Camarines Norte,Capalonga,CAMARINES NORTE
+1504,Region V,Camarines Norte,Daet North,CAMARINES NORTE
+1505,Region V,Camarines Norte,Daet South,CAMARINES NORTE
+1506,Region V,Camarines Norte,Jose Panganiban East,CAMARINES NORTE
+1507,Region V,Camarines Norte,Jose Panganiban West,CAMARINES NORTE
+1508,Region V,Camarines Norte,Labo East,CAMARINES NORTE
+1509,Region V,Camarines Norte,Labo West,CAMARINES NORTE
+1510,Region V,Camarines Norte,Mercedes,CAMARINES NORTE
+1511,Region V,Camarines Norte,Paracale,CAMARINES NORTE
+1512,Region V,Camarines Norte,Sn Vicente-San Lorenzo Ruiz,CAMARINES NORTE
+1513,Region V,Camarines Norte,Sta. Elena,CAMARINES NORTE
+1514,Region V,Camarines Norte,Talisay,CAMARINES NORTE
+1515,Region V,Camarines Norte,Vinzons,CAMARINES NORTE
+1516,Region V,Camarines Sur,Baao,CAMARINES SUR
+1517,Region V,Camarines Sur,Balatan,CAMARINES SUR
+1518,Region V,Camarines Sur,Bato,CAMARINES SUR
+1519,Region V,Camarines Sur,Buhi,CAMARINES SUR
+1520,Region V,Camarines Sur,Bula,CAMARINES SUR
+1521,Region V,Camarines Sur,Cabusao,CAMARINES SUR
+1522,Region V,Camarines Sur,Calabanga,CAMARINES SUR
+1523,Region V,Camarines Sur,Camaligan,CAMARINES SUR
+1524,Region V,Camarines Sur,Canaman,CAMARINES SUR
+1525,Region V,Camarines Sur,Caramoan,CAMARINES SUR
+1526,Region V,Camarines Sur,Del Gallego,CAMARINES SUR
+1527,Region V,Camarines Sur,Garchitorena,CAMARINES SUR
+1528,Region V,Camarines Sur,Goa,CAMARINES SUR
+1529,Region V,Camarines Sur,Lagonoy North,CAMARINES SUR
+1530,Region V,Camarines Sur,Lagonoy South,CAMARINES SUR
+1531,Region V,Camarines Sur,Libmanan North,CAMARINES SUR
+1532,Region V,Camarines Sur,Libmanan South,CAMARINES SUR
+1533,Region V,Camarines Sur,Lupi,CAMARINES SUR
+1534,Region V,Camarines Sur,Magarao-Bombon,CAMARINES SUR
+1535,Region V,Camarines Sur,Milaor-Gainza,CAMARINES SUR
+1536,Region V,Camarines Sur,Minalabac,CAMARINES SUR
+1537,Region V,Camarines Sur,Nabua East,CAMARINES SUR
+1538,Region V,Camarines Sur,Nabua West,CAMARINES SUR
+1539,Region V,Camarines Sur,Ocampo,CAMARINES SUR
+1540,Region V,Camarines Sur,Pamplona,CAMARINES SUR
+1541,Region V,Camarines Sur,Parubcan-Presentacion,CAMARINES SUR
+1542,Region V,Camarines Sur,Pasacao,CAMARINES SUR
+1543,Region V,Camarines Sur,Pili,CAMARINES SUR
+1544,Region V,Camarines Sur,Ragay,CAMARINES SUR
+1545,Region V,Camarines Sur,Sagñay,CAMARINES SUR
+1546,Region V,Camarines Sur,San Fernando,CAMARINES SUR
+1547,Region V,Camarines Sur,San Jose,CAMARINES SUR
+1548,Region V,Camarines Sur,Sipocot North,CAMARINES SUR
+1549,Region V,Camarines Sur,Sipocot South,CAMARINES SUR
+1550,Region V,Camarines Sur,Siruma,CAMARINES SUR
+1551,Region V,Camarines Sur,Tigaon,CAMARINES SUR
+1552,Region V,Camarines Sur,Tinambac North,CAMARINES SUR
+1553,Region V,Camarines Sur,Tinambac South,CAMARINES SUR
+1554,Region V,Catanduanes,Bagamanoc North,CATANDUANES
+1555,Region V,Catanduanes,Bagamanoc South,CATANDUANES
+1556,Region V,Catanduanes,Baras North,CATANDUANES
+1557,Region V,Catanduanes,Baras South,CATANDUANES
+1558,Region V,Catanduanes,Bato East,CATANDUANES
+1559,Region V,Catanduanes,Bato West,CATANDUANES
+1560,Region V,Catanduanes,Caramoran North,CATANDUANES
+1561,Region V,Catanduanes,Caramoran South,CATANDUANES
+1562,Region V,Catanduanes,Gigmoto,CATANDUANES
+1563,Region V,Catanduanes,Pandan East,CATANDUANES
+1564,Region V,Catanduanes,Pandan West,CATANDUANES
+1565,Region V,Catanduanes,Panganiban,CATANDUANES
+1566,Region V,Catanduanes,San Andres East,CATANDUANES
+1567,Region V,Catanduanes,San Andres West,CATANDUANES
+1568,Region V,Catanduanes,San Miguel North,CATANDUANES
+1569,Region V,Catanduanes,San Miguel South,CATANDUANES
+1570,Region V,Catanduanes,Viga East,CATANDUANES
+1571,Region V,Catanduanes,Viga West,CATANDUANES
+1572,Region V,Catanduanes,Virac North,CATANDUANES
+1573,Region V,Catanduanes,Virac South,CATANDUANES
+1574,Region V,Iriga City,Iriga Central District,CAMARINES SUR
+1575,Region V,Iriga City,Iriga North District,CAMARINES SUR
+1576,Region V,Iriga City,Iriga South District,CAMARINES SUR
+1577,Region V,Legaspi City,Albay I District,ALBAY
+1578,Region V,Legaspi City,Albay II District,ALBAY
+1579,Region V,Legaspi City,Legazpi Port I District,ALBAY
+1580,Region V,Legaspi City,Legazpi Port II District,ALBAY
+1581,Region V,Ligao City,Ligao East District,ALBAY
+1582,Region V,Ligao City,Ligao South District,ALBAY
+1583,Region V,Ligao City,Ligao West District,ALBAY
+1584,Region V,Masbate,Aroroy East,MASBATE
+1585,Region V,Masbate,Aroroy West,MASBATE
+1586,Region V,Masbate,Baleno,MASBATE
+1587,Region V,Masbate,Balud North,MASBATE
+1588,Region V,Masbate,Balud South,MASBATE
+1589,Region V,Masbate,Batuan,MASBATE
+1590,Region V,Masbate,Cataingan East,MASBATE
+1591,Region V,Masbate,Cataingan West,MASBATE
+1592,Region V,Masbate,Cawayan East (Cawayan),MASBATE
+1593,Region V,Masbate,Cawayan West,MASBATE
+1594,Region V,Masbate,Claveria North,MASBATE
+1595,Region V,Masbate,Claveria South,MASBATE
+1596,Region V,Masbate,Dimasalang,MASBATE
+1597,Region V,Masbate,Esperanza,MASBATE
+1598,Region V,Masbate,Mandaon North,MASBATE
+1599,Region V,Masbate,Mandaon South,MASBATE
+1600,Region V,Masbate,Milagros East,MASBATE
+1601,Region V,Masbate,Milagros West,MASBATE
+1602,Region V,Masbate,Mobo North,MASBATE
+1603,Region V,Masbate,Mobo South,MASBATE
+1604,Region V,Masbate,Monreal,MASBATE
+1605,Region V,Masbate,Palanas North,MASBATE
+1606,Region V,Masbate,Palanas South,MASBATE
+1607,Region V,Masbate,Pio V. Corpuz,MASBATE
+1608,Region V,Masbate,Placer East,MASBATE
+1609,Region V,Masbate,Placer West,MASBATE
+1610,Region V,Masbate,San Fernando,MASBATE
+1611,Region V,Masbate,San Jacinto,MASBATE
+1612,Region V,Masbate,San Pascual North,MASBATE
+1613,Region V,Masbate,San Pascual South,MASBATE
+1614,Region V,Masbate,Uson South,MASBATE
+1615,Region V,Masbate,Uson-North,MASBATE
+1616,Region V,Masbate City,Masbaste North District 1,MASBATE
+1617,Region V,Masbate City,Masbaste North District 2,MASBATE
+1618,Region V,Masbate City,Masbate South District 1,MASBATE
+1619,Region V,Masbate City,Masbate South District 2,MASBATE
+1620,Region V,Naga City,Naga East District,CAMARINES SUR
+1621,Region V,Naga City,Naga North District,CAMARINES SUR
+1622,Region V,Naga City,Naga South District,CAMARINES SUR
+1623,Region V,Naga City,Naga West District,CAMARINES SUR
+1624,Region V,Sorsogon,Barcelona,SORSOGON
+1625,Region V,Sorsogon,Bulan North,SORSOGON
+1626,Region V,Sorsogon,Bulan South,SORSOGON
+1627,Region V,Sorsogon,Bulusan,SORSOGON
+1628,Region V,Sorsogon,Casiguran,SORSOGON
+1629,Region V,Sorsogon,Castilla East,SORSOGON
+1630,Region V,Sorsogon,Castilla West,SORSOGON
+1631,Region V,Sorsogon,Donsol East,SORSOGON
+1632,Region V,Sorsogon,Donsol West,SORSOGON
+1633,Region V,Sorsogon,Gubat North,SORSOGON
+1634,Region V,Sorsogon,Gubat South,SORSOGON
+1635,Region V,Sorsogon,Irosin,SORSOGON
+1636,Region V,Sorsogon,Juban,SORSOGON
+1637,Region V,Sorsogon,Magallanes North,SORSOGON
+1638,Region V,Sorsogon,Magallanes South,SORSOGON
+1639,Region V,Sorsogon,Matnog,SORSOGON
+1640,Region V,Sorsogon,Pilar I,SORSOGON
+1641,Region V,Sorsogon,Pilar II,SORSOGON
+1642,Region V,Sorsogon,Prieto Diaz,SORSOGON
+1643,Region V,Sorsogon,Sta. Magdalena,SORSOGON
+1644,Region V,Sorsogon City,Bacon East,SORSOGON
+1645,Region V,Sorsogon City,Bacon West,SORSOGON
+1646,Region V,Sorsogon City,Sorsogon East,SORSOGON
+1647,Region V,Sorsogon City,Sorsogon West,SORSOGON
+1648,Region V,Tabaco City,Tabaco East,ALBAY
+1649,Region V,Tabaco City,Tabaco North,ALBAY
+1650,Region V,Tabaco City,Tabaco South,ALBAY
+1651,Region V,Tabaco City,Tabaco West,ALBAY
+1652,Region VI,Aklan,Altavas,AKLAN
+1653,Region VI,Aklan,Balete,AKLAN
+1654,Region VI,Aklan,Banga,AKLAN
+1655,Region VI,Aklan,Batan,AKLAN
+1656,Region VI,Aklan,Buruanga,AKLAN
+1657,Region VI,Aklan,Ibajay I,AKLAN
+1658,Region VI,Aklan,Ibajay II,AKLAN
+1659,Region VI,Aklan,Kalibo I,AKLAN
+1660,Region VI,Aklan,Kalibo II,AKLAN
+1661,Region VI,Aklan,Lezo,AKLAN
+1662,Region VI,Aklan,Libacao,AKLAN
+1663,Region VI,Aklan,Madalag,AKLAN
+1664,Region VI,Aklan,Makato,AKLAN
+1665,Region VI,Aklan,Malay,AKLAN
+1666,Region VI,Aklan,Malinao,AKLAN
+1667,Region VI,Aklan,Nabas,AKLAN
+1668,Region VI,Aklan,New Washington,AKLAN
+1669,Region VI,Aklan,Numancia,AKLAN
+1670,Region VI,Aklan,Tangalan,AKLAN
+1671,Region VI,Antique,Anini-y,ANTIQUE
+1672,Region VI,Antique,Barbaza,ANTIQUE
+1673,Region VI,Antique,Belison,ANTIQUE
+1674,Region VI,Antique,Bugasong,ANTIQUE
+1675,Region VI,Antique,Caluya,ANTIQUE
+1676,Region VI,Antique,Culasi,ANTIQUE
+1677,Region VI,Antique,Hamtic North,ANTIQUE
+1678,Region VI,Antique,Hamtic South,ANTIQUE
+1679,Region VI,Antique,Laua-an,ANTIQUE
+1680,Region VI,Antique,Libertad,ANTIQUE
+1681,Region VI,Antique,Pandan,ANTIQUE
+1682,Region VI,Antique,Patnongon I,ANTIQUE
+1683,Region VI,Antique,Patnongon II,ANTIQUE
+1684,Region VI,Antique,San Jose,ANTIQUE
+1685,Region VI,Antique,San Remegio I,ANTIQUE
+1686,Region VI,Antique,San Remegio II,ANTIQUE
+1687,Region VI,Antique,Sebaste,ANTIQUE
+1688,Region VI,Antique,Sibalom North,ANTIQUE
+1689,Region VI,Antique,Sibalom South,ANTIQUE
+1690,Region VI,Antique,Tibiao,ANTIQUE
+1691,Region VI,Antique,Tobias Fornier,ANTIQUE
+1692,Region VI,Antique,Valderama,ANTIQUE
+1693,Region VI,Bacolod City,Bacolod City I District,NEGROS OCCIDENTAL
+1694,Region VI,Bacolod City,Bacolod City II District,NEGROS OCCIDENTAL
+1695,Region VI,Bacolod City,Bacolod City III District,NEGROS OCCIDENTAL
+1696,Region VI,Bacolod City,Bacolod City IV District,NEGROS OCCIDENTAL
+1697,Region VI,Bacolod City,Bacolod City V District,NEGROS OCCIDENTAL
+1698,Region VI,Bacolod City,Bacolod City VI District,NEGROS OCCIDENTAL
+1699,Region VI,Bacolod City,Bacolod City VII District,NEGROS OCCIDENTAL
+1700,Region VI,Bago City,Bago City I District,NEGROS OCCIDENTAL
+1701,Region VI,Bago City,Bago City II District,NEGROS OCCIDENTAL
+1702,Region VI,Bago City,Bago City III District,NEGROS OCCIDENTAL
+1703,Region VI,Bago City,Bago City IV District,NEGROS OCCIDENTAL
+1704,Region VI,Cadiz City,Cadiz City I District,NEGROS OCCIDENTAL
+1705,Region VI,Cadiz City,Cadiz City II District,NEGROS OCCIDENTAL
+1706,Region VI,Cadiz City,Cadiz City III District,NEGROS OCCIDENTAL
+1707,Region VI,Cadiz City,Cadiz City IV District,NEGROS OCCIDENTAL
+1708,Region VI,Capiz,Cuartero,CAPIZ
+1709,Region VI,Capiz,Dao,CAPIZ
+1710,Region VI,Capiz,Dumalag,CAPIZ
+1711,Region VI,Capiz,Dumarao,CAPIZ
+1712,Region VI,Capiz,Ivisan,CAPIZ
+1713,Region VI,Capiz,Jamindan,CAPIZ
+1714,Region VI,Capiz,Maayon,CAPIZ
+1715,Region VI,Capiz,Mambusao East,CAPIZ
+1716,Region VI,Capiz,Mambusao West,CAPIZ
+1717,Region VI,Capiz,Panay,CAPIZ
+1718,Region VI,Capiz,Panit-An,CAPIZ
+1719,Region VI,Capiz,Pilar,CAPIZ
+1720,Region VI,Capiz,Pontevedra,CAPIZ
+1721,Region VI,Capiz,President Roxas,CAPIZ
+1722,Region VI,Capiz,Sapian,CAPIZ
+1723,Region VI,Capiz,Sigma,CAPIZ
+1724,Region VI,Capiz,Tapaz East,CAPIZ
+1725,Region VI,Capiz,Tapaz West,CAPIZ
+1726,Region VI,Escalante City,Escalante I,NEGROS OCCIDENTAL
+1727,Region VI,Escalante City,Escalante II,NEGROS OCCIDENTAL
+1728,Region VI,Guimaras,Buenavista I,GUIMARAS
+1729,Region VI,Guimaras,Buenavista II,GUIMARAS
+1730,Region VI,Guimaras,Jordan I,GUIMARAS
+1731,Region VI,Guimaras,Jordan II,GUIMARAS
+1732,Region VI,Guimaras,Nueva Valencia North,GUIMARAS
+1733,Region VI,Guimaras,Nueva Valencia South,GUIMARAS
+1734,Region VI,Guimaras,San Lorenzo (Buenavista III),GUIMARAS
+1735,Region VI,Guimaras,Sibunag (Jordan III),GUIMARAS
+1736,Region VI,Himamaylan City,District 1,NEGROS OCCIDENTAL
+1737,Region VI,Himamaylan City,District 2,NEGROS OCCIDENTAL
+1738,Region VI,Iloilo,Ajuy,ILOILO
+1739,Region VI,Iloilo,Alimodian I,ILOILO
+1740,Region VI,Iloilo,Alimodian II,ILOILO
+1741,Region VI,Iloilo,Anilao,ILOILO
+1742,Region VI,Iloilo,Badiangan,ILOILO
+1743,Region VI,Iloilo,Balasan,ILOILO
+1744,Region VI,Iloilo,Banate,ILOILO
+1745,Region VI,Iloilo,Barotac Nuevo,ILOILO
+1746,Region VI,Iloilo,Barotac Viejo,ILOILO
+1747,Region VI,Iloilo,Batad,ILOILO
+1748,Region VI,Iloilo,Bingawan,ILOILO
+1749,Region VI,Iloilo,Cabatuan I,ILOILO
+1750,Region VI,Iloilo,Cabatuan II,ILOILO
+1751,Region VI,Iloilo,Calinog I,ILOILO
+1752,Region VI,Iloilo,Calinog II,ILOILO
+1753,Region VI,Iloilo,Carles,ILOILO
+1754,Region VI,Iloilo,Concepcion,ILOILO
+1755,Region VI,Iloilo,Dingle,ILOILO
+1756,Region VI,Iloilo,Due¤as,ILOILO
+1757,Region VI,Iloilo,Dumangas I,ILOILO
+1758,Region VI,Iloilo,Dumangas II,ILOILO
+1759,Region VI,Iloilo,Estancia,ILOILO
+1760,Region VI,Iloilo,Guimbal,ILOILO
+1761,Region VI,Iloilo,Igbaras,ILOILO
+1762,Region VI,Iloilo,Janiuay I,ILOILO
+1763,Region VI,Iloilo,Janiuay II,ILOILO
+1764,Region VI,Iloilo,Lambunao East,ILOILO
+1765,Region VI,Iloilo,Lambunao West,ILOILO
+1766,Region VI,Iloilo,Leganes,ILOILO
+1767,Region VI,Iloilo,Lemery,ILOILO
+1768,Region VI,Iloilo,Leon I,ILOILO
+1769,Region VI,Iloilo,Leon II,ILOILO
+1770,Region VI,Iloilo,Maasin,ILOILO
+1771,Region VI,Iloilo,Miagao East,ILOILO
+1772,Region VI,Iloilo,Miagao West,ILOILO
+1773,Region VI,Iloilo,Mina,ILOILO
+1774,Region VI,Iloilo,New Lucena,ILOILO
+1775,Region VI,Iloilo,Oton,ILOILO
+1776,Region VI,Iloilo,Pavia,ILOILO
+1777,Region VI,Iloilo,Pototan I,ILOILO
+1778,Region VI,Iloilo,Pototan II,ILOILO
+1779,Region VI,Iloilo,San Dionisio,ILOILO
+1780,Region VI,Iloilo,San Enrique,ILOILO
+1781,Region VI,Iloilo,San Joaquin North,ILOILO
+1782,Region VI,Iloilo,San Joaquin South,ILOILO
+1783,Region VI,Iloilo,San Miguel,ILOILO
+1784,Region VI,Iloilo,San Rafael,ILOILO
+1785,Region VI,Iloilo,Sara,ILOILO
+1786,Region VI,Iloilo,Sta. Barbara,ILOILO
+1787,Region VI,Iloilo,Tigbauan,ILOILO
+1788,Region VI,Iloilo,Tubungan,ILOILO
+1789,Region VI,Iloilo,Zarraga,ILOILO
+1790,Region VI,Iloilo City,Arevalo,ILOILO
+1791,Region VI,Iloilo City,City Proper,ILOILO
+1792,Region VI,Iloilo City,Jaro,ILOILO
+1793,Region VI,Iloilo City,Lapaz,ILOILO
+1794,Region VI,Iloilo City,Mandurriao,ILOILO
+1795,Region VI,Iloilo City,Molo,ILOILO
+1796,Region VI,Iloilo City,Montes-Lapuz,ILOILO
+1797,Region VI,Kabankalan City,Kabankalan I,NEGROS OCCIDENTAL
+1798,Region VI,Kabankalan City,Kabankalan II,NEGROS OCCIDENTAL
+1799,Region VI,Kabankalan City,Kabankalan III,NEGROS OCCIDENTAL
+1800,Region VI,Kabankalan City,Kabankalan IV,NEGROS OCCIDENTAL
+1801,Region VI,Kabankalan City,Kabankalan V,NEGROS OCCIDENTAL
+1802,Region VI,La Carlota City,La Carlota City District   I,NEGROS OCCIDENTAL
+1803,Region VI,La Carlota City,La Carlota City District   II,NEGROS OCCIDENTAL
+1804,Region VI,La Carlota City,La Carlota City District   III,NEGROS OCCIDENTAL
+1805,Region VI,Negros Occidental,Binalbagan I,NEGROS OCCIDENTAL
+1806,Region VI,Negros Occidental,Binalbagan II,NEGROS OCCIDENTAL
+1807,Region VI,Negros Occidental,Calatrava I,NEGROS OCCIDENTAL
+1808,Region VI,Negros Occidental,Calatrava II,NEGROS OCCIDENTAL
+1809,Region VI,Negros Occidental,Candoni,NEGROS OCCIDENTAL
+1810,Region VI,Negros Occidental,Cauayan I,NEGROS OCCIDENTAL
+1811,Region VI,Negros Occidental,Cauayan II,NEGROS OCCIDENTAL
+1812,Region VI,Negros Occidental,Enrique B. Magalona,NEGROS OCCIDENTAL
+1813,Region VI,Negros Occidental,Hinigaran I,NEGROS OCCIDENTAL
+1814,Region VI,Negros Occidental,Hinigaran II,NEGROS OCCIDENTAL
+1815,Region VI,Negros Occidental,Hinobaan,NEGROS OCCIDENTAL
+1816,Region VI,Negros Occidental,Ilog I,NEGROS OCCIDENTAL
+1817,Region VI,Negros Occidental,Ilog II,NEGROS OCCIDENTAL
+1818,Region VI,Negros Occidental,Isabela I,NEGROS OCCIDENTAL
+1819,Region VI,Negros Occidental,Isabela II,NEGROS OCCIDENTAL
+1820,Region VI,Negros Occidental,La Castellana I,NEGROS OCCIDENTAL
+1821,Region VI,Negros Occidental,La Castellana II,NEGROS OCCIDENTAL
+1822,Region VI,Negros Occidental,Manapla,NEGROS OCCIDENTAL
+1823,Region VI,Negros Occidental,Moises Padilla,NEGROS OCCIDENTAL
+1824,Region VI,Negros Occidental,Murcia I,NEGROS OCCIDENTAL
+1825,Region VI,Negros Occidental,Murcia II,NEGROS OCCIDENTAL
+1826,Region VI,Negros Occidental,Pontevedra I,NEGROS OCCIDENTAL
+1827,Region VI,Negros Occidental,Pontevedra II,NEGROS OCCIDENTAL
+1828,Region VI,Negros Occidental,Pulupandan,NEGROS OCCIDENTAL
+1829,Region VI,Negros Occidental,Salvador Benedicto,NEGROS OCCIDENTAL
+1830,Region VI,Negros Occidental,San Enrique,NEGROS OCCIDENTAL
+1831,Region VI,Negros Occidental,Talisay I,NEGROS OCCIDENTAL
+1832,Region VI,Negros Occidental,Talisay II,NEGROS OCCIDENTAL
+1833,Region VI,Negros Occidental,Talisay III,NEGROS OCCIDENTAL
+1834,Region VI,Negros Occidental,Toboso,NEGROS OCCIDENTAL
+1835,Region VI,Negros Occidental,Valladolid,NEGROS OCCIDENTAL
+1836,Region VI,Passi City,Passi City District I (West),ILOILO
+1837,Region VI,Passi City,Passi City District II (East),ILOILO
+1838,Region VI,Roxas City,Roxas City District I,CAPIZ
+1839,Region VI,Roxas City,Roxas City District II,CAPIZ
+1840,Region VI,Roxas City,Roxas City District III,CAPIZ
+1841,Region VI,Sagay City,Sagay City District I,NEGROS OCCIDENTAL
+1842,Region VI,Sagay City,Sagay City District II,NEGROS OCCIDENTAL
+1843,Region VI,Sagay City,Sagay City District III,NEGROS OCCIDENTAL
+1844,Region VI,San Carlos City,San Carlos City District I,NEGROS OCCIDENTAL
+1845,Region VI,San Carlos City,San Carlos City District II,NEGROS OCCIDENTAL
+1846,Region VI,San Carlos City,San Carlos City District III,NEGROS OCCIDENTAL
+1847,Region VI,San Carlos City,San Carlos City District IV,NEGROS OCCIDENTAL
+1848,Region VI,San Carlos City,San Carlos City District V,NEGROS OCCIDENTAL
+1849,Region VI,Silay City,Silay City District I,NEGROS OCCIDENTAL
+1850,Region VI,Silay City,Silay City District II,NEGROS OCCIDENTAL
+1851,Region VI,Silay City,Silay City District III,NEGROS OCCIDENTAL
+1852,Region VI,Silay City,Silay City District IV,NEGROS OCCIDENTAL
+1853,Region VI,Sipalay City,District 1,NEGROS OCCIDENTAL
+1854,Region VI,Sipalay City,District 2,NEGROS OCCIDENTAL
+1855,Region VI,Victorias City,Victorias I,NEGROS OCCIDENTAL
+1856,Region VI,Victorias City,Victorias II,NEGROS OCCIDENTAL
+1857,Region VII,Bais City,Bais City North,NEGROS ORIENTAL
+1858,Region VII,Bais City,Bais City South,NEGROS ORIENTAL
+1859,Region VII,Bayawan City,Basay,NEGROS ORIENTAL
+1860,Region VII,Bayawan City,Bayawan East,NEGROS ORIENTAL
+1861,Region VII,Bayawan City,Bayawan West,NEGROS ORIENTAL
+1862,Region VII,Bogo City,Bogo I,CEBU
+1863,Region VII,Bogo City,Bogo II,CEBU
+1864,Region VII,Bogo City,Bogo III,CEBU
+1865,Region VII,Bohol,Alburquerque,BOHOL
+1866,Region VII,Bohol,Alicia,BOHOL
+1867,Region VII,Bohol,Anda,BOHOL
+1868,Region VII,Bohol,Antequera,BOHOL
+1869,Region VII,Bohol,Baclayon,BOHOL
+1870,Region VII,Bohol,Balilihan,BOHOL
+1871,Region VII,Bohol,Batuan,BOHOL
+1872,Region VII,Bohol,Bien Unido,BOHOL
+1873,Region VII,Bohol,Bilar,BOHOL
+1874,Region VII,Bohol,Buenavista,BOHOL
+1875,Region VII,Bohol,Calape,BOHOL
+1876,Region VII,Bohol,Candijay,BOHOL
+1877,Region VII,Bohol,Carmen,BOHOL
+1878,Region VII,Bohol,Catigbian,BOHOL
+1879,Region VII,Bohol,Clarin,BOHOL
+1880,Region VII,Bohol,Corella,BOHOL
+1881,Region VII,Bohol,Cortes,BOHOL
+1882,Region VII,Bohol,Dagohoy,BOHOL
+1883,Region VII,Bohol,Danao,BOHOL
+1884,Region VII,Bohol,Dauis,BOHOL
+1885,Region VII,Bohol,Dimiao,BOHOL
+1886,Region VII,Bohol,Duero,BOHOL
+1887,Region VII,Bohol,Garcia-Hernandez,BOHOL
+1888,Region VII,Bohol,Getafe,BOHOL
+1889,Region VII,Bohol,Guindulman,BOHOL
+1890,Region VII,Bohol,Inabanga North,BOHOL
+1891,Region VII,Bohol,Inabanga South,BOHOL
+1892,Region VII,Bohol,Jagna,BOHOL
+1893,Region VII,Bohol,Lila,BOHOL
+1894,Region VII,Bohol,Loay,BOHOL
+1895,Region VII,Bohol,Loboc,BOHOL
+1896,Region VII,Bohol,Loon North,BOHOL
+1897,Region VII,Bohol,Loon South,BOHOL
+1898,Region VII,Bohol,Mabini,BOHOL
+1899,Region VII,Bohol,Maribojoc,BOHOL
+1900,Region VII,Bohol,Panglao,BOHOL
+1901,Region VII,Bohol,Pilar,BOHOL
+1902,Region VII,Bohol,Pres. C. P. Garcia,BOHOL
+1903,Region VII,Bohol,Sagbayan,BOHOL
+1904,Region VII,Bohol,San Isidro,BOHOL
+1905,Region VII,Bohol,San Miguel,BOHOL
+1906,Region VII,Bohol,Sevilla,BOHOL
+1907,Region VII,Bohol,Sierra Bullones,BOHOL
+1908,Region VII,Bohol,Sikatuna,BOHOL
+1909,Region VII,Bohol,Talibon I,BOHOL
+1910,Region VII,Bohol,Talibon II,BOHOL
+1911,Region VII,Bohol,Trinidad,BOHOL
+1912,Region VII,Bohol,Tubigon,BOHOL
+1913,Region VII,Bohol,Ubay I (Northeast),BOHOL
+1914,Region VII,Bohol,Ubay II (East),BOHOL
+1915,Region VII,Bohol,Ubay III (Southwest),BOHOL
+1916,Region VII,Bohol,Valencia,BOHOL
+1917,Region VII,Canlaon City,Canlaon City,NEGROS ORIENTAL
+1918,Region VII,Carcar City,Carcar I,CEBU
+1919,Region VII,Carcar City,Carcar II,CEBU
+1920,Region VII,Cebu,Alcantara,CEBU
+1921,Region VII,Cebu,Alcoy,CEBU
+1922,Region VII,Cebu,Alegria,CEBU
+1923,Region VII,Cebu,Aloguinsan,CEBU
+1924,Region VII,Cebu,Argao I,CEBU
+1925,Region VII,Cebu,Argao II,CEBU
+1926,Region VII,Cebu,Asturias,CEBU
+1927,Region VII,Cebu,Badian,CEBU
+1928,Region VII,Cebu,Balamban I,CEBU
+1929,Region VII,Cebu,Balamban II,CEBU
+1930,Region VII,Cebu,Bantayan I,CEBU
+1931,Region VII,Cebu,Bantayan II,CEBU
+1932,Region VII,Cebu,Barili I,CEBU
+1933,Region VII,Cebu,Barili II,CEBU
+1934,Region VII,Cebu,Boljoon,CEBU
+1935,Region VII,Cebu,Borbon,CEBU
+1936,Region VII,Cebu,Carmen,CEBU
+1937,Region VII,Cebu,Catmon,CEBU
+1938,Region VII,Cebu,Compostela,CEBU
+1939,Region VII,Cebu,Consolacion,CEBU
+1940,Region VII,Cebu,Cordova,CEBU
+1941,Region VII,Cebu,Daanbantayan I,CEBU
+1942,Region VII,Cebu,Daanbantayan II,CEBU
+1943,Region VII,Cebu,Dalaguete I,CEBU
+1944,Region VII,Cebu,Dalaguete II,CEBU
+1945,Region VII,Cebu,Dumanjug I,CEBU
+1946,Region VII,Cebu,Dumanjug II,CEBU
+1947,Region VII,Cebu,Ginatilan,CEBU
+1948,Region VII,Cebu,Liloan,CEBU
+1949,Region VII,Cebu,Madridejos,CEBU
+1950,Region VII,Cebu,Malabuyoc,CEBU
+1951,Region VII,Cebu,Medellin,CEBU
+1952,Region VII,Cebu,Minglanilla I,CEBU
+1953,Region VII,Cebu,Minglanilla II,CEBU
+1954,Region VII,Cebu,Moalboal,CEBU
+1955,Region VII,Cebu,Oslob,CEBU
+1956,Region VII,Cebu,Pilar,CEBU
+1957,Region VII,Cebu,Pinamungajan 1,CEBU
+1958,Region VII,Cebu,Pinamungajan 2,CEBU
+1959,Region VII,Cebu,Poro,CEBU
+1960,Region VII,Cebu,Ronda,CEBU
+1961,Region VII,Cebu,Samboan,CEBU
+1962,Region VII,Cebu,San Fernando,CEBU
+1963,Region VII,Cebu,San Francisco,CEBU
+1964,Region VII,Cebu,San Remegio I,CEBU
+1965,Region VII,Cebu,San Remegio II,CEBU
+1966,Region VII,Cebu,Santa Fe,CEBU
+1967,Region VII,Cebu,Santander,CEBU
+1968,Region VII,Cebu,Sibonga,CEBU
+1969,Region VII,Cebu,Sogod,CEBU
+1970,Region VII,Cebu,Tabogon,CEBU
+1971,Region VII,Cebu,Tabuelan,CEBU
+1972,Region VII,Cebu,Tuburan I,CEBU
+1973,Region VII,Cebu,Tuburan II,CEBU
+1974,Region VII,Cebu,Tudela,CEBU
+1975,Region VII,Cebu City,North District 1,CEBU
+1976,Region VII,Cebu City,North District 2,CEBU
+1977,Region VII,Cebu City,North District 3,CEBU
+1978,Region VII,Cebu City,North District 4,CEBU
+1979,Region VII,Cebu City,North District 5,CEBU
+1980,Region VII,Cebu City,North District 6,CEBU
+1981,Region VII,Cebu City,North District 7,CEBU
+1982,Region VII,Cebu City,North District 8,CEBU
+1983,Region VII,Cebu City,South District 1,CEBU
+1984,Region VII,Cebu City,South District 2,CEBU
+1985,Region VII,Cebu City,South District 3,CEBU
+1986,Region VII,Cebu City,South District 4,CEBU
+1987,Region VII,Cebu City,South District 5,CEBU
+1988,Region VII,Cebu City,South District 6,CEBU
+1989,Region VII,Cebu City,South District 7,CEBU
+1990,Region VII,Cebu City,South District 8,CEBU
+1991,Region VII,"City of Naga, Cebu",Naga I,CEBU
+1992,Region VII,"City of Naga, Cebu",Naga II,CEBU
+1993,Region VII,"City of Naga, Cebu",Naga III,CEBU
+1994,Region VII,Danao City,Danao City East,CEBU
+1995,Region VII,Danao City,Danao City North,CEBU
+1996,Region VII,Danao City,Danao City South,CEBU
+1997,Region VII,Danao City,Danao City West,CEBU
+1998,Region VII,Dumaguete City,Dumaguete City North District,NEGROS ORIENTAL
+1999,Region VII,Dumaguete City,Dumaguete City South District,NEGROS ORIENTAL
+2000,Region VII,Dumaguete City,Dumaguete City West District,NEGROS ORIENTAL
+2001,Region VII,Guihulngan City,Guihulngan North,NEGROS ORIENTAL
+2002,Region VII,Guihulngan City,Guihulngan South,NEGROS ORIENTAL
+2003,Region VII,Guihulngan City,Vallehermoso,NEGROS ORIENTAL
+2004,Region VII,Lapu-Lapu City,Lapu-Lapu City East District,CEBU
+2005,Region VII,Lapu-Lapu City,Lapu-Lapu City North District,CEBU
+2006,Region VII,Lapu-Lapu City,Lapu-Lapu City South District,CEBU
+2007,Region VII,Lapu-Lapu City,Lapu-Lapu City West District,CEBU
+2008,Region VII,Mandaue City,Mandaue City Central District,CEBU
+2009,Region VII,Mandaue City,Mandaue City North District,CEBU
+2010,Region VII,Mandaue City,Mandaue City South District,CEBU
+2011,Region VII,Mandaue City,Mandaue City West District,CEBU
+2012,Region VII,Negros Oriental,Amlan,NEGROS ORIENTAL
+2013,Region VII,Negros Oriental,Ayungon,NEGROS ORIENTAL
+2014,Region VII,Negros Oriental,Bacong,NEGROS ORIENTAL
+2015,Region VII,Negros Oriental,Bindoy,NEGROS ORIENTAL
+2016,Region VII,Negros Oriental,Dauin,NEGROS ORIENTAL
+2017,Region VII,Negros Oriental,Jimalalud,NEGROS ORIENTAL
+2018,Region VII,Negros Oriental,La Libertad,NEGROS ORIENTAL
+2019,Region VII,Negros Oriental,Mabinay I,NEGROS ORIENTAL
+2020,Region VII,Negros Oriental,Mabinay II,NEGROS ORIENTAL
+2021,Region VII,Negros Oriental,Manjuyod,NEGROS ORIENTAL
+2022,Region VII,Negros Oriental,San Jose,NEGROS ORIENTAL
+2023,Region VII,Negros Oriental,Siaton East,NEGROS ORIENTAL
+2024,Region VII,Negros Oriental,Siaton West,NEGROS ORIENTAL
+2025,Region VII,Negros Oriental,Sibulan,NEGROS ORIENTAL
+2026,Region VII,Negros Oriental,Sta. Catalina North,NEGROS ORIENTAL
+2027,Region VII,Negros Oriental,Sta. Catalina South,NEGROS ORIENTAL
+2028,Region VII,Negros Oriental,Tayasan,NEGROS ORIENTAL
+2029,Region VII,Negros Oriental,Valencia,NEGROS ORIENTAL
+2030,Region VII,Negros Oriental,Zamboanguita,NEGROS ORIENTAL
+2031,Region VII,Siquijor,Larena,SIQUIJOR
+2032,Region VII,Siquijor,Lazi,SIQUIJOR
+2033,Region VII,Siquijor,Maria,SIQUIJOR
+2034,Region VII,Siquijor,San Juan,SIQUIJOR
+2035,Region VII,Siquijor,Siquijor,SIQUIJOR
+2036,Region VII,Tagbilaran City,Tagbilaran City,BOHOL
+2037,Region VII,Talisay City,Talisay City I,CEBU
+2038,Region VII,Talisay City,Talisay City II,CEBU
+2039,Region VII,Talisay City,Talisay City III,CEBU
+2040,Region VII,Tanjay City,Pamplona District,NEGROS ORIENTAL
+2041,Region VII,Tanjay City,Tanjay City North,NEGROS ORIENTAL
+2042,Region VII,Tanjay City,Tanjay City South,NEGROS ORIENTAL
+2043,Region VII,Tanjay City,Tanjay City West,NEGROS ORIENTAL
+2044,Region VII,Toledo City,Toledo City East District,CEBU
+2045,Region VII,Toledo City,Toledo City North District,CEBU
+2046,Region VII,Toledo City,Toledo City South District,CEBU
+2047,Region VII,Toledo City,Toledo City West District,CEBU
+2048,Region VIII,Baybay City,Baybay I,LEYTE
+2049,Region VIII,Baybay City,Baybay II,LEYTE
+2050,Region VIII,Baybay City,Baybay III,LEYTE
+2051,Region VIII,Baybay City,Baybay IV,LEYTE
+2052,Region VIII,Biliran,Almeria,BILIRAN
+2053,Region VIII,Biliran,Biliran,BILIRAN
+2054,Region VIII,Biliran,Cabucgayan,BILIRAN
+2055,Region VIII,Biliran,Caibiran,BILIRAN
+2056,Region VIII,Biliran,Culaba,BILIRAN
+2057,Region VIII,Biliran,Kawayan,BILIRAN
+2058,Region VIII,Biliran,Maripipi,BILIRAN
+2059,Region VIII,Biliran,Naval North,BILIRAN
+2060,Region VIII,Biliran,Naval South,BILIRAN
+2061,Region VIII,Borongan City,Borongan East,EASTERN SAMAR
+2062,Region VIII,Borongan City,Borongan North,EASTERN SAMAR
+2063,Region VIII,Borongan City,Borongan South,EASTERN SAMAR
+2064,Region VIII,Calbayog City,Calbayog District I,WESTERN SAMAR
+2065,Region VIII,Calbayog City,Calbayog District II,WESTERN SAMAR
+2066,Region VIII,Calbayog City,Calbayog District III,WESTERN SAMAR
+2067,Region VIII,Calbayog City,Calbayog District IV,WESTERN SAMAR
+2068,Region VIII,Calbayog City,Calbayog District V,WESTERN SAMAR
+2069,Region VIII,Calbayog City,Oquendo District I,WESTERN SAMAR
+2070,Region VIII,Calbayog City,Oquendo District II,WESTERN SAMAR
+2071,Region VIII,Calbayog City,Tinambacan District I,WESTERN SAMAR
+2072,Region VIII,Calbayog City,Tinambacan District II,WESTERN SAMAR
+2073,Region VIII,Calbayog City,Tinambacan District III,WESTERN SAMAR
+2074,Region VIII,Catbalogan City,Catbalogan I,WESTERN SAMAR
+2075,Region VIII,Catbalogan City,Catbalogan II,WESTERN SAMAR
+2076,Region VIII,Catbalogan City,Catbalogan III,WESTERN SAMAR
+2077,Region VIII,Catbalogan City,Catbalogan IV,WESTERN SAMAR
+2078,Region VIII,Catbalogan City,Catbalogan V,WESTERN SAMAR
+2079,Region VIII,Eastern Samar,Arteche,EASTERN SAMAR
+2080,Region VIII,Eastern Samar,Balangiga-Lawaan,EASTERN SAMAR
+2081,Region VIII,Eastern Samar,Balangkayan,EASTERN SAMAR
+2082,Region VIII,Eastern Samar,Can-Avid,EASTERN SAMAR
+2083,Region VIII,Eastern Samar,Dolores I,EASTERN SAMAR
+2084,Region VIII,Eastern Samar,Dolores II,EASTERN SAMAR
+2085,Region VIII,Eastern Samar,General Macarthur-Hernani,EASTERN SAMAR
+2086,Region VIII,Eastern Samar,Giporlos,EASTERN SAMAR
+2087,Region VIII,Eastern Samar,Guiuan East,EASTERN SAMAR
+2088,Region VIII,Eastern Samar,Guiuan North,EASTERN SAMAR
+2089,Region VIII,Eastern Samar,Guiuan South,EASTERN SAMAR
+2090,Region VIII,Eastern Samar,Hernani,EASTERN SAMAR
+2091,Region VIII,Eastern Samar,Jipapad,EASTERN SAMAR
+2092,Region VIII,Eastern Samar,Lawaan,EASTERN SAMAR
+2093,Region VIII,Eastern Samar,Llorente,EASTERN SAMAR
+2094,Region VIII,Eastern Samar,Maslog,EASTERN SAMAR
+2095,Region VIII,Eastern Samar,Maydolong,EASTERN SAMAR
+2096,Region VIII,Eastern Samar,Mercedes,EASTERN SAMAR
+2097,Region VIII,Eastern Samar,Oras East,EASTERN SAMAR
+2098,Region VIII,Eastern Samar,Oras West,EASTERN SAMAR
+2099,Region VIII,Eastern Samar,Quinapundan,EASTERN SAMAR
+2100,Region VIII,Eastern Samar,Salcedo I,EASTERN SAMAR
+2101,Region VIII,Eastern Samar,Salcedo II,EASTERN SAMAR
+2102,Region VIII,Eastern Samar,San Julian,EASTERN SAMAR
+2103,Region VIII,Eastern Samar,San Policarpo,EASTERN SAMAR
+2104,Region VIII,Eastern Samar,Sulat,EASTERN SAMAR
+2105,Region VIII,Eastern Samar,Taft,EASTERN SAMAR
+2106,Region VIII,Leyte,Abuyog East,LEYTE
+2107,Region VIII,Leyte,Abuyog North,LEYTE
+2108,Region VIII,Leyte,Abuyog South,LEYTE
+2109,Region VIII,Leyte,Alangalang I,LEYTE
+2110,Region VIII,Leyte,Alangalang II,LEYTE
+2111,Region VIII,Leyte,Albuera North,LEYTE
+2112,Region VIII,Leyte,Albuera South,LEYTE
+2113,Region VIII,Leyte,Babatngon,LEYTE
+2114,Region VIII,Leyte,Barugo I,LEYTE
+2115,Region VIII,Leyte,Barugo II,LEYTE
+2116,Region VIII,Leyte,Bato,LEYTE
+2117,Region VIII,Leyte,Burauen North,LEYTE
+2118,Region VIII,Leyte,Burauen South,LEYTE
+2119,Region VIII,Leyte,Calubian North,LEYTE
+2120,Region VIII,Leyte,Calubian South,LEYTE
+2121,Region VIII,Leyte,Capoocan,LEYTE
+2122,Region VIII,Leyte,Carigara I,LEYTE
+2123,Region VIII,Leyte,Carigara II,LEYTE
+2124,Region VIII,Leyte,Dagami North,LEYTE
+2125,Region VIII,Leyte,Dagami South,LEYTE
+2126,Region VIII,Leyte,Dulag North,LEYTE
+2127,Region VIII,Leyte,Dulag South,LEYTE
+2128,Region VIII,Leyte,Hilongos North,LEYTE
+2129,Region VIII,Leyte,Hilongos South,LEYTE
+2130,Region VIII,Leyte,Hindang,LEYTE
+2131,Region VIII,Leyte,Inopacan,LEYTE
+2132,Region VIII,Leyte,Isabel,LEYTE
+2133,Region VIII,Leyte,Jaro I,LEYTE
+2134,Region VIII,Leyte,Jaro II,LEYTE
+2135,Region VIII,Leyte,Javier,LEYTE
+2136,Region VIII,Leyte,Julita,LEYTE
+2137,Region VIII,Leyte,Kananga I,LEYTE
+2138,Region VIII,Leyte,Kananga II,LEYTE
+2139,Region VIII,Leyte,La Paz,LEYTE
+2140,Region VIII,Leyte,Leyte I,LEYTE
+2141,Region VIII,Leyte,Leyte II,LEYTE
+2142,Region VIII,Leyte,Macarthur,LEYTE
+2143,Region VIII,Leyte,Mahaplag,LEYTE
+2144,Region VIII,Leyte,Matag-Ob,LEYTE
+2145,Region VIII,Leyte,Matalom North,LEYTE
+2146,Region VIII,Leyte,Matalom South,LEYTE
+2147,Region VIII,Leyte,Mayorga,LEYTE
+2148,Region VIII,Leyte,Merida,LEYTE
+2149,Region VIII,Leyte,Palo I,LEYTE
+2150,Region VIII,Leyte,Palo II,LEYTE
+2151,Region VIII,Leyte,Palompon North,LEYTE
+2152,Region VIII,Leyte,Palompon South,LEYTE
+2153,Region VIII,Leyte,Pastrana,LEYTE
+2154,Region VIII,Leyte,San Isidro,LEYTE
+2155,Region VIII,Leyte,San Miguel,LEYTE
+2156,Region VIII,Leyte,Sta. Fe,LEYTE
+2157,Region VIII,Leyte,Tabango North,LEYTE
+2158,Region VIII,Leyte,Tabango South,LEYTE
+2159,Region VIII,Leyte,Tabontabon,LEYTE
+2160,Region VIII,Leyte,Tanauan I,LEYTE
+2161,Region VIII,Leyte,Tanauan II,LEYTE
+2162,Region VIII,Leyte,Tolosa,LEYTE
+2163,Region VIII,Leyte,Tunga,LEYTE
+2164,Region VIII,Leyte,Villaba North,LEYTE
+2165,Region VIII,Leyte,Villaba South,LEYTE
+2166,Region VIII,Maasin City,Maasin City I,SOUTHERN LEYTE
+2167,Region VIII,Maasin City,Maasin City II,SOUTHERN LEYTE
+2168,Region VIII,Maasin City,Maasin City III,SOUTHERN LEYTE
+2169,Region VIII,Maasin City,Maasin City IV,SOUTHERN LEYTE
+2170,Region VIII,Northern Samar,Allen,NORTHERN SAMAR
+2171,Region VIII,Northern Samar,Biri,NORTHERN SAMAR
+2172,Region VIII,Northern Samar,Bobon,NORTHERN SAMAR
+2173,Region VIII,Northern Samar,Capul,NORTHERN SAMAR
+2174,Region VIII,Northern Samar,Catarman I,NORTHERN SAMAR
+2175,Region VIII,Northern Samar,Catarman II,NORTHERN SAMAR
+2176,Region VIII,Northern Samar,Catarman III,NORTHERN SAMAR
+2177,Region VIII,Northern Samar,Catarman IV,NORTHERN SAMAR
+2178,Region VIII,Northern Samar,Catubig I,NORTHERN SAMAR
+2179,Region VIII,Northern Samar,Catubig II,NORTHERN SAMAR
+2180,Region VIII,Northern Samar,Gamay I,NORTHERN SAMAR
+2181,Region VIII,Northern Samar,Gamay II,NORTHERN SAMAR
+2182,Region VIII,Northern Samar,Laoang I,NORTHERN SAMAR
+2183,Region VIII,Northern Samar,Laoang II,NORTHERN SAMAR
+2184,Region VIII,Northern Samar,Laoang III,NORTHERN SAMAR
+2185,Region VIII,Northern Samar,Lapinig,NORTHERN SAMAR
+2186,Region VIII,Northern Samar,Las Navas I,NORTHERN SAMAR
+2187,Region VIII,Northern Samar,Las Navas II,NORTHERN SAMAR
+2188,Region VIII,Northern Samar,Lavezares I,NORTHERN SAMAR
+2189,Region VIII,Northern Samar,Lavezares II,NORTHERN SAMAR
+2190,Region VIII,Northern Samar,Lope De Vega,NORTHERN SAMAR
+2191,Region VIII,Northern Samar,Mapanas,NORTHERN SAMAR
+2192,Region VIII,Northern Samar,Mondragon I,NORTHERN SAMAR
+2193,Region VIII,Northern Samar,Mondragon II,NORTHERN SAMAR
+2194,Region VIII,Northern Samar,Palapag I,NORTHERN SAMAR
+2195,Region VIII,Northern Samar,Palapag II,NORTHERN SAMAR
+2196,Region VIII,Northern Samar,Pambujan I,NORTHERN SAMAR
+2197,Region VIII,Northern Samar,Pambujan II,NORTHERN SAMAR
+2198,Region VIII,Northern Samar,Rosario,NORTHERN SAMAR
+2199,Region VIII,Northern Samar,San Antonio,NORTHERN SAMAR
+2200,Region VIII,Northern Samar,San Isidro,NORTHERN SAMAR
+2201,Region VIII,Northern Samar,San Jose,NORTHERN SAMAR
+2202,Region VIII,Northern Samar,San Roque,NORTHERN SAMAR
+2203,Region VIII,Northern Samar,San Vicente,NORTHERN SAMAR
+2204,Region VIII,Northern Samar,Silvino Lubos,NORTHERN SAMAR
+2205,Region VIII,Northern Samar,Victoria,NORTHERN SAMAR
+2206,Region VIII,Ormoc City,Ormoc I,LEYTE
+2207,Region VIII,Ormoc City,Ormoc II,LEYTE
+2208,Region VIII,Ormoc City,Ormoc III,LEYTE
+2209,Region VIII,Ormoc City,Ormoc IV,LEYTE
+2210,Region VIII,Ormoc City,Ormoc V,LEYTE
+2211,Region VIII,Ormoc City,Ormoc VI,LEYTE
+2212,Region VIII,Samar (Western Samar),Almagro,WESTERN SAMAR
+2213,Region VIII,Samar (Western Samar),Basey I,WESTERN SAMAR
+2214,Region VIII,Samar (Western Samar),Basey II,WESTERN SAMAR
+2215,Region VIII,Samar (Western Samar),Calbiga,WESTERN SAMAR
+2216,Region VIII,Samar (Western Samar),Daram I,WESTERN SAMAR
+2217,Region VIII,Samar (Western Samar),Daram II,WESTERN SAMAR
+2218,Region VIII,Samar (Western Samar),Gandara I,WESTERN SAMAR
+2219,Region VIII,Samar (Western Samar),Gandara II - Matuguinao,WESTERN SAMAR
+2220,Region VIII,Samar (Western Samar),Hinabangan,WESTERN SAMAR
+2221,Region VIII,Samar (Western Samar),Jiabong,WESTERN SAMAR
+2222,Region VIII,Samar (Western Samar),Marabut,WESTERN SAMAR
+2223,Region VIII,Samar (Western Samar),Motiong,WESTERN SAMAR
+2224,Region VIII,Samar (Western Samar),Pagsanghan,WESTERN SAMAR
+2225,Region VIII,Samar (Western Samar),Pinabacdao,WESTERN SAMAR
+2226,Region VIII,Samar (Western Samar),San Jorge,WESTERN SAMAR
+2227,Region VIII,Samar (Western Samar),San Sebastian,WESTERN SAMAR
+2228,Region VIII,Samar (Western Samar),Sta. Margarita I,WESTERN SAMAR
+2229,Region VIII,Samar (Western Samar),Sta. Margarita II,WESTERN SAMAR
+2230,Region VIII,Samar (Western Samar),Sta. Rita I,WESTERN SAMAR
+2231,Region VIII,Samar (Western Samar),Sta. Rita II,WESTERN SAMAR
+2232,Region VIII,Samar (Western Samar),Sto. Nino,WESTERN SAMAR
+2233,Region VIII,Samar (Western Samar),Tagapul-an,WESTERN SAMAR
+2234,Region VIII,Samar (Western Samar),Talalora,WESTERN SAMAR
+2235,Region VIII,Samar (Western Samar),Tarangnan,WESTERN SAMAR
+2236,Region VIII,Samar (Western Samar),Villareal I,WESTERN SAMAR
+2237,Region VIII,Samar (Western Samar),Villareal II,WESTERN SAMAR
+2238,Region VIII,Samar (Western Samar),Wright I,WESTERN SAMAR
+2239,Region VIII,Samar (Western Samar),Wright II -San Jose De Buan,WESTERN SAMAR
+2240,Region VIII,Samar (Western Samar),Zumarraga,WESTERN SAMAR
+2241,Region VIII,Southern Leyte,Anahawan,SOUTHERN LEYTE
+2242,Region VIII,Southern Leyte,Bontoc I,SOUTHERN LEYTE
+2243,Region VIII,Southern Leyte,Bontoc II,SOUTHERN LEYTE
+2244,Region VIII,Southern Leyte,Hinunangan,SOUTHERN LEYTE
+2245,Region VIII,Southern Leyte,Hinundayan,SOUTHERN LEYTE
+2246,Region VIII,Southern Leyte,Libagon,SOUTHERN LEYTE
+2247,Region VIII,Southern Leyte,Liloan,SOUTHERN LEYTE
+2248,Region VIII,Southern Leyte,Limasawa,SOUTHERN LEYTE
+2249,Region VIII,Southern Leyte,Macrohon,SOUTHERN LEYTE
+2250,Region VIII,Southern Leyte,Malitbog,SOUTHERN LEYTE
+2251,Region VIII,Southern Leyte,Padre Burgos,SOUTHERN LEYTE
+2252,Region VIII,Southern Leyte,Pintuyan,SOUTHERN LEYTE
+2253,Region VIII,Southern Leyte,San Francisco,SOUTHERN LEYTE
+2254,Region VIII,Southern Leyte,San Juan (Cabalian),SOUTHERN LEYTE
+2255,Region VIII,Southern Leyte,San Ricardo,SOUTHERN LEYTE
+2256,Region VIII,Southern Leyte,Silago,SOUTHERN LEYTE
+2257,Region VIII,Southern Leyte,Sogod I,SOUTHERN LEYTE
+2258,Region VIII,Southern Leyte,Sogod II,SOUTHERN LEYTE
+2259,Region VIII,Southern Leyte,St. Bernard,SOUTHERN LEYTE
+2260,Region VIII,Southern Leyte,Tomas Oppus,SOUTHERN LEYTE
+2261,Region VIII,Tacloban City,District Learning Center I,LEYTE
+2262,Region VIII,Tacloban City,District Learning Center II,LEYTE
+2263,Region VIII,Tacloban City,District Learning Center III,LEYTE
+2264,Region VIII,Tacloban City,District Learning Center IV,LEYTE
+2265,Region VIII,Tacloban City,District Learning Center V,LEYTE
+2266,Region VIII,Tacloban City,District Learning Center VI,LEYTE
+2267,Region X,Bukidnon,Baungon,BUKIDNON
+2268,Region X,Bukidnon,Cabanglasan,BUKIDNON
+2269,Region X,Bukidnon,Damulog,BUKIDNON
+2270,Region X,Bukidnon,Dangcagan,BUKIDNON
+2271,Region X,Bukidnon,Don Carlos I,BUKIDNON
+2272,Region X,Bukidnon,Don Carlos II,BUKIDNON
+2273,Region X,Bukidnon,Impasug-Ong I,BUKIDNON
+2274,Region X,Bukidnon,Impasug-Ong II,BUKIDNON
+2275,Region X,Bukidnon,Kadingilan,BUKIDNON
+2276,Region X,Bukidnon,Kalilangan,BUKIDNON
+2277,Region X,Bukidnon,Kibawe,BUKIDNON
+2278,Region X,Bukidnon,Kitaotao I,BUKIDNON
+2279,Region X,Bukidnon,Kitaotao II,BUKIDNON
+2280,Region X,Bukidnon,Lantapan,BUKIDNON
+2281,Region X,Bukidnon,Libona,BUKIDNON
+2282,Region X,Bukidnon,Malitbog,BUKIDNON
+2283,Region X,Bukidnon,Manolo Fortich I,BUKIDNON
+2284,Region X,Bukidnon,Manolo Fortich II,BUKIDNON
+2285,Region X,Bukidnon,Maramag I,BUKIDNON
+2286,Region X,Bukidnon,Maramag II,BUKIDNON
+2287,Region X,Bukidnon,Maramag III,BUKIDNON
+2288,Region X,Bukidnon,Pangantucan,BUKIDNON
+2289,Region X,Bukidnon,Pangantucan South District,BUKIDNON
+2290,Region X,Bukidnon,Quezon I,BUKIDNON
+2291,Region X,Bukidnon,Quezon II,BUKIDNON
+2292,Region X,Bukidnon,San Fernando I,BUKIDNON
+2293,Region X,Bukidnon,San Fernando II,BUKIDNON
+2294,Region X,Bukidnon,Sumilao,BUKIDNON
+2295,Region X,Bukidnon,Talakag I,BUKIDNON
+2296,Region X,Bukidnon,Talakag II,BUKIDNON
+2297,Region X,Cagayan de Oro City,Cagayan de Oro City Central I District,MISAMIS ORIENTAL
+2298,Region X,Cagayan de Oro City,Cagayan de Oro City East I District,MISAMIS ORIENTAL
+2299,Region X,Cagayan de Oro City,Cagayan de Oro City East II District,MISAMIS ORIENTAL
+2300,Region X,Cagayan de Oro City,Cagayan de Oro City North I District,MISAMIS ORIENTAL
+2301,Region X,Cagayan de Oro City,Cagayan de Oro City North II District,MISAMIS ORIENTAL
+2302,Region X,Cagayan de Oro City,Cagayan de Oro City South District,MISAMIS ORIENTAL
+2303,Region X,Cagayan de Oro City,Cagayan de Oro City Southwest District I,MISAMIS ORIENTAL
+2304,Region X,Cagayan de Oro City,Cagayan de Oro City Southwest District II,MISAMIS ORIENTAL
+2305,Region X,Cagayan de Oro City,Cagayan de Oro City West I District,MISAMIS ORIENTAL
+2306,Region X,Cagayan de Oro City,Cagayan de Oro City West II District,MISAMIS ORIENTAL
+2307,Region X,Camiguin,Catarman,CAMIGUIN
+2308,Region X,Camiguin,Mahinog,CAMIGUIN
+2309,Region X,Camiguin,Mambajao,CAMIGUIN
+2310,Region X,Camiguin,Sagay-Guinsiliban,CAMIGUIN
+2311,Region X,El Salvador,District I,MISAMIS ORIENTAL
+2312,Region X,El Salvador,District II,MISAMIS ORIENTAL
+2313,Region X,Gingoog City,Gingoog City East-1 District,MISAMIS ORIENTAL
+2314,Region X,Gingoog City,Gingoog City East-2 District,MISAMIS ORIENTAL
+2315,Region X,Gingoog City,Gingoog City North-1 District,MISAMIS ORIENTAL
+2316,Region X,Gingoog City,Gingoog City North-2 District,MISAMIS ORIENTAL
+2317,Region X,Gingoog City,Gingoog City North-3 District,MISAMIS ORIENTAL
+2318,Region X,Gingoog City,Gingoog City South-1 District,MISAMIS ORIENTAL
+2319,Region X,Gingoog City,Gingoog City South-2 District,MISAMIS ORIENTAL
+2320,Region X,Gingoog City,Gingoog City West-1 District,MISAMIS ORIENTAL
+2321,Region X,Gingoog City,Gingoog City West-2 District,MISAMIS ORIENTAL
+2322,Region X,Gingoog City,Gingoog City West-3 District,MISAMIS ORIENTAL
+2323,Region X,Iligan City,Iligan City Central District,LANAO DEL NORTE
+2324,Region X,Iligan City,Iligan City East I District,LANAO DEL NORTE
+2325,Region X,Iligan City,Iligan City East II District,LANAO DEL NORTE
+2326,Region X,Iligan City,Iligan City North I District,LANAO DEL NORTE
+2327,Region X,Iligan City,Iligan City North II District,LANAO DEL NORTE
+2328,Region X,Iligan City,Iligan City Northeast I - A District,LANAO DEL NORTE
+2329,Region X,Iligan City,Iligan City Northeast I - B District,LANAO DEL NORTE
+2330,Region X,Iligan City,Iligan City Northeast II - A District,LANAO DEL NORTE
+2331,Region X,Iligan City,Iligan City Northeast II - B District,LANAO DEL NORTE
+2332,Region X,Iligan City,Iligan City South I - A District,LANAO DEL NORTE
+2333,Region X,Iligan City,Iligan City South I - B District,LANAO DEL NORTE
+2334,Region X,Iligan City,Iligan City South II District,LANAO DEL NORTE
+2335,Region X,Iligan City,Iligan City West District,LANAO DEL NORTE
+2336,Region X,Lanao del Norte,Bacolod,LANAO DEL NORTE
+2337,Region X,Lanao del Norte,Baloi East,LANAO DEL NORTE
+2338,Region X,Lanao del Norte,Baloi West,LANAO DEL NORTE
+2339,Region X,Lanao del Norte,Baroy,LANAO DEL NORTE
+2340,Region X,Lanao del Norte,Kapatagan East,LANAO DEL NORTE
+2341,Region X,Lanao del Norte,Kapatagan West,LANAO DEL NORTE
+2342,Region X,Lanao del Norte,Kauswagan,LANAO DEL NORTE
+2343,Region X,Lanao del Norte,Kolambugan,LANAO DEL NORTE
+2344,Region X,Lanao del Norte,Lala North,LANAO DEL NORTE
+2345,Region X,Lanao del Norte,Lala South,LANAO DEL NORTE
+2346,Region X,Lanao del Norte,Linamon,LANAO DEL NORTE
+2347,Region X,Lanao del Norte,Magsaysay,LANAO DEL NORTE
+2348,Region X,Lanao del Norte,Maigo,LANAO DEL NORTE
+2349,Region X,Lanao del Norte,Matungao,LANAO DEL NORTE
+2350,Region X,Lanao del Norte,Munai,LANAO DEL NORTE
+2351,Region X,Lanao del Norte,Pantao-Ragat,LANAO DEL NORTE
+2352,Region X,Lanao del Norte,Pantar,LANAO DEL NORTE
+2353,Region X,Lanao del Norte,Poonapiagapo,LANAO DEL NORTE
+2354,Region X,Lanao del Norte,Salvador,LANAO DEL NORTE
+2355,Region X,Lanao del Norte,Sapad - Nunungan,LANAO DEL NORTE
+2356,Region X,Lanao del Norte,Sultan Naga Dimaporo,LANAO DEL NORTE
+2357,Region X,Lanao del Norte,Tagoloan,LANAO DEL NORTE
+2358,Region X,Lanao del Norte,Tangkal,LANAO DEL NORTE
+2359,Region X,Lanao del Norte,Tubod East,LANAO DEL NORTE
+2360,Region X,Lanao del Norte,Tubod West,LANAO DEL NORTE
+2361,Region X,Malaybalay City,Malaybalay City District I,BUKIDNON
+2362,Region X,Malaybalay City,Malaybalay City District II,BUKIDNON
+2363,Region X,Malaybalay City,Malaybalay City District III,BUKIDNON
+2364,Region X,Malaybalay City,Malaybalay City District IV,BUKIDNON
+2365,Region X,Malaybalay City,Malaybalay City District IX,BUKIDNON
+2366,Region X,Malaybalay City,Malaybalay City District V,BUKIDNON
+2367,Region X,Malaybalay City,Malaybalay City District VI,BUKIDNON
+2368,Region X,Malaybalay City,Malaybalay City District VII,BUKIDNON
+2369,Region X,Malaybalay City,Malaybalay City District VIII,BUKIDNON
+2370,Region X,Malaybalay City,Malaybalay City District X,BUKIDNON
+2371,Region X,Misamis Occidental,Aloran,MISAMIS OCCIDENTAL
+2372,Region X,Misamis Occidental,Baliangao,MISAMIS OCCIDENTAL
+2373,Region X,Misamis Occidental,Bonifacio East,MISAMIS OCCIDENTAL
+2374,Region X,Misamis Occidental,Bonifacio West,MISAMIS OCCIDENTAL
+2375,Region X,Misamis Occidental,Calamba,MISAMIS OCCIDENTAL
+2376,Region X,Misamis Occidental,Clarin North,MISAMIS OCCIDENTAL
+2377,Region X,Misamis Occidental,Clarin South,MISAMIS OCCIDENTAL
+2378,Region X,Misamis Occidental,Concepcion,MISAMIS OCCIDENTAL
+2379,Region X,Misamis Occidental,Don Victoriano,MISAMIS OCCIDENTAL
+2380,Region X,Misamis Occidental,Jimenez,MISAMIS OCCIDENTAL
+2381,Region X,Misamis Occidental,Lopez Jaena,MISAMIS OCCIDENTAL
+2382,Region X,Misamis Occidental,Panaon,MISAMIS OCCIDENTAL
+2383,Region X,Misamis Occidental,Plaridel North,MISAMIS OCCIDENTAL
+2384,Region X,Misamis Occidental,Plaridel South,MISAMIS OCCIDENTAL
+2385,Region X,Misamis Occidental,Sapang Dalaga,MISAMIS OCCIDENTAL
+2386,Region X,Misamis Occidental,Sinacaban,MISAMIS OCCIDENTAL
+2387,Region X,Misamis Occidental,Tudela,MISAMIS OCCIDENTAL
+2388,Region X,Misamis Oriental,Alubijid,MISAMIS ORIENTAL
+2389,Region X,Misamis Oriental,Balingasag North (Balingasag District),MISAMIS ORIENTAL
+2390,Region X,Misamis Oriental,Balingasag South (Balingasag District),MISAMIS ORIENTAL
+2391,Region X,Misamis Oriental,Claveria I (Claveria District),MISAMIS ORIENTAL
+2392,Region X,Misamis Oriental,Claveria II (Claveria District),MISAMIS ORIENTAL
+2393,Region X,Misamis Oriental,Initao,MISAMIS ORIENTAL
+2394,Region X,Misamis Oriental,Jasaan,MISAMIS ORIENTAL
+2395,Region X,Misamis Oriental,Kinoguitan,MISAMIS ORIENTAL
+2396,Region X,Misamis Oriental,Lagonglong,MISAMIS ORIENTAL
+2397,Region X,Misamis Oriental,Laguindingan,MISAMIS ORIENTAL
+2398,Region X,Misamis Oriental,Libertad,MISAMIS ORIENTAL
+2399,Region X,Misamis Oriental,Lugait,MISAMIS ORIENTAL
+2400,Region X,Misamis Oriental,Magsaysay I (Magsaysay District),MISAMIS ORIENTAL
+2401,Region X,Misamis Oriental,Magsaysay II (Magsaysay District),MISAMIS ORIENTAL
+2402,Region X,Misamis Oriental,Manticao,MISAMIS ORIENTAL
+2403,Region X,Misamis Oriental,Medina,MISAMIS ORIENTAL
+2404,Region X,Misamis Oriental,Naawan,MISAMIS ORIENTAL
+2405,Region X,Misamis Oriental,Opol,MISAMIS ORIENTAL
+2406,Region X,Misamis Oriental,Salay,MISAMIS ORIENTAL
+2407,Region X,Misamis Oriental,Sugbongcogon,MISAMIS ORIENTAL
+2408,Region X,Misamis Oriental,Tagoloan,MISAMIS ORIENTAL
+2409,Region X,Misamis Oriental,Talisayan,MISAMIS ORIENTAL
+2410,Region X,Misamis Oriental,Villanueva,MISAMIS ORIENTAL
+2411,Region X,Oroquieta City,Central District I,MISAMIS OCCIDENTAL
+2412,Region X,Oroquieta City,Central District II,MISAMIS OCCIDENTAL
+2413,Region X,Oroquieta City,Northwest District,MISAMIS OCCIDENTAL
+2414,Region X,Oroquieta City,Southeast District I,MISAMIS OCCIDENTAL
+2415,Region X,Oroquieta City,Southeast District II,MISAMIS OCCIDENTAL
+2416,Region X,Oroquieta City,Southwest District,MISAMIS OCCIDENTAL
+2417,Region X,Ozamis City,Ozamis City Central District,MISAMIS OCCIDENTAL
+2418,Region X,Ozamis City,Ozamis City District I,MISAMIS OCCIDENTAL
+2419,Region X,Ozamis City,Ozamis City District II,MISAMIS OCCIDENTAL
+2420,Region X,Ozamis City,Ozamis City District III,MISAMIS OCCIDENTAL
+2421,Region X,Ozamis City,Ozamis City District IV,MISAMIS OCCIDENTAL
+2422,Region X,Tangub City,Tangub Central District,MISAMIS OCCIDENTAL
+2423,Region X,Tangub City,Tangub North District,MISAMIS OCCIDENTAL
+2424,Region X,Tangub City,Tangub South District,MISAMIS OCCIDENTAL
+2425,Region X,Tangub City,Tangub Southwest District,MISAMIS OCCIDENTAL
+2426,Region X,Valencia City,District I,BUKIDNON
+2427,Region X,Valencia City,District II,BUKIDNON
+2428,Region X,Valencia City,District III,BUKIDNON
+2429,Region X,Valencia City,District IV,BUKIDNON
+2430,Region X,Valencia City,District V,BUKIDNON
+2431,Region X,Valencia City,District VI,BUKIDNON
+2432,Region X,Valencia City,District VII,BUKIDNON
+2433,Region XI,Davao City,Baguio,DAVAO DEL SUR
+2434,Region XI,Davao City,Bangoy,DAVAO DEL SUR
+2435,Region XI,Davao City,Binugao,DAVAO DEL SUR
+2436,Region XI,Davao City,Buhangin,DAVAO DEL SUR
+2437,Region XI,Davao City,Bunawan,DAVAO DEL SUR
+2438,Region XI,Davao City,Calinan,DAVAO DEL SUR
+2439,Region XI,Davao City,Daliaon,DAVAO DEL SUR
+2440,Region XI,Davao City,Davao Central,DAVAO DEL SUR
+2441,Region XI,Davao City,General Roxas,DAVAO DEL SUR
+2442,Region XI,Davao City,Maa,DAVAO DEL SUR
+2443,Region XI,Davao City,Malabog,DAVAO DEL SUR
+2444,Region XI,Davao City,Marilog,DAVAO DEL SUR
+2445,Region XI,Davao City,Matina,DAVAO DEL SUR
+2446,Region XI,Davao City,Paquibato,DAVAO DEL SUR
+2447,Region XI,Davao City,Piedad,DAVAO DEL SUR
+2448,Region XI,Davao City,San Roque,DAVAO DEL SUR
+2449,Region XI,Davao City,Sta. Ana,DAVAO DEL SUR
+2450,Region XI,Davao City,Talomo,DAVAO DEL SUR
+2451,Region XI,Davao City,Tibungco,DAVAO DEL SUR
+2452,Region XI,Davao City,Tugbok,DAVAO DEL SUR
+2453,Region XI,Davao De Oro,Compostela,COMPOSTELA VALLEY
+2454,Region XI,Davao De Oro,Laak,COMPOSTELA VALLEY
+2455,Region XI,Davao De Oro,Mabini,COMPOSTELA VALLEY
+2456,Region XI,Davao De Oro,Maco North,COMPOSTELA VALLEY
+2457,Region XI,Davao De Oro,Maco South,COMPOSTELA VALLEY
+2458,Region XI,Davao De Oro,Maragusan,COMPOSTELA VALLEY
+2459,Region XI,Davao De Oro,Mawab,COMPOSTELA VALLEY
+2460,Region XI,Davao De Oro,Moncayo,COMPOSTELA VALLEY
+2461,Region XI,Davao De Oro,Montevista,COMPOSTELA VALLEY
+2462,Region XI,Davao De Oro,Nabunturan East,COMPOSTELA VALLEY
+2463,Region XI,Davao De Oro,Nabunturan West,COMPOSTELA VALLEY
+2464,Region XI,Davao De Oro,New Bataan,COMPOSTELA VALLEY
+2465,Region XI,Davao De Oro,Pantukan,COMPOSTELA VALLEY
+2466,Region XI,Davao Occidental,Don Marcelino,DAVAO OCCIDENTAL
+2467,Region XI,Davao Occidental,Jose Abad Santos,DAVAO OCCIDENTAL
+2468,Region XI,Davao Occidental,Jose Abad Santos I,DAVAO OCCIDENTAL
+2469,Region XI,Davao Occidental,Jose Abad Santos II,DAVAO OCCIDENTAL
+2470,Region XI,Davao Occidental,Malita,DAVAO OCCIDENTAL
+2471,Region XI,Davao Occidental,Malita East,DAVAO OCCIDENTAL
+2472,Region XI,Davao Occidental,Malita North,DAVAO OCCIDENTAL
+2473,Region XI,Davao Occidental,Malita South,DAVAO OCCIDENTAL
+2474,Region XI,Davao Occidental,Malita West,DAVAO OCCIDENTAL
+2475,Region XI,Davao Occidental,Sarangani,DAVAO OCCIDENTAL
+2476,Region XI,Davao Occidental,Sta. Maria,DAVAO OCCIDENTAL
+2477,Region XI,Davao Occidental,Sta. Maria East,DAVAO OCCIDENTAL
+2478,Region XI,Davao Occidental,Sta. Maria West,DAVAO OCCIDENTAL
+2479,Region XI,Davao Oriental,Baganga North,DAVAO ORIENTAL
+2480,Region XI,Davao Oriental,Baganga South,DAVAO ORIENTAL
+2481,Region XI,Davao Oriental,Banaybanay,DAVAO ORIENTAL
+2482,Region XI,Davao Oriental,Boston,DAVAO ORIENTAL
+2483,Region XI,Davao Oriental,Caraga North,DAVAO ORIENTAL
+2484,Region XI,Davao Oriental,Caraga South,DAVAO ORIENTAL
+2485,Region XI,Davao Oriental,Cateel I,DAVAO ORIENTAL
+2486,Region XI,Davao Oriental,Cateel II,DAVAO ORIENTAL
+2487,Region XI,Davao Oriental,Gov. Generoso North,DAVAO ORIENTAL
+2488,Region XI,Davao Oriental,Gov. Generoso South,DAVAO ORIENTAL
+2489,Region XI,Davao Oriental,Lupon East,DAVAO ORIENTAL
+2490,Region XI,Davao Oriental,Lupon West,DAVAO ORIENTAL
+2491,Region XI,Davao Oriental,Manay,DAVAO ORIENTAL
+2492,Region XI,Davao Oriental,San Isidro North,DAVAO ORIENTAL
+2493,Region XI,Davao Oriental,San Isidro South,DAVAO ORIENTAL
+2494,Region XI,Davao Oriental,Tarragona,DAVAO ORIENTAL
+2495,Region XI,Davao del Norte,Asuncion,DAVAO DEL NORTE
+2496,Region XI,Davao del Norte,Braulio Dujali,DAVAO DEL NORTE
+2497,Region XI,Davao del Norte,Carmen,DAVAO DEL NORTE
+2498,Region XI,Davao del Norte,Kapalong East,DAVAO DEL NORTE
+2499,Region XI,Davao del Norte,Kapalong West,DAVAO DEL NORTE
+2500,Region XI,Davao del Norte,New Corella,DAVAO DEL NORTE
+2501,Region XI,Davao del Norte,San Isidro,DAVAO DEL NORTE
+2502,Region XI,Davao del Norte,Sto. Tomas East,DAVAO DEL NORTE
+2503,Region XI,Davao del Norte,Sto. Tomas West,DAVAO DEL NORTE
+2504,Region XI,Davao del Norte,Talaingod,DAVAO DEL NORTE
+2505,Region XI,Davao del Sur,Bansalan East,DAVAO DEL SUR
+2506,Region XI,Davao del Sur,Bansalan West,DAVAO DEL SUR
+2507,Region XI,Davao del Sur,Hagonoy I,DAVAO DEL SUR
+2508,Region XI,Davao del Sur,Hagonoy II,DAVAO DEL SUR
+2509,Region XI,Davao del Sur,Kiblawan,DAVAO DEL SUR
+2510,Region XI,Davao del Sur,Magsaysay North,DAVAO DEL SUR
+2511,Region XI,Davao del Sur,Magsaysay South,DAVAO DEL SUR
+2512,Region XI,Davao del Sur,Malalag,DAVAO DEL SUR
+2513,Region XI,Davao del Sur,Matanao I,DAVAO DEL SUR
+2514,Region XI,Davao del Sur,Matanao II,DAVAO DEL SUR
+2515,Region XI,Davao del Sur,Padada,DAVAO DEL SUR
+2516,Region XI,Davao del Sur,Sta. Cruz North,DAVAO DEL SUR
+2517,Region XI,Davao del Sur,Sta. Cruz South,DAVAO DEL SUR
+2518,Region XI,Davao del Sur,Sulop,DAVAO DEL SUR
+2519,Region XI,Digos City,Digos Occidental,DAVAO DEL SUR
+2520,Region XI,Digos City,Digos Oriental,DAVAO DEL SUR
+2521,Region XI,Digos City,Mt. Apo,DAVAO DEL SUR
+2522,Region XI,Island Garden City of Samal,Babak,DAVAO DEL NORTE
+2523,Region XI,Island Garden City of Samal,Kaputian,DAVAO DEL NORTE
+2524,Region XI,Island Garden City of Samal,Samal,DAVAO DEL NORTE
+2525,Region XI,Mati City,Mati Central,DAVAO ORIENTAL
+2526,Region XI,Mati City,Mati North,DAVAO ORIENTAL
+2527,Region XI,Mati City,Mati South,DAVAO ORIENTAL
+2528,Region XI,Panabo City,Panabo Central,DAVAO DEL NORTE
+2529,Region XI,Panabo City,Panabo North,DAVAO DEL NORTE
+2530,Region XI,Panabo City,Panabo South,DAVAO DEL NORTE
+2531,Region XI,Tagum City,Tagum City Central,DAVAO DEL NORTE
+2532,Region XI,Tagum City,Tagum City North,DAVAO DEL NORTE
+2533,Region XI,Tagum City,Tagum City South,DAVAO DEL NORTE
+2534,Region XII,General Santos City,Acharon,SOUTH COTABATO
+2535,Region XII,General Santos City,Apopong,SOUTH COTABATO
+2536,Region XII,General Santos City,Buayan,SOUTH COTABATO
+2537,Region XII,General Santos City,Bula,SOUTH COTABATO
+2538,Region XII,General Santos City,Cahilsot,SOUTH COTABATO
+2539,Region XII,General Santos City,Conel,SOUTH COTABATO
+2540,Region XII,General Santos City,General Santos City North District,SOUTH COTABATO
+2541,Region XII,General Santos City,General Santos City South District,SOUTH COTABATO
+2542,Region XII,General Santos City,General Santos City West District,SOUTH COTABATO
+2543,Region XII,General Santos City,Katangawan,SOUTH COTABATO
+2544,Region XII,General Santos City,Labangal,SOUTH COTABATO
+2545,Region XII,General Santos City,North Fatima,SOUTH COTABATO
+2546,Region XII,General Santos City,Pedro Acharon,SOUTH COTABATO
+2547,Region XII,General Santos City,South Fatima,SOUTH COTABATO
+2548,Region XII,General Santos City,Tambler,SOUTH COTABATO
+2549,Region XII,Kidapawan City,Kidapawan City District I,NORTH COTABATO
+2550,Region XII,Kidapawan City,Kidapawan City District II,NORTH COTABATO
+2551,Region XII,Kidapawan City,Kidapawan City District III,NORTH COTABATO
+2552,Region XII,Kidapawan City,Kidapawan City District IV,NORTH COTABATO
+2553,Region XII,Kidapawan City,Kidapawan City District V,NORTH COTABATO
+2554,Region XII,Koronadal City,Koronadal East District I,SOUTH COTABATO
+2555,Region XII,Koronadal City,Koronadal East District II,SOUTH COTABATO
+2556,Region XII,Koronadal City,Koronadal South District I,SOUTH COTABATO
+2557,Region XII,Koronadal City,Koronadal South District II,SOUTH COTABATO
+2558,Region XII,Koronadal City,Koronadal West District I,SOUTH COTABATO
+2559,Region XII,Koronadal City,Koronadal West District II,SOUTH COTABATO
+2560,Region XII,North Cotabato,Alamada East,NORTH COTABATO
+2561,Region XII,North Cotabato,Alamada North,NORTH COTABATO
+2562,Region XII,North Cotabato,Alamada West,NORTH COTABATO
+2563,Region XII,North Cotabato,Aleosan East,NORTH COTABATO
+2564,Region XII,North Cotabato,Aleosan West,NORTH COTABATO
+2565,Region XII,North Cotabato,Antipas,NORTH COTABATO
+2566,Region XII,North Cotabato,Arakan East,NORTH COTABATO
+2567,Region XII,North Cotabato,Arakan North,NORTH COTABATO
+2568,Region XII,North Cotabato,Arakan West,NORTH COTABATO
+2569,Region XII,North Cotabato,Banisilan North,NORTH COTABATO
+2570,Region XII,North Cotabato,Banisilan South,NORTH COTABATO
+2571,Region XII,North Cotabato,Banisilan West,NORTH COTABATO
+2572,Region XII,North Cotabato,Carmen North,NORTH COTABATO
+2573,Region XII,North Cotabato,Carmen South,NORTH COTABATO
+2574,Region XII,North Cotabato,Kabacan North,NORTH COTABATO
+2575,Region XII,North Cotabato,Kabacan South,NORTH COTABATO
+2576,Region XII,North Cotabato,Kabacan West,NORTH COTABATO
+2577,Region XII,North Cotabato,Libungan East,NORTH COTABATO
+2578,Region XII,North Cotabato,Libungan West,NORTH COTABATO
+2579,Region XII,North Cotabato,M'Lang  East,NORTH COTABATO
+2580,Region XII,North Cotabato,M'Lang Central,NORTH COTABATO
+2581,Region XII,North Cotabato,M'Lang North,NORTH COTABATO
+2582,Region XII,North Cotabato,M'Lang South,NORTH COTABATO
+2583,Region XII,North Cotabato,Magpet  East,NORTH COTABATO
+2584,Region XII,North Cotabato,Magpet West,NORTH COTABATO
+2585,Region XII,North Cotabato,Makilala Central,NORTH COTABATO
+2586,Region XII,North Cotabato,Makilala East,NORTH COTABATO
+2587,Region XII,North Cotabato,Makilala North,NORTH COTABATO
+2588,Region XII,North Cotabato,Makilala West,NORTH COTABATO
+2589,Region XII,North Cotabato,Matalam Central,NORTH COTABATO
+2590,Region XII,North Cotabato,Matalam North,NORTH COTABATO
+2591,Region XII,North Cotabato,Matalam South,NORTH COTABATO
+2592,Region XII,North Cotabato,Matalam West,NORTH COTABATO
+2593,Region XII,North Cotabato,Midsayap Central,NORTH COTABATO
+2594,Region XII,North Cotabato,Midsayap North,NORTH COTABATO
+2595,Region XII,North Cotabato,Midsayap South,NORTH COTABATO
+2596,Region XII,North Cotabato,Midsayap South-West,NORTH COTABATO
+2597,Region XII,North Cotabato,Midsayap West,NORTH COTABATO
+2598,Region XII,North Cotabato,Pigcawayan North,NORTH COTABATO
+2599,Region XII,North Cotabato,Pigcawayan South,NORTH COTABATO
+2600,Region XII,North Cotabato,Pigcawayan West,NORTH COTABATO
+2601,Region XII,North Cotabato,Pikit East,NORTH COTABATO
+2602,Region XII,North Cotabato,Pikit North,NORTH COTABATO
+2603,Region XII,North Cotabato,Pikit South,NORTH COTABATO
+2604,Region XII,North Cotabato,Pikit West,NORTH COTABATO
+2605,Region XII,North Cotabato,President Roxas Central,NORTH COTABATO
+2606,Region XII,North Cotabato,President Roxas North,NORTH COTABATO
+2607,Region XII,North Cotabato,President Roxas South,NORTH COTABATO
+2608,Region XII,North Cotabato,Tulunan East,NORTH COTABATO
+2609,Region XII,North Cotabato,Tulunan North,NORTH COTABATO
+2610,Region XII,North Cotabato,Tulunan South,NORTH COTABATO
+2611,Region XII,Sarangani,Central Glan,SARANGANI
+2612,Region XII,Sarangani,East Alabel,SARANGANI
+2613,Region XII,Sarangani,East Kiamba,SARANGANI
+2614,Region XII,Sarangani,East Maasim,SARANGANI
+2615,Region XII,Sarangani,East Maitum,SARANGANI
+2616,Region XII,Sarangani,East Malungon,SARANGANI
+2617,Region XII,Sarangani,Malapatan I,SARANGANI
+2618,Region XII,Sarangani,Malapatan II,SARANGANI
+2619,Region XII,Sarangani,Malapatan III,SARANGANI
+2620,Region XII,Sarangani,North Glan,SARANGANI
+2621,Region XII,Sarangani,North Glan - Cluster A,SARANGANI
+2622,Region XII,Sarangani,North Glan - Cluster B,SARANGANI
+2623,Region XII,Sarangani,North Malungon,SARANGANI
+2624,Region XII,Sarangani,South Glan,SARANGANI
+2625,Region XII,Sarangani,South Glan - Cluster A,SARANGANI
+2626,Region XII,Sarangani,South Malungon,SARANGANI
+2627,Region XII,Sarangani,Southwest Alabel,SARANGANI
+2628,Region XII,Sarangani,West Alabel,SARANGANI
+2629,Region XII,Sarangani,West Kiamba,SARANGANI
+2630,Region XII,Sarangani,West Maasim,SARANGANI
+2631,Region XII,Sarangani,West Maitum,SARANGANI
+2632,Region XII,Sarangani,West Malungon,SARANGANI
+2633,Region XII,South Cotabato,Banga East,SOUTH COTABATO
+2634,Region XII,South Cotabato,Banga North,SOUTH COTABATO
+2635,Region XII,South Cotabato,Banga South,SOUTH COTABATO
+2636,Region XII,South Cotabato,Lake Sebu East,SOUTH COTABATO
+2637,Region XII,South Cotabato,Lake Sebu West,SOUTH COTABATO
+2638,Region XII,South Cotabato,Norala,SOUTH COTABATO
+2639,Region XII,South Cotabato,Polomolok East,SOUTH COTABATO
+2640,Region XII,South Cotabato,Polomolok West,SOUTH COTABATO
+2641,Region XII,South Cotabato,Sto. Niño,SOUTH COTABATO
+2642,Region XII,South Cotabato,Surallah Central,SOUTH COTABATO
+2643,Region XII,South Cotabato,Surallah North,SOUTH COTABATO
+2644,Region XII,South Cotabato,Surallah South,SOUTH COTABATO
+2645,Region XII,South Cotabato,T ' Boli East,SOUTH COTABATO
+2646,Region XII,South Cotabato,T ' Boli West,SOUTH COTABATO
+2647,Region XII,South Cotabato,Tampakan,SOUTH COTABATO
+2648,Region XII,South Cotabato,Tantangan,SOUTH COTABATO
+2649,Region XII,South Cotabato,Tupi North,SOUTH COTABATO
+2650,Region XII,South Cotabato,Tupi South,SOUTH COTABATO
+2651,Region XII,Sultan Kudarat,Bagumbayan I,SULTAN KUDARAT
+2652,Region XII,Sultan Kudarat,Bagumbayan II,SULTAN KUDARAT
+2653,Region XII,Sultan Kudarat,Bagumbayan III,SULTAN KUDARAT
+2654,Region XII,Sultan Kudarat,Columbio I,SULTAN KUDARAT
+2655,Region XII,Sultan Kudarat,Columbio II,SULTAN KUDARAT
+2656,Region XII,Sultan Kudarat,Esperanza I,SULTAN KUDARAT
+2657,Region XII,Sultan Kudarat,Esperanza II,SULTAN KUDARAT
+2658,Region XII,Sultan Kudarat,Esperanza III,SULTAN KUDARAT
+2659,Region XII,Sultan Kudarat,Isulan Central,SULTAN KUDARAT
+2660,Region XII,Sultan Kudarat,Isulan East,SULTAN KUDARAT
+2661,Region XII,Sultan Kudarat,Isulan South,SULTAN KUDARAT
+2662,Region XII,Sultan Kudarat,Isulan West,SULTAN KUDARAT
+2663,Region XII,Sultan Kudarat,Kalamansig I,SULTAN KUDARAT
+2664,Region XII,Sultan Kudarat,Kalamansig II,SULTAN KUDARAT
+2665,Region XII,Sultan Kudarat,Kulaman I (Sen. N. Aquino),SULTAN KUDARAT
+2666,Region XII,Sultan Kudarat,Kulaman II,SULTAN KUDARAT
+2667,Region XII,Sultan Kudarat,Lambayong I,SULTAN KUDARAT
+2668,Region XII,Sultan Kudarat,Lambayong II,SULTAN KUDARAT
+2669,Region XII,Sultan Kudarat,Lambayong III,SULTAN KUDARAT
+2670,Region XII,Sultan Kudarat,Lebak Central,SULTAN KUDARAT
+2671,Region XII,Sultan Kudarat,Lebak East,SULTAN KUDARAT
+2672,Region XII,Sultan Kudarat,Lebak West,SULTAN KUDARAT
+2673,Region XII,Sultan Kudarat,Lutayan I,SULTAN KUDARAT
+2674,Region XII,Sultan Kudarat,Lutayan II,SULTAN KUDARAT
+2675,Region XII,Sultan Kudarat,Palimbang I,SULTAN KUDARAT
+2676,Region XII,Sultan Kudarat,Palimbang II,SULTAN KUDARAT
+2677,Region XII,Sultan Kudarat,Pres. Quirino North,SULTAN KUDARAT
+2678,Region XII,Sultan Kudarat,Pres. Quirino South,SULTAN KUDARAT
+2679,Region XII,Tacurong City,Tacurong Central,SULTAN KUDARAT
+2680,Region XII,Tacurong City,Tacurong East,SULTAN KUDARAT
+2681,Region XII,Tacurong City,Tacurong North,SULTAN KUDARAT
+2682,Region XII,Tacurong City,Tacurong South,SULTAN KUDARAT
+2683,Region XII,Tacurong City,Tacurong West,SULTAN KUDARAT
