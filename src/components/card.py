@@ -19,9 +19,9 @@ def Card(children=[], **kwargs):
         'flex': '1',
         
         'box-sizing': 'content-box',
-        'border-radius': '1em',
+        'border-radius': '0.75em',
         'margin': '0.5em',
-        # 'box-shadow' : '10px 10px 25px #f0f0f0, -10px -10px 25px #565856'
+        'box-shadow' : '-2px 0px 6px rgba(0, 0, 0, 0.03)'    
     }
     
     return html.Div(
