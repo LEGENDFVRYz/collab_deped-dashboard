@@ -19,7 +19,7 @@ body{
 .app-container{
     min-height: 100vh;
     background-color: $light-color-2;
-    max-width: 120em; // not final
+    // max-width: 120em; // not final
     margin: 0 auto;
 
     display: flex;
@@ -103,14 +103,14 @@ body{
                         
                         display: flex;
                         align-self: center;
-                        font-size: 1.15em;
+                        font-size: 1em;
                     }
                 }
             }
 
             .item-ctn.active{
                 .nav-btn{
-                    background-color: $primary-color-1;
+                    background-color: #04508c;
     
                     .icon.dark{
                         display: none;
@@ -195,7 +195,7 @@ body{
                     }
                     .text{
                         padding-left: 1em;
-                        color: $primary-shades-5;
+                        color: $primary-shades-5n;
                         
                         display: flex;
                         align-self: center;
@@ -312,6 +312,8 @@ body{
                 .container{
                     display: flex;
                     flex-direction: column;
+                    max-width: 120em; // not final
+                    margin: 0 auto;
 
                     .content{
                         display: flex;
@@ -321,7 +323,7 @@ body{
                     .page-header{
                         padding: 1em 1em;
                         h1{
-                            color: $primary-shades-5;
+                            color: $primary-shades-5n;
                         }
                     }
                 }
