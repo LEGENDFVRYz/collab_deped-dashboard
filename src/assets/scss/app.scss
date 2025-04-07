@@ -34,7 +34,8 @@ body{
         max-width: 18em; // not final
 
         background-color: $light-color-1;
-        box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
+        // box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
+        box-shadow: -2px 0px 14px 0px #0000001A;
 
         .brand-section{
             margin-bottom: 1em;
@@ -98,7 +99,7 @@ body{
                     }
                     .text{
                         padding-left: 1em;
-                        color: $primary-color-3;
+                        color: $primary-color-1;
                         
                         display: flex;
                         align-self: center;
@@ -194,11 +195,11 @@ body{
                     }
                     .text{
                         padding-left: 1em;
-                        color: $primary-color-3;
+                        color: $primary-shades-5;
                         
                         display: flex;
                         align-self: center;
-                        font-size: 1.15em;
+                        font-size: 1em;
                     }
                 }
             }
@@ -320,7 +321,7 @@ body{
                     .page-header{
                         padding: 1em 1em;
                         h1{
-                            color: $primary-color-2;
+                            color: $primary-shades-5;
                         }
                     }
                 }
