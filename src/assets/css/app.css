@@ -7,13 +7,12 @@
 }
 
 body {
-  background-color: #EFEFEF;
+  background-color: #EFF3F6;
 }
 
 .app-container {
   min-height: 100vh;
-  background-color: #EFEFEF;
-  max-width: 120em;
+  background-color: #EFF3F6;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -24,7 +23,7 @@ body {
   flex: 1;
   max-width: 18em;
   background-color: #FFFFFF;
-  box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
 }
 .app-container .navigation .brand-section {
   margin-bottom: 1em;
@@ -52,7 +51,7 @@ body {
   height: 3em;
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
-  background-color: #00AD7F;
+  background-color: #04508c;
   position: absolute;
   left: 0;
 }
@@ -80,13 +79,13 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn .nav-btn .text {
   padding-left: 1em;
-  color: #2CC295;
+  color: #04508c;
   display: flex;
   align-self: center;
-  font-size: 1.15em;
+  font-size: 1em;
 }
 .app-container .navigation .menu-section .item-ctn.active .nav-btn {
-  background-color: #00AD7F;
+  background-color: #04508c;
 }
 .app-container .navigation .menu-section .item-ctn.active .nav-btn .icon.dark {
   display: none;
@@ -126,7 +125,7 @@ body {
   height: 3em;
   border-top-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
-  background-color: #00AD7F;
+  background-color: #04508c;
 }
 .app-container .navigation .settings-section .item-ctn .nav-btn {
   width: 15em;
@@ -152,13 +151,13 @@ body {
 }
 .app-container .navigation .settings-section .item-ctn .nav-btn .text {
   padding-left: 1em;
-  color: #2CC295;
+  color: #04518C;
   display: flex;
   align-self: center;
-  font-size: 1.15em;
+  font-size: 1em;
 }
 .app-container .navigation .settings-section .item-ctn.active .nav-btn {
-  background-color: #00AD7F;
+  background-color: #04508c;
 }
 .app-container .navigation .settings-section .item-ctn.active .nav-btn .icon.dark {
   display: none;
@@ -194,7 +193,7 @@ body {
   flex-direction: row;
   margin: 0 auto;
   padding: 0.5em 1em;
-  background-color: #EFEFEF;
+  background-color: #EFF3F6;
   border-radius: 0.5em;
   width: 16em;
 }
@@ -233,7 +232,7 @@ body {
   margin-right: 0em;
   display: flex;
   flex: 1;
-  background-color: #EFEFEF;
+  background-color: #EFF3F6;
   border-radius: 1.5em 0em 0em 1.5em;
 }
 .app-container .content-wrapper > div:first-of-type {
@@ -245,6 +244,8 @@ body {
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container {
   display: flex;
   flex-direction: column;
+  max-width: 120em;
+  margin: 0 auto;
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container .content {
   display: flex;
@@ -254,5 +255,5 @@ body {
   padding: 1em 1em;
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header h1 {
-  color: #3E7D6E;
+  color: #04518C;
 }/*# sourceMappingURL=app.css.map */

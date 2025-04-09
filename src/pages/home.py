@@ -79,7 +79,7 @@ layout = html.Div([
                         html.Div([
                             dcc.Graph(id="track-ratio-per-track", figure=track_ratio_per_track,
                                             config={"responsive": True},
-                                            style={"width": "100%", "height": "200px"}
+                                            style={"height": "100%"}
                                       )
                         ], className='graph'),
                     ]
