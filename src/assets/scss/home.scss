@@ -61,12 +61,11 @@
                             flex: 1;
                             display: flex;
                             align-self: center;
-                            font-size: 1.5em;
+                            font-size: clamp(1.15rem, 1.8vw, 2.5rem);
                             
                             h1{
                                 flex: 1;
                                 width: 100%;
-                                font-size: clamp(1rem, 5vw, 3rem);
                             }
                         }
                     }
