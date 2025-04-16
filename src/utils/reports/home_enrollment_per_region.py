@@ -31,9 +31,10 @@ query = dataframe.groupby(['school-level','grade'], as_index=False)[['counts']].
 
 # Ploting
 home_enrollment_per_region = px.bar(query, 
-                                    x="grade", 
-                                    y="counts",
+                                    x="counts", 
+                                    y="grade",
                                     text=None,
+                                    orientation='h',
                                     color='school-level',
                                     color_discrete_map={
                                         'ELEM': '#68d87b', 
@@ -137,3 +138,47 @@ track_ratio_per_track.update_layout(
     autosize=True,
     margin={"l": 8, "r": 8, "t": 16, "b": 0},  # Optional: Adjust margins
 )
+
+# ----------------------------------------------------------
+# School Distribution Across Sectors
+df4 = pd.read_csv("database/processed/sch_info.csv")
+grouped_by_sectors = df4.groupby("sector")
+sector_counts = grouped_by_sectors.size().reset_index(name="count")
+
+sector_counts
+
+home_school_number_per_sector = px.bar(sector_counts, x="sector", y="count",
+            #  title="Distribution of Schools Across Sectors",
+             text="count",
+             orientation="v",
+             color="sector",
+             color_discrete_map={
+                'Private': '#68d87b', 
+                'Public': '#40ad62', 
+                'SUCsLUCs': '#138954'    
+             })
+
+home_school_number_per_sector
+
+home_school_number_per_sector.update_traces(textposition="outside")
+home_school_number_per_sector.update_layout(yaxis=dict(visible=True), xaxis=dict(visible=False))
+home_school_number_per_sector.update_layout(
+    autosize=True,
+    margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
+    paper_bgcolor='rgba(0, 0, 0, 0)', 
+    plot_bgcolor='rgba(0, 0, 0, 0)',   
+    yaxis=dict(showticklabels=True),
+    legend=dict(
+        orientation="h",  # Horizontal legend
+        yanchor="bottom",  # Align legend at the bottom
+        y=-0.2,  # Position it below the chart
+        xanchor="center",  # Center it horizontally
+        x=0.5  # Align it to the center
+    )
+)
+
+# ----------------------------------------------------------
+# Gender Distribution
+
+
+

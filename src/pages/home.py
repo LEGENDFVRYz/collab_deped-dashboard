@@ -7,7 +7,7 @@ from src.components.card import Card
 
 # -- Graphs
 from src.utils.reports.home_enrollment_per_region import format_large_number
-from src.utils.reports.home_enrollment_per_region import home_enrollment_per_region, track_ratio_per_track
+from src.utils.reports.home_enrollment_per_region import home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector
 from src.utils.reports.home_enrollment_per_region import total_enrollees, most_active, least_active, academic_track_ratio
 
 # Landing page
@@ -63,10 +63,16 @@ layout = html.Div([
                     ])], className='loc-2'),
                 ], className='area-2'),
         ], className='layer-1'),
-        html.Div([Card(
-            
-            
-        )], className='layer-2')
+        
+        html.Div([Card([
+            html.Div(["School Distribution Across Sectors"], className='header'),
+            html.Div([
+                dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
+                                config={"responsive": True},
+                                style={"width": "100%", "height": "100%"}
+                )
+            ], className='graph'),
+        ])], className='layer-2')
     ], className='main-section'),
     
     ## -- Side Part

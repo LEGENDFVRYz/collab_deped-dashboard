@@ -138,6 +138,17 @@
         .layer-2{
             flex: 1;
             padding: 0.5em;
+
+            .header{
+                font-family: 'Inter Semi Bold';
+                font-size: 1.2em;
+                color: $dark-color-3;
+                padding-left: 0.5em;
+            }
+
+            .graph{
+                flex: 1;
+            }
         }
     }
 
