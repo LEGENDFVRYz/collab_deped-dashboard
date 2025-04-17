@@ -1,4 +1,4 @@
-from re import X
+import re, os, sys
 import dash
 from dash import dcc, html
 
@@ -8,14 +8,14 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
-# -- Create the appropriate plot
-df1 = pd.read_csv("database/processed/enrollment.csv")
-df2 = pd.read_csv("database/processed/ES_JHS_enroll.csv")
-df3 = pd.read_csv("database/processed/SHS_enroll.csv")
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from config import project_root
+from utils.get_data import auto_extract
 
-es_df = df1.merge(df2, on='enroll_id')
-shs_df = df1.merge(df3, on='enroll_id')
-dataframe = pd.concat([es_df, shs_df])
+
+# -- Create the appropriate plot
+dataframe = auto_extract(['counts'], is_specific=False)
+dataframe
 
 order = [
     'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
