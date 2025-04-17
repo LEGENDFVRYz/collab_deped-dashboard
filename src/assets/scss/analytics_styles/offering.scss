@@ -5,10 +5,114 @@
 
 #plot-content.rendered{
     .plotted-offering-report{
-        //
-        // INSERT STYLES HERE ONLYYYY
-        //
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
         
+        // GENERAL DESIGN FOR SECTION
+        .plot-sec-wrap{
+            display: flex;
+            flex-direction: column;
 
+            .label{
+                padding-bottom: 0.5em;
+            }
+            .plot-content{
+                flex: 1;
+            }
+        }
+
+        // PLOTTING THE CONTENTS
+        .plot-left-section{
+            flex: 4;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .plot-top-section{
+                flex: 4;
+
+                display: flex;
+                flex-direction: column;
+                
+                .plot-box{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: row;
+
+                    gap: 0.5em;
+
+                    .plot-a{
+                        flex: 1;
+                    }
+                    .plot-b{
+                        flex: 1;
+
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5em;
+
+                        .plot-b-top{
+                            flex: 1;
+                        }
+                        .plot-b-bot{
+                            flex: 1;
+                        }
+                    }
+                }
+            }
+
+            .plot-bottom-section{
+                flex: 3;
+
+                .plot-box{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: row;
+
+                    gap: 0.5em;
+
+                    .plot-a{
+                        flex: 1;
+                    }
+                    .plot-b{
+                        flex: 1;
+                    }
+                }
+            }
+        }
+
+
+        .plot-right-section{
+            flex: 2;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .plot-top-section{
+                flex: 1;
+            }
+
+            .plot-bottom-section{
+                flex: 1;
+
+                .plot-box{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    gap: 0.5em;
+
+                    .plot-sec-a{
+                        min-height: 40%;
+                    }
+                    .plot-sec-b{
+                        flex: 1;
+                    }
+                }
+            }
+        }
     }
 }

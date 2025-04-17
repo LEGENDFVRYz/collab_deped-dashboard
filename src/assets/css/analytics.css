@@ -116,6 +116,5 @@
 }
 .analytics-page .content-section .right-content #plot-content.rendered #plot-filtered-page .render-plot {
   display: flex;
-  flex-direction: column;
   flex: 1;
 }/*# sourceMappingURL=analytics.css.map */

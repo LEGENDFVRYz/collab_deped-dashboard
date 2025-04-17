@@ -14,5 +14,5 @@ def save_analytic_tabs(in1, in2, in3, in4):
     
     for idx, val in enumerate([in1, in2, in3, in4]):
         if val.split(" ")[0] == 'active':
-            print(opt[idx])
+            # print(opt[idx])
             return opt[idx]
