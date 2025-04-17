@@ -2,7 +2,7 @@ from dash import html, dcc
 
 
 """
-    Template for Senior High Filtering:
+    Template for Sub Class Filtering:
     
     
 """

@@ -15,7 +15,6 @@ from utils.get_data import auto_extract
 
 # -- Create the appropriate plot
 dataframe = auto_extract(['counts'], is_specific=False)
-dataframe
 
 order = [
     'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
@@ -75,7 +74,7 @@ def format_large_number(num):
     else:
         return str(num)
 
-shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=True)
+shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=False)
 shs_df
 
 es_count = dataframe[dataframe['school-level'] == 'ELEM']['counts'].sum()
@@ -163,7 +162,9 @@ def smart_truncate_number(n):
 # ----------------------------------------------------------
 # School Distribution Across Sectors
 
-df4 = pd.read_csv("database/processed/sch_info.csv")
+df4 = auto_extract(['sector'], is_specific=False)
+df4
+
 grouped_by_sectors = df4.groupby("sector")
 sector_counts = grouped_by_sectors.size().reset_index(name="count")
 
@@ -199,9 +200,9 @@ home_school_number_per_sector
 
 # ----------------------------------------------------------
 # Gender Distribution
-
 # Group the original dataframe to sum by gender
-grouped_by_gender = dataframe.groupby('gender', as_index=False)['counts'].sum()
+
+grouped_by_gender = dataframe.groupby(['gender'], as_index=False)['counts'].sum()
 
 colors = ['#FF5B72', '#5DB7FF']
 
@@ -240,8 +241,7 @@ total_female_count
 # ----------------------------------------------------------
 # Regional Distribution
 
-df5 = pd.read_csv("database/processed/sch_local.csv")
-df6 = pd.read_csv("database/processed/sch_region.csv")
+
 
 # ----------------------------------------------------------
 # Total Number of Schools Available

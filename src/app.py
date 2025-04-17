@@ -28,12 +28,14 @@ app.layout = html.Div(
             html.Div([
                 # Navigation Options
                 html.Div([
-                    html.Div([], className='indicator'),
-                    dcc.Link([
-                            html.Div([html.Img(src="/assets/images/icons_navigation/overview-light.svg")], className='light icon'),
-                            html.Div([html.Img(src="/assets/images/icons_navigation/overview-blue.svg")], className='dark icon'),
-                            html.Div(['Overview'], className='text')
-                        ], href="/", className='overview nav-btn')
+                    html.Div([
+                            html.Div([], className='indicator'),
+                            dcc.Link([
+                                    html.Div([html.Img(src="/assets/images/icons_navigation/overview-light.svg")], className='light icon'),
+                                    html.Div([html.Img(src="/assets/images/icons_navigation/overview-blue.svg")], className='dark icon'),
+                                    html.Div(['Overview'], className='text')
+                                ], href="/", className='overview nav-btn')
+                        ], className='main-tab'),
                 ], id='nav-1', className='item-ctn'),
                 
                 html.Div([

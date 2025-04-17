@@ -16,7 +16,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
         
         GRADE_LIST = ['ES_enroll', 'JHS_enroll', 'SHS_enroll']
-        grade_cols = ['es_grade', 'jhs_grade', 'shs_grade']
+        grade_cols = ['es_grade', 'jhs_grade', 'shs_grade', 'gender']
         is_distinct = ''
         
         data_record = {
@@ -102,7 +102,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
                     
                 g_query = f"""
                 SELECT {cols} FROM enrollment
-                INNER JOIN {grade} USING (enroll_id)
+                LEFT JOIN {grade} USING (enroll_id)
                 """
                 all_g_query.append(g_query)
                 
@@ -121,7 +121,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         """
         
         ### main query
-        print(">>>", ', '.join(target_cols))
+        # print(">>>", ', '.join(target_cols))
         if len(all_g_query) == 0:
             main_query = sch_query(', '.join(target_cols) if is_specific else '*')
         else:
@@ -131,7 +131,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
                 FROM ({sch_query('*')})
                 LEFT JOIN (
                     {grouped_grade}
-                ) USING (enroll_id)
+                ) USING (enroll_id, beis_id, gender)
                 WHERE grade IS NOT NULL
             """
         # print(main_query)
@@ -144,4 +144,5 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['counts'], is_specific=True)
+    df = auto_extract(['counts'], is_specific=False)
+    df
