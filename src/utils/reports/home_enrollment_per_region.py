@@ -37,21 +37,21 @@ home_enrollment_per_region = px.bar(query,
                                     orientation='h',
                                     color='school-level',
                                     color_discrete_map={
-                                        'ELEM': '#68d87b', 
-                                        'JHS': '#40ad62', 
-                                        'SHS': '#138954'    
+                                        'ELEM': '#FF899A', 
+                                        'JHS': '#E11C38', 
+                                        'SHS': '#930F22'    
                                     }
                             )
 home_enrollment_per_region
 
 # Layout configs
-home_enrollment_per_region.update_layout(yaxis=dict(visible=False), xaxis=dict(visible=False))
+home_enrollment_per_region.update_layout(yaxis=dict(visible=True), xaxis=dict(visible=False))
 home_enrollment_per_region.update_layout(
     autosize=True,
     margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
     paper_bgcolor='rgba(0, 0, 0, 0)', 
     plot_bgcolor='rgba(0, 0, 0, 0)',   
-    yaxis=dict(showticklabels=False),
+    yaxis=dict(showticklabels=True),
     xaxis=dict(
         categoryorder='array',
         categoryarray=order,
@@ -80,8 +80,6 @@ shs_count = shs_df['counts'].sum()
 
 total_enrollees = format_large_number(es_count + shs_count)
 total_enrollees
-
-
 
 ## -- INDICATORS: Most and Least active school level
 most_active =   query.loc[query['counts'].idxmax()]
@@ -140,12 +138,31 @@ track_ratio_per_track.update_layout(
 )
 
 # ----------------------------------------------------------
+# Number Format
+import math
+
+def smart_truncate_number(n):
+    if n < 1000:
+        return str(n)
+
+    # Handle Millions (M)
+    if n >= 1_000_000:
+        base = n / 1_000_000  # Get the number in millions
+        truncated = math.floor(base * 10) / 10  # Truncate to 1 decimal
+        return f"{int(truncated) if truncated.is_integer() else truncated}M"
+
+    # Handle Thousands (k)
+    elif n >= 1000:
+        base = n / 1000  # Get the number in thousands
+        truncated = math.floor(base * 10) / 10  # Truncate to 1 decimal
+        return f"{int(truncated) if truncated.is_integer() else truncated}k"
+
+# ----------------------------------------------------------
 # School Distribution Across Sectors
+
 df4 = pd.read_csv("database/processed/sch_info.csv")
 grouped_by_sectors = df4.groupby("sector")
 sector_counts = grouped_by_sectors.size().reset_index(name="count")
-
-sector_counts
 
 home_school_number_per_sector = px.bar(sector_counts, x="sector", y="count",
             #  title="Distribution of Schools Across Sectors",
@@ -153,12 +170,10 @@ home_school_number_per_sector = px.bar(sector_counts, x="sector", y="count",
              orientation="v",
              color="sector",
              color_discrete_map={
-                'Private': '#68d87b', 
-                'Public': '#40ad62', 
-                'SUCsLUCs': '#138954'    
+                'Private': '#037DEE', 
+                'Public': '#037DEE', 
+                'SUCsLUCs': '#037DEE'    
              })
-
-home_school_number_per_sector
 
 home_school_number_per_sector.update_traces(textposition="outside")
 home_school_number_per_sector.update_layout(yaxis=dict(visible=True), xaxis=dict(visible=False))
@@ -177,8 +192,71 @@ home_school_number_per_sector.update_layout(
     )
 )
 
+home_school_number_per_sector
+
 # ----------------------------------------------------------
 # Gender Distribution
 
+# Group the original dataframe to sum by gender
+grouped_by_gender = dataframe.groupby('gender', as_index=False)['counts'].sum()
 
+colors = ['#FF5B72', '#5DB7FF']
 
+# Create half-donut chart
+home_gender_distribution = go.Figure(go.Pie(
+    labels=grouped_by_gender['gender'],
+    values=grouped_by_gender['counts'],
+    hole=0.65,
+    direction='clockwise',
+    sort=False,
+    textinfo='label+percent',
+    marker=dict(colors=colors)
+))
+
+home_gender_distribution.update_layout(
+    showlegend=False,
+    margin=dict(t=0, b=0, l=0, r=0),
+    annotations=[dict(text='Gender Distribution',
+                      x=0.5,
+                      y=0.5,
+                      font_size=20,
+                      showarrow=False)],
+)
+
+home_gender_distribution.update_traces(rotation=180)
+home_gender_distribution
+
+total_male_count = grouped_by_gender.loc[grouped_by_gender['gender'] == 'M', 'counts'].values[0]
+total_male_count = smart_truncate_number(total_male_count)
+total_male_count
+
+total_female_count = grouped_by_gender.loc[grouped_by_gender['gender'] == 'F', 'counts'].values[0]
+total_female_count = smart_truncate_number(total_female_count)
+total_female_count
+
+# ----------------------------------------------------------
+# Regional Distribution
+
+df5 = pd.read_csv("database/processed/sch_local.csv")
+df6 = pd.read_csv("database/processed/sch_region.csv")
+
+# ----------------------------------------------------------
+# Total Number of Schools Available
+
+number_of_schools = df4["beis_id"].count()
+number_of_schools = smart_truncate_number(number_of_schools)
+number_of_schools
+
+# ----------------------------------------------------------
+# Enrollees per Education Level
+
+grouped_by_school_level = dataframe.groupby('school-level', as_index=False)['counts'].sum()
+
+total_es_count = grouped_by_school_level.loc[grouped_by_school_level["school-level"] == "ELEM", 'counts'].values[0]
+total_es_count = smart_truncate_number(total_es_count)
+
+total_jhs_count = grouped_by_school_level.loc[grouped_by_school_level["school-level"] == "JHS", 'counts'].values[0]
+total_jhs_count = smart_truncate_number(total_jhs_count)
+
+total_shs_count = grouped_by_school_level.loc[grouped_by_school_level["school-level"] == "SHS", 'counts'].values[0]
+total_shs_count = smart_truncate_number(total_shs_count)
