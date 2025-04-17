@@ -129,6 +129,9 @@ body {
   align-self: center;
   color: #0674C8;
 }
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active a {
+  font-weight: bold;
+}
 .app-container .navigation .menu-section .item-ctn:not(.active) .indicator {
   display: none;
 }
@@ -151,6 +154,10 @@ body {
   gap: 1em;
   bottom: 0;
   padding-bottom: 1em;
+}
+.app-container .navigation .settings-section #opt-2 {
+  display: none;
+  visibility: none;
 }
 .app-container .navigation .settings-section .item-ctn {
   display: flex;

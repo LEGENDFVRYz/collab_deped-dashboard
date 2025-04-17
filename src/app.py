@@ -7,6 +7,7 @@ import pandas as pd
 
 # Callbacks
 from src.utils import activeTab_callback
+# from src.utils import filter_menu_callback
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
@@ -47,23 +48,24 @@ app.layout = html.Div(
                             ], href='/analytics', className='overview nav-btn'),
                     ], className='main-tab'),
                     html.Div([
-                        
                         html.Div([
-                            
                                 html.Div([
                                         html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
                                         html.A("Location")
-                                    ], className='tab-btn'),
+                                    ], id='location', className='tab-btn'),
                                 html.Div([
                                         html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Sectors")
-                                    ], className='tab-btn'),
+                                        html.A("Senior High")
+                                    ], id='senior-high', className='tab-btn'),
                                 html.Div([
                                         html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Kuru Villanueva")
-                                    ], className='tab-btn'),
+                                        html.A("Subclassification")
+                                    ], id='subclass', className='tab-btn'),
+                                html.Div([
+                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
+                                        html.A("Offering")
+                                    ], id='offering', className='tab-btn'),
                             ], className='tabs-menu-ctn')    
-                        
                         ], className='tabs-menu')
                     
                 ], id='nav-2', className='item-ctn'),
@@ -77,8 +79,18 @@ app.layout = html.Div(
                                 html.Div(['School-level'], className='text')
                             ], href='/school-level', className='overview nav-btn'),
                     ], className='main-tab'),
-                    html.Div([], className='tabs-menu')
-                    
+                    html.Div([
+                            html.Div([
+                                html.Div([
+                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
+                                        html.A("Analysis")
+                                    ], className='tab-btn'),
+                                html.Div([
+                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
+                                        html.A("Comparizon")
+                                    ], className='tab-btn'),
+                            ], className='tabs-menu-ctn')  
+                        ], className='tabs-menu')
                 ], id='nav-3', className='item-ctn'),
             ], className='menu-section'),
             
@@ -94,12 +106,12 @@ app.layout = html.Div(
                 ], id='opt-1', className='item-ctn'),
                 
                 html.Div([
-                    html.Div([], className='indicator'),
-                    dcc.Link([
-                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
-                            html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
-                            html.Div(['Help'], className='text')
-                        ], href='/help', className='overview nav-btn'),
+                    # html.Div([], className='indicator'),
+                    # dcc.Link([
+                    #         html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-fill.svg")], className='light icon'),
+                    #         html.Div([html.Img(src="/assets/images/icons_navigation/pie-chart-2-fill.svg")], className='dark icon'),
+                    #         html.Div(['Help'], className='text')
+                    #     ], href='/help', className='overview nav-btn'),
                 ], id='opt-2', className='item-ctn'),
                 
                 html.Div([
