@@ -59,51 +59,54 @@ body{
 
             .item-ctn{
                 display: flex;
-                flex-direction: row;
-
-                .indicator{
-                    width:0.5em;
-                    height: 3em;
-                    border-top-right-radius: 0.5em;
-                    border-bottom-right-radius: 0.5em;
-
-                    background-color: $primary-color-1;
-                    position: absolute;
-                    left: 0;
-                }
-
-                // Actual Button Stylings
-                .nav-btn{
-                    // display: none;
-                    width: 15em;
-                    height: 3em;
-                    padding: 0.5em 1em;
-                    margin: 0 auto;
-                    border-radius: 0.5em;
-                    
-                    text-decoration: none;
-                    user-select: none;
-                    
-                    display: flex;
-                    align-items: center;
-                    flex-direction: row;
-                    
-                    .icon{
-                        display: flex;
-                        align-self: center;
-                        
-                        img{
-                            width: 1.5em;
-                            height: 1.5em;
-                        }
+                flex-direction: column;
+                
+                .main-tab{
+                    flex: 1;
+                    .indicator{
+                        width:0.5em;
+                        height: 3em;
+                        border-top-right-radius: 0.5em;
+                        border-bottom-right-radius: 0.5em;
+    
+                        background-color: $primary-color-1;
+                        position: absolute;
+                        left: 0;
                     }
-                    .text{
-                        padding-left: 1em;
-                        color: $primary-color-1;
+    
+                    // Actual Button Stylings
+                    .nav-btn{
+                        // display: none;
+                        width: 15em;
+                        height: 3em;
+                        padding: 0.5em 1em;
+                        margin: 0 auto;
+                        border-radius: 0.5em;
+                        
+                        text-decoration: none;
+                        user-select: none;
                         
                         display: flex;
-                        align-self: center;
-                        font-size: 1em;
+                        align-items: center;
+                        flex-direction: row;
+                        
+                        .icon{
+                            display: flex;
+                            align-self: center;
+                            
+                            img{
+                                width: 1.5em;
+                                height: 1.5em;
+                            }
+                        }
+                        .text{
+                            padding-left: 1em;
+                            color: $primary-color-1;
+                            
+                            display: flex;
+                            align-self: center;
+                            font-size: 1em;
+                        }
                     }
                 }
             }
@@ -122,6 +125,46 @@ body{
                         color: $light-color-1;
                     }
                 }
+
+                .tabs-menu{
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+
+                    width: 100%;
+                    padding: 1em;
+                    padding-bottom: 0em;
+                    
+                    .tabs-menu-ctn{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5em;
+                        width: 11em;
+                        
+                        .tab-btn{
+                            user-select: none;
+                            cursor: pointer;
+                            
+                            display: flex;
+                            gap: 0.75em;
+
+                            img{
+                                width: 1.25em;
+                                height: 1.25em;
+                            }
+                            a{
+                                align-self: center;
+                                color: $primary-shades-4;
+                            }
+                        }
+
+                        .tab-btn.active{
+                            a{
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
             }
 
             .item-ctn:not(.active){
@@ -137,6 +180,10 @@ body{
                     .icon.light{
                         display: none;
                     }
+                }
+
+                .tabs-menu{
+                    display: none;
                 }
             }
 
@@ -154,6 +201,11 @@ body{
             gap: 1em;
             bottom: 0;
             padding-bottom: 1em;
+
+            #opt-2{     // Temporarily 
+                display: none;
+                visibility: none;
+            }
 
             .item-ctn{
                 display: flex;
