@@ -74,8 +74,11 @@ def format_large_number(num):
     else:
         return str(num)
 
-es_count = es_df['counts'].sum()
-shs_count = shs_df['counts'].sum()
+shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=True)
+shs_df
+
+es_count = dataframe[dataframe['school-level'] == 'ELEM']['counts'].sum()
+shs_count = dataframe[dataframe['school-level'] == 'SHS']['counts'].sum()
 
 total_enrollees = format_large_number(es_count + shs_count)
 total_enrollees

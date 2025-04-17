@@ -1,4 +1,3 @@
-from ast import main
 from numpy import append
 from sqlalchemy import create_engine
 import pandas as pd
@@ -17,7 +16,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
         
         GRADE_LIST = ['ES_enroll', 'JHS_enroll', 'SHS_enroll']
-        grade_cols = ['es_grade', 'jhs_grade', 'shs_grade', 'counts', 'year', 'track', 'strand']
+        grade_cols = ['es_grade', 'jhs_grade', 'shs_grade']
         is_distinct = ''
         
         data_record = {
@@ -122,6 +121,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         """
         
         ### main query
+        print(">>>", ', '.join(target_cols))
         if len(all_g_query) == 0:
             main_query = sch_query(', '.join(target_cols) if is_specific else '*')
         else:
@@ -144,4 +144,4 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['region'], is_specific=True, distinct=True)
+    df = auto_extract(['counts'], is_specific=True)
