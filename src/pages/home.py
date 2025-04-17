@@ -31,27 +31,27 @@ layout = html.Div([
                     html.Div([
                         Card([
                             html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-                        ])
+                        ], margin=False)
                     ], className="ns-info"),
                     html.Div([
                         Card([
                             html.Div([html.H1(f"{total_es_count}", className="text-center"),], className='indicator'),
-                        ])
+                        ], margin=False)
                     ], className="ns-info"),
                     html.Div([
                         Card([
                             html.Div([html.H1(f"{total_jhs_count}", className="text-center"),], className='indicator'),
-                        ])
+                        ], margin=False)
                     ], className="ns-info"),
                     html.Div([
                         Card([
                             html.Div([html.H1(f"{total_shs_count}", className="text-center"),], className='indicator'),
-                        ])
+                        ], margin=False)
                     ], className="ns-info"),
                 ], className="ns-info-cards"),
                 
                 html.Div([
-                    Card()
+                    Card([], margin=False)
                 ], className="ns-graph"),
             ], className="national-snapshot"),
             
@@ -70,15 +70,15 @@ layout = html.Div([
                                         style={"width": "100%", "height": "100%"}
                             )
                         ], className='graph'),   
-                      ])  
+                      ], margin=False)  
                     ], className="gld-graph"),
                     
                     html.Div([
                         html.Div([
-                            Card()
+                            Card([], margin=False)
                         ], className="gld-info"),
                         html.Div([
-                            Card()
+                            Card([], margin=False)
                         ], className="gld-info"),
                     ],className="gld-info-cards"),
                     
@@ -104,26 +104,26 @@ layout = html.Div([
                                                 style={"width": "100%", "height": "100%"}
                                     )
                                 ], className='graph'),
-                            ])
+                            ], margin=False)
                         ], className="lp-graph"),
                         
                         html.Div([
                             html.Div([
                                 Card([
                                     html.Div([html.H3(f"{total_female_count}")], className='header'),
-                                ])
+                                ], margin=False)
                             ], className="lp-info"),
                             html.Div([
                                 Card([
                                     html.Div([html.H3(f"{total_male_count}")], className='header'),
-                                ])
+                                ], margin=False)
                             ], className="lp-info"),
                         ],className="lp-info-cards"), 
                         
                     ], className="lp-graph-1"),
                     
                     html.Div([
-                      Card()  
+                      Card([], margin=False)  
                     ], className="lp-graph-2"),
                 ], className="lp-content"),
                 
@@ -140,7 +140,7 @@ layout = html.Div([
                             html.Div([
                                 Card([
                                     html.Div([html.H3(f"{number_of_schools}")], className='header'),
-                                ])
+                                ], margin=False)
                             ], className="ssc-info"),
                             html.Div([
                                 Card([
@@ -150,18 +150,18 @@ layout = html.Div([
                                                     style={"width": "100%", "height": "100%"}
                                         )
                                     ], className='graph'),
-                                ])
+                                ], margin=False)
                             ], className="ssc-graph"),
                         ],className="ssc-info-graph"), 
                         
                         html.Div([
-                            Card()
+                            Card([], margin=False)
                         ], className="ssc-table"),
                         
                     ], className="ssc-content-1"),
                     
                     html.Div([
-                      Card()  
+                        Card([], margin=False) 
                     ], className="ssc-content-2"),
                 ], className="ssc-content"),  
                 
