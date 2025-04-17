@@ -1,1 +1,61 @@
-@import '../../fonts/stylesheet.css';/*# sourceMappingURL=seniorhigh.css.map */
+@import '../../fonts/stylesheet.css';
+#plot-content.rendered .plotted-seniorhigh-report {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment {
+  display: flex;
+  flex-direction: column;
+  flex: 1.5;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-dist-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-lower {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-lower .shs-enrollment-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail .shs-track-avail-content {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail .shs-track-avail-content .shs-track-avail-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-right-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-right-content .shs-region-sector-graph {
+  display: flex;
+  flex: 1;
+}/*# sourceMappingURL=seniorhigh.css.map */
