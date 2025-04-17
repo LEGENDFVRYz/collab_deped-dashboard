@@ -157,6 +157,12 @@ body{
                                 color: $primary-shades-4;
                             }
                         }
+
+                        .tab-btn.active{
+                            a{
+                                font-weight: bold;
+                            }
+                        }
                     }
                 }
             }
@@ -195,6 +201,11 @@ body{
             gap: 1em;
             bottom: 0;
             padding-bottom: 1em;
+
+            #opt-2{     // Temporarily 
+                display: none;
+                visibility: none;
+            }
 
             .item-ctn{
                 display: flex;
