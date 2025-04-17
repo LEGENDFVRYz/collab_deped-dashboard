@@ -96,18 +96,6 @@ layout = html.Div([
 
 
 # close the filter function:
-# # Step 1: Add animation class (but keep visible)
-# @callback(
-#     Output('filter-section', 'style'),
-#     Output('placeholder', 'style'),
-#     Input('proceed-btn', 'n_clicks')
-# )
-# def hide_div(n_clicks):
-#     if n_clicks > 0:
-#         return {'display': 'none'}, {'background-color': '#EFF3F6'}
-#     return {'display': 'flex'}, {}
-
-
 @callback(
     Output('filter-section', 'style'),
     Output('placeholder', 'style'),
