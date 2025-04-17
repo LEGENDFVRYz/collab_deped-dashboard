@@ -63,12 +63,7 @@
 }
 .home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards .gld-info {
   display: flex;
-  align-self: center;
-  font-size: clamp(1.15rem, 1.8vw, 2.5rem);
-}
-.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator h1 {
   flex: 1;
-  width: 100%;
 }
 .home-page .content .lower-content {
   display: flex;
