@@ -59,7 +59,7 @@ def render_location_filter():
                     html.Div(["Strand/Track Preferences"], className='label'),
                     html.Div([Card([
                         #########################################
-                        ## INSERT PLOT: ENROLLMENT DENSIITY
+                        ## INSERT PLOT: Strand preferences per region
                         #########################################
                         
                         
@@ -76,7 +76,7 @@ def render_location_filter():
                     html.Div(["Geographic Distribution"], className='label'),
                     html.Div([Card([
                         #########################################
-                        ## INSERT PLOT: ENROLLMENT DENSIITY
+                        ## INSERT PLOT: enrollment density (students per location)
                         #########################################
                         
                         
@@ -88,7 +88,7 @@ def render_location_filter():
                     html.Div(["School Type Analysis"], className='label'),
                     html.Div([Card([
                         #########################################
-                        ## INSERT PLOT: SCHOOL TYPE ANALYSIS (school sectors)
+                        ## INSERT PLOT: school sectors
                         #########################################
                         
                         

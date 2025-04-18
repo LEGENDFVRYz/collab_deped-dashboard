@@ -47,7 +47,7 @@ def render_offering_filter():
                                 #########################################
                                 
                             
-                            ], margin=False, padding='')], className='plot-b-top'),
+                            ], margin=False)], className='plot-b-top'),
                             
                             ## PLOT B - BOT
                             html.Div([Card([
