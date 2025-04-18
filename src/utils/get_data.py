@@ -140,7 +140,7 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         return dataframe
         
     except Exception as e:
-        print(f'error: {e}')
+        print(f'error: SQL QUERY FAILED')
         
     
 if __name__ == '__main__':
