@@ -38,7 +38,7 @@ FILTERED_DF
 ## -- EXAMPLE CHHART
 
 # Manipulated Data for charts
-query = FILTERED_DF[['grade']]
+query = FILTERED_DF[['grade']][:]
 
 query['school-level'] = query['grade'].apply(
     lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
