@@ -63,13 +63,11 @@ layout = html.Div([
                     html.Div([
                       Card([
                       ## -- GRAPH: Total Enrollment Count per School Level
-                        # html.Div(["Enrollments per School Level"], className='header'),
-                        html.Div([
-                            dcc.Graph(id="home_enrollment-per-region", figure=home_enrollment_per_region,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
-                        ], className='graph'),   
+                        # html.Div(["Enrollments per School Level"], className='header'), 
+                        dcc.Graph(id="home_enrollment-per-region", figure=home_enrollment_per_region,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                        ),
                       ], margin=False)  
                     ], className="gld-graph"),
                     
@@ -98,12 +96,10 @@ layout = html.Div([
                         
                         html.Div([
                             Card([
-                                html.Div([
-                                    dcc.Graph(id="home_gender_distribution", figure=home_gender_distribution,
-                                                config={"responsive": True},
-                                                style={"width": "100%", "height": "100%"}
-                                    )
-                                ], className='graph'),
+                                dcc.Graph(id="home_gender_distribution", figure=home_gender_distribution,
+                                            config={"responsive": True},
+                                            style={"width": "100%", "height": "100%"}
+                                ),
                             ], margin=False)
                         ], className="lp-graph"),
                         
@@ -144,12 +140,10 @@ layout = html.Div([
                             ], className="ssc-info"),
                             html.Div([
                                 Card([
-                                    html.Div([
-                                        dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
-                                                    config={"responsive": True},
-                                                    style={"width": "100%", "height": "100%"}
-                                        )
-                                    ], className='graph'),
+                                    dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
+                                                config={"responsive": True},
+                                                style={"width": "100%", "height": "100%"}
+                                    )
                                 ], margin=False)
                             ], className="ssc-graph"),
                         ],className="ssc-info-graph"), 
