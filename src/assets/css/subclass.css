@@ -1,0 +1,80 @@
+@import '../../fonts/stylesheet.css';
+#plot-content.rendered .plotted-subclass-report {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1.25;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail {
+  display: flex;
+  flex-direction: column;
+  flex: 1.5;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-graph {
+  display: flex;
+  flex: 1.25;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-last-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-last-cards .subclass-program-indicator {
+  display: flex;
+  flex: 1;
+}/*# sourceMappingURL=subclass.css.map */

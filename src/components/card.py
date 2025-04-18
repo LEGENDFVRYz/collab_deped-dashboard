@@ -8,8 +8,10 @@ from dash import html
 """
 
 
-def Card(children=[], **kwargs):
+def Card(children=[], margin=True, padding='1em', **kwargs):
     # Styles: Box Container
+    margin = '0.5em' if margin else '0em'
+    
     box_styles = {
         # Default Stylings
         'background-color': '#FFFFFF',
@@ -20,7 +22,7 @@ def Card(children=[], **kwargs):
         
         'box-sizing': 'content-box',
         'border-radius': '0.75em',
-        'margin': '0.5em',
+        'margin': margin,
         'box-shadow' : '-2px 0px 6px rgba(0, 0, 0, 0.03)'    
     }
     
@@ -28,7 +30,7 @@ def Card(children=[], **kwargs):
         children=[
             
             html.Div(children, className='card-wrap', style={
-                'padding': '1em',
+                'padding': padding,
                 'display': 'flex',
                 'flex-direction': 'column',
                 'flex': '1'

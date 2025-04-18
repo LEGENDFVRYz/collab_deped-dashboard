@@ -44,9 +44,12 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
-.app-container .navigation .menu-section .item-ctn .indicator {
+.app-container .navigation .menu-section .item-ctn .main-tab {
+  flex: 1;
+}
+.app-container .navigation .menu-section .item-ctn .main-tab .indicator {
   width: 0.5em;
   height: 3em;
   border-top-right-radius: 0.5em;
@@ -55,7 +58,7 @@ body {
   position: absolute;
   left: 0;
 }
-.app-container .navigation .menu-section .item-ctn .nav-btn {
+.app-container .navigation .menu-section .item-ctn .main-tab .nav-btn {
   width: 15em;
   height: 3em;
   padding: 0.5em 1em;
@@ -69,15 +72,15 @@ body {
   align-items: center;
   flex-direction: row;
 }
-.app-container .navigation .menu-section .item-ctn .nav-btn .icon {
+.app-container .navigation .menu-section .item-ctn .main-tab .nav-btn .icon {
   display: flex;
   align-self: center;
 }
-.app-container .navigation .menu-section .item-ctn .nav-btn .icon img {
+.app-container .navigation .menu-section .item-ctn .main-tab .nav-btn .icon img {
   width: 1.5em;
   height: 1.5em;
 }
-.app-container .navigation .menu-section .item-ctn .nav-btn .text {
+.app-container .navigation .menu-section .item-ctn .main-tab .nav-btn .text {
   padding-left: 1em;
   color: #04508c;
   display: flex;
@@ -96,6 +99,39 @@ body {
 .app-container .navigation .menu-section .item-ctn.active .nav-btn .text {
   color: #FFFFFF;
 }
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1em;
+  padding-bottom: 0em;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 11em;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  display: flex;
+  gap: 0.75em;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn img {
+  width: 1.25em;
+  height: 1.25em;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn a {
+  align-self: center;
+  color: #0674C8;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active a {
+  font-weight: bold;
+}
 .app-container .navigation .menu-section .item-ctn:not(.active) .indicator {
   display: none;
 }
@@ -103,6 +139,9 @@ body {
   display: flex;
 }
 .app-container .navigation .menu-section .item-ctn:not(.active) .nav-btn .icon.light {
+  display: none;
+}
+.app-container .navigation .menu-section .item-ctn:not(.active) .tabs-menu {
   display: none;
 }
 .app-container .navigation .menu-section .item-ctn:not(.active):hover .nav-btn {
@@ -115,6 +154,10 @@ body {
   gap: 1em;
   bottom: 0;
   padding-bottom: 1em;
+}
+.app-container .navigation .settings-section #opt-2 {
+  display: none;
+  visibility: none;
 }
 .app-container .navigation .settings-section .item-ctn {
   display: flex;

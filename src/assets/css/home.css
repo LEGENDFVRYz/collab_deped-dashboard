@@ -4,141 +4,148 @@
   height: 100%;
   display: flex;
 }
-.home-page .main-section {
-  width: 300px;
+.home-page .content {
   display: flex;
   flex-direction: column;
-  flex: 2;
-}
-.home-page .main-section .layer-1 {
   flex: 1;
+  gap: 2em;
+  padding: 1em;
+}
+.home-page .content .upper-content {
   display: flex;
-  padding: 0.5em;
-}
-.home-page .main-section .layer-1 .area-1 {
-  flex: 2;
-}
-.home-page .main-section .layer-1 .area-1 .header {
-  font-family: "Inter Semi Bold";
-  font-size: 1.2em;
-  color: #565856;
-  padding-left: 0.5em;
-}
-.home-page .main-section .layer-1 .area-1 .graph {
-  flex: 1;
-}
-.home-page .main-section .layer-1 .area-2 {
-  display: flex;
-  flex-direction: column;
+  flex: 1.25;
   gap: 1em;
-  flex: 1;
 }
-.home-page .main-section .layer-1 .area-2 .loc-1 {
-  flex: 1;
-}
-.home-page .main-section .layer-1 .area-2 .loc-1 .display {
-  flex: 1;
+.home-page .content .upper-content .national-snapshot {
   display: flex;
-  flex-direction: row;
-  gap: 0.25em;
-  color: #04508c;
+  flex-direction: column;
+  flex: 1.5;
+  gap: 0.5em;
 }
-.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display {
+.home-page .content .upper-content .national-snapshot .ns-info-cards {
   display: flex;
-  align-self: center;
-}
-.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator-display img {
-  width: 3.5em;
-}
-.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator {
   flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .upper-content .national-snapshot .ns-info-cards .ns-info {
   display: flex;
-  align-self: center;
-  font-size: 1.5em;
-}
-.home-page .main-section .layer-1 .area-2 .loc-1 .display .indicator h1 {
   flex: 1;
-  width: 100%;
-  font-size: clamp(1rem, 5vw, 3rem);
 }
-.home-page .main-section .layer-1 .area-2 .loc-1 .details {
-  font-family: "Inter Semi Bold";
-  text-align: center;
-  color: #565856;
+.home-page .content .upper-content .national-snapshot .ns-info-cards .ns-info:first-child {
+  flex: 1.5;
 }
-.home-page .main-section .layer-1 .area-2 .loc-2 {
+.home-page .content .upper-content .national-snapshot .ns-graph {
+  display: flex;
+  flex: 2;
+}
+.home-page .content .upper-content .grade-level-dynamics {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .upper-content .grade-level-dynamics .gld-content {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-graph {
+  display: flex;
+  flex: 2.25;
+}
+.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-graph .graph {
+  flex: 1;
+}
+.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards .gld-info {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .lower-content {
   display: flex;
   flex: 1;
   gap: 2em;
-  color: #3E7D6E;
 }
-.home-page .main-section .layer-1 .area-2 .loc-2 .upper {
-  flex: 1;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator-display {
-  display: flex;
-  align-self: center;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator-display img {
-  width: 3em;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .upper .display .indicator {
-  flex: 1;
-  display: flex;
-  align-self: center;
-  justify-content: right;
-  font-size: 1.25em;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .lower {
-  flex: 1;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display {
-  flex: 1;
-  display: flex;
-  flex-direction: row-reverse;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display {
-  display: flex;
-  align-self: center;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator-display img {
-  width: 3em;
-}
-.home-page .main-section .layer-1 .area-2 .loc-2 .lower .display .indicator {
-  flex: 1;
-  display: flex;
-  align-self: center;
-  font-size: 1.25em;
-}
-.home-page .main-section .layer-2 {
-  flex: 1;
-  padding: 0.5em;
-}
-.home-page .side-section {
-  width: 300px;
+.home-page .content .lower-content .learner-profiles {
   display: flex;
   flex-direction: column;
   flex: 1;
+  gap: 0.5em;
 }
-.home-page .side-section .layer-1 {
+.home-page .content .lower-content .learner-profiles .lp-content {
+  display: flex;
   flex: 1;
-  padding: 0.5em;
+  gap: 0.5em;
 }
-.home-page .side-section .layer-1 .header {
-  font-family: "Inter Semi Bold";
-  font-size: 1.25em;
-  color: #565856;
-  padding-left: 0.5em;
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
 }
-.home-page .side-section .layer-1 .graph {
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-graph {
+  display: flex;
+  flex: 1.5;
+}
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-graph .graph {
   flex: 1;
 }
-.home-page .side-section .layer-2 {
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
+  display: flex;
   flex: 1;
-  padding: 0.5em;
+  gap: 0.5em;
+}
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-info {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-2 {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .lower-content .school-system-composition {
+  display: flex;
+  flex-direction: column;
+  flex: 1.4;
+  gap: 0.5em;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1.5;
+  gap: 0.5em;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph {
+  display: flex;
+  flex: 1.5;
+  gap: 0.5em;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-info {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph {
+  display: flex;
+  flex: 1.5;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph .graph {
+  flex: 1;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-table {
+  display: flex;
+  flex: 2;
+}
+.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-2 {
+  display: flex;
+  flex: 1;
 }/*# sourceMappingURL=home.css.map */

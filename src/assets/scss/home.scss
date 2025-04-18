@@ -8,167 +8,356 @@
     height: 100%;
     display: flex;
 
-    .main-section{
-        // background-color: red;
-        width: 300px;
-
-        display: flex;
-        flex-direction: column;
-        flex: 2;
-
-        .layer-1{
-            flex: 1;
-            display: flex;
-            padding: 0.5em;
-
-            .area-1{
-                flex: 2;
-
-                .header{
-                    font-family: 'Inter Semi Bold';
-                    font-size: 1.2em;
-                    color: $dark-color-3;
-                    padding-left: 0.5em;
-                }
-                .graph{
-                    flex: 1;
-                }
-            }
-            .area-2{
-                display: flex;
-                flex-direction: column;
-                gap: 1em;
-                flex: 1;
-
-                .loc-1{
-                    flex: 1;
-
-                    .display{
-                        flex: 1;
-                        display: flex;
-                        flex-direction: row;
-                        gap: 0.25em;
-                        color: $primary-color-1;
-
-                        .indicator-display{
-                            display: flex;
-                            align-self: center;
-                            img{
-                                width: 3.5em;
-                            }
-                        }
-                        .indicator{
-                            flex: 1;
-                            display: flex;
-                            align-self: center;
-                            font-size: 1.5em;
-                            
-                            h1{
-                                flex: 1;
-                                width: 100%;
-                                font-size: clamp(1rem, 5vw, 3rem);
-                            }
-                        }
-                    }
-                    .details{
-                        font-family: 'Inter Semi Bold';
-                        text-align: center;
-                        color: $dark-color-3;
-                    }
-                }
-
-                .loc-2{
-                    display: flex;
-                    flex: 1;
-                    gap: 2em;
-                    color: $primary-color-2;
-
-                    .upper{
-                        flex: 1;
-                        
-                        .display{
-                            flex: 1;
-                            display: flex;
-                            flex-direction: row;
-                            
-
-                            .indicator-display{
-                                display: flex;
-                                align-self: center;
-                                img{
-                                    width: 3em;
-                                }
-                            }
-                            .indicator{
-                                flex: 1;
-                                display: flex;
-                                align-self: center;
-                                justify-content: right;
-                                font-size: 1.25em;
-                            }
-                        }
-                    }
-                    .lower{
-                        flex: 1;
-
-                        
-                        .display{
-                            flex: 1;
-                            display: flex;
-                            flex-direction: row-reverse;
-
-                            .indicator-display{
-                                display: flex;
-                                align-self: center;
-                                img{
-                                    width: 3em;
-                                }
-                            }
-                            .indicator{
-                                flex: 1;
-                                display: flex;
-                                align-self: center;
-                                font-size: 1.25em;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        .layer-2{
-            flex: 1;
-            padding: 0.5em;
-        }
-    }
-
-    .side-section{
-        // background-color: blue;
-        width: 300px;
-
+    .content {
         display: flex;
         flex-direction: column;
         flex: 1;
+        gap: 2em;
+        padding: 1em;
 
-        .layer-1{
-            flex: 1;
-            padding: 0.5em;
+        .upper-content {
+            display: flex;
+            flex: 1.25;
+            gap: 1em;
 
-            .header{
-                font-family: 'Inter Semi Bold';
-                font-size: 1.25em;
-                color: $dark-color-3;
-                padding-left: 0.5em;
+            .national-snapshot {
+                display: flex;
+                flex-direction: column;
+                flex: 1.5;
+                gap: 0.5em;
+
+                .ns-info-cards {
+                    display: flex;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .ns-info {
+                        display: flex;
+                        flex: 1;
+                    
+                        &:first-child {
+                          flex: 1.5;
+                        }
+                    }
+                }
+
+                .ns-graph {
+                    display: flex;
+                    flex: 2;
+                }
             }
-            .graph{
+        
+            .grade-level-dynamics {
+                display: flex;
+                flex-direction: column;
                 flex: 1;
+                gap: 0.5em;
+
+                .gld-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .gld-graph {
+                        display: flex;
+                        flex: 2.25;
+                    }
+
+                    .gld-info-cards {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 1;
+                        gap: 0.5em;
+
+                        .gld-info {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+                }
             }
         }
-        
-        .layer-2{
+
+        .lower-content {
+            display: flex;
             flex: 1;
-            padding: 0.5em;
+            gap: 2em;
+
+            .learner-profiles {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                gap: 0.5em;
+
+                .lp-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .lp-graph-1 {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 1;
+                        gap: 0.5em;
+
+                        .lp-graph {
+                            display: flex;
+                            flex: 1.5;
+                        }
+
+                        .lp-info-cards {
+                            display: flex;
+                            flex: 1;
+                            gap: 0.5em;
+
+                            .lp-info {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+                    }
+
+                    .lp-graph-2 {
+                        display: flex;
+                        flex: 1;
+                   }
+                }
+            }
+        
+            .school-system-composition {
+                display: flex;
+                flex-direction: column;
+                flex: 1.4;
+                gap: 0.5em;
+
+                .ssc-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .ssc-content-1 {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 1.5;
+                        gap: 0.5em;
+
+                        .ssc-info-graph {
+                            display: flex;
+                            flex: 1.5;
+                            gap: 0.5em;
+
+                            .ssc-info {
+                                display: flex;
+                                flex: 1;
+                            }
+
+                            .ssc-graph {
+                                display: flex;
+                                flex: 1.5;
+
+                                .graph{
+                                    flex: 1;
+                                }
+                            }
+                        }
+
+                        .ssc-table {
+                            display: flex;
+                            flex: 2;
+                        }
+                    }
+
+                    .ssc-content-2 {
+                        display: flex;
+                        flex: 1;
+                    }
+                }
+            }
         }
     }
+
+    // .main-section{
+    //     // background-color: red;
+    //     width: 300px;
+
+    //     display: flex;
+    //     flex-direction: column;
+    //     flex: 2;
+
+    //     .layer-1{
+    //         flex: 1;
+    //         display: flex;
+    //         padding: 0.5em;
+
+    //         .area-1{
+    //             flex: 2;
+
+    //             .header{
+    //                 font-family: 'Inter Semi Bold';
+    //                 font-size: 1.2em;
+    //                 color: $dark-color-3;
+    //                 padding-left: 0.5em;
+    //             }
+    //             .graph{
+    //                 flex: 1;
+    //             }
+    //         }
+    //         .area-2{
+    //             display: flex;
+    //             flex-direction: column;
+    //             gap: 1em;
+    //             flex: 1;
+
+    //             .loc-1{
+    //                 flex: 1;
+
+    //                 .display{
+    //                     flex: 1;
+    //                     display: flex;
+    //                     flex-direction: row;
+    //                     gap: 0.25em;
+    //                     color: $primary-color-1;
+
+    //                     .indicator-display{
+    //                         display: flex;
+    //                         align-self: center;
+    //                         img{
+    //                             width: 3.5em;
+    //                         }
+    //                     }
+    //                     .indicator{
+    //                         flex: 1;
+    //                         display: flex;
+    //                         align-self: center;
+    //                         font-size: 1.5em;
+                            
+    //                         h1{
+    //                             flex: 1;
+    //                             width: 100%;
+    //                             font-size: clamp(1rem, 5vw, 3rem);
+    //                         }
+    //                     }
+    //                 }
+    //                 .details{
+    //                     font-family: 'Inter Semi Bold';
+    //                     text-align: center;
+    //                     color: $dark-color-3;
+    //                 }
+    //             }
+
+    //             .loc-2{
+    //                 display: flex;
+    //                 flex: 1;
+    //                 gap: 2em;
+    //                 color: $primary-color-2;
+
+    //                 .upper{
+    //                     flex: 1;
+                        
+    //                     .display{
+    //                         flex: 1;
+    //                         display: flex;
+    //                         flex-direction: row;
+                            
+
+    //                         .indicator-display{
+    //                             display: flex;
+    //                             align-self: center;
+    //                             img{
+    //                                 width: 3em;
+    //                             }
+    //                         }
+    //                         .indicator{
+    //                             flex: 1;
+    //                             display: flex;
+    //                             align-self: center;
+    //                             justify-content: right;
+    //                             font-size: 1.25em;
+    //                         }
+    //                     }
+    //                 }
+    //                 .lower{
+    //                     flex: 1;
+
+                        
+    //                     .display{
+    //                         flex: 1;
+    //                         display: flex;
+    //                         flex-direction: row-reverse;
+
+    //                         .indicator-display{
+    //                             display: flex;
+    //                             align-self: center;
+    //                             img{
+    //                                 width: 3em;
+    //                             }
+    //                         }
+    //                         .indicator{
+    //                             flex: 1;
+    //                             display: flex;
+    //                             align-self: center;
+    //                             font-size: 1.25em;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .layer-2{
+    //         flex: 1;
+    //         padding: 0.5em;
+
+    //         .header{
+    //             font-family: 'Inter Semi Bold';
+    //             font-size: 1.2em;
+    //             color: $dark-color-3;
+    //             padding-left: 0.5em;
+    //         }
+
+    //         .graph{
+    //             flex: 1;
+    //         }
+    //     }
+    // }
+
+    // .side-section{
+    //     // background-color: blue;
+    //     width: 300px;
+
+    //     display: flex;
+    //     flex-direction: column;
+    //     flex: 1;
+
+    //     .layer-1{
+    //         flex: 1;
+    //         padding: 0.5em;
+
+    //         .header{
+    //             font-family: 'Inter Semi Bold';
+    //             font-size: 1.25em;
+    //             color: $dark-color-3;
+    //             padding-left: 0.5em;
+    //         }
+    //         .graph{
+    //             flex: 1;
+    //         }
+    //     }
+        
+    //     .layer-2{
+    //         flex: 1;
+    //         padding: 0.5em;
+
+    //         .header{
+    //             font-family: 'Inter Semi Bold';
+    //             font-size: 1.25em;
+    //             color: $dark-color-3;
+    //             padding-left: 0.5em;
+    //         }
+    //         .graph{
+    //             flex: 1;
+    //         }
+    //     }
+    // }
 }
 
 // .card{

@@ -1,0 +1,78 @@
+// Import default styles
+@import "../variables";
+@import '../../fonts/stylesheet.css';
+
+
+#plot-content.rendered{
+    .plotted-seniorhigh-report {
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        .shs-content {
+            display: flex;            
+            flex: 1;
+            gap: 1em;
+            
+            .shs-left-content {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                gap: 1em;
+
+                .shs-enrollment {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1.5;
+                    gap: 0.5em;
+
+                    .shs-enrollment-dist-graph {
+                        display: flex;
+                        flex: 1;
+                    }
+
+                    .shs-enrollment-lower {
+                        display: flex;
+                        flex: 1;
+                        gap: 0.5em;
+
+                        .shs-enrollment-graph {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+                }
+
+                .shs-track-avail {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .shs-track-avail-content {
+                        display: flex;
+                        flex: 1;
+                        gap: 0.5em;
+                        
+                        .shs-track-avail-graph {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+                }
+            }
+
+            .shs-right-content {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                gap: 0.5em;
+                
+                .shs-region-sector-graph {
+                    display: flex;
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

@@ -10,147 +10,155 @@
     .content-section {
         display: flex;
         flex: 1;
-        gap: 2em;
+        gap: 1em;
+
+        #filter-section{
+            transition: display 2s ease-in-out, opacity 0.2s ease-in-out;
+        }
 
         .left-content {
             display: flex;
             flex: 2;
             flex-direction: column;
+            padding: 0.5em;           
 
-            .search-bar {
-                display: flex;
-                height: 2em;
-                align-items: center;
-                margin: 1em 0.5em;
-                background-color: $light-color-1;
-                border-color: $primary-color-1;
-                border-radius: 0.75em;
-                justify-content: space-evenly;
+            // GENERAL DESIGN FOR EACH TYPE OF FILTERS
+            .dropdown-ctn{
+                .double-dropdown{
+                    display: flex;
+                    flex-direction: rows;
+                    gap: 0.5em;
+
+                    .dropdown-opt-box{
+                        flex: 1;
+                    }
+                }
+
+                .dropdown-opt-box{
+                    padding-bottom: 0.5em;
+                    .label{
+                        padding-bottom: 0.25em;
+    
+                    }
+                }
+            }
+
+
+            // SPECIFIC PRIMARY STYLES
+            #primary-wrap{
+                box-sizing: border-box;
+                padding-bottom: 1em;
+
+                .primary-tags{
+                    padding-bottom: 1em;
+                }
                 
-                .search-icon {
-                    display: flex;
-                    background-color: transparent;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 0px 8px;
+                #filter-options{
+                    padding: 0em 1.5em;
 
-                    img {
-                        width: 18px;
-                        height: 18px;
-                    }
-                }
+                    #Location-based-filter{
+                        .secondary-options{
 
-                .search-input {
-                    width: 80%;
-                    height: 100%;
-                    border: none;
-                    color: $black-60;
-                }
-
-                input::placeholder {
-                    font-family: "Inter Regular";
-                    color: #b6b6b6;
-                }
-
-                .clear-button {
-                    display: flex;
-                    background-color: transparent;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 0px 8px;
-
-                    img {
-                        width: 10px;
-                        height: 10px;
+                        }
                     }
                 }
             }
 
-            .buttons-level {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                padding: 0.5em;
-                gap: 1em;
-
-                .gray-1, .filter-icon {
-                    display: flex;
-                    background-color: $black-5;
-                    border-radius: 4px;
-                    padding: 5px;
-                    justify-content: center;
-                    align-items: center;
-                }
-        
-                .gray-1 {
-                    width: 200px;
-                }
-        
-                .filter-icon {
-                    background-color: transparent;
-        
-                    img {
-                        width: 25px;
-                        height: 25px;
-                    }
-                }
-            }
-
-            .card-1 {
-                display: flex;
-                flex: 3;
+            // SPECIFIC SECONDARY STYLES
+            #secondary-wrap{
                 padding: 0.5em 0em;
-                align-items: center;
             }
 
+            // SPECIFIC BUTTON CHARTS STYLES
+            .confirmation-box{
+                display: flex;
+                gap: 0.75em;
+                justify-content: flex-end; 
+
+                button{
+                    padding: 1em 2em;
+                    border: 0;
+                    border-radius: 2em;
+                    font-size: 1;
+                    font-family: 'Inter Medium';
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+
+                #proceed-btn{
+                    background-color: $primary-color-1;
+                    color: $black-1;
+                }
+                #proceed-btn:hover{
+                    background-color: $primary-shades-4;
+                }
+                #proceed-btn:active{
+                    background-color: $primary-shades-6;
+                }
+                
+                #addons-btn{
+                    background-color: $black-5;
+                }
+                #addons-btn:hover{
+                    background-color: $black-10;
+                }
+                #addons-btn:active{
+                    background-color: $black-1;
+                }
+            }
         }
 
         .right-content {
             display: flex;
             flex-direction: column;
-            flex: 3;
+            flex: 1;
 
-            .tab-options {
+            #plot-content{
                 display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                margin: 2em 3.4em 0em 0.5em;
-                max-height: 3em;
-                gap: 0.5em;    
+                padding: 0.5em 0em;
+                flex: 1;
 
-                .option-1,
-                .option {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 0.5em;
-                }
-
-                .option-1 {
-                    height: 4.5em;
+                #placeholder{
+                    text-align: center;
                     background-color: $light-color-1;
-                    margin-right: 0.25em;
-                    flex: 8;
-                }
-
-                .option {
-                    margin: 0.25em;
-                    background-color: $black-5;
-                    flex: 6;
-
-                    :hover {
-                        background-color: $black-10;
+                    border-radius: 1em;
+                    color: $black-20;
+                    
+                    display: flex;
+                    align-items: center;
+                    flex: 1;
+    
+                    transition: background-color 0.8s ease-in-out, opacity 0.8s ease-in-out;
+                    
+                    h2{
+                        margin: auto;
+                        transition: color 0.5s ease-in-out
                     }
                 }
             }
 
-            .content-card {
+
+            #plot-content.rendered{
                 display: flex;
-                flex: 4;
-                padding: 0.5em 0em;
-                align-items: center;
+                flex: 1;
+
+                // RENDER PLOTS
+                #placeholder{
+                    display: none;
+                }
+
+                #plot-filtered-page{
+                    display: flex;
+                    padding: 0em 1em;
+                    flex: 1;
+
+                    .render-plot{
+                        display: flex;
+                        // flex-direction: column;
+                        flex: 1;
+                    }
+                }
             }
         }
-
     }
 }
