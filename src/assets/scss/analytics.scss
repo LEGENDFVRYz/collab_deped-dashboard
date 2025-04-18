@@ -86,24 +86,25 @@
                 }
 
                 #proceed-btn{
-                    background-color: $primary-color-1;
-                    color: $black-1;
+                    background-color: $primary-color-2;
+                    color: $white;
                 }
                 #proceed-btn:hover{
                     background-color: $primary-shades-4;
                 }
                 #proceed-btn:active{
-                    background-color: $primary-shades-6;
+                    background-color: $primary-color-2;
                 }
                 
                 #addons-btn{
-                    background-color: $black-5;
+                    background-color: $grayish-white-1;
+                    color: $primary-color-1;
                 }
                 #addons-btn:hover{
-                    background-color: $black-10;
+                    background-color: $grayish-white-2;
                 }
                 #addons-btn:active{
-                    background-color: $black-1;
+                    background-color: $grayish-white-1;
                 }
             }
         }
@@ -120,9 +121,9 @@
 
                 #placeholder{
                     text-align: center;
-                    background-color: $light-color-1;
+                    background-color: $white;
                     border-radius: 1em;
-                    color: $black-20;
+                    color: $text-color-1;
                     
                     display: flex;
                     align-items: center;
