@@ -8,7 +8,7 @@ from dash import html
 """
 
 
-def Card(children=[], margin=True, **kwargs):
+def Card(children=[], margin=True, padding='1em', **kwargs):
     # Styles: Box Container
     margin = '0.5em' if margin else '0em'
     
@@ -30,7 +30,7 @@ def Card(children=[], margin=True, **kwargs):
         children=[
             
             html.Div(children, className='card-wrap', style={
-                'padding': '1em',
+                'padding': padding,
                 'display': 'flex',
                 'flex-direction': 'column',
                 'flex': '1'
