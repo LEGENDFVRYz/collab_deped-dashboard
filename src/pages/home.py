@@ -29,36 +29,47 @@ layout = html.Div([
                 
                 html.Div([
                     html.Div([
-                        Card([
-                            html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-                        ], margin=False, gradient=True)
-                    ], className="ns-info"),
-                    html.Div([
-                        Card([
-                            html.Div([html.H1(f"{total_es_count}", className="text-center"),], className='indicator'),
-                        ], margin=False)
-                    ], className="ns-info"),
-                    html.Div([
-                        Card([
-                            html.Div([html.H1(f"{total_jhs_count}", className="text-center"),], className='indicator'),
-                        ], margin=False)
-                    ], className="ns-info"),
-                    html.Div([
-                        Card([
-                            html.Div([html.H1(f"{total_shs_count}", className="text-center"),], className='indicator'),
-                        ], margin=False)
-                    ], className="ns-info"),
-                ], className="ns-info-cards"),
+                        
+                        html.Div([
+                            Card([
+                                html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
+                            ], margin=False, gradient=True)
+                        ], className="ns-main-detail"),
+                        
+                        html.Div([
+                            html.Div([
+                                Card([
+                                    html.Div([html.H1(f"{total_es_count}", className="text-center"),], className='indicator'),
+                                ], margin=False)
+                            ], className="ns-indicator"),
+                            html.Div([
+                                Card([
+                                    html.Div([html.H1(f"{total_jhs_count}", className="text-center"),], className='indicator'),
+                                ], margin=False)
+                            ], className="ns-indicator"),
+                            html.Div([
+                                Card([
+                                    html.Div([html.H1(f"{total_shs_count}", className="text-center"),], className='indicator'),
+                                ], margin=False)
+                            ], className="ns-indicator")
+                        ], className="ns-sub-detail"),
+                    ], className="ns-details"),
                 
-                html.Div([
-                    Card([
-                        dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                        ),
-                    ], margin=False)
-                ], className="ns-graph"),
+                    html.Div([
+                        Card([
+                            dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                            ),
+                        ], margin=False)
+                    ], className="ns-graph")
+                    
+                ], className="ns-content"),
             ], className="national-snapshot"),
+            
+        ], className="overview-layer-1"),
+        
+        html.Div([
             
             # Grade-level Dynamics
             html.Div([
@@ -87,10 +98,6 @@ layout = html.Div([
                     
                 ], className="gld-content"),
             ], className="grade-level-dynamics"),
-            
-        ], className="upper-content"),
-        
-        html.Div([
             
             # Learner Profile
             html.Div([
@@ -130,6 +137,10 @@ layout = html.Div([
                 
             ], className="learner-profiles"),
             
+        ], className="overview-layer-2"),
+        
+        html.Div([
+            
             # School System Composition
             html.Div([
                 html.H3(["School System Composition"], className="section_title"),
@@ -165,7 +176,8 @@ layout = html.Div([
                 ], className="ssc-content"),  
                 
             ], className="school-system-composition"),
-        ], className="lower-content")
+            
+        ], className="overview-layer-3")
         
     ], className='content')
     

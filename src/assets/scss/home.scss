@@ -19,62 +19,82 @@
             color: $text-color-1;
         }
 
-        .upper-content {
+        .overview-layer-1 {
             display: flex;
             flex: 1;
+            min-height: 340px;
             gap: 2em;
 
             .national-snapshot {
                 display: flex;
                 flex-direction: column;
-                flex: 1.5;
+                flex: 1.3;
                 gap: 0.5em;
 
-                .ns-info-cards {
+                .ns-content {
                     display: flex;
                     flex: 1;
-                    gap: 0.5em;
+                    gap: 0.75em;
 
-                    .ns-info {
+                    .ns-details {
                         display: flex;
+                        flex-direction: column;
                         flex: 1;
-                    
-                        &:first-child {
-                            // background: linear-gradient(to right, $primary-gradient-1, $primary-gradient-2);
-                            // border-radius: 2em;
-                            flex: 1.3;
+                        gap: 0.75em;
+
+                        .ns-main-detail {
+                            display: flex;
+                            flex: 1;
                         }
+
+                        .ns-sub-detail {
+                            display: flex;
+                            flex: 1;
+                            gap: 0.5em;
+
+                            .ns-indicator {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }                       
+                    }
+
+                    .ns-graph {
+                        display: flex;
+                        flex: 1.3;
                     }
                 }
-
-                .ns-graph {
-                    display: flex;
-                    flex: 2;
-                }
-            }
+            }  
+        }
         
+        .overview-layer-2 {
+            display: flex;
+            flex: 1;
+            min-height: 380px;
+            gap: 2em;
+            
             .grade-level-dynamics {
                 display: flex;
                 flex-direction: column;
                 flex: 1;
                 gap: 0.5em;
-
+    
                 .gld-content {
                     display: flex;
                     flex: 1;
                     gap: 0.5em;
-
+    
                     .gld-graph {
                         display: flex;
                         flex: 2.25;
                     }
-
+    
                     .gld-info-cards {
                         display: flex;
                         flex-direction: column;
                         flex: 1;
                         gap: 0.5em;
-
+    
                         .gld-info {
                             display: flex;
                             flex: 1;
@@ -82,97 +102,97 @@
                     }
                 }
             }
-        }
-
-        .lower-content {
-            display: flex;
-            flex: 1;
-            gap: 2em;
 
             .learner-profiles {
                 display: flex;
                 flex-direction: column;
                 flex: 1;
                 gap: 0.5em;
-
+                
                 .lp-content {
                     display: flex;
                     flex: 1;
                     gap: 0.5em;
-
+                    
                     .lp-graph-1 {
                         display: flex;
                         flex-direction: column;
                         flex: 1;
                         gap: 0.5em;
-
+                        
                         .lp-graph {
                             display: flex;
-                            flex: 1.5;
+                            flex: 2;
                         }
-
+                        
                         .lp-info-cards {
                             display: flex;
                             flex: 1;
                             gap: 0.5em;
-
+                            
                             .lp-info {
                                 display: flex;
                                 flex: 1;
                             }
                         }
                     }
-
+                    
                     .lp-graph-2 {
                         display: flex;
                         flex: 1;
-                   }
+                    }
                 }
             }
+        }
         
+        .overview-layer-3 {
+            display: flex;
+            flex: 1;
+            min-height: 340px;
+
             .school-system-composition {
                 display: flex;
                 flex-direction: column;
                 flex: 1.4;
                 gap: 0.5em;
-
+    
                 .ssc-content {
                     display: flex;
                     flex: 1;
                     gap: 0.5em;
-
+    
                     .ssc-content-1 {
                         display: flex;
                         flex-direction: column;
                         flex: 1.5;
                         gap: 0.5em;
-
+    
                         .ssc-info-graph {
                             display: flex;
                             flex: 1.5;
                             gap: 0.5em;
-
+    
                             .ssc-info {
                                 display: flex;
                                 flex: 1;
                             }
-
+    
                             .ssc-graph {
                                 display: flex;
                                 flex: 1.5;
-
+    
                                 .graph{
                                     flex: 1;
                                 }
                             }
                         }
-
+    
                         .ssc-table {
                             display: flex;
                             flex: 2;
                         }
                     }
-
+    
                     .ssc-content-2 {
                         display: flex;
                         flex: 1;
@@ -181,199 +201,4 @@
             }
         }
     }
-
-    // .main-section{
-    //     // background-color: red;
-    //     width: 300px;
-
-    //     display: flex;
-    //     flex-direction: column;
-    //     flex: 2;
-
-    //     .layer-1{
-    //         flex: 1;
-    //         display: flex;
-    //         padding: 0.5em;
-
-    //         .area-1{
-    //             flex: 2;
-
-    //             .header{
-    //                 font-family: 'Inter Semi Bold';
-    //                 font-size: 1.2em;
-    //                 color: $dark-color-3;
-    //                 padding-left: 0.5em;
-    //             }
-    //             .graph{
-    //                 flex: 1;
-    //             }
-    //         }
-    //         .area-2{
-    //             display: flex;
-    //             flex-direction: column;
-    //             gap: 1em;
-    //             flex: 1;
-
-    //             .loc-1{
-    //                 flex: 1;
-
-    //                 .display{
-    //                     flex: 1;
-    //                     display: flex;
-    //                     flex-direction: row;
-    //                     gap: 0.25em;
-    //                     color: $primary-color-1;
-
-    //                     .indicator-display{
-    //                         display: flex;
-    //                         align-self: center;
-    //                         img{
-    //                             width: 3.5em;
-    //                         }
-    //                     }
-    //                     .indicator{
-    //                         flex: 1;
-    //                         display: flex;
-    //                         align-self: center;
-    //                         font-size: 1.5em;
-                            
-    //                         h1{
-    //                             flex: 1;
-    //                             width: 100%;
-    //                             font-size: clamp(1rem, 5vw, 3rem);
-    //                         }
-    //                     }
-    //                 }
-    //                 .details{
-    //                     font-family: 'Inter Semi Bold';
-    //                     text-align: center;
-    //                     color: $dark-color-3;
-    //                 }
-    //             }
-
-    //             .loc-2{
-    //                 display: flex;
-    //                 flex: 1;
-    //                 gap: 2em;
-    //                 color: $primary-color-2;
-
-    //                 .upper{
-    //                     flex: 1;
-                        
-    //                     .display{
-    //                         flex: 1;
-    //                         display: flex;
-    //                         flex-direction: row;
-                            
-
-    //                         .indicator-display{
-    //                             display: flex;
-    //                             align-self: center;
-    //                             img{
-    //                                 width: 3em;
-    //                             }
-    //                         }
-    //                         .indicator{
-    //                             flex: 1;
-    //                             display: flex;
-    //                             align-self: center;
-    //                             justify-content: right;
-    //                             font-size: 1.25em;
-    //                         }
-    //                     }
-    //                 }
-    //                 .lower{
-    //                     flex: 1;
-
-                        
-    //                     .display{
-    //                         flex: 1;
-    //                         display: flex;
-    //                         flex-direction: row-reverse;
-
-    //                         .indicator-display{
-    //                             display: flex;
-    //                             align-self: center;
-    //                             img{
-    //                                 width: 3em;
-    //                             }
-    //                         }
-    //                         .indicator{
-    //                             flex: 1;
-    //                             display: flex;
-    //                             align-self: center;
-    //                             font-size: 1.25em;
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     .layer-2{
-    //         flex: 1;
-    //         padding: 0.5em;
-
-    //         .header{
-    //             font-family: 'Inter Semi Bold';
-    //             font-size: 1.2em;
-    //             color: $dark-color-3;
-    //             padding-left: 0.5em;
-    //         }
-
-    //         .graph{
-    //             flex: 1;
-    //         }
-    //     }
-    // }
-
-    // .side-section{
-    //     // background-color: blue;
-    //     width: 300px;
-
-    //     display: flex;
-    //     flex-direction: column;
-    //     flex: 1;
-
-    //     .layer-1{
-    //         flex: 1;
-    //         padding: 0.5em;
-
-    //         .header{
-    //             font-family: 'Inter Semi Bold';
-    //             font-size: 1.25em;
-    //             color: $dark-color-3;
-    //             padding-left: 0.5em;
-    //         }
-    //         .graph{
-    //             flex: 1;
-    //         }
-    //     }
-        
-    //     .layer-2{
-    //         flex: 1;
-    //         padding: 0.5em;
-
-    //         .header{
-    //             font-family: 'Inter Semi Bold';
-    //             font-size: 1.25em;
-    //             color: $dark-color-3;
-    //             padding-left: 0.5em;
-    //         }
-    //         .graph{
-    //             flex: 1;
-    //         }
-    //     }
-    // }
 }
-
-// .card{
-//     background-color: $light-color-2;
-//     width: inherit;
-//     height: 100%;
-//     flex: 1;
-//     box-sizing: content-box;
-
-//     border-radius: 1em;
-//     box-shadow:  5px 5px 11px #ead7dd,
-//                 -5px -5px 11px #fffdff;
-// }
