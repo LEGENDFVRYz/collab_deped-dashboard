@@ -99,7 +99,7 @@ layout = html.Div([
                         html.Div([
                             Card([
                                 html.Div([
-                                    dcc.Graph(id="home_school_number_per_sector", figure=home_gender_distribution,
+                                    dcc.Graph(id="home_gender_distribution", figure=home_gender_distribution,
                                                 config={"responsive": True},
                                                 style={"width": "100%", "height": "100%"}
                                     )

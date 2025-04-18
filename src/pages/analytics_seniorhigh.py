@@ -6,6 +6,10 @@ from dash import Dash, dcc, html
 # --  Shared Components
 from src.components.card import Card
 
+# -- Graphs
+from src.utils.reports.seniorhigh_chart import sample_chart ## Importing Charts
+from src.utils.reports.seniorhigh_chart import sample_chart ## Importing Indicators
+
 
 """
     Template For Rendering the Location Reports:
@@ -26,6 +30,13 @@ def render_seniorhigh_filter():
                         html.Div([
                             Card([
                                 # distribution of enrollees per track
+                                #########################################
+                                ## Sample Use of Charts, Remove this After
+                                dcc.Graph(id="sample_chart", figure=sample_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                ),
+                                #########################################
                             ], margin=False),
                         ], className="shs-enrollment-dist-graph"),
                         html.Div([

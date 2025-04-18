@@ -6,6 +6,9 @@ from dash import Dash, dcc, html
 # --  Shared Components
 from src.components.card import Card
 
+# -- Graphs
+from src.utils.reports.subclass_chart import sample_chart ## Importing Charts
+from src.utils.reports.subclass_chart import sample_chart ## Importing Indicators
 """
     Template For Rendering the Location Reports:
     
@@ -24,6 +27,13 @@ def render_subclass_filter():
                     html.Div([
                         Card([
                             # total schools per subclass
+                            #########################################
+                            ## Sample Use of Charts, Remove this After
+                            dcc.Graph(id="sample_chart", figure=sample_chart,
+                                config={"responsive": True},
+                                style={"width": "100%", "height": "100%"}
+                            ),
+                            #########################################
                         ], margin=False)
                     ], className="subclass-enroll-graph"),
                     
