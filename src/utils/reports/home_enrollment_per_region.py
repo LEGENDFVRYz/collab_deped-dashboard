@@ -12,6 +12,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from config import project_root
 from utils.get_data import auto_extract
 
+#################################################################################
+##                     MAIN DATAFRAME BASED FROM THE QUERY                     ##
+#################################################################################
 
 # -- Create the appropriate plot
 dataframe = auto_extract(['counts'], is_specific=False)
@@ -78,9 +81,10 @@ shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=Fa
 shs_df
 
 es_count = dataframe[dataframe['school-level'] == 'ELEM']['counts'].sum()
+jhs_count = dataframe[dataframe['school-level'] == 'JHS']['counts'].sum()
 shs_count = dataframe[dataframe['school-level'] == 'SHS']['counts'].sum()
 
-total_enrollees = format_large_number(es_count + shs_count)
+total_enrollees = format_large_number(es_count + jhs_count + shs_count)
 total_enrollees
 
 ## -- INDICATORS: Most and Least active school level
@@ -172,28 +176,16 @@ home_school_number_per_sector = px.bar(sector_counts, x="sector", y="count",
             #  title="Distribution of Schools Across Sectors",
              text="count",
              orientation="v",
-             color="sector",
-             color_discrete_map={
-                'Private': '#037DEE', 
-                'Public': '#037DEE', 
-                'SUCsLUCs': '#037DEE'    
-             })
+             )
 
-home_school_number_per_sector.update_traces(textposition="outside")
-home_school_number_per_sector.update_layout(yaxis=dict(visible=True), xaxis=dict(visible=False))
+home_school_number_per_sector.update_traces(textposition="outside", marker_color="#037DEE")
+home_school_number_per_sector.update_layout(yaxis=dict(visible=False), xaxis=dict(visible=False))
 home_school_number_per_sector.update_layout(
     autosize=True,
     margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
     paper_bgcolor='rgba(0, 0, 0, 0)', 
     plot_bgcolor='rgba(0, 0, 0, 0)',   
     yaxis=dict(showticklabels=True),
-    legend=dict(
-        orientation="h",  # Horizontal legend
-        yanchor="bottom",  # Align legend at the bottom
-        y=-0.2,  # Position it below the chart
-        xanchor="center",  # Center it horizontally
-        x=0.5  # Align it to the center
-    )
 )
 
 home_school_number_per_sector
@@ -241,6 +233,27 @@ total_female_count
 # ----------------------------------------------------------
 # Regional Distribution
 
+enrollees_df = auto_extract(['counts', 'region'], is_specific=False)
+enrollees_df
+
+enrolles_per_region = enrollees_df.groupby(['region'], as_index=False)["counts"].sum()
+enrolles_per_region
+
+home_regional_distribution = px.bar (enrolles_per_region, x="region", y="counts",
+            # title="Regional Distribution",
+            text="counts",
+            orientation="v"
+            )
+
+home_regional_distribution.update_traces(marker_color="#369EFF")
+home_regional_distribution.update_layout(
+    autosize=True,
+    margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
+    paper_bgcolor='rgba(0, 0, 0, 0)', 
+    plot_bgcolor='rgba(0, 0, 0, 0)',   
+    yaxis=dict(showticklabels=True),
+)
+home_regional_distribution
 
 
 # ----------------------------------------------------------

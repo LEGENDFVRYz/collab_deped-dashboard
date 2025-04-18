@@ -8,7 +8,7 @@ from src.components.card import Card
 
 # -- Graphs
 from src.utils.reports.home_enrollment_per_region import format_large_number
-from src.utils.reports.home_enrollment_per_region import home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector, home_gender_distribution
+from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector, home_gender_distribution
 from src.utils.reports.home_enrollment_per_region import total_enrollees, most_active, least_active, academic_track_ratio, number_of_schools, total_male_count, total_female_count, total_es_count, total_jhs_count, total_shs_count
 
 # Landing page
@@ -25,13 +25,13 @@ layout = html.Div([
             
             # National Snapshot
             html.Div([
-                html.H4("National Snapshot"),
+                html.H3(["National Snapshot"], className="section_title"),
                 
                 html.Div([
                     html.Div([
                         Card([
                             html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-                        ], margin=False)
+                        ], margin=False, gradient=True)
                     ], className="ns-info"),
                     html.Div([
                         Card([
@@ -51,13 +51,18 @@ layout = html.Div([
                 ], className="ns-info-cards"),
                 
                 html.Div([
-                    Card([], margin=False)
+                    Card([
+                        dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                        ),
+                    ], margin=False)
                 ], className="ns-graph"),
             ], className="national-snapshot"),
             
             # Grade-level Dynamics
             html.Div([
-                html.H4("Grade-level Dynamics"),
+                html.H3(["Grade-level Dynamics"], className="section_title"),
                 
                 html.Div([
                     html.Div([
@@ -89,7 +94,7 @@ layout = html.Div([
             
             # Learner Profile
             html.Div([
-                html.H4("Learner Profiles"),
+                html.H3(["Learner Profiles"], className="section_title"),
                 
                 html.Div([
                     html.Div([
@@ -127,7 +132,7 @@ layout = html.Div([
             
             # School System Composition
             html.Div([
-                html.H4("School System Composition"),
+                html.H3(["School System Composition"], className="section_title"),
                 
                 html.Div([
                     html.Div([
@@ -136,7 +141,7 @@ layout = html.Div([
                             html.Div([
                                 Card([
                                     html.Div([html.H3(f"{number_of_schools}")], className='header'),
-                                ], margin=False)
+                                ], margin=False, gradient=True)
                             ], className="ssc-info"),
                             html.Div([
                                 Card([
