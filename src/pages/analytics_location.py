@@ -1,6 +1,9 @@
 from dash import html, dcc
 from src.components.card import Card
 
+## IMPORTED CHARTS
+from src.utils.reports.location_chart import sample_chart
+
 
 """
     Template For Rendering the Location Reports:
@@ -26,8 +29,13 @@ def render_location_filter():
                             ## INSERT PLOT: Distribution of enrollees per location 
                             #########################################
                             
+                            ## SAMPLE, REMOVE IT
+                            dcc.Graph(id="home_distribution-per-location", figure=sample_chart,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                            )
                             
-                        ], margin=False)], className='plot-a-section'),
+                        ], margin=False, padding='0.25em')], className='plot-a-section'),
                         
                         ## PLOT B
                         html.Div([

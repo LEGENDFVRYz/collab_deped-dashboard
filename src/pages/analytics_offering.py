@@ -1,6 +1,10 @@
 from dash import html, dcc
 from src.components.card import Card
 
+## IMPORTED CHARTS
+from src.utils.reports.offering_chart import sample_chart
+
+
 """
     Template For Rendering the Program Offering Reports:
     
@@ -25,8 +29,13 @@ def render_offering_filter():
                             ## INSERT PLOT: Number of Schools by MCOC Type
                             #########################################
                             
-                        
-                        ], margin=False)], className='plot-a'),
+                            ## SAMPLE, REMOVE IT
+                            dcc.Graph(id="home_distribution-per-location", figure=sample_chart,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                            )
+                            
+                        ], margin=False, padding='0.25em')], className='plot-a'),
                         
                         ## PLOT B
                         html.Div([
@@ -38,7 +47,7 @@ def render_offering_filter():
                                 #########################################
                                 
                             
-                            ], margin=False)], className='plot-b-top'),
+                            ], margin=False, padding='')], className='plot-b-top'),
                             
                             ## PLOT B - BOT
                             html.Div([Card([

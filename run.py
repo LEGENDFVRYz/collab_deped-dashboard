@@ -15,3 +15,4 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Failed due to {e}: restarting...")
             time.sleep(1)
+        
