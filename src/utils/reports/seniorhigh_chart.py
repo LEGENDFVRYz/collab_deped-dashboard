@@ -157,8 +157,25 @@ sample_chart.update_layout(
 #################################################################################
 # dist_per_track_chart = px.bar(filtered_df, )
 
+mydf = auto_extract(['region', 'beis_id', 'track', 'strand'], is_specific=True)
+grouped = mydf.groupby(['region', 'track'])['beis_id'].nunique().reset_index(name='school_count')
+heatmap_data = grouped.pivot(index='region', columns='track', values='school_count').fillna(0)
 
+fig = px.imshow(
+    heatmap_data,
+    labels=dict(x="SHS Track", y="Region", color="No. of Schools"),
+    x=heatmap_data.columns,
+    y=heatmap_data.index,
+    color_continuous_scale="YlGnBu",
+    text_auto=True
+)
 
+fig.update_layout(
+    title="Number of Schools Offering Each SHS Track per Region",
+    xaxis_title="SHS Track",
+    yaxis_title="Region"
+)
+fig
 
 
 #################################################################################
