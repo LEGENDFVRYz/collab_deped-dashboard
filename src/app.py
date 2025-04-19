@@ -7,7 +7,6 @@ import pandas as pd
 
 # Callbacks
 from src.utils import activeTab_callback
-# from src.utils import filter_menu_callback
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
@@ -16,6 +15,7 @@ app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions
 app.layout = html.Div(
     children=[
         dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
+        dcc.Store(id="filtered_values", data={}, storage_type="session"),
         dcc.Location(id="url"),  # Gets the current pathname
         
         # Navigation style

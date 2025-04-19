@@ -31,7 +31,6 @@ def Addons_filter():
                 dcc.Dropdown(options=[],
                             id='grade-lvl-dropdown', disabled=True, multi=True, placeholder="Multi-select Grade Level to Filter..."),
                 ], className='dropdown-opt-box'),
-                # dcc.Store(id='grade-filter')
         ], className='add-mod-coc-options category-ctn'),
         
         
@@ -57,7 +56,6 @@ def Addons_filter():
                         html.Div(['Filter by Strand:'], className='label'),
                         dcc.Dropdown([], id='track-dropdown', disabled=True, multi=True, placeholder='Select "Academic" Track to Multiselect Strand...'),
                 ], className='dropdown-opt-box'),
-                # dcc.Store(id='track-filter')
         ], className='add-shs-options category-ctn'),
 
           
@@ -72,7 +70,6 @@ def Addons_filter():
                                         id='subclass-dropdown',
                                         multi=True,
                                     ),
-                        # dcc.Store(id='subclass-filter'),
                 ], className='dropdown-opt-box'),
             ], className='add-subclass-options category-ctn'),
         
@@ -88,7 +85,6 @@ def Addons_filter():
                                         placeholder="Select Gender to Filter... (Default Both)",
                                         id='gender-dropdown'
                                     ),
-                        # dcc.Store(id='gender-filter'),
                 ], className='dropdown-opt-box'),
             ], className='add-gender-options category-ctn'),
         
@@ -102,7 +98,6 @@ def Addons_filter():
                             dcc.Checklist([ 
                                     'Public', 'Private', 'SUCsLUCs', 'PSO'
                                 ], id='sector-checklist', className='modernized'),
-                            # dcc.Store(id='sector-filter'),
                     ], className='checklist-opt-box'),
             ], className='add-sector-options category-ctn'),
             
@@ -114,7 +109,6 @@ def Addons_filter():
                             dcc.Checklist([ 
                                     'School with no Annexes', 'Mother school', 'Annex or Extension school(s)', 'Mobile School(s)/Center(s)'
                                 ], id='types-checklist', className='modernized'),
-                            # dcc.Store(id='types-filter'),
                     ], className='checklist-opt-box'),
             ], className='add-types-options category-ctn'),
         ], className='double-section'),
@@ -124,7 +118,7 @@ def Addons_filter():
 
 
 ############################################################
-## --- Callback for the SENIOR HIGH FILTERS
+## SENIOR HIGH -- Updating options of track based on strand
 ############################################################
 @callback(
     Output('track-dropdown', 'options'),
@@ -140,50 +134,9 @@ def update_tracks(strand):
         return [], True
     
 
-# @callback(
-#     Output('track-filter', 'data'),
-#     Input('track-dropdown', 'value')
-# )
-# def update_store(selected_types):
-#     # print(selected_types)
-#     return selected_types or []
-
-
-
-# ############################################################
-# ## --- Callback for the SECTORS FILTERS
-# ############################################################
-# @callback(
-#     Output('filtered_values', 'data'),
-#     Input('sector-checklist', 'value'),
-#     State('filtered_values', 'data'),
-# )
-# def update_store(selected_sectors, stored_filter_data):
-#     # UPDATE
-#     stored_filter_data["sector"] = selected_sectors or []
-#     # print(stored_filter_data)
-#     return stored_filter_data
-
-
-
-# ############################################################
-# ## --- Callback for the TYPES FILTERS
-# ############################################################
-# @callback(
-#     Output('filtered_values', 'data'),
-#     Input('types-checklist', 'value'),
-#     State('filtered_values', 'data'),
-# )
-# def update_store(selected_types, stored_filter_data):
-#     # UPDATE
-#     stored_filter_data["types"] = selected_types or []
-#     # print(stored_filter_data)
-#     return stored_filter_data
-
-
 
 ############################################################
-## --- Callback for the SENIOR HIGH FILTERS
+## MOD COC -- Updating options of track based on mod coc
 ############################################################
 @callback(
     Output('grade-lvl-dropdown', 'options'),
@@ -212,59 +165,10 @@ def update_modcoc(modcoc):
         return [], True
 
 
-# @callback(
-#     Output('grade-filter', 'data'),
-#     Input('grade-lvl-dropdown', 'value')
-# )
-# def update_store(selected_types):
-#     # print(selected_types)
-#     return selected_types or []
-
-
-
-# ############################################################
-# ## --- Callback for the GENDER FILTERS
-# ############################################################
-# @callback(
-#     Output('gender-filter', 'data'),
-#     Input('gender-dropdown', 'value')
-# )
-# def update_store(selected_types):
-#     # print(selected_types)
-#     return selected_types or []
-
-
-
-# ############################################################
-# ## --- Callback for the SUBCLASSIFICATION FILTERS
-# ############################################################
-# @callback(
-#     Output('subclass-filter', 'data'),
-#     Input('subclass-dropdown', 'value')
-# )
-# def update_store(selected_types):
-#     # print(selected_types)
-#     return selected_types or []
-
-
 
 ############################################################
 ## --- ACCESS THE FILTERED SESSION DATA
 ############################################################
-# @callback(
-#     Output('filtered_values', 'data'),
-#     Input('proceed-btn', 'n_clicks'),
-#     State('filtered_values', 'data'),
-#     State('sector-checklist', 'value'),
-#     prevent_initial_call=True
-# )
-# def retrieve_filtered_values(btn, filter_storage, sector):
-#     triggered_id = ctx.triggered_id
-
-#     if triggered_id == 'proceed-btn':
-#         print('YES')
-#         filter_storage["sector"] = sector or []
-# #         return filter_storage
 
 @callback(
     Output('filtered_values', 'data'),
