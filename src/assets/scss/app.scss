@@ -25,17 +25,21 @@ body{
     display: flex;
     flex-direction: row;
     // justify-content: center;
+    overflow: hidden;
 
     // Side Navigations:
     .navigation{
         display: flex;
         flex-direction: column;
         flex: 1;
-        max-width: 18em; // not final
+        min-width: 18em; // not final
+        height: 100vh;
 
         background-color: $white;
         // box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
         box-shadow: -2px 0px 14px 0px #0000001A;
+        // flex-shrink: 0; 
+        position: fixed;    
 
         .brand-section{
             margin-bottom: 1em;
@@ -357,6 +361,7 @@ body{
         flex: 1;
         background-color: $bluish-white;
         border-radius: 1.5em 0em 0em 1.5em;
+        overflow-y: auto;
 
         > div:first-of-type {
             flex: 1;
