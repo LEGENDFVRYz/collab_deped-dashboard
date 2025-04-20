@@ -27,6 +27,7 @@ body {
   background-color: #FFFFFF;
   box-shadow: -2px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
   position: fixed;
+  z-index: 1;
 }
 .app-container .navigation .brand-section {
   margin-bottom: 1em;
@@ -131,6 +132,9 @@ body {
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn a {
   align-self: center;
   color: #0674C8;
+}
+.app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active {
+  pointer-events: none;
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active a {
   font-weight: bold;
@@ -281,7 +285,6 @@ body {
   flex: 1;
   background-color: #EFF3F6;
   border-radius: 1.5em 0em 0em 1.5em;
-  overflow-y: auto;
 }
 .app-container .content-wrapper > div:first-of-type {
   flex: 1;

@@ -53,9 +53,6 @@
   display: flex;
   flex: 2.25;
 }
-.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-graph .graph {
-  flex: 1;
-}
 .home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards {
   display: flex;
   flex-direction: column;
@@ -91,9 +88,6 @@
 .home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-graph {
   display: flex;
   flex: 1.5;
-}
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-graph .graph {
-  flex: 1;
 }
 .home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;
