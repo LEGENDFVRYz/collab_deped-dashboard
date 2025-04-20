@@ -24,7 +24,7 @@ from utils.get_data import auto_extract
 #################################################################################
 
 # ## -- This only a temporary dataframe for testing your charts, you can change it
-FILTERED_DF = dataframe = auto_extract(['sub_class', 'track'], is_specific=False)
+FILTERED_DF = dataframe = auto_extract(['sub_class', 'track', 'counts'], is_specific=False)
 FILTERED_DF
 
 HM_CBC_DF = dataframe = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
@@ -92,10 +92,10 @@ HM_CBC_DF
 # )
 # sample_chart
 
-sample_chart.update_layout(
-    autosize=True,
-    margin={"l": 8, "r": 8, "t": 8, "b": 8},
-)
+# sample_chart.update_layout(
+#     autosize=True,
+#     margin={"l": 8, "r": 8, "t": 8, "b": 8},
+# )
 
 
 
