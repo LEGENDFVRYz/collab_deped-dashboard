@@ -9,13 +9,19 @@ from dash import html, dcc
 
 
 def Subclass_filter():
-    return html.Div(
-        children=[
-            ## options
+    return html.Div([
+        html.Div([
+            
+            # Subclassification
             html.Div([
-                        html.Div(['Sub Classification:'], className='label'),
-                        dcc.Dropdown(['New York City', 'Montréal', 'San Francisco'], 'Region')
-                    ], className='dropdown-opt-box'),
-            
-            
-        ], className='primary-options')
+                    html.Div(['Filter by Subclassification:'], className='label'),
+                    dcc.Dropdown(options=[
+                                            'DepED Managed', 'Sectarian', 'Non-Sectarian', 'LUC', 'SUC Managed', 'DOST Managed', 'Other GA Managed', 'Local International School', 'SCHOOL ABROAD'
+                                        ],
+                                        placeholder="Multi-select Subclassification to Filter...",
+                                    id='subclass-dropdown',
+                                    multi=True,
+                                ),
+            ], className='dropdown-opt-box'),
+        ], className='primary-options dropdown-ctn'),
+    ], id='subclass-based-filter')
