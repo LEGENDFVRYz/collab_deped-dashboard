@@ -155,8 +155,38 @@ sample_chart.update_layout(
 #################################################################################
 ##  --- How many schools offer each SHS track per region
 #################################################################################
+track_pref = dataframe = auto_extract(['beis_id','strand', 'region'], is_specific=True)
+track_pref
+
+heatmap_data = track_pref.groupby(['region', 'strand'])['beis_id'].size().reset_index()
+heatmap_data.rename(columns={'beis_id': 'school_count'}, inplace=True)
 
 
+heatmap_pivot = heatmap_data.pivot(index='strand', columns='region', values='school_count').fillna(0)
+
+
+heatmap_fig = px.imshow(
+    heatmap_pivot.values,
+    labels=dict(x="Region", y="Track", color="Number of Schools"),
+    x=heatmap_pivot.columns.tolist(),
+    y=heatmap_pivot.index.tolist(),
+    color_continuous_scale=[
+        "#FF899A",  # Light pink
+        "#E11C38",  # Mid red
+        "#930F22"   # Deep red
+    ]
+)
+
+
+heatmap_fig.update_layout(
+    title="Number of Schools Offering SHS Tracks per Region",
+    xaxis_title="Region",
+    yaxis_title="SHS Track",
+    xaxis=dict(tickangle=45),
+    margin={"l": 20, "r": 20, "t": 40, "b": 40}
+)
+
+heatmap_fig
 
 
 #################################################################################
