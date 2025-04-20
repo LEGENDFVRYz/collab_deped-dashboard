@@ -9,6 +9,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 
+from utils.reports.location_chart import FILTERED_DF
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from config import project_root
 from utils.get_data import auto_extract
@@ -22,8 +24,8 @@ from utils.get_data import auto_extract
 #################################################################################
 
 # ## -- This only a temporary dataframe for testing your charts, you can change it
-SHS_DF = dataframe = auto_extract(['sub_class', 'track'], is_specific=False)
-SHS_DF
+FILTERED_DF = dataframe = auto_extract(['sub_class', 'track'], is_specific=False)
+FILTERED_DF
 
 HM_CBC_DF = dataframe = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
 
@@ -471,7 +473,7 @@ subclass_clustered.update_layout(
 ##  --- Enrollment in shs tracks across subclass
 #################################################################################
 # Filter the dataframe to include only SHS tracks and subclasses
-shs_tracks_df = SHS_DF[['track', 'sub_class']]
+shs_tracks_df = FILTERED_DF[['track', 'sub_class']]
 
 # Remove rows with missing values in 'track' or 'sub_class'
 shs_tracks_df = shs_tracks_df.dropna(subset=['track', 'sub_class'])
@@ -614,11 +616,11 @@ subclass_firstindicator.update_layout(
 ##  --- % schools offering shs per subclass
 #################################################################################
 # Get all unique SHS tracks
-unique_tracks = SHS_DF['track'].unique()
+unique_tracks = FILTERED_DF['track'].unique()
 total_tracks = len(unique_tracks)
 
 # Count the unique tracks offered per sub_class
-tracks_per_subclass = SHS_DF.groupby('sub_class')['track'].nunique()
+tracks_per_subclass = FILTERED_DF.groupby('sub_class')['track'].nunique()
 
 # Calculate the percentage of tracks offered for each sub_class
 percentage_tracks_per_subclass = (tracks_per_subclass / total_tracks) * 100

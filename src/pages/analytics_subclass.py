@@ -8,11 +8,16 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
+
 from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
 from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
 from src.utils.reports.subclass_chart import subclass_clustered_tracks ## Importing Clustered Bar Chart for Tracks
 from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
 from src.utils.reports.subclass_chart import subclass_secondindicator ## Importing Second Indicator Chart
+from src.utils.reports.subclass_chart import avg_enroll_dost, avg_enroll_deped, avg_enroll_luc, avg_enroll_int, avg_enroll_nonsec, avg_enroll_ga, avg_enroll_abroad, avg_enroll_suc, avg_enroll_sec 
+from src.utils.reports.subclass_chart import total_schools_per_subclass, distrib_by_subclass, student_school_ratio, subclass_vs_school_type, sector_affiliation
+
+
 """
     Template For Rendering the Location Reports:
     
