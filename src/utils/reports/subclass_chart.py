@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 
-from utils.reports.location_chart import FILTERED_DF
+# from utils.reports.location_chart import FILTERED_DF
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from config import project_root
@@ -24,10 +24,10 @@ from utils.get_data import auto_extract
 #################################################################################
 
 # ## -- This only a temporary dataframe for testing your charts, you can change it
-FILTERED_DF = dataframe = auto_extract(['sub_class', 'track', 'counts'], is_specific=False)
+FILTERED_DF = auto_extract(['sub_class', 'track', 'shs_grade'], is_specific=False)
 FILTERED_DF
 
-HM_CBC_DF = dataframe = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
+HM_CBC_DF = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
 
 # Rename values in subclass, type, and sector
 subclass_rename = {
