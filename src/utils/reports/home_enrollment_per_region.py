@@ -5,7 +5,6 @@ from dash import dcc, html
 
 import numpy as np
 from numpy import average
-from overrides import override
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -142,23 +141,23 @@ total_shs_enrollees = shs_df['counts'].sum()
 total_shs_enrollees
 
 
-# Ratio per Strand
-total_enrollees_per_strand = shs_df.groupby('strand', as_index=False)['counts'].sum()
-total_enrollees_per_strand['ratio'] = total_enrollees_per_strand['counts'] / total_shs_enrollees
-total_enrollees_per_strand
+# # Ratio per Strand
+# total_enrollees_per_strand = shs_df.groupby('strand', as_index=False)['counts'].sum()
+# total_enrollees_per_strand['ratio'] = total_enrollees_per_strand['counts'] / total_shs_enrollees
+# total_enrollees_per_strand
 
-academic_track_ratio = total_enrollees_per_strand[total_enrollees_per_strand['strand'] == 'ACAD'].values.tolist()[0][2]
+# academic_track_ratio = total_enrollees_per_strand[total_enrollees_per_strand['track'] == 'ACAD'].values.tolist()[0][2]
 
-# Ratio per track
-total_enrollees_per_track = shs_df[
-                                shs_df['strand'] == 'ACAD'
-                            ].groupby('track', as_index=False)['counts'].sum()
-total_enrollees_per_track['ratio'] = total_enrollees_per_track['counts'] / total_shs_enrollees
-total_enrollees_per_track
+# # Ratio per track
+# total_enrollees_per_track = shs_df[
+#                                 shs_df['strand'] == 'ACAD'
+#                             ].groupby('track', as_index=False)['counts'].sum()
+# total_enrollees_per_track['ratio'] = total_enrollees_per_track['counts'] / total_shs_enrollees
+# total_enrollees_per_track
 
-filtered_non_acad = total_enrollees_per_strand[total_enrollees_per_strand['strand'] == 'NON ACAD'].values.tolist()[0]
-total_enrollees_per_track.loc[len(total_enrollees_per_track)] = pd.Series(filtered_non_acad, index=total_enrollees_per_track.columns)
-total_enrollees_per_track
+# filtered_non_acad = total_enrollees_per_strand[total_enrollees_per_strand['strand'] == 'NON ACAD'].values.tolist()[0]
+# total_enrollees_per_track.loc[len(total_enrollees_per_track)] = pd.Series(filtered_non_acad, index=total_enrollees_per_track.columns)
+# total_enrollees_per_track
 
 
 # avg_stem = shs_df[shs_df['track'] == 'STEM']['counts'].sum() / total_shs_enrollees
@@ -167,24 +166,24 @@ total_enrollees_per_track
 # average_per_track = shs_df['track'].value_counts(normalize=True)
 # average_per_track
 
-# Ploting
-custom_colors = ['#00AD7F', '#E0E0E0']
-explode = [0, 0.15]
+# # Ploting
+# custom_colors = ['#00AD7F', '#E0E0E0']
+# explode = [0, 0.15]
 
-track_ratio_per_track = go.Figure(
-    data=[
-        go.Pie(labels=total_enrollees_per_strand['strand'], 
-               values=total_enrollees_per_strand['ratio'], 
-               marker=dict(colors=custom_colors),
-               pull=explode
-    )]
-)
+# track_ratio_per_track = go.Figure(
+#     data=[
+#         go.Pie(labels=total_enrollees_per_strand['strand'], 
+#                values=total_enrollees_per_strand['ratio'], 
+#                marker=dict(colors=custom_colors),
+#                pull=explode
+#     )]
+# )
 
-# Layout configs
-track_ratio_per_track.update_layout(
-    autosize=True,
-    margin={"l": 8, "r": 8, "t": 16, "b": 0},  # Optional: Adjust margins
-)
+# # Layout configs
+# track_ratio_per_track.update_layout(
+#     autosize=True,
+#     margin={"l": 8, "r": 8, "t": 16, "b": 0},  # Optional: Adjust margins
+# )
 
 # ----------------------------------------------------------
 # School Distribution Across Sectors

@@ -7,9 +7,8 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
-from src.utils.reports.home_enrollment_per_region import format_large_number
-from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector, home_gender_distribution, home_subclass_chart, home_subclass_table, program_donut_chart
-from src.utils.reports.home_enrollment_per_region import total_enrollees, most_active, least_active, academic_track_ratio, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted
+from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, program_donut_chart
+from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted
 
 # Landing page
 dash.register_page(__name__, path="/")  
