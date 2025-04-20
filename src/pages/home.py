@@ -8,8 +8,8 @@ from src.components.card import Card
 
 # -- Graphs
 from src.utils.reports.home_enrollment_per_region import format_large_number
-from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector, home_gender_distribution
-from src.utils.reports.home_enrollment_per_region import total_enrollees, most_active, least_active, academic_track_ratio, number_of_schools, total_male_count, total_female_count, total_es_count, total_jhs_count, total_shs_count
+from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, track_ratio_per_track, home_school_number_per_sector, home_gender_distribution, home_subclass_chart, home_subclass_table, program_donut_chart
+from src.utils.reports.home_enrollment_per_region import total_enrollees, most_active, least_active, academic_track_ratio, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted
 
 # Landing page
 dash.register_page(__name__, path="/")  
@@ -32,24 +32,57 @@ layout = html.Div([
                         
                         html.Div([
                             Card([
-                                html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-                            ], margin=False, gradient=True)
+                                html.Div([
+                                    html.Div([
+                                        html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
+                                        html.H1(f"{total_enrollees:,}", className="total-text"),
+                                    ], className='icon-and-text'),
+                                    html.Div([
+                                        html.Span("", className="year-marker"),
+                                        html.Span("Academic Year 2023-2024", className="year-text"),
+                                    ], className='academic-year'),
+                                    html.Div([
+                                        html.Span("Total Number of Enrollees", className="desc-text"),
+                                    ], className='indicator'),
+                                ], className="ns-card-1"),
+                            ], margin=False, padding="1em", gradient=True)
                         ], className="ns-main-detail"),
                         
                         html.Div([
                             html.Div([
                                 Card([
-                                    html.Div([html.H1(f"{total_es_count}", className="text-center"),], className='indicator'),
+                                    html.Div([
+                                        html.Div([
+                                            html.Span("", className="glevel-marker es"),
+                                            html.H1(f"{total_es_count_formatted}", className="count-text"),
+                                        ], className="glevel-count"),
+                                        html.Span(f"{total_es_count:,} enrollees", className="full-count-text"),
+                                        html.Span("Elementary", className="desc-text"),
+                                    ], className="ns-sub-cards"),
                                 ], margin=False)
                             ], className="ns-indicator"),
                             html.Div([
                                 Card([
-                                    html.Div([html.H1(f"{total_jhs_count}", className="text-center"),], className='indicator'),
+                                    html.Div([
+                                        html.Div([
+                                            html.Span("", className="glevel-marker jhs"),
+                                            html.H1(f"{total_jhs_count_formatted}", className="count-text"),
+                                        ], className="glevel-count"),
+                                        html.Span(f"{total_jhs_count:,} enrollees", className="full-count-text"),
+                                        html.Span("Junior High School", className="desc-text"),
+                                    ], className="ns-sub-cards"),
                                 ], margin=False)
                             ], className="ns-indicator"),
                             html.Div([
                                 Card([
-                                    html.Div([html.H1(f"{total_shs_count}", className="text-center"),], className='indicator'),
+                                    html.Div([
+                                        html.Div([
+                                            html.Span("", className="glevel-marker shs"),
+                                            html.H1(f"{total_shs_count_formatted}", className="count-text"),
+                                        ], className="glevel-count"),
+                                        html.Span(f"{total_shs_count:,} enrollees", className="full-count-text"),
+                                        html.Span("Senior High School", className="desc-text"),
+                                    ], className="ns-sub-cards"),
                                 ], margin=False)
                             ], className="ns-indicator")
                         ], className="ns-sub-detail"),
@@ -57,6 +90,7 @@ layout = html.Div([
                 
                     html.Div([
                         Card([
+                            html.H4(["Regional Distribution"], className="ns-graph-title"),
                             dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}
@@ -79,7 +113,7 @@ layout = html.Div([
                     html.Div([
                       Card([
                       ## -- GRAPH: Total Enrollment Count per School Level
-                        # html.Div(["Enrollments per School Level"], className='header'), 
+                        html.H4(["Grade-level Distribution"], className="gld-graph-title"), 
                         dcc.Graph(id="home_enrollment-per-region", figure=home_enrollment_per_region,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
@@ -108,24 +142,50 @@ layout = html.Div([
                         
                         html.Div([
                             Card([
-                                dcc.Graph(id="home_gender_distribution", figure=home_gender_distribution,
-                                            config={"responsive": True},
-                                            style={"width": "100%", "height": "100%"}
-                                ),
+                                html.Div([
+                                    dcc.Graph(id="home_gender_distribution", className="lp-dist-graph", figure=home_gender_distribution,
+                                                config={"responsive": True},
+                                                style={"width": "100%", "height": "100%"}
+                                    ),
+                                    html.Div([
+                                        html.Span("There are 1.2% more MALE than FEMALE"),
+                                    ], className="lp-desc"),
+                                ], className="lp-graph-desc"),
                             ], margin=False)
                         ], className="lp-graph"),
                         
                         html.Div([
                             html.Div([
                                 Card([
-                                    html.Div([html.H3(f"{total_female_count}")], className='header'),
-                                ], margin=False)
-                            ], className="lp-info"),
+                                    html.Div([
+                                        html.Div([
+                                            html.Span("", className="gender-marker female"),
+                                            html.H1(f"{total_female_count_formatted}", className="count-text"),
+                                        ], className="gender-count"),
+                                        html.Span(f"{total_female_count:,} students", className="full-count-text"),
+                                        html.Div([
+                                            html.Span("Female Students", className="desc-text female"),
+                                            html.Img(src="/assets/images/icons_navigation/female.svg"),
+                                        ], className="desc-n-icon"),
+                                    ], className="lp-sub-cards"),
+                                ], margin=False, padding="1em 1em 0.25em 1em"),
+                            ], className="lp-indicator"),
+                            
                             html.Div([
                                 Card([
-                                    html.Div([html.H3(f"{total_male_count}")], className='header'),
-                                ], margin=False)
-                            ], className="lp-info"),
+                                    html.Div([
+                                        html.Div([
+                                            html.Span("", className="gender-marker male"),
+                                            html.H1(f"{total_male_count_formatted}", className="count-text"),
+                                        ], className="gender-count"),
+                                        html.Span(f"{total_male_count:,} students", className="full-count-text"),
+                                        html.Div([
+                                            html.Span("Male Students", className="desc-text male"),
+                                            html.Img(src="/assets/images/icons_navigation/male.svg"),
+                                        ], className="desc-n-icon"),
+                                    ], className="lp-sub-cards"),
+                                ], margin=False, padding="1em 1em 0.25em 1em"),
+                            ], className="lp-indicator"),
                         ],className="lp-info-cards"), 
                         
                     ], className="lp-graph-1"),
@@ -151,7 +211,8 @@ layout = html.Div([
                         html.Div([
                             html.Div([
                                 Card([
-                                    html.Div([html.H3(f"{number_of_schools}")], className='header'),
+                                    html.Div([html.H3(f"{number_of_schools_formatted}")], className='header'),
+                                    html.Div([html.Span(f"{number_of_schools:,} schools", className="text-center"),], className='indicator'),
                                 ], margin=False, gradient=True)
                             ], className="ssc-info"),
                             html.Div([
@@ -165,13 +226,28 @@ layout = html.Div([
                         ],className="ssc-info-graph"), 
                         
                         html.Div([
-                            Card([], margin=False)
+                            Card([
+                                html.Div([
+                                    html.H6("Subclassification"),
+                                    html.H6("School Count"),
+                                    html.H6("Student Count"),
+                                ], className="ssc-table-header"),
+                                dcc.Graph(id="ssc-subclass-table", className="ssc-subclass-table", figure=home_subclass_table,
+                                                config={"responsive": True},
+                                                style={"width": "100%", "height": "100%"}
+                                ),
+                            ], margin=False)
                         ], className="ssc-table"),
                         
                     ], className="ssc-content-1"),
                     
                     html.Div([
-                        Card([], margin=False) 
+                        Card([
+                            dcc.Graph(id="program_donut_chart", figure=program_donut_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                            ),
+                        ], margin=False) 
                     ], className="ssc-content-2"),
                 ], className="ssc-content"),  
                 
@@ -181,86 +257,4 @@ layout = html.Div([
         
     ], className='content')
     
-    #     ## -- Main Part
-    #     html.Div([
-    #         html.Div([
-    #             ## --> Sub layer
-    #             html.Div([Card([
-    #                         ## -- GRAPH: Total Enrollment Count per School Level
-    #                         html.Div(["Enrollments per School Level"], className='header'),
-    #                         html.Div([
-    #                             dcc.Graph(id="home_enrollment-per-region", figure=home_enrollment_per_region,
-    #                                             config={"responsive": True},
-    #                                             style={"width": "100%", "height": "100%"}
-    #                                     )
-    #                         ], className='graph'),
-    #                     ]
-    #             )], className='area-1'),
-    #             html.Div([
-    #                     html.Div([Card([
-    #                             # -- INDICATOR: TOTAL ENROLEES IN PH
-    #                             html.Div([
-    #                                     html.Div([html.H1(f"{total_enrollees}", className="text-center"),], className='indicator'),
-    #                                     html.Div([html.Img(src='/assets/images/icons_navigation/team-fill.svg')], className='indicator-display'),
-    #                                 ], className='display'),
-    #                             html.Div(['TOTAL ENROLLEES'], className='details')
-    #                         ])], className='loc-1'),
-    #                     html.Div([Card([
-    #                         html.Div([
-    #                                 # -- INDICATOR: Most Active School Level
-    #                                 html.Div([
-    #                                         html.Div([html.H1(f"{format_large_number(most_active['counts'])}", className="text-center"),], className='indicator'),
-    #                                         html.Div([html.Img(src='/assets/images/icons_navigation/arrow-right-up-fill.svg')], className='indicator-display'),
-    #                                     ], className='display'),
-    #                             ], className='upper'),
-    #                         html.Div([
-    #                                 # -- INDICATOR: Most Active School Level
-    #                                 html.Div([
-    #                                         html.Div([html.H1(f"{format_large_number(least_active['counts'])}", className="text-center"),], className='indicator'),
-    #                                         html.Div([html.Img(src='/assets/images/icons_navigation/arrow-left-down-fill.svg')], className='indicator-display'),
-    #                                     ], className='display'),
-    #                             ], className='lower')
-    #                     ])], className='loc-2'),
-    #                 ], className='area-2'),
-    #         ], className='layer-1'),
-            
-    #         html.Div([Card([
-    #             html.Div(["School Distribution Across Sectors"], className='header'),
-    #             html.Div([
-    #                 dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
-    #                                 config={"responsive": True},
-    #                                 style={"width": "100%", "height": "100%"}
-    #                 )
-    #             ], className='graph'),
-    #         ])], className='layer-2')
-    #     ], className='main-section'),
-    
-    #     ## -- Side Part
-    #     html.Div([
-    #         html.Div([
-    #                 Card([
-    #                     ## -- GRAPH: Ratio distribution of shs strand
-    #                     html.Div([html.H3(f"Academic Track is roughly {academic_track_ratio * 100:.2f}%")], className='header'),
-    #                     html.Div([
-    #                         dcc.Graph(id="track-ratio-per-track", figure=track_ratio_per_track,
-    #                                         config={"responsive": True},
-    #                                         style={"height": "100%"}
-    #                     )], className='graph'),
-    #                 ]
-    #         )], className='layer-1'),
-    #             html.Div([
-    #                     Card([
-    #                         html.Div([html.H3(f"{number_of_schools}")], className='header'),
-    #                         html.Div([html.H3(f"{total_male_count}")], className='header'),
-    #                         html.Div([html.H3(f"{total_female_count}")], className='header'),
-    #                         html.Div(["School Distribution Across Sectors"], className='header'),
-    #                         html.Div([
-    #                             dcc.Graph(id="home_school_number_per_sector", figure=home_gender_distribution,
-    #                                             config={"responsive": True},
-    #                                             style={"width": "100%", "height": "100%"}
-    #                             )
-    #                         ], className='graph'),
-    #                     ])
-    #                 ], className='layer-2')
-    #         ], className='side-section')
 ], className='home-page container')
