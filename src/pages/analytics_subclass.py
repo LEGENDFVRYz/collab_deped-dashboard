@@ -1,4 +1,5 @@
 from pydoc import classname
+from re import sub
 import dash
 from dash import html
 from dash import Dash, dcc, html
@@ -7,8 +8,11 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
-from src.utils.reports.subclass_chart import *
-
+from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
+from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
+from src.utils.reports.subclass_chart import subclass_clustered_tracks ## Importing Clustered Bar Chart for Tracks
+from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
+from src.utils.reports.subclass_chart import subclass_secondindicator ## Importing Second Indicator Chart
 """
     Template For Rendering the Location Reports:
     
@@ -173,6 +177,10 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # regional distribution/ which subclass has the highest number of schools per loc
+                                    dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100"}
+                                    ),
                                 ], margin=False)
                             ], className="subclass-dist-avail-graph-2"),
                         ], className="subclass-dist-avail-lower")
@@ -186,12 +194,20 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # mcoc breakdown/which subclass offers which program types
+                                    dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                    ),
                                 ], margin=False),
                             ], className="subclass-program-graph"),
                             
                             html.Div([
                                 Card([
                                     # enrollment in shs tracks across subclass
+                                    dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                    ),
                                 ], margin=False),
                             ], className="subclass-program-graph"),
                             
@@ -199,11 +215,19 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # % schools offering ‘all offerings’ per subclass
+                                        dcc.Graph(id="subclass_firstindicator", figure=subclass_firstindicator,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                                        ),
                                     ], margin=False),
                                 ], className="subclass-program-indicator"),
                                 html.Div([
                                     Card([
                                         # % schools offering shs per subclass
+                                        dcc.Graph(id="subclass_secondindicator", figure=subclass_secondindicator,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                                        ),
                                     ], margin=False),
                                 ], className="subclass-program-indicator"),
                             ], className="subclass-program-last-cards")
