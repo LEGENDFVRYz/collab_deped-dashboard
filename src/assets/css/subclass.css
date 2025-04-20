@@ -12,12 +12,14 @@
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1.25;
   gap: 0.5em;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-graph {
   display: flex;
   flex: 1;
+  gap: 0.5em;
+  min-height: 100px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle {
   display: flex;
@@ -28,10 +30,34 @@
   display: flex;
   flex: 1;
 }
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard {
+  display: flex;
+  flex: 0.7;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row .column {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row .column .subclass-enroll-ind {
+  display: flex;
+  flex: 1;
+  align-self: center;
+  font-size: 0.7em;
+  gap: 0.5em;
+  min-height: 100px;
+}
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content {
   display: flex;
   flex-direction: column;
-  flex: 1.25;
+  flex: 1;
   gap: 1em;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail {
@@ -43,13 +69,18 @@
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-graph {
   display: flex;
   flex: 1;
+  min-height: 250px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph {
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph-1 {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph-2 {
   display: flex;
   flex: 1;
 }
@@ -58,6 +89,7 @@
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
+  min-height: 500px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents {
   display: flex;

@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #EFF3F6;
+  background-color: #FFFFFF;
 }
 
 .app-container {
@@ -37,7 +37,7 @@ body {
   height: 6em;
 }
 .app-container .navigation .brand-section h2 {
-  color: #090909;
+  color: #04508c;
 }
 .app-container .navigation .menu-section {
   display: flex;
@@ -130,9 +130,10 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn a {
   align-self: center;
-  color: #0674C8;
+  color: #3C6382;
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active a {
+  color: #04508c;
   font-weight: bold;
 }
 .app-container .navigation .menu-section .item-ctn:not(.active) .indicator {
@@ -148,7 +149,7 @@ body {
   display: none;
 }
 .app-container .navigation .menu-section .item-ctn:not(.active):hover .nav-btn {
-  background-color: #EFEFEF;
+  background-color: #F0F0F0;
   cursor: pointer;
 }
 .app-container .navigation .settings-section {
@@ -197,7 +198,7 @@ body {
 }
 .app-container .navigation .settings-section .item-ctn .nav-btn .text {
   padding-left: 1em;
-  color: #04518C;
+  color: #04508c;
   display: flex;
   align-self: center;
   font-size: 1em;
@@ -227,7 +228,7 @@ body {
   display: none;
 }
 .app-container .navigation .settings-section .item-ctn:not(.active):hover .nav-btn {
-  background-color: #EFEFEF;
+  background-color: #F0F0F0;
   cursor: pointer;
 }
 .app-container .navigation .account-section {
@@ -258,6 +259,7 @@ body {
 }
 .app-container .navigation .account-section .ctn .details {
   flex: 1;
+  color: #3C6382;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -273,7 +275,7 @@ body {
   cursor: pointer;
 }
 .app-container .content-wrapper {
-  padding: 1em;
+  padding: 2em;
   margin: 0em 1em;
   margin-right: 0em;
   margin-left: 18em;
@@ -303,5 +305,5 @@ body {
   padding: 1em 1em;
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header h1 {
-  color: #04518C;
+  color: #04508c;
 }/*# sourceMappingURL=app.css.map */

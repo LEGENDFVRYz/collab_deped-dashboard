@@ -34,7 +34,7 @@
   flex: 1;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section {
-  min-height: 40%;
+  min-height: 10%;
   display: flex;
   flex-direction: row;
   gap: 0.5em;
@@ -42,6 +42,14 @@
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .plot-b-box1 {
   flex: 5;
   padding-top: 0.5em;
+  display: flex;
+  align-self: center;
+  font-size: 1.5em;
+}
+#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .plot-b-box1 h1 {
+  flex: 1;
+  width: 100%;
+  font-size: clamp(1rem, 5vw, 3rem);
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .plot-b-box2 {
   flex: 2;
@@ -49,6 +57,7 @@
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-bottom-section {
   flex: 2;
+  min-height: 400px;
 }
 #plot-content.rendered .plotted-location-report .plot-right-section {
   flex: 2;
