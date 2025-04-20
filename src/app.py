@@ -2,6 +2,7 @@ import dash
 from dash import Dash, dcc, html
 from src.server import server
 from src.server import cache, load_location_data
+from src.data import enrollment_db_engine
 
 # Callbacks
 from src.utils import activeTab_callback

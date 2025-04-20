@@ -1,6 +1,8 @@
 import dash
 import numpy as np
+import pandas as pd
 from dash import html, dcc, Output, Input, State, callback, ctx
+from src.data import enrollment_db_engine, smart_filter
 
 
 # src/pages/dashboard.py
@@ -413,7 +415,14 @@ def retrieve_filtered_values(btn, sector, types, gender, subclass, strand, track
 @callback(
     Output('print', 'children'),
     Input('filtered_values', 'data'),
+    prevent_initial_call=True
 )
 def checked(data):
-    # print(data)
+    print(data)
+    
+    # query, params = smart_filter(data)
+    # filtered_df = pd.read_sql(query, enrollment_db_engine, params=params)
+    
+    # print(filtered_df)
+    
     return data
