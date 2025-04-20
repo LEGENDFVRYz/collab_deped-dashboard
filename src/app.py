@@ -1,21 +1,21 @@
-import plotly.express as px
 import dash
-from dash import Dash, dcc, html, Output, Input
+from dash import Dash, dcc, html
 from src.server import server
-import pandas as pd
-# from src.data import dataframe
+from src.server import cache, load_location_data
 
 # Callbacks
 from src.utils import activeTab_callback
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
+cache.init_app(app.server)
 
 
+# Main File Content
 app.layout = html.Div(
     children=[
         dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
-        dcc.Store(id="filtered_values", data={}, storage_type="session"),
+        dcc.Store(id="filtered_values", data={}, storage_type="session"),  # Store the params for filtering
         dcc.Location(id="url"),  # Gets the current pathname
         
         # Navigation style
