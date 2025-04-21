@@ -1,20 +1,18 @@
-import dash
+import dash, time
 import numpy as np
-import pandas as pd
 from dash import html, dcc, Output, Input, State, callback, ctx
-from sqlalchemy import false
-from src.data import enrollment_db_engine, smart_filter
 
+# Used the cache:
+from src.server import load_location_data   # Only for abalytics page / location filtering purposes
+from src.data import enrollment_db_engine, smart_filter
 
 # src/pages/dashboard.py
 from src.components.card import Card
 
-# Used the cache:
-from src.server import load_location_data
-
 # Callbacks
 from src.utils import filter_menu_callback
 from src.utils import saved_tabs_analytics
+
 
 ############################### PAGES ################################
 from src.pages.analytics_location import render_location_filter
@@ -24,12 +22,12 @@ from src.pages.analytics_offering import render_offering_filter
 from src.components.addons_filter import Addons_filter
 
 
-
 # Landing page
 dash.register_page(__name__, path="/analytics", suppress_callback_exceptions=True)  
 
 # Main Page
 layout = html.Div([
+    dcc.Store(id="filtered_values", data={}, storage_type="memory"),  # Store the params for filtering
     dcc.Store(id="analytics-sub-tracker", data=""),
     dcc.Store(id='sub-status-toggle', data=True), 
     
@@ -42,64 +40,72 @@ layout = html.Div([
     ], className='page-header'),
     
     ## -- Main Content: Start hereee
-    html.Div([
+    
+    dcc.Loading([
         html.Div([
-            ## -- Filtering Options
             html.Div([
-                    Card([
-                        html.Div([
-                            html.H3(f"Filter by :", id='filter-header')
-                        ], className='primary-tags'),
+                ## -- Filtering Options
+                html.Div([
+                        Card([
+                            html.Div([
+                                html.H3(f"Filter by :", id='filter-header')
+                            ], className='primary-tags'),
 
-                        ## -- Primary options
-                        html.Div([
-                            ## Render options here
-                            
-                            
-                        ], id='filter-options'),
-                    ], margin=False)
-                ], id='primary-wrap', className='primary-filter'),
-            
-            
-            html.Div([
-                    html.Div([html.Button('Add Additional Filters', id='addons-btn', n_clicks=0)], className='additional'),
-                    html.Div([html.Button('Submit', id='proceed-btn', n_clicks=0)], className='proceed'),
-                ], id='confirmation-box'),
-            dcc.Interval(id='hide-delay', interval=800, n_intervals=0, disabled=True),
-            
-            
-            html.Div([
-                html.Div([
-                    html.H3(f"Additional Filters:")
-                    
-                ], className='secondary-tag category'),     
-                      
-                ## -- Secondary options
-                html.Div([
-                    ## Render secondary options here
-                    
-                ], id='secondary-wrap'),
-            ], id='secondary-filter')          
-        ], id='filter-section', className='left-content'),
-        
-        
-        ## -- Rendering Plots
-        html.Div([
-            html.Div([
-                html.Div([
-                        html.H2(["SELECT FILTER TO PROCEED"])
-                    ], id="placeholder"),
+                            ## -- Primary options
+                            html.Div([
+                                ## Render options here
+                                
+                                
+                            ], id='filter-options'),
+                        ], margin=False)
+                    ], id='primary-wrap', className='primary-filter'),
+                
                 
                 html.Div([
-                    ## -- RENDER THE REPORT HERE
-                    html.Div([], id='print'),
-                    
-                    
-                    ], id='plot-filtered-page')
-            ], id='plot-content', className="")
+                        html.Div([html.Button('Add Additional Filters', id='addons-btn', n_clicks=0)], className='additional'),
+                        html.Div([html.Button('Submit', id='proceed-btn', n_clicks=0)], className='proceed'),
+                    ], id='confirmation-box'),
+                dcc.Interval(id='hide-delay', interval=800, n_intervals=0, disabled=True),
+                
+                
+                html.Div([
+                    html.Div([
+                        html.H3(f"Additional Filters:")
+                        
+                    ], className='secondary-tag category'),     
+                        
+                    ## -- Secondary options
+                    html.Div([
+                        ## Render secondary options here
+                        
+                    ], id='secondary-wrap'),
+                ], id='secondary-filter')          
+            ], id='filter-section', className='left-content'),
             
-        ], className='right-content'),
-    ], className='content-section'),
+            
+            ## -- Rendering Plots
+            html.Div([
+                # dcc.Loading([
+                    html.Div([
+                        html.Div([
+                                html.H2(["SELECT FILTER TO PROCEED"])
+                            ], id="placeholder"),
+                        
+                            html.Div([
+                                ## -- RENDER THE REPORT HERE
+                                html.Div([], id='print'),
+                                
+                                
+                                ], id='plot-filtered-page')
+                        
+                        
+                    ], id='plot-content', className="")
+                # ], id='loading-render-content', type='circle')
+                
+            ], className='right-content'),
+        ], className='content-section'),
+    
+    ], id='query_loading')
 ], className='analytics-page container')
 
 
@@ -444,16 +450,17 @@ def retrieve_filtered_values(btn, types, gender, sector, subclass, track, strand
     
     
 @callback(
-    Output('print', 'children'),
+    Output('chart-trigger', 'data'),
     Input('filtered_values', 'data'),
+    State('chart-trigger', 'data'),
     prevent_initial_call=True
 )
-def checked(data):
-    print(data)
-    
-    # query, params = smart_filter(data)
-    # filtered_df = pd.read_sql(query, enrollment_db_engine, params=params)
-    
-    # print(filtered_df)
-    
-    return data
+def checked(data, status):
+    print(">>>>", data)
+    if data:
+        # time.sleep(3)
+        smart_filter(data, enrollment_db_engine)
+        print('checked()')
+        return not status
+        
+    return dash.no_update

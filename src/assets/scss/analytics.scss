@@ -12,15 +12,16 @@
         flex: 1;
         gap: 1em;
         
+        
 
         // FIXED THIS AND MAKE IT SCROLLABLE
-        // max-height: 80vh;
+        max-height: 80vh;
         // overflow-y: auto;
 
 
         #filter-section {
             transition: display 2s ease-in-out, opacity 0.2s ease-in-out;
-            height: 85vh;
+            height: 80vh;
             overflow-y: auto;
         }
         

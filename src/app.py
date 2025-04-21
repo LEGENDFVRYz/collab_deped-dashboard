@@ -1,7 +1,7 @@
 import dash
 from dash import Dash, dcc, html
 from src.server import server
-from src.server import cache, load_location_data
+from src.server import cache
 from src.data import enrollment_db_engine
 
 # Callbacks
@@ -15,8 +15,8 @@ cache.init_app(app.server)
 # Main File Content
 app.layout = html.Div(
     children=[
-        dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
-        dcc.Store(id="filtered_values", data={}, storage_type="session"),  # Store the params for filtering
+        dcc.Store(id="active-tab", data="", storage_type="session"),  # Store clicked tab
+        dcc.Store(id="chart-trigger", data=False, storage_type="session"),
         dcc.Location(id="url"),  # Gets the current pathname
         
         # Navigation style
