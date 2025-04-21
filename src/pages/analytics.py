@@ -361,7 +361,7 @@ def update_sector(sector_value):
     options = []
     
     if 'Public' in sector_value:
-        options += [{'label': strand, 'value': strand} for strand in ['Dost Managed', 'DepED Managed', 'Other GA Managed']]
+        options += [{'label': strand, 'value': strand} for strand in ['DOST Managed', 'DepED Managed', 'Other GA Managed']]
     if 'Private' in sector_value:
         options += [{'label': strand, 'value': strand} for strand in ['Local International School', 'Non-Sectarian', 'Sectarian']]
     if 'SUCs/LUCs' in sector_value:
@@ -430,7 +430,7 @@ def retrieve_filtered_values(btn, types, gender, sector, subclass, track, strand
     #     return no_update
     filter_data = {}
     locs = ['region', 'province', 'division', 'district', 'municipality', 'brgy']
-    keys = ['types', 'gender', 'sector', 'subclass', 'track', 'strand', 'modcoc', 'grade']
+    keys = ['type', 'gender', 'sector', 'sub_class', 'track', 'strand', 'mod_coc', 'grade']
     
     for i, category in enumerate([types, gender, sector, subclass, track, strand, modcoc, grade]):
         if category:

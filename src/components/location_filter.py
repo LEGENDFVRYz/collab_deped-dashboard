@@ -24,7 +24,7 @@ def Location_filter():
                 html.Div([
                             html.Div(['Region'], className='label'),
                             dcc.Dropdown(np.array([
-                                'BARMM', 'CAR', 'CARAGA', 'MIMAROPA', 'NCR', 'PSO', 'Region I',
+                                'BARMM', 'CAR', 'CARAGA', 'Region IV-B', 'NCR', 'PSO', 'Region I',
                                 'Region II', 'Region III', 'Region IV-A', 'Region IX', 'Region V',
                                 'Region VI', 'Region VII', 'Region VIII', 'Region X', 'Region XI', 'Region XII'
                             ]), id='region', multi=True),

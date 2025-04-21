@@ -20,7 +20,7 @@ def Addons_filter(reference:array):
                     html.Div([
                                 html.Div(['Region'], className='label'),
                                 dcc.Dropdown(np.array([
-                                    'BARMM', 'CAR', 'CARAGA', 'MIMAROPA', 'NCR', 'PSO', 'Region I',
+                                    'BARMM', 'CAR', 'CARAGA', 'Region IV-B', 'NCR', 'PSO', 'Region I',
                                     'Region II', 'Region III', 'Region IV-A', 'Region IX', 'Region V',
                                     'Region VI', 'Region VII', 'Region VIII', 'Region X', 'Region XI', 'Region XII'
                                 ]), id='region', multi=True),
@@ -157,9 +157,13 @@ def Addons_filter(reference:array):
                 ## FILTER BY TYPEs
                 html.Div([
                             html.Div(['Filter by Types:'], className='label'),
-                            dcc.Checklist([ 
-                                    'School with no Annexes', 'Mother school', 'Annex or Extension school(s)', 'Mobile School(s)/Center(s)'
-                                ], id='types-checklist', className='modernized'),
+                            dcc.Checklist([
+                                {'label': 'School with no Annexes', 'value': 'No Annexes'},
+                                {'label': 'Mother school', 'value': 'Mother School'},
+                                {'label': 'Annex or Extension school(s)', 'value': 'Annex/Extension'},
+                                {'label': 'Mobile School(s)/Center(s)', 'value': 'Mobile School'}
+                            ]
+                            , id='types-checklist', className='modernized'),
                     ], className='checklist-opt-box'),
             ], className='add-types-options category-ctn'),
         ], className='double-section'),
