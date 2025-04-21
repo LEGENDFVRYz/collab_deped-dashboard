@@ -8,15 +8,32 @@
   display: flex;
   flex: 1;
   gap: 1em;
+  max-height: 80vh;
 }
 .analytics-page .content-section #filter-section {
   transition: display 2s ease-in-out, opacity 0.2s ease-in-out;
+  height: 80vh;
+  overflow-y: auto;
+}
+.analytics-page .content-section #filter-section::-webkit-scrollbar {
+  width: 0.5em;
+  background: transparent; /* Optional: just to make sure */
+}
+.analytics-page .content-section #filter-section::-webkit-scrollbar-thumb {
+  background-color: #90a0cf;
+  border-radius: 0.25em;
 }
 .analytics-page .content-section .left-content {
   display: flex;
   flex: 2;
   flex-direction: column;
   padding: 0.5em;
+  gap: 0.75em;
+}
+.analytics-page .content-section .left-content .dropdown-ctn {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 .analytics-page .content-section .left-content .dropdown-ctn .double-dropdown {
   display: flex;
@@ -26,31 +43,110 @@
 .analytics-page .content-section .left-content .dropdown-ctn .double-dropdown .dropdown-opt-box {
   flex: 1;
 }
-.analytics-page .content-section .left-content .dropdown-ctn .dropdown-opt-box {
+.analytics-page .content-section .left-content .dropdown-ctn .dropdown-opt-box .label {
   padding-bottom: 0.5em;
 }
-.analytics-page .content-section .left-content .dropdown-ctn .dropdown-opt-box .label {
-  padding-bottom: 0.25em;
+.analytics-page .content-section .left-content .checklist-opt-box .label {
+  padding-bottom: 0.5em;
+}
+.analytics-page .content-section .left-content .checklist-opt-box .modernized input[type=checkbox] {
+  accent-color: #0d6efd; /* Bootstrap primary blue */
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+}
+.analytics-page .content-section .left-content .checklist-opt-box .modernized label {
+  font-weight: 500;
 }
 .analytics-page .content-section .left-content #primary-wrap {
   box-sizing: border-box;
   padding-bottom: 1em;
+  order: 1;
 }
 .analytics-page .content-section .left-content #primary-wrap .primary-tags {
-  padding-bottom: 1em;
+  padding: 1em 1em;
 }
 .analytics-page .content-section .left-content #primary-wrap #filter-options {
+  padding: 0em 2em;
+  padding-bottom: 1.5em;
+}
+.analytics-page .content-section .left-content #secondary-filter {
+  padding: 0em 1.5em;
+  padding-bottom: 3em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.analytics-page .content-section .left-content #secondary-filter .secondary-tag {
+  padding: 0em 0.5em;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap {
+  flex: 1;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .double-section {
+  flex: 1;
+  display: flex;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .double-section div {
+  flex: 1;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .category-ctn {
   padding: 0em 1.5em;
 }
-.analytics-page .content-section .left-content #secondary-wrap {
-  padding: 0.5em 0em;
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-shs-options {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
 }
-.analytics-page .content-section .left-content .confirmation-box {
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-shs-options .modern-checklist input[type=checkbox] {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.4rem;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-shs-options .modern-checklist label {
+  font-weight: 500;
+  margin-right: 1rem;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-mod-coc-options {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-location-options {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-location-options .double-dropdown {
+  display: flex;
+  flex-direction: rows;
+  gap: 0.5em;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-location-options .double-dropdown .dropdown-opt-box {
+  flex: 1;
+}
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-subclass-options {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.analytics-page .content-section .left-content #confirmation-box {
   display: flex;
   gap: 0.75em;
   justify-content: flex-end;
 }
-.analytics-page .content-section .left-content .confirmation-box button {
+.analytics-page .content-section .left-content #confirmation-box button {
   padding: 1em 2em;
   border: 0;
   border-radius: 2em;
@@ -59,24 +155,24 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn {
   background-color: #037DEE;
   color: #FFFFFF;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn:hover {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn:hover {
   background-color: #0264BE;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn:active {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn:active {
   background-color: #037DEE;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn {
   background-color: #D3DDE5;
   color: #04508c;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn:hover {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn:hover {
   background-color: #C8D2DA;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn:active {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn:active {
   background-color: #D3DDE5;
 }
 .analytics-page .content-section .right-content {
