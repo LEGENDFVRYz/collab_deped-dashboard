@@ -408,7 +408,6 @@ seniorhigh_least_offered_high_demand.update_layout(
         'x': 1.05
     }
 )
-
 seniorhigh_least_offered_high_demand
 
 
