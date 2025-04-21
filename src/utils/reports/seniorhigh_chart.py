@@ -135,10 +135,10 @@ seniorhigh_distri_per_track
 ##  --- Ratio enrollment in Academic vs. non-Academic tracks
 #################################################################################
 # Count the number of students in each 'track'
-track_counts = FILTERED_DF.groupby('track').size().reset_index(name='student_count')
+track_counts = FILTERED_DF.groupby(['track'])['counts'].sum().reset_index(name='student_count')
 
 # Get the acad_count and non_acad_count
-acad_count = track_counts.loc[track_counts['track'] == 'acad', 'student_count'].sum()
+acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
 non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()
 
 # Create the Donut Chart
@@ -188,7 +188,12 @@ seniorhigh_ratio_enrollment
 #################################################################################
 ##  --- Most and least enrolled  (strand)
 #################################################################################
-track_counts = FILTERED_DF.groupby('strand')['counts'].sum().reset_index()
+# Filter out "__NaN__" and actual NaN values from 'strand'
+cleaned_df = FILTERED_DF[~FILTERED_DF['strand'].isin(['__NaN__'])]
+cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
+
+# Group and find the most and least populated strands
+track_counts = cleaned_df.groupby('strand')['counts'].sum().reset_index()
 most_populated = track_counts.sort_values('counts', ascending=False).iloc[0]
 least_populated = track_counts.sort_values('counts', ascending=True).iloc[0]
 
@@ -243,14 +248,27 @@ seniorhigh_most_least_enrolled
 #################################################################################
 ##  --- Gender Distribution
 #################################################################################
-# Group the data by 'strand' and 'gender' and sum the counts
-track_gender = FILTERED_DF.groupby(['strand', 'gender'])['counts'].sum().reset_index()
+# Remove "__NaN__" and actual NaN values from 'strand'
+cleaned_df = FILTERED_DF[~FILTERED_DF['strand'].isin(['__NaN__'])]
+cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
 
-# Create the horizontal bar chart
+# Group the cleaned data by 'strand' and 'gender'
+track_gender = cleaned_df.groupby(['strand', 'gender'])['counts'].sum().reset_index()
+
+# Calculate total counts per strand to determine sort order
+strand_order = (
+    track_gender.groupby('strand')['counts']
+    .sum()
+    .sort_values(ascending=False)
+    .index.tolist()
+)
+
+# Create the horizontal bar chart with sorted strand order
 seniorhigh_gender_distri = px.bar(
     track_gender,
     x='counts',
     y='strand',
+    category_orders={'strand': strand_order},  
     color='gender',
     orientation='h',
     barmode='group',
@@ -302,7 +320,15 @@ FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=Fals
 FILTERED_DF = FILTERED_DF[FILTERED_DF['counts'] != 0]
 school_count = FILTERED_DF.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')
 
-# Create horizontal stacked bar chart
+# Compute total school count per track to determine sort order
+track_order = (
+    school_count.groupby('track')['school_count']
+    .sum()
+    .sort_values(ascending=False)
+    .index.tolist()
+)
+
+# Create horizontal stacked bar chart with sorted track order
 seniorhigh_school_offering_per_track_by_sector = px.bar(
     school_count,
     x='school_count',
@@ -311,6 +337,7 @@ seniorhigh_school_offering_per_track_by_sector = px.bar(
     orientation='h',
     labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
     color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
+    category_orders={'track': track_order},
     title="Number of Schools Offering Each Track by Sector"
 )
 
@@ -324,8 +351,8 @@ seniorhigh_school_offering_per_track_by_sector.update_layout(
     xaxis={
         'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
         'tickfont': {'color': '#667889'},
-        'tickformat': '~s',  
-        'tickangle': 0       
+        'tickformat': '~s',
+        'tickangle': 0
     },
     yaxis={
         'title': {'text': "Track", 'font': {'color': '#667889'}},
@@ -362,7 +389,7 @@ grouped = FILTERED_DF.groupby('track').agg(
 ).reset_index()
 
 # Define custom color palette
-custom_colors = ['#FFB700', '#F9F521', '#89FE2A', '#00F2FF', '#00CCFF', '#1389F0', '#0C6DC1', '#074889']
+custom_colors = ['#00CCFF', '#1389F0', '#0C6DC1', '#074889']
 
 # Create the scatter plot
 seniorhigh_least_offered_high_demand = px.scatter(
