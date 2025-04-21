@@ -13,7 +13,6 @@ def Addons_filter(reference:array):
     
     
     return html.Div(children=[
-        
         *([
             ## LOCATION SECTION
             html.Div([
@@ -88,7 +87,7 @@ def Addons_filter(reference:array):
         *([
             ### -- SENIOR HIGH SECTION
             html.Div([
-                ## FILTER FIRST BY STRAND
+                ## FILTER FIRST BY TRACK
                 html.Div([
                             html.Div(['Filter by Tracks:'], className='label'),
                             dcc.Dropdown(options=[
@@ -98,14 +97,14 @@ def Addons_filter(reference:array):
                                             {'label': 'SPORTS', 'value': 'SPORTS'}],
                                         placeholder="Select Strand First...",
                                         multi=True,
-                                        id='strand-dropdown'
+                                        id='track-dropdown'
                                         )
                     ], className='dropdown-opt-box'),
                 
-                ## FILTER BY TRACKS
+                ## FILTER BY STRAND
                 html.Div([
                             html.Div(['Filter by Strand:'], className='label'),
-                            dcc.Dropdown([], id='track-dropdown', disabled=True, multi=True, placeholder='Select "Academic" Track to Multiselect Strand...'),
+                            dcc.Dropdown([], id='strand-dropdown', disabled=True, multi=True, placeholder='Select "Academic" Track to Multiselect Strand...'),
                     ], className='dropdown-opt-box'),
         ], className='add-shs-options category-ctn'),
         ] if reference[1] else []),
@@ -114,15 +113,27 @@ def Addons_filter(reference:array):
             ## SUB CLASSIFICATION SECTION
             html.Div([
                 html.Div([
-                            html.Div(['Filter by Subclassification:'], className='label'),
-                            dcc.Dropdown(options=[
-                                                    'DepED Managed', 'Sectarian', 'Non-Sectarian', 'LUC', 'SUC Managed', 'DOST Managed', 'Other GA Managed', 'Local International School', 'SCHOOL ABROAD'
-                                                ],
-                                                placeholder="Multi-select Subclassification to Filter...",
-                                            id='subclass-dropdown',
-                                            multi=True,
-                                        ),
+                    
+                    ## Filter by Sectors
+                    html.Div([
+                        html.Div(['Filter by Sector:'], className='label'),
+                        dcc.Dropdown([ 
+                                        'Public', 'Private', 'SUCsLUCs', 'PSO'
+                                    ], 
+                                    id='sector-dropdown',
+                                    placeholder="Select Sector to proceed...",
+                                    multi=True,),
+                        ], className='dropdown-opt-box'),
+                    
+                    ## Filter by Subclassification
+                    html.Div(['Filter by Subclassification:'], className='label'),
+                    dcc.Dropdown(options=[],
+                                    placeholder='Select "Sector" first to select Subclassification...',
+                                    id='subclass-dropdown',
+                                    multi=True,
+                                ),
                     ], className='dropdown-opt-box'),
+                    
             ], className='add-subclass-options category-ctn'),
         ] if reference[2] else []),
         
@@ -142,16 +153,6 @@ def Addons_filter(reference:array):
         
         
         html.Div([
-            ### -- SECTOR SECTION
-            html.Div([
-                ## FILTER BY SECTORS
-                html.Div([
-                            html.Div(['Filter by Sector:'], className='label'),
-                            dcc.Checklist([ 
-                                    'Public', 'Private', 'SUCsLUCs', 'PSO'
-                                ], id='sector-checklist', className='modernized'),
-                    ], className='checklist-opt-box'),
-            ], className='add-sector-options category-ctn'),
             
             ### -- TYPES SECTION
             html.Div([

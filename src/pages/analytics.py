@@ -143,6 +143,7 @@ def render_after_fade(n, data):
             return pages[i](), "rendered"
 
 
+
 ############################################################
 ## HANDLE BUTTONS KEY AND RENDERING ADDITIONAL FILTERS
 ############################################################
@@ -332,15 +333,40 @@ def reset_values(region, province, division, district, municipality):
 #####################################################################################
 
 @callback(
-    Output('track-dropdown', 'options'),
-    Output('track-dropdown', 'disabled'),
-    Input('strand-dropdown', 'value'),
+    Output('strand-dropdown', 'options'),
+    Output('strand-dropdown', 'disabled'),
+    Input('track-dropdown', 'value'),
     prevent_initial_call=True
 )
-def update_tracks(strand):
+def update_tracks(track):
     # print(strand)
-    if 'ACADEMIC' in strand:
-        return [{'label': track, 'value': track} for track in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+    if 'ACADEMIC' in track:
+        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+    else:
+        return [], True
+    
+
+#####################################################################################
+## MOD COC -- Updating options of track based on mod coc
+#####################################################################################
+
+@callback(
+    Output('subclass-dropdown', 'options'),
+    Output('subclass-dropdown', 'disabled'),
+    Input('sector-dropdown', 'value'),
+    prevent_initial_call=True
+)
+def update_sector(sector_value):
+    # print(strand)
+    
+    if 'Public' in sector_value:
+        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+    elif 'Private' in sector_value:
+        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+    elif 'SUCsLUCs' in sector_value:
+        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+    elif 'PSO' in sector_value:
+        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
     else:
         return [], True
     
@@ -388,20 +414,20 @@ def update_modcoc(modcoc):
     State('types-checklist', 'value'),
     State('gender-dropdown', 'value'),
     State('subclass-dropdown', 'value'),
-    State('strand-dropdown', 'value'),
     State('track-dropdown', 'value'),
+    State('strand-dropdown', 'value'),
     State('grade-lvl-dropdown', 'value'),
     State('location-filter', 'data'),
     prevent_initial_call=True
 )
-def retrieve_filtered_values(btn, sector, types, gender, subclass, strand, track, grade, location_data):
+def retrieve_filtered_values(btn, sector, types, gender, subclass, track, strand, grade, location_data):
     # if any(x is None for x in [sector, types, gender, subclass]):
     #     return no_update
     filter_data = {}
     locs = ['region', 'province', 'division', 'district', 'municipality', 'brgy']
-    keys = ['sector', 'types', 'gender', 'subclass', 'strand', 'track', 'grade']
+    keys = ['sector', 'types', 'gender', 'subclass', 'track', 'strand', 'grade']
     
-    for i, category in enumerate([sector, types, gender, subclass, strand, track, grade]):
+    for i, category in enumerate([sector, types, gender, subclass, track, strand, grade]):
         if category:
             filter_data[keys[i]] = category
     
