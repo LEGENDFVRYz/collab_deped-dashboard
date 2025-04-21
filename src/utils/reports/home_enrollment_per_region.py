@@ -50,11 +50,11 @@ def format_large_number(num):
 dataframe = auto_extract(['counts'], is_specific=False)
 
 order = [
-    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'Elem', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
+    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12'
 ]
 
 dataframe['school-level'] = dataframe['grade'].apply(
-    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
+    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
 )
 dataframe
 

@@ -3,7 +3,7 @@ from src.components.card import Card
 
 ## IMPORTED CHARTS
 from src.utils.reports.location_chart import gender_region_fig, heatmap_fig, hi_low_fig
-from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees, raw_total_schools, truncated_total_schools
+from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees, raw_total_schools, truncated_total_schools, sector_chart
 
 
 """
