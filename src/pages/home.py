@@ -7,7 +7,7 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
-from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, home_program_offering, home_shs_tracks
+from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, home_program_offering, home_shs_tracks, home_shs_strands
 from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted, gender_gap, greater_gender, lesser_gender
 
 # Landing page
@@ -148,12 +148,18 @@ layout = html.Div([
                                     ),
                                     html.Div([
                                         html.Div([
-                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="up-icon"),
-                                            html.Span(f"+{gender_gap}", className="percentage"),
+                                            html.Img(src="/assets/images/icons_navigation/up-green.svg", className="up-icon"),
+                                            html.Span(f"{gender_gap}%", className="percentage"),
                                         ], className="gap-percentage"),
-                                        html.Span(f"more {greater_gender}", className="text-1"),
-                                        html.Span("students", className="text-2"),
-                                        html.Span(f"than {lesser_gender}", className="text-3"),
+                                        html.Div([
+                                            html.Span("more"),
+                                            html.Span(f"{greater_gender}", className=f"greater {'male-dominant' if greater_gender == 'MALE' else 'female-dominant'}"),
+                                        ], className="greater-div"),
+                                        html.Span("enrollees"),
+                                        html.Div([
+                                            html.Span("than"),
+                                            html.Span(f"{lesser_gender}", className=f"lesser {'male-less-dominant' if lesser_gender == 'MALE' else 'female-less-dominant'}"),
+                                        ], className="lesser-div"),
                                     ], className="lp-desc"),
                                 ], className="lp-graph-desc"),
                             ], margin=False)
@@ -197,10 +203,27 @@ layout = html.Div([
                     
                     html.Div([
                         Card([
-                            dcc.Graph(id="home_shs_tracks", figure=home_shs_tracks,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                            ),
+                            html.Div([
+                                
+                                html.Div([
+                                    html.H5("Track Preference"),
+                                    dcc.Graph(id="home_shs_tracks", figure=home_shs_tracks,
+                                            config={"responsive": True},
+                                            style={"width": "100%", "height": "100%"}
+                                    ),
+                                ], className="lp-upper"),
+                                
+                                html.Div([
+                                    html.Hr(),
+                                    html.H5("Academic Track"),
+                                    html.H6("Strand Breakdown"),
+                                    dcc.Graph(id="home_shs_strands", figure=home_shs_strands,
+                                            config={"responsive": True},
+                                            style={"width": "100%", "height": "100%"}
+                                    ),    
+                                ], className="lp-lower")
+                                
+                            ], className="lp-tracks-strands"),
                         ], margin=False)  
                     ], className="lp-graph-2"),
                 ], className="lp-content"),
@@ -219,21 +242,11 @@ layout = html.Div([
                     html.Div([
                         
                         html.Div([
-                            html.Div([
-                                Card([
-                                    html.Div([html.H3(f"{number_of_schools_formatted}")], className='header'),
-                                    html.Div([html.Span(f"{number_of_schools:,} schools", className="text-center"),], className='indicator'),
-                                ], margin=False, gradient=True)
-                            ], className="ssc-info"),
-                            html.Div([
-                                Card([
-                                    dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
-                                                config={"responsive": True},
-                                                style={"width": "100%", "height": "100%"}
-                                    )
-                                ], margin=False)
-                            ], className="ssc-graph"),
-                        ],className="ssc-info-graph"), 
+                            Card([
+                                html.Div([html.H3(f"{number_of_schools_formatted}")], className='header'),
+                                html.Div([html.Span(f"{number_of_schools:,} schools", className="text-center"),], className='indicator'),
+                            ], margin=False, gradient=True)
+                        ], className="ssc-info"),
                         
                         html.Div([
                             Card([
@@ -242,7 +255,7 @@ layout = html.Div([
                                     html.H6("School Count"),
                                     html.H6("Student Count"),
                                 ], className="ssc-table-header"),
-                                dcc.Graph(id="ssc-subclass-table", className="ssc-subclass-table", figure=home_subclass_table,
+                                dcc.Graph(id="ssc-subclass-table", figure=home_subclass_table,
                                                 config={"responsive": True},
                                                 style={"width": "100%", "height": "100%"}
                                 ),
@@ -253,12 +266,22 @@ layout = html.Div([
                     
                     html.Div([
                         Card([
+                            dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
+                                            config={"responsive": True},
+                                            style={"width": "100%", "height": "100%"}
+                            ),   
+                        ], margin=False),
+                    ], className="ssc-content-2"),
+                    
+                    html.Div([
+                        Card([
                             dcc.Graph(id="home_program_offering", figure=home_program_offering,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
                             ),
-                        ], margin=False) 
-                    ], className="ssc-content-2"),
+                        ], margin=False),
+                    ], className="ssc-content-3"),
+                    
                 ], className="ssc-content"),  
                 
             ], className="school-system-composition"),

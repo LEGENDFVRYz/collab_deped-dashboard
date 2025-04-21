@@ -79,11 +79,11 @@ def format_large_number(num):
 dataframe = auto_extract(['counts'], is_specific=False)
 
 order = [
-    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'Elem', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
+    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12'
 ]
 
 dataframe['school-level'] = dataframe['grade'].apply(
-    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
+    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
 )
 dataframe
 
@@ -236,7 +236,7 @@ home_school_number_per_sector.update_traces(textposition="outside", marker_color
 home_school_number_per_sector.update_layout(yaxis=dict(visible=False), xaxis=dict(visible=False))
 home_school_number_per_sector.update_layout(
     autosize=True,
-    margin={"l": 8, "r": 8, "t": 16, "b": 8},  # Optional: Adjust margins
+    margin={"l": 10, "r": 10, "t": 10, "b": 10},  # Optional: Adjust margins
     paper_bgcolor='rgba(0, 0, 0, 0)', 
     plot_bgcolor='rgba(0, 0, 0, 0)',   
     yaxis=dict(showticklabels=True),
@@ -433,14 +433,16 @@ home_subclass_chart.update_layout(
 
 home_subclass_chart
 
-# Subclassification School Count - Table
+# Subclass - TABLE
 home_subclass_table = go.Figure(data=[go.Table(
+    columnwidth=[2, 1, 1],
     header=dict(
         values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
-        fill_color='rgba(0,0,0,0)',  # Transparent header background
-        font=dict(color='black', size=12),
-        line_color='rgba(0,0,0,0)',  # Hide header borders
+        fill_color='#E6F2FB',  # Light blue header for contrast
+        font=dict(color='#04508c', size=12, family="Arial"),
         align='left',
+        line_color='#B0C4DE',  # Soft border
+        height=28
     ),
     cells=dict(
         values=[
@@ -448,18 +450,18 @@ home_subclass_table = go.Figure(data=[go.Table(
             subclass_df1['school_count'],
             subclass_df1['counts']
         ],
-        fill_color='rgba(0,0,0,0)',  # Transparent cell background
-        font=dict(color='black', size=11),
-        line_color='rgba(0,0,0,0)',  # Hide cell borders
-        align='left'
+        fill_color=[['#FFFFFF', '#F7FAFC'] * (len(subclass_df1) // 2 + 1)],  # Alternating row colors
+        font=dict(color='#3C6382', size=11, family="Arial"),
+        align='left',
+        line_color='#D3D3D3',
+        height=24
     )
 )])
 
-# Layout settings
 home_subclass_table.update_layout(
     autosize=True,
-    margin=dict(l=10, r=10, t=0, b=10),
-    paper_bgcolor='rgba(0,0,0,0)',  # Fully transparent background
+    margin=dict(l=0, r=0, t=0, b=0),
+    paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
 )
 
@@ -498,8 +500,12 @@ outer_color_map = {
     'JHS': '#FE4761',
     'SHS': '#FFBF5F'
 }
-
 outer_colors = outer_labels.map(outer_color_map)
+
+# Identify smallest slice in outer donut
+smallest_outer_idx = outer_values.idxmin()
+outer_pull = [0] * len(outer_values)
+outer_pull[smallest_outer_idx] = 0.1
 
 # Inner donut (Offerings) with gradient sort
 desired_order = [
@@ -534,7 +540,7 @@ inner_colors = inner_labels.map(inner_color_map)
 # Create donut chart
 home_program_offering = go.Figure()
 
-# Outer donut
+# Outer donut (with pulled-out smallest slice)
 home_program_offering.add_trace(go.Pie(
     labels=outer_labels,
     values=outer_values,
@@ -542,7 +548,7 @@ home_program_offering.add_trace(go.Pie(
     direction='clockwise',
     sort=False,
     textinfo='none',
-    textposition='inside',
+    pull=outer_pull,
     marker=dict(colors=outer_colors, line=dict(color='#3C6382', width=0)),
     domain={'x': [0, 1], 'y': [0, 1]},
     name='Programs',
@@ -559,9 +565,8 @@ home_program_offering.add_trace(go.Pie(
     rotation=90,
     sort=False,
     textinfo='none',
-    textposition='inside',
     marker=dict(colors=inner_colors, line=dict(color='#3C6382', width=0)),
-    domain={'x': [0.2, 0.8], 'y': [0.2, 0.8]},
+    domain={'x': [0.22, 0.78], 'y': [0.22, 0.78]},
     name='Level',
     legendgroup='Education Level',
     showlegend=True
@@ -572,21 +577,12 @@ home_program_offering.update_layout(
     showlegend=True,
     autosize=True,
     margin=dict(t=20, b=20, l=20, r=20),
-    # annotations=[dict(
-    #     text='Programs<br>& Offerings',
-    #     x=0.5, y=0.5, font_size=14, showarrow=False, font=dict(color='#3C6382')
-    # )],
     legend=dict(
-        # orientation='h',
-        # yanchor='top',
-        # y=-0.1,
-        # xanchor='center',
-        # x=0.5,
-        orientation='v',       # vertical layout
-        yanchor='middle',      # anchor at the middle vertically
-        y=0.5,                 # center of the y-axis
-        xanchor='left',        # anchor the x at the left of the legend box
-        x=1.05,  
+        orientation='v',
+        yanchor='middle',
+        y=0.5,
+        xanchor='left',
+        x=1.05,
     )
 )
 
@@ -599,15 +595,111 @@ home_program_offering
 shs_tracks_df = auto_extract(['track'], is_specific=False)
 grouped_by_tracks = shs_tracks_df.groupby(["track"], as_index=False)["counts"].sum()
 
+grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
+
 home_shs_tracks = px.bar(
     grouped_by_tracks,
     x="track",
     y="counts",
+    color="track",
+    text="counts_truncated",
+    color_discrete_sequence=["#B4162D", "#D61B35", "#E63E56", "#EA6074"]
 )
 
 home_shs_tracks.update_layout(
     autosize=True,
     margin=dict(t=10, b=10, l=10, r=10),
+    plot_bgcolor='#ECF8FF',
+    showlegend=False,
+    xaxis=dict(
+        tickfont=dict(size=8, color="#3C6382"),
+        title=None,
+        showgrid=False,
+    ),
+    yaxis=dict(
+        tickfont=dict(size=8, color="#3C6382"),
+        title=None,
+        showgrid=True,
+        gridcolor='#D2EBFF',
+        ticksuffix = "  ",
+    ),
+)
+
+home_shs_tracks.update_traces(
+    textposition='outside',
+    insidetextanchor='middle',
+    textfont=dict(size=8, color="#04508c"),
+    hovertemplate='Track: %{x}<br>Count: %{y}<extra></extra>',
 )
 
 home_shs_tracks
+
+# ----------------------------------------------------------
+# Senior High School Strands Distribution
+shs_strands_df = auto_extract(['strand'], is_specific=False)
+shs_strands_df = shs_strands_df[shs_strands_df['strand'] != '__NaN__']
+
+# Group and sort
+grouped_by_strands = shs_strands_df.groupby(["strand"], as_index=False)["counts"].sum()
+grouped_by_strands = grouped_by_strands.sort_values(by="counts", ascending=False)
+grouped_by_strands["category"] = "SHS Strands"
+
+# Plotting the horizontal stacked bar
+home_shs_strands = px.bar(
+    grouped_by_strands,
+    x="counts",
+    y="category",
+    color="strand",
+    orientation="h",
+    text="counts",
+    hover_name="strand",
+    color_discrete_sequence=px.colors.qualitative.Set3,
+)
+
+home_shs_strands.update_layout(
+    barmode='stack',
+    height=None,    # Optional: Let the container determine height
+    width=None,     # Optional: Let the container determine width
+    margin=dict(t=10, b=10, l=10, r=10),  # Extra bottom margin for legend
+    showlegend=False,
+    plot_bgcolor='rgba(0,0,0,0)',  # Transparent background
+    paper_bgcolor='rgba(0,0,0,0)',
+    autosize=True,
+    font=dict(
+        size=8,
+        color="#3C6382",
+    ),
+    xaxis=dict(
+        showticklabels=False,
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        title=None,
+    ),
+    yaxis=dict(
+        showticklabels=False,
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        title=None,
+    ),
+    legend=dict(
+        orientation='h',         # Horizontal legend
+        yanchor='bottom',
+        y=-0.5,                  # Adjust the position further down
+        xanchor='center',
+        x=0.5,
+        title=None,                # Optional: hide 'strand' label from legend
+    )
+)
+
+# Hover and label formatting
+home_shs_strands.update_traces(
+    textposition='inside',
+    insidetextanchor='middle',
+    customdata=grouped_by_strands[["strand"]],
+    hovertemplate='Strand: %{hovertext}<br>Count: %{x}<extra></extra>',
+)
+
+home_shs_strands
+
