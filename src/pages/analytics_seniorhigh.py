@@ -131,5 +131,5 @@ from dash import Dash, dcc, html
 ## --- TEMPORARY
 def render_seniorhigh_filter():
     return html.Div(
-        children=[]
+        children=["SENIORRRR"]
     )

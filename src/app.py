@@ -140,7 +140,6 @@ app.layout = html.Div(
                 ], className='ctn')
             ], className='account-section')
         ], className='navigation'),
-                
         
         
         # output: layout pages

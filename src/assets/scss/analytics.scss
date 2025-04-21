@@ -249,7 +249,7 @@
         .right-content {
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: 3;
 
             #plot-content{
                 display: flex;
@@ -258,39 +258,13 @@
                 padding: 0.5em 0em;
                 flex: 1;
 
-                #placeholder{
-                    text-align: center;
-                    background-color: $white;
-                    border-radius: 1em;
-                    color: $text-color-1;
-                    
-                    display: flex;
-                    align-items: center;
-                    flex: 1;
-    
-                    transition: background-color 0.8s ease-in-out, opacity 0.8s ease-in-out;
-                    
-                    h2{
-                        margin: auto;
-                        transition: color 0.5s ease-in-out
-                    }
-                }
-            }
-
-
-            #plot-content.rendered{
-                display: flex;
-                flex: 1;
-
-                // RENDER PLOTS
-                #placeholder{
-                    display: none;
-                }
-
+                
                 #plot-filtered-page{
                     display: flex;
                     padding: 0em 1em;
                     flex: 1;
+
+                    
 
                     .render-plot{
                         display: flex;

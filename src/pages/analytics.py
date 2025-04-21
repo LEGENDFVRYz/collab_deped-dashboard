@@ -40,72 +40,69 @@ layout = html.Div([
     ], className='page-header'),
     
     ## -- Main Content: Start hereee
-    
-    dcc.Loading([
-        html.Div([
-            html.Div([
-                ## -- Filtering Options
-                html.Div([
-                        Card([
-                            html.Div([
-                                html.H3(f"Filter by :", id='filter-header')
-                            ], className='primary-tags'),
 
-                            ## -- Primary options
-                            html.Div([
-                                ## Render options here
-                                
-                                
-                            ], id='filter-options'),
-                        ], margin=False)
-                    ], id='primary-wrap', className='primary-filter'),
-                
-                
-                html.Div([
-                        html.Div([html.Button('Add Additional Filters', id='addons-btn', n_clicks=0)], className='additional'),
-                        html.Div([html.Button('Submit', id='proceed-btn', n_clicks=0)], className='proceed'),
-                    ], id='confirmation-box'),
-                dcc.Interval(id='hide-delay', interval=800, n_intervals=0, disabled=True),
-                
-                
-                html.Div([
-                    html.Div([
-                        html.H3(f"Additional Filters:")
-                        
-                    ], className='secondary-tag category'),     
-                        
-                    ## -- Secondary options
-                    html.Div([
-                        ## Render secondary options here
-                        
-                    ], id='secondary-wrap'),
-                ], id='secondary-filter')          
-            ], id='filter-section', className='left-content'),
-            
-            
-            ## -- Rendering Plots
+    html.Div([
+        html.Div([
+            ## -- Filtering Options
             html.Div([
-                # dcc.Loading([
-                    html.Div([
+                    Card([
                         html.Div([
-                                html.H2(["SELECT FILTER TO PROCEED"])
-                            ], id="placeholder"),
-                        
-                            html.Div([
-                                ## -- RENDER THE REPORT HERE
-                                html.Div([], id='print'),
-                                
-                                
-                                ], id='plot-filtered-page')
-                        
-                        
-                    ], id='plot-content', className="")
-                # ], id='loading-render-content', type='circle')
-                
-            ], className='right-content'),
-        ], className='content-section'),
-    
-    ], id='query_loading')
+                            html.H3(f"Filter by :", id='filter-header')
+                        ], className='primary-tags'),
+
+                        ## -- Primary options
+                        html.Div([
+                            ## Render options here
+                            
+                            
+                        ], id='filter-options'),
+                    ], margin=False)
+                ], id='primary-wrap', className='primary-filter'),
+            
+            
+            html.Div([
+                    html.Div([html.Button('Add Additional Filters', id='addons-btn', n_clicks=0)], className='additional'),
+                    html.Div([html.Button('Submit', id='proceed-btn', n_clicks=0)], className='proceed'),
+                ], id='confirmation-box'),
+            dcc.Interval(id='hide-delay', interval=800, n_intervals=0, disabled=True),
+            
+            
+            html.Div([
+                html.Div([
+                    html.H3(f"Additional Filters:")
+                    
+                ], className='secondary-tag category'),     
+                    
+                ## -- Secondary options
+                html.Div([
+                    ## Render secondary options here
+                    
+                ], id='secondary-wrap'),
+            ], id='secondary-filter')          
+        ], id='filter-section', className='left-content'),
+        
+        
+        ## -- Rendering Plots
+        html.Div([
+            # dcc.Loading([
+                html.Div([
+                    # html.Div([
+                    #         html.H2(["SELECT FILTER TO PROCEED"])
+                    #     ], id="placeholder"),
+                    dcc.Loading([
+                        html.Div([
+                            ## -- RENDER THE REPORT HERE
+                            
+                            
+                            ], id='plot-filtered-page')
+                    ],  id='query_loading',
+                        parent_style={"display": "flex", "flexDirection": "column", "flex": "1"},
+                    )
+                ], id='plot-content', className="")
+            # ], id='loading-render-content', type='circle')
+            
+        ], className='right-content'),
+    ], className='content-section'),
 ], className='analytics-page container')
 
 
@@ -115,39 +112,41 @@ layout = html.Div([
 ############################################################
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
-    Output('placeholder', 'style', allow_duplicate=True),
-    Output('hide-delay', 'disabled'),
+    # Output('placeholder', 'style', allow_duplicate=True),
+    # Output('hide-delay', 'disabled'),
     Input('proceed-btn', 'n_clicks'),
-    Input('hide-delay', 'n_intervals'),
-    prevent_initial_call=True
+    # Input('hide-delay', 'n_intervals'),
+    prevent_initial_call='initial_duplicate'
 )
-def handle_hide(n_clicks, n_intervals):
+def handle_hide(n_clicks):
     triggered_id = ctx.triggered_id
     
     if triggered_id == 'proceed-btn':
-        return {'display': 'none'}, {'background-color': '#EFF3F6'}, False  # Enable timer
+        return {'display': 'none'}
 
-    elif triggered_id == 'hide-delay':
-        return dash.no_update, {'display': 'none'}, True  # Disable after firing
-
-    return dash.no_update, dash.no_update, dash.no_update
+    return dash.no_update
 
 
 @callback(
     Output('plot-filtered-page', 'children', allow_duplicate=True),
     Output('plot-content', 'className', allow_duplicate=True),
-    Input('hide-delay', 'n_intervals'),
-    State('analytics-sub-tracker', 'data'),
-    prevent_initial_call=True
+    # Input('hide-delay', 'n_intervals'),
+    Input('sub-status-toggle', 'data'),
+    Input('analytics-sub-tracker', 'data'),
+    prevent_initial_call='initial_duplicate'  
 )
 def render_after_fade(n, data):
     opt = ["Location", "Senior High", "Subclassification", "Offering"]
     pages = [
         render_location_filter, render_seniorhigh_filter, render_subclass_filter, render_offering_filter
     ]
+    print(n, ":", data)
     for i, choices in enumerate(opt):
+        print(">>>>")
         if data == choices:
             return pages[i](), "rendered"
+        
+    return pages[0](), "rendered"
 
 
 
@@ -186,7 +185,7 @@ def render_additional_filters(reference):
 ############################################################
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
-    Output('placeholder', 'style', allow_duplicate=True),
+    # Output('placeholder', 'style', allow_duplicate=True),
     Output('plot-filtered-page', 'children', allow_duplicate=True),
     Output('plot-content', 'className', allow_duplicate=True),
     Output('addons-btn', 'n_clicks'),
@@ -213,10 +212,10 @@ def sub_tab_has_change(in1, in2, in3, in4, sub_tracker, sub_status):
 
     if trans[triggered_id] == sub_tracker:
         # print("page is still the same")
-        return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
+        return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
     else:
         # print("you clicked different page--")
-        return {'display': 'flex'}, {'display': 'flex'}, html.Div(), "", 0, (not sub_status)
+        return {'display': 'flex'}, html.Div(), "", 0, (not sub_status)
     
     
     

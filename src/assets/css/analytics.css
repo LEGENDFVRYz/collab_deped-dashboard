@@ -178,40 +178,19 @@
 .analytics-page .content-section .right-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 3;
 }
 .analytics-page .content-section .right-content #plot-content {
   display: flex;
   padding: 0.5em 0em;
   flex: 1;
 }
-.analytics-page .content-section .right-content #plot-content #placeholder {
-  text-align: center;
-  background-color: #FFFFFF;
-  border-radius: 1em;
-  color: #3C6382;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  transition: background-color 0.8s ease-in-out, opacity 0.8s ease-in-out;
-}
-.analytics-page .content-section .right-content #plot-content #placeholder h2 {
-  margin: auto;
-  transition: color 0.5s ease-in-out;
-}
-.analytics-page .content-section .right-content #plot-content.rendered {
-  display: flex;
-  flex: 1;
-}
-.analytics-page .content-section .right-content #plot-content.rendered #placeholder {
-  display: none;
-}
-.analytics-page .content-section .right-content #plot-content.rendered #plot-filtered-page {
+.analytics-page .content-section .right-content #plot-content #plot-filtered-page {
   display: flex;
   padding: 0em 1em;
   flex: 1;
 }
-.analytics-page .content-section .right-content #plot-content.rendered #plot-filtered-page .render-plot {
+.analytics-page .content-section .right-content #plot-content #plot-filtered-page .render-plot {
   display: flex;
   flex: 1;
 }/*# sourceMappingURL=analytics.css.map */
