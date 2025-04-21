@@ -1,7 +1,11 @@
 import re, os, sys
-import math
+from turtle import title
+import dash, math
+from dash import dcc, html
 
 import numpy as np
+import numpy as np
+from numpy import average
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -10,6 +14,34 @@ import pandas as pd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from config import project_root
 from utils.get_data import auto_extract
+
+# ----------------------------------------------------------
+# Number Format
+
+def smart_truncate_number(n):
+    if n < 1000:
+        return str(n)
+
+    # Handle Millions (M)
+    if n >= 1_000_000:
+        base = n / 1_000_000  # Get the number in millions
+        truncated = math.floor(base * 10) / 10  # Truncate to 1 decimal
+        return f"{int(truncated) if truncated.is_integer() else truncated}M"
+
+    # Handle Thousands (k)
+    elif n >= 1000:
+        base = n / 1000  # Get the number in thousands
+        truncated = math.floor(base * 10) / 10  # Truncate to 1 decimal
+        return f"{int(truncated) if truncated.is_integer() else truncated}k"
+
+## -- INDICATORS: Total Enrollees
+def format_large_number(num):
+    if num >= 1_000_000:
+        return f"{num / 1_000_000:.1f}M"
+    elif num >= 1_000:
+        return f"{num / 1_000:.1f}K"
+    else:
+        return str(num)
 
 # ----------------------------------------------------------
 # Number Format

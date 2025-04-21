@@ -148,18 +148,12 @@ layout = html.Div([
                                     ),
                                     html.Div([
                                         html.Div([
-                                            html.Img(src="/assets/images/icons_navigation/arrow-right-up-fill.svg", className="up-icon"),
+                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="up-icon"),
                                             html.Span(f"+{gender_gap}", className="percentage"),
                                         ], className="gap-percentage"),
-                                        html.Div([
-                                            html.Span("more"),
-                                            html.Span(f"{greater_gender}", className=f"greater {'male-dominant' if greater_gender == 'MALE' else 'female-dominant'}"),
-                                        ], className="greater-div"),
-                                        html.Span("enrollees", className="text-2"),
-                                        html.Div([
-                                            html.Span("than"),
-                                            html.Span(f"{lesser_gender}", className=f"lesser {'male-less-dominant' if lesser_gender == 'MALE' else 'female-less-dominant'}"),
-                                        ], className="lesser-div"),
+                                        html.Span(f"more {greater_gender}", className="text-1"),
+                                        html.Span("students", className="text-2"),
+                                        html.Span(f"than {lesser_gender}", className="text-3"),
                                     ], className="lp-desc"),
                                 ], className="lp-graph-desc"),
                             ], margin=False)
