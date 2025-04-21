@@ -134,6 +134,12 @@
 .analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-location-options .double-dropdown .dropdown-opt-box {
   flex: 1;
 }
+.analytics-page .content-section .left-content #secondary-filter #secondary-wrap .secondary-rendered .add-subclass-options {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
 .analytics-page .content-section .left-content #confirmation-box {
   display: flex;
   gap: 0.75em;
@@ -149,23 +155,24 @@
   transition: background-color 0.3s ease;
 }
 .analytics-page .content-section .left-content #confirmation-box #proceed-btn {
-  background-color: #04508c;
-  color: #EFEFEF;
+  background-color: #037DEE;
+  color: #FFFFFF;
 }
 .analytics-page .content-section .left-content #confirmation-box #proceed-btn:hover {
-  background-color: #0674C8;
+  background-color: #0264BE;
 }
 .analytics-page .content-section .left-content #confirmation-box #proceed-btn:active {
-  background-color: #033962;
+  background-color: #037DEE;
 }
 .analytics-page .content-section .left-content #confirmation-box #addons-btn {
-  background-color: #E0E0E0;
+  background-color: #D3DDE5;
+  color: #04508c;
 }
 .analytics-page .content-section .left-content #confirmation-box #addons-btn:hover {
-  background-color: #C0C0C0;
+  background-color: #C8D2DA;
 }
 .analytics-page .content-section .left-content #confirmation-box #addons-btn:active {
-  background-color: #EFEFEF;
+  background-color: #D3DDE5;
 }
 .analytics-page .content-section .right-content {
   display: flex;
@@ -181,7 +188,7 @@
   text-align: center;
   background-color: #FFFFFF;
   border-radius: 1em;
-  color: #A0A0A0;
+  color: #3C6382;
   display: flex;
   align-items: center;
   flex: 1;

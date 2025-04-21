@@ -11,10 +11,13 @@
   gap: 2em;
   padding: 1em;
 }
+.home-page .content .section_title {
+  color: #3C6382;
+}
 .home-page .content .upper-content {
   display: flex;
-  flex: 1.25;
-  gap: 1em;
+  flex: 1;
+  gap: 2em;
 }
 .home-page .content .upper-content .national-snapshot {
   display: flex;
@@ -32,7 +35,7 @@
   flex: 1;
 }
 .home-page .content .upper-content .national-snapshot .ns-info-cards .ns-info:first-child {
-  flex: 1.5;
+  flex: 1.3;
 }
 .home-page .content .upper-content .national-snapshot .ns-graph {
   display: flex;

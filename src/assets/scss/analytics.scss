@@ -185,6 +185,14 @@
                                 }
                             }
                         }
+
+                        // -- SECTOR
+                        .add-subclass-options{
+                            display: flex;
+                            flex-direction: column;
+                            flex: 1;
+                            gap: 0.5em;
+                        }
                     }
                     
                 }

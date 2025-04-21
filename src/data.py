@@ -137,33 +137,29 @@ def get_engine():
     
 if __name__ == '__main__':
     sample = {
-        "sector": [
-            "Private",
-            "Public"
-        ],
-        "subclass": [
-            "Non-Sectarian"
-        ],
-        "track": [
-            "ARTS"
-        ],
-        # "grade": [
-        #     "G8",
-        #     "G9",
-        #     "G10"
-        # ],
-        "region": [
-            "MIMAROPA"
-        ],
-        "province": [
-            "ORIENTAL MINDORO"
-        ],
-        "division": [
-            "Calapan City"
-        ],
-        "district": [
-            "Calapan South"
-        ]
+    "types": [
+        "School with no Annexes"
+    ],
+    "gender": "M",
+    "sector": [
+        "Private"
+    ],
+    "subclass": [
+        "Non-Sectarian"
+    ],
+    "track": [
+        "ARTS"
+    ],
+    "modcoc": "All Offering",
+    "region": [
+        "BARMM"
+    ],
+    "province": [
+        "CITY OF COTABATO"
+    ],
+    "division": [
+        "Cotabato City"
+    ]
     }
     
     df = smart_filter(sample)

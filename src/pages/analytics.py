@@ -2,6 +2,7 @@ import dash
 import numpy as np
 import pandas as pd
 from dash import html, dcc, Output, Input, State, callback, ctx
+from sqlalchemy import false
 from src.data import enrollment_db_engine, smart_filter
 
 
@@ -347,7 +348,7 @@ def update_tracks(track):
     
 
 #####################################################################################
-## MOD COC -- Updating options of track based on mod coc
+## SECTOR AND SUBCLASS -- Updating options of track based on mod coc
 #####################################################################################
 
 @callback(
@@ -357,16 +358,19 @@ def update_tracks(track):
     prevent_initial_call=True
 )
 def update_sector(sector_value):
-    # print(strand)
+    options = []
     
     if 'Public' in sector_value:
-        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
-    elif 'Private' in sector_value:
-        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
-    elif 'SUCsLUCs' in sector_value:
-        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
-    elif 'PSO' in sector_value:
-        return [{'label': strand, 'value': strand} for strand in ['ABM', 'HUMSS', 'STEM', 'GAS']], False
+        options += [{'label': strand, 'value': strand} for strand in ['Dost Managed', 'DepED Managed', 'Other GA Managed']]
+    if 'Private' in sector_value:
+        options += [{'label': strand, 'value': strand} for strand in ['Local International School', 'Non-Sectarian', 'Sectarian']]
+    if 'SUCs/LUCs' in sector_value:
+        options += [{'label': strand, 'value': strand} for strand in ['LUC Managed', 'SUC Managed']]
+    if 'PSO' in sector_value:
+        options += [{'label': strand, 'value': strand} for strand in ['School Abroad']]
+    
+    if sector_value or sector_value is None:
+        return options, False
     else:
         return [], True
     
@@ -410,24 +414,25 @@ def update_modcoc(modcoc):
     Output('filtered_values', 'data'),
     Input('proceed-btn', 'n_clicks'),
     
-    State('sector-checklist', 'value'), 
     State('types-checklist', 'value'),
     State('gender-dropdown', 'value'),
+    State('sector-dropdown', 'value'),
     State('subclass-dropdown', 'value'),
     State('track-dropdown', 'value'),
     State('strand-dropdown', 'value'),
+    State('modcoc-dropdown', 'value'),
     State('grade-lvl-dropdown', 'value'),
     State('location-filter', 'data'),
     prevent_initial_call=True
 )
-def retrieve_filtered_values(btn, sector, types, gender, subclass, track, strand, grade, location_data):
+def retrieve_filtered_values(btn, types, gender, sector, subclass, track, strand, modcoc, grade, location_data):
     # if any(x is None for x in [sector, types, gender, subclass]):
     #     return no_update
     filter_data = {}
     locs = ['region', 'province', 'division', 'district', 'municipality', 'brgy']
-    keys = ['sector', 'types', 'gender', 'subclass', 'track', 'strand', 'grade']
+    keys = ['types', 'gender', 'sector', 'subclass', 'track', 'strand', 'modcoc', 'grade']
     
-    for i, category in enumerate([sector, types, gender, subclass, track, strand, grade]):
+    for i, category in enumerate([types, gender, sector, subclass, track, strand, modcoc, grade]):
         if category:
             filter_data[keys[i]] = category
     

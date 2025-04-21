@@ -10,11 +10,9 @@ from dash import html, dcc, callback, Output, Input, State, ctx
 
 
 def Addons_filter(reference:array):
-    
-    
     return html.Div(children=[
         *([
-            ## LOCATION SECTION
+            ## -- LOCATION SECTION
             html.Div([
                 # dcc.Store(id='location-filter'),
                 ## Location Filters:
@@ -64,7 +62,7 @@ def Addons_filter(reference:array):
         ] if reference[0] else []),
         
         *([
-            ## MODIFIED MOC SECTION
+            ## -- MODIFIED MOC SECTION
             html.Div([
                 ## FILTER FIRST BY MOD COC
                 html.Div([
@@ -83,6 +81,34 @@ def Addons_filter(reference:array):
                     ], className='dropdown-opt-box'),
             ], className='add-mod-coc-options category-ctn'),
         ] if reference[3] else []),
+        
+        *([
+            ## -- SUB CLASSIFICATION SECTION
+            html.Div([
+                ## Filter by Sectors
+                html.Div([
+                    html.Div(['Filter by Sector:'], className='label'),
+                    dcc.Dropdown([ 
+                                    'Public', 'Private', 'SUCs/LUCs', 'PSO'
+                                ], 
+                                id='sector-dropdown',
+                                placeholder="Select Sector to proceed...",
+                                multi=True,),
+                    ], className='dropdown-opt-box'),
+                
+                ## Filter by Subclassification
+                html.Div([
+                    html.Div(['Filter by Subclassification:'], className='label'),
+                    dcc.Dropdown(options=[],
+                                    placeholder='Select "Sector" first to select Subclassification...',
+                                    id='subclass-dropdown',
+                                    multi=True,
+                                    disabled=True
+                                ),
+                ], className='dropdown-opt-box'),
+                    
+            ], className='add-subclass-options category-ctn'),
+        ] if reference[2] else []),
         
         *([
             ### -- SENIOR HIGH SECTION
@@ -108,34 +134,7 @@ def Addons_filter(reference:array):
                     ], className='dropdown-opt-box'),
         ], className='add-shs-options category-ctn'),
         ] if reference[1] else []),
-          
-        *([
-            ## SUB CLASSIFICATION SECTION
-            html.Div([
-                html.Div([
-                    
-                    ## Filter by Sectors
-                    html.Div([
-                        html.Div(['Filter by Sector:'], className='label'),
-                        dcc.Dropdown([ 
-                                        'Public', 'Private', 'SUCsLUCs', 'PSO'
-                                    ], 
-                                    id='sector-dropdown',
-                                    placeholder="Select Sector to proceed...",
-                                    multi=True,),
-                        ], className='dropdown-opt-box'),
-                    
-                    ## Filter by Subclassification
-                    html.Div(['Filter by Subclassification:'], className='label'),
-                    dcc.Dropdown(options=[],
-                                    placeholder='Select "Sector" first to select Subclassification...',
-                                    id='subclass-dropdown',
-                                    multi=True,
-                                ),
-                    ], className='dropdown-opt-box'),
-                    
-            ], className='add-subclass-options category-ctn'),
-        ] if reference[2] else []),
+        
         
         ## GENDER SECTION
         html.Div([
@@ -153,7 +152,6 @@ def Addons_filter(reference:array):
         
         
         html.Div([
-            
             ### -- TYPES SECTION
             html.Div([
                 ## FILTER BY TYPEs
