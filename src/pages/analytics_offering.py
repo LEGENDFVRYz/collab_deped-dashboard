@@ -3,7 +3,7 @@ from src.components.card import Card
 
 ## IMPORTED CHARTS
 from src.utils.reports.offering_chart import sample_chart
-
+from src.utils.reports.offering_chart import number_of_schools_mcoc_chart, gender_distribution_chart, ranked_mcoc_chart, region_stacked_chart, indicator_chart
 
 """
     Template For Rendering the Program Offering Reports:
@@ -30,7 +30,7 @@ def render_offering_filter():
                             #########################################
                             
                             ## SAMPLE, REMOVE IT
-                            dcc.Graph(id="home_distribution-per-location", figure=sample_chart,
+                            dcc.Graph(id="offering_number-of-schools", figure=number_of_schools_mcoc_chart,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}
                             )
@@ -45,6 +45,12 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: Gender Distribution Aross MCOC types
                                 #########################################
+                                 dcc.Graph(
+                                    id="offering_gender-distribution",
+                                    figure=gender_distribution_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                )
                                 
                             
                             ], margin=False)], className='plot-b-top'),
@@ -54,7 +60,12 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: MCOC Types Ranked by Total Student Enrollment
                                 #########################################
-                                
+                                dcc.Graph(
+                                    id="offering_ranked-mcoc",
+                                    figure=ranked_mcoc_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                )
                             
                             ], margin=False)], className='plot-b-bot'),
                         ], className='plot-b'),
@@ -70,6 +81,12 @@ def render_offering_filter():
                             #########################################
                             ## INDICATOR: Locations with the Highest and Lowest Number of Offerings
                             #########################################
+                            dcc.Graph(
+                                    id="offering_location-extremes",
+                                    figure=indicator_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                )
                             
                         
                         ], margin=False)], className='plot-a'),
@@ -79,6 +96,12 @@ def render_offering_filter():
                             #########################################
                             ## INSERT PLOT: Number of MCOC Offerings per Location by School Level
                             #########################################
+                            dcc.Graph(
+                                    id="offering_mcoc-per-location",
+                                    figure=region_stacked_chart,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                )
                             
                         
                         ], margin=False)], className='plot-b'),

@@ -3,6 +3,7 @@ from src.components.card import Card
 
 ## IMPORTED CHARTS
 from src.utils.reports.location_chart import sample_chart
+from src.utils.reports.location_chart import sector_chart
 
 
 """
@@ -90,7 +91,10 @@ def render_location_filter():
                         #########################################
                         ## INSERT PLOT: school sectors
                         #########################################
-                        
+                        dcc.Graph(id="location_school-sector", figure=sector_chart,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                        )
                         
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),
