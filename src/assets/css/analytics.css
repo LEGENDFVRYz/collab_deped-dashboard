@@ -154,24 +154,24 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn {
   background-color: #037DEE;
   color: #FFFFFF;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn:hover {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn:hover {
   background-color: #0264BE;
 }
-.analytics-page .content-section .left-content .confirmation-box #proceed-btn:active {
+.analytics-page .content-section .left-content #confirmation-box #proceed-btn:active {
   background-color: #037DEE;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn {
   background-color: #D3DDE5;
   color: #04508c;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn:hover {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn:hover {
   background-color: #C8D2DA;
 }
-.analytics-page .content-section .left-content .confirmation-box #addons-btn:active {
+.analytics-page .content-section .left-content #confirmation-box #addons-btn:active {
   background-color: #D3DDE5;
 }
 .analytics-page .content-section .right-content {

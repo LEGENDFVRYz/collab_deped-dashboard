@@ -135,7 +135,6 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active {
   pointer-events: none;
-  color: #3C6382;
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu .tabs-menu-ctn .tab-btn.active a {
   color: #04508c;
