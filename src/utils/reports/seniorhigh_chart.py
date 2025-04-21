@@ -87,25 +87,40 @@ seniorhigh_distri_per_track = px.bar(
     x='counts', 
     y='track', 
     orientation='h', 
-    labels={'counts': 'Number of Students', 'track': 'Track'}
+    labels={'counts': 'Number of Students', 'track': 'Track', 'color': '#667889'}
 )
 
+# Update layout to ensure all y-axis labels show
 seniorhigh_distri_per_track.update_layout(
-    bargap=0.4,
+    bargap=0.2,
     autosize=True,
+    margin=dict(l=80, r=10, t=50, b=10),  
     title={
         'text': 'Distribution of SHS Enrollees per Track',
         'x': 0.5,
         'xanchor': 'center',
         'font': {
-            'size': 20,  
-            'color': '#3C6382' 
+            'size': 14,
+            'color': '#3C6382'
         },
-    }
+    },
+    yaxis=dict(
+        automargin=True,          
+        tickfont=dict(size=12),   
+    ),
 )
+
+# Keep layout responsive
+seniorhigh_distri_per_track.update_layout(
+    uirevision='true',
+)
+
 # Change the color of the bars
-seniorhigh_distri_per_track.update_traces(marker_color='#2991F1')
+seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
+
+# Display the chart
 seniorhigh_distri_per_track
+
 
 
 
@@ -122,85 +137,46 @@ seniorhigh_distri_per_track
 # Count the number of students in each 'track'
 track_counts = FILTERED_DF.groupby('track').size().reset_index(name='student_count')
 
-# Get the acad_count and non_acad_count based on 'track' values
+# Get the acad_count and non_acad_count
 acad_count = track_counts.loc[track_counts['track'] == 'acad', 'student_count'].sum()
-non_acad_count = track_counts.loc[track_counts['track'].isin(['tvl', 'arts', 'sports']), 'student_count'].sum()
+non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()
 
-# Create the Pie chart
+# Create the Donut Chart
 seniorhigh_ratio_enrollment = go.Figure(
     data=[go.Pie(
-        labels=track_counts['track'],  
-        values=track_counts['student_count'],  
+        labels=['Academic', 'Non-Academic'],
+        values=[acad_count, non_acad_count],
+        hole=0.7,  
+        marker=dict(colors=['#5DB7FF', '#FF5B72']),
         textinfo='none',
-        marker=dict(colors=['#5DB7FF', '#FF5B72']), 
-        hoverinfo='label+percent'
+        hoverinfo='label+value+percent',
+        direction='clockwise',
+        sort=False,
+        domain={'x': [0, 1], 'y': [0, 1]},
     )]
 )
 
-# Layout and annotations for the donut chart
+# Update layout for true maximization
 seniorhigh_ratio_enrollment.update_layout(
     autosize=True,
+    margin=dict(t=0, r=0, b=0, l=0),  
     showlegend=False,
-    margin=dict(t=20, r=10, b=100, l=10),  
     annotations=[
-        # Center donut title
         dict(
             text="Academic<br>vs.<br>Non-Academic",
             x=0.5, y=0.5,
+            font=dict(size=14, color='#3C6382'),  
             showarrow=False,
-            font_size=16,
-            font_color='#3C6382',
-            align='center'
-        ),
-        # Academic number
-        dict(
-            text=f"<b>{acad_count:,}</b>",
-            x=0.15, y=-0.09,
-            showarrow=False,
-            font_size=16,
-            font_color='#3C6382'
-        ),
-        # Non-Academic number
-        dict(
-            text=f"<b>{non_acad_count:,}</b>",
-            x=0.85, y=-0.09,
-            showarrow=False,
-            font_size=16,
-            font_color='#3C6382'
-        ),
-        # "students" label
-        dict(
-            text="students",
-            x=0.17, y=-0.15,
-            showarrow=False,
-            font_size=12,
-            font_color='#9DADBD'
-        ),
-        dict(
-            text="students",
-            x=0.83, y=-0.15,
-            showarrow=False,
-            font_size=12,
-            font_color='#9DADBD'
-        ),
-        # Strand labels
-        dict(
-            text="<b>ACADEMIC</b>",
-            x=0.15, y=-0.23,
-            showarrow=False,
-            font_size=12,
-            font_color='#5DB7FF'
-        ),
-        dict(
-            text="<b>NON-ACADEMIC</b>",
-            x=0.9, y=-0.23,
-            showarrow=False,
-            font_size=12,
-            font_color='#FF5B72'
-        ),
+            align='center',
+            xanchor='center',
+            yanchor='middle'
+        )
     ]
 )
 seniorhigh_ratio_enrollment
+
+
+
 
 
 
@@ -275,36 +251,39 @@ seniorhigh_gender_distri = px.bar(
     track_gender,
     x='counts',
     y='strand',
-    color='gender',  # This will use the color parameter
+    color='gender',
     orientation='h',
     barmode='group',
     labels={'strand': 'Strand', 'counts': 'Number of Students', 'gender': 'Gender'},
-    color_discrete_sequence=['#5DB7FF', '#FF5B72']  # Directly specify the color sequence for Male and Female
+    color_discrete_sequence=['#5DB7FF', '#FF5B72']
 )
 
-# Update layout with formatting
+# Update layout to maximize chart space and reduce label sizes
 seniorhigh_gender_distri.update_layout(
+    autosize=True,
+    margin=dict(l=60, r=10, t=50, b=20),
     title={
-        'text': "Enrollment Distribution by Strand and Gender",
+        'text': "Distribution by<br>Strand and Gender",
         'x': 0.5,
         'xanchor': 'center',
-        'font': {'color': '#04508c'}
+        'font': {'color': '#3C6382', 'size': 14}
     },
     xaxis={
-        'title': {'text': "Number of Students", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'},
+        'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
+        'tickfont': {'color': '#667889', 'size': 10},
     },
     yaxis={
-        'title': {'text': "Strand", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'title': {'text': "Strand", 'font': {'color': '#667889', 'size': 11}},
+        'tickfont': {'color': '#667889', 'size': 10},
+        'automargin': True
     },
     legend={
-        'title': {'text': "Gender", 'font': {'color': '#667889'}},
-        'font': {'color': '#667889'}
+        'title': {'text': "Gender", 'font': {'color': '#667889', 'size': 10}},
+        'font': {'color': '#667889', 'size': 10}
     },
-    bargap=0.8,
-    bargroupgap=0.1,
-    
+    bargap=0.3,
+    bargroupgap=0.05,
+    uirevision='true',
 )
 seniorhigh_gender_distri
 
@@ -321,8 +300,7 @@ seniorhigh_gender_distri
 # Group data by track and sector, counting unique schools
 FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
 FILTERED_DF = FILTERED_DF[FILTERED_DF['counts'] != 0]
-school_count = FILTERED_DF.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')  
-school_count
+school_count = FILTERED_DF.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')
 
 # Create horizontal stacked bar chart
 seniorhigh_school_offering_per_track_by_sector = px.bar(
@@ -336,15 +314,18 @@ seniorhigh_school_offering_per_track_by_sector = px.bar(
     title="Number of Schools Offering Each Track by Sector"
 )
 
+# Update layout
 seniorhigh_school_offering_per_track_by_sector.update_layout(
     title={
-        'text': "Number of Schools Offering Each Track by Sector",
+        'text': "Number of Schools<br>Offering Each Track by Sector",
         'x': 0.5,
-        'font': {'color': '#3C6382'}
+        'font': {'color': '#3C6382', 'size': 14}
     },
     xaxis={
         'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'tickfont': {'color': '#667889'},
+        'tickformat': '~s',  
+        'tickangle': 0       
     },
     yaxis={
         'title': {'text': "Track", 'font': {'color': '#667889'}},
@@ -374,44 +355,57 @@ seniorhigh_school_offering_per_track_by_sector
 #################################################################################
 ##  --- Which SHS tracks are least offered but in high demand
 #################################################################################
-# Step 1: Group by track to get supply and demand
+# Group by track to get supply and demand
 grouped = FILTERED_DF.groupby('track').agg(
     offerings=('enroll_id', 'count'),    
     total_demand=('counts', 'sum')       
 ).reset_index()
 
-# Step 2: Create the scatter plot (equal-sized circles)
+# Define custom color palette
+custom_colors = ['#FFB700', '#F9F521', '#89FE2A', '#00F2FF', '#00CCFF', '#1389F0', '#0C6DC1', '#074889']
+
+# Create the scatter plot
 seniorhigh_least_offered_high_demand = px.scatter(
     grouped,
     x='offerings',
     y='total_demand',
     color='track',
-    title='Scatter Plot: SHS Tracks - Least Offered but High in Demand',
     labels={
         'offerings': 'Number of Offerings (Supply)',
         'total_demand': 'Student Demand',
         'track': 'SHS Track',
     },
+    color_discrete_sequence=custom_colors
 )
 
-# Step 3: Styling
+# Update layout for full responsiveness with legend on the right
 seniorhigh_least_offered_high_demand.update_layout(
+    autosize=True,
+    margin=dict(l=60, r=120, t=60, b=60),  
     title={
-        'text': 'Relationship between Student Demand and Track Supply',
+        'text': 'Relationship between<br>Student Demand and Track Supply',
         'x': 0.5,
-        'font': {'color': '#3C6382'}
+        'xanchor': 'center',
+        'font': {'color': '#3C6382', 'size': 14}
     },
     xaxis={
-        'title': {'text': 'Number of Offerings (Supply)', 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'title': {'text': 'Number of Offerings (Supply)', 'font': {'color': '#667889', 'size': 12}},
+        'tickfont': {'color': '#667889'},
+        'automargin': True
     },
     yaxis={
-        'title': {'text': 'Student Demand', 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'title': {'text': 'Student Demand', 'font': {'color': '#667889', 'size': 12}},
+        'tickfont': {'color': '#667889'},
+        'automargin': True
     },
     legend={
         'title': {'text': 'SHS Track', 'font': {'color': '#667889'}},
-        'font': {'color': '#667889'}
+        'font': {'color': '#667889'},
+        'orientation': 'v',
+        'yanchor': 'middle',
+        'y': 0.5,
+        'xanchor': 'left',
+        'x': 1.05
     }
 )
 seniorhigh_least_offered_high_demand
@@ -428,10 +422,38 @@ seniorhigh_least_offered_high_demand
 #################################################################################
 ##  --- How many schools offer each SHS track per region
 #################################################################################
-# dist_per_track_chart = px.bar(filtered_df, )
+track_pref = dataframe = auto_extract(['beis_id','strand', 'region'], is_specific=True)
+track_pref
+
+heatmap_data = track_pref.groupby(['region', 'strand'])['beis_id'].size().reset_index()
+heatmap_data.rename(columns={'beis_id': 'school_count'}, inplace=True)
 
 
+heatmap_pivot = heatmap_data.pivot(index='strand', columns='region', values='school_count').fillna(0)
 
+
+heatmap_fig = px.imshow(
+    heatmap_pivot.values,
+    labels=dict(x="Region", y="Track", color="Number of Schools"),
+    x=heatmap_pivot.columns.tolist(),
+    y=heatmap_pivot.index.tolist(),
+    color_continuous_scale=[
+        "#FF899A",  # Light pink
+        "#E11C38",  # Mid red
+        "#930F22"   # Deep red
+    ]
+)
+
+
+heatmap_fig.update_layout(
+    title="Number of Schools Offering SHS Tracks per Region",
+    xaxis_title="Region",
+    yaxis_title="SHS Track",
+    xaxis=dict(tickangle=45),
+    margin={"l": 20, "r": 20, "t": 40, "b": 40}
+)
+
+heatmap_fig
 
 
 #################################################################################
@@ -442,10 +464,49 @@ seniorhigh_least_offered_high_demand
 ##  --- Which SHS tracks are more prevalent in each sector
 #################################################################################
 # dist_per_track_chart = px.bar(filtered_df, )
+FILTERED_byprevalent = dataframe = auto_extract(['strand', 'sector'], is_specific=True)
+FILTERED_nostudents = dataframe = auto_extract(['counts'], is_specific=True)
+grade_enrollment2 = FILTERED_nostudents.groupby('grade')['counts'].sum().reset_index()
+merged = FILTERED_byprevalent.copy()
+merged['counts'] = FILTERED_nostudents['counts']
+grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
 
+def smart_truncate_number(num):
+    if num >= 1_000_000:
+        return f"{num/1_000_000:.1f}M"
+    elif num >= 1_000:
+        return f"{num/1_000:.1f}K"
+    else:
+        return str(num)
+grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
+blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 
+grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
+fig = px.bar(
+    grouped,
+    x='strand',
+    y='counts',
+    color='sector',
+    barmode='group',
+    title='Prevalence of SHS Strands by Sector (Based on Student Count)',
+    labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
+    color_discrete_sequence=blue_shades,
+    text='counts_text'
+)
+
+fig.update_traces(textposition='outside')
+
+fig.update_layout(
+    xaxis_tickangle=-45,
+    legend_title='Sector',
+    xaxis_title='SHS Strand',
+    yaxis_title='Number of Students',
+    margin=dict(l=60, r=40, t=60, b=60)
+)
+
+fig
 
 #################################################################################
 
@@ -455,10 +516,40 @@ seniorhigh_least_offered_high_demand
 ##  --- Do mother schools or annexes offer a wider range of SHS tracks
 #################################################################################
 # dist_per_track_chart = px.bar(filtered_df, )
+FILTERED_bytype = dataframe = auto_extract(['strand', 'type'], is_specific=True)
+FILTERED_bytype 
 
 
+track_counts = FILTERED_bytype.groupby('type')['strand'].nunique().reset_index()
+track_counts.columns = ['School Type', 'Number of strand']
 
 
+blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
+
+track_counts = FILTERED_bytype.groupby('type')['strand'].nunique().reset_index()
+track_counts.columns = ['School Type', 'Number of strand']
+
+fig = px.bar(
+    track_counts,
+    x='School Type',
+    y='Number of strand',
+    title='Number of SHS Strand Offered by Mother Schools vs Annexes',
+    color='School Type',
+    text='Number of strand',
+    color_discrete_sequence=blue_shades
+)
+
+fig.update_traces(textposition='outside')
+
+fig.update_layout(
+    xaxis_title='School Type',
+    yaxis_title='Number of Strand Offered',
+    uniformtext_minsize=8,
+    uniformtext_mode='hide',
+    showlegend=False
+)
+
+fig
 
 #################################################################################
 
