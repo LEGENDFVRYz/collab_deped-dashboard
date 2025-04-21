@@ -72,11 +72,12 @@ home_enrollment_per_region = px.bar(query,
                                     y="grade",
                                     text="formatted_counts",
                                     orientation='h',
+                                    custom_data=['school-level'],
                                     color='school-level',
                                     color_discrete_map={
-                                        'ELEM': '#FFBF5F', 
+                                        'ELEM': '#037DEE', 
                                         'JHS': '#FE4761', 
-                                        'SHS': '#037DEE'    
+                                        'SHS': '#FFBF5F'    
                                     }
                             )
 home_enrollment_per_region
@@ -85,7 +86,8 @@ home_enrollment_per_region
 home_enrollment_per_region.update_traces(
     textposition='outside',
     cliponaxis=False,
-    textfont=dict(size=8, color="#04508c")
+    textfont=dict(size=8, color="#04508c"),
+    hovertemplate='Education Level: %{customdata[0]}<br>Enrollees: %{x}<br>Grade-level: %{y}',
 )
 home_enrollment_per_region.update_layout(yaxis=dict(visible=True), xaxis=dict(visible=False))
 home_enrollment_per_region.update_layout(
@@ -97,7 +99,8 @@ home_enrollment_per_region.update_layout(
         automargin=True,
         showticklabels=True,
         title=None,
-        tickfont=dict(size=9, color="#9DADBD")
+        tickfont=dict(size=9, color="#9DADBD"),
+        ticksuffix = "  "
     ),
     xaxis=dict(
         automargin=True,
@@ -109,7 +112,7 @@ home_enrollment_per_region.update_layout(
         title=None,
         orientation="h",  # Horizontal legend
         yanchor="bottom",  # Align legend at the bottom
-        y=1.05,  # Position it below the chart
+        y=1.025,  # Position it below the chart
         xanchor="center",  # Center it horizontally
         x=0.45  # Align it to the center
     )
@@ -254,6 +257,15 @@ total_male_count_formatted = smart_truncate_number(total_male_count)
 total_female_count = grouped_by_gender.loc[grouped_by_gender['gender'] == 'F', 'counts'].values[0]
 total_female_count_formatted = smart_truncate_number(total_female_count)
 
+if total_male_count > total_female_count:
+    gender_gap = ((total_male_count - total_female_count) / total_female_count) * 100
+elif total_female_count > total_male_count:
+    gender_gap = ((total_female_count - total_male_count) / total_male_count) * 100
+else:
+    gender_gap = 0
+
+gender_gap = round(gender_gap, 2)
+
 # ----------------------------------------------------------
 # Regional Distribution
 
@@ -262,6 +274,21 @@ enrollees_df
 
 enrollees_per_region = enrollees_df.groupby(['region'], as_index=False)["counts"].sum()
 enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
+
+ordered_regions = [
+    'Region I', 'Region II', 'Region III', 'Region IV-A', 'MIMAROPA',
+    'Region V', 'Region VI', 'Region VII', 'Region VIII', 'Region IX',
+    'Region X', 'Region XI', 'Region XII', 'CAR', 'NCR', 'CARAGA',
+    'BARMM', 'PSO'
+]
+
+enrollees_per_region['region'] = pd.Categorical(
+    enrollees_per_region['region'],
+    categories=ordered_regions,
+    ordered=True
+)
+
+enrollees_per_region = enrollees_per_region.sort_values('region').reset_index(drop=True)
 enrollees_per_region
 
 home_regional_distribution = px.bar (enrollees_per_region, x="region", y="counts", 
@@ -295,7 +322,7 @@ home_regional_distribution.update_layout(
         tickangle=-45,
         tickfont=dict(size=8, color="#9DADBD")
     ),
-    transition=dict(duration=20000, easing="cubic-in-out"),
+    # transition=dict(duration=20000, easing="cubic-in-out"),
 )
 
 home_regional_distribution
@@ -414,11 +441,11 @@ grouped_by_offering = program_offering_extract.groupby("mod_coc").size().reset_i
 
 # Flags for outer donut totals
 grouped_by_offering['has_ES'] = grouped_by_offering['mod_coc'].str.contains('ES', case=False, na=False) | \
-                                 grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
+                                grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
 grouped_by_offering['has_JHS'] = grouped_by_offering['mod_coc'].str.contains('JHS', case=False, na=False) | \
-                                  grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
+                                grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
 grouped_by_offering['has_SHS'] = grouped_by_offering['mod_coc'].str.contains('SHS', case=False, na=False) | \
-                                  grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
+                                grouped_by_offering['mod_coc'].str.contains('All Offering', case=False, na=False)
 
 # Program totals
 es_total = grouped_by_offering.loc[grouped_by_offering['has_ES'], 'counts'].sum()
@@ -434,29 +461,29 @@ program_totals = pd.DataFrame({
 outer_labels = program_totals['program']
 outer_values = program_totals['total_count']
 outer_color_map = {
-    'ES': '#FFBF5F',
+    'ES': '#037DEE',
     'JHS': '#FE4761',
-    'SHS': '#037DEE'
+    'SHS': '#FFBF5F'
 }
 
 outer_colors = outer_labels.map(outer_color_map)
 
 # Inner donut (Offerings) with gradient sort
 desired_order = [
-    'All Offering',
-    'JHS with SHS',
-    'ES and JHS',
-    'Purely SHS',
+    'Purely ES',
     'Purely JHS',
-    'Purely ES'
+    'Purely SHS',
+    'ES and JHS',
+    'JHS with SHS',
+    'All Offering'
 ]
 inner_color_map = {
-    'All Offering': '#002242',
-    'JHS with SHS': '#004386',
-    'ES and JHS': '#004386',
-    'Purely SHS': '#5EAFFF',
-    'Purely JHS': '#ADDBFF',
-    'Purely ES': '#E2F2FF'
+    'Purely ES': '#002242',
+    'Purely JHS': '#004386',
+    'Purely SHS': '#0162C2',
+    'ES and JHS': '#5EAFFF',
+    'JHS with SHS': '#ADDBFF',
+    'All Offering': '#E2F2FF'
 }
 
 # Apply desired order
@@ -472,59 +499,82 @@ inner_values = grouped_by_offering['counts']
 inner_colors = inner_labels.map(inner_color_map)
 
 # Create donut chart
-program_donut_chart = go.Figure()
+home_program_offering = go.Figure()
 
 # Outer donut
-program_donut_chart.add_trace(go.Pie(
+home_program_offering.add_trace(go.Pie(
     labels=outer_labels,
     values=outer_values,
-    hole=0.75,
+    hole=0.7,
     direction='clockwise',
     sort=False,
-    textinfo='label+percent',
+    textinfo='none',
     textposition='inside',
-    marker=dict(colors=outer_colors, line=dict(color='white', width=1)),
+    marker=dict(colors=outer_colors, line=dict(color='#3C6382', width=0)),
     domain={'x': [0, 1], 'y': [0, 1]},
     name='Programs',
-    legendgroup='Programs',
+    legendgroup='Program Offering',
     showlegend=True
 ))
 
 # Inner donut
-program_donut_chart.add_trace(go.Pie(
+home_program_offering.add_trace(go.Pie(
     labels=inner_labels,
     values=inner_values,
-    hole=0.65,
+    hole=0.43,
     direction='clockwise',
+    rotation=90,
     sort=False,
-    textinfo='label+percent',
+    textinfo='none',
     textposition='inside',
-    marker=dict(colors=inner_colors, line=dict(color='white', width=1)),
-    domain={'x': [0.17, 0.83], 'y': [0.17, 0.83]},
-    name='Offerings',
-    legendgroup='Offerings',
+    marker=dict(colors=inner_colors, line=dict(color='#3C6382', width=0)),
+    domain={'x': [0.2, 0.8], 'y': [0.2, 0.8]},
+    name='Level',
+    legendgroup='Education Level',
     showlegend=True
 ))
 
 # Layout
-program_donut_chart.update_layout(
+home_program_offering.update_layout(
     showlegend=True,
+    autosize=True,
     margin=dict(t=20, b=20, l=20, r=20),
-    annotations=[dict(
-        text='Programs<br>& Offerings',
-        x=0.5, y=0.5, font_size=14, showarrow=False, font=dict(color='#3C6382')
-    )],
+    # annotations=[dict(
+    #     text='Programs<br>& Offerings',
+    #     x=0.5, y=0.5, font_size=14, showarrow=False, font=dict(color='#3C6382')
+    # )],
     legend=dict(
-        orientation='h',
-        yanchor='top',
-        y=-0.1,
-        xanchor='center',
-        x=0.5
+        # orientation='h',
+        # yanchor='top',
+        # y=-0.1,
+        # xanchor='center',
+        # x=0.5,
+        orientation='v',       # vertical layout
+        yanchor='middle',      # anchor at the middle vertically
+        y=0.5,                 # center of the y-axis
+        xanchor='left',        # anchor the x at the left of the legend box
+        x=1.05,  
     )
 )
 
 # Show the chart
-program_donut_chart
+home_program_offering
 
 # ----------------------------------------------------------
-# Ratio of Schools by Program Offering
+# Senior High School Tracks Distribution
+
+shs_tracks_df = auto_extract(['track'], is_specific=False)
+grouped_by_tracks = shs_tracks_df.groupby(["track"], as_index=False)["counts"].sum()
+
+home_shs_tracks = px.bar(
+    grouped_by_tracks,
+    x="track",
+    y="counts",
+)
+
+home_shs_tracks.update_layout(
+    autosize=True,
+    margin=dict(t=10, b=10, l=10, r=10),
+)
+
+home_shs_tracks

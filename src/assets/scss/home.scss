@@ -131,9 +131,9 @@
                                             width: 10px;
                                             height: 30px;
 
-                                            &.es { background-color: #FFBF5F; }
+                                            &.es { background-color: $primary-color-2; }
                                             &.jhs { background-color: #FE4761; }
-                                            &.shs { background-color: $primary-color-2; }
+                                            &.shs { background-color: #FFBF5F; }
                                         }
     
                                         .count-text {
@@ -179,7 +179,7 @@
         .overview-layer-2 {
             display: flex;
             flex: 1;
-            min-height: 390px;
+            min-height: 400px;
             gap: 2em;
             
             .grade-level-dynamics {
@@ -195,7 +195,7 @@
     
                     .gld-graph {
                         display: flex;
-                        flex: 3;
+                        flex: 2.75;
 
                         .gld-graph-title {
                             color: $text-color-1;

@@ -7,8 +7,8 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
-from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, program_donut_chart
-from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted
+from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, home_program_offering, home_shs_tracks
+from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted, gender_gap
 
 # Landing page
 dash.register_page(__name__, path="/")  
@@ -147,7 +147,7 @@ layout = html.Div([
                                                 style={"width": "100%", "height": "100%"}
                                     ),
                                     html.Div([
-                                        html.Span("There are 1.2% more MALE than FEMALE"),
+                                        html.Span(f"There are {gender_gap}% more MALE than FEMALE"),
                                     ], className="lp-desc"),
                                 ], className="lp-graph-desc"),
                             ], margin=False)
@@ -190,7 +190,12 @@ layout = html.Div([
                     ], className="lp-graph-1"),
                     
                     html.Div([
-                      Card([], margin=False)  
+                        Card([
+                            dcc.Graph(id="home_shs_tracks", figure=home_shs_tracks,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                            ),
+                        ], margin=False)  
                     ], className="lp-graph-2"),
                 ], className="lp-content"),
                 
@@ -242,7 +247,7 @@ layout = html.Div([
                     
                     html.Div([
                         Card([
-                            dcc.Graph(id="program_donut_chart", figure=program_donut_chart,
+                            dcc.Graph(id="home_program_offering", figure=home_program_offering,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
                             ),
