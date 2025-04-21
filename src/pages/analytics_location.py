@@ -84,9 +84,7 @@ def render_location_filter():
                                     id="loading-graph",
                                     type="default",
                                     children=html.Div([
-                                        ],
-                                        id='location_enrollees-distribution-per-location',
-                                    )
+                                    ],id='location_highest_lowest_enrollees')
                                 )
                                 
                                 #     dcc.Graph(id="location_highest_lowest_enrollees", 
@@ -100,8 +98,8 @@ def render_location_filter():
                             html.Div([
                                     Card([
                                         html.Div([
-                                            # html.H1(f"{truncated_total_enrollees}", className="truncated_total_enrollees"), 
-                                            # html.Span(f"{raw_total_enrollees:,} enrollees", className="raw_total_enrollees"),
+                                            html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"), 
+                                            html.Span([], id="raw-total-enrollees", className="raw_total_enrollees"),
                                             html.Span("Total Enrollees", className="label_total_enrollees")
                                         ], className="total_enrollees")
                                     ], margin=False)
@@ -109,12 +107,9 @@ def render_location_filter():
 
                             
                             html.Div([Card([
-                                # html.H1(
-                                #     f"{truncated_total_schools} {raw_total_schools:,}",
-                                #     className="total_schools"
-                                # )
+                                    html.H1([], id="truncated-total-schools", className="truncated_total_schools"), 
+                                    html.Span([], id="raw-total-schools", className="raw_total_schools"),
                                 ], margin=False)], className='plot-b-box2'),
-                        
                         ], className='plot-b-section'),
                     ], className='track-box plot-content')
                 ], className='plot-top-section plot-sec-wrap'),
@@ -126,6 +121,13 @@ def render_location_filter():
                         #########################################
                         ## INSERT PLOT: Strand preferences per region
                         #########################################
+                        
+                        dcc.Loading(
+                            id="loading-graph",
+                            type="default",
+                            children=html.Div([
+                            ],id='track-preference-heatmap')
+                        )
                         # dcc.Graph(
                         #     id="track-preference-heatmap",
                         #     # figure=heatmap_fig,
