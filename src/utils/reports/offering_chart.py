@@ -75,7 +75,7 @@ sample_chart
 ##  --- CHART: Number of Schools by MCOC Type
 #################################################################################
 # 1. Automatically extract 'counts' column for all grades (ES to SHS)
-number_of_schools = dataframe = auto_extract(['counts','mod_coc'], is_specific=False)
+number_of_schools = FILTERED_DF = auto_extract(['counts','mod_coc'], is_specific=False)
 number_of_schools
 
 # 2. Group by 'mod_coc' (program offering type) and sum the total number of students
@@ -139,7 +139,7 @@ number_of_schools_mcoc_chart
 ##  --- CHART: Gender Distribution Aross MCOC types
 #################################################################################
 # 1. Automatically extract 'counts' column for all grades (ES to SHS)
-gender_distribution = dataframe = auto_extract(['counts','gender','mod_coc'], is_specific=False)
+gender_distribution = FILTERED_DF = auto_extract(['counts','gender','mod_coc'], is_specific=False)
 gender_distribution
 
 # 2. Group by mod_coc and gender, then sum student counts
@@ -203,7 +203,7 @@ gender_distribution_chart
 ##  --- CHART: MCOC Types Ranked by Total Student Enrollment
 #################################################################################
 # 1. Automatically extract 'counts' and 'mod_coc' columns for all grades (ES to SHS)
-program_offering_enrollment_data = dataframe = auto_extract(['counts', 'mod_coc'], is_specific=False)
+program_offering_enrollment_data = FILTERED_DF = auto_extract(['counts', 'mod_coc'], is_specific=False)
 
 # 2. Group data by mod_coc and sum student counts
 mcoc_enrollment = program_offering_enrollment_data.groupby('mod_coc')['counts'].sum().reset_index()
@@ -282,7 +282,7 @@ ranked_mcoc_chart
 #################################################################################
 ##  --- CHART: Enrollment Distribution by Grade Level
 #################################################################################
-FILTERED_Distribution = dataframe = auto_extract(['counts'], is_specific=False)
+FILTERED_Distribution = FILTERED_DF = auto_extract(['counts'], is_specific=False)
 FILTERED_Distribution
 
 grade_enrollment = FILTERED_Distribution.groupby('grade')['counts'].sum().reset_index()
@@ -320,7 +320,7 @@ fig
 ##  --- CHART: Number of MCOC Offerings per Location by School Level
 #################################################################################
 # 1. Automatically extract 'region', 'grade', and 'counts' columns for all grades (ES to SHS)
-region_counts_df = dataframe = auto_extract(['region', 'grade', 'counts'], is_specific=False)
+region_counts_df = FILTERED_DF = auto_extract(['region', 'grade', 'counts'], is_specific=False)
 
 # 2. Create a new column for school level based on grade
 region_counts_df['school_level'] = region_counts_df['grade'].apply(
@@ -398,7 +398,7 @@ region_stacked_chart
 ##  --- INDICATOR: Locations with the Highest and Lowest Number of Offerings
 #################################################################################
 # 1. Automatically extract relevant columns
-edu_level_df = auto_extract(['region', 'grade', 'counts'], is_specific=False)
+edu_level_df = FILTERED_DF =auto_extract(['region', 'grade', 'counts'], is_specific=False)
 
 # 2. Create a column for school level based on grade
 edu_level_df['school_level'] = edu_level_df['grade'].apply(
