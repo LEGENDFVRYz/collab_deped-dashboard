@@ -1,3 +1,4 @@
+from itertools import count
 import re, os, sys
 import dash
 from dash import dcc, html
@@ -428,35 +429,52 @@ seniorhigh_least_offered_high_demand
 #################################################################################
 ##  --- How many schools offer each SHS track per region
 #################################################################################
-track_pref = dataframe = auto_extract(['beis_id','strand', 'region'], is_specific=True)
-track_pref
+schooloffer_region = dataframe = auto_extract(['beis_id','strand', 'region','shs_grade', 'counts'], is_specific=True)
+schooloffer_region
 
-heatmap_data = track_pref.groupby(['region', 'strand'])['beis_id'].size().reset_index()
-heatmap_data.rename(columns={'beis_id': 'school_count'}, inplace=True)
+schooloffer_region = schooloffer_region[
+    schooloffer_region['strand'].notna() & 
+    (schooloffer_region['strand'] != '__NaN__')
+]
 
+# Step 1: Filter only rows where counts > 0
+valid_offers = schooloffer_region[schooloffer_region['counts'] > 0]
 
+# Step 2: Drop duplicates so that each school only counts once per strand-region
+valid_offers_unique = valid_offers.drop_duplicates(subset=['beis_id', 'region', 'strand'])
+
+# Step 3: Group by region and strand, count number of unique schools offering each
+heatmap_data = valid_offers_unique.groupby(['region', 'strand']).size().reset_index(name='school_count')
+
+# Step 4: Pivot for heatmap structure
 heatmap_pivot = heatmap_data.pivot(index='strand', columns='region', values='school_count').fillna(0)
 
+# Step 5: Color scale with white for 0
+colorscale = [
+    [0.0, "#ffffff"],    # white for 0
+    [0.00001, "#FF899A"],  # light pink
+    [0.5, "#E11C38"],    # mid red
+    [1.0, "#930F22"]     # deep red
+]
 
+# Step 6: Create the heatmap
 heatmap_fig = px.imshow(
     heatmap_pivot.values,
-    labels=dict(x="Region", y="Track", color="Number of Schools"),
+    labels=dict(x="Region", y="SHS Strand", color="Number of Schools Offering"),
     x=heatmap_pivot.columns.tolist(),
     y=heatmap_pivot.index.tolist(),
-    color_continuous_scale=[
-        "#FF899A",  # Light pink
-        "#E11C38",  # Mid red
-        "#930F22"   # Deep red
-    ]
+    color_continuous_scale=colorscale,
+    zmin=0,
+    zmax=heatmap_pivot.values.max()
 )
 
-
+# Step 7: Layout tweaks
 heatmap_fig.update_layout(
-    title="Number of Schools Offering SHS Tracks per Region",
+    title="Number of Schools Offering SHS Strands per Region",
     xaxis_title="Region",
-    yaxis_title="SHS Track",
+    yaxis_title="SHS Strand",
     xaxis=dict(tickangle=45),
-    margin={"l": 20, "r": 20, "t": 40, "b": 40}
+    margin={"l": 40, "r": 40, "t": 50, "b": 40}
 )
 
 heatmap_fig
@@ -470,13 +488,27 @@ heatmap_fig
 ##  --- Which SHS tracks are more prevalent in each sector
 #################################################################################
 # dist_per_track_chart = px.bar(filtered_df, )
+# Auto-extract relevant data
 FILTERED_byprevalent = dataframe = auto_extract(['strand', 'sector'], is_specific=True)
 FILTERED_nostudents = dataframe = auto_extract(['counts'], is_specific=True)
+
+# Filter out rows with NaN or "__NaN__" in 'strand'
+FILTERED_byprevalent = FILTERED_byprevalent[
+    FILTERED_byprevalent['strand'].notna() &
+    (FILTERED_byprevalent['strand'] != '__NaN__')
+]
+
+# Calculate total counts per grade (if needed elsewhere)
 grade_enrollment2 = FILTERED_nostudents.groupby('grade')['counts'].sum().reset_index()
+
+# Merge counts with strand + sector
 merged = FILTERED_byprevalent.copy()
 merged['counts'] = FILTERED_nostudents['counts']
+
+# Group by strand and sector
 grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
 
+# Smart number formatting
 def smart_truncate_number(num):
     if num >= 1_000_000:
         return f"{num/1_000_000:.1f}M"
@@ -484,12 +516,13 @@ def smart_truncate_number(num):
         return f"{num/1_000:.1f}K"
     else:
         return str(num)
+
 grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
+# Define blue color shades
 blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 
-grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
-
+# Create grouped bar chart
 fig = px.bar(
     grouped,
     x='strand',
@@ -502,6 +535,7 @@ fig = px.bar(
     text='counts_text'
 )
 
+# Set text and layout options
 fig.update_traces(textposition='outside')
 
 fig.update_layout(
