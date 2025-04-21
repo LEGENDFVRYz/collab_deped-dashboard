@@ -1,14 +1,10 @@
 from dash import html, dcc
 from src.components.card import Card
 
-## IMPORTED CHARTS
-<<<<<<< HEAD
-from src.utils.reports.location_chart import sample_chart
-from src.utils.reports.location_chart import sector_chart
-=======
+#IMPORTED CHARTS
 from src.utils.reports.location_chart import gender_region_fig, heatmap_fig, hi_low_fig
 from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees, raw_total_schools, truncated_total_schools
->>>>>>> baede56d3fec5f230862cccb7beba5228ee681e5
+
 
 
 """
