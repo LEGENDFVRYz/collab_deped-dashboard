@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
-
+# from src.server import cache
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
@@ -15,9 +15,13 @@ from config import project_root
 
 # Database Engine
 enrollment_db_engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
+print("DATABASE CALLED")
 
-def smart_filter(filter_info={}) -> pd.DataFrame:
+# @cache.memoize()
+def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
     try:
+        print("QUERYINGGG...")
+        
         # Base query (JOIN: enrollment and sch_info)
         first_query = "SELECT * FROM enrollment LEFT JOIN sch_info USING(beis_id) WHERE 1=1"  
         params = {}
@@ -69,13 +73,13 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
         
 
         # JOIN: first_query + location detailes
+        region_query = f"""SELECT * FROM (
+            {first_query}
+        ) LEFT JOIN sch_region USING (region_id)
+        LEFT JOIN sch_local USING (local_id)
+        WHERE 1=1
+        """
         if any(key in filter_info for key in ['region', 'province', 'division', 'district']):
-            region_query = f"""SELECT * FROM (
-                {first_query}
-            ) LEFT JOIN sch_region USING (region_id)
-            LEFT JOIN sch_local USING (local_id)
-            WHERE 1=1
-            """
             for col_key, value in filter_info.items():
                 if col_key in ['region', 'province', 'division', 'district', 'municipality', 'brgy']:
                     ## LOCATION
@@ -83,9 +87,6 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
                     params = {**params, **{second_scope[col_key](i)[1:]: v for i, v in enumerate(value)}}
                     
                     region_query += f"\nAND {col_key} IN ({placeholders})"
-        else:
-            # NO LOCATION FILTER SELECTED
-            region_query = first_query
         
         
         ## JOIN: region_query + grade
@@ -120,17 +121,22 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
         
         ## MAIN QUERY
         main_query = f"""
-            SELECT * FROM (
+            SELECT beis_id, gender, name, sector, sub_class, type,
+                mod_coc, region, province, division, district, municipality, 
+                brgy, track, strand, grade, counts, year 
+            FROM(
                 {region_query}
             ) INNER JOIN (
                 {grade_query}
             ) USING (enroll_id, beis_id, gender)
         """
         
-        print(main_query)
+        # print(main_query)
         # print("params:\n", params)
-            
-        dataframe = pd.read_sql_query(main_query, con=enrollment_db_engine, params=params)
+        
+        dataframe = pd.read_sql_query(main_query, con=_engine, params=params)
+        # print(dataframe)
+        
         return dataframe
         
         
@@ -150,9 +156,9 @@ if __name__ == '__main__':
     #     # "No Annexes"
     # ],
     # "gender": "M",
-    # "sector": [
-    #     "Private"
-    # ],
+    "sector": [
+        "Private"
+    ],
     # "sub_class": [
     #     "Sectarian"
     # ],
@@ -164,7 +170,7 @@ if __name__ == '__main__':
     #     "G1", "G2"
     # ],
     # "region": [
-    #     "CARAGA"
+    #     "CARAGA",
     # ],
     # "province": [
     #     "DINAGAT ISLANDS"
