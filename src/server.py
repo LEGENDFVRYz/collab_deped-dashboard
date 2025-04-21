@@ -17,3 +17,4 @@ def load_location_data():
         'region', 'division', 'district', 'province', 'municipality', 'brgy'
     ], is_specific=True, distinct=True)
     return dataframe
+

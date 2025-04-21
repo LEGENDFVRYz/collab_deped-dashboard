@@ -2,6 +2,8 @@ from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
 
+
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from config import project_root
 
@@ -13,7 +15,6 @@ from config import project_root
 
 # Database Engine
 enrollment_db_engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
-
 
 def smart_filter(filter_info={}) -> pd.DataFrame:
     try:

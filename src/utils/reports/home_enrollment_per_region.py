@@ -1,10 +1,7 @@
 import re, os, sys
-from turtle import title
-import dash, math
-from dash import dcc, html
+import math
 
 import numpy as np
-from numpy import average
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
