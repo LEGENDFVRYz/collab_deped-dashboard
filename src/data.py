@@ -38,7 +38,6 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
         }
         
         third_scope = {
-                'mod_coc' : lambda x: f":mod_coc_{x}",
                 'grade' :lambda x: f":grade_{x}",
                 'track' :lambda x: f":track_{x}",
                 'strand' :lambda x: f":strand_{x}",
@@ -50,7 +49,7 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
         if any(key in filter_info for key in ['gender', 'sector', 'sub_class', 'type', 'mod_coc']):
             for col_key, value in filter_info.items():
                 
-                if col_key in ['sector', 'sub_class', 'type', 'mod_coc']:
+                if col_key in ['sector', 'sub_class', 'type']:
                     ## Multiples
                     placeholders = ', '.join([first_scope[col_key](i) for i in range(len(value))])
                     params = {**params, **{first_scope[col_key](i)[1:]: v for i, v in enumerate(value)}}
@@ -60,6 +59,12 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
                 if col_key in ['gender']:
                     ## Single
                     first_query += f"\nAND gender == '{filter_info['gender']}'"
+                
+                if col_key in ['mod_coc']:
+                    placeholders = ', '.join([first_scope[col_key](i) for i in range(len([value]))])
+                    params = {**params, **{first_scope[col_key](i)[1:]: v for i, v in enumerate([value])}}
+
+                    first_query += f"\nAND {col_key} IN ({placeholders})"
         
 
         # JOIN: first_query + location detailes
@@ -83,48 +88,50 @@ def smart_filter(filter_info={}) -> pd.DataFrame:
         
         
         ## JOIN: region_query + grade
-        if any(key in filter_info for key in ['mod_coc', 'grade', 'strand', 'track', 'year']):
-            grade_query = """SELECT * FROM (
-                SELECT enroll_id, beis_id, gender, '__NaN__' as track, '__NaN__' as strand, grade, counts, year FROM enrollment
-                INNER JOIN ES_enroll USING(enroll_id)
+        grade_query = """SELECT * FROM (
+            SELECT enroll_id, beis_id, gender, '__NaN__' as track, '__NaN__' as strand, grade, counts, year FROM enrollment
+            INNER JOIN ES_enroll USING(enroll_id)
 
-                UNION ALL
+            UNION ALL
 
-                SELECT enroll_id, beis_id, gender, '__NaN__' as track, '__NaN__' as strand, grade, counts, year FROM enrollment 
-                INNER JOIN JHS_enroll USING(enroll_id)
+            SELECT enroll_id, beis_id, gender, '__NaN__' as track, '__NaN__' as strand, grade, counts, year FROM enrollment 
+            INNER JOIN JHS_enroll USING(enroll_id)
 
-                UNION ALL
+            UNION ALL
 
-                SELECT enroll_id, beis_id, gender, track, strand, grade, counts, year FROM enrollment 
-                INNER JOIN SHS_enroll USING(enroll_id)
-            )
-            WHERE 1=1"""
-            
+            SELECT enroll_id, beis_id, gender, track, strand, grade, counts, year FROM enrollment 
+            INNER JOIN SHS_enroll USING(enroll_id)
+        )
+        WHERE 1=1"""
+        
+        if any(key in filter_info for key in ['grade', 'strand', 'track', 'year']):
+            # is_there_grade = False
             for col_key, value in filter_info.items():
-                if col_key in ['mod_coc', 'grade', 'strand', 'track', 'year']:
+                if col_key in ['grade', 'strand', 'track', 'year']:
                     ## LOCATION
                     placeholders = ', '.join([third_scope[col_key](i) for i in range(len(value))])
                     params = {**params, **{third_scope[col_key](i)[1:]: v for i, v in enumerate(value)}}
 
                     grade_query += f"\nAND {col_key} IN ({placeholders})"
-            
-            ## MAIN QUERY
-            main_query = f"""
-                SELECT * FROM (
-                    {region_query}
-                ) INNER JOIN (
-                    {grade_query}
-                ) USING (enroll_id, beis_id, gender)
-            """
-        else:
-            main_query = region_query
-            
+                # if col_key in ['grade']:
+                #     is_there_grade = True
+                    
+        
+        ## MAIN QUERY
+        main_query = f"""
+            SELECT * FROM (
+                {region_query}
+            ) INNER JOIN (
+                {grade_query}
+            ) USING (enroll_id, beis_id, gender)
+        """
+        
+        print(main_query)
+        # print("params:\n", params)
             
         dataframe = pd.read_sql_query(main_query, con=enrollment_db_engine, params=params)
         return dataframe
         
-        # print(grade_query)
-        # print("params:\n", params)
         
     except Exception as e:
         print(f'error: {e}')
@@ -137,29 +144,33 @@ def get_engine():
     
 if __name__ == '__main__':
     sample = {
-    "types": [
-        "School with no Annexes"
-    ],
-    "gender": "M",
-    "sector": [
-        "Private"
-    ],
-    "subclass": [
-        "Non-Sectarian"
-    ],
-    "track": [
-        "ARTS"
-    ],
-    "modcoc": "All Offering",
-    "region": [
-        "BARMM"
-    ],
-    "province": [
-        "CITY OF COTABATO"
-    ],
-    "division": [
-        "Cotabato City"
-    ]
+    # "type": [
+    #     "Mother School",
+    #     # "No Annexes"
+    # ],
+    # "gender": "M",
+    # "sector": [
+    #     "Private"
+    # ],
+    # "sub_class": [
+    #     "Sectarian"
+    # ],
+    # "track": [
+    #     "TVL"
+    # ],
+    # "mod_coc": "All Offering",
+    # "grade": [
+    #     "G1", "G2"
+    # ],
+    # "region": [
+    #     "CARAGA"
+    # ],
+    # "province": [
+    #     "DINAGAT ISLANDS"
+    # ],
+    # "division": [
+    #     "Dinagat Island"
+    # ]
     }
     
     df = smart_filter(sample)
