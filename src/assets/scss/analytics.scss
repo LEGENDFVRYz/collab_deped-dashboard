@@ -11,6 +11,12 @@
         display: flex;
         flex: 1;
         gap: 1em;
+        
+
+        // FIXED THIS AND MAKE IT SCROLLABLE
+        // max-height: 80vh;
+        // overflow-y: auto;
+
 
         #filter-section {
             transition: display 2s ease-in-out, opacity 0.2s ease-in-out;
@@ -246,6 +252,8 @@
 
             #plot-content{
                 display: flex;
+                // justify-content: center;
+                // align-items: center;
                 padding: 0.5em 0em;
                 flex: 1;
 
@@ -291,5 +299,20 @@
                 }
             }
         }
+
+        // // PLACEHOLDER FOR CHARTS
+        // .graph-placeholder-container {
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     height: 300px;
+        // }
+            
+        // .placeholder-box {
+        // height: 200px;
+        // width: 80%;
+        // background-color: #e6e6e6;
+        // border-radius: 8px;
+        // }
     }
 }
