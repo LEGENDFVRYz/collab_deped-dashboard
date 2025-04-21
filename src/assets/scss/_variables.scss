@@ -1,49 +1,54 @@
 // Color Branding
-$primary-color-1: #04508c;
-$primary-color-2: #3E7D6E;
-$primary-color-3: #2CC295;  // Main Green for dark themes
+$primary-color-1: #04508c; // Main Titles and Indicator Highlights
+$primary-color-2: #037DEE;
+$primary-color-3: #369EFF;
+$secondary-color-1: #930F22;
+$secondary-color-2: #E11C38;
+$secondary-color-3: #FF899A;
 
-// monochromatic
-$primary-shades-1: #DCF0FF;
-$primary-shades-2: #B3DEFF;
-$primary-shades-3: #87CBFF;
-$primary-shades-3: #0787EA;
-$primary-shades-4: #0674C8;
-$primary-shades-5n: #04518C; // Neutral: same as Primary-Color-1 
-$primary-shades-6: #033962;
-$primary-shades-7: #133F61;
-$primary-shades-8: #142938;
+// Text Colors
+$text-color-1: #3C6382; // Main Topics (Subtitles/Indicator Highlights)
+$text-color-2: #667889; // Regular Texts (Legends/Labels)
+$text-color-3: #9DADBD; // Lighter Texts
 
+// Gradient Combination
+$primary-gradient-1: #A8E8FF;
+$primary-gradient-2: #F5FBFF;
 
-$secondary-color-1: #AD8A68;
-$secondary-color-2: #dfe0df;
-$secondary-color-3: #fff8ee;
+// For Comparison
+$primary-shades-extra: #5DB7FF;
+$secondary-shades-extra: #FF5B72;
 
+// Others Shades of Blue
+$primary-shades-1: #012C53;
+$primary-shades-2: #023F77;
+$primary-shades-3: #02519B;
+$primary-shades-4: #0264BE;
+$primary-shades-5: #0377E2;
+$primary-shades-6: #2991F1;
+$primary-shades-7: #4FA4F3;
+$primary-shades-8: #74B8F6;
+$primary-shades-9: #9ACBF8;
+$primary-shades-10: #C0DFFB;
+$primary-shades-11: #E6F2FD;
 
-$light-color-1: #FFFFFF;
-$light-color-2: #EFF3F6;
-$light-color-3: #ebecea;
-$light-color-3: #C2D5E2;
+// Other Shades of Red
+$secondary-shades-1: #4F0A14;
+$secondary-shades-2: #710E1C;
+$secondary-shades-3: #921224;
+$secondary-shades-4: #B4162D;
+$secondary-shades-5: #D61B35;
+$secondary-shades-6: #E63E56;
+$secondary-shades-7: #EA6074;
+$secondary-shades-8: #EF8292;
+$secondary-shades-9: #F3A4AF;
+$secondary-shades-10: #F8C6CD;
+$secondary-shades-11: #FCE8EB;
 
+// White
+$white: #FFFFFF;
+$off-white: #F0F0F0;
+$bluish-white: #EFF3F6;
+$grayish-white-1: #D3DDE5;
+$grayish-white-2: #C8D2DA;
 
-$dark-color-1: #090909;
-$dark-color-2: #171717;
-$dark-color-3: #565856;
-
-
-// Primary Black Shades
-$black-100: #1A1A1A; 
-$black-90: #222222;  
-$black-80: #2B2B2B;  
-$black-70: #333333; 
-$black-60: #404040;  
-$black-50: #555555;  
-$black-40: #666666;  
-$black-30: #808080;  
-$black-20: #A0A0A0;  
-$black-10: #C0C0C0;  
-$black-5: #E0E0E0;   
-$black-1: #EFEFEF
-
-
-// Hues of Blue:

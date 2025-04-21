@@ -11,14 +11,14 @@
     font-family: 'Inter Medium';
 }
 body{
-    background-color: $light-color-2;
+    background-color: $white;
 }
 
 
 // App Main Container - Stylings
 .app-container{
     min-height: 100vh;
-    background-color: $light-color-2;
+    background-color: $bluish-white;
     // max-width: 120em; // not final
     margin: 0 auto;
 
@@ -35,7 +35,7 @@ body{
         min-width: 18em; // not final
         height: 100vh;
 
-        background-color: $light-color-1;
+        background-color: $white;
         // box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2); 
         box-shadow: -2px 0px 14px 0px #0000001A;
         // flex-shrink: 0; 
@@ -52,7 +52,7 @@ body{
             height: 6em;
             
             h2{
-                color: $dark-color-1;
+                color: $primary-color-1;
             }
         }
 
@@ -118,7 +118,7 @@ body{
 
             .item-ctn.active{
                 .nav-btn{
-                    background-color: #04508c;
+                    background-color: $primary-color-1;
     
                     .icon.dark{
                         display: none;
@@ -127,7 +127,7 @@ body{
                         display: flex;
                     }
                     .text{
-                        color: $light-color-1;
+                        color: $white;
                     }
                 }
 
@@ -159,7 +159,7 @@ body{
                             }
                             a{
                                 align-self: center;
-                                color: $primary-shades-4;
+                                color: $text-color-1;
                             }
                         }
 
@@ -167,6 +167,7 @@ body{
                             pointer-events: none;
 
                             a{
+                                color: $primary-color-1;
                                 font-weight: bold;
                             }
                         }
@@ -197,7 +198,7 @@ body{
 
             .item-ctn:not(.active):hover{
                 .nav-btn{
-                    background-color: $black-1;
+                    background-color: $off-white;
                     cursor: pointer;
                 }
             }
@@ -255,7 +256,7 @@ body{
                     }
                     .text{
                         padding-left: 1em;
-                        color: $primary-shades-5n;
+                        color: $primary-color-1;
                         
                         display: flex;
                         align-self: center;
@@ -275,7 +276,7 @@ body{
                         display: flex;
                     }
                     .text{
-                        color: $light-color-1;
+                        color: $white;
                     }
                 }
             }
@@ -299,7 +300,7 @@ body{
 
             .item-ctn:not(.active):hover{
                 .nav-btn{
-                    background-color: $black-1;
+                    background-color: $off-white;
                     cursor: pointer;
                 }
             }
@@ -314,7 +315,7 @@ body{
                 flex-direction: row;
                 margin: 0 auto;
                 padding: 0.5em 1em;
-                background-color: $light-color-2;
+                background-color: $bluish-white;
                 border-radius: 0.5em;
                 width: 16em;
 
@@ -332,7 +333,7 @@ body{
                 }
                 .details{
                     flex: 1;
-
+                    color: $text-color-1;
                     display: flex;
                     flex-direction: column;
                     align-self: center;
@@ -358,10 +359,11 @@ body{
         padding: 1em;
         margin: 0em 1em;
         margin-right: 0em;
-        margin-left: 18em;
+        // min-height: 60em;
+        
         display: flex;
         flex: 1;
-        background-color: $light-color-2;
+        background-color: $bluish-white;
         border-radius: 1.5em 0em 0em 1.5em;
         // overflow-y: auto;
 
@@ -384,7 +386,7 @@ body{
                     .page-header{
                         padding: 1em 1em;
                         h1{
-                            color: $primary-shades-5n;
+                            color: $primary-color-1;
                         }
                     }
                 }

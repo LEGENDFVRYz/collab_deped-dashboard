@@ -15,10 +15,14 @@
         gap: 2em;
         padding: 1em;
 
+        .section_title {
+            color: $text-color-1;
+        }
+
         .upper-content {
             display: flex;
-            flex: 1.25;
-            gap: 1em;
+            flex: 1;
+            gap: 2em;
 
             .national-snapshot {
                 display: flex;
@@ -36,7 +40,9 @@
                         flex: 1;
                     
                         &:first-child {
-                          flex: 1.5;
+                            // background: linear-gradient(to right, $primary-gradient-1, $primary-gradient-2);
+                            // border-radius: 2em;
+                            flex: 1.3;
                         }
                     }
                 }
