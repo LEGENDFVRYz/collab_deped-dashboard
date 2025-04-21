@@ -428,10 +428,10 @@ seniorhigh_least_offered_high_demand
 #################################################################################
 ##  --- How many schools offer each SHS track per region
 #################################################################################
-track_pref = dataframe = auto_extract(['beis_id','strand', 'region'], is_specific=True)
-track_pref
+schooloffer_region = dataframe = auto_extract(['beis_id','strand','region'], is_specific=False)
+schooloffer_region
 
-heatmap_data = track_pref.groupby(['region', 'strand'])['beis_id'].size().reset_index()
+heatmap_data = schooloffer_region.groupby(['region', 'strand'])['beis_id'].size().reset_index()
 heatmap_data.rename(columns={'beis_id': 'school_count'}, inplace=True)
 
 
