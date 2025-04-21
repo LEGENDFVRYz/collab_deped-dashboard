@@ -2,7 +2,7 @@ from dash import html, dcc
 from src.components.card import Card
 
 ## IMPORTED CHARTS
-from src.utils.reports.offering_chart import sample_chart
+from src.utils.reports.offering_chart import sample_chart, table_fig
 
 
 """
@@ -111,6 +111,10 @@ def render_offering_filter():
                         html.Div([Card([
                             #########################################
                             ## INDICATOR: Total Number of Enrollees Across All MCOC Types
+                            dcc.Graph(id="offering_total-number-enrollees-mcoc", figure=table_fig,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                            )
                             #########################################
                             
                             

@@ -221,7 +221,7 @@ counts = [total_All_Offering, total_ES_JHS, total_JHS_SHS, total_Pure_ES, total_
 header_color = '#74B8F6'       
 cell_color = '#D6E9FA'        
 
-fig = go.Figure(data=[go.Table(
+table_fig = go.Figure(data=[go.Table(
     header=dict(
         values=["<b>Modified COC (Offering)</b>", "<b>Total</b>"],
         fill_color=header_color,
@@ -236,8 +236,8 @@ fig = go.Figure(data=[go.Table(
     )
 )])
 
-fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
+table_fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
 
-fig
+table_fig
 
 #################################################################################
