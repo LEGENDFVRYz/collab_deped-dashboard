@@ -148,7 +148,7 @@ layout = html.Div([
                                     ),
                                     html.Div([
                                         html.Div([
-                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="up-icon"),
+                                            html.Img(src="/assets/images/icons_navigation/arrow-right-up-fill.svg", className="up-icon"),
                                             html.Span(f"+{gender_gap}", className="percentage"),
                                         ], className="gap-percentage"),
                                         html.Span(f"more {greater_gender}", className="text-1"),
