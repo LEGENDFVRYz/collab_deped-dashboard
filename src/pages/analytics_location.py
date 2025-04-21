@@ -117,7 +117,13 @@ def render_location_filter():
                         #########################################
                         ## INSERT PLOT: school sectors
                         #########################################
-                        
+                        dcc.Graph(
+                            id="location_sector-chart",
+                            figure=sector_chart,
+                            config={"responsive": True},
+                            style={"width": "100%", "height": "100%"}
+                        )
+
                         
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),
