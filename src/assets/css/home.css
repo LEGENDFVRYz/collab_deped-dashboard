@@ -14,135 +14,387 @@
 .home-page .content .section_title {
   color: #3C6382;
 }
-.home-page .content .upper-content {
+.home-page .content .overview-layer-1 {
   display: flex;
   flex: 1;
+  min-height: 340px;
   gap: 2em;
 }
-.home-page .content .upper-content .national-snapshot {
+.home-page .content .overview-layer-1 .national-snapshot {
   display: flex;
   flex-direction: column;
-  flex: 1.5;
+  flex: 1.3;
   gap: 0.5em;
 }
-.home-page .content .upper-content .national-snapshot .ns-info-cards {
+.home-page .content .overview-layer-1 .national-snapshot .ns-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+  padding: 0em 0.5em;
+  color: #FFFFFF;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .icon-and-text {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .icon-and-text img {
+  width: 45px;
+  height: 45px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .icon-and-text .total-icon {
+  display: flex;
+  align-self: center;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .icon-and-text .total-text {
+  font-family: "Inter Bold";
+  font-size: 3em;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year {
+  display: flex;
+  width: 300px;
+  background: linear-gradient(to right, #005599, #2FA6FA);
+  border-radius: 0.5em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year .year-marker {
+  background-color: #FFFFFF;
+  border-radius: 0.5em;
+  width: 6px;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year .year-text {
+  display: flex;
+  font-size: 12px;
+  padding: 0.25em 1em 0.25em 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .desc-text {
+  font-family: "Inter Bold";
+  font-size: 18px;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .upper-content .national-snapshot .ns-info-cards .ns-info {
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator {
   display: flex;
   flex: 1;
 }
-.home-page .content .upper-content .national-snapshot .ns-info-cards .ns-info:first-child {
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #04508c;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count {
+  display: flex;
+  justify-content: space-between;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker {
+  display: flex;
+  align-self: center;
+  border-radius: 0.5em;
+  width: 10px;
+  height: 30px;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.es {
+  background-color: #037DEE;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.jhs {
+  background-color: #FE4761;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.shs {
+  background-color: #FFBF5F;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .count-text {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Inter Bold";
+  font-size: 2.3em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .full-count-text {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Inter Medium Italic";
+  font-size: 9px;
+  color: #3C6382;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .desc-text {
+  color: #3C6382;
+  font-family: "Inter Semi Bold";
+  font-size: 15px;
+  padding-top: 1.5em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-graph {
+  display: flex;
   flex: 1.3;
 }
-.home-page .content .upper-content .national-snapshot .ns-graph {
-  display: flex;
-  flex: 2;
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-graph .ns-graph-title {
+  color: #3C6382;
+  padding: 0.5em;
 }
-.home-page .content .upper-content .grade-level-dynamics {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 0.5em;
-}
-.home-page .content .upper-content .grade-level-dynamics .gld-content {
+.home-page .content .overview-layer-2 {
   display: flex;
   flex: 1;
-  gap: 0.5em;
-}
-.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-graph {
-  display: flex;
-  flex: 2.25;
-}
-.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 0.5em;
-}
-.home-page .content .upper-content .grade-level-dynamics .gld-content .gld-info-cards .gld-info {
-  display: flex;
-  flex: 1;
-}
-.home-page .content .lower-content {
-  display: flex;
-  flex: 1;
+  min-height: 400px;
   gap: 2em;
 }
-.home-page .content .lower-content .learner-profiles {
+.home-page .content .overview-layer-2 .grade-level-dynamics {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .lower-content .learner-profiles .lp-content {
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 {
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-graph {
+  display: flex;
+  flex: 2.75;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-graph .gld-graph-title {
+  color: #3C6382;
+  padding: 0.1em;
+  text-align: center;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-graph {
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .overview-layer-2 .learner-profiles {
+  display: flex;
+  flex-direction: column;
+  flex: 1.2;
+  gap: 0.5em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1.3;
+  gap: 1em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph {
   display: flex;
   flex: 1.5;
 }
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc {
+  display: flex;
+  flex: 1;
+  color: #3C6382;
+  gap: 1em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-dist-graph {
+  display: flex;
+  flex: 1.6;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-self: center;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc span {
+  font-size: 18px;
+  font-family: "Inter Bold";
+  color: #667889;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage {
+  display: flex;
+  color: #037DEE;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .img {
+  width: 50px;
+  height: 50px;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .up-icon {
+  display: flex;
+  align-self: center;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .percentage {
+  font-size: 25px;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div {
+  display: flex;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater {
+  display: flex;
+  padding: 0.05em 0.3em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater.male-dominant {
+  color: #FFFFFF;
+  background-color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater.female-dominant {
+  color: #FFFFFF;
+  background-color: #FF5B72;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div {
+  display: flex;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.male-less-dominant {
+  color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.female-less-dominant {
+  color: #FF5B72;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-info {
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator {
   display: flex;
   flex: 1;
 }
-.home-page .content .lower-content .learner-profiles .lp-content .lp-graph-2 {
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #3C6382;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .gender-count {
+  display: flex;
+  justify-content: space-between;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .gender-count .gender-marker {
+  display: flex;
+  align-self: center;
+  border-radius: 0.5em;
+  width: 10px;
+  height: 30px;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .gender-count .gender-marker.female {
+  background-color: #FF5B72;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .gender-count .gender-marker.male {
+  background-color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .gender-count .count-text {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Inter Bold";
+  font-size: 2.3em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .full-count-text {
+  display: flex;
+  justify-content: end;
+  font-family: "Inter Medium Italic";
+  font-size: 9px;
+  color: #3C6382;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .desc-n-icon {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: visible;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .desc-n-icon img {
+  width: 40px;
+  height: 50px;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .desc-n-icon .desc-text {
+  color: #3C6382;
+  font-family: "Inter Semi Bold";
+  font-size: 15px;
+  text-align: start;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .desc-n-icon .desc-text.female {
+  color: #FF5B72;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards .lp-indicator .lp-sub-cards .desc-n-icon .desc-text.male {
+  color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 {
   display: flex;
   flex: 1;
 }
-.home-page .content .lower-content .school-system-composition {
+.home-page .content .overview-layer-3 {
+  display: flex;
+  flex: 1;
+  min-height: 340px;
+}
+.home-page .content .overview-layer-3 .school-system-composition {
   display: flex;
   flex-direction: column;
   flex: 1.4;
   gap: 0.5em;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph {
+  display: flex;
   flex: 1.5;
   gap: 0.5em;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph {
-  display: flex;
-  flex: 1.5;
-  gap: 0.5em;
-}
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-info {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-info {
   display: flex;
   flex: 1;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph {
   display: flex;
   flex: 1.5;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph .graph {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph .graph {
   flex: 1;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-1 .ssc-table {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-table {
   display: flex;
   flex: 2;
 }
-.home-page .content .lower-content .school-system-composition .ssc-content .ssc-content-2 {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-table .ssc-table-header {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 0em 6em 0em 1em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 {
   display: flex;
   flex: 1;
 }/*# sourceMappingURL=home.css.map */
