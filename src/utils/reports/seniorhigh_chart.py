@@ -173,6 +173,7 @@ seniorhigh_ratio_enrollment.update_layout(
         )
     ]
 )
+
 seniorhigh_ratio_enrollment
 
 
@@ -238,6 +239,7 @@ seniorhigh_most_least_enrolled.update_layout(
     autosize=True,
     margin=dict(t=10, b=10, l=10, r=10)
 )
+
 seniorhigh_most_least_enrolled
 
 
@@ -303,6 +305,7 @@ seniorhigh_gender_distri.update_layout(
     bargroupgap=0.05,
     uirevision='true',
 )
+
 seniorhigh_gender_distri
 
 
@@ -366,6 +369,7 @@ seniorhigh_school_offering_per_track_by_sector.update_layout(
     autosize=True,
     margin=dict(l=80, r=40, t=60, b=40)
 )
+
 seniorhigh_school_offering_per_track_by_sector
 
 
@@ -435,6 +439,7 @@ seniorhigh_least_offered_high_demand.update_layout(
         'x': 1.05
     }
 )
+
 seniorhigh_least_offered_high_demand
 
 
