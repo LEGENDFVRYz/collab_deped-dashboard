@@ -8,7 +8,7 @@ from src.components.card import Card
 
 # -- Graphs
 from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, home_program_offering, home_shs_tracks
-from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted, gender_gap
+from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted, gender_gap, greater_gender, lesser_gender
 
 # Landing page
 dash.register_page(__name__, path="/")  
@@ -147,7 +147,13 @@ layout = html.Div([
                                                 style={"width": "100%", "height": "100%"}
                                     ),
                                     html.Div([
-                                        html.Span(f"There are {gender_gap}% more MALE than FEMALE"),
+                                        html.Div([
+                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="up-icon"),
+                                            html.Span(f"+{gender_gap}", className="percentage"),
+                                        ], className="gap-percentage"),
+                                        html.Span(f"more {greater_gender}", className="text-1"),
+                                        html.Span("students", className="text-2"),
+                                        html.Span(f"than {lesser_gender}", className="text-3"),
                                     ], className="lp-desc"),
                                 ], className="lp-graph-desc"),
                             ], margin=False)

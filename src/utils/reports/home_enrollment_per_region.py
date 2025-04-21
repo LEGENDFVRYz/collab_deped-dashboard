@@ -229,10 +229,10 @@ home_gender_distribution = go.Figure(go.Pie(
     hole=0.70,
     direction='clockwise',
     sort=False,
-    textinfo='percent',  # Show percentage only
-    textposition='inside',  # Inside the slice
-    insidetextorientation='horizontal',  # <-- Make labels horizontal
-    textfont=dict(size=12, color='black'),  # Font styling
+    # textinfo='percent', 
+    # textposition='inside', 
+    # insidetextorientation='horizontal', 
+    textfont=dict(size=12, color='black'),
     # textinfo='label+percent',
     marker=dict(colors=colors)
 ))
@@ -259,8 +259,12 @@ total_female_count_formatted = smart_truncate_number(total_female_count)
 
 if total_male_count > total_female_count:
     gender_gap = ((total_male_count - total_female_count) / total_female_count) * 100
+    greater_gender = "MALE"
+    lesser_gender = "FEMALE"
 elif total_female_count > total_male_count:
     gender_gap = ((total_female_count - total_male_count) / total_male_count) * 100
+    greater_gender = "FEMALE"
+    lesser_gender = "MALE"
 else:
     gender_gap = 0
 
@@ -276,7 +280,7 @@ enrollees_per_region = enrollees_df.groupby(['region'], as_index=False)["counts"
 enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
 
 ordered_regions = [
-    'Region I', 'Region II', 'Region III', 'Region IV-A', 'MIMAROPA',
+    'Region I', 'Region II', 'Region III', 'Region IV-A', 'Region IV-B',
     'Region V', 'Region VI', 'Region VII', 'Region VIII', 'Region IX',
     'Region X', 'Region XI', 'Region XII', 'CAR', 'NCR', 'CARAGA',
     'BARMM', 'PSO'

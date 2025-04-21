@@ -252,8 +252,31 @@
 
                                 .lp-desc {
                                     display: flex;
+                                    flex-direction: column;
                                     flex: 1;
                                     align-items: center;
+                                    color: $text-color-2;
+
+                                    .gap-percentage {
+                                        display: flex;
+                                        gap: 0.5em;
+
+                                        .gap-percentage {
+
+                                        }
+                                    }
+
+                                    .text-1 {
+
+                                    }
+
+                                    .text-2 {
+
+                                    }
+
+                                    .text-3 {
+
+                                    }
                                 }
                             }
                         }
