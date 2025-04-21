@@ -302,8 +302,7 @@ fig.update_traces(
 )
 
 
-<<<<<<< HEAD
-=======
+
 fig.update_layout(
     xaxis_title='Grade Level',
     yaxis_title='Number of Enrollees',
@@ -312,7 +311,7 @@ fig.update_layout(
 )
 
 fig
->>>>>>> baede56d3fec5f230862cccb7beba5228ee681e5
+
 #################################################################################
 
 
