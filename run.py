@@ -9,10 +9,10 @@ import time
 # Run the dashboard project:
 if __name__ == '__main__':
     # Temporary run file loop for development process
-    while True:
-        try:
+    # while True:
+    #     try:
             app.run(debug=True)
-        except Exception as e:
-            print(f"Failed due to {e}: restarting...")
-            time.sleep(1)
+        # except Exception as e:
+        #     print(f"Failed due to {e}: restarting...")
+        #     time.sleep(1)
         
