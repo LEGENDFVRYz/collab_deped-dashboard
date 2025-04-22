@@ -81,31 +81,49 @@ sample_chart.update_layout(
 # Group and prepare the data
 enrollees_distribution = FILTERED_DF.groupby(['track'])['counts'].sum().reset_index()
 
+# Sort in descending order
+enrollees_distribution = enrollees_distribution.sort_values(by='counts', ascending=True)
+
 # Create the horizontal bar chart
 seniorhigh_distri_per_track = px.bar(
-    enrollees_distribution, 
-    x='counts', 
-    y='track', 
-    orientation='h', 
-    labels={'counts': 'Number of Students', 'track': 'Track'}
+    enrollees_distribution,
+    x='counts',
+    y='track',
+    orientation='h',
+    labels={'counts': 'Number of Students', 'track': 'Track', 'color': '#667889'}
 )
 
+# Update layout to ensure all y-axis labels show
 seniorhigh_distri_per_track.update_layout(
-    bargap=0.4,
+    bargap=0.2,
     autosize=True,
+    margin=dict(l=80, r=10, t=50, b=10),  
     title={
         'text': 'Distribution of SHS Enrollees per Track',
         'x': 0.5,
         'xanchor': 'center',
         'font': {
-            'size': 20,  
-            'color': '#3C6382' 
+            'size': 14,
+            'color': '#3C6382'
         },
-    }
+    },
+    yaxis=dict(
+        automargin=True,
+        tickfont=dict(size=12),
+    ),
 )
+
+# Keep layout responsive
+seniorhigh_distri_per_track.update_layout(
+    uirevision='true',
+)
+
 # Change the color of the bars
-seniorhigh_distri_per_track.update_traces(marker_color='#2991F1')
+seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
+
+# Display the chart
 seniorhigh_distri_per_track
+
 
 
 
@@ -120,87 +138,48 @@ seniorhigh_distri_per_track
 ##  --- Ratio enrollment in Academic vs. non-Academic tracks
 #################################################################################
 # Count the number of students in each 'track'
-track_counts = FILTERED_DF.groupby('track').size().reset_index(name='student_count')
+track_counts = FILTERED_DF.groupby(['track'])['counts'].sum().reset_index(name='student_count')
 
-# Get the acad_count and non_acad_count based on 'track' values
-acad_count = track_counts.loc[track_counts['track'] == 'acad', 'student_count'].sum()
-non_acad_count = track_counts.loc[track_counts['track'].isin(['tvl', 'arts', 'sports']), 'student_count'].sum()
 
-# Create the Pie chart
+# Get the acad_count and non_acad_count
+acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
+non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()
+
+
+# Create the Donut Chart
 seniorhigh_ratio_enrollment = go.Figure(
     data=[go.Pie(
-        labels=track_counts['track'],  
-        values=track_counts['student_count'],  
+        labels=['Academic', 'Non-Academic'],
+        values=[acad_count, non_acad_count],
+        hole=0.7,  
+        marker=dict(colors=['#5DB7FF', '#FF5B72']),
         textinfo='none',
-        marker=dict(colors=['#5DB7FF', '#FF5B72']), 
-        hoverinfo='label+percent'
+        hoverinfo='label+value+percent',
+        direction='clockwise',
+        sort=False,
+        domain={'x': [0, 1], 'y': [0, 1]},
     )]
 )
 
-# Layout and annotations for the donut chart
+# Update layout for true maximization
 seniorhigh_ratio_enrollment.update_layout(
     autosize=True,
+    margin=dict(t=0, r=0, b=0, l=0),  
     showlegend=False,
-    margin=dict(t=20, r=10, b=100, l=10),  
     annotations=[
-        # Center donut title
         dict(
             text="Academic<br>vs.<br>Non-Academic",
             x=0.5, y=0.5,
+            font=dict(size=12, color='#3C6382'),  
             showarrow=False,
-            font_size=16,
-            font_color='#3C6382',
-            align='center'
-        ),
-        # Academic number
-        dict(
-            text=f"<b>{acad_count:,}</b>",
-            x=0.15, y=-0.09,
-            showarrow=False,
-            font_size=16,
-            font_color='#3C6382'
-        ),
-        # Non-Academic number
-        dict(
-            text=f"<b>{non_acad_count:,}</b>",
-            x=0.85, y=-0.09,
-            showarrow=False,
-            font_size=16,
-            font_color='#3C6382'
-        ),
-        # "students" label
-        dict(
-            text="students",
-            x=0.17, y=-0.15,
-            showarrow=False,
-            font_size=12,
-            font_color='#9DADBD'
-        ),
-        dict(
-            text="students",
-            x=0.83, y=-0.15,
-            showarrow=False,
-            font_size=12,
-            font_color='#9DADBD'
-        ),
-        # Strand labels
-        dict(
-            text="<b>ACADEMIC</b>",
-            x=0.15, y=-0.23,
-            showarrow=False,
-            font_size=12,
-            font_color='#5DB7FF'
-        ),
-        dict(
-            text="<b>NON-ACADEMIC</b>",
-            x=0.9, y=-0.23,
-            showarrow=False,
-            font_size=12,
-            font_color='#FF5B72'
-        ),
+            align='center',
+            xanchor='center',
+            yanchor='middle'
+        )
     ]
 )
 seniorhigh_ratio_enrollment
+
 
 
 
@@ -212,9 +191,16 @@ seniorhigh_ratio_enrollment
 #################################################################################
 ##  --- Most and least enrolled  (strand)
 #################################################################################
-track_counts = FILTERED_DF.groupby('strand')['counts'].sum().reset_index()
+# Filter out "__NaN__" and actual NaN values from 'strand'
+cleaned_df = FILTERED_DF[~FILTERED_DF['strand'].isin(['__NaN__'])]
+cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
+
+
+# Group and find the most and least populated strands
+track_counts = cleaned_df.groupby('strand')['counts'].sum().reset_index()
 most_populated = track_counts.sort_values('counts', ascending=False).iloc[0]
 least_populated = track_counts.sort_values('counts', ascending=True).iloc[0]
+
 
 # Data for tables
 most_populated_table = go.Table(
@@ -234,6 +220,7 @@ most_populated_table = go.Table(
     domain=dict(x=[0, 1], y=[0.55, 1])
 )
 
+
 least_populated_table = go.Table(
     header=dict(
         values=["Least Populated"],
@@ -251,6 +238,7 @@ least_populated_table = go.Table(
     domain=dict(x=[0, 1], y=[0, 0.45])
 )
 
+
 # Combine tables in one figure with autosizing
 seniorhigh_most_least_enrolled = go.Figure(data=[most_populated_table, least_populated_table])
 seniorhigh_most_least_enrolled.update_layout(
@@ -260,6 +248,7 @@ seniorhigh_most_least_enrolled.update_layout(
 seniorhigh_most_least_enrolled
 
 
+
 #################################################################################
 
 
@@ -267,46 +256,67 @@ seniorhigh_most_least_enrolled
 #################################################################################
 ##  --- Gender Distribution
 #################################################################################
-# Group the data by 'strand' and 'gender' and sum the counts
-track_gender = FILTERED_DF.groupby(['strand', 'gender'])['counts'].sum().reset_index()
+# Remove "__NaN__" and actual NaN values from 'strand'
+cleaned_df = FILTERED_DF[~FILTERED_DF['strand'].isin(['__NaN__'])]
+cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
 
-# Create the horizontal bar chart
+
+# Group the cleaned data by 'strand' and 'gender'
+track_gender = cleaned_df.groupby(['strand', 'gender'])['counts'].sum().reset_index()
+
+
+# Calculate total counts per strand to determine sort order
+strand_order = (
+    track_gender.groupby('strand')['counts']
+    .sum()
+    .sort_values(ascending=False)
+    .index.tolist()
+)
+
+
+# Create the horizontal bar chart with sorted strand order
 seniorhigh_gender_distri = px.bar(
     track_gender,
     x='counts',
     y='strand',
-    color='gender',  # This will use the color parameter
+    category_orders={'strand': strand_order},  
+    color='gender',
     orientation='h',
     barmode='group',
     labels={'strand': 'Strand', 'counts': 'Number of Students', 'gender': 'Gender'},
-    color_discrete_sequence=['#5DB7FF', '#FF5B72']  # Directly specify the color sequence for Male and Female
+    color_discrete_sequence=['#5DB7FF', '#FF5B72']
 )
 
-# Update layout with formatting
+
+# Update layout to maximize chart space and reduce label sizes
 seniorhigh_gender_distri.update_layout(
+    autosize=True,
+    margin=dict(l=60, r=10, t=50, b=20),
     title={
-        'text': "Enrollment Distribution by Strand and Gender",
+        'text': "Distribution by<br>Strand and Gender",
         'x': 0.5,
         'xanchor': 'center',
-        'font': {'color': '#04508c'}
+        'font': {'color': '#3C6382', 'size': 14}
     },
     xaxis={
-        'title': {'text': "Number of Students", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'},
+        'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
+        'tickfont': {'color': '#667889', 'size': 10},
     },
     yaxis={
-        'title': {'text': "Strand", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'title': {'text': "Strand", 'font': {'color': '#667889', 'size': 11}},
+        'tickfont': {'color': '#667889', 'size': 10},
+        'automargin': True
     },
     legend={
-        'title': {'text': "Gender", 'font': {'color': '#667889'}},
-        'font': {'color': '#667889'}
+        'title': {'text': "Gender", 'font': {'color': '#667889', 'size': 10}},
+        'font': {'color': '#667889', 'size': 10}
     },
-    bargap=0.8,
-    bargroupgap=0.1,
-    
+    bargap=0.3,
+    bargroupgap=0.05,
+    uirevision='true',
 )
 seniorhigh_gender_distri
+
 
 
 
@@ -321,10 +331,19 @@ seniorhigh_gender_distri
 # Group data by track and sector, counting unique schools
 FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
 FILTERED_DF = FILTERED_DF[FILTERED_DF['counts'] != 0]
-school_count = FILTERED_DF.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')  
-school_count
+school_count = FILTERED_DF.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')
 
-# Create horizontal stacked bar chart
+
+# Compute total school count per track to determine sort order
+track_order = (
+    school_count.groupby('track')['school_count']
+    .sum()
+    .sort_values(ascending=False)
+    .index.tolist()
+)
+
+
+# Create horizontal stacked bar chart with sorted track order
 seniorhigh_school_offering_per_track_by_sector = px.bar(
     school_count,
     x='school_count',
@@ -333,18 +352,23 @@ seniorhigh_school_offering_per_track_by_sector = px.bar(
     orientation='h',
     labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
     color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
+    category_orders={'track': track_order},
     title="Number of Schools Offering Each Track by Sector"
 )
 
+
+# Update layout
 seniorhigh_school_offering_per_track_by_sector.update_layout(
     title={
-        'text': "Number of Schools Offering Each Track by Sector",
+        'text': "Number of Schools<br>Offering Each Track by Sector",
         'x': 0.5,
-        'font': {'color': '#3C6382'}
+        'font': {'color': '#3C6382', 'size': 14}
     },
     xaxis={
         'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
+        'tickfont': {'color': '#667889'},
+        'tickformat': '~s',
+        'tickangle': 0
     },
     yaxis={
         'title': {'text': "Track", 'font': {'color': '#667889'}},
@@ -367,6 +391,7 @@ seniorhigh_school_offering_per_track_by_sector
 
 
 
+
 #################################################################################
 
 
@@ -374,47 +399,63 @@ seniorhigh_school_offering_per_track_by_sector
 #################################################################################
 ##  --- Which SHS tracks are least offered but in high demand
 #################################################################################
-# Step 1: Group by track to get supply and demand
+# Group by track to get supply and demand
 grouped = FILTERED_DF.groupby('track').agg(
     offerings=('enroll_id', 'count'),    
-    total_demand=('counts', 'sum')       
+    total_demand=('counts', 'sum')      
 ).reset_index()
 
-# Step 2: Create the scatter plot (equal-sized circles)
+# Define custom color palette
+custom_colors = ['#00CCFF', '#1389F0', '#0C6DC1', '#074889']
+
+# Create the scatter plot
 seniorhigh_least_offered_high_demand = px.scatter(
     grouped,
     x='offerings',
     y='total_demand',
     color='track',
-    title='Scatter Plot: SHS Tracks - Least Offered but High in Demand',
     labels={
         'offerings': 'Number of Offerings (Supply)',
         'total_demand': 'Student Demand',
         'track': 'SHS Track',
     },
+    color_discrete_sequence=custom_colors
 )
 
-# Step 3: Styling
+# Update layout for full responsiveness and clean space usage
 seniorhigh_least_offered_high_demand.update_layout(
+    autosize=True,
+    margin=dict(l=60, r=100, t=80, b=60),
     title={
-        'text': 'Relationship between Student Demand and Track Supply',
+        'text': 'Relationship between<br>Student Demand and Track Supply',
         'x': 0.5,
-        'font': {'color': '#3C6382'}
+        'xanchor': 'center',
+        'font': {'color': '#3C6382', 'size': 16}
     },
-    xaxis={
-        'title': {'text': 'Number of Offerings (Supply)', 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
-    },
-    yaxis={
-        'title': {'text': 'Student Demand', 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
-    },
-    legend={
-        'title': {'text': 'SHS Track', 'font': {'color': '#667889'}},
-        'font': {'color': '#667889'}
-    }
+    xaxis=dict(
+        title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
+        tickfont=dict(color='#667889'),
+        automargin=True
+    ),
+    yaxis=dict(
+        title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
+        tickfont=dict(color='#667889'),
+        automargin=True
+    ),
+    legend=dict(
+        title=dict(text='SHS Track', font=dict(color='#667889')),
+        font=dict(color='#667889'),
+        orientation='v',
+        yanchor='middle',
+        y=0.5,
+        xanchor='left',
+        x=1.02  # Slightly closer so it doesn't eat into the space
+    )
 )
+
+# Display the chart
 seniorhigh_least_offered_high_demand
+
 
 
 
