@@ -74,38 +74,33 @@ sample_chart
 #################################################################################
 ##  --- CHART: Number of Schools by MCOC Type
 #################################################################################
-# 1. Automatically extract 'counts' column for all grades (ES to SHS)
-number_of_schools = FILTERED_DF = auto_extract(['counts','mod_coc'], is_specific=False)
+
+number_of_schools = FILTERED_DF = auto_extract(['beis_id', 'mod_coc'], is_specific=False)
 number_of_schools
 
-# 2. Group by 'mod_coc' (program offering type) and sum the total number of students
-number_of_schools_mcoc = number_of_schools.groupby('mod_coc')['counts'].sum().reset_index()
+number_of_schools_mcoc = number_of_schools.groupby('mod_coc')['beis_id'].nunique().reset_index()
+number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
 
-# 3. Sort the data by total number of students in descending order
-number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='counts', ascending=False)
+number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='school_count', ascending=False)
 
-# 4. Define the custom color palette for the chart
 number_of_schools_mcoc_colors = ['#04508c', '#037DEE', '#369EFF', '#930F22', '#E11C38', '#FF899A']
 
-# 5. Create the pie chart (donut chart) using Plotly Express
 number_of_schools_mcoc_chart = px.pie(
     number_of_schools_mcoc_sorted,
     names='mod_coc',
-    values='counts',
+    values='school_count',
     hole=0.45,
     title='Number of Schools by Program Offerings',
     color_discrete_sequence=number_of_schools_mcoc_colors
 )
 
-# 6. Update the chart appearance and interactivity
 number_of_schools_mcoc_chart.update_traces(
     textposition='inside',
     textinfo='label+value',
     textfont=dict(size=14, color='white'),
-    hovertemplate='<b>%{label}</b><br>Total: %{value:,} students<extra></extra>'
+    hovertemplate='<b>%{label}</b><br>Schools: %{value:,}<extra></extra>'
 )
 
-# 7. Adjust layout and styling for dashboard consistency
 number_of_schools_mcoc_chart.update_layout(
     showlegend=True,
     legend_title_text='Programs',
@@ -116,7 +111,7 @@ number_of_schools_mcoc_chart.update_layout(
     height=450,
     paper_bgcolor='#F0F0F0',
     plot_bgcolor='#FFFFFF',
-    font=dict(family='Inter, sans-serif', color='#3C6382'),  # <<< Changed here
+    font=dict(family='Inter, sans-serif', color='#3C6382'),
     legend=dict(
         title='Programs',
         font=dict(size=14),
@@ -129,7 +124,6 @@ number_of_schools_mcoc_chart.update_layout(
     )
 )
 
-# 8. Display the final chart
 number_of_schools_mcoc_chart
 #################################################################################
 
@@ -319,26 +313,32 @@ fig
 #################################################################################
 ##  --- CHART: Number of MCOC Offerings per Location by School Level
 #################################################################################
-# 1. Automatically extract 'region', 'grade', and 'counts' columns for all grades (ES to SHS)
-region_counts_df = FILTERED_DF = auto_extract(['region', 'grade', 'counts'], is_specific=False)
+# Step 1: Automatically extract relevant columns
+region_schools_df = FILTERED_DF =auto_extract(['region', 'grade', 'counts'], is_specific=False)
 
-# 2. Create a new column for school level based on grade
-region_counts_df['school_level'] = region_counts_df['grade'].apply(
-    lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6'] else 
+# Step 2: Clean grade values and ensure uniform casing
+region_schools_df['grade'] = region_schools_df['grade'].astype(str).str.upper().str.strip()
+
+# Step 3: Assign school level based on grade
+region_schools_df['school_level'] = region_schools_df['grade'].apply(
+    lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6'] else
               ('JHS' if x in ['G7', 'G8', 'G9', 'G10'] else 'SHS')
 )
 
-# 3. Group data by region and school level, then sum the number of offerings
-region_grouped = region_counts_df.groupby(['region', 'school_level'])['counts'].sum().reset_index()
+# Step 4: Remove rows where school_level is 'UNKNOWN' (if any)
+region_schools_df = region_schools_df[region_schools_df['school_level'] != 'UNKNOWN']
 
-# 4. Create a stacked bar chart
+# Step 5: Group by region and school level, counting unique beis_id (schools)
+region_grouped_schools = region_schools_df.groupby(['region', 'school_level'])['beis_id'].nunique().reset_index()
+
+# Step 6: Create stacked bar chart
 region_stacked_chart = px.bar(
-    region_grouped,
+    region_grouped_schools,
     x='region',
-    y='counts',
+    y='beis_id',  # Use beis_id to represent the number of unique schools
     color='school_level',
     barmode='stack',
-    title='Total Number of Offerings per Region by School Level',
+    title='Number of Schools per Region by School Level',
     color_discrete_map={
         'ELEM': '#FF899A',
         'JHS': '#E11C38',
@@ -346,30 +346,27 @@ region_stacked_chart = px.bar(
     },
     labels={
         'region': 'Region',
-        'counts': 'Number of Offerings',
+        'beis_id': 'Number of Schools',
         'school_level': 'School Level'
     }
 )
 
-# 5. Update chart layout and appearance
+# Step 7: Style and layout
 region_stacked_chart.update_layout(
     title={
-        'text': 'Total Number of Offerings per Region by School Level',
+        'text': 'Number of Schools per Region by School Level',
         'x': 0.5,
         'xanchor': 'center',
         'font': {'size': 24, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
     },
     font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
     xaxis_title='Region',
-    yaxis_title='Total Number of Offerings',
+    yaxis_title='Total Number of Schools',
     legend_title='School Level',
     margin={"l": 40, "r": 40, "t": 60, "b": 100},
     height=550,
     xaxis_tickangle=45,
-    xaxis=dict(
-        showgrid=True,
-        gridcolor='rgba(0,0,0,0.05)'
-    ),
+    xaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.05)'),
     legend=dict(
         x=1,
         y=1,
@@ -382,13 +379,13 @@ region_stacked_chart.update_layout(
     plot_bgcolor='#FFFFFF'
 )
 
-# 6. Add white borders between stacked segments for clarity
+# Step 8: Add white borders between segments
 region_stacked_chart.update_traces(
     marker_line_color='#FFFFFF',
     marker_line_width=2
 )
 
-# 7. Display the final chart
+# Step 9: Show chart
 region_stacked_chart
 #################################################################################
 
