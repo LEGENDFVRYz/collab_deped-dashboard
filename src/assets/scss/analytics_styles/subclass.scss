@@ -17,7 +17,7 @@
             .subclass-left-content {
                 display: flex;
                 flex-direction: column;
-                flex: 1.25;
+                flex: 1;
                 gap: 0.5em;
 
                 .subclass-enroll-graph {
@@ -113,7 +113,18 @@
                         display: flex;
                         flex: 1;
                         gap: 0.5em;
-
+                        
+                        .subclass-program-graph-left {
+                            display: flex;
+                            flex-direction: column;
+                            flex: 3;
+                            gap: 0.5em;
+                            
+                            .subclass-program-graph {
+                                display: flex;
+                                flex: 1.25;
+                            }
+                        }
                         .subclass-program-graph {
                             display: flex;
                             flex: 1.25;

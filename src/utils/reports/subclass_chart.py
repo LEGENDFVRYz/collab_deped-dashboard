@@ -396,72 +396,49 @@ subclass_heatmap.update_layout(
 #################################################################################
 ##  --- MCOC breakdown/which subclass offers which program types
 #################################################################################
-# Filter the dataframe to include only the required columns
+
+
+
+## Ensure the dataframe is filtered to include only the required columns
 mcoc_df = HM_CBC_DF[['mod_coc', 'counts', 'sub_class']]
 
 # Group by 'mod_coc' and 'sub_class' to aggregate the counts
 mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
 
-# Truncate counts directly in the DataFrame
-mcoc_grouped['counts'] = mcoc_grouped['counts'].apply(
-    lambda count: f"{count/1_000_000:.1f}M" if count >= 1_000_000 else
-                  f"{count/1_000:.1f}K" if count >= 1_000 else
-                  str(count)
+# Revert the counts back to numeric for plotting
+mcoc_grouped['counts_numeric'] = mcoc_grouped['counts'].apply(
+    lambda count: float(count.replace('M', 'e6').replace('K', 'e3')) if isinstance(count, str) else count
 )
 
-# Sort the DataFrame by counts to ensure the lowest values are at the bottom
-mcoc_grouped['numeric_counts'] = mcoc_df.groupby(['mod_coc', 'sub_class'])['counts'].transform('sum')
-mcoc_grouped = mcoc_grouped.sort_values(by='numeric_counts')
-
-# Create a clustered bar chart with default discrete color sequence
+# Create the clustered bar chart
 subclass_clustered = px.bar(
     mcoc_grouped,
-    x='mod_coc',  # Set mod_coc as x-axis
-    y='counts',  # Set counts as y-axis
-    color='sub_class',  # Clustered by subclass
-    barmode='group',  # Grouped bar chart
-    color_discrete_sequence=[
-        "#012C53", "#023F77", "#02519B", "#0264BE", "#0377E2",
-        "#2991F1", "#4FA4F3", "#74B8F6", "#9ACBF8", "#C0DFFB", "#E6F2FD"
-    ]   # Apply the color scheme
+    x='mod_coc',
+    y='counts_numeric',
+    color='sub_class',
+    title='Clustered Bar Chart for mod_coc vs. Sub_Class',
+    labels={'counts_numeric': 'Counts (in millions or thousands)', 'mod_coc': 'mod_coc'},
+    category_orders={'sub_class': sorted(mcoc_grouped['sub_class'].unique())},
+    barmode='group'
 )
 
-# Update the layout for better readability
+# Customize the layout further using update_layout
 subclass_clustered.update_layout(
-    title=dict(
-        text='Program Types',
-        font=dict(
-            family='Inter Bold',  # Use the 'Inter Bold' font face
-            size=14,  # Font size
-            color= '#04508c'
-        ),
-    ),
+    title="Clustered Bar Chart for mod_coc vs. Sub_Class",
     xaxis=dict(
-        title='',  # Set x-axis title
-        tickangle=45,  # Rotate x-axis labels for better readability
-        tickfont=dict(
-            family='Inter Medium',  # Use the 'Inter Medium' font face
-            size=8
-        )
+        title="mod_coc",  # Label for the x-axis
+        tickangle=45,  # Rotate x-axis ticks for better readability
+        tickmode='array',
+        tickvals=mcoc_grouped['mod_coc'].unique(),  # Ensure all mod_coc values are shown
     ),
     yaxis=dict(
-        title='',  # Set y-axis title
-        tickfont=dict(
-            family='Inter Medium',  # Use the 'Inter Medium' font face
-            size=8
-        )
+        title="Counts (in millions or thousands)",  # Label for the y-axis
+        tickformat=".1f",  # Format y-axis ticks to show one decimal place
     ),
-    font=dict(size=11),  # General font size
-    autosize=False,
-    width=300,  # Increase the width of the chart
-    height=200,  # Increase the height of the chart
-    margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
-    showlegend=False,
-    bargap=0.1,
-    bargroupgap=0.0,  # Adjust the gap between bars in the same group
+    legend_title="Sub Class",  # Title for the legend
+    barmode='group',  # Ensure bars are grouped
+    margin=dict(l=50, r=50, t=50, b=100),  # Set margins for the chart for better spacing
 )
-
-
 
 
 
@@ -531,140 +508,47 @@ subclass_clustered_tracks.update_layout(
 ##  --- % schools offering ‘all offerings’ for the entire mod_coc
 #################################################################################
 
-# Group by sub_class, calculate total and 'All Offering' counts
-grouped = HM_CBC_DF.groupby('sub_class')
+# Total schools per subclass
+total_counts = HM_CBC_DF.groupby('sub_class')['counts'].sum()
 
-# Total schools per sub_class
-total_counts = grouped['counts'].sum()
-
-# Schools offering "All Offering" per sub_class
+# Schools offering "All Offering" per subclass
 all_offerings_counts = HM_CBC_DF[HM_CBC_DF['mod_coc'] == 'All Offering'].groupby('sub_class')['counts'].sum()
 
-# Calculate % of All Offering per sub_class
-percentage_per_subclass = (all_offerings_counts / total_counts) * 100
+# Compute % of All Offering per subclass, drop NaNs (where no offering exists)
+percentage_per_subclass = ((all_offerings_counts / total_counts) * 100).dropna().round(2)
 
-# Drop NaNs (in case some subclasses had no 'All Offering')
-percentage_per_subclass = percentage_per_subclass.dropna()
+# Helper function to get percentage by subclass
+def get_offering_percentage(subclass_name):
+    return percentage_per_subclass.get(subclass_name, None)
 
-# Get top sub_class and its percentage
-top_subclass = percentage_per_subclass.idxmax()
-top_percentage = percentage_per_subclass.max()
-
-# Create the figure
-subclass_firstindicator = go.Figure()
-
-# Add the indicator (number + delta)
-subclass_firstindicator.add_trace(go.Indicator(
-    mode="number+delta",
-    value=top_percentage,
-    number={
-        "suffix": "%",
-        "font": {
-            "size": 30,
-            "color": "#02519B",
-            "family": "Inter Bold, sans-serif"
-        }
-    },
-    delta={
-        "reference": 100,
-        "relative": False,
-        "increasing": {"color": "#03C988"},
-        "decreasing": {"color": "#FF6B6B"},
-    },
-    domain={'x': [0, 1], 'y': [0.35, 0.75]}  # Centered vertically
-))
-
-# Add subclass name as annotation below the indicator
-subclass_firstindicator.update_layout(
-    annotations=[
-        dict(
-            text=(
-                f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
-                f"<b>Top All Program Offering:</b> <br> {top_subclass}</span>"
-            ),
-            x=0.5,
-            y=0.20,
-            xanchor='center',
-            yanchor='top',
-            showarrow=False,
-        )
-    ],
-    margin=dict(t=10, b=10, l=10, r=10),
-    paper_bgcolor="rgba(0,0,0,0)",  # Transparent background
-    plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Inter, sans-serif", color="#012C53"),
-    autosize=True,
-)
-
-
-
-
-
-
-
-
-
-
-
+# Get top subclass and its percentage
+top_offering_subclass = percentage_per_subclass.idxmax()
+top_offering_percentage = percentage_per_subclass.max()
 
 
 #################################################################################
 
 
 
-#################################################################################
-##  --- % schools offering shs per subclass
 #################################################################################
 # Get all unique SHS tracks
-unique_tracks = FILTERED_DF['track'].unique()
+unique_tracks = FILTERED_DF['track'].dropna().unique()
 total_tracks = len(unique_tracks)
 
-# Count the unique tracks offered per sub_class
+# Count the unique tracks offered per subclass
 tracks_per_subclass = FILTERED_DF.groupby('sub_class')['track'].nunique()
 
-# Calculate the percentage of tracks offered for each sub_class
-percentage_tracks_per_subclass = (tracks_per_subclass / total_tracks) * 100
+# Calculate percentage per subclass
+percentage_tracks_per_subclass = ((tracks_per_subclass / total_tracks) * 100).dropna().round(2)
 
-# Find the sub_class with the highest percentage
-top_subclass = percentage_tracks_per_subclass.idxmax()
-top_percentage = percentage_tracks_per_subclass.max()
+# Helper function to retrieve % of SHS track coverage by subclass
+def get_track_coverage(subclass_name):
+    return percentage_tracks_per_subclass.get(subclass_name, None)
 
-subclass_secondindicator = go.Figure()
+# Get top-performing subclass and its percentage
+top_track_subclass = percentage_tracks_per_subclass.idxmax()
+top_track_percentage = percentage_tracks_per_subclass.max()
 
-subclass_secondindicator.add_trace(go.Indicator(
-    mode="number",
-    value=top_percentage,
-    number={
-        "suffix": "%",
-        "font": {
-            "size": 30,
-            "color": "#02519B",
-            "family": "Inter Bold, sans-serif"
-        }
-    },
-    domain={'x': [0, 1], 'y': [0.5, 1]}  # Indicator takes the upper half
-))
-
-subclass_secondindicator.update_layout(
-    annotations=[
-        dict(
-            text=(
-                f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
-                f"<b>Top SHS Track Coverage:</b><br>{top_subclass}</span>"
-            ),
-            x=0.5,
-            y=0.4,  # Just below the number
-            xanchor='center',
-            yanchor='top',
-            showarrow=False,
-        )
-    ],
-    margin=dict(t=10, b=10, l=10, r=10),
-    paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Inter, sans-serif", color="#012C53"),
-    autosize=True,
-)
 
 
 

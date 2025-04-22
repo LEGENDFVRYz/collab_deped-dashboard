@@ -12,10 +12,9 @@ from src.components.card import Card
 from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
 from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
 from src.utils.reports.subclass_chart import subclass_clustered_tracks ## Importing Clustered Bar Chart for Tracks
-from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
-from src.utils.reports.subclass_chart import subclass_secondindicator ## Importing Second Indicator Chart
 from src.utils.reports.subclass_chart import avg_enroll_dost, avg_enroll_deped, avg_enroll_luc, avg_enroll_int, avg_enroll_nonsec, avg_enroll_ga, avg_enroll_abroad, avg_enroll_suc, avg_enroll_sec 
 from src.utils.reports.subclass_chart import total_schools_per_subclass, distrib_by_subclass, student_school_ratio, subclass_vs_school_type, sector_affiliation
+from src.utils.reports.subclass_chart import top_offering_subclass, top_offering_percentage, top_track_subclass, top_track_percentage
 
 
 """
@@ -197,46 +196,53 @@ def render_subclass_filter():
                         html.H4("Program and Grade Level Offerings"),
                         html.Div([
                             html.Div([
-                                Card([
-                                    # mcoc breakdown/which subclass offers which program types
-                                    dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                    ),
-                                ], margin=False),
-                            ], className="subclass-program-graph"),
-                            
-                            html.Div([
-                                Card([
-                                    # enrollment in shs tracks across subclass
-                                    dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                    ),
-                                ], margin=False),
-                            ], className="subclass-program-graph"),
-                            
-                            html.Div([
                                 html.Div([
                                     Card([
-                                        # % schools offering ‘all offerings’ per subclass
-                                        dcc.Graph(id="subclass_firstindicator", figure=subclass_firstindicator,
+                                        # mcoc breakdown/which subclass offers which program types
+                                        dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}
                                         ),
                                     ], margin=False),
-                                ], className="subclass-program-indicator"),
+                                ], className="subclass-program-graph"),
+                                
                                 html.Div([
                                     Card([
-                                        # % schools offering shs per subclass
-                                        dcc.Graph(id="subclass_secondindicator", figure=subclass_secondindicator,
+                                        # enrollment in shs tracks across subclass
+                                        dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}
                                         ),
                                     ], margin=False),
-                                ], className="subclass-program-indicator"),
-                            ], className="subclass-program-last-cards")
-                            
+                                ], className="subclass-program-graph"),
+                            ], className="subclass-program-graph-left"),
+
+                            html.Div(
+                                className="subclass-percentage",  # Updated to match the new class name
+                                children=[
+                                    # Row 1: Displaying the percentage of "All Offering" schools
+                                    html.Div(className="row", children=[
+                                        html.Div(className="col", children=[
+                                            Card([
+                                                html.H6("Top 'All Offering' Subclass"),
+                                                html.Span(f"{top_offering_subclass}", className="subclass-percentage"),
+                                                html.Span(f"{top_offering_percentage}%", className="subclass-percentage"),
+                                                html.H6("schools offering all programs"),
+                                            ], margin=False)
+                                        ]),
+                                    ]),
+                                    html.Div(className="row", children=[
+                                        html.Div(className="col", children=[
+                                            Card([
+                                                html.H6("Top SHS Track Coverage Subclass"),
+                                                html.Span(f"{top_track_subclass}", className="subclass-percentage"),
+                                                html.Span(f"{top_track_percentage}%", className="subclass-percentage"),
+                                                html.H6("track coverage"),
+                                            ], margin=False)
+                                        ]),
+                                    ]),
+                                ]
+                            )                            
                         ], className="subclass-program-contents"),
                     ], className="subclass-program"),
                     
