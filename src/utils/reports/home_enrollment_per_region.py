@@ -253,7 +253,7 @@ home_school_number_per_sector.update_layout(
     yaxis=dict(
         type='log',
         tickvals=[10, 100, 1000, 10000, 50000],  # Customize based on your data range
-        ticktext=["10", "100", "1K", "10K", "100K"],
+        ticktext=["10", "100", "1K", "10K", "50K"],
         showticklabels=True,
         title=None,
         showgrid=False,
