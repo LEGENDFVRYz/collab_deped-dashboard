@@ -36,6 +36,7 @@ def render_subclass_filter():
                     html.Div([
                         Card([
                             # total schools per subclass
+                            html.H4(["Total Schools per Subclassification"], className="subclass-graph-title"),
                             dcc.Graph(id="subclass_total_schools_per_subclass", 
                                 figure=total_schools_per_subclass,
                                 config={"responsive": True},
@@ -47,6 +48,7 @@ def render_subclass_filter():
                     html.Div([
                         Card([
                             # enrollment distribution by subclass
+                            html.H4(["Enrollment Distribution by Subclassification"], className="subclass-graph-title"),
                             dcc.Graph(id="subclass_distrib_by_subclass", 
                                 figure=distrib_by_subclass,
                                 config={"responsive": True},
@@ -56,100 +58,149 @@ def render_subclass_filter():
                     ], className="subclass-enroll-graph"),
 
                     html.Div([
-                        html.Div([
-                            Card([
-                                # student-to-school ratio    
-                                dcc.Graph(id="student_school_ratio", 
-                                figure=student_school_ratio,
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"}
-                                ),
-                            ], margin=False)
-                        ], className="subclass-enroll-graph"),
-                        html.Div( 
-                            # average enrollees per school
-                            #html.H5("Average per Subclassification"),
-                            children=[
-                                html.Div(
-                                    className="subclass-enroll-indcard", 
-                                    children=[
-                                        # Row 1
-                                        html.Div(className="row", children=[
-                                            html.Div(className="col", children=[
-                                                Card([ #A1
-                                                    html.H6("DOST Managed"),
-                                                    html.Span(f"{avg_enroll_dost}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
+                        # Column 1
+                        html.Div(className="subclass-col1", children=[
+                            # Row 1: Graph
+                            html.Div([
+                                Card([
+                                    # student to school ratio
+                                    html.H4(["Student-to-School Ratio"], className="subclass-graph-title"),
+                                    dcc.Graph(
+                                        id="subclass_student_school_ratio",
+                                        figure=student_school_ratio,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                                    ),
+                                ], margin=False)
+                            ], className="subclass-enroll-scatter"),
+
+                            # Row 2: Indicator Cards B2-C2
+                            html.Div(className="subclass-row", children=[
+                                # B2
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span(),
+                                                html.H6("Non-Sectarian", className="sei-label"),
                                             ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #B1
-                                                    html.H6("Local Int'l School"),
-                                                    html.Span(f"{avg_enroll_int}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
+                                            html.Span(f"{avg_enroll_nonsec}", className="sei-count"),
+                                            html.P("average enrollees", className="sei-text"),
+                                        ], className="subclass-enroll-ind")
+                                    ], margin=False)
+                                ]),
+                                # B3
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span(),
+                                                html.H6("Other GA Mgd.", className="sei-label"),
                                             ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #C1
-                                                    html.H6("School Abroad"),
-                                                    html.Span(f"{avg_enroll_abroad}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
+                                            html.Span(f"{avg_enroll_ga}", className="sei-count"),
+                                            html.P("average enrollees", className="sei-text"),
+                                        ], className="subclass-enroll-ind")
+                                    ], margin=False)
+                                ]),
+                                # C1
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span(),
+                                                html.H6("School Abroad", className="sei-label"),
                                             ]),
+                                            html.Span(f"{avg_enroll_abroad}", className="sei-count"),
+                                            html.P("average enrollees", className="sei-text"),
+                                        ], className="subclass-enroll-ind")
+                                    ], margin=False)
+                                ]),
+                                # C2
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span(),
+                                                html.H6("SUC Managed", className="sei-label"),
+                                            ]),
+                                            html.Span(f"{avg_enroll_suc}", className="sei-count"),
+                                            html.P("average enrollees", className="sei-text"),
+                                        ], className="subclass-enroll-ind")
+                                    ], margin=False)
+                                ]),
+                            ]),
+                        ]),
+
+                        # Column 2
+                        html.Div(className="subclass-col2", children=[
+                            # Row 1: Indicator Cards A1-B1  
+                            # A1
+                            html.Div([
+                                Card([
+                                    html.Div([
+                                        html.Div([
+                                            html.Span(),
+                                            html.H6("DOST Managed", className="sei-label"),
                                         ]),
-                                        # Row 2
-                                        html.Div(className="row", children=[
-                                            html.Div(className="col", children=[
-                                                Card([ #A2
-                                                    html.H6("DepED Managed"),
-                                                    html.Span(f"{avg_enroll_deped}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #B2
-                                                    html.H6("Non-Sectarian"),
-                                                    html.Span(f"{avg_enroll_nonsec}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #C2
-                                                    html.H6("SUC Managed"),
-                                                    html.Span(f"{avg_enroll_suc}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
+                                        html.Span(f"{avg_enroll_dost}", className="sei-count"),
+                                        html.P("average enrollees", className="sei-text"),
+                                    ], className="subclass-enroll-ind")
+                                ], margin=False)
+                            ]),
+                            # A2
+                            html.Div([
+                                Card([
+                                    html.Div([
+                                        html.Div([
+                                            html.Span(),
+                                            html.H6("DepED Managed", className="sei-label"),
                                         ]),
-                                        # Row 3
-                                        html.Div(className="row", children=[
-                                            html.Div(className="col", children=[
-                                                Card([ #A3
-                                                    html.H6("LUC Managed"),
-                                                    html.Span(f"{avg_enroll_luc}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #B3
-                                                    html.H6("Other GA Mgd."),
-                                                    html.Span(f"{avg_enroll_ga}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
-                                            html.Div(className="col", children=[
-                                                Card([ #C3
-                                                    html.H6("Sectarian"),
-                                                    html.Span(f"{avg_enroll_sec}", className="subclass-enroll-ind"),
-                                                    html.H6("average enrollees"),
-                                                ], margin=False)
-                                            ]),
+                                        html.Span(f"{avg_enroll_deped}", className="sei-count"),
+                                        html.P("average enrollees", className="sei-text"),
+                                    ], className="subclass-enroll-ind")
+                                ], margin=False)
+                            ]),
+                            # A3
+                            html.Div([
+                                Card([
+                                    html.Div([
+                                        html.Div([
+                                            html.Span(),
+                                            html.H6("LUC Managed", className="sei-label"),
                                         ]),
-                                    ]
-                                )
-                            ]
-                        ) ###
-                    ], className="subclass-enroll-middle"),
+                                        html.Span(f"{avg_enroll_luc}", className="sei-count"),
+                                        html.P("average enrollees", className="sei-text"),
+                                    ], className="subclass-enroll-ind")
+                                ], margin=False)
+                            ]),
+                            # B1
+                            html.Div([
+                                Card([
+                                    html.Div([
+                                        html.Div([
+                                            html.Span(),
+                                            html.H6("Local Int'l School", className="sei-label"),
+                                        ]),
+                                        html.Span(f"{avg_enroll_int}", className="sei-count"),
+                                        html.P("average enrollees", className="sei-text"),
+                                    ], className="subclass-enroll-ind")
+                                ], margin=False)
+                            ]),
+                            # C3
+                            html.Div([
+                                Card([
+                                    html.Div([
+                                        html.Div([
+                                            html.Span(),
+                                            html.H6("Sectarian", className="sei-label"),
+                                        ]),
+                                        html.Span(f"{avg_enroll_sec}", className="sei-count"),
+                                        html.P("average enrollees", className="sei-text"),
+                                    ], className="subclass-enroll-ind")
+                                ], margin=False)
+                            ])
+                        ])
+                    ], className="subclass-enroll-middle")
                 ], className="subclass-left-content"),
                 
                 # RIGHT SIDE CONTENTS
@@ -160,6 +211,7 @@ def render_subclass_filter():
                         html.Div([
                             Card([
                                 # subclass vs school type
+                                html.H4(["Subclassification by School Type Distribution"], className="subclass-graph-title"),
                                 dcc.Graph(id="subclass_vs_school_type", 
                                     figure=subclass_vs_school_type,
                                     config={"responsive": True},
@@ -172,7 +224,8 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # sector affiliation
-                                    dcc.Graph(id="sector_affiliation", 
+                                    html.H4(["Sector Affiliation"], className="subclass-graph-title"),
+                                    dcc.Graph(id="subclass_sector_affiliation", 
                                     figure=sector_affiliation,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
@@ -184,7 +237,7 @@ def render_subclass_filter():
                                     # regional distribution/ which subclass has the highest number of schools per loc
                                     dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
                                     config={"responsive": True},
-                                    style={"width": "100%", "height": "100"}
+                                    style={"width": "100%", "height": "100%"}
                                     ),
                                 ], margin=False)
                             ], className="subclass-dist-avail-graph-2"),
@@ -197,25 +250,26 @@ def render_subclass_filter():
                         html.H4("Program and Grade Level Offerings"),
                         html.Div([
                             html.Div([
-                                Card([
-                                    # mcoc breakdown/which subclass offers which program types
-                                    dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                    ),
-                                ], margin=False),
-                            ], className="subclass-program-graph"),
-                            
-                            html.Div([
-                                Card([
-                                    # enrollment in shs tracks across subclass
-                                    dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                    ),
-                                ], margin=False),
-                            ], className="subclass-program-graph"),
-                            
+                                html.Div([
+                                    Card([
+                                        # mcoc breakdown/which subclass offers which program types
+                                        dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                                        ),
+                                    ], margin=False),
+                                ], className="subclass-program-graph"),
+                                
+                                html.Div([
+                                    Card([
+                                        # enrollment in shs tracks across subclass
+                                        dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                                        ),
+                                    ], margin=False),
+                                ], className="subclass-program-graph"),
+                            ], className="subclass-program-graph-left"),    
                             html.Div([
                                 html.Div([
                                     Card([

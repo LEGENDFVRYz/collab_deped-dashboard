@@ -30,7 +30,7 @@ FILTERED_DF
 HM_CBC_DF = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
 
 # Rename values in subclass, type, and sector
-subclass_rename = {
+"""subclass_rename = {
     'LUC': 'LUC Managed',
     'Non-Sectarian ': 'Non-Sectarian',
     'SCHOOL ABROAD': 'School Abroad',
@@ -56,7 +56,7 @@ if 'type' in HM_CBC_DF.columns:
 if 'sector' in HM_CBC_DF.columns:
     HM_CBC_DF['sector'] = HM_CBC_DF['sector'].map(sector_rename).fillna(HM_CBC_DF['sector'])
 
-HM_CBC_DF
+HM_CBC_DF"""
 
 # ## -- Check the document for all valid columns and structurette
 # ## -- Dont change the all caps variables
@@ -119,8 +119,7 @@ subclass_df1 = (
 
 total_schools_per_subclass = px.bar(subclass_df1, 
     x='school_count', 
-    y='sub_class', 
-    title='Total Number of Schools per Subclass',
+    y='sub_class',
     labels={'sub_class': 'Subclass', 'school_count': 'Number of Schools'},
     text='school_count',
     color='sub_class',
@@ -129,7 +128,7 @@ total_schools_per_subclass = px.bar(subclass_df1,
 )    
 total_schools_per_subclass.update_layout(
     autosize=True,
-    margin={"l": 8, "r": 8, "t": 40, "b": 8},
+    margin={"l": 0, "r": 0, "t": 0, "b": 0},
     yaxis=dict(showticklabels=True),
     showlegend=False
 )
@@ -159,16 +158,15 @@ distrib_by_subclass = px.pie(FILTERED_DF,
 )
 distrib_by_subclass.update_traces(
     textinfo='label+percent',
-    textfont_size=9,
+    textfont_size=7,
     pull=[0.1 if x != 'DepED Managed' else 0 for x in FILTERED_DF['sub_class']],
     marker=dict(line=dict(color='#FFFFFF', width=2)),
-    rotation=315
+    rotation=45
 )
 distrib_by_subclass.update_layout(
     autosize=True,
     showlegend=True,
-    margin={"l": 8, "r": 8, "t": 40, "b": 8},
-    title={'text': 'Enrollment Distribution by Subclass','font': {'color': '#3C6382'}},
+    margin={"l": 0, "r": 0, "t": 0, "b": 0},
 )
 #################################################################################
 
@@ -209,19 +207,16 @@ student_school_ratio = px.scatter(subclass_df1,
 )
 student_school_ratio.update_traces(marker=dict(size=12))
 student_school_ratio.update_layout(
-    title={
-        'text': "Student-to-School Ratio",
-        'font': {'color': '#3C6382'}
-    },xaxis_title='Number of Enrolled Students',
+    xaxis_title='Number of Enrolled Students',
     yaxis_title='Number of Schools',
-    margin={"l": 0, "r": 0, "t": 40, "b": 50},
+    margin={"l": 0, "r": 0, "t": 0, "b": 50},
     scattermode="group",
     legend={
         'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
         'orientation': 'h', 
         'yanchor': 'bottom',
-        'y': -10, 
-        'xanchor': 'center',
+        'y': -20, 
+        'xanchor': 'left',
         'x': 0.5 
     }
 )
@@ -252,10 +247,6 @@ subclass_vs_school_type = px.bar(
 )
 
 subclass_vs_school_type.update_layout(
-    title={
-        'text': "Number of Schools by School Type",
-        'font': {'color': '#3C6382'}
-    },
     xaxis={
         'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
         'tickfont': {'color': '#667889'}
@@ -269,11 +260,12 @@ subclass_vs_school_type.update_layout(
         'font': {'color': '#667889'},
         'orientation': 'h', 
         'yanchor': 'bottom',
-        'y': -0.2, 
-        'xanchor': 'center',
+        'y': -0.5, 
+        'xanchor': 'left',
         'x': 0.5 
     },
-    margin=dict(l=0, r=0, t=40, b=20)
+    margin=dict(l=0, r=0, t=0, b=40),
+    autosize=True,
 )
 subclass_vs_school_type
 #################################################################################
@@ -310,8 +302,7 @@ sector_affiliation = go.Figure(data=[go.Table(
 )])
 sector_affiliation.update_layout(
     autosize=True,
-    margin={"l": 8, "r": 8, "t": 40, "b": 8},
-    title={'text': "Sector Affiliation",'font': {'color': '#3C6382'}},
+    margin={"l": 0, "r": 0, "t": 0, "b": 0},
 )
 #################################################################################
 
@@ -452,9 +443,9 @@ subclass_clustered.update_layout(
         )
     ),
     font=dict(size=11),  # General font size
-    autosize=False,
-    width=300,  # Increase the width of the chart
-    height=200,  # Increase the height of the chart
+    autosize=True,
+    #width=300,  # Increase the width of the chart
+    #height=200,  # Increase the height of the chart
     margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
     showlegend=False,
     bargap=0.1,
