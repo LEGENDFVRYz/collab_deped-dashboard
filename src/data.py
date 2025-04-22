@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
-from src.server import cache
+# from src.server import cache
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
@@ -17,7 +17,7 @@ from config import project_root
 enrollment_db_engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
 print("DATABASE CALLED")
 
-@cache.memoize()
+# @cache.memoize()
 def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
     try:
         print("QUERYINGGG...")
@@ -136,9 +136,16 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
         # print("params:\n", params)
         
         dataframe = pd.read_sql_query(main_query, con=_engine, params=params)
-        print('Pandarette finished...')
-        # print(dataframe)
         
+        # List of column names
+        columns_to_convert = ['gender', 'sector', 'sub_class', 'type', 'mod_coc',
+                              'region', 'province', 'division', 'district',
+                              'track', 'strand', 'grade', 'year']  
+
+        for col in columns_to_convert:
+            dataframe[col] = dataframe[col].astype('category')
+        
+        print('Pandarette finished...')
         return dataframe
         
     except Exception as e:
