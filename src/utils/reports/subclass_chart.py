@@ -396,14 +396,14 @@ subclass_heatmap.update_layout(
 #################################################################################
 ##  --- MCOC breakdown/which subclass offers which program types
 #################################################################################
-
-
-
-## Ensure the dataframe is filtered to include only the required columns
+# Ensure the dataframe is filtered to include only the required columns
 mcoc_df = HM_CBC_DF[['mod_coc', 'counts', 'sub_class']]
 
 # Group by 'mod_coc' and 'sub_class' to aggregate the counts
 mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
+
+# Capitalize each word in 'sub_class' for the legend
+mcoc_grouped['sub_class'] = mcoc_grouped['sub_class'].str.title()
 
 # Revert the counts back to numeric for plotting
 mcoc_grouped['counts_numeric'] = mcoc_grouped['counts'].apply(
@@ -442,6 +442,7 @@ subclass_clustered.update_layout(
 
 
 
+
 #################################################################################
 
 
@@ -457,6 +458,9 @@ shs_tracks_df = shs_tracks_df.dropna(subset=['track', 'sub_class'])
 
 # Group by 'track' and 'sub_class' and count the entries
 shs_tracks_grouped = shs_tracks_df.groupby(['track', 'sub_class']).size().reset_index(name='counts')
+
+# Capitalize each word in 'sub_class' for the legend
+shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.title()
 
 # Truncate 'track' and 'sub_class' values for better readability
 shs_tracks_grouped['track'] = shs_tracks_grouped['track'].str.slice(0, 20)
