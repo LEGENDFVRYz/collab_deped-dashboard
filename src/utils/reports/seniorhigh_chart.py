@@ -435,8 +435,8 @@ def update_graph(trigger, data):
     
     # Group by track to get supply and demand
     grouped = FILTERED_DATA.groupby('track').agg(
-        offerings=('enroll_id', 'count'),    
-        total_demand=('counts', 'sum')      
+        offerings=('beis_id', 'count'),    
+        total_demand=('counts', 'sum')    
     ).reset_index()
 
     # Define custom color palette
@@ -498,49 +498,64 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- How many schools offer each SHS track per region
 # #################################################################################
-# @callback(
-#     Output('location_enrollees-distribution-per-location', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
-# def update_graph(trigger, data):
+
+@callback(
+    Output('seniorhigh_shs_offers', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    schooloffer_region = FILTERED_DATA[
+        FILTERED_DATA['strand'].notna() & 
+        (FILTERED_DATA['strand'] != '__NaN__')
+    ]
+
+    # Step 1: Filter only rows where counts > 0
+    valid_offers = schooloffer_region[schooloffer_region['counts'] > 0]
+
+    # Step 2: Drop duplicates so that each school only counts once per strand-region
+    valid_offers_unique = valid_offers.drop_duplicates(subset=['beis_id', 'region', 'strand'])
+
+    # Step 3: Group by region and strand, count number of unique schools offering each
+    heatmap_data = valid_offers_unique.groupby(['region', 'strand']).size().reset_index(name='school_count')
+
+    # Step 4: Pivot for heatmap structure
+    heatmap_pivot = heatmap_data.pivot(index='strand', columns='region', values='school_count').fillna(0)
+
+    # Step 5: Color scale with white for 0
+    colorscale = [
+        [0.0, "#ffffff"],    # white for 0
+        [0.00001, "#FF899A"],  # light pink
+        [0.5, "#E11C38"],    # mid red
+        [1.0, "#930F22"]     # deep red
+    ]
+
+    # Step 6: Create the heatmap
+    heatmap_fig = px.imshow(
+        heatmap_pivot.values,
+        labels=dict(x="Region", y="SHS Strand", color="Number of Schools Offering"),
+        x=heatmap_pivot.columns.tolist(),
+        y=heatmap_pivot.index.tolist(),
+        color_continuous_scale=colorscale,
+        zmin=0,
+        zmax=heatmap_pivot.values.max()
+    )
+
+    # Step 7: Layout tweaks
+    heatmap_fig.update_layout(
+        title="Number of Schools Offering SHS Strands per Region",
+        xaxis_title="Region",
+        yaxis_title="SHS Strand",
+        xaxis=dict(tickangle=45),
+        margin={"l": 40, "r": 40, "t": 50, "b": 40}
+    )
+
+    heatmap_fig
     
-#     return dcc.Graph(figure=)
-
-# track_pref = dataframe = auto_extract(['beis_id','strand', 'region'], is_specific=True)
-# track_pref
-
-# heatmap_data = track_pref.groupby(['region', 'strand'])['beis_id'].size().reset_index()
-# heatmap_data.rename(columns={'beis_id': 'school_count'}, inplace=True)
-
-
-# heatmap_pivot = heatmap_data.pivot(index='strand', columns='region', values='school_count').fillna(0)
-
-
-# heatmap_fig = px.imshow(
-#     heatmap_pivot.values,
-#     labels=dict(x="Region", y="Track", color="Number of Schools"),
-#     x=heatmap_pivot.columns.tolist(),
-#     y=heatmap_pivot.index.tolist(),
-#     color_continuous_scale=[
-#         "#FF899A",  # Light pink
-#         "#E11C38",  # Mid red
-#         "#930F22"   # Deep red
-#     ]
-# )
-
-
-# heatmap_fig.update_layout(
-#     title="Number of Schools Offering SHS Tracks per Region",
-#     xaxis_title="Region",
-#     yaxis_title="SHS Track",
-#     xaxis=dict(tickangle=45),
-#     margin={"l": 20, "r": 20, "t": 40, "b": 40}
-# )
-
-# heatmap_fig
-
+    return dcc.Graph(figure=heatmap_fig)
 
 # #################################################################################
 
@@ -549,60 +564,73 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Which SHS tracks are more prevalent in each sector
 # #################################################################################
-# @callback(
-#     Output('location_enrollees-distribution-per-location', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
-# def update_graph(trigger, data):
-    
-#     return dcc.Graph(figure=)
 
-# # dist_per_track_chart = px.bar(filtered_df, )
-# FILTERED_byprevalent = dataframe = auto_extract(['strand', 'sector'], is_specific=True)
-# FILTERED_nostudents = dataframe = auto_extract(['counts'], is_specific=True)
-# grade_enrollment2 = FILTERED_nostudents.groupby('grade')['counts'].sum().reset_index()
-# merged = FILTERED_byprevalent.copy()
-# merged['counts'] = FILTERED_nostudents['counts']
-# grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
+@callback(
+    Output('seniorhigh_prevalent_tracks', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-# def smart_truncate_number(num):
-#     if num >= 1_000_000:
-#         return f"{num/1_000_000:.1f}M"
-#     elif num >= 1_000:
-#         return f"{num/1_000:.1f}K"
-#     else:
-#         return str(num)
-# grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
+    # Filter out rows with NaN or "__NaN__" in 'strand'
+    FILTERED_byprevalent = FILTERED_DATA[
+        FILTERED_DATA['strand'].notna() &
+        (FILTERED_DATA['strand'] != '__NaN__')
+    ]
 
-# blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
+    # Calculate total counts per grade (if needed elsewhere)
+    grade_enrollment2 = FILTERED_DATA.groupby('grade')['counts'].sum().reset_index()
 
-# grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
+    # Merge counts with strand + sector
+    merged = FILTERED_byprevalent.copy()
+    merged['counts'] = FILTERED_DATA['counts']
 
-# fig = px.bar(
-#     grouped,
-#     x='strand',
-#     y='counts',
-#     color='sector',
-#     barmode='group',
-#     title='Prevalence of SHS Strands by Sector (Based on Student Count)',
-#     labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
-#     color_discrete_sequence=blue_shades,
-#     text='counts_text'
-# )
+    # Group by strand and sector
+    grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
 
-# fig.update_traces(textposition='outside')
+    # Smart number formatting
+    def smart_truncate_number(num):
+        if num >= 1_000_000:
+            return f"{num/1_000_000:.1f}M"
+        elif num >= 1_000:
+            return f"{num/1_000:.1f}K"
+        else:
+            return str(num)
 
-# fig.update_layout(
-#     xaxis_tickangle=-45,
-#     legend_title='Sector',
-#     xaxis_title='SHS Strand',
-#     yaxis_title='Number of Students',
-#     margin=dict(l=60, r=40, t=60, b=60)
-# )
+    grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
-# fig
+    # Define blue color shades
+    blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
+
+    # Create grouped bar chart
+    prevalent_tracks_fig = px.bar(
+        grouped,
+        x='strand',
+        y='counts',
+        color='sector',
+        barmode='group',
+        title='Prevalence of SHS Strands by Sector (Based on Student Count)',
+        labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
+        color_discrete_sequence=blue_shades,
+        text='counts_text'
+    )
+
+    # Set text and layout options
+    prevalent_tracks_fig.update_traces(textposition='outside')
+
+    prevalent_tracks_fig.update_layout(
+        xaxis_tickangle=-45,
+        legend_title='Sector',
+        xaxis_title='SHS Strand',
+        yaxis_title='Number of Students',
+        margin=dict(l=60, r=40, t=60, b=60)
+    )
+
+    prevalent_tracks_fig
+
+    return dcc.Graph(figure=prevalent_tracks_fig)
 
 # #################################################################################
 
@@ -611,51 +639,47 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Do mother schools or annexes offer a wider range of SHS tracks
 # #################################################################################
-# @callback(
-#     Output('location_enrollees-distribution-per-location', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
-# def update_graph(trigger, data):
+
+@callback(
+    Output('shs_offer_range', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    track_counts = FILTERED_DATA.groupby('type')['strand'].nunique().reset_index()
+    track_counts.columns = ['School Type', 'Number of strand']
+
+    blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
+
+    track_counts = FILTERED_DATA.groupby('type')['strand'].nunique().reset_index()
+    track_counts.columns = ['School Type', 'Number of strand']
+
+    shs_offer_range = px.bar(
+        track_counts,
+        x='School Type',
+        y='Number of strand',
+        title='Number of SHS Strand Offered by Mother Schools vs Annexes',
+        color='School Type',
+        text='Number of strand',
+        color_discrete_sequence=blue_shades
+    )
+
+    shs_offer_range.update_traces(textposition='outside')
+
+    shs_offer_range.update_layout(
+        xaxis_title='School Type',
+        yaxis_title='Number of Strand Offered',
+        uniformtext_minsize=8,
+        uniformtext_mode='hide',
+        showlegend=False
+    )
+
+    shs_offer_range
     
-#     return dcc.Graph(figure=)
-
-# # dist_per_track_chart = px.bar(filtered_df, )
-# FILTERED_bytype = dataframe = auto_extract(['strand', 'type'], is_specific=True)
-# FILTERED_bytype 
-
-
-# track_counts = FILTERED_bytype.groupby('type')['strand'].nunique().reset_index()
-# track_counts.columns = ['School Type', 'Number of strand']
-
-
-# blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
-
-# track_counts = FILTERED_bytype.groupby('type')['strand'].nunique().reset_index()
-# track_counts.columns = ['School Type', 'Number of strand']
-
-# fig = px.bar(
-#     track_counts,
-#     x='School Type',
-#     y='Number of strand',
-#     title='Number of SHS Strand Offered by Mother Schools vs Annexes',
-#     color='School Type',
-#     text='Number of strand',
-#     color_discrete_sequence=blue_shades
-# )
-
-# fig.update_traces(textposition='outside')
-
-# fig.update_layout(
-#     xaxis_title='School Type',
-#     yaxis_title='Number of Strand Offered',
-#     uniformtext_minsize=8,
-#     uniformtext_mode='hide',
-#     showlegend=False
-# )
-
-# fig
+    return dcc.Graph(figure=shs_offer_range)
 
 # #################################################################################
 

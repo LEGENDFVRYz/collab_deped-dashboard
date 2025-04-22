@@ -32,11 +32,7 @@ def render_location_filter():
                             dcc.Loading(
                                 id="loading-graph",
                                 type="default",
-                                children=html.Div([
-                                        
-                                    ],
-                                    id='location_enrollees-distribution-per-location',
-                                )
+                                children=html.Div([], id='location_enrollees-distribution-per-location',)
                             )
                             
                             #                             dcc.Loading(
@@ -163,8 +159,11 @@ def render_location_filter():
                         #########################################
                         ## INSERT PLOT: school sectors
                         #########################################
-                        
-                        
+                        dcc.Loading(
+                            id="loading-graph",
+                            type="default",
+                            children=html.Div([], id='location_school_sectors',)
+                        ),
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),
             ], className='plot-right-section'), 

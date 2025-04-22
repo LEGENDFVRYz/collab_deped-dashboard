@@ -266,6 +266,7 @@ layout = html.Div([
                     
                     html.Div([
                         Card([
+                            html.H4(["School Distribution Across Sectors"], className="sector-graph-title"),
                             dcc.Graph(id="home_school_number_per_sector", figure=home_school_number_per_sector,
                                             config={"responsive": True},
                                             style={"width": "100%", "height": "100%"}

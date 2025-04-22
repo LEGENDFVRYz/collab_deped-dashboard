@@ -144,7 +144,7 @@ home_enrollment_per_region.update_layout(
         y=1.025,  # Position it below the chart
         xanchor="center",  # Center it horizontally
         x=0.45  # Align it to the center
-    )
+    ),
 )
 
 # ----------------------------------------------------------
@@ -226,23 +226,41 @@ df4
 grouped_by_sectors = df4.groupby("sector")
 sector_counts = grouped_by_sectors.size().reset_index(name="count")
 
-home_school_number_per_sector = px.bar(sector_counts, x="sector", y="count",
-            #  title="Distribution of Schools Across Sectors",
-             text="count",
-             orientation="v",
-             )
-
-home_school_number_per_sector.update_traces(textposition="outside", marker_color="#037DEE")
-home_school_number_per_sector.update_layout(yaxis=dict(visible=False), xaxis=dict(visible=False))
-home_school_number_per_sector.update_layout(
-    autosize=True,
-    margin={"l": 10, "r": 10, "t": 10, "b": 10},  # Optional: Adjust margins
-    paper_bgcolor='rgba(0, 0, 0, 0)', 
-    plot_bgcolor='rgba(0, 0, 0, 0)',   
-    yaxis=dict(showticklabels=True),
+home_school_number_per_sector = px.bar(
+    sector_counts,
+    x="sector",
+    y="count",
+    text="count",
+    orientation="v",
+    color="sector",  # use sector to apply multiple colors
+    color_discrete_sequence=["#B4162D", "#D61B35", "#E63E56", "#EA6074"]
 )
 
-home_school_number_per_sector
+home_school_number_per_sector.update_traces(
+    textposition="outside",
+    textfont=dict(size=10, color="#04508c"),  # edit font size and color here
+)
+
+home_school_number_per_sector.update_layout(
+    autosize=True,
+    margin={"l": 10, "r": 10, "t": 10, "b": 10},
+    plot_bgcolor="#ECF8FF",   # Plot area background
+    xaxis=dict(
+        showticklabels=True,
+        title=None,
+        tickfont=dict(size=10, color="#3C6382")
+    ),
+    yaxis=dict(
+        type='log',
+        tickvals=[10, 100, 1000, 10000, 50000],  # Customize based on your data range
+        ticktext=["10", "100", "1K", "10K", "100K"],
+        showticklabels=True,
+        title=None,
+        showgrid=False,
+        tickfont=dict(size=10, color="#3C6382")
+    ),
+    showlegend=False  # Optional: remove legend if not needed
+)
 
 # ----------------------------------------------------------
 # Gender Distribution
