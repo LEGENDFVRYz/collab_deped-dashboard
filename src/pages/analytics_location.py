@@ -29,15 +29,16 @@ def render_location_filter():
                             ## INSERT PLOT: Distribution of enrollees per location 
                             #########################################
                             
-                            dcc.Loading(
-                                id="loading-graph",
-                                type="default",
-                                children=html.Div([
+                            # dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="default",
+                                # children=
+                                html.Div([
                                         
                                     ],
                                     id='location_enrollees-distribution-per-location',
                                 )
-                            )
+                            # )
                             
                             #                             dcc.Loading(
                             #     id="loading-graph",
@@ -80,12 +81,13 @@ def render_location_filter():
                                 ## TABLE: highest and lowest number of enrollees
                                 #########################################
                                 
-                                dcc.Loading(
-                                    id="loading-graph",
-                                    type="default",
-                                    children=html.Div([
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                    # children=
+                                    html.Div([
                                     ],id='location_highest_lowest_enrollees')
-                                )
+                                # )
                                 
                                 #     dcc.Graph(id="location_highest_lowest_enrollees", 
                                 #             # figure=hi_low_fig,
@@ -122,12 +124,13 @@ def render_location_filter():
                         ## INSERT PLOT: Strand preferences per region
                         #########################################
                         
-                        dcc.Loading(
-                            id="loading-graph",
-                            type="default",
-                            children=html.Div([
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                            # children=
+                            html.Div([
                             ],id='track-preference-heatmap')
-                        )
+                        # )
                         # dcc.Graph(
                         #     id="track-preference-heatmap",
                         #     # figure=heatmap_fig,

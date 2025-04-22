@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, callback, Output, Input, State, Patch
+from dash import dcc, callback, Output, Input, State
 
 # important part
 from src.data import enrollment_db_engine, smart_filter

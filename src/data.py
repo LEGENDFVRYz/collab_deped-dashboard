@@ -20,7 +20,7 @@ print("DATABASE CALLED")
 @cache.memoize()
 def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
     try:
-        # print("QUERYINGGG...")
+        print("QUERYINGGG...")
         
         # Base query (JOIN: enrollment and sch_info)
         first_query = "SELECT * FROM enrollment LEFT JOIN sch_info USING(beis_id) WHERE 1=1"  
@@ -131,7 +131,7 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
             ) USING (enroll_id, beis_id, gender)
         """
         
-        # print('QUERYING.. DONED...')
+        print('DONED... ANG QUERY')
         # print(main_query)
         # print("params:\n", params)
         

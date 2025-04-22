@@ -304,7 +304,7 @@ body {
   flex: 1;
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header {
-  padding: 1em 1em;
+  padding: 0.5em 1em 1em 1em;
 }
 .app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header h1 {
   color: #04508c;

@@ -1,4 +1,4 @@
-from dash import html, dcc, Output, Input, State, callback, ctx, Patch
+from dash import html, dcc, Output, Input, State, callback, ctx
 import os, sys
 import numpy as np
 import dash

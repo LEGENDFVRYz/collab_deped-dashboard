@@ -4,6 +4,33 @@
   height: 100%;
   display: flex;
 }
+.analytics-page button {
+  padding: 1em 2em;
+  border: 0;
+  border-radius: 2em;
+  font-size: 1;
+  font-family: "Inter Medium";
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.analytics-page .page-header {
+  display: flex;
+  flex-direction: row;
+}
+.analytics-page .page-header .headerr {
+  flex: 1;
+}
+.analytics-page .page-header #analytics-back-box #analytics-back-btn {
+  display: none;
+  background-color: #037DEE;
+  color: #FFFFFF;
+}
+.analytics-page .page-header #analytics-back-box #analytics-back-btn:hover {
+  background-color: #0264BE;
+}
+.analytics-page .page-header #analytics-back-box #analytics-back-btn:active {
+  background-color: #037DEE;
+}
 .analytics-page .content-section {
   display: flex;
   flex: 1;
@@ -145,15 +172,6 @@
   display: flex;
   gap: 0.75em;
   justify-content: flex-end;
-}
-.analytics-page .content-section .left-content #confirmation-box button {
-  padding: 1em 2em;
-  border: 0;
-  border-radius: 2em;
-  font-size: 1;
-  font-family: "Inter Medium";
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 .analytics-page .content-section .left-content #confirmation-box #proceed-btn {
   background-color: #037DEE;

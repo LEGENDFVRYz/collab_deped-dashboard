@@ -4,7 +4,7 @@ from dash import html, dcc, Output, Input, State, callback, ctx
 
 # Used the cache:
 from src.server import load_location_data   # Only for abalytics page / location filtering purposes
-from src.data import enrollment_db_engine, smart_filter
+from src.data import enrollment_db_engine, smart_filter # initialization
 
 # src/pages/dashboard.py
 from src.components.card import Card
@@ -36,7 +36,8 @@ layout = html.Div([
     
     ## -- Standard: Page Content Header
     html.Div([
-        html.H1('Analytical Tools')
+        html.Div([html.H1('Analytical Tools')], className='headerr'),
+        html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
     ], className='page-header'),
     
     ## -- Main Content: Start hereee
@@ -90,6 +91,7 @@ layout = html.Div([
                     #         html.H2(["SELECT FILTER TO PROCEED"])
                     #     ], id="placeholder"),
                     dcc.Loading([
+                        html.Div([], id='atake-lang'),
                         html.Div([
                             ## -- RENDER THE REPORT HERE
                             
@@ -97,6 +99,8 @@ layout = html.Div([
                             ], id='plot-filtered-page')
                     ],  id='query_loading',
                         parent_style={"display": "flex", "flexDirection": "column", "flex": "1"},
+                        style={"position": "absolute", "top": "50%", "left": "50%", "transform": "translate(-50%, -50%)"},
+                        delay_show=2,
                     )
                 ], id='plot-content', className="")
             # ], id='loading-render-content', type='circle')
@@ -112,21 +116,45 @@ layout = html.Div([
 ############################################################
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
+    Output('analytics-back-btn', 'style'),
     # Output('placeholder', 'style', allow_duplicate=True),
     # Output('hide-delay', 'disabled'),
     Input('proceed-btn', 'n_clicks'),
+    Input('analytics-back-btn', 'n_clicks'),
     # Input('hide-delay', 'n_intervals'),
     prevent_initial_call='initial_duplicate'
 )
-def handle_hide(n_clicks):
+def handle_hide(n_clicks, back_clicks):
     triggered_id = ctx.triggered_id
     
     if triggered_id == 'proceed-btn':
-        return {'display': 'none'}
+        return {'display': 'none'}, {'display': 'flex'}
 
-    return dash.no_update
+    if triggered_id == 'analytics-back-btn':
+        return {'display': 'flex'}, {'display': 'none'},
+    
+    return dash.no_update, dash.no_update
 
 
+# @callback(
+#     Output('filter-section', 'style', allow_duplicate=True),
+#     # Input('hide-delay', 'n_intervals'),
+#     Input('analytics-back-btn', 'n_clicks'),
+#     prevent_initial_call='initial_duplicate'
+# )
+# def going_back_to_december(trigger):
+#     triggered_id = ctx.triggered_id
+    
+#     if triggered_id == 'proceed-btn':
+#         return {'display': 'flex'},
+
+#     return {'display': 'none'}
+
+
+
+############################################################
+## OPENING THE FILTER MENU
+############################################################
 @callback(
     Output('plot-filtered-page', 'children', allow_duplicate=True),
     Output('plot-content', 'className', allow_duplicate=True),
@@ -140,14 +168,11 @@ def render_after_fade(n, data):
     pages = [
         render_location_filter, render_seniorhigh_filter, render_subclass_filter, render_offering_filter
     ]
-    print(n, ":", data)
     for i, choices in enumerate(opt):
-        print(">>>>")
         if data == choices:
             return pages[i](), "rendered"
         
     return pages[0](), "rendered"
-
 
 
 ############################################################
@@ -450,6 +475,7 @@ def retrieve_filtered_values(btn, types, gender, sector, subclass, track, strand
     
 @callback(
     Output('chart-trigger', 'data'),
+    Output('atake-lang', 'children'),
     Input('filtered_values', 'data'),
     State('chart-trigger', 'data'),
     prevent_initial_call=True
@@ -458,8 +484,8 @@ def checked(data, status):
     print(">>>>", data)
     if data:
         # time.sleep(3)
-        smart_filter(data, enrollment_db_engine)
-        print('checked()')
-        return not status
+        smart_filter(data ,enrollment_db_engine)
+        # print('checked()')
+        return (not status), html.Div([])
         
-    return dash.no_update
+    return dash.no_update, dash.no_update

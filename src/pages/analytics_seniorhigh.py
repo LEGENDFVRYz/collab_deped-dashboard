@@ -5,7 +5,7 @@ from dash import Dash, dcc, html
 
 # --  Shared Components
 from src.components.card import Card
-# from src.utils.reports import seniorhigh_chart
+from src.utils.reports import seniorhigh_chart
 
 # # -- Graphs
 # from src.utils.reports.seniorhigh_chart import seniorhigh_distri_per_track ## Importing Charts

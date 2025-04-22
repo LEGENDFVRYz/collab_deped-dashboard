@@ -7,6 +7,42 @@
     height: 100%;
     display: flex;
 
+    // FILTER MENU
+    button{
+        padding: 1em 2em;
+        border: 0;
+        border-radius: 2em;
+        font-size: 1;
+        font-family: 'Inter Medium';
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .page-header{
+        display: flex;
+        flex-direction: row;
+
+        .headerr{
+            flex: 1;
+        }
+
+        #analytics-back-box{
+            
+            
+            #analytics-back-btn{
+                display: none;
+                background-color: $primary-color-2;
+                color: $white;
+            }
+            #analytics-back-btn:hover{
+                background-color: $primary-shades-4;
+            }
+            #analytics-back-btn:active{
+                background-color: $primary-color-2;
+            }
+        }
+    }
+
     .content-section {
         display: flex;
         flex: 1;
@@ -211,16 +247,6 @@
                 gap: 0.75em;
                 justify-content: flex-end; 
                 // order: 3;
-
-                button{
-                    padding: 1em 2em;
-                    border: 0;
-                    border-radius: 2em;
-                    font-size: 1;
-                    font-family: 'Inter Medium';
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
-                }
 
                 #proceed-btn{
                     background-color: $primary-color-2;
