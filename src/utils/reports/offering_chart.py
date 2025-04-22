@@ -151,8 +151,8 @@ gender_distribution_chart = px.bar(
     barmode='group',
     title='Gender Distribution Across Program Offerings',
     color_discrete_map={
-        'Male': '#04508c',     # Primary color
-        'Female': '#E11C38'    # Secondary color
+        'Male': '#5DB7FF',     # Primary color
+        'Female': '#FF5B72'    # Secondary color
     },
     labels={
         'mod_coc': 'Program Offering',
