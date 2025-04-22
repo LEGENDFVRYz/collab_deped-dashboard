@@ -523,7 +523,7 @@ grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 
 # Create grouped bar chart
-fig = px.bar(
+prevalent_fig = px.bar(
     grouped,
     x='strand',
     y='counts',
@@ -536,9 +536,9 @@ fig = px.bar(
 )
 
 # Set text and layout options
-fig.update_traces(textposition='outside')
+prevalent_fig.update_traces(textposition='outside')
 
-fig.update_layout(
+prevalent_fig.update_layout(
     xaxis_tickangle=-45,
     legend_title='Sector',
     xaxis_title='SHS Strand',
@@ -546,7 +546,7 @@ fig.update_layout(
     margin=dict(l=60, r=40, t=60, b=60)
 )
 
-fig
+prevalent_fig
 
 #################################################################################
 
@@ -569,7 +569,7 @@ blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 track_counts = FILTERED_bytype.groupby('type')['strand'].nunique().reset_index()
 track_counts.columns = ['School Type', 'Number of strand']
 
-fig = px.bar(
+widerrange_fig = px.bar(
     track_counts,
     x='School Type',
     y='Number of strand',
@@ -579,9 +579,9 @@ fig = px.bar(
     color_discrete_sequence=blue_shades
 )
 
-fig.update_traces(textposition='outside')
+widerrange_fig.update_traces(textposition='outside')
 
-fig.update_layout(
+widerrange_fig.update_layout(
     xaxis_title='School Type',
     yaxis_title='Number of Strand Offered',
     uniformtext_minsize=8,
@@ -589,7 +589,7 @@ fig.update_layout(
     showlegend=False
 )
 
-fig
+widerrange_fig
 
 #################################################################################
 

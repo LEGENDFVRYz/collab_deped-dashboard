@@ -132,7 +132,7 @@ FILTERED_Distribution
 grade_enrollment = FILTERED_Distribution.groupby('grade')['counts'].sum().reset_index()
 grade_enrollment
 
-fig = px.bar(
+chartoffering_fig = px.bar(
     grade_enrollment,
     x='grade',
     y='counts',
@@ -142,20 +142,20 @@ fig = px.bar(
 )
 
 
-fig.update_traces(
+chartoffering_fig.update_traces(
     textposition='outside',
     marker_color='#EA6074' 
 )
 
 
-fig.update_layout(
+chartoffering_fig.update_layout(
     xaxis_title='Grade Level',
     yaxis_title='Number of Enrollees',
     uniformtext_minsize=8,
     uniformtext_mode='hide'
 )
 
-fig
+chartoffering_fig
 #################################################################################
 
 

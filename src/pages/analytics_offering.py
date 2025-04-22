@@ -2,7 +2,7 @@ from dash import html, dcc
 from src.components.card import Card
 
 ## IMPORTED CHARTS
-from src.utils.reports.offering_chart import sample_chart, table_fig
+from src.utils.reports.offering_chart import sample_chart, table_fig, chartoffering_fig
 
 
 """
@@ -124,6 +124,10 @@ def render_offering_filter():
                         html.Div([Card([
                             #########################################
                             ## INSERT PLOT: Enrollment Distribution by Grade Level
+                            dcc.Graph(id="enrollment_distribution-by-grade", figure=chartoffering_fig,
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
+                            )
                             #########################################
                             
                             

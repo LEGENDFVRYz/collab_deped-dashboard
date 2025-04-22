@@ -14,7 +14,9 @@ from src.utils.reports.seniorhigh_chart import seniorhigh_gender_distri
 from src.utils.reports.seniorhigh_chart import seniorhigh_school_offering_per_track_by_sector
 from src.utils.reports.seniorhigh_chart import seniorhigh_least_offered_high_demand
 from src.utils.reports.seniorhigh_chart import sample_chart ## Importing Indicators
-
+from src.utils.reports.seniorhigh_chart import heatmap_fig 
+from src.utils.reports.seniorhigh_chart import prevalent_fig
+from src.utils.reports.seniorhigh_chart import widerrange_fig
 
 """
     Template For Rendering the Location Reports:
@@ -111,16 +113,28 @@ def render_seniorhigh_filter():
                     html.Div([
                         Card([
                             # how many schools offer each SHS track per region
+                            dcc.Graph(id="school_offering-track-region", className="school_offering-track-region", figure=heatmap_fig,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                     html.Div([
                         Card([
                             # which SHS tracks are more prevalent in each sector
+                            dcc.Graph(id="shs_tracks-prevelent", className="shs_tracks-prevelent", figure=prevalent_fig,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                     html.Div([
                         Card([
                             # do mother schools or annexes offer a wider range of SHS tracks
+                            dcc.Graph(id="school_wider-range", className="school_wider-range", figure=widerrange_fig,
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"}
+                                ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                 ], className="shs-right-content"),
