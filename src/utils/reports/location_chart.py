@@ -1,16 +1,15 @@
-import time
 import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import dcc, callback, Output, Input, State, Patch
+from plotly.subplots import make_subplots 
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
 
 # Extra Utilities
-from plotly.subplots import make_subplots 
-from utils.reports.home_enrollment_per_region import smart_truncate_number
+from src.utils.extras_utils import smart_truncate_number
 
 
 """
