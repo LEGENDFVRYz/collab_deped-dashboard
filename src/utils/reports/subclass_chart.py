@@ -184,10 +184,10 @@ def update_graph(trigger, data):
     
     distrib_by_subclass.update_traces(
         textinfo='label+percent',
-        textfont_size=9,
+        textfont_size=7,
         pull=[0.1 if x != 'DepED Managed' else 0 for x in FILTERED_DATA['sub_class']],
         marker=dict(line=dict(color='#FFFFFF', width=2)),
-        #rotation=315
+        rotation=45
     )
     
     distrib_by_subclass.update_layout(
@@ -279,7 +279,6 @@ def update_graph(trigger, data):
         yaxis_title='Number of Schools',
         margin={"l": 0, "r": 0, "t": 0, "b": 50},
         scattermode="group",
-        width=400,
         legend={
             'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
             'orientation': 'h', 
@@ -572,7 +571,7 @@ def update_graph(trigger, data):
 #         )
 #     ),
 #     font=dict(size=11),  # General font size
-#     autosize=False,
+#     autosize=True,
 #     width=300,  # Increase the width of the chart
 #     height=200,  # Increase the height of the chart
 #     margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
