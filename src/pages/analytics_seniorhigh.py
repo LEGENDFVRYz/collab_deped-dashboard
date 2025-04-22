@@ -7,16 +7,6 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 from src.utils.reports import seniorhigh_chart
 
-# # -- Graphs
-# from src.utils.reports.seniorhigh_chart import seniorhigh_distri_per_track ## Importing Charts
-# from src.utils.reports.seniorhigh_chart import seniorhigh_ratio_enrollment
-# from src.utils.reports.seniorhigh_chart import seniorhigh_most_least_enrolled
-# from src.utils.reports.seniorhigh_chart import seniorhigh_gender_distri
-# from src.utils.reports.seniorhigh_chart import seniorhigh_school_offering_per_track_by_sector
-# from src.utils.reports.seniorhigh_chart import seniorhigh_least_offered_high_demand
-# from src.utils.reports.seniorhigh_chart import sample_chart ## Importing Indicators
-
-
 # """
 #     Template For Rendering the Location Reports:
     

@@ -22,86 +22,6 @@ from src.data import enrollment_db_engine, smart_filter
 # ##                     MAIN DATAFRAME BASED FROM THE QUERY                     ##
 # #################################################################################
 
-# # ## -- This only a temporary dataframe for testing your charts, you can change it
-# FILTERED_DF = auto_extract(['sub_class', 'track', 'shs_grade'], is_specific=False)
-# FILTERED_DF
-
-# HM_CBC_DF = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
-
-# # Rename values in subclass, type, and sector
-# subclass_rename = {
-#     'LUC': 'LUC Managed',
-#     'Non-Sectarian ': 'Non-Sectarian',
-#     'SCHOOL ABROAD': 'School Abroad',
-#     'Sectarian ': 'Sectarian'
-# }
-# type_rename = {
-#     'School with no Annexes' : 'No Annexes', 
-#     'Mother school': 'Mother School',
-#     'Annex or Extension school(s)': 'Annex/Extension', 
-#     'Mobile School(s)/Center(s)': 'Mobile School'
-# }
-# sector_rename = {
-#     'SUCsLUCs': 'SUCs/LUCs'
-# }
-
-# # Apply renaming if columns exist
-# if 'sub_class' in HM_CBC_DF.columns:
-#     HM_CBC_DF['sub_class'] = HM_CBC_DF['sub_class'].map(subclass_rename).fillna(HM_CBC_DF['sub_class'])
-
-# if 'type' in HM_CBC_DF.columns:
-#     HM_CBC_DF['type'] = HM_CBC_DF['type'].map(type_rename).fillna(HM_CBC_DF['type'])
-
-# if 'sector' in HM_CBC_DF.columns:
-#     HM_CBC_DF['sector'] = HM_CBC_DF['sector'].map(sector_rename).fillna(HM_CBC_DF['sector'])
-
-# HM_CBC_DF
-
-# # ## -- Check the document for all valid columns and structurette
-# # ## -- Dont change the all caps variables
-# #################################################################################
-
-
-
-
-# #################################################################################
-# #################################################################################
-# ## -- EXAMPLE CHHART
-
-# # # Manipulated Data for charts
-# # query = FILTERED_DF[['grade']][:]
-
-# # query['school-level'] = query['grade'].apply(
-# #     lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
-# # )
-
-# # query = query.groupby(['school-level', 'grade']).size().reset_index(name='school_count')
-
-# # # Ploting
-# # sample_chart = px.bar(
-# #     query,
-# #     x="school_count", 
-# #     y="grade",
-# #     color='school-level',
-# #     color_discrete_map={
-# #         'ELEM': '#FF899A', 
-# #         'JHS': '#E11C38', 
-# #         'SHS': '#930F22'
-# #     }
-# # )
-# # sample_chart
-
-# # sample_chart.update_layout(
-# #     autosize=True,
-# #     margin={"l": 8, "r": 8, "t": 8, "b": 8},
-# # )
-
-
-
-# #################################################################################
-# #################################################################################
-
-
 # ## -- FIND YOUR CHARTS HERE:
 
 # ################################################################################
@@ -412,86 +332,82 @@ def update_graph(trigger, data):
 # ##  --- Regional distribution/ which subclass has the highest number of schools per loc
 # #################################################################################
 
-# @callback(
-#     Output('', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
+@callback(
+    Output('subclass_heatmap', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
+    # Assuming FILTERED_DF is already defined
+    query2 = FILTERED_DATA[['region', 'sub_class']][:]
+
+    # Count the number of schools per sub_class per region
+    query2 = query2.groupby(['region', 'sub_class']).size().reset_index(name='school_count')
+
+    # Pivot the data to wide format for heatmap
+    heatmap_df = query2.pivot(index='region', columns='sub_class', values='school_count').fillna(0)
+
+    # Reset index for Plotly compatibility
+    heatmap_df = heatmap_df.reset_index().melt(id_vars='region', var_name='sub_class', value_name='school_count')
+
+    # Create heatmap with custom reversed secondary shades palette
+    subclass_heatmap = px.density_heatmap(
+        heatmap_df,
+        x='sub_class',
+        y='region',
+        z='school_count',
+        color_continuous_scale=[
+            '#F3A4AF',  # Lightest - secondary-shades-9
+            '#EF8292',
+            '#EA6074',
+            '#E63E56',
+            '#D61B35',
+            '#B4162D',
+            '#921224',
+            '#710E1C',
+            '#4F0A14'   # Darkest - secondary-shades-1
+        ],
+        text_auto=False
+    )
+
+    # Update layout for improved visuals
+    subclass_heatmap.update_layout(
+        title=dict(
+            text='Regional Distribution of Schools',
+            font=dict(
+                family='Inter Bold',
+                size=14,
+                color='#04508c'
+            )
+        ),
+        xaxis=dict(
+            tickangle=45,
+            tickfont=dict(size=9),
+            title=''
+        ),
+        yaxis=dict(
+            tickfont=dict(size=9),
+            title='',
+        ),
+        coloraxis_colorbar=dict(
+            title=dict(
+                text='Schools',
+                font=dict(
+                    family='Inter Medium',
+                    size=10
+                )
+            )
+        ),
+        font=dict(size=11),
+        autosize=True,
+        margin={"l": 100, "r": 10, "t": 40, "b": 50}
+    )
     
-    
-#     return dcc.Graph(figure=)
-# # Assuming FILTERED_DF is already defined
-# query2 = HM_CBC_DF[['region', 'sub_class']][:]
-
-# # Count the number of schools per sub_class per region
-# query2 = query2.groupby(['region', 'sub_class']).size().reset_index(name='school_count')
-
-# # Pivot the data to wide format for heatmap
-# heatmap_df = query2.pivot(index='region', columns='sub_class', values='school_count').fillna(0)
-
-# # Reset index for Plotly compatibility
-# heatmap_df = heatmap_df.reset_index().melt(id_vars='region', var_name='sub_class', value_name='school_count')
-
-# # Create heatmap with custom reversed secondary shades palette
-# subclass_heatmap = px.density_heatmap(
-#     heatmap_df,
-#     x='sub_class',
-#     y='region',
-#     z='school_count',
-#     color_continuous_scale=[
-#         '#F3A4AF',  # Lightest - secondary-shades-9
-#         '#EF8292',
-#         '#EA6074',
-#         '#E63E56',
-#         '#D61B35',
-#         '#B4162D',
-#         '#921224',
-#         '#710E1C',
-#         '#4F0A14'   # Darkest - secondary-shades-1
-#     ],
-#     text_auto=False
-# )
-
-# # Update layout for improved visuals
-# subclass_heatmap.update_layout(
-#     title=dict(
-#         text='Regional Distribution of Schools',
-#         font=dict(
-#             family='Inter Bold',
-#             size=14,
-#             color='#04508c'
-#         )
-#     ),
-#     xaxis=dict(
-#         tickangle=45,
-#         tickfont=dict(size=9),
-#         title=''
-#     ),
-#     yaxis=dict(
-#         tickfont=dict(size=9),
-#         title='',
-#     ),
-#     coloraxis_colorbar=dict(
-#         title=dict(
-#             text='Schools',
-#             font=dict(
-#                 family='Inter Medium',
-#                 size=10
-#             )
-#         )
-#     ),
-#     font=dict(size=11),
-#     autosize=True,
-#     margin={"l": 100, "r": 10, "t": 40, "b": 50}
-# )
-
-
-
+    return dcc.Graph(figure=subclass_heatmap)
 
 
 # #################################################################################
@@ -502,87 +418,61 @@ def update_graph(trigger, data):
 # ##  --- MCOC breakdown/which subclass offers which program types
 # #################################################################################
 
-# @callback(
-#     Output('', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
+@callback(
+    Output('subclass_clustered', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    
-    
-#     return dcc.Graph(figure=)
-# # Filter the dataframe to include only the required columns
-# mcoc_df = HM_CBC_DF[['mod_coc', 'counts', 'sub_class']]
+    # Ensure the dataframe is filtered to include only the required columns
+    mcoc_df = FILTERED_DATA[['mod_coc', 'counts', 'sub_class']]
 
-# # Group by 'mod_coc' and 'sub_class' to aggregate the counts
-# mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
+    # Group by 'mod_coc' and 'sub_class' to aggregate the counts
+    mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
 
-# # Truncate counts directly in the DataFrame
-# mcoc_grouped['counts'] = mcoc_grouped['counts'].apply(
-#     lambda count: f"{count/1_000_000:.1f}M" if count >= 1_000_000 else
-#                   f"{count/1_000:.1f}K" if count >= 1_000 else
-#                   str(count)
-# )
+    # Capitalize each word in 'sub_class' for the legend
+    mcoc_grouped['sub_class'] = mcoc_grouped['sub_class'].str.title()
 
-# # Sort the DataFrame by counts to ensure the lowest values are at the bottom
-# mcoc_grouped['numeric_counts'] = mcoc_df.groupby(['mod_coc', 'sub_class'])['counts'].transform('sum')
-# mcoc_grouped = mcoc_grouped.sort_values(by='numeric_counts')
+    # Revert the counts back to numeric for plotting
+    mcoc_grouped['counts_numeric'] = mcoc_grouped['counts'].apply(
+        lambda count: float(count.replace('M', 'e6').replace('K', 'e3')) if isinstance(count, str) else count
+    )
 
-# # Create a clustered bar chart with default discrete color sequence
-# subclass_clustered = px.bar(
-#     mcoc_grouped,
-#     x='mod_coc',  # Set mod_coc as x-axis
-#     y='counts',  # Set counts as y-axis
-#     color='sub_class',  # Clustered by subclass
-#     barmode='group',  # Grouped bar chart
-#     color_discrete_sequence=[
-#         "#012C53", "#023F77", "#02519B", "#0264BE", "#0377E2",
-#         "#2991F1", "#4FA4F3", "#74B8F6", "#9ACBF8", "#C0DFFB", "#E6F2FD"
-#     ]   # Apply the color scheme
-# )
+    # Create the clustered bar chart
+    subclass_clustered = px.bar(
+        mcoc_grouped,
+        x='mod_coc',
+        y='counts_numeric',
+        color='sub_class',
+        title='Clustered Bar Chart for mod_coc vs. Sub_Class',
+        labels={'counts_numeric': 'Counts (in millions or thousands)', 'mod_coc': 'mod_coc'},
+        category_orders={'sub_class': sorted(mcoc_grouped['sub_class'].unique())},
+        barmode='group'
+    )
 
-# # Update the layout for better readability
-# subclass_clustered.update_layout(
-#     title=dict(
-#         text='Program Types',
-#         font=dict(
-#             family='Inter Bold',  # Use the 'Inter Bold' font face
-#             size=14,  # Font size
-#             color= '#04508c'
-#         ),
-#     ),
-#     xaxis=dict(
-#         title='',  # Set x-axis title
-#         tickangle=45,  # Rotate x-axis labels for better readability
-#         tickfont=dict(
-#             family='Inter Medium',  # Use the 'Inter Medium' font face
-#             size=8
-#         )
-#     ),
-#     yaxis=dict(
-#         title='',  # Set y-axis title
-#         tickfont=dict(
-#             family='Inter Medium',  # Use the 'Inter Medium' font face
-#             size=8
-#         )
-#     ),
-#     font=dict(size=11),  # General font size
-#     autosize=True,
-#     width=300,  # Increase the width of the chart
-#     height=200,  # Increase the height of the chart
-#     margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
-#     showlegend=False,
-#     bargap=0.1,
-#     bargroupgap=0.0,  # Adjust the gap between bars in the same group
-# )
+    # Customize the layout further using update_layout
+    subclass_clustered.update_layout(
+        title="Clustered Bar Chart for mod_coc vs. Sub_Class",
+        xaxis=dict(
+            title="mod_coc",  # Label for the x-axis
+            tickangle=45,  # Rotate x-axis ticks for better readability
+            tickmode='array',
+            tickvals=mcoc_grouped['mod_coc'].unique(),  # Ensure all mod_coc values are shown
+        ),
+        yaxis=dict(
+            title="Counts (in millions or thousands)",  # Label for the y-axis
+            tickformat=".1f",  # Format y-axis ticks to show one decimal place
+        ),
+        legend_title="Sub Class",  # Title for the legend
+        barmode='group',  # Ensure bars are grouped
+        margin=dict(l=50, r=50, t=50, b=100),  # Set margins for the chart for better spacing
+    )
 
-
-
-
+    return dcc.Graph(figure=subclass_clustered)
 
 # #################################################################################
 
@@ -592,168 +482,104 @@ def update_graph(trigger, data):
 # ##  --- Enrollment in shs tracks across subclass
 # #################################################################################
 
-# @callback(
-#     Output('', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
+@callback(
+    Output('subclass_clustered_tracks', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    
-    
-#     return dcc.Graph(figure=)
-# # Filter the dataframe to include only SHS tracks and subclasses
-# shs_tracks_df = FILTERED_DF[['track', 'sub_class']]
+    # Filter the dataframe to include only SHS tracks and subclasses
+    shs_tracks_df = FILTERED_DATA[['track', 'sub_class']]
 
-# # Remove rows with missing values in 'track' or 'sub_class'
-# shs_tracks_df = shs_tracks_df.dropna(subset=['track', 'sub_class'])
+    # Remove rows with missing values in 'track' or 'sub_class'
+    shs_tracks_df = shs_tracks_df.dropna(subset=['track', 'sub_class'])
 
-# # Group by 'track' and 'sub_class' and count the entries
-# shs_tracks_grouped = shs_tracks_df.groupby(['track', 'sub_class']).size().reset_index(name='counts')
+    # Group by 'track' and 'sub_class' and count the entries
+    shs_tracks_grouped = shs_tracks_df.groupby(['track', 'sub_class']).size().reset_index(name='counts')
 
-# # Truncate 'track' and 'sub_class' values for better readability
-# shs_tracks_grouped['track'] = shs_tracks_grouped['track'].str.slice(0, 20)
-# shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.slice(0, 15)
+    # Capitalize each word in 'sub_class' for the legend
+    shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.title()
 
-# # Create a clustered bar chart for SHS tracks and subclasses
-# subclass_clustered_tracks = px.bar(
-#     shs_tracks_grouped,
-#     x='track',
-#     y='counts',
-#     color='sub_class',
-#     barmode='group',
-#     title='Enrollment in SHS Tracks Across Subclass'
-# )
+    # Truncate 'track' and 'sub_class' values for better readability
+    shs_tracks_grouped['track'] = shs_tracks_grouped['track'].str.slice(0, 20)
+    shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.slice(0, 15)
 
-# # Update chart layout for improved readability
-# subclass_clustered_tracks.update_layout(
-#     title=dict(
-#         text='SHS Tracks Enrollment',
-#         font=dict(family='Inter Bold', size=14, color='#04508c'),
-#         x=0  # Left align the title
-#     ),
-#     xaxis=dict(
-#         title='',
-#         tickangle=45,
-#         tickfont=dict(size=10, family='Inter Medium')
-#     ),
-#     yaxis=dict(
-#         title='',
-#         tickfont=dict(size=10, family='Inter Medium')
-#     ),
-#     showlegend=True,  # Display legend for clarity
-#     legend_title=None,  # Remove legend title (sub_class)
-#     font=dict(size=11, family='Inter Medium'),
-#     autosize=True,
-#     margin={"l": 50, "r": 10, "t": 50, "b": 40}  # Adjust margins
-# )
+    # Create a clustered bar chart for SHS tracks and subclasses
+    subclass_clustered_tracks = px.bar(
+        shs_tracks_grouped,
+        x='track',
+        y='counts',
+        color='sub_class',
+        barmode='group',
+        title='Enrollment in SHS Tracks Across Subclass'
+    )
 
-
-
-
-
-
+    # Update chart layout for improved readability
+    subclass_clustered_tracks.update_layout(
+        title=dict(
+            text='SHS Tracks Enrollment',
+            font=dict(family='Inter Bold', size=14, color='#04508c'),
+            x=0  # Left align the title
+        ),
+        xaxis=dict(
+            title='',
+            tickangle=45,
+            tickfont=dict(size=10, family='Inter Medium')
+        ),
+        yaxis=dict(
+            title='',
+            tickfont=dict(size=10, family='Inter Medium')
+        ),
+        showlegend=True,  # Display legend for clarity
+        legend_title=None,  # Remove legend title (sub_class)
+        font=dict(size=11, family='Inter Medium'),
+        autosize=True,
+        margin={"l": 50, "r": 10, "t": 50, "b": 40}  # Adjust margins
+    )
+        
+    return dcc.Graph(figure=subclass_clustered_tracks)
 
 
 # #################################################################################
+
 
 # #################################################################################
 # ##  --- % schools offering ‘all offerings’ for the entire mod_coc
 # #################################################################################
 
-# @callback(
-#     Output('', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
+@callback(
+    Output('top_offering_subclass', 'children'),
+    Output('top_offering_percentage', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
+    # Total schools per subclass
+    total_counts = FILTERED_DATA.groupby('sub_class')['counts'].sum()
+
+    # Schools offering "All Offering" per subclass
+    all_offerings_counts = FILTERED_DATA[FILTERED_DATA['mod_coc'] == 'All Offering'].groupby('sub_class')['counts'].sum()
+
+    # Compute % of All Offering per subclass, drop NaNs (where no offering exists)
+    percentage_per_subclass = ((all_offerings_counts / total_counts) * 100).dropna().round(2)
+
+    # Helper function to get percentage by subclass
+    def get_offering_percentage(subclass_name):
+        return percentage_per_subclass.get(subclass_name, None)
+
+    # Get top subclass and its percentage
+    top_offering_subclass = percentage_per_subclass.idxmax()
+    top_offering_percentage = percentage_per_subclass.max()
     
-    
-#     return dcc.Graph(figure=)
-
-# # Group by sub_class, calculate total and 'All Offering' counts
-# grouped = HM_CBC_DF.groupby('sub_class')
-
-# # Total schools per sub_class
-# total_counts = grouped['counts'].sum()
-
-# # Schools offering "All Offering" per sub_class
-# all_offerings_counts = HM_CBC_DF[HM_CBC_DF['mod_coc'] == 'All Offering'].groupby('sub_class')['counts'].sum()
-
-# # Calculate % of All Offering per sub_class
-# percentage_per_subclass = (all_offerings_counts / total_counts) * 100
-
-# # Drop NaNs (in case some subclasses had no 'All Offering')
-# percentage_per_subclass = percentage_per_subclass.dropna()
-
-# # Get top sub_class and its percentage
-# top_subclass = percentage_per_subclass.idxmax()
-# top_percentage = percentage_per_subclass.max()
-
-# # Create the figure
-# subclass_firstindicator = go.Figure()
-
-# # Add the indicator (number + delta)
-# subclass_firstindicator.add_trace(go.Indicator(
-#     mode="number+delta",
-#     value=top_percentage,
-#     number={
-#         "suffix": "%",
-#         "font": {
-#             "size": 30,
-#             "color": "#02519B",
-#             "family": "Inter Bold, sans-serif"
-#         }
-#     },
-#     delta={
-#         "reference": 100,
-#         "relative": False,
-#         "increasing": {"color": "#03C988"},
-#         "decreasing": {"color": "#FF6B6B"},
-#     },
-#     domain={'x': [0, 1], 'y': [0.35, 0.75]}  # Centered vertically
-# ))
-
-# # Add subclass name as annotation below the indicator
-# subclass_firstindicator.update_layout(
-#     annotations=[
-#         dict(
-#             text=(
-#                 f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
-#                 f"<b>Top All Program Offering:</b> <br> {top_subclass}</span>"
-#             ),
-#             x=0.5,
-#             y=0.20,
-#             xanchor='center',
-#             yanchor='top',
-#             showarrow=False,
-#         )
-#     ],
-#     margin=dict(t=10, b=10, l=10, r=10),
-#     paper_bgcolor="rgba(0,0,0,0)",  # Transparent background
-#     plot_bgcolor="rgba(0,0,0,0)",
-#     font=dict(family="Inter, sans-serif", color="#012C53"),
-#     autosize=True,
-# )
-
-
-
-
-
-
-
-
-
-
-
-
+    return top_offering_subclass, f"{top_offering_percentage}%"
 
 # #################################################################################
 
@@ -763,73 +589,36 @@ def update_graph(trigger, data):
 # ##  --- % schools offering shs per subclass
 # #################################################################################
 
-# @callback(
-#     Output('', 'children'),
-#     Input('chart-trigger', 'data'),
-#     State('filtered_values', 'data'),
-#     prevent_initial_call=True
-# )
+@callback(
+    Output('top_track_subclass', 'children'),
+    Output('top_track_percentage', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    
-    
-#     return dcc.Graph(figure=)
-# # Get all unique SHS tracks
-# unique_tracks = FILTERED_DF['track'].unique()
-# total_tracks = len(unique_tracks)
+    # Get all unique SHS tracks
+    unique_tracks = FILTERED_DATA['track'].dropna().unique()
+    total_tracks = len(unique_tracks)
 
-# # Count the unique tracks offered per sub_class
-# tracks_per_subclass = FILTERED_DF.groupby('sub_class')['track'].nunique()
+    # Count the unique tracks offered per subclass
+    tracks_per_subclass = FILTERED_DATA.groupby('sub_class')['track'].nunique()
 
-# # Calculate the percentage of tracks offered for each sub_class
-# percentage_tracks_per_subclass = (tracks_per_subclass / total_tracks) * 100
+    # Calculate percentage per subclass
+    percentage_tracks_per_subclass = ((tracks_per_subclass / total_tracks) * 100).dropna().round(2)
 
-# # Find the sub_class with the highest percentage
-# top_subclass = percentage_tracks_per_subclass.idxmax()
-# top_percentage = percentage_tracks_per_subclass.max()
+    # Helper function to retrieve % of SHS track coverage by subclass
+    def get_track_coverage(subclass_name):
+        return percentage_tracks_per_subclass.get(subclass_name, None)
 
-# subclass_secondindicator = go.Figure()
-
-# subclass_secondindicator.add_trace(go.Indicator(
-#     mode="number",
-#     value=top_percentage,
-#     number={
-#         "suffix": "%",
-#         "font": {
-#             "size": 30,
-#             "color": "#02519B",
-#             "family": "Inter Bold, sans-serif"
-#         }
-#     },
-#     domain={'x': [0, 1], 'y': [0.5, 1]}  # Indicator takes the upper half
-# ))
-
-# subclass_secondindicator.update_layout(
-#     annotations=[
-#         dict(
-#             text=(
-#                 f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
-#                 f"<b>Top SHS Track Coverage:</b><br>{top_subclass}</span>"
-#             ),
-#             x=0.5,
-#             y=0.4,  # Just below the number
-#             xanchor='center',
-#             yanchor='top',
-#             showarrow=False,
-#         )
-#     ],
-#     margin=dict(t=10, b=10, l=10, r=10),
-#     paper_bgcolor="rgba(0,0,0,0)",
-#     plot_bgcolor="rgba(0,0,0,0)",
-#     font=dict(family="Inter, sans-serif", color="#012C53"),
-#     autosize=True,
-# )
-
-
-
-
+    # Get top-performing subclass and its percentage
+    top_track_subclass = percentage_tracks_per_subclass.idxmax()
+    top_track_percentage = percentage_tracks_per_subclass.max()
+        
+    return top_track_subclass, f"{top_track_percentage}%"
 
 
 # #################################################################################

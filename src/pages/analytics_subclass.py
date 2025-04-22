@@ -4,16 +4,6 @@ from src.components.card import Card
 ## Chart Callbacks
 from src.utils.reports import subclass_chart
 
-# # -- Graphs
-
-# from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
-# from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
-# from src.utils.reports.subclass_chart import subclass_clustered_tracks ## Importing Clustered Bar Chart for Tracks
-# from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
-# from src.utils.reports.subclass_chart import subclass_secondindicator ## Importing Second Indicator Chart
-# from src.utils.reports.subclass_chart import avg_enroll_dost, avg_enroll_deped, avg_enroll_luc, avg_enroll_int, avg_enroll_nonsec, avg_enroll_ga, avg_enroll_abroad, avg_enroll_suc, avg_enroll_sec 
-# from src.utils.reports.subclass_chart import total_schools_per_subclass, distrib_by_subclass, student_school_ratio, subclass_vs_school_type, sector_affiliation
-
 
 # """
 #     Template For Rendering the Location Reports:
@@ -252,6 +242,11 @@ def render_subclass_filter():
                                 Card([
                                     # regional distribution/ which subclass has the highest number of schools per loc
                                     html.H4(["Regional Distribution of Schools"], className="subclass-graph-title"),
+                                    dcc.Loading(
+                                        id="loading-graph",
+                                        type="default",
+                                        children=html.Div([],id='subclass_heatmap',)
+                                    ), 
                                     # dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
                                     # config={"responsive": True},
                                     # style={"width": "100%", "height": "100%"}
@@ -270,7 +265,11 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # mcoc breakdown/which subclass offers which program types
-                                        html.H4(["Program Types"], className="subclass-graph-title"),
+                                        dcc.Loading(
+                                            id="loading-graph",
+                                            type="default",
+                                            children=html.Div([],id='subclass_clustered',)
+                                        ),  
                                         # dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
                                         # config={"responsive": True},
                                         # style={"width": "100%", "height": "100%"}
@@ -281,35 +280,45 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # enrollment in shs tracks across subclass
-                                        html.H4(["Enrollment in SHS Tracks Across Subclass"], className="subclass-graph-title"),
+                                        dcc.Loading(
+                                            id="loading-graph",
+                                            type="default",
+                                            children=html.Div([],id='subclass_clustered_tracks',)
+                                        ),
                                         # dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
-                                        # config={"responsive": True},
-                                        # style={"width": "100%", "height": "100%"}
+                                            # config={"responsive": True},
+                                            # style={"width": "100%", "height": "100%"}
                                         # ),
                                     ], margin=False),
                                 ], className="subclass-program-graph"),
-                            ], className="subclass-program-graph-left"),    
-                            html.Div([
-                                html.Div([
-                                    Card([
-                                        # % schools offering ‘all offerings’ per subclass
-                                        # dcc.Graph(id="subclass_firstindicator", figure=subclass_firstindicator,
-                                        # config={"responsive": True},
-                                        # style={"width": "100%", "height": "100%"}
-                                        # ),
-                                    ], margin=False),
-                                ], className="subclass-program-indicator"),
-                                html.Div([
-                                    Card([
-                                        # % schools offering shs per subclass
-                                        # dcc.Graph(id="subclass_secondindicator", figure=subclass_secondindicator,
-                                        # config={"responsive": True},
-                                        # style={"width": "100%", "height": "100%"}
-                                        # ),
-                                    ], margin=False),
-                                ], className="subclass-program-indicator"),
-                            ], className="subclass-program-last-cards")
-                            
+                            ], className="subclass-program-graph-left"),
+
+                            html.Div(
+                                className="subclass-percentage",  # Updated to match the new class name
+                                children=[
+                                    # Row 1: Displaying the percentage of "All Offering" schools
+                                    html.Div(className="row", children=[
+                                        html.Div(className="col", children=[
+                                            Card([
+                                                html.H6("Top 'All Offering' Subclass"),
+                                                html.Span([], id="top_offering_subclass", className="subclass-percentage"),
+                                                html.Span([], id="top_offering_percentage", className="subclass-percentage"),
+                                                html.H6("schools offering all programs"),
+                                            ], margin=False)
+                                        ]),
+                                    ]),
+                                    html.Div(className="row", children=[
+                                        html.Div(className="col", children=[
+                                            Card([
+                                                html.H6("Top SHS Track Coverage Subclass"),
+                                                html.Span([], id="top_track_subclass", className="subclass-percentage"),
+                                                html.Span([], id="top_track_percentage", className="subclass-percentage"),
+                                                html.H6("track coverage"),
+                                            ], margin=False)
+                                        ]),
+                                    ]),
+                                ]
+                            )                            
                         ], className="subclass-program-contents"),
                     ], className="subclass-program"),
                     
