@@ -235,6 +235,7 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # regional distribution/ which subclass has the highest number of schools per loc
+                                    html.H4(["Regional Distribution of Schools"], className="subclass-graph-title"),
                                     dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
@@ -253,6 +254,7 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # mcoc breakdown/which subclass offers which program types
+                                        html.H4(["Program Types"], className="subclass-graph-title"),
                                         dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}
@@ -263,6 +265,7 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # enrollment in shs tracks across subclass
+                                        html.H4(["Enrollment in SHS Tracks Across Subclass"], className="subclass-graph-title"),
                                         dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
                                         config={"responsive": True},
                                         style={"width": "100%", "height": "100%"}

@@ -345,14 +345,6 @@ subclass_heatmap = px.density_heatmap(
 
 # Update layout for improved visuals
 subclass_heatmap.update_layout(
-    title=dict(
-        text='Regional Distribution of Schools',
-        font=dict(
-            family='Inter Bold',
-            size=14,
-            color='#04508c'
-        )
-    ),
     xaxis=dict(
         tickangle=45,
         tickfont=dict(size=9),
@@ -419,14 +411,6 @@ subclass_clustered = px.bar(
 
 # Update the layout for better readability
 subclass_clustered.update_layout(
-    title=dict(
-        text='Program Types',
-        font=dict(
-            family='Inter Bold',  # Use the 'Inter Bold' font face
-            size=14,  # Font size
-            color= '#04508c'
-        ),
-    ),
     xaxis=dict(
         title='',  # Set x-axis title
         tickangle=45,  # Rotate x-axis labels for better readability
@@ -444,8 +428,6 @@ subclass_clustered.update_layout(
     ),
     font=dict(size=11),  # General font size
     autosize=True,
-    #width=300,  # Increase the width of the chart
-    #height=200,  # Increase the height of the chart
     margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
     showlegend=False,
     bargap=0.1,
@@ -483,16 +465,10 @@ subclass_clustered_tracks = px.bar(
     y='counts',
     color='sub_class',
     barmode='group',
-    title='Enrollment in SHS Tracks Across Subclass'
 )
 
 # Update chart layout for improved readability
 subclass_clustered_tracks.update_layout(
-    title=dict(
-        text='SHS Tracks Enrollment',
-        font=dict(family='Inter Bold', size=14, color='#04508c'),
-        x=0  # Left align the title
-    ),
     xaxis=dict(
         title='',
         tickangle=45,

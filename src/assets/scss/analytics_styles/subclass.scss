@@ -85,8 +85,6 @@
                             display: flex;
                             flex: 1;
                             gap: 0.5em;
-                            //flex-wrap: wrap;
-                            //justify-content: space-between;
 
                             .subclass-enroll-ind {
                                 display: flex;
@@ -115,25 +113,24 @@
                 flex-direction: column;
                 flex: 1;
                 gap: 1em;
-                //max-width: 50%;
 
                 .subclass-dist-avail {
                     display: flex;
                     flex-direction: column;
-                    flex: 1.5;
+                    flex: 1;
                     gap: 0.5em;
 
                     .subclass-dist-avail-graph {
                         display: flex;
                         flex: 1;
-                        //min-height: 300px;
+                        min-height: 300px;
                     }
 
                     .subclass-dist-avail-lower {
                         display: flex;
                         flex: 1;
                         gap: 0.5em;
-                        //min-height: 300px;
+                        min-height: 300px;
                         
                         .subclass-dist-avail-graph-1 {
                             display: flex;
@@ -142,7 +139,7 @@
 
                         .subclass-dist-avail-graph-2 {
                             display: flex;
-                            flex: 1;
+                            flex: 1.5;
                         }
                     }
                 }
@@ -152,7 +149,6 @@
                     flex-direction: column;
                     flex: 1;
                     gap: 0.5em;
-                    //min-height: 100px;
 
                     .subclass-program-contents {
                         display: flex;
