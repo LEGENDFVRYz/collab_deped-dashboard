@@ -50,11 +50,11 @@ def format_large_number(num):
 dataframe = auto_extract(['counts'], is_specific=False)
 
 order = [
-    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'Elem', 'G7', 'G8', 'G9', 'G10', 'JHS', 'G11', 'G12'
+    'K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12'
 ]
 
 dataframe['school-level'] = dataframe['grade'].apply(
-    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
+    lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else ('SHS' if x in ['G11', 'G12'] else 'ELEM')
 )
 dataframe
 
@@ -273,63 +273,63 @@ gender_gap = round(gender_gap, 2)
 # ----------------------------------------------------------
 # Regional Distribution
 
-enrollees_df = auto_extract(['counts', 'region'], is_specific=False)
-enrollees_df
+# enrollees_df = auto_extract(['counts', 'region'], is_specific=False)
+# enrollees_df
 
-enrollees_per_region = enrollees_df.groupby(['region'], as_index=False)["counts"].sum()
-enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
+# enrollees_per_region = enrollees_df.groupby(['region'], as_index=False)["counts"].sum()
+# enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
 
-ordered_regions = [
-    'Region I', 'Region II', 'Region III', 'Region IV-A', 'Region IV-B',
-    'Region V', 'Region VI', 'Region VII', 'Region VIII', 'Region IX',
-    'Region X', 'Region XI', 'Region XII', 'CAR', 'NCR', 'CARAGA',
-    'BARMM', 'PSO'
-]
+# ordered_regions = [
+#     'Region I', 'Region II', 'Region III', 'Region IV-A', 'Region IV-B',
+#     'Region V', 'Region VI', 'Region VII', 'Region VIII', 'Region IX',
+#     'Region X', 'Region XI', 'Region XII', 'CAR', 'NCR', 'CARAGA',
+#     'BARMM', 'PSO'
+# ]
 
-enrollees_per_region['region'] = pd.Categorical(
-    enrollees_per_region['region'],
-    categories=ordered_regions,
-    ordered=True
-)
+# enrollees_per_region['region'] = pd.Categorical(
+#     enrollees_per_region['region'],
+#     categories=ordered_regions,
+#     ordered=True
+# )
 
-enrollees_per_region = enrollees_per_region.sort_values('region').reset_index(drop=True)
-enrollees_per_region
+# enrollees_per_region = enrollees_per_region.sort_values('region').reset_index(drop=True)
+# enrollees_per_region
 
-home_regional_distribution = px.bar (enrollees_per_region, x="region", y="counts", 
-                                text="counts_label"
-                            )
+# home_regional_distribution = px.bar (enrollees_per_region, x="region", y="counts", 
+#                                 text="counts_label"
+#                             )
 
-home_regional_distribution.update_traces(
-    marker_color="#037DEE",
-    textposition='outside',
-    cliponaxis=False,
-    textfont=dict(size=8, color="#04508c"),
-    hovertemplate='Region: %{x}<br>Enrollees: %{y}',
-    # hovertext=enrollees_per_region['counts'].astype(str)
-)
+# home_regional_distribution.update_traces(
+#     marker_color="#037DEE",
+#     textposition='outside',
+#     cliponaxis=False,
+#     textfont=dict(size=8, color="#04508c"),
+#     hovertemplate='Region: %{x}<br>Enrollees: %{y}',
+#     # hovertext=enrollees_per_region['counts'].astype(str)
+# )
 
-home_regional_distribution.update_layout(
-    autosize=True,
-    margin={"l": 8, "r": 8, "t": 8, "b": 8},
-    plot_bgcolor='#ECF8FF',         
-    yaxis=dict(
-        automargin=True,
-        title=None,
-        showgrid=True,            
-        gridcolor='#D2EBFF',          
-        zeroline=False,
-        tickfont=dict(size=8, color="#9DADBD")             
-    ),
-    xaxis=dict(
-        automargin=True,
-        title=None,
-        tickangle=-45,
-        tickfont=dict(size=8, color="#9DADBD")
-    ),
-    # transition=dict(duration=20000, easing="cubic-in-out"),
-)
+# home_regional_distribution.update_layout(
+#     autosize=True,
+#     margin={"l": 8, "r": 8, "t": 8, "b": 8},
+#     plot_bgcolor='#ECF8FF',         
+#     yaxis=dict(
+#         automargin=True,
+#         title=None,
+#         showgrid=True,            
+#         gridcolor='#D2EBFF',          
+#         zeroline=False,
+#         tickfont=dict(size=8, color="#9DADBD")             
+#     ),
+#     xaxis=dict(
+#         automargin=True,
+#         title=None,
+#         tickangle=-45,
+#         tickfont=dict(size=8, color="#9DADBD")
+#     ),
+#     # transition=dict(duration=20000, easing="cubic-in-out"),
+# )
 
-home_regional_distribution
+# home_regional_distribution
 
 
 # ----------------------------------------------------------
@@ -355,86 +355,86 @@ total_shs_count_formatted = smart_truncate_number(total_shs_count)
 # ----------------------------------------------------------
 # Schools Count per Subclassification
 
-# Subclassification School Count - Chart
-subclass_extract = auto_extract(['counts', 'sub_class'], is_specific=False)
+# # Subclassification School Count - Chart
+# subclass_extract = auto_extract(['counts', 'sub_class'], is_specific=False)
 
-subclass_df1 = (
-    subclass_extract.groupby('sub_class')
-    .agg(
-        school_count=('beis_id', 'nunique'),
-        counts=('counts', 'sum'),  
-    )
-    .reset_index()
-)
+# subclass_df1 = (
+#     subclass_extract.groupby('sub_class')
+#     .agg(
+#         school_count=('beis_id', 'nunique'),
+#         counts=('counts', 'sum'),  
+#     )
+#     .reset_index()
+# )
 
-home_subclass_chart = px.bar(
-    subclass_df1,
-    x='school_count',           # Number of schools
-    y='sub_class',              # Subclassification
-    orientation='h',            # Horizontal bars
-    text='school_count',        # Show school count as text
-    color='sub_class',          # Optional: add color by sub_class
-    color_discrete_sequence=px.colors.qualitative.Set2  # Nice color palette
-)
+# home_subclass_chart = px.bar(
+#     subclass_df1,
+#     x='school_count',           # Number of schools
+#     y='sub_class',              # Subclassification
+#     orientation='h',            # Horizontal bars
+#     text='school_count',        # Show school count as text
+#     color='sub_class',          # Optional: add color by sub_class
+#     color_discrete_sequence=px.colors.qualitative.Set2  # Nice color palette
+# )
 
-home_subclass_chart.update_traces(
-    textposition='outside',     # Show text outside bars
-    marker_line_width=0.5,      # Add outline to bars
-    marker_line_color='gray'
-)
+# home_subclass_chart.update_traces(
+#     textposition='outside',     # Show text outside bars
+#     marker_line_width=0.5,      # Add outline to bars
+#     marker_line_color='gray'
+# )
 
-home_subclass_chart.update_layout(
-    title='Number of Schools per Subclassification',
-    xaxis_title='Number of Schools',
-    yaxis_title=None,
-    plot_bgcolor='rgba(0,0,0,0)',
-    paper_bgcolor='rgba(0,0,0,0)',
-    margin=dict(l=80, r=20, t=50, b=20),
-    yaxis=dict(
-        tickfont=dict(size=10, color='#4A4A4A')
-    ),
-    xaxis=dict(
-        tickfont=dict(size=10, color='#4A4A4A'),
-        gridcolor='#EDEDED',
-        showgrid=True,
-        zeroline=False
-    ),
-    showlegend=False
-)
+# home_subclass_chart.update_layout(
+#     title='Number of Schools per Subclassification',
+#     xaxis_title='Number of Schools',
+#     yaxis_title=None,
+#     plot_bgcolor='rgba(0,0,0,0)',
+#     paper_bgcolor='rgba(0,0,0,0)',
+#     margin=dict(l=80, r=20, t=50, b=20),
+#     yaxis=dict(
+#         tickfont=dict(size=10, color='#4A4A4A')
+#     ),
+#     xaxis=dict(
+#         tickfont=dict(size=10, color='#4A4A4A'),
+#         gridcolor='#EDEDED',
+#         showgrid=True,
+#         zeroline=False
+#     ),
+#     showlegend=False
+# )
 
-home_subclass_chart
+# home_subclass_chart
 
-# Subclassification School Count - Table
-home_subclass_table = go.Figure(data=[go.Table(
-    header=dict(
-        values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
-        fill_color='rgba(0,0,0,0)',  # Transparent header background
-        font=dict(color='black', size=12),
-        line_color='rgba(0,0,0,0)',  # Hide header borders
-        align='left',
-    ),
-    cells=dict(
-        values=[
-            subclass_df1['sub_class'],
-            subclass_df1['school_count'],
-            subclass_df1['counts']
-        ],
-        fill_color='rgba(0,0,0,0)',  # Transparent cell background
-        font=dict(color='black', size=11),
-        line_color='rgba(0,0,0,0)',  # Hide cell borders
-        align='left'
-    )
-)])
+# # Subclassification School Count - Table
+# home_subclass_table = go.Figure(data=[go.Table(
+#     header=dict(
+#         values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
+#         fill_color='rgba(0,0,0,0)',  # Transparent header background
+#         font=dict(color='black', size=12),
+#         line_color='rgba(0,0,0,0)',  # Hide header borders
+#         align='left',
+#     ),
+#     cells=dict(
+#         values=[
+#             subclass_df1['sub_class'],
+#             subclass_df1['school_count'],
+#             subclass_df1['counts']
+#         ],
+#         fill_color='rgba(0,0,0,0)',  # Transparent cell background
+#         font=dict(color='black', size=11),
+#         line_color='rgba(0,0,0,0)',  # Hide cell borders
+#         align='left'
+#     )
+# )])
 
-# Layout settings
-home_subclass_table.update_layout(
-    autosize=True,
-    margin=dict(l=10, r=10, t=0, b=10),
-    paper_bgcolor='rgba(0,0,0,0)',  # Fully transparent background
-    plot_bgcolor='rgba(0,0,0,0)',
-)
+# # Layout settings
+# home_subclass_table.update_layout(
+#     autosize=True,
+#     margin=dict(l=10, r=10, t=0, b=10),
+#     paper_bgcolor='rgba(0,0,0,0)',  # Fully transparent background
+#     plot_bgcolor='rgba(0,0,0,0)',
+# )
 
-home_subclass_table
+# home_subclass_table
 
 # ----------------------------------------------------------
 # Ratio of Schools by Program Offering
