@@ -202,6 +202,7 @@ most_populated = track_counts.sort_values('counts', ascending=False).iloc[0]
 least_populated = track_counts.sort_values('counts', ascending=True).iloc[0]
 
 
+
 # Data for tables
 most_populated_table = go.Table(
     header=dict(
