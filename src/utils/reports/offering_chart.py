@@ -86,32 +86,53 @@ from src.data import enrollment_db_engine, smart_filter
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    # 2. Group by 'mod_coc' (program offering type) and sum the total number of students
-    number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['counts'].sum().reset_index()
+    number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
+    number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
 
-    # 3. Sort the data by total number of students in descending order
-    number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='counts', ascending=False)
+    number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='school_count', ascending=False)
 
-    # 4. Define the custom color palette for the chart
     number_of_schools_mcoc_colors = ['#04508c', '#037DEE', '#369EFF', '#930F22', '#E11C38', '#FF899A']
 
-    # 5. Create the pie chart (donut chart) using Plotly Express
     number_of_schools_mcoc_chart = px.pie(
         number_of_schools_mcoc_sorted,
         names='mod_coc',
-        values='counts',
+        values='school_count',
         hole=0.45,
         title='Number of Schools by Program Offerings',
         color_discrete_sequence=number_of_schools_mcoc_colors
     )
 
-    # 6. Update the chart appearance and interactivity
     number_of_schools_mcoc_chart.update_traces(
         textposition='inside',
         textinfo='label+value',
         textfont=dict(size=14, color='white'),
-        hovertemplate='<b>%{label}</b><br>Total: %{value:,} students<extra></extra>'
+        hovertemplate='<b>%{label}</b><br>Schools: %{value:,}<extra></extra>'
     )
+
+    number_of_schools_mcoc_chart.update_layout(
+        showlegend=True,
+        legend_title_text='Programs',
+        title_font_size=18,
+        title_font_color='#3C6382',
+        title_x=0.5,
+        margin=dict(l=20, r=20, t=50, b=20),
+        height=450,
+        paper_bgcolor='#F0F0F0',
+        plot_bgcolor='#FFFFFF',
+        font=dict(family='Inter, sans-serif', color='#3C6382'),
+        legend=dict(
+            title='Programs',
+            font=dict(size=14),
+            x=1,
+            y=0.5,
+            traceorder='normal',
+            orientation='v',
+            xanchor='right',
+            yanchor='middle'
+        )
+    )
+
+    number_of_schools_mcoc_chart
     
     return dcc.Graph(figure=number_of_schools_mcoc_chart)
 
@@ -148,8 +169,8 @@ def update_graph(trigger, data):
         barmode='group',
         title='Gender Distribution Across Program Offerings',
         color_discrete_map={
-            'Male': '#04508c',     # Primary color
-            'Female': '#E11C38'    # Secondary color
+            'Male': '#5DB7FF',     # Primary color
+            'Female': '#FF5B72'    # Secondary color
         },
         labels={
             'mod_coc': 'Program Offering',
@@ -180,7 +201,7 @@ def update_graph(trigger, data):
             bordercolor='rgba(0,0,0,0)',  # No border
         )
     )
-    
+
     # 6. Optional: format y-axis ticks with commas
     gender_distribution_chart.update_yaxes(tickformat=',')
 
@@ -236,6 +257,7 @@ def update_graph(trigger, data):
         marker_line_color='#3C6382',
         marker_line_width=1
     )
+
     # 6. Layout and design adjustments for uniform styling
     ranked_mcoc_chart.update_layout(
         title={
@@ -265,8 +287,6 @@ def update_graph(trigger, data):
     ranked_mcoc_chart
     
     return dcc.Graph(figure=ranked_mcoc_chart)
-
-
 
 
 # #################################################################################
