@@ -20,7 +20,7 @@ def render_location_filter():
                 
                 ## TOP SECTION
                 html.Div([
-                    html.Div(["Enrollees per Location"], className='label'),
+                    html.H3(["Enrollees per Location"], className='label'),
                     html.Div([
                         
                         ## PLOT A
@@ -28,17 +28,12 @@ def render_location_filter():
                             #########################################
                             ## INSERT PLOT: Distribution of enrollees per location 
                             #########################################
-                            
-                            # dcc.Loading(
-                            #     id="loading-graph",
-                            #     type="default",
-                                # children=
-                                html.Div([
-                                        
-                                    ],
-                                    id='location_enrollees-distribution-per-location',
-                                )
-                            # )
+                            html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title"),
+                            dcc.Loading(
+                                id="loading-graph",
+                                type="default",
+                                children=html.Div([], id='location_enrollees-distribution-per-location',)
+                            )
                             
                             #                             dcc.Loading(
                             #     id="loading-graph",
@@ -80,12 +75,12 @@ def render_location_filter():
                                 #########################################
                                 ## TABLE: highest and lowest number of enrollees
                                 #########################################
+                                html.H4(["School with the Highest and Lowest Enrollees"], className="hle-graph-title"), 
                                 
-                                # dcc.Loading(
-                                #     id="loading-graph",
-                                #     type="default",
-                                    # children=
-                                    html.Div([
+                                dcc.Loading(
+                                    id="loading-graph",
+                                    type="default",
+                                    children=html.Div([
                                     ],id='location_highest_lowest_enrollees')
                                 # )
                                 
@@ -98,37 +93,60 @@ def render_location_filter():
                             ], margin=False)], className='plot-b-box1'),
                             
                             html.Div([
+                                html.Div([
                                     Card([
                                         html.Div([
-                                            html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"), 
+                                            html.Div([
+                                                html.Span("", className="glevel-marker enrollees"),
+                                                # html.Img(src="/assets/images/icons_navigation/person-blue.svg", className="total-enrollees-icon"),
+                                                html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"),
+                                            ], className="glevel-count"),
                                             html.Span([], id="raw-total-enrollees", className="raw_total_enrollees"),
-                                            html.Span("Total Enrollees", className="label_total_enrollees")
-                                        ], className="total_enrollees")
+                                            html.Div([
+                                                html.Span("Total Enrollees", className="label_total_enrollees"),
+                                                html.Img(src="/assets/images/icons_navigation/person-blue.svg"),
+                                            ], className="total_label")
+                                            
+                                        ], className="total_enrollees"),    
                                     ], margin=False)
-                                ], className='plot-b-box2'),
+                                ], className="plot-b-box2"),
 
-                            
-                            html.Div([Card([
-                                    html.H1([], id="truncated-total-schools", className="truncated_total_schools"), 
-                                    html.Span([], id="raw-total-schools", className="raw_total_schools"),
-                                ], margin=False)], className='plot-b-box2'),
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker schools"),
+                                                # html.Img(src="/assets/images/icons_navigation/school-blue.svg", className="total-schools-icon"),
+                                                html.H1([], id="truncated-total-schools", className="truncated_total_schools"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="raw-total-schools", className="raw_total_schools"),
+                                            html.Div([
+                                                html.Span("Total Schools", className="label_total_schools"),
+                                                html.Img(src="/assets/images/icons_navigation/school-blue.svg"),
+                                            ], className="total_label")
+                                        ], className="total_enrollees"),
+                                    ], margin=False)
+                                ], className="plot-b-box2"),
+                            ], className="ns-sub-detail")
+
+                        
                         ], className='plot-b-section'),
                     ], className='track-box plot-content')
                 ], className='plot-top-section plot-sec-wrap'),
                 
                 ## BOTTOM SECTION
                 html.Div([
-                    html.Div(["Strand/Track Preferences"], className='label'),
+                    html.H3(["Strand/Track Preferences"], className='label'),
                     html.Div([Card([
                         #########################################
                         ## INSERT PLOT: Strand preferences per region
                         #########################################
+                        html.H4(["Strand and Track Preferences per Region"], className="spr-graph-title"), 
                         
-                        # dcc.Loading(
-                        #     id="loading-graph",
-                        #     type="default",
-                            # children=
-                            html.Div([
+                        dcc.Loading(
+                            id="loading-graph",
+                            type="default",
+                            children=html.Div([
                             ],id='track-preference-heatmap')
                         # )
                         # dcc.Graph(
@@ -149,7 +167,7 @@ def render_location_filter():
                 
                 ## TOP SECTION
                 html.Div([
-                    html.Div(["Geographic Distribution"], className='label'),
+                    html.H3(["Geographic Distribution"], className='label'),
                     html.Div([Card([
                         #########################################
                         ## INSERT PLOT: enrollment density (students per location)
@@ -161,12 +179,17 @@ def render_location_filter():
                 
                 ## BOT SECTION
                 html.Div([
-                    html.Div(["School Type Analysis"], className='label'),
+                    html.H3(["School Type Analysis"], className='label'),
                     html.Div([Card([
                         #########################################
                         ## INSERT PLOT: school sectors
                         #########################################
-                        
+                        html.H4(["Student Enrollment by School Sector per Region"], className="ss-graph-title"), 
+                        dcc.Loading(
+                            id="loading-graph",
+                            type="default",
+                            children=html.Div([], id='location_school_sectors',)
+                        ),
                         
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),

@@ -58,10 +58,10 @@ def update_graph(trigger, data):
     # Step 1: Group by region and gender
     gender_region = FILTERED_DATA.groupby(['region', 'gender'])['counts'].sum().reset_index()
 
-    # Step 2: Define brand colors
+# Step 2: Define brand colors
     brand_colors = {
-        'M': '#037DEE',
-        'F': '#E11C38'
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
     }
 
     # Step 3: Create the stacked bar chart
@@ -95,20 +95,15 @@ def update_graph(trigger, data):
 
     # Step 6: Customize layout
     gender_region_fig.update_layout(
-        title={
-            'text': "Enrollment Distribution by Region and Gender",
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {'color': '#04508c'}
-        },
         xaxis_title="Number of Students",
         yaxis_title="Region",
         legend_title="Gender",
-        font=dict(color="#667889"),
-        margin=dict(l=80, r=20, t=50, b=40),
-        plot_bgcolor="#F5FBFF",
-        paper_bgcolor="#F5FBFF",
+        font=dict(color="#667889", family='Inter'),
+        margin=dict(l=80, r=20, t=20, b=40),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
     )
+    gender_region_fig
 
     return dcc.Graph(figure=gender_region_fig)
 
@@ -122,22 +117,193 @@ def update_graph(trigger, data):
 # #################################################################################
 # # enrollment_density_chart = []
 
+# import pandas as pd
+# import plotly.express as px
+# import json
+# from geojson_rewind import rewind
+# # Load your enrollment data
+# # FILTERED_DF is already provided
+# # FILTERED_DF = pd.read_csv("your_filtered_df.csv")  # if from CSV
+
+# # ## -- This only a temporary dataframe for testing your charts, you can change it
+# FILTERED_DF = dataframe = auto_extract(['counts', 'region', 'brgy'], is_specific=False)
+# FILTERED_DF[['region', 'province', 'division', 'district', 'municipality', 'brgy', 'counts']]
+
+
+# # Load GeoJSON (municipality level for PH)
+# with open("/Users/marke/Downloads/country.0.1.json") as f:
+#     geojson = json.load(f)
+
+# geojson = rewind(geojson, rfc7946=False)
+
+# # Print all REGION names in GeoJSON
+# geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
+# print(set(geo_regions))
+
+# # Print all region names in your DF
+# print(set(FILTERED_DF['region']))
+
+
+# region_name_map = {
+#     'Region I': 'Region I (Ilocos Region)',
+#     'Region II': 'Region II (Cagayan Valley)',
+#     'Region III': 'Region III (Central Luzon)',
+#     'Region IV-A': 'Region IV-A (CALABARZON)',
+#     'Region IV-B': 'Region IV-B (MIMAROPA)',
+#     'Region V': 'Region V (Bicol Region)',
+#     'Region VI': 'Region VI (Western Visayas)',
+#     'Region VII': 'Region VII (Central Visayas)',
+#     'Region VIII': 'Region VIII (Eastern Visayas)',
+#     'Region IX': 'Region IX (Zamboanga Peninsula)',
+#     'Region X': 'Region X (Northern Mindanao)',
+#     'Region XI': 'Region XI (Davao Region)',
+#     'Region XII': 'Region XII (SOCCSKSARGEN)',
+#     'Region XIII': 'Region XIII (Caraga)',
+#     'NCR': 'National Capital Region (NCR)',
+#     'CAR': 'Cordillera Administrative Region (CAR)',
+#     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)',  # or ARMM depending on version
+#     # Add others if needed
+# }
+# # Map region names to GeoJSON-compatible names
+# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
+# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])  # remove rows without mapping
+
+# # Plot the map
+# fig = px.choropleth(
+#     FILTERED_DF,
+#     geojson=geojson,
+#     locations='geo_region',
+#     featureidkey='properties.adm1_en',
+#     color='counts',
+#     hover_name='region',
+#     hover_data=['province', 'counts'],
+#     color_continuous_scale='Viridis',
+# )
+
+# fig.update_geos(fitbounds="locations", visible=False)
+# fig.update_layout(title="Enrollment by Region", margin={"r":0,"t":30,"l":0,"b":0})
+# fig
 
 
 
 
-# #################################################################################
+#################################################################################
 
 
 
 # #################################################################################
 # ##  --- CHART: school sectors
 # #################################################################################
-# # enrollment_density_chart = []
 
+@callback(
+    Output('location_school_sectors', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    prevent_initial_call=True
+)
 
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
+    # 2. Aggregate counts by region and sector, then sort so smaller sectors stack on top
+    sector_enrollment = (
+        FILTERED_DATA
+        .groupby(['region', 'sector'])['counts']
+        .sum()
+        .reset_index()
+    )
 
+    # Sort within each region by counts ascending (smallest on top in stack)
+    sector_enrollment = (
+        sector_enrollment
+        .sort_values(['region', 'counts'], ascending=[True, True])
+    )
+
+    # 3. Define chronological region order (DepEd standard)
+    region_order = [
+        'CAR', 'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
+        'MIMAROPA', 'Region V', 'Region VI', 'Region VII', 'Region VIII',
+        'Region IX', 'Region X', 'Region XI', 'Region XII', 'CARAGA', 'BARMM'
+    ]
+
+    # Enforce this order on the data
+    sector_enrollment['region'] = pd.Categorical(
+        sector_enrollment['region'],
+        categories=region_order,
+        ordered=True
+    )
+
+    # 4. Define exact sector order and use red shades from your palette
+    sector_order  = ['Public', 'Private', 'SUCs/LUCs', 'PSO']
+    sector_colors = {
+        'Public':    '#930F22',  # Dark red
+        'Private':   '#E11C38',  # Mid red
+        'SUCs/LUCs': '#FF5B72',  # Light red
+        'PSO':       '#FF899A'   # Pinkish red
+    }
+
+    # Enforce sector order to control stacking
+    sector_enrollment['sector'] = pd.Categorical(
+        sector_enrollment['sector'],
+        categories=sector_order,
+        ordered=True
+    )
+
+    # 5. Build the stacked bar chart
+    sector_chart = px.bar(
+        sector_enrollment,
+        x='region',
+        y='counts',
+        color='sector',
+        barmode='stack',
+        category_orders={
+            'region': region_order,
+            'sector': sector_order
+        },
+        color_discrete_map=sector_colors,
+        labels={
+            'region': 'Region',
+            'counts': 'Number of Students',
+            'sector': 'School Sector'
+        },
+        title="Student Enrollment by School Sector per Region"
+    )
+
+    # 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
+    sector_chart.update_layout(
+        title_font=dict(size=20, family='Arial', color='#3C6382'),
+        title_x=0.5,
+        font=dict(family='Arial', size=14, color='#3C6382'),
+        paper_bgcolor='#F0F0F0',
+        plot_bgcolor='rgba(255,255,255,0.5)',
+        margin=dict(l=50, r=30, t=70, b=60),
+        legend=dict(
+            title='School Sector',
+            font=dict(size=14),
+            x=1, y=1,
+            xanchor='right', yanchor='top',
+            bgcolor='rgba(0,0,0,0)',
+            bordercolor='rgba(0,0,0,0)'
+        ),
+        xaxis=dict(showgrid=False, tickangle=-45),
+        yaxis=dict(
+            showgrid=False,
+            tickformat='.1s',
+            tickprefix=''
+        ),
+        bargap=0.1
+    )
+
+    # 7. Add a bold white border to each segment
+    sector_chart.update_traces(
+        marker_line_color='#FFFFFF',
+        marker_line_width=2
+    )
+
+    # 8. Display the chart
+    sector_chart
+
+    return dcc.Graph(figure=sector_chart)
 
 # #################################################################################
 
@@ -322,7 +488,7 @@ def update_graph(trigger, data):
             align='left',
             font=dict(family='Inter', color='#9DADBD', size=13),
             line_color='white',
-            height=30  # header height
+            height=40  # header height
         ),
         cells=dict(
             values=[
@@ -333,12 +499,12 @@ def update_graph(trigger, data):
             fill_color='#F8C6CD',
             align='left',
             font=dict(family='Inter', color='#667889', size=13),
-            height=60  # fixed cell height
+            height=100  # fixed cell height
         )
     )])
 
     hi_low_fig.update_layout(
-        font=dict(family='Inter'),
+        font=dict(family='Inter', color='#667889', size=13),
         autosize=True,
         margin={"l": 8, "r": 8, "t": 15, "b": 0},
     )

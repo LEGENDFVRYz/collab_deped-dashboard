@@ -400,8 +400,10 @@
   display: flex;
   flex: 1;
 }
-.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 .ssc-graph {
-  display: flex;
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 .sector-graph-title {
+  color: #3C6382;
+  text-align: center;
+  padding: 0.25em 0.5em;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 {
   display: flex;

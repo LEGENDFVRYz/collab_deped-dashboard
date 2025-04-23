@@ -9,50 +9,86 @@
   flex: 1;
   gap: 1em;
 }
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-graph-title {
+  color: #3C6382;
+  padding: 0.5em;
+  text-align: center;
+}
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content {
   display: flex;
   flex-direction: column;
-  flex: 1.25;
+  flex: 1;
+  flex: 1;
   gap: 0.5em;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-graph {
   display: flex;
   flex: 1;
-  gap: 0.5em;
-  min-height: 100px;
+  min-height: 300px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle {
   display: flex;
   flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-graph {
-  display: flex;
-  flex: 1;
-}
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard {
-  display: flex;
-  flex: 0.7;
-  gap: 0.5em;
-}
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row {
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-ind {
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-self: stretch;
+  box-sizing: border-box;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-ind .sei-label {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter Semi Bold";
+  font-size: 0.5em;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-ind .sei-count {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter Bold";
+  font-size: 0.8em;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-ind .sei-text {
+  display: flex;
+  justify-content: center;
+  font-family: "Inter Medium Italic";
+  font-size: 0.5em;
+  color: #9DADBD;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col1 {
+  display: flex;
+  flex-direction: column;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row .column {
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col1 .subclass-enroll-scatter {
   display: flex;
-  flex: 1;
-  align-items: center;
+  flex: 4.25;
 }
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-enroll-indcard .row .column .subclass-enroll-ind {
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col1 .subclass-row {
   display: flex;
   flex: 1;
-  align-self: center;
-  font-size: 0.7em;
   gap: 0.5em;
-  min-height: 100px;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col1 .subclass-row .subclass-enroll-ind {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col2 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-left-content .subclass-enroll-middle .subclass-col2 .subclass-enroll-ind {
+  display: flex;
+  flex: 1;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content {
   display: flex;
@@ -63,18 +99,19 @@
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail {
   display: flex;
   flex-direction: column;
-  flex: 1.5;
+  flex: 1;
   gap: 0.5em;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-graph {
   display: flex;
   flex: 1;
-  min-height: 250px;
+  min-height: 300px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower {
   display: flex;
   flex: 1;
   gap: 0.5em;
+  min-height: 300px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph-1 {
   display: flex;
@@ -82,23 +119,28 @@
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-dist-avail .subclass-dist-avail-lower .subclass-dist-avail-graph-2 {
   display: flex;
-  flex: 1;
+  flex: 1.5;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
-  min-height: 500px;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents {
   display: flex;
   flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-graph {
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-graph-left {
   display: flex;
-  flex: 1.25;
+  flex-direction: column;
+  flex: 3;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-graph-left .subclass-program-graph {
+  display: flex;
+  flex: 1;
 }
 #plot-content.rendered .plotted-subclass-report .subclass-content .subclass-right-content .subclass-program .subclass-program-contents .subclass-program-last-cards {
   display: flex;

@@ -7,16 +7,6 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 from src.utils.reports import seniorhigh_chart
 
-# # -- Graphs
-# from src.utils.reports.seniorhigh_chart import seniorhigh_distri_per_track ## Importing Charts
-# from src.utils.reports.seniorhigh_chart import seniorhigh_ratio_enrollment
-# from src.utils.reports.seniorhigh_chart import seniorhigh_most_least_enrolled
-# from src.utils.reports.seniorhigh_chart import seniorhigh_gender_distri
-# from src.utils.reports.seniorhigh_chart import seniorhigh_school_offering_per_track_by_sector
-# from src.utils.reports.seniorhigh_chart import seniorhigh_least_offered_high_demand
-# from src.utils.reports.seniorhigh_chart import sample_chart ## Importing Indicators
-
-
 # """
 #     Template For Rendering the Location Reports:
     
@@ -118,12 +108,13 @@ def render_seniorhigh_filter():
                             ], className="shs-track-avail-graph"),
                             html.Div([
                                 Card([
+                                    # which SHS tracks are least offered but in high demand
                                     dcc.Loading(
                                         id="loading-graph",
                                         type="default",
                                         children=html.Div([],id='seniorhigh_least_offered_high_demand',)
                                     ),
-                                    # which SHS tracks are least offered but in high demand
+                                    
                                     # dcc.Graph(id="seniorhigh_least_offered_high_demand", className="seniorhigh_least_offered_high_demand", figure=seniorhigh_least_offered_high_demand,
                                     #     config={"responsive": True},
                                     #     style={"width": "100%", "height": "100%"}
@@ -142,16 +133,31 @@ def render_seniorhigh_filter():
                     html.Div([
                         Card([
                             # how many schools offer each SHS track per region
+                            dcc.Loading(
+                                id="loading-graph",
+                                type="default",
+                                children=html.Div([],id='seniorhigh_shs_offers',)
+                            ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                     html.Div([
                         Card([
-                            # which SHS tracks are more prevalent in each sector
+                            # which SHS tracks are more prevalent in each sector\
+                            dcc.Loading(
+                                id="loading-graph",
+                                type="default",
+                                children=html.Div([],id='seniorhigh_prevalent_tracks',)
+                            ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                     html.Div([
                         Card([
                             # do mother schools or annexes offer a wider range of SHS tracks
+                            dcc.Loading(
+                                id="loading-graph",
+                                type="default",
+                                children=html.Div([],id='seniorhigh_offer_range',)
+                            ),
                         ], margin=False),
                     ], className="shs-region-sector-graph"),
                 ], className="shs-right-content"),
