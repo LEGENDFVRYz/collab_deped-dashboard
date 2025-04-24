@@ -1,16 +1,15 @@
 import os, sys
-import time
 import numpy as np
 import pandas as pd
 import dash
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, callback, Output, Input, State, Patch
+import plotly.io as pio
+from dash import html, callback, Output, Input, State, Patch
 
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
-
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from utils.get_data import auto_extract
@@ -18,9 +17,28 @@ from utils.get_data import auto_extract
 
 # ----------------------------------------------------------
 from src.utils.extras_utils import smart_truncate_number
+pio.templates.default = "plotly"
 
 
 
+## QUERYY
+@callback(
+    Output('base-trigger', 'data'),
+    Output('render-base', 'children'),
+    Input("url", "pathname"),
+    State('base-trigger', 'data'),
+)
+def trigger_base_charts(pathname, base_status):
+    if pathname != "/":
+        return dash.no_update, dash.no_update
+    
+    # Initialize DF
+    smart_filter({}, _engine=enrollment_db_engine)
+    
+    return (not base_status), dash.no_update
+    
+    
+    
 #################################################################################
 ##                     MAIN DATAFRAME BASED FROM THE QUERY                     ##
 #################################################################################
@@ -29,12 +47,12 @@ from src.utils.extras_utils import smart_truncate_number
 
 @callback(
     Output('home-enrollment-per-region', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
 def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
-
+    # if pathname != "/":
+    #     return dash.no_update
     
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF[['grade', 'counts']]
@@ -184,11 +202,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_school_number_per_sector', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[["sector", "counts"]]
@@ -252,11 +271,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_gender_distribution', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['gender', 'counts']]
@@ -330,11 +350,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_regional_distribution', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['region', 'counts']]
@@ -408,11 +429,12 @@ def update_graph(pathname):
 @callback(
     # Output('home_shs_tracks', 'figure'),
     Output('ssc-subclass-table', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['beis_id', 'sub_class', 'counts']]
@@ -513,11 +535,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_program_offering', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['mod_coc', 'counts']]
@@ -643,12 +666,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_shs_tracks', 'figure'),
-    Input("url", "pathname")
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    if pathname != "/":
-        print("wrongness??")
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['track', 'counts']]
@@ -710,12 +733,12 @@ def update_graph(pathname):
 
 @callback(
     Output('home_shs_strands', 'figure'),
-    Input("url", "pathname"),
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
 )
-def update_graph(pathname):
-    time.sleep(1)
-    if pathname != "/":
-        return dash.no_update
+def update_graph(base_trigger):
+    # if base_trigger != "/":
+    #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['strand', 'counts']]
