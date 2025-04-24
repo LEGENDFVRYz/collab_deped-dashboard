@@ -23,8 +23,8 @@ from src.data import enrollment_db_engine, smart_filter
 # # FILTERED_DF = dataframe = auto_extract(['counts'], is_specific=False)
 # # FILTERED_DF
 
-FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
-FILTERED_DF
+# FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
+# FILTERED_DF
 # # ## -- Check the document for all valid columns and structurette
 # # ## -- Dont change the all caps variables
 # #################################################################################
@@ -100,38 +100,38 @@ def update_graph(trigger, data):
         labels={'counts': 'Number of Students', 'track': 'Track', 'color': '#667889'}
     )
 
-# Update layout to ensure all y-axis labels show
-seniorhigh_distri_per_track.update_layout(
-    bargap=0.2,
-    autosize=True,
-    margin=dict(l=80, r=10, t=50, b=10),  
-    # title={
-    #     'text': 'Distribution of SHS Enrollees per Track',
-    #     'x': 0.5,
-    #     'xanchor': 'center',
-    #     'font': {
-    #         'size': 14,
-    #         'color': '#3C6382'
-    #     },
-    # },
-    yaxis=dict(
-        automargin=True,
-        tickfont=dict(size=12),
-    ),
-)
-
-    # Keep layout responsive
-seniorhigh_distri_per_track.update_layout(
-        uirevision='true',
+    # Update layout to ensure all y-axis labels show
+    seniorhigh_distri_per_track.update_layout(
+        bargap=0.2,
+        autosize=True,
+        margin=dict(l=80, r=10, t=50, b=10),  
+        # title={
+        #     'text': 'Distribution of SHS Enrollees per Track',
+        #     'x': 0.5,
+        #     'xanchor': 'center',
+        #     'font': {
+        #         'size': 14,
+        #         'color': '#3C6382'
+        #     },
+        # },
+        yaxis=dict(
+            automargin=True,
+            tickfont=dict(size=12),
+        ),
     )
 
-    # Change the color of the bars
-seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
+    # Keep layout responsive
+    seniorhigh_distri_per_track.update_layout(
+            uirevision='true',
+        )
 
-    # Display the chart
-seniorhigh_distri_per_track
-    
-return dcc.Graph(figure=seniorhigh_distri_per_track)
+        # Change the color of the bars
+    seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
+
+        # Display the chart
+    seniorhigh_distri_per_track
+        
+    return dcc.Graph(figure=seniorhigh_distri_per_track)
 
 # #################################################################################
 
@@ -141,6 +141,7 @@ return dcc.Graph(figure=seniorhigh_distri_per_track)
 # #################################################################################
 # ##  --- Ratio enrollment in Academic vs. non-Academic tracks
 # #################################################################################
+
 @callback(
     Output('seniorhigh_ratio_enrollment', 'children'),
     Input('chart-trigger', 'data'),
@@ -201,6 +202,7 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Most and least enrolled  (strand)
 # #################################################################################
+
 @callback(
     Output('seniorhigh_most_least_enrolled', 'children'),
     Input('chart-trigger', 'data'),
@@ -274,6 +276,7 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Gender Distribution
 # #################################################################################
+
 @callback(
     Output('seniorhigh_gender_distri', 'children'),
     Input('chart-trigger', 'data'),
@@ -313,35 +316,37 @@ def update_graph(trigger, data):
     )
 
 
-# Update layout to maximize chart space and reduce label sizes
-seniorhigh_gender_distri.update_layout(
-    autosize=True,
-    margin=dict(l=60, r=10, t=50, b=20),
-    # title={
-    #     'text': "Distribution by<br>Strand and Gender",
-    #     'x': 0.5,
-    #     'xanchor': 'center',
-    #     'font': {'color': '#3C6382', 'size': 14}
-    # },
-    xaxis={
-        'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
-        'tickfont': {'color': '#667889', 'size': 10},
-    },
-    yaxis={
-        'title': {'text': "Strand", 'font': {'color': '#667889', 'size': 11}},
-        'tickfont': {'color': '#667889', 'size': 10},
-        'automargin': True
-    },
-    legend={
-        'title': {'text': "Gender", 'font': {'color': '#667889', 'size': 10}},
-        'font': {'color': '#667889', 'size': 10}
-    },
-    bargap=0.3,
-    bargroupgap=0.05,
-    uirevision='true',
-)
-seniorhigh_gender_distri
+    # Update layout to maximize chart space and reduce label sizes
+    seniorhigh_gender_distri.update_layout(
+        autosize=True,
+        margin=dict(l=60, r=10, t=50, b=20),
+        # title={
+        #     'text': "Distribution by<br>Strand and Gender",
+        #     'x': 0.5,
+        #     'xanchor': 'center',
+        #     'font': {'color': '#3C6382', 'size': 14}
+        # },
+        xaxis={
+            'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
+            'tickfont': {'color': '#667889', 'size': 10},
+        },
+        yaxis={
+            'title': {'text': "Strand", 'font': {'color': '#667889', 'size': 11}},
+            'tickfont': {'color': '#667889', 'size': 10},
+            'automargin': True
+        },
+        legend={
+            'title': {'text': "Gender", 'font': {'color': '#667889', 'size': 10}},
+            'font': {'color': '#667889', 'size': 10}
+        },
+        bargap=0.3,
+        bargroupgap=0.05,
+        uirevision='true',
+    )
+    
+    seniorhigh_gender_distri
 
+    return dcc.Graph(figure=seniorhigh_gender_distri)
 
 
 
@@ -353,6 +358,7 @@ seniorhigh_gender_distri
 # #################################################################################
 # ##  --- Differences in the number of schools offering each track
 # #################################################################################
+
 @callback(
     Output('seniorhigh_school_offering_per_track_by_sector', 'children'),
     Input('chart-trigger', 'data'),
@@ -376,55 +382,50 @@ def update_graph(trigger, data):
     )
 
 
-# Create horizontal stacked bar chart with sorted track order
-seniorhigh_school_offering_per_track_by_sector = px.bar(
-    school_count,
-    x='school_count',
-    y='track',
-    color='sector',
-    orientation='h',
-    labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
-    color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
-    category_orders={'track': track_order},
-    # title="Number of Schools Offering Each Track by Sector"
-)
+    # Create horizontal stacked bar chart with sorted track order
+    seniorhigh_school_offering_per_track_by_sector = px.bar(
+        school_count,
+        x='school_count',
+        y='track',
+        color='sector',
+        orientation='h',
+        labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
+        color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
+        category_orders={'track': track_order},
+        # title="Number of Schools Offering Each Track by Sector"
+    )
 
 
-# Update layout
-seniorhigh_school_offering_per_track_by_sector.update_layout(
-    # title={
-    #     'text': "Number of Schools<br>Offering Each Track by Sector",
-    #     'x': 0.5,
-    #     'font': {'color': '#3C6382', 'size': 14}
-    # },
-    xaxis={
-        'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'},
-        'tickformat': '~s',
-        'tickangle': 0
-    },
-    yaxis={
-        'title': {'text': "Track", 'font': {'color': '#667889'}},
-        'tickfont': {'color': '#667889'}
-    },
-    legend={
-        'title': {'text': "Sector", 'font': {'color': '#667889'}},
-        'font': {'color': '#667889'}
-    },
-    bargap=0.6,
-    autosize=True,
-    margin=dict(l=80, r=40, t=60, b=40)
-)
-seniorhigh_school_offering_per_track_by_sector
+    # Update layout
+    seniorhigh_school_offering_per_track_by_sector.update_layout(
+        # title={
+        #     'text': "Number of Schools<br>Offering Each Track by Sector",
+        #     'x': 0.5,
+        #     'font': {'color': '#3C6382', 'size': 14}
+        # },
+        xaxis={
+            'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
+            'tickfont': {'color': '#667889'},
+            'tickformat': '~s',
+            'tickangle': 0
+        },
+        yaxis={
+            'title': {'text': "Track", 'font': {'color': '#667889'}},
+            'tickfont': {'color': '#667889'}
+        },
+        legend={
+            'title': {'text': "Sector", 'font': {'color': '#667889'}},
+            'font': {'color': '#667889'}
+        },
+        bargap=0.6,
+        autosize=True,
+        margin=dict(l=80, r=40, t=60, b=40)
+    )
+    
+    seniorhigh_school_offering_per_track_by_sector
 
-
-
-
-
-
-
-
-
+    return dcc.Graph(figure=seniorhigh_school_offering_per_track_by_sector)
+    
 #################################################################################
 
 
@@ -432,6 +433,7 @@ seniorhigh_school_offering_per_track_by_sector
 # #################################################################################
 # ##  --- Which SHS tracks are least offered but in high demand
 # #################################################################################
+
 @callback(
     Output('seniorhigh_least_offered_high_demand', 'children'),
     Input('chart-trigger', 'data'),
@@ -465,46 +467,42 @@ def update_graph(trigger, data):
         color_discrete_sequence=custom_colors
     )
 
-# Update layout for full responsiveness and clean space usage
-seniorhigh_least_offered_high_demand.update_layout(
-    autosize=True,
-    margin=dict(l=60, r=100, t=80, b=60),
-    # title={
-    #     'text': 'Relationship between<br>Student Demand and Track Supply',
-    #     'x': 0.5,
-    #     'xanchor': 'center',
-    #     'font': {'color': '#3C6382', 'size': 16}
-    # },
-    xaxis=dict(
-        title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
-        tickfont=dict(color='#667889'),
-        automargin=True
-    ),
-    yaxis=dict(
-        title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
-        tickfont=dict(color='#667889'),
-        automargin=True
-    ),
-    legend=dict(
-        title=dict(text='SHS Track', font=dict(color='#667889')),
-        font=dict(color='#667889'),
-        orientation='v',
-        yanchor='middle',
-        y=0.5,
-        xanchor='left',
-        x=1.02  # Slightly closer so it doesn't eat into the space
+    # Update layout for full responsiveness and clean space usage
+    seniorhigh_least_offered_high_demand.update_layout(
+        autosize=True,
+        margin=dict(l=60, r=100, t=80, b=60),
+        # title={
+        #     'text': 'Relationship between<br>Student Demand and Track Supply',
+        #     'x': 0.5,
+        #     'xanchor': 'center',
+        #     'font': {'color': '#3C6382', 'size': 16}
+        # },
+        xaxis=dict(
+            title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
+            tickfont=dict(color='#667889'),
+            automargin=True
+        ),
+        yaxis=dict(
+            title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
+            tickfont=dict(color='#667889'),
+            automargin=True
+        ),
+        legend=dict(
+            title=dict(text='SHS Track', font=dict(color='#667889')),
+            font=dict(color='#667889'),
+            orientation='v',
+            yanchor='middle',
+            y=0.5,
+            xanchor='left',
+            x=1.02  # Slightly closer so it doesn't eat into the space
+        )
     )
-)
 
-# Display the chart
-seniorhigh_least_offered_high_demand
+    # Display the chart
+    seniorhigh_least_offered_high_demand
 
-
-
-
-
-
-
+    return dcc.Graph(figure=seniorhigh_least_offered_high_demand)
+    
 #################################################################################
 
 
