@@ -197,14 +197,14 @@ def update_graph(trigger, data):
     student_school_ratio.update_layout(
         xaxis_title='Number of Enrolled Students',
         yaxis_title='Number of Schools',
-        margin={"l": 0, "r": 0, "t": 0, "b": 50},
-        scattermode="group",
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+        #scattermode="group",
         legend={
-            'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
+            'title': {'text': "Subclass", 'font': {'color': '#667889'}},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -20, 
-            'xanchor': 'left',
+            'y': -3, 
+            'xanchor': 'center',
             'x': 0.5 
         }
     )
@@ -262,8 +262,8 @@ def update_graph(trigger, data):
             'font': {'color': '#667889'},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -0.2, 
-            'xanchor': 'left',
+            'y': -0.5, 
+            'xanchor': 'center',
             'x': 0.5 
         },
         margin=dict(l=0, r=0, t=0, b=40),
