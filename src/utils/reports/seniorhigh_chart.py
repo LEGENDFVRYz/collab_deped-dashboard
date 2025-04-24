@@ -23,8 +23,8 @@ from src.data import enrollment_db_engine, smart_filter
 # # FILTERED_DF = dataframe = auto_extract(['counts'], is_specific=False)
 # # FILTERED_DF
 
-# FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
-# FILTERED_DF
+FILTERED_DF = dataframe = auto_extract(['shs_grade', 'sector'], is_specific=False)
+FILTERED_DF
 # # ## -- Check the document for all valid columns and structurette
 # # ## -- Dont change the all caps variables
 # #################################################################################
@@ -121,17 +121,17 @@ seniorhigh_distri_per_track.update_layout(
 )
 
     # Keep layout responsive
-    seniorhigh_distri_per_track.update_layout(
+seniorhigh_distri_per_track.update_layout(
         uirevision='true',
     )
 
     # Change the color of the bars
-    seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
+seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
 
     # Display the chart
-    seniorhigh_distri_per_track
+seniorhigh_distri_per_track
     
-    return dcc.Graph(figure=seniorhigh_distri_per_track)
+return dcc.Graph(figure=seniorhigh_distri_per_track)
 
 # #################################################################################
 
