@@ -118,6 +118,7 @@ layout = html.Div([
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
     Output('analytics-back-btn', 'style', allow_duplicate=True),
+    Output('plot-content', 'style'),
     # Output('placeholder', 'style', allow_duplicate=True),
     # Output('hide-delay', 'disabled'),
     Input('proceed-btn', 'n_clicks'),
@@ -129,12 +130,12 @@ def handle_hide(n_clicks, back_clicks):
     triggered_id = ctx.triggered_id
     
     if triggered_id == 'proceed-btn':
-        return {'display': 'none'}, {'display': 'flex'}
+        return {'display': 'none'}, {'display': 'flex'}, {'display': 'flex'},
 
     if triggered_id == 'analytics-back-btn':
-        return {'display': 'flex'}, {'display': 'none'},
+        return {'display': 'flex'}, {'display': 'none'}, {'display': 'none'},
     
-    return dash.no_update, dash.no_update
+    return dash.no_update, dash.no_update, dash.no_update
 
 
 @callback(
