@@ -16,6 +16,7 @@
 
             .label{
                 padding-bottom: 0.5em;
+                color: $text-color-1;
             }
             .plot-content{
                 flex: 1;
@@ -45,31 +46,110 @@
                     .plot-a-section{
                         flex: 1;
                     }
+
+                    .edrg-graph-title {
+                        color: $text-color-1;
+                        padding: 0.50em;
+                        text-align: center;
+                    }
                     .plot-b-section{
-                       min-height: 10%;
+                       //min-height: 10%;
                         display: flex;
                         flex-direction: row;
                         gap: 0.5em;
 
                         .plot-b-box1{
-                            flex: 5;
-                            padding-top: 0.5em;
-                            
-
-                                display: flex;
-                                align-self: center;
-                                font-size: 1.5em;
-                                                        
-                                h1{
-                                flex: 1;
-                                width: 100%;
-                                font-size: clamp(1rem, 5vw, 3rem);
-                                }
-                        }
-                        .plot-b-box2{
                             flex: 2;
-                            padding-top: 0.5em; 
+                            padding-top: 0.5em;
+                            display: flex;
                         }
+
+                        .hle-graph-title {
+                            color: $text-color-1;
+                            text-align: center;
+                        }
+
+                        .ns-sub-detail {
+                            display: flex;
+                            flex: 1;
+                            flex-direction: column; // add this line
+                            gap: 0.5em;
+                            padding-top: 0.5em;
+                          
+                            .plot-b-box2 {
+                              display: flex;
+                              flex: 1;
+                          
+                              .total_enrollees {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 1;
+                                color: $primary-color-1;
+
+
+                                .total_label{
+                                    display: flex;
+                                    justify-content: space-between;
+                                    flex: 1;
+                                    overflow: visible;
+
+                                    .label_total_enrollees, .label_total_schools {
+                                        color: $text-color-1;
+                                        font-family: "Inter Semi Bold";
+                                        font-size: 15px;
+                                        padding-top: 1.5em;
+                                        width: 10px;
+                                      }
+
+                                    img {
+                                        width: 40px;
+                                        height: 50px;
+                                        padding: 0px;
+                                        align-self: flex-end;
+                                    }
+                                }
+                                
+                                
+                                
+                                .glevel-count {
+                                  display: flex;
+                                  justify-content: space-between;
+                                
+                          
+                                  .glevel-marker {
+                                    display: flex;
+                                    align-self: center;
+                                    border-radius: 0.5em;
+                                    width: 10px;
+                                    height: 30px;
+                          
+                                    &.enrollees { background-color: #04508c; } // Custom color for enrollees
+                                    &.schools { background-color: #04508c; } // Custom color for schools
+                                    
+                                  }
+                          
+                                  .truncated_total_enrollees {
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    font-family: "Inter Bold";
+                                    font-size: 2.3em;
+                                  }
+                                }
+                          
+                                .raw_total_enrollees {
+                                  display: flex;
+                                  justify-content: flex-end;
+                                  font-family: "Inter Medium Italic";
+                                  font-size: 9px;
+                                  color: $text-color-1;
+                                }
+                          
+                                
+                                
+                              }
+                            }
+                          }
+                          
                         
                     }
                 }
@@ -78,6 +158,11 @@
             .plot-bottom-section{
                 flex: 2;
                 min-height: 400px;
+
+                .spr-graph-title {
+                    color: $text-color-1;
+                    text-align: center;
+                }
             }
         }
         
