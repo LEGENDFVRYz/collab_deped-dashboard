@@ -28,7 +28,7 @@ dash.register_page(__name__, path="/analytics", suppress_callback_exceptions=Tru
 # Main Page
 layout = html.Div([
     dcc.Store(id="filtered_values", data={}, storage_type="memory"),  # Store the params for filtering
-    dcc.Store(id="analytics-sub-tracker", data=""),
+    dcc.Store(id="analytics-sub-tracker", data="Location", storage_type="memory"),
     dcc.Store(id='sub-status-toggle', data=True), 
     
     ## -- Store for filter menus
@@ -80,32 +80,33 @@ layout = html.Div([
                     
                 ], id='secondary-wrap'),
             ], id='secondary-filter')          
-        ], id='filter-section', className='left-content'),
+        ], id='filter-section', className='left-content', style={'display': 'none'}),
         
         
         ## -- Rendering Plots
-        html.Div([
-            # dcc.Loading([
-                html.Div([
-                    # html.Div([
-                    #         html.H2(["SELECT FILTER TO PROCEED"])
-                    #     ], id="placeholder"),
-                    dcc.Loading([
-                        html.Div([], id='atake-lang'),
-                        html.Div([
-                            ## -- RENDER THE REPORT HERE
-                            
-                            
-                            ], id='plot-filtered-page')
-                    ],  id='query_loading',
-                        parent_style={"display": "flex", "flexDirection": "column", "flex": "1"},
-                        style={"position": "absolute", "top": "50%", "left": "50%", "transform": "translate(-50%, -50%)"},
-                        delay_show=2,
-                    )
-                ], id='plot-content', className="")
-            # ], id='loading-render-content', type='circle')
-            
-        ], className='right-content'),
+        dcc.Loading([
+            html.Div([], id='atake-lang'),
+            html.Div([
+                # dcc.Loading([
+                    html.Div([
+                        # html.Div([
+                        #         html.H2(["SELECT FILTER TO PROCEED"])
+                        #     ], id="placeholder"),
+                            html.Div([
+                                ## -- RENDER THE REPORT HERE
+                                
+                                
+                                ], id='plot-filtered-page')
+
+                    ], id='plot-content', className="")
+                # ], id='loading-render-content', type='circle')
+                
+            ], className='right-content'),
+        ],  id='query_loading',
+            parent_style={"display": "flex", "flexDirection": "column", "flex": "1", "maxHeight": "80vh"},
+            style={"position": "absolute", "top": "50%", "left": "50%", "transform": "translate(-50%, -50%)","overflowY": "hidden"},
+            delay_hide=1
+        )
     ], className='content-section'),
 ], className='analytics-page container')
 
@@ -116,7 +117,7 @@ layout = html.Div([
 ############################################################
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
-    Output('analytics-back-btn', 'style'),
+    Output('analytics-back-btn', 'style', allow_duplicate=True),
     # Output('placeholder', 'style', allow_duplicate=True),
     # Output('hide-delay', 'disabled'),
     Input('proceed-btn', 'n_clicks'),
@@ -134,6 +135,21 @@ def handle_hide(n_clicks, back_clicks):
         return {'display': 'flex'}, {'display': 'none'},
     
     return dash.no_update, dash.no_update
+
+
+@callback(
+    Output('analytics-back-btn', 'style', allow_duplicate=True),
+    Input('sub-status-toggle', 'data'),
+    State('filter-section', 'style'),
+    prevent_initial_call='initial_duplicate'
+)
+def check_display(data, div_style):
+    if div_style and div_style.get("display") == "none":
+        return {'display': 'flex'}
+    
+    # Return the style unchanged so the UI doesn’t break
+    return {'display': 'none'}
+
 
 
 # @callback(
@@ -209,13 +225,13 @@ def render_additional_filters(reference):
 ## DETERMINE IF THE USER SWITCH THROUGH PAGES
 ############################################################
 @callback(
-    Output('filter-section', 'style', allow_duplicate=True),
+    # Output('filter-section', 'style', allow_duplicate=True),
     # Output('placeholder', 'style', allow_duplicate=True),
     Output('plot-filtered-page', 'children', allow_duplicate=True),
     Output('plot-content', 'className', allow_duplicate=True),
     Output('addons-btn', 'n_clicks'),
     Output('sub-status-toggle', 'data'),
-
+    Output('filtered_values', 'data', allow_duplicate=True),
     
     Input("location", "n_clicks"),
     Input("senior-high", "n_clicks"),
@@ -236,11 +252,11 @@ def sub_tab_has_change(in1, in2, in3, in4, sub_tracker, sub_status):
     
 
     if trans[triggered_id] == sub_tracker:
-        # print("page is still the same")
+        print("page is still the same")
         return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
     else:
-        # print("you clicked different page--")
-        return {'display': 'flex'}, html.Div(), "", 0, (not sub_status)
+        print("you clicked different page--")
+        return html.Div(), "", 0, (not sub_status), {}
     
     
     
@@ -477,15 +493,19 @@ def retrieve_filtered_values(btn, types, gender, sector, subclass, track, strand
     Output('chart-trigger', 'data'),
     Output('atake-lang', 'children'),
     Input('filtered_values', 'data'),
+    Input("sub-status-toggle", "data"),
     State('chart-trigger', 'data'),
     prevent_initial_call=True
 )
-def checked(data, status):
+def checked(data, toggle, status):
     print(">>>>", data)
     if data:
         # time.sleep(3)
-        smart_filter(data ,enrollment_db_engine)
+        smart_filter(data, _engine=enrollment_db_engine)
         # print('checked()')
-        return (not status), html.Div([])
+    else:
+        print("based form...")
+        smart_filter({}, _engine=enrollment_db_engine)
+    print("sended>>>")
+    return (not status), html.Div([])
         
-    return dash.no_update, dash.no_update

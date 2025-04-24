@@ -8,21 +8,20 @@ from src.data import enrollment_db_engine
 from src.utils import activeTab_callback
 
 # important part
-from src.data import enrollment_db_engine, smart_filter
+# from src.data import enrollment_db_engine, smart_filter
 
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
 cache.init_app(app.server)
 
-# Initialize DF
-smart_filter({}, _engine=enrollment_db_engine)
 
 # Main File Content
 app.layout = html.Div(
     children=[
         dcc.Store(id="active-tab", data="", storage_type="session"),  # Store clicked tab
         dcc.Store(id="chart-trigger", data=False, storage_type="session"),
+        dcc.Store(id="base-trigger", data=False, storage_type="session"),
         dcc.Location(id="url", refresh=False),  # Gets the current pathname
         
         # Navigation style
@@ -150,6 +149,7 @@ app.layout = html.Div(
         
         # output: layout pages
         html.Div([
+            
             # dcc.Location(id="url", refresh=False),
             dash.page_container
         ], className='content-wrapper')

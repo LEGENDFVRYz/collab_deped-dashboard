@@ -24,11 +24,12 @@ def render_subclass_filter():
                         Card([
                             # total schools per subclass
                             html.H4(["Total Schools per Subclassification"], className="subclass-graph-title"),
-                            dcc.Loading(
-                                id="loading-graph",
-                                type="default",
-                                children=html.Div([],id='subclass_total_schools_per_subclass',)
-                            ),
+                            # dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="default",
+                            #     children=
+                                html.Div([],id='subclass_total_schools_per_subclass',)
+                            # ),
                             # dcc.Graph(id="subclass_total_schools_per_subclass", 
                             #     figure=total_schools_per_subclass,
                             #     config={"responsive": True},
@@ -40,11 +41,12 @@ def render_subclass_filter():
                     html.Div([
                         Card([
                             html.H4(["Enrollment Distribution by Subclassification"], className="subclass-graph-title"),
-                            dcc.Loading(
-                                id="loading-graph",
-                                type="default",
-                                children=html.Div([],id='subclass_distrib_by_subclass',)
-                            ),
+                            # dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="default",
+                                # children=
+                                html.Div([],id='subclass_distrib_by_subclass',)
+                            # ),
                             # enrollment distribution by subclass
                             # dcc.Graph(id="subclass_distrib_by_subclass", 
                             #     figure=distrib_by_subclass,
@@ -62,11 +64,12 @@ def render_subclass_filter():
                                 Card([
                                     # student to school ratio
                                     html.H4(["Student-to-School Ratio"], className="subclass-graph-title"),
-                                    dcc.Loading(
-                                        id="loading-graph",
-                                        type="default",
-                                        children=html.Div([],id='subclass_student_school_ratio',)
-                                    ), 
+                                    # dcc.Loading(
+                                        # id="loading-graph",
+                                        # type="default",
+                                        # children=
+                                        html.Div([],id='subclass_student_school_ratio',)
+                                    # ), 
                                 ], margin=False)
                             ], className="subclass-enroll-scatter"),
 
@@ -208,11 +211,12 @@ def render_subclass_filter():
                             Card([
                                 # subclass vs school type
                                 html.H4(["Subclassification by School Type Distribution"], className="subclass-graph-title"),
-                                dcc.Loading(
-                                    id="loading-graph",
-                                    type="default",
-                                    children=html.Div([],id='subclass_vs_school_type',)
-                                ),   
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                #     children=
+                                    html.Div([],id='subclass_vs_school_type',)
+                                # ),   
                                 # dcc.Graph(id="subclass_vs_school_type", 
                                 #     figure=subclass_vs_school_type,
                                 #     config={"responsive": True},
@@ -226,11 +230,12 @@ def render_subclass_filter():
                                 Card([
                                     # sector affiliation
                                     html.H4(["Sector Affiliation"], className="subclass-graph-title"),
-                                    dcc.Loading(
-                                        id="loading-graph",
-                                        type="default",
-                                        children=html.Div([],id='subclass_sector_affiliation',)
-                                    ),  
+                                    # dcc.Loading(
+                                    #     id="loading-graph",
+                                    #     type="default",
+                                    #     children=
+                                        html.Div([],id='subclass_sector_affiliation',)
+                                    # ),  
                                     # dcc.Graph(id="subclass_sector_affiliation", 
                                     #     figure=sector_affiliation,
                                     #     config={"responsive": True},
@@ -242,11 +247,12 @@ def render_subclass_filter():
                                 Card([
                                     # regional distribution/ which subclass has the highest number of schools per loc
                                     html.H4(["Regional Distribution of Schools"], className="subclass-graph-title"),
-                                    dcc.Loading(
-                                        id="loading-graph",
-                                        type="default",
-                                        children=html.Div([],id='subclass_heatmap',)
-                                    ), 
+                                    # dcc.Loading(
+                                    #     id="loading-graph",
+                                    #     type="default",
+                                    #     children=
+                                        html.Div([],id='subclass_heatmap',)
+                                    # ), 
                                     # dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
                                     # config={"responsive": True},
                                     # style={"width": "100%", "height": "100%"}
@@ -265,11 +271,12 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # mcoc breakdown/which subclass offers which program types
-                                        dcc.Loading(
-                                            id="loading-graph",
-                                            type="default",
-                                            children=html.Div([],id='subclass_clustered',)
-                                        ),  
+                                        # dcc.Loading(
+                                        #     id="loading-graph",
+                                        #     type="default",
+                                        #     children=
+                                            html.Div([],id='subclass_clustered',)
+                                        # ),  
                                         # dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
                                         # config={"responsive": True},
                                         # style={"width": "100%", "height": "100%"}
@@ -280,11 +287,12 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # enrollment in shs tracks across subclass
-                                        dcc.Loading(
-                                            id="loading-graph",
-                                            type="default",
-                                            children=html.Div([],id='subclass_clustered_tracks',)
-                                        ),
+                                        # dcc.Loading(
+                                        #     id="loading-graph",
+                                        #     type="default",
+                                        #     children=
+                                            html.Div([],id='subclass_clustered_tracks',)
+                                        # ),
                                         # dcc.Graph(id="subclass_clustered_tracks", figure=subclass_clustered_tracks,
                                             # config={"responsive": True},
                                             # style={"width": "100%", "height": "100%"}

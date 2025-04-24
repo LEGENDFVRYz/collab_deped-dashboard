@@ -29,11 +29,12 @@ def render_location_filter():
                             ## INSERT PLOT: Distribution of enrollees per location 
                             #########################################
                             html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title"),
-                            dcc.Loading(
-                                id="loading-graph",
-                                type="default",
-                                children=html.Div([], id='location_enrollees-distribution-per-location',)
-                            )
+                            # dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="default",
+                                # children=
+                                html.Div([], id='location_enrollees-distribution-per-location',)
+                            # )
                             
                             #                             dcc.Loading(
                             #     id="loading-graph",
@@ -77,12 +78,13 @@ def render_location_filter():
                                 #########################################
                                 html.H4(["School with the Highest and Lowest Enrollees"], className="hle-graph-title"), 
                                 
-                                dcc.Loading(
-                                    id="loading-graph",
-                                    type="default",
-                                    children=html.Div([
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                    # children=
+                                    html.Div([
                                     ],id='location_highest_lowest_enrollees')
-                                )
+                                # )
                                 
                                 #     dcc.Graph(id="location_highest_lowest_enrollees", 
                                 #             # figure=hi_low_fig,
@@ -143,12 +145,13 @@ def render_location_filter():
                         #########################################
                         html.H4(["Strand and Track Preferences per Region"], className="spr-graph-title"), 
                         
-                        dcc.Loading(
-                            id="loading-graph",
-                            type="default",
-                            children=html.Div([
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                        #     children=
+                            html.Div([
                             ],id='track-preference-heatmap')
-                        )
+                        # )
                         # dcc.Graph(
                         #     id="track-preference-heatmap",
                         #     # figure=heatmap_fig,
@@ -185,11 +188,12 @@ def render_location_filter():
                         ## INSERT PLOT: school sectors
                         #########################################
                         html.H4(["Student Enrollment by School Sector per Region"], className="ss-graph-title"), 
-                        dcc.Loading(
-                            id="loading-graph",
-                            type="default",
-                            children=html.Div([], id='location_school_sectors',)
-                        ),
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                        #     children=
+                            html.Div([], id='location_school_sectors',)
+                        # ),
                         
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),
