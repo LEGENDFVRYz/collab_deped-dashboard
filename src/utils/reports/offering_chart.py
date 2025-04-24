@@ -112,26 +112,24 @@ def update_graph(trigger, data):
     number_of_schools_mcoc_chart.update_layout(
         autosize=True,
         showlegend=True,
-        legend_title_text='Programs',
         title_font_size=18,
         title_font_color='#3C6382',
         title_x=0.5,
-        margin=dict(l=20, r=20, t=50, b=20),
+        margin=dict(l=20, r=20, t=50, b=80),
         height=450,
-        paper_bgcolor='#F0F0F0',
         plot_bgcolor='#FFFFFF',
         font=dict(family='Inter, sans-serif', color='#3C6382'),
         legend=dict(
-            title='Programs',
+            orientation='h',
+            yanchor='bottom',
+            y=-0.2,
+            xanchor='center',
+            x=0.5,
+            title=None,
             font=dict(size=14),
-            x=1,
-            y=0.5,
-            traceorder='normal',
-            orientation='v',
-            xanchor='right',
-            yanchor='middle'
         )
     )
+
 
     number_of_schools_mcoc_chart
     
@@ -188,7 +186,6 @@ def update_graph(trigger, data):
         title_font_size=18,
         title_font_color='#3C6382',
         title_x=0.5,
-        paper_bgcolor='#F0F0F0',
         plot_bgcolor='rgba(255, 255, 255, 0.5)',
         font=dict(family='Inter, sans-serif', color='#3C6382'),
         margin={"l": 20, "r": 20, "t": 50, "b": 20},
@@ -281,7 +278,6 @@ def update_graph(trigger, data):
             zeroline=False,
             tickformat=','
         ),
-        paper_bgcolor='#F0F0F0',
         plot_bgcolor='#FFFFFF'  # Pure white plot area to contrast with bar color
     )
 
@@ -432,7 +428,6 @@ def update_graph(trigger, data):
             xanchor='left',
             yanchor='middle',
         ),
-        paper_bgcolor='#F0F0F0',
         plot_bgcolor='#FFFFFF'
     )
 
@@ -519,7 +514,6 @@ def update_graph(trigger, data):
         },
         font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
         margin={"l": 50, "r": 50, "t": 80, "b": 50},
-        paper_bgcolor='#F0F0F0',
         plot_bgcolor='#FFFFFF'
     )
 
