@@ -130,7 +130,7 @@ gender_region_fig.update_layout(
     yaxis_title="Region",
     legend_title="Gender",
     font=dict(color="#667889", family='Inter'),
-    margin=dict(l=80, r=20, t=20, b=40),
+    margin=dict(l=10, r=20, t=20, b=40),
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
 )
@@ -142,13 +142,106 @@ gender_region_fig
 
 #################################################################################
 
+# import pandas as pd
+# import plotly.express as px
+# import plotly.io as pio
+# import json
+# from geojson_rewind import rewind
+
+# # Set default renderer
+# pio.renderers.default = 'browser'
+
+# # Load enrollment data (your `auto_extract` method)
+# FILTERED_DF = auto_extract(['counts', 'region', 'brgy'], is_specific=False)
+# FILTERED_DF = FILTERED_DF[['region', 'province', 'division', 'district', 'municipality', 'brgy', 'counts']]
+
+# # REGION NAME MAP to match GeoJSON country.0.1
+# # region_name_map = {
+# #     'Region I': 'Region I (Ilocos Region)',
+# #     'Region II': 'Region II (Cagayan Valley)',
+# #     'Region III': 'Region III (Central Luzon)',
+# #     'Region IV-A': 'Region IV-A (CALABARZON)',
+# #     'Region IV-B': 'Region IV-B (MIMAROPA)',
+# #     'Region V': 'Region V (Bicol Region)',
+# #     'Region VI': 'Region VI (Western Visayas)',
+# #     'Region VII': 'Region VII (Central Visayas)',
+# #     'Region VIII': 'Region VIII (Eastern Visayas)',
+# #     'Region IX': 'Region IX (Zamboanga Peninsula)',
+# #     'Region X': 'Region X (Northern Mindanao)',
+# #     'Region XI': 'Region XI (Davao Region)',
+# #     'Region XII': 'Region XII (SOCCSKSARGEN)',
+# #     'Region XIII': 'Region XIII (Caraga)',
+# #     'NCR': 'National Capital Region (NCR)',
+# #     'CAR': 'Cordillera Administrative Region (CAR)',
+# #     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)'
+# # }
+
+# region_name_map = {
+#     'Region I': 'Ilocos Region (Region I)',
+#     'Region II': 'Cagayan Valley (Region II)',
+#     'Region III': 'Central Luzon (Region III)',
+#     'Region IV-A': 'CALABARZON (Region IV-A)',
+#     'Region IV-B': 'MIMAROPA (Region IV-B)',
+#     'Region V': 'Bicol Region (Region V)',
+#     'Region VI': 'Western Visayas (Region VI)',
+#     'Region VII': 'Central Visayas (Region VII)',
+#     'Region VIII': 'Eastern Visayas (Region VIII)',
+#     'Region IX': 'Zamboanga Peninsula (Region IX)',
+#     'Region X': 'Northern Mindanao (Region X)',
+#     'Region XI': 'Davao Region (Region XI)',
+#     'Region XII': 'SOCCSKSARGEN (Region XII)',
+#     'Region XIII': 'Caraga (Region XIII)',
+#     'NCR': 'National Capital Region (NCR)',
+#     'CAR': 'Cordillera Administrative Region (CAR)',
+#     'BARMM': 'Autonomous Region in Muslim Mindanao (ARMM)'
+# }
+
+# # Map geo_region for region-level maps
+# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
+# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])
+
+# # Clean province names (ensure matching format)
+# FILTERED_DF['province'] = FILTERED_DF['province'].apply(
+#     lambda x: ', '.join(sorted(set(map(str.strip, x.split(','))))
+# ))
+
+# # Load the province-level GeoJSON
+# with open("/Users/marke/Downloads/Provinces.json") as f:
+#     geojson = json.load(f)
+
+# # Optional: Check GeoJSON provinces
+# geo_provinces = {f['properties']['PROVINCE'] for f in geojson['features']}
+# print("Provinces in GeoJSON:", geo_provinces)
+# print("Provinces in DF:", set(FILTERED_DF['province']))
+
+# # Group data by province for aggregation (in case of duplicates)
+# grouped = FILTERED_DF.groupby(['province', 'region']).agg({'counts': 'sum'}).reset_index()
+
+# # Choropleth by PROVINCE
+# fig = px.choropleth(
+#     grouped,
+#     geojson=geojson,
+#     locations='province',
+#     featureidkey='properties.PROVINCE',
+#     color='counts',
+#     hover_name='province',
+#     hover_data={'region': True, 'counts': True},
+#     color_continuous_scale='Viridis'
+# )
+
+# fig.update_geos(fitbounds="locations", visible=False)
+# fig.update_layout(
+#     title="Enrollment by Province",
+#     margin={"r":0,"t":30,"l":0,"b":0}
+# )
+# fig.show()
 
 
 
-#################################################################################
-##  --- CHART: enrollment density (students per location)
-#################################################################################
-# enrollment_density_chart = []
+# #################################################################################
+# ##  --- CHART: enrollment density (students per location)
+# #################################################################################
+# # enrollment_density_chart = []
 
 # import pandas as pd
 # import plotly.express as px
@@ -215,19 +308,208 @@ gender_region_fig
 
 # fig.update_geos(fitbounds="locations", visible=False)
 # fig.update_layout(title="Enrollment by Region", margin={"r":0,"t":30,"l":0,"b":0})
-# fig
+# fig.show()
 
 
 
 
-#################################################################################
+# #################################################################################
 
 
 
-#################################################################################
-##  --- CHART: school sectors
-#################################################################################
-# enrollment_density_chart = []
+# #################################################################################
+# ##  --- CHART: school sectors
+# #################################################################################
+# # enrollment_density_chart = []
+# import json
+# import pandas as pd
+# import plotly.express as px
+# import plotly.io as pio
+
+# # from geojson_rewind import rewind
+
+# # Set the renderer for Plotly
+# pio.renderers.default = 'browser'
+
+# # Load GeoJSON (municipality level for PH)
+# with open("/Users/marke/Downloads/country.0.1.json") as f:
+#     geojson = json.load(f)
+
+# # Assuming rewind function is defined somewhere
+# # geojson = rewind(geojson, rfc7946=False)
+
+# # Print all REGION names in GeoJSON
+# geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
+# print(set(geo_regions))
+
+# # Print all region names in your DF
+# print(set(FILTERED_DF['region']))
+
+
+# region_name_map = {
+#     'Region I': 'Region I (Ilocos Region)',
+#     'Region II': 'Region II (Cagayan Valley)',
+#     'Region III': 'Region III (Central Luzon)',
+#     'Region IV-A': 'Region IV-A (CALABARZON)',
+#     'Region IV-B': 'Region IV-B (MIMAROPA)',
+#     'Region V': 'Region V (Bicol Region)',
+#     'Region VI': 'Region VI (Western Visayas)',
+#     'Region VII': 'Region VII (Central Visayas)',
+#     'Region VIII': 'Region VIII (Eastern Visayas)',
+#     'Region IX': 'Region IX (Zamboanga Peninsula)',
+#     'Region X': 'Region X (Northern Mindanao)',
+#     'Region XI': 'Region XI (Davao Region)',
+#     'Region XII': 'Region XII (SOCCSKSARGEN)',
+#     'Region XIII': 'Region XIII (Caraga)',
+#     'NCR': 'National Capital Region (NCR)',
+#     'CAR': 'Cordillera Administrative Region (CAR)',
+#     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)',  # or ARMM depending on version
+#     # Add others if needed
+# }
+
+# # Map region names to GeoJSON-compatible names
+# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
+# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])  # remove rows without mapping
+
+# # Check for NaN values
+# print(FILTERED_DF['geo_region'].isna().sum())
+
+# # Plot the map
+# fig = px.choropleth(
+#     FILTERED_DF,
+#     geojson=geojson,
+#     locations='geo_region',
+#     featureidkey='properties.adm1_en',
+#     color='counts',
+#     hover_name='region',
+#     hover_data=['province', 'counts'],
+#     color_continuous_scale='Viridis',
+# )
+
+# fig.update_geos(fitbounds="locations", visible=False)
+# fig.update_layout(title="Enrollment by Region", margin={"r":0,"t":30,"l":0,"b":0})
+
+# # Display the figure
+# fig.show()
+
+
+# def clean_provinces(province_series):
+#     return ', '.join(sorted(set(
+#         p.strip().title() for plist in province_series for p in plist.split(',')
+#     )))
+
+# grouped = FILTERED_DF.groupby('region').agg({
+#     'province': clean_provinces,
+#     'counts': 'sum'
+# }).reset_index()
+
+# # Add GeoJSON-compatible names
+# grouped['geo_region'] = grouped['region'].map(region_name_map)
+
+# # Drop any region not matched
+# grouped = grouped.dropna(subset=['geo_region'])
+
+# # Final choropleth working
+# fig = px.choropleth(
+#     grouped,
+#     geojson=geojson,
+#     locations='geo_region',
+#     featureidkey='properties.adm1_en',
+#     color='counts',
+#     hover_name='region',
+#     hover_data={'province': True, 'counts': True},
+#     color_continuous_scale='Viridis',
+# )
+
+# fig.update_geos(fitbounds="locations", visible=False)
+# fig.update_layout(title="Enrollment by Region with Provinces", margin={"r":0,"t":30,"l":0,"b":0})
+# fig.show()
+
+# import json
+# import pandas as pd
+# import plotly.express as px
+# import plotly.io as pio
+
+# # Set Plotly to open in your default browser
+# pio.renderers.default = 'browser'
+
+# # Load the province-level GeoJSON
+# with open("/Users/marke/Downloads/Provinces.json") as f:
+#     geojson = json.load(f)
+
+# # Prepare your DataFrame (already grouped by province and region)
+# # Assume your DataFrame is called FILTERED_DF and already looks like:
+# # region | province | counts
+
+# # Clean up provinces (remove duplicates in strings, if any)
+# FILTERED_DF['province'] = FILTERED_DF['province'].apply(
+#     lambda x: ', '.join(sorted(set(map(str.strip, x.split(','))))
+# ))
+
+# # Optional: check unique province names
+# print("PROVINCES in DF:", set(FILTERED_DF['province']))
+# print("PROVINCES in GeoJSON:", set([f['properties']['PROVINCE'] for f in geojson['features']]))
+
+# # Plot the choropleth by province
+# fig = px.choropleth(
+#     FILTERED_DF,
+#     geojson=geojson,
+#     locations='province',
+#     featureidkey='properties.PROVINCE',
+#     color='counts',
+#     hover_name='province',
+#     hover_data=['region', 'counts'],
+#     color_continuous_scale='Viridis',
+# )
+
+# fig.update_geos(fitbounds="locations", visible=False)
+# fig.update_layout(title="Enrollment by Province", margin={"r":0,"t":30,"l":0,"b":0})
+
+# fig.show()
+
+
+# import json
+# import pandas as pd
+# import plotly.express as px
+# import plotly.io as pio
+
+# pio.renderers.default = 'browser'
+
+# # Load updated GeoJSON with province & region
+# with open("/Users/marke/Downloads/Provinces.json") as f:
+#     geojson = json.load(f)
+
+# # Clean province names
+# FILTERED_DF['province'] = FILTERED_DF['province'].apply(
+#     lambda x: ', '.join(sorted(set(map(str.strip, x.split(','))))
+# ))
+
+# # Prepare a column to match GeoJSON's REGION field
+# # (Make sure regions are already full names like "Region III (Central Luzon)")
+# region_names = set([f['properties']['REGION'] for f in geojson['features']])
+# print("Regions in GeoJSON:", region_names)
+
+# # Merge logic for plotting
+# fig = px.choropleth(
+#     FILTERED_DF,
+#     geojson=geojson,
+#     locations='province',
+#     featureidkey='properties.PROVINCE',
+#     color='counts',
+#     hover_name='province',
+#     hover_data=['region', 'counts'],
+#     color_continuous_scale='Viridis',
+# )
+
+# # Fit view to entire Philippines at first
+# fig.update_geos(fitbounds="locations", visible=False)
+
+# fig.update_layout(
+#     title="Enrollment by Province (Click a Province to Zoom into Region)",
+#     margin={"r":0,"t":30,"l":0,"b":0}
+# )
+
+# fig.show()
 
 
 #################################################################################
@@ -306,9 +588,9 @@ sector_chart = px.bar(
 
 # 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
 sector_chart.update_layout(
-    title_font=dict(size=20, family='Arial', color='#3C6382'),
+    title_font=dict(size=20, family='Inter', color='#3C6382'),
     title_x=0.5,
-    font=dict(family='Arial', size=14, color='#3C6382'),
+    font=dict(family='Inter', size=14, color='#3C6382'),
     paper_bgcolor='#F0F0F0',
     plot_bgcolor='rgba(255,255,255,0.5)',
     margin=dict(l=50, r=30, t=70, b=60),
@@ -533,7 +815,7 @@ hi_low_fig = go.Figure(data=[go.Table(
         fill_color='#F8C6CD',
         align='left',
         font=dict(family='Inter', color='#667889', size=13),
-        height=100  # fixed cell height
+        height=90  # fixed cell height
     )
 )])
 

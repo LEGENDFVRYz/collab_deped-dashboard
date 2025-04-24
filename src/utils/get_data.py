@@ -144,5 +144,5 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['counts'], is_specific=False)
+    df = auto_extract(['region'], is_specific=False)
     df

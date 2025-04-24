@@ -468,51 +468,51 @@ heatmap_fig
 
 #################################################################################
 ##  --- Which SHS tracks are more prevalent in each sector
-#################################################################################
-# dist_per_track_chart = px.bar(filtered_df, )
-FILTERED_byprevalent = dataframe = auto_extract(['strand', 'sector'], is_specific=True)
-FILTERED_nostudents = dataframe = auto_extract(['counts'], is_specific=True)
-grade_enrollment2 = FILTERED_nostudents.groupby('grade')['counts'].sum().reset_index()
-merged = FILTERED_byprevalent.copy()
-merged['counts'] = FILTERED_nostudents['counts']
-grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
+# #################################################################################
+# # dist_per_track_chart = px.bar(filtered_df, )
+# FILTERED_byprevalent = dataframe = auto_extract(['strand', 'sector'], is_specific=True)
+# FILTERED_nostudents = dataframe = auto_extract(['counts'], is_specific=True)
+# grade_enrollment2 = FILTERED_nostudents.groupby('grade')['counts'].sum().reset_index()
+# merged = FILTERED_byprevalent.copy()
+# merged['counts'] = FILTERED_nostudents['counts']
+# grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
 
-def smart_truncate_number(num):
-    if num >= 1_000_000:
-        return f"{num/1_000_000:.1f}M"
-    elif num >= 1_000:
-        return f"{num/1_000:.1f}K"
-    else:
-        return str(num)
-grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
+# def smart_truncate_number(num):
+#     if num >= 1_000_000:
+#         return f"{num/1_000_000:.1f}M"
+#     elif num >= 1_000:
+#         return f"{num/1_000:.1f}K"
+#     else:
+#         return str(num)
+# grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
-blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
+# blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 
-grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
+# grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
-fig = px.bar(
-    grouped,
-    x='strand',
-    y='counts',
-    color='sector',
-    barmode='group',
-    title='Prevalence of SHS Strands by Sector (Based on Student Count)',
-    labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
-    color_discrete_sequence=blue_shades,
-    text='counts_text'
-)
+# fig = px.bar(
+#     grouped,
+#     x='strand',
+#     y='counts',
+#     color='sector',
+#     barmode='group',
+#     title='Prevalence of SHS Strands by Sector (Based on Student Count)',
+#     labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
+#     color_discrete_sequence=blue_shades,
+#     text='counts_text'
+# )
 
-fig.update_traces(textposition='outside')
+# fig.update_traces(textposition='outside')
 
-fig.update_layout(
-    xaxis_tickangle=-45,
-    legend_title='Sector',
-    xaxis_title='SHS Strand',
-    yaxis_title='Number of Students',
-    margin=dict(l=60, r=40, t=60, b=60)
-)
+# fig.update_layout(
+#     xaxis_tickangle=-45,
+#     legend_title='Sector',
+#     xaxis_title='SHS Strand',
+#     yaxis_title='Number of Students',
+#     margin=dict(l=60, r=40, t=60, b=60)
+# )
 
-fig
+# fig
 
 #################################################################################
 

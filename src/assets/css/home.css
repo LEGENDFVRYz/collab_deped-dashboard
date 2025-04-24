@@ -116,13 +116,13 @@
   height: 30px;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.es {
-  background-color: #FFBF5F;
+  background-color: #037DEE;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.jhs {
   background-color: #FE4761;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.shs {
-  background-color: #037DEE;
+  background-color: #FFBF5F;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .count-text {
   display: flex;
@@ -154,7 +154,7 @@
 .home-page .content .overview-layer-2 {
   display: flex;
   flex: 1;
-  min-height: 390px;
+  min-height: 400px;
   gap: 2em;
 }
 .home-page .content .overview-layer-2 .grade-level-dynamics {
@@ -170,7 +170,7 @@
 }
 .home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-graph {
   display: flex;
-  flex: 3;
+  flex: 2.75;
 }
 .home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-graph .gld-graph-title {
   color: #3C6382;
@@ -220,8 +220,14 @@
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc {
   display: flex;
+  flex-direction: column;
   flex: 1;
   align-items: center;
+  color: #667889;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage {
+  display: flex;
+  gap: 0.5em;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;

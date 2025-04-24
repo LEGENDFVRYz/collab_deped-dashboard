@@ -7,7 +7,7 @@ from dash import Dash, dcc, html
 from src.components.card import Card
 
 # -- Graphs
-from src.utils.reports.home_enrollment_per_region import home_regional_distribution, home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution, home_subclass_table, home_program_offering, home_shs_tracks
+from src.utils.reports.home_enrollment_per_region import  home_enrollment_per_region, home_school_number_per_sector, home_gender_distribution,  home_program_offering, home_shs_tracks
 from src.utils.reports.home_enrollment_per_region import total_enrollees, number_of_schools, number_of_schools_formatted, total_male_count, total_male_count_formatted, total_female_count, total_female_count_formatted, total_es_count, total_es_count_formatted, total_jhs_count, total_jhs_count_formatted, total_shs_count, total_shs_count_formatted, gender_gap, greater_gender, lesser_gender
 
 # Landing page
@@ -89,11 +89,11 @@ layout = html.Div([
                 
                     html.Div([
                         Card([
-                            html.H4(["Regional Distribution"], className="ns-graph-title"),
-                            dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            ),
+                            # html.H4(["Regional Distribution"], className="ns-graph-title"),
+                            # dcc.Graph(id="home_regional_distribution", figure=home_regional_distribution,
+                            #             config={"responsive": True},
+                            #             style={"width": "100%", "height": "100%"}
+                            # ),
                         ], margin=False)
                     ], className="ns-graph")
                     
@@ -236,17 +236,17 @@ layout = html.Div([
                         ],className="ssc-info-graph"), 
                         
                         html.Div([
-                            Card([
-                                html.Div([
-                                    html.H6("Subclassification"),
-                                    html.H6("School Count"),
-                                    html.H6("Student Count"),
-                                ], className="ssc-table-header"),
-                                dcc.Graph(id="ssc-subclass-table", className="ssc-subclass-table", figure=home_subclass_table,
-                                                config={"responsive": True},
-                                                style={"width": "100%", "height": "100%"}
-                                ),
-                            ], margin=False)
+                            # Card([
+                            #     html.Div([
+                            #         html.H6("Subclassification"),
+                            #         html.H6("School Count"),
+                            #         html.H6("Student Count"),
+                            #     ], className="ssc-table-header"),
+                            #     dcc.Graph(id="ssc-subclass-table", className="ssc-subclass-table", figure=home_subclass_table,
+                            #                     config={"responsive": True},
+                            #                     style={"width": "100%", "height": "100%"}
+                            #     ),
+                            # ], margin=False)
                         ], className="ssc-table"),
                         
                     ], className="ssc-content-1"),
