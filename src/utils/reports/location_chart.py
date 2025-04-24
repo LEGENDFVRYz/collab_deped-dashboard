@@ -381,7 +381,7 @@ def update_graph(trigger, data):
     )
 
 # 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
-sector_chart.update_layout(
+    sector_chart.update_layout(
     title_font=dict(size=20, family='Inter', color='#3C6382'),
     title_x=0.5,
     font=dict(family='Inter', size=14, color='#3C6382'),
