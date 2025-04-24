@@ -384,9 +384,9 @@ def update_graph(trigger, data):
     FILTERED_DATA['grade'] = FILTERED_DATA['grade'].astype(str).str.upper().str.strip()
 
 
-    region_schools_df = FILTERED_DATA[region_schools_df['school_level'] != 'UNKNOWN']
+    region_schools_df = FILTERED_DATA[FILTERED_DATA['school_level'] != 'UNKNOWN']
 
-    region_grouped_schools =   region_schools_df.groupby(['region', 'school_level'])['beis_id'].nunique().reset_index()
+    region_grouped_schools = region_schools_df.groupby(['region', 'school_level'])['beis_id'].nunique().reset_index()
 
     region_stacked_chart = px.bar(
         region_grouped_schools,
