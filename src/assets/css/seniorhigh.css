@@ -25,6 +25,18 @@
   display: flex;
   flex: 1;
 }
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .dpt-graph-title {
+  color: #3C6382;
+  text-align: center;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .dsg-graph-title {
+  color: #3C6382;
+  text-align: center;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .sots-graph-title {
+  color: #3C6382;
+  text-align: center;
+}
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-lower {
   display: flex;
   flex: 1;

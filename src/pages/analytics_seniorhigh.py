@@ -37,6 +37,7 @@ def render_seniorhigh_filter():
                                 # distribution of enrollees per track
                                 #########################################
                                 ## Sample Use of Charts, Remove this After
+                                html.H4("Distribution of SHS Enrollees per Track", className="dpt-graph-title"),
                                 dcc.Graph(id="seniorhigh_distri_per_track", className="seniorhigh_distri_per_track", figure=seniorhigh_distri_per_track,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
@@ -66,6 +67,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # gender distribution
+                                    html.H4("Distribution by Strand and Gender", className="dsg-graph-title"),
                                     dcc.Graph(id="seniorhigh_gender_distri", className="seniorhigh_gender_distri", figure=seniorhigh_gender_distri,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}
@@ -93,6 +95,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # which SHS tracks are least offered but in high demand
+                                    html.H4("Relationship between Student Demand and Track Supply", className="rsdts-graph-title"),
                                     dcc.Graph(id="seniorhigh_least_offered_high_demand", className="seniorhigh_least_offered_high_demand", figure=seniorhigh_least_offered_high_demand,
                                     config={"responsive": True},
                                     style={"width": "100%", "height": "100%"}

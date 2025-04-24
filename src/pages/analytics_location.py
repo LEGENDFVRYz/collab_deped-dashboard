@@ -2,8 +2,8 @@ from dash import html, dcc
 from src.components.card import Card
 
 ## IMPORTED CHARTS
-from src.utils.reports.location_chart import gender_region_fig, heatmap_fig, hi_low_fig
-from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees, raw_total_schools, truncated_total_schools
+from src.utils.reports.location_chart import heatmap_fig, hi_low_fig
+from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees
 
 
 """
@@ -31,11 +31,11 @@ def render_location_filter():
                             #########################################
                             
                             ## SAMPLE, REMOVE IT
-                            dcc.Graph(id="location_enrollees-distribution-per-location", 
-                                        figure=gender_region_fig,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
+                            # dcc.Graph(id="location_enrollees-distribution-per-location", 
+                            #             figure=gender_region_fig,
+                            #             config={"responsive": True},
+                            #             style={"width": "100%", "height": "100%"}
+                            # )
                             
                         ], margin=False, padding='0.25em')], className='plot-a-section'),
                         
@@ -65,10 +65,10 @@ def render_location_filter():
 
                             
                             html.Div([Card([
-                                html.H1(
-                                    f"{truncated_total_schools} {raw_total_schools:,}",
-                                    className="total_schools"
-                                )
+                                # html.H1(
+                                #     f"{truncated_total_schools} {raw_total_schools:,}",
+                                #     className="total_schools"
+                                # )
                                 ], margin=False)], className='plot-b-box2'),
                         
                         ], className='plot-b-section'),

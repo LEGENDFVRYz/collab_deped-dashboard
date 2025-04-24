@@ -30,33 +30,33 @@ FILTERED_DF
 HM_CBC_DF = auto_extract(['counts', 'region', 'sub_class', 'mod_coc', 'track'], is_specific=False)
 
 # Rename values in subclass, type, and sector
-subclass_rename = {
-    'LUC': 'LUC Managed',
-    'Non-Sectarian ': 'Non-Sectarian',
-    'SCHOOL ABROAD': 'School Abroad',
-    'Sectarian ': 'Sectarian'
-}
-type_rename = {
-    'School with no Annexes' : 'No Annexes', 
-    'Mother school': 'Mother School',
-    'Annex or Extension school(s)': 'Annex/Extension', 
-    'Mobile School(s)/Center(s)': 'Mobile School'
-}
-sector_rename = {
-    'SUCsLUCs': 'SUCs/LUCs'
-}
+# subclass_rename = {
+#     'LUC': 'LUC Managed',
+#     'Non-Sectarian ': 'Non-Sectarian',
+#     'SCHOOL ABROAD': 'School Abroad',
+#     'Sectarian ': 'Sectarian'
+# }
+# type_rename = {
+#     'School with no Annexes' : 'No Annexes', 
+#     'Mother school': 'Mother School',
+#     'Annex or Extension school(s)': 'Annex/Extension', 
+#     'Mobile School(s)/Center(s)': 'Mobile School'
+# }
+# sector_rename = {
+#     'SUCsLUCs': 'SUCs/LUCs'
+# }
 
-# Apply renaming if columns exist
-if 'sub_class' in HM_CBC_DF.columns:
-    HM_CBC_DF['sub_class'] = HM_CBC_DF['sub_class'].map(subclass_rename).fillna(HM_CBC_DF['sub_class'])
+# # Apply renaming if columns exist
+# if 'sub_class' in HM_CBC_DF.columns:
+#     HM_CBC_DF['sub_class'] = HM_CBC_DF['sub_class'].map(subclass_rename).fillna(HM_CBC_DF['sub_class'])
 
-if 'type' in HM_CBC_DF.columns:
-    HM_CBC_DF['type'] = HM_CBC_DF['type'].map(type_rename).fillna(HM_CBC_DF['type'])
+# if 'type' in HM_CBC_DF.columns:
+#     HM_CBC_DF['type'] = HM_CBC_DF['type'].map(type_rename).fillna(HM_CBC_DF['type'])
 
-if 'sector' in HM_CBC_DF.columns:
-    HM_CBC_DF['sector'] = HM_CBC_DF['sector'].map(sector_rename).fillna(HM_CBC_DF['sector'])
+# if 'sector' in HM_CBC_DF.columns:
+#     HM_CBC_DF['sector'] = HM_CBC_DF['sector'].map(sector_rename).fillna(HM_CBC_DF['sector'])
 
-HM_CBC_DF
+# HM_CBC_DF
 
 # ## -- Check the document for all valid columns and structurette
 # ## -- Dont change the all caps variables
@@ -108,31 +108,31 @@ HM_CBC_DF
 ################################################################################
 ##  --- Total schools per subclass
 #################################################################################
-subclass_df1 = (
-    FILTERED_DF.groupby('sub_class')
-    .agg(
-        school_count=('beis_id', 'nunique'),
-        counts=('counts', 'sum'),  
-    )
-    .reset_index()
-)
+# subclass_df1 = (
+#     FILTERED_DF.groupby('sub_class')
+#     .agg(
+#         school_count=('beis_id', 'nunique'),
+#         counts=('counts', 'sum'),  
+#     )
+#     .reset_index()
+# )
 
-total_schools_per_subclass = px.bar(subclass_df1, 
-    x='school_count', 
-    y='sub_class', 
-    title='Total Number of Schools per Subclass',
-    labels={'sub_class': 'Subclass', 'school_count': 'Number of Schools'},
-    text='school_count',
-    color='sub_class',
-    color_discrete_sequence=['#012C53','#023F77','#02519B','#0264BE',
-                             '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
-)    
-total_schools_per_subclass.update_layout(
-    autosize=True,
-    margin={"l": 8, "r": 8, "t": 40, "b": 8},
-    yaxis=dict(showticklabels=True),
-    showlegend=False
-)
+# total_schools_per_subclass = px.bar(subclass_df1, 
+#     x='school_count', 
+#     y='sub_class', 
+#     title='Total Number of Schools per Subclass',
+#     labels={'sub_class': 'Subclass', 'school_count': 'Number of Schools'},
+#     text='school_count',
+#     color='sub_class',
+#     color_discrete_sequence=['#012C53','#023F77','#02519B','#0264BE',
+#                              '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
+# )    
+# total_schools_per_subclass.update_layout(
+#     autosize=True,
+#     margin={"l": 8, "r": 8, "t": 40, "b": 8},
+#     yaxis=dict(showticklabels=True),
+#     showlegend=False
+# )
 #################################################################################
 
 
@@ -200,31 +200,31 @@ avg_enroll_sec = get_avg_enroll('Sectarian')
 #################################################################################
 ##  --- Student-to-school ratio
 #################################################################################
-student_school_ratio = px.scatter(subclass_df1, 
-    x="counts", 
-    y="school_count",
-    color='sub_class',
-    color_discrete_sequence=['#012C53','#023F77','#02519B','#0264BE',
-                             '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
-)
-student_school_ratio.update_traces(marker=dict(size=12))
-student_school_ratio.update_layout(
-    title={
-        'text': "Student-to-School Ratio",
-        'font': {'color': '#3C6382'}
-    },xaxis_title='Number of Enrolled Students',
-    yaxis_title='Number of Schools',
-    margin={"l": 0, "r": 0, "t": 40, "b": 50},
-    scattermode="group",
-    legend={
-        'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
-        'orientation': 'h', 
-        'yanchor': 'bottom',
-        'y': -10, 
-        'xanchor': 'center',
-        'x': 0.5 
-    }
-)
+# student_school_ratio = px.scatter(subclass_df1, 
+#     x="counts", 
+#     y="school_count",
+#     color='sub_class',
+#     color_discrete_sequence=['#012C53','#023F77','#02519B','#0264BE',
+#                              '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
+# )
+# student_school_ratio.update_traces(marker=dict(size=12))
+# student_school_ratio.update_layout(
+#     title={
+#         'text': "Student-to-School Ratio",
+#         'font': {'color': '#3C6382'}
+#     },xaxis_title='Number of Enrolled Students',
+#     yaxis_title='Number of Schools',
+#     margin={"l": 0, "r": 0, "t": 40, "b": 50},
+#     scattermode="group",
+#     legend={
+#         'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
+#         'orientation': 'h', 
+#         'yanchor': 'bottom',
+#         'y': -10, 
+#         'xanchor': 'center',
+#         'x': 0.5 
+#     }
+# )
 #################################################################################
 
 
@@ -320,70 +320,70 @@ sector_affiliation.update_layout(
 #################################################################################
 ##  --- Regional distribution/ which subclass has the highest number of schools per loc
 #################################################################################
-# Assuming FILTERED_DF is already defined
-query2 = HM_CBC_DF[['region', 'sub_class']][:]
+# # Assuming FILTERED_DF is already defined
+# query2 = HM_CBC_DF[['region', 'sub_class']][:]
 
-# Count the number of schools per sub_class per region
-query2 = query2.groupby(['region', 'sub_class']).size().reset_index(name='school_count')
+# # Count the number of schools per sub_class per region
+# query2 = query2.groupby(['region', 'sub_class']).size().reset_index(name='school_count')
 
-# Pivot the data to wide format for heatmap
-heatmap_df = query2.pivot(index='region', columns='sub_class', values='school_count').fillna(0)
+# # Pivot the data to wide format for heatmap
+# heatmap_df = query2.pivot(index='region', columns='sub_class', values='school_count').fillna(0)
 
-# Reset index for Plotly compatibility
-heatmap_df = heatmap_df.reset_index().melt(id_vars='region', var_name='sub_class', value_name='school_count')
+# # Reset index for Plotly compatibility
+# heatmap_df = heatmap_df.reset_index().melt(id_vars='region', var_name='sub_class', value_name='school_count')
 
-# Create heatmap with custom reversed secondary shades palette
-subclass_heatmap = px.density_heatmap(
-    heatmap_df,
-    x='sub_class',
-    y='region',
-    z='school_count',
-    color_continuous_scale=[
-        '#F3A4AF',  # Lightest - secondary-shades-9
-        '#EF8292',
-        '#EA6074',
-        '#E63E56',
-        '#D61B35',
-        '#B4162D',
-        '#921224',
-        '#710E1C',
-        '#4F0A14'   # Darkest - secondary-shades-1
-    ],
-    text_auto=False
-)
+# # Create heatmap with custom reversed secondary shades palette
+# subclass_heatmap = px.density_heatmap(
+#     heatmap_df,
+#     x='sub_class',
+#     y='region',
+#     z='school_count',
+#     color_continuous_scale=[
+#         '#F3A4AF',  # Lightest - secondary-shades-9
+#         '#EF8292',
+#         '#EA6074',
+#         '#E63E56',
+#         '#D61B35',
+#         '#B4162D',
+#         '#921224',
+#         '#710E1C',
+#         '#4F0A14'   # Darkest - secondary-shades-1
+#     ],
+#     text_auto=False
+# )
 
-# Update layout for improved visuals
-subclass_heatmap.update_layout(
-    title=dict(
-        text='Regional Distribution of Schools',
-        font=dict(
-            family='Inter Bold',
-            size=14,
-            color='#04508c'
-        )
-    ),
-    xaxis=dict(
-        tickangle=45,
-        tickfont=dict(size=9),
-        title=''
-    ),
-    yaxis=dict(
-        tickfont=dict(size=9),
-        title='',
-    ),
-    coloraxis_colorbar=dict(
-        title=dict(
-            text='Schools',
-            font=dict(
-                family='Inter Medium',
-                size=10
-            )
-        )
-    ),
-    font=dict(size=11),
-    autosize=True,
-    margin={"l": 100, "r": 10, "t": 40, "b": 50}
-)
+# # Update layout for improved visuals
+# subclass_heatmap.update_layout(
+#     title=dict(
+#         text='Regional Distribution of Schools',
+#         font=dict(
+#             family='Inter Bold',
+#             size=14,
+#             color='#04508c'
+#         )
+#     ),
+#     xaxis=dict(
+#         tickangle=45,
+#         tickfont=dict(size=9),
+#         title=''
+#     ),
+#     yaxis=dict(
+#         tickfont=dict(size=9),
+#         title='',
+#     ),
+#     coloraxis_colorbar=dict(
+#         title=dict(
+#             text='Schools',
+#             font=dict(
+#                 family='Inter Medium',
+#                 size=10
+#             )
+#         )
+#     ),
+#     font=dict(size=11),
+#     autosize=True,
+#     margin={"l": 100, "r": 10, "t": 40, "b": 50}
+# )
 
 
 
@@ -396,70 +396,70 @@ subclass_heatmap.update_layout(
 #################################################################################
 ##  --- MCOC breakdown/which subclass offers which program types
 #################################################################################
-# Filter the dataframe to include only the required columns
-mcoc_df = HM_CBC_DF[['mod_coc', 'counts', 'sub_class']]
+# # Filter the dataframe to include only the required columns
+# mcoc_df = HM_CBC_DF[['mod_coc', 'counts', 'sub_class']]
 
-# Group by 'mod_coc' and 'sub_class' to aggregate the counts
-mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
+# # Group by 'mod_coc' and 'sub_class' to aggregate the counts
+# mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
 
-# Truncate counts directly in the DataFrame
-mcoc_grouped['counts'] = mcoc_grouped['counts'].apply(
-    lambda count: f"{count/1_000_000:.1f}M" if count >= 1_000_000 else
-                  f"{count/1_000:.1f}K" if count >= 1_000 else
-                  str(count)
-)
+# # Truncate counts directly in the DataFrame
+# mcoc_grouped['counts'] = mcoc_grouped['counts'].apply(
+#     lambda count: f"{count/1_000_000:.1f}M" if count >= 1_000_000 else
+#                   f"{count/1_000:.1f}K" if count >= 1_000 else
+#                   str(count)
+# )
 
-# Sort the DataFrame by counts to ensure the lowest values are at the bottom
-mcoc_grouped['numeric_counts'] = mcoc_df.groupby(['mod_coc', 'sub_class'])['counts'].transform('sum')
-mcoc_grouped = mcoc_grouped.sort_values(by='numeric_counts')
+# # Sort the DataFrame by counts to ensure the lowest values are at the bottom
+# mcoc_grouped['numeric_counts'] = mcoc_df.groupby(['mod_coc', 'sub_class'])['counts'].transform('sum')
+# mcoc_grouped = mcoc_grouped.sort_values(by='numeric_counts')
 
-# Create a clustered bar chart with default discrete color sequence
-subclass_clustered = px.bar(
-    mcoc_grouped,
-    x='mod_coc',  # Set mod_coc as x-axis
-    y='counts',  # Set counts as y-axis
-    color='sub_class',  # Clustered by subclass
-    barmode='group',  # Grouped bar chart
-    color_discrete_sequence=[
-        "#012C53", "#023F77", "#02519B", "#0264BE", "#0377E2",
-        "#2991F1", "#4FA4F3", "#74B8F6", "#9ACBF8", "#C0DFFB", "#E6F2FD"
-    ]   # Apply the color scheme
-)
+# # Create a clustered bar chart with default discrete color sequence
+# subclass_clustered = px.bar(
+#     mcoc_grouped,
+#     x='mod_coc',  # Set mod_coc as x-axis
+#     y='counts',  # Set counts as y-axis
+#     color='sub_class',  # Clustered by subclass
+#     barmode='group',  # Grouped bar chart
+#     color_discrete_sequence=[
+#         "#012C53", "#023F77", "#02519B", "#0264BE", "#0377E2",
+#         "#2991F1", "#4FA4F3", "#74B8F6", "#9ACBF8", "#C0DFFB", "#E6F2FD"
+#     ]   # Apply the color scheme
+# )
 
-# Update the layout for better readability
-subclass_clustered.update_layout(
-    title=dict(
-        text='Program Types',
-        font=dict(
-            family='Inter Bold',  # Use the 'Inter Bold' font face
-            size=14,  # Font size
-            color= '#04508c'
-        ),
-    ),
-    xaxis=dict(
-        title='',  # Set x-axis title
-        tickangle=45,  # Rotate x-axis labels for better readability
-        tickfont=dict(
-            family='Inter Medium',  # Use the 'Inter Medium' font face
-            size=8
-        )
-    ),
-    yaxis=dict(
-        title='',  # Set y-axis title
-        tickfont=dict(
-            family='Inter Medium',  # Use the 'Inter Medium' font face
-            size=8
-        )
-    ),
-    font=dict(size=11),  # General font size
-    autosize=False,
-    width=300,  # Increase the width of the chart
-    height=200,  # Increase the height of the chart
-    margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
-    showlegend=False,
-    bargap=0.1,
-    bargroupgap=0.0,  # Adjust the gap between bars in the same group
-)
+# # Update the layout for better readability
+# subclass_clustered.update_layout(
+#     title=dict(
+#         text='Program Types',
+#         font=dict(
+#             family='Inter Bold',  # Use the 'Inter Bold' font face
+#             size=14,  # Font size
+#             color= '#04508c'
+#         ),
+#     ),
+#     xaxis=dict(
+#         title='',  # Set x-axis title
+#         tickangle=45,  # Rotate x-axis labels for better readability
+#         tickfont=dict(
+#             family='Inter Medium',  # Use the 'Inter Medium' font face
+#             size=8
+#         )
+#     ),
+#     yaxis=dict(
+#         title='',  # Set y-axis title
+#         tickfont=dict(
+#             family='Inter Medium',  # Use the 'Inter Medium' font face
+#             size=8
+#         )
+#     ),
+#     font=dict(size=11),  # General font size
+#     autosize=False,
+#     width=300,  # Increase the width of the chart
+#     height=200,  # Increase the height of the chart
+#     margin={"l": 70, "r": 10, "t": 50, "b": 10},  # Adjust margins
+#     showlegend=False,
+#     bargap=0.1,
+#     bargroupgap=0.0,  # Adjust the gap between bars in the same group
+# )
 
 
 
@@ -531,70 +531,70 @@ subclass_clustered_tracks.update_layout(
 ##  --- % schools offering ‘all offerings’ for the entire mod_coc
 #################################################################################
 
-# Group by sub_class, calculate total and 'All Offering' counts
-grouped = HM_CBC_DF.groupby('sub_class')
+# # Group by sub_class, calculate total and 'All Offering' counts
+# grouped = HM_CBC_DF.groupby('sub_class')
 
-# Total schools per sub_class
-total_counts = grouped['counts'].sum()
+# # Total schools per sub_class
+# total_counts = grouped['counts'].sum()
 
-# Schools offering "All Offering" per sub_class
-all_offerings_counts = HM_CBC_DF[HM_CBC_DF['mod_coc'] == 'All Offering'].groupby('sub_class')['counts'].sum()
+# # Schools offering "All Offering" per sub_class
+# all_offerings_counts = HM_CBC_DF[HM_CBC_DF['mod_coc'] == 'All Offering'].groupby('sub_class')['counts'].sum()
 
-# Calculate % of All Offering per sub_class
-percentage_per_subclass = (all_offerings_counts / total_counts) * 100
+# # Calculate % of All Offering per sub_class
+# percentage_per_subclass = (all_offerings_counts / total_counts) * 100
 
-# Drop NaNs (in case some subclasses had no 'All Offering')
-percentage_per_subclass = percentage_per_subclass.dropna()
+# # Drop NaNs (in case some subclasses had no 'All Offering')
+# percentage_per_subclass = percentage_per_subclass.dropna()
 
-# Get top sub_class and its percentage
-top_subclass = percentage_per_subclass.idxmax()
-top_percentage = percentage_per_subclass.max()
+# # Get top sub_class and its percentage
+# top_subclass = percentage_per_subclass.idxmax()
+# top_percentage = percentage_per_subclass.max()
 
-# Create the figure
-subclass_firstindicator = go.Figure()
+# # Create the figure
+# subclass_firstindicator = go.Figure()
 
-# Add the indicator (number + delta)
-subclass_firstindicator.add_trace(go.Indicator(
-    mode="number+delta",
-    value=top_percentage,
-    number={
-        "suffix": "%",
-        "font": {
-            "size": 30,
-            "color": "#02519B",
-            "family": "Inter Bold, sans-serif"
-        }
-    },
-    delta={
-        "reference": 100,
-        "relative": False,
-        "increasing": {"color": "#03C988"},
-        "decreasing": {"color": "#FF6B6B"},
-    },
-    domain={'x': [0, 1], 'y': [0.35, 0.75]}  # Centered vertically
-))
+# # Add the indicator (number + delta)
+# subclass_firstindicator.add_trace(go.Indicator(
+#     mode="number+delta",
+#     value=top_percentage,
+#     number={
+#         "suffix": "%",
+#         "font": {
+#             "size": 30,
+#             "color": "#02519B",
+#             "family": "Inter Bold, sans-serif"
+#         }
+#     },
+#     delta={
+#         "reference": 100,
+#         "relative": False,
+#         "increasing": {"color": "#03C988"},
+#         "decreasing": {"color": "#FF6B6B"},
+#     },
+#     domain={'x': [0, 1], 'y': [0.35, 0.75]}  # Centered vertically
+# ))
 
-# Add subclass name as annotation below the indicator
-subclass_firstindicator.update_layout(
-    annotations=[
-        dict(
-            text=(
-                f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
-                f"<b>Top All Program Offering:</b> <br> {top_subclass}</span>"
-            ),
-            x=0.5,
-            y=0.20,
-            xanchor='center',
-            yanchor='top',
-            showarrow=False,
-        )
-    ],
-    margin=dict(t=10, b=10, l=10, r=10),
-    paper_bgcolor="rgba(0,0,0,0)",  # Transparent background
-    plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Inter, sans-serif", color="#012C53"),
-    autosize=True,
-)
+# # Add subclass name as annotation below the indicator
+# subclass_firstindicator.update_layout(
+#     annotations=[
+#         dict(
+#             text=(
+#                 f"<span style='font-family:Inter Medium, sans-serif; font-size:10px;'>"
+#                 f"<b>Top All Program Offering:</b> <br> {top_subclass}</span>"
+#             ),
+#             x=0.5,
+#             y=0.20,
+#             xanchor='center',
+#             yanchor='top',
+#             showarrow=False,
+#         )
+#     ],
+#     margin=dict(t=10, b=10, l=10, r=10),
+#     paper_bgcolor="rgba(0,0,0,0)",  # Transparent background
+#     plot_bgcolor="rgba(0,0,0,0)",
+#     font=dict(family="Inter, sans-serif", color="#012C53"),
+#     autosize=True,
+# )
 
 
 

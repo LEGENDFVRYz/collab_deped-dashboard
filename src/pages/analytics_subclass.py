@@ -9,13 +9,13 @@ from src.components.card import Card
 
 # -- Graphs
 
-from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
-from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
+# from src.utils.reports.subclass_chart import subclass_heatmap ## Importing Heatmap
+# from src.utils.reports.subclass_chart import subclass_clustered ## Importing Clustered Bar Chart
 from src.utils.reports.subclass_chart import subclass_clustered_tracks ## Importing Clustered Bar Chart for Tracks
-from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
+# from src.utils.reports.subclass_chart import subclass_firstindicator ## Importing First Indicator Chart
 from src.utils.reports.subclass_chart import subclass_secondindicator ## Importing Second Indicator Chart
 from src.utils.reports.subclass_chart import avg_enroll_dost, avg_enroll_deped, avg_enroll_luc, avg_enroll_int, avg_enroll_nonsec, avg_enroll_ga, avg_enroll_abroad, avg_enroll_suc, avg_enroll_sec 
-from src.utils.reports.subclass_chart import total_schools_per_subclass, distrib_by_subclass, student_school_ratio, subclass_vs_school_type, sector_affiliation
+from src.utils.reports.subclass_chart import distrib_by_subclass, subclass_vs_school_type, sector_affiliation
 
 
 """
@@ -36,11 +36,11 @@ def render_subclass_filter():
                     html.Div([
                         Card([
                             # total schools per subclass
-                            dcc.Graph(id="subclass_total_schools_per_subclass", 
-                                figure=total_schools_per_subclass,
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"}
-                            ),
+                            # dcc.Graph(id="subclass_total_schools_per_subclass", 
+                            #     figure=total_schools_per_subclass,
+                            #     config={"responsive": True},
+                            #     style={"width": "100%", "height": "100%"}
+                            # ),
                         ], margin=False)
                     ], className="subclass-enroll-graph"),
 
@@ -59,11 +59,11 @@ def render_subclass_filter():
                         html.Div([
                             Card([
                                 # student-to-school ratio    
-                                dcc.Graph(id="student_school_ratio", 
-                                figure=student_school_ratio,
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"}
-                                ),
+                                # dcc.Graph(id="student_school_ratio", 
+                                # figure=student_school_ratio,
+                                # config={"responsive": True},
+                                # style={"width": "100%", "height": "100%"}
+                                # ),
                             ], margin=False)
                         ], className="subclass-enroll-graph"),
                         html.Div( 
@@ -182,10 +182,10 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # regional distribution/ which subclass has the highest number of schools per loc
-                                    dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100"}
-                                    ),
+                                    # dcc.Graph(id="subclass_heatmap", figure=subclass_heatmap,
+                                    # config={"responsive": True},
+                                    # style={"width": "100%", "height": "100"}
+                                    # ),
                                 ], margin=False)
                             ], className="subclass-dist-avail-graph-2"),
                         ], className="subclass-dist-avail-lower")
@@ -199,10 +199,10 @@ def render_subclass_filter():
                             html.Div([
                                 Card([
                                     # mcoc breakdown/which subclass offers which program types
-                                    dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                    ),
+                                    # dcc.Graph(id="subclass_clustered", figure=subclass_clustered,
+                                    # config={"responsive": True},
+                                    # style={"width": "100%", "height": "100%"}
+                                    # ),
                                 ], margin=False),
                             ], className="subclass-program-graph"),
                             
@@ -220,10 +220,10 @@ def render_subclass_filter():
                                 html.Div([
                                     Card([
                                         # % schools offering ‘all offerings’ per subclass
-                                        dcc.Graph(id="subclass_firstindicator", figure=subclass_firstindicator,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                                        ),
+                                        # dcc.Graph(id="subclass_firstindicator", figure=subclass_firstindicator,
+                                        # config={"responsive": True},
+                                        # style={"width": "100%", "height": "100%"}
+                                        # ),
                                     ], margin=False),
                                 ], className="subclass-program-indicator"),
                                 html.Div([

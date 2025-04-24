@@ -30,7 +30,22 @@
                         display: flex;
                         flex: 1;
                     }
-
+                    .dpt-graph-title{
+                        color: $text-color-1;
+                        text-align: center;
+                    }
+                    .dsg-graph-title{
+                        color: $text-color-1;
+                        text-align: center;
+                    }
+                    // .sots-graph-title{
+                    //     color: $text-color-1;
+                    //     text-align: center;
+                    // }
+                    .rsdts-graph-title{
+                        color: $text-color-1;
+                        text-align: center;
+                    }
                     .shs-enrollment-lower {
                         display: flex;
                         flex: 1;

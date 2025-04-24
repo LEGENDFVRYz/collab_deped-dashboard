@@ -79,66 +79,66 @@ sample_chart
 #################################################################################
 # chart_x = px.bar(filtered_df, )
 
-from utils.reports.home_enrollment_per_region import smart_truncate_number
+# from utils.reports.home_enrollment_per_region import smart_truncate_number
 
-total_gender_region = dataframe = auto_extract(['region', 'gender', 'counts'], is_specific=False)
-total_gender_region
+# total_gender_region = dataframe = auto_extract(['region', 'gender', 'counts'], is_specific=False)
+# total_gender_region
 
-# Step 1: Group by region and gender
-gender_region = total_gender_region.groupby(['region', 'gender'])['counts'].sum().reset_index()
+# # Step 1: Group by region and gender
+# gender_region = total_gender_region.groupby(['region', 'gender'])['counts'].sum().reset_index()
 
-# Step 2: Define brand colors
-brand_colors = {
-    'M': '#037DEE',
-    'F': '#E11C38'
-}
+# # Step 2: Define brand colors
+# brand_colors = {
+#     'M': '#037DEE',
+#     'F': '#E11C38'
+# }
 
-# Step 3: Create the stacked bar chart
-gender_region_fig = px.bar(
-    gender_region,
-    x='counts',
-    y='region',
-    color='gender',
-    orientation='h',
-    barmode='stack',
-    labels={'counts': 'Number of Enrollees', 'region': 'Region', 'gender': 'Gender'},
-    color_discrete_map=brand_colors
-)
+# # Step 3: Create the stacked bar chart
+# gender_region_fig = px.bar(
+#     gender_region,
+#     x='counts',
+#     y='region',
+#     color='gender',
+#     orientation='h',
+#     barmode='stack',
+#     labels={'counts': 'Number of Enrollees', 'region': 'Region', 'gender': 'Gender'},
+#     color_discrete_map=brand_colors
+# )
 
-# Step 4: Calculate total per region for annotations
-region_totals = gender_region.groupby('region')['counts'].sum().reset_index()
+# # Step 4: Calculate total per region for annotations
+# region_totals = gender_region.groupby('region')['counts'].sum().reset_index()
 
-# Step 5: Add truncated total annotations using your function
-for _, row in region_totals.iterrows():
-    short_text = smart_truncate_number(row['counts'])  # Your custom truncation
-    gender_region_fig.add_annotation(
-        x=row['counts'] + 1,
-        y=row['region'],
-        text=short_text,
-        hovertext=str(row['counts']),  # Full raw number on hover
-        showarrow=False,
-        font=dict(color="#04508c", size=12),
-        xanchor="left",
-        yanchor="middle"
-    )
+# # Step 5: Add truncated total annotations using your function
+# for _, row in region_totals.iterrows():
+#     short_text = smart_truncate_number(row['counts'])  # Your custom truncation
+#     gender_region_fig.add_annotation(
+#         x=row['counts'] + 1,
+#         y=row['region'],
+#         text=short_text,
+#         hovertext=str(row['counts']),  # Full raw number on hover
+#         showarrow=False,
+#         font=dict(color="#04508c", size=12),
+#         xanchor="left",
+#         yanchor="middle"
+#     )
 
-# Step 6: Customize layout
-gender_region_fig.update_layout(
-    title={
-        'text': "Enrollment Distribution by Region and Gender",
-        'x': 0.5,
-        'xanchor': 'center',
-        'font': {'color': '#04508c'}
-    },
-    xaxis_title="Number of Students",
-    yaxis_title="Region",
-    legend_title="Gender",
-    font=dict(color="#667889"),
-    margin=dict(l=80, r=20, t=50, b=40),
-    plot_bgcolor="#F5FBFF",
-    paper_bgcolor="#F5FBFF",
-)
-gender_region_fig
+# # Step 6: Customize layout
+# gender_region_fig.update_layout(
+#     title={
+#         'text': "Enrollment Distribution by Region and Gender",
+#         'x': 0.5,
+#         'xanchor': 'center',
+#         'font': {'color': '#04508c'}
+#     },
+#     xaxis_title="Number of Students",
+#     yaxis_title="Region",
+#     legend_title="Gender",
+#     font=dict(color="#667889"),
+#     margin=dict(l=80, r=20, t=50, b=40),
+#     plot_bgcolor="#F5FBFF",
+#     paper_bgcolor="#F5FBFF",
+# )
+# gender_region_fig
 
 
 
@@ -250,14 +250,14 @@ truncated_total_enrollees
 #################################################################################
 ##  --- INDICATOR: Total number of schools
 #################################################################################
-total_scho = dataframe = auto_extract(['name', 'counts'], is_specific=False)
-total_scho
-# Count total number of unique schools
-raw_total_schools = dataframe['name'].nunique()
-truncated_total_schools = smart_truncate_number(raw_total_schools)
+# total_scho = dataframe = auto_extract(['name', 'counts'], is_specific=False)
+# total_scho
+# # Count total number of unique schools
+# raw_total_schools = dataframe['name'].nunique()
+# truncated_total_schools = smart_truncate_number(raw_total_schools)
 
-raw_total_schools
-truncated_total_schools
+# raw_total_schools
+# truncated_total_schools
 
 
 

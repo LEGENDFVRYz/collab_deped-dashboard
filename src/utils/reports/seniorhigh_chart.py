@@ -98,15 +98,15 @@ seniorhigh_distri_per_track.update_layout(
     bargap=0.2,
     autosize=True,
     margin=dict(l=80, r=10, t=50, b=10),  
-    title={
-        'text': 'Distribution of SHS Enrollees per Track',
-        'x': 0.5,
-        'xanchor': 'center',
-        'font': {
-            'size': 14,
-            'color': '#3C6382'
-        },
-    },
+    # title={
+    #     'text': 'Distribution of SHS Enrollees per Track',
+    #     'x': 0.5,
+    #     'xanchor': 'center',
+    #     'font': {
+    #         'size': 14,
+    #         'color': '#3C6382'
+    #     },
+    # },
     yaxis=dict(
         automargin=True,
         tickfont=dict(size=12),
@@ -293,12 +293,12 @@ seniorhigh_gender_distri = px.bar(
 seniorhigh_gender_distri.update_layout(
     autosize=True,
     margin=dict(l=60, r=10, t=50, b=20),
-    title={
-        'text': "Distribution by<br>Strand and Gender",
-        'x': 0.5,
-        'xanchor': 'center',
-        'font': {'color': '#3C6382', 'size': 14}
-    },
+    # title={
+    #     'text': "Distribution by<br>Strand and Gender",
+    #     'x': 0.5,
+    #     'xanchor': 'center',
+    #     'font': {'color': '#3C6382', 'size': 14}
+    # },
     xaxis={
         'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
         'tickfont': {'color': '#667889', 'size': 10},
@@ -354,17 +354,17 @@ seniorhigh_school_offering_per_track_by_sector = px.bar(
     labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
     color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
     category_orders={'track': track_order},
-    title="Number of Schools Offering Each Track by Sector"
+    # title="Number of Schools Offering Each Track by Sector"
 )
 
 
 # Update layout
 seniorhigh_school_offering_per_track_by_sector.update_layout(
-    title={
-        'text': "Number of Schools<br>Offering Each Track by Sector",
-        'x': 0.5,
-        'font': {'color': '#3C6382', 'size': 14}
-    },
+    # title={
+    #     'text': "Number of Schools<br>Offering Each Track by Sector",
+    #     'x': 0.5,
+    #     'font': {'color': '#3C6382', 'size': 14}
+    # },
     xaxis={
         'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
         'tickfont': {'color': '#667889'},
@@ -427,12 +427,12 @@ seniorhigh_least_offered_high_demand = px.scatter(
 seniorhigh_least_offered_high_demand.update_layout(
     autosize=True,
     margin=dict(l=60, r=100, t=80, b=60),
-    title={
-        'text': 'Relationship between<br>Student Demand and Track Supply',
-        'x': 0.5,
-        'xanchor': 'center',
-        'font': {'color': '#3C6382', 'size': 16}
-    },
+    # title={
+    #     'text': 'Relationship between<br>Student Demand and Track Supply',
+    #     'x': 0.5,
+    #     'xanchor': 'center',
+    #     'font': {'color': '#3C6382', 'size': 16}
+    # },
     xaxis=dict(
         title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
         tickfont=dict(color='#667889'),
