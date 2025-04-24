@@ -74,9 +74,7 @@ sample_chart
 #################################################################################
 ##  --- CHART: Number of Schools by MCOC Type
 #################################################################################
-
 number_of_schools = FILTERED_DF = auto_extract(['beis_id', 'mod_coc'], is_specific=False)
-number_of_schools
 
 number_of_schools_mcoc = number_of_schools.groupby('mod_coc')['beis_id'].nunique().reset_index()
 number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
@@ -102,13 +100,12 @@ number_of_schools_mcoc_chart.update_traces(
 )
 
 number_of_schools_mcoc_chart.update_layout(
+    autosize=True,
     showlegend=True,
-    legend_title_text='Programs',
     title_font_size=18,
     title_font_color='#3C6382',
     title_x=0.5,
     margin=dict(l=20, r=20, t=50, b=20),
-    height=450,
     paper_bgcolor='#F0F0F0',
     plot_bgcolor='#FFFFFF',
     font=dict(family='Inter, sans-serif', color='#3C6382'),
@@ -132,17 +129,12 @@ number_of_schools_mcoc_chart
 #################################################################################
 ##  --- CHART: Gender Distribution Aross MCOC types
 #################################################################################
-# 1. Automatically extract 'counts' column for all grades (ES to SHS)
-gender_distribution = FILTERED_DF = auto_extract(['counts','gender','mod_coc'], is_specific=False)
-gender_distribution
+gender_distribution = FILTERED_DF = auto_extract(['counts', 'gender', 'mod_coc'], is_specific=False)
 
-# 2. Group by mod_coc and gender, then sum student counts
 gender_distribution_mcoc = gender_distribution.groupby(['mod_coc', 'gender'])['counts'].sum().reset_index()
 
-# 3. Standardize gender labels
 gender_distribution_mcoc['gender'] = gender_distribution_mcoc['gender'].str.title().replace({'M': 'Male', 'F': 'Female'})
 
-# 4. Bar chart setup
 gender_distribution_chart = px.bar(
     gender_distribution_mcoc,
     x='mod_coc',
@@ -151,8 +143,8 @@ gender_distribution_chart = px.bar(
     barmode='group',
     title='Gender Distribution Across Program Offerings',
     color_discrete_map={
-        'Male': '#5DB7FF',     # Primary color
-        'Female': '#FF5B72'    # Secondary color
+        'Male': '#5DB7FF',
+        'Female': '#FF5B72'
     },
     labels={
         'mod_coc': 'Program Offering',
@@ -161,8 +153,8 @@ gender_distribution_chart = px.bar(
     }
 )
 
-# 5. Update layout to match your pie chart style
 gender_distribution_chart.update_layout(
+    autosize=True,
     xaxis_title='Program Offering',
     yaxis_title='Number of Students',
     title_font_size=18,
@@ -171,23 +163,22 @@ gender_distribution_chart.update_layout(
     paper_bgcolor='#F0F0F0',
     plot_bgcolor='rgba(255, 255, 255, 0.5)',
     font=dict(family='Inter, sans-serif', color='#3C6382'),
-    margin={"l": 20, "r": 20, "t": 50, "b": 20},
+    margin=dict(l=20, r=20, t=50, b=20),
     legend=dict(
         title='Gender',
         font=dict(size=14),
-        x=1,
+        orientation='v',
+        x=1.05,
         y=1,
-        xanchor='right',
+        xanchor='left',
         yanchor='top',
-        bgcolor='rgba(0,0,0,0)',   # Transparent background
-        bordercolor='rgba(0,0,0,0)',  # No border
+        bgcolor='rgba(0,0,0,0)',
+        bordercolor='rgba(0,0,0,0)'
     )
 )
 
-# 6. Optional: format y-axis ticks with commas
-gender_distribution_chart.update_yaxes(tickformat=',')
+gender_distribution_chart.update_yaxes(tickformat="~s")
 
-# 7. Display the chart
 gender_distribution_chart
 #################################################################################
 
@@ -196,16 +187,12 @@ gender_distribution_chart
 #################################################################################
 ##  --- CHART: MCOC Types Ranked by Total Student Enrollment
 #################################################################################
-# 1. Automatically extract 'counts' and 'mod_coc' columns for all grades (ES to SHS)
 program_offering_enrollment_data = FILTERED_DF = auto_extract(['counts', 'mod_coc'], is_specific=False)
 
-# 2. Group data by mod_coc and sum student counts
 mcoc_enrollment = program_offering_enrollment_data.groupby('mod_coc')['counts'].sum().reset_index()
 
-# 3. Sort by counts in descending order
 mcoc_enrollment_sorted = mcoc_enrollment.sort_values(by='counts', ascending=False)
 
-# 4. Create a ranked horizontal bar chart with custom blue shades 
 custom_blues = ['#A8E8FF', '#5DB7FF', '#369EFF', '#037DEE', '#04508c']
 
 ranked_mcoc_chart = px.bar(
@@ -215,7 +202,7 @@ ranked_mcoc_chart = px.bar(
     orientation='h',
     title='MCOC Types Ranked by Total Student Enrollment',
     color='counts',
-    color_continuous_scale=custom_blues,  # Custom blue gradient, no white
+    color_continuous_scale=custom_blues,
     labels={
         'mod_coc': 'MCOC Type',
         'counts': 'Total Students'
@@ -223,38 +210,39 @@ ranked_mcoc_chart = px.bar(
     hover_data={'mod_coc': False, 'counts': True}
 )
 
-# 5. Add a border around the bars using a subtle darker blue
 ranked_mcoc_chart.update_traces(
     marker_line_color='#3C6382',
     marker_line_width=1
 )
 
-# 6. Layout and design adjustments for uniform styling
 ranked_mcoc_chart.update_layout(
+    autosize=True,
     title={
         'text': 'MCOC Types Ranked by Total Student Enrollment',
         'x': 0.5,
         'xanchor': 'center',
-        'font': {'size': 26, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+        'font': {
+            'size': 26,
+            'family': 'Inter, sans-serif',
+            'color': '#3C6382'
+        }
     },
     xaxis_title='Number of Students',
     yaxis_title='Programs',
     font=dict(family='Inter, sans-serif', color='#3C6382'),
-    margin={"l": 40, "r": 40, "t": 60, "b": 40},
-    height=500,
+    margin=dict(l=40, r=40, t=60, b=40),
     yaxis={'categoryorder': 'total ascending'},
     xaxis=dict(
         showgrid=True,
         gridcolor='rgba(0,0,0,0.05)',
         zeroline=False,
-        tickformat=','
+        tickformat='~s'  # <--- This formats 1000000 as 1M
     ),
     paper_bgcolor='#F0F0F0',
-    plot_bgcolor='#FFFFFF'  # Pure white plot area to contrast with bar color
+    plot_bgcolor='#FFFFFF',
+    coloraxis_showscale=False
 )
 
-
-# 7. Display the final chart
 ranked_mcoc_chart
 #################################################################################
 
@@ -313,29 +301,23 @@ fig
 #################################################################################
 ##  --- CHART: Number of MCOC Offerings per Location by School Level
 #################################################################################
-# Step 1: Automatically extract relevant columns
-region_schools_df = FILTERED_DF =auto_extract(['region', 'grade', 'counts'], is_specific=False)
+region_schools_df = FILTERED_DF = auto_extract(['region', 'grade', 'counts', 'beis_id'], is_specific=False)
 
-# Step 2: Clean grade values and ensure uniform casing
 region_schools_df['grade'] = region_schools_df['grade'].astype(str).str.upper().str.strip()
 
-# Step 3: Assign school level based on grade
 region_schools_df['school_level'] = region_schools_df['grade'].apply(
     lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6'] else
               ('JHS' if x in ['G7', 'G8', 'G9', 'G10'] else 'SHS')
 )
 
-# Step 4: Remove rows where school_level is 'UNKNOWN' (if any)
 region_schools_df = region_schools_df[region_schools_df['school_level'] != 'UNKNOWN']
 
-# Step 5: Group by region and school level, counting unique beis_id (schools)
 region_grouped_schools = region_schools_df.groupby(['region', 'school_level'])['beis_id'].nunique().reset_index()
 
-# Step 6: Create stacked bar chart
 region_stacked_chart = px.bar(
     region_grouped_schools,
     x='region',
-    y='beis_id',  # Use beis_id to represent the number of unique schools
+    y='beis_id',
     color='school_level',
     barmode='stack',
     title='Number of Schools per Region by School Level',
@@ -351,8 +333,8 @@ region_stacked_chart = px.bar(
     }
 )
 
-# Step 7: Style and layout
 region_stacked_chart.update_layout(
+    autosize=True,
     title={
         'text': 'Number of Schools per Region by School Level',
         'x': 0.5,
@@ -363,29 +345,28 @@ region_stacked_chart.update_layout(
     xaxis_title='Region',
     yaxis_title='Total Number of Schools',
     legend_title='School Level',
-    margin={"l": 40, "r": 40, "t": 60, "b": 100},
+    margin=dict(l=40, r=40, t=60, b=100),
     height=550,
-    xaxis_tickangle=45,
-    xaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.05)'),
+    xaxis=dict(
+        tickangle=45,
+        showgrid=True,
+        gridcolor='rgba(0,0,0,0.05)'
+    ),
     legend=dict(
-        x=1,
-        y=1,
-        xanchor='right',
-        yanchor='top',
-        bgcolor='rgba(255, 255, 255, 0.5)',
-        bordercolor='rgba(0, 0, 0, 0)'
+        x=1.02,
+        y=0.5,
+        xanchor='left',
+        yanchor='middle',
     ),
     paper_bgcolor='#F0F0F0',
     plot_bgcolor='#FFFFFF'
 )
 
-# Step 8: Add white borders between segments
 region_stacked_chart.update_traces(
     marker_line_color='#FFFFFF',
     marker_line_width=2
 )
 
-# Step 9: Show chart
 region_stacked_chart
 #################################################################################
 
@@ -444,14 +425,17 @@ for _, row in high_low_combined.iterrows():
 indicator_chart.update_layout(
     grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
     template="plotly_white",
-    height=600,
+    autosize=True,
     title={
         'text': "Regions with Highest and Lowest Offerings per School Level",
         'x': 0.5,
         'xanchor': 'center',
-        'font': {'size': 22, 'family': 'Inter, sans-serif'}
+        'font': {'size': 22, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
     },
-    margin={"l": 50, "r": 50, "t": 80, "b": 50}
+    font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
+    margin={"l": 50, "r": 50, "t": 80, "b": 50},
+    paper_bgcolor='#F0F0F0',
+    plot_bgcolor='#FFFFFF'
 )
 
 # 9. Display chart
