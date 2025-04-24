@@ -296,6 +296,7 @@ def update_graph(trigger, data):
         school_count=('beis_id', 'nunique'),
         total_enrollees=('counts', 'sum')
     ).reset_index()
+    subclass_df4 = subclass_df4[(subclass_df4['school_count'] > 0) & (subclass_df4['total_enrollees'] > 0)]
     subclass_df4.sort_values(by='sub_class', inplace=True)
 
     sector_affiliation = go.Figure(data=[go.Table(
