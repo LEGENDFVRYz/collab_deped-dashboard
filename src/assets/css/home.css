@@ -190,7 +190,7 @@
 .home-page .content .overview-layer-2 .learner-profiles {
   display: flex;
   flex-direction: column;
-  flex: 1.2;
+  flex: 1.3;
   gap: 0.5em;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content {
@@ -206,7 +206,7 @@
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph {
   display: flex;
-  flex: 1.5;
+  flex: 1.35;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc {
   display: flex;
@@ -222,12 +222,65 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+<<<<<<< HEAD
   align-items: center;
+=======
+  align-self: center;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc span {
+  font-size: 17px;
+  font-family: "Inter Bold";
+>>>>>>> 15aaf3f4dcd5ebd12df15cc68e0b4f860670e7e4
   color: #667889;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage {
   display: flex;
+<<<<<<< HEAD
   gap: 0.5em;
+=======
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .up-icon {
+  display: flex;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .percentage {
+  font-size: 29px;
+  font-family: "Inter Extra Bold";
+  color: #037DEE;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div {
+  display: flex;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater {
+  display: flex;
+  padding: 0.05em 0.3em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater.male-dominant {
+  color: #FFFFFF;
+  background-color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .greater-div .greater.female-dominant {
+  color: #FFFFFF;
+  background-color: #FF5B72;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div {
+  display: flex;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser {
+  display: flex;
+  flex: 1;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.male-less-dominant {
+  color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.female-less-dominant {
+  color: #FF5B72;
+>>>>>>> 15aaf3f4dcd5ebd12df15cc68e0b4f860670e7e4
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;
@@ -300,42 +353,45 @@
   display: flex;
   flex: 1;
 }
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands .lp-upper {
+  display: flex;
+  flex-direction: column;
+  flex: 2.5;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands .lp-lower {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .home-page .content .overview-layer-3 {
   display: flex;
   flex: 1;
-  min-height: 340px;
+  min-height: 420px;
 }
 .home-page .content .overview-layer-3 .school-system-composition {
   display: flex;
   flex-direction: column;
-  flex: 1.4;
+  flex: 1;
   gap: 0.5em;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content {
   display: flex;
   flex: 1;
-  gap: 0.5em;
+  gap: 1em;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 0.5em;
+  gap: 1em;
 }
-.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph {
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info {
   display: flex;
-  flex: 1.5;
-  gap: 0.5em;
-}
-.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-info {
-  display: flex;
-  flex: 1;
-}
-.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph {
-  display: flex;
-  flex: 1.5;
-}
-.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info-graph .ssc-graph .graph {
   flex: 1;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-table {
@@ -343,7 +399,7 @@
   flex: 2;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-table .ssc-table-header {
-  display: flex;
+  display: none;
   flex: 1;
   justify-content: space-between;
   padding: 0em 6em 0em 1em;
@@ -351,4 +407,13 @@
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 {
   display: flex;
   flex: 1;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 .sector-graph-title {
+  color: #3C6382;
+  text-align: center;
+  padding: 0.25em 0.5em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 {
+  display: flex;
+  flex: 1.3;
 }/*# sourceMappingURL=home.css.map */

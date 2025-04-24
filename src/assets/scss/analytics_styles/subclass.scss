@@ -14,54 +14,96 @@
             flex: 1;
             gap: 1em;
 
+            .subclass-graph-title {
+                color: $text-color-1;
+                padding: 0.50em;
+                text-align: center;
+            }
+
             .subclass-left-content {
                 display: flex;
                 flex-direction: column;
-                flex: 1.25;
+                flex: 1;
+                flex: 1;
                 gap: 0.5em;
 
                 .subclass-enroll-graph {
                     display: flex;
                     flex: 1;
-                    gap: 0.5em;
-                    min-height: 100px;
+                    min-height: 300px;
                 }
 
                 .subclass-enroll-middle {
                     display: flex;
                     flex: 1;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
                     gap: 0.5em;
 
-                    .subclass-enroll-graph {
+                    .subclass-enroll-ind {
                         display: flex;
-                        flex: 1;
+                        flex: 1; 
+                        flex-direction: column;
+                        justify-self: stretch;
+                        box-sizing: border-box;
+
+                        .sei-label {
+                            display: flex;
+                            justify-content: center;
+                            font-family: "Inter Semi Bold";
+                            font-size: 0.5em;
+                            color: $text-color-1;
+                        }
+
+                        .sei-count {
+                            display: flex;
+                            justify-content: center;
+                            font-family: "Inter Bold";
+                            font-size: 0.8em;
+                            color: $text-color-1;
+                        }
+
+                        .sei-text {
+                            display: flex;
+                            justify-content: center;
+                            font-family: "Inter Medium Italic";
+                            font-size: 0.5em;
+                            color: $text-color-3;
+                        }
                     }
 
-                    .subclass-enroll-indcard {
+                    .subclass-col1 {
                         display: flex;
-                        flex: 0.7;
+                        //flex: 4.25;
+                        flex-direction: column;
                         gap: 0.5em;
 
-                        .row {
+                        .subclass-enroll-scatter {
+                            display: flex;
+                            flex: 4.25;
+                        }
+                        .subclass-row {
                             display: flex;
                             flex: 1;
-                            flex-direction: column;
                             gap: 0.5em;
 
-                            .column {
+                            .subclass-enroll-ind {
                                 display: flex;
-                                flex: 1;
-                                align-items: center;
-
-                                .subclass-enroll-ind {
-                                display: flex;
-                                flex: 1;
-                                align-self: center;
-                                font-size: 0.7em;
-                                gap: 0.5em;
-                                min-height: 100px
-                                }
+                                flex: 1; 
                             }
+                        }
+                    }
+
+                    .subclass-col2 {
+                        display: flex;
+                        flex: 1;
+                        flex-direction: column;
+                        height: 100%;
+                        gap: 0.5em;
+
+                        .subclass-enroll-ind {
+                            display: flex;
+                            flex: 1; 
                         }
                     }
                 }
@@ -76,19 +118,20 @@
                 .subclass-dist-avail {
                     display: flex;
                     flex-direction: column;
-                    flex: 1.5;
+                    flex: 1;
                     gap: 0.5em;
 
                     .subclass-dist-avail-graph {
                         display: flex;
                         flex: 1;
-                        min-height: 250px;
+                        min-height: 300px;
                     }
 
                     .subclass-dist-avail-lower {
                         display: flex;
                         flex: 1;
                         gap: 0.5em;
+                        min-height: 300px;
                         
                         .subclass-dist-avail-graph-1 {
                             display: flex;
@@ -97,7 +140,7 @@
 
                         .subclass-dist-avail-graph-2 {
                             display: flex;
-                            flex: 1;
+                            flex: 1.5;
                         }
                     }
                 }
@@ -107,18 +150,23 @@
                     flex-direction: column;
                     flex: 1;
                     gap: 0.5em;
-                    min-height: 500px;
 
                     .subclass-program-contents {
                         display: flex;
                         flex: 1;
                         gap: 0.5em;
 
-                        .subclass-program-graph {
+                        .subclass-program-graph-left {
                             display: flex;
-                            flex: 1.25;
+                            flex-direction: column;
+                            flex: 3;
+                            gap: 0.5em;
+                            
+                            .subclass-program-graph {
+                                display: flex;
+                                flex: 1;
+                            }
                         }
-
                         .subclass-program-last-cards {
                             display: flex;
                             flex-direction: column;

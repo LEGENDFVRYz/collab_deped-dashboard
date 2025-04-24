@@ -1,9 +1,9 @@
 from dash import html, dcc
 from src.components.card import Card
 
-## IMPORTED CHARTS
-from src.utils.reports.location_chart import gender_region_fig, heatmap_fig, hi_low_fig, sector_chart
-from src.utils.reports.location_chart import raw_total_enrollees, truncated_total_enrollees, raw_total_schools, truncated_total_schools
+
+## Chart Callbacks
+from src.utils.reports import location_chart
 
 
 """
@@ -15,7 +15,6 @@ from src.utils.reports.location_chart import raw_total_enrollees, truncated_tota
 def render_location_filter():
     return html.Div(
         children=[
-            
             ## LEFT SECTION
             html.Div([
                 
@@ -29,14 +28,45 @@ def render_location_filter():
                             #########################################
                             ## INSERT PLOT: Distribution of enrollees per location 
                             #########################################
+                            html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title"),
+                            # dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="default",
+                                # children=
+                                html.Div([], id='location_enrollees-distribution-per-location',)
+                            # )
                             
-                            ## SAMPLE, REMOVE IT
-                            html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title"), 
-                            dcc.Graph(id="location_enrollees-distribution-per-location", 
-                                        figure=gender_region_fig,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
+                            #                             dcc.Loading(
+                            #     id="loading-graph",
+                            #     type="circle",
+                            #     children=html.Div(
+                            #         children=html.Div(
+                            #             style={
+                            #                 "height": "200px",
+                            #                 "width": "80%",
+                            #                 "backgroundColor": "#e6e6e6",
+                            #                 "borderRadius": "8px",
+                            #                 # "animation": "pulse 1.5s infinite",
+                            #             }
+                            #         ),
+                            #         id='graph-container',
+                            #         style={
+                            #             'display': 'flex',
+                            #             'justifyContent': 'center',
+                            #             'alignItems': 'center',
+                            #             'height': '300px'
+                            #         }
+                            #     ),
+                            #     style={'padding': '1em'}
+                            # )
+
+                            
+                            
+                            # dcc.Graph(id="location_enrollees-distribution-per-location", 
+                            #             # figure=gender_region_fig,
+                            #             config={"responsive": True},
+                            #             style={"width": "100%", "height": "100%"}
+                            # )
                             
                         ], margin=False, padding='0.25em')], className='plot-a-section'),
                         
@@ -47,11 +77,20 @@ def render_location_filter():
                                 ## TABLE: highest and lowest number of enrollees
                                 #########################################
                                 html.H4(["School with the Highest and Lowest Enrollees"], className="hle-graph-title"), 
-                                dcc.Graph(id="location_highest_lowest_enrollees", 
-                                        figure=hi_low_fig,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
+                                
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                    # children=
+                                    html.Div([
+                                    ],id='location_highest_lowest_enrollees')
+                                # )
+                                
+                                #     dcc.Graph(id="location_highest_lowest_enrollees", 
+                                #             # figure=hi_low_fig,
+                                #             config={"responsive": True},
+                                #             style={"width": "100%", "height": "100%", "display": "none"}
+                                # )
                                 
                             ], margin=False)], className='plot-b-box1'),
                             
@@ -62,9 +101,9 @@ def render_location_filter():
                                             html.Div([
                                                 html.Span("", className="glevel-marker enrollees"),
                                                 # html.Img(src="/assets/images/icons_navigation/person-blue.svg", className="total-enrollees-icon"),
-                                                html.H1(f"{truncated_total_enrollees}", className="truncated_total_enrollees"),
+                                                html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"),
                                             ], className="glevel-count"),
-                                            html.Span(f"{raw_total_enrollees:,} enrollees", className="raw_total_enrollees"),
+                                            html.Span([], id="raw-total-enrollees", className="raw_total_enrollees"),
                                             html.Div([
                                                 html.Span("Total Enrollees", className="label_total_enrollees"),
                                                 html.Img(src="/assets/images/icons_navigation/person-blue.svg"),
@@ -80,9 +119,9 @@ def render_location_filter():
                                             html.Div([
                                                 html.Span("", className="glevel-marker schools"),
                                                 # html.Img(src="/assets/images/icons_navigation/school-blue.svg", className="total-schools-icon"),
-                                                html.H1(f"{truncated_total_schools}", className="truncated_total_enrollees"),
+                                                html.H1([], id="truncated-total-schools", className="truncated_total_schools"),
                                             ], className="glevel-count"),
-                                            html.Span(f"{raw_total_schools:,} schools", className="raw_total_enrollees"),
+                                            html.Span([], id="raw-total-schools", className="raw_total_schools"),
                                             html.Div([
                                                 html.Span("Total Schools", className="label_total_schools"),
                                                 html.Img(src="/assets/images/icons_navigation/school-blue.svg"),
@@ -105,12 +144,20 @@ def render_location_filter():
                         ## INSERT PLOT: Strand preferences per region
                         #########################################
                         html.H4(["Strand and Track Preferences per Region"], className="spr-graph-title"), 
-                        dcc.Graph(
-                            id="track-preference-heatmap",
-                            figure=heatmap_fig,
-                            config={"responsive": True},
-                            style={"width": "100%", "height": "100%"}
-                        )
+                        
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                        #     children=
+                            html.Div([
+                            ],id='track-preference-heatmap')
+                        # )
+                        # dcc.Graph(
+                        #     id="track-preference-heatmap",
+                        #     # figure=heatmap_fig,
+                        #     config={"responsive": True},
+                        #     style={"width": "100%", "height": "100%", "display": "none"}
+                        # )
 
                         
                     ], margin=False)], className='plot-content')
@@ -141,14 +188,15 @@ def render_location_filter():
                         ## INSERT PLOT: school sectors
                         #########################################
                         html.H4(["Student Enrollment by School Sector per Region"], className="ss-graph-title"), 
-                        dcc.Graph(
-                            id="location_school-sectors",
-                            figure=sector_chart,
-                            config={"responsive": True},
-                            style={"width": "100%", "height": "100%"}
-                        )
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                        #     children=
+                            html.Div([], id='location_school_sectors',)
+                        # ),
                         
                     ], margin=False)], className='plot-content')
                 ], className='plot-bottom-section plot-sec-wrap'),
-            ], className='plot-right-section'),          
+            ], className='plot-right-section'), 
+            
         ], className='plotted-location-report render-plot')
