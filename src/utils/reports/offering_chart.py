@@ -182,7 +182,7 @@ def update_graph(trigger, data):
 
     # 5. Update layout to match your pie chart style
     gender_distribution_chart.update_layout(
-        autozize=True,
+        autosize=True,
         xaxis_title='Program Offering',
         yaxis_title='Number of Students',
         title_font_size=18,
