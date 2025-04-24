@@ -22,9 +22,10 @@ layout = html.Div([
     ], className='page-header'),
     
     dcc.Loading([
+        html.Div([], id="render-base"),
         html.Div([
             html.Div([
-                
+
                 # National Snapshot
                 html.Div([
                     html.H3(["National Snapshot"], className="section_title"),
@@ -294,6 +295,7 @@ layout = html.Div([
             ], className="overview-layer-3")
             
         ], className='content')
-    ], className='home-loading')
+    ], className='home-loading', delay_hide=1)
     
 ], className='home-page container')
+
