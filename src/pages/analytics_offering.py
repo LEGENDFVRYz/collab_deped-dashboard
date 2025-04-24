@@ -160,10 +160,6 @@ def render_offering_filter():
                         html.Div([Card([
                             #########################################
                             ## INDICATOR: Total Number of Enrollees Across All MCOC Types
-                            dcc.Graph(id="offering_total-number-enrollees-mcoc", figure=table_fig,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
                             #########################################
                             # dcc.Loading(
                             #         id="loading-graph",
@@ -179,10 +175,6 @@ def render_offering_filter():
                         html.Div([Card([
                             #########################################
                             ## INSERT PLOT: Enrollment Distribution by Grade Level
-                            dcc.Graph(id="enrollment_distribution-by-grade", figure=chartoffering_fig,
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                            )
                             #########################################
                             # dcc.Loading(
                             #         id="loading-graph",
