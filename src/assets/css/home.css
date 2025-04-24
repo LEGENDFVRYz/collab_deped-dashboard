@@ -117,7 +117,6 @@
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.es {
   background-color: #037DEE;
-  background-color: #037DEE;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-sub-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.jhs {
   background-color: #FE4761;
@@ -267,14 +266,13 @@
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser {
   display: flex;
-  flex-direction: column;
   flex: 1;
-  align-items: center;
-  color: #667889;
 }
-.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage {
-  display: flex;
-  gap: 0.5em;
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.male-less-dominant {
+  color: #5DB7FF;
+}
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.female-less-dominant {
+  color: #FF5B72;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;
