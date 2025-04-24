@@ -366,9 +366,9 @@ body{
         border-radius: 1.5em 0em 0em 1.5em;
         // overflow-y: auto;
 
-        > div:first-of-type {
+        > div:nth-of-type(1) {
             flex: 1;
-            > div:first-of-type {
+            > div:nth-of-type(1) {
                 height: 100%;   
 
                 .container{
@@ -377,17 +377,38 @@ body{
                     max-width: 120em; // not final
                     margin: 0 auto;
 
-                    .content{
-                        display: flex;
-                        flex: 1;
-
-                    }
                     .page-header{
                         padding: 0.5em 1em 1em 1em;
                         h1{
                             color: $primary-color-1;
                         }
                     }
+
+                    > div:nth-of-type(2) {
+                        max-height: 80vh;
+                        overflow: hidden;
+                        // display: flex;        /* Optional but often necessary depending on layout */
+                        // flex-direction: column;
+                    
+                        .content {
+                            height: 80vh;
+                            overflow-y: auto;
+                            overflow-x: hidden; 
+                            // padding-right: 1.25em;
+                        }
+
+                        .content::-webkit-scrollbar {
+                            // width: 0;
+                            width: 0.5em;
+                            background: transparent; /* Optional: just to make sure */  
+                        }
+                        
+                        .content::-webkit-scrollbar-thumb {
+                            background-color: #90a0cf; 
+                            border-radius: 0.25em;
+                        }
+                    }
+
                 }
             }
         }

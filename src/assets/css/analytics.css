@@ -196,7 +196,9 @@
 .analytics-page .content-section .right-content {
   display: flex;
   flex-direction: column;
-  flex: 3;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .analytics-page .content-section .right-content #plot-content {
   display: flex;
@@ -211,4 +213,12 @@
 .analytics-page .content-section .right-content #plot-content #plot-filtered-page .render-plot {
   display: flex;
   flex: 1;
+}
+.analytics-page .content-section .right-content::-webkit-scrollbar {
+  width: 0.5em;
+  background: transparent; /* Optional: just to make sure */
+}
+.analytics-page .content-section .right-content::-webkit-scrollbar-thumb {
+  background-color: #90a0cf;
+  border-radius: 0.25em;
 }/*# sourceMappingURL=analytics.css.map */

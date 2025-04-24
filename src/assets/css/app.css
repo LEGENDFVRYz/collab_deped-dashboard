@@ -287,25 +287,38 @@ body {
   background-color: #EFF3F6;
   border-radius: 1.5em 0em 0em 1.5em;
 }
-.app-container .content-wrapper > div:first-of-type {
+.app-container .content-wrapper > div:nth-of-type(1) {
   flex: 1;
 }
-.app-container .content-wrapper > div:first-of-type > div:first-of-type {
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) {
   height: 100%;
 }
-.app-container .content-wrapper > div:first-of-type > div:first-of-type .container {
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container {
   display: flex;
   flex-direction: column;
   max-width: 120em;
   margin: 0 auto;
 }
-.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .content {
-  display: flex;
-  flex: 1;
-}
-.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header {
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header {
   padding: 0.5em 1em 1em 1em;
 }
-.app-container .content-wrapper > div:first-of-type > div:first-of-type .container .page-header h1 {
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header h1 {
   color: #04508c;
+}
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) {
+  max-height: 80vh;
+  overflow: hidden;
+}
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) .content {
+  height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) .content::-webkit-scrollbar {
+  width: 0.5em;
+  background: transparent; /* Optional: just to make sure */
+}
+.app-container .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) .content::-webkit-scrollbar-thumb {
+  background-color: #90a0cf;
+  border-radius: 0.25em;
 }/*# sourceMappingURL=app.css.map */
