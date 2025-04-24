@@ -80,7 +80,7 @@ from src.data import enrollment_db_engine, smart_filter
     Output('seniorhigh_distri_per_track', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -145,7 +145,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_ratio_enrollment', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -205,7 +205,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_most_least_enrolled', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -278,7 +278,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_gender_distri', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -355,7 +355,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_school_offering_per_track_by_sector', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -427,7 +427,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_least_offered_high_demand', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -503,7 +503,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_shs_offers', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
@@ -569,7 +569,7 @@ def update_graph(trigger, data):
     Output('seniorhigh_prevalent_tracks', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
@@ -644,7 +644,7 @@ def update_graph(trigger, data):
     Output('shs_offer_range', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)

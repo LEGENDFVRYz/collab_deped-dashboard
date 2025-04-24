@@ -80,7 +80,7 @@ from src.data import enrollment_db_engine, smart_filter
     Output('offering_number-of-schools', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -148,7 +148,7 @@ def update_graph(trigger, data):
     Output('offering_gender-distribution', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -222,7 +222,7 @@ def update_graph(trigger, data):
     Output('offering_ranked-mcoc', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -301,7 +301,7 @@ def update_graph(trigger, data):
 #     Output('', 'children'),
 #     Input('chart-trigger', 'data'),
 #     State('filtered_values', 'data'),
-#     prevent_initial_call=True
+    # prevent_initial_call=True
 # )
 
 # def update_graph(trigger, data):
@@ -324,7 +324,7 @@ def update_graph(trigger, data):
     Output('offering_enroll_dist', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -366,7 +366,7 @@ def update_graph(trigger, data):
     Output('offering_mcoc-offerings-per-loc', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -459,7 +459,7 @@ def update_graph(trigger, data):
     Output('offering_location-extremes', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -534,7 +534,7 @@ def update_graph(trigger, data):
     Output('offering_enrollees_num', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):

@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
+import dash
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, callback, Output, Input, State, Patch
+from dash import dcc, html, callback, Output, Input, State, Patch
 from plotly.subplots import make_subplots 
 
 # important part
@@ -36,6 +37,23 @@ from src.utils.extras_utils import smart_truncate_number
 
 #################################################################################
 
+# ## QUERYY
+# @callback(
+#     Output('base-trigger', 'data'),
+#     Output('render-base', 'children'),
+#     Input("url", "pathname"),
+#     State('base-trigger', 'data')
+# )
+# def trigger_base_charts(pathname, base_status):
+#     if pathname != "/analytics":
+#         return dash.no_update, html.Div([])
+    
+#     # Initialize DF
+#     smart_filter({}, _engine=enrollment_db_engine)
+    
+#     return (not base_status), dash.no_update
+
+
 
 
 
@@ -49,16 +67,16 @@ from src.utils.extras_utils import smart_truncate_number
     Output('location_enrollees-distribution-per-location', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-
+    # print("triggered dispilinr")
     # Step 1: Group by region and gender
     gender_region = FILTERED_DATA.groupby(['region', 'gender'])['counts'].sum().reset_index()
 
-# Step 2: Define brand colors
+    # Step 2: Define brand colors
     brand_colors = {
         'M': '#5DB7FF',
         'F': '#FF5B72'
@@ -199,7 +217,7 @@ def update_graph(trigger, data):
     Output('location_school_sectors', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -329,7 +347,7 @@ def update_graph(trigger, data):
     Output('track-preference-heatmap', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -409,7 +427,7 @@ def update_graph(trigger, data):
     Output('truncated-total-enrollees', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -436,7 +454,7 @@ def update_graph(trigger, data):
     Output('truncated-total-schools', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -462,7 +480,7 @@ def update_graph(trigger, data):
     Output('location_highest_lowest_enrollees', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):

@@ -32,7 +32,7 @@ from src.data import enrollment_db_engine, smart_filter
     Output('subclass_total_schools_per_subclass', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -79,7 +79,7 @@ def update_graph(trigger, data):
     Output('subclass_distrib_by_subclass', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -134,7 +134,7 @@ def update_graph(trigger, data):
     Output('subclass-enroll-sec', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -171,7 +171,7 @@ def update_graph(trigger, data):
     Output('subclass_student_school_ratio', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -223,7 +223,7 @@ def update_graph(trigger, data):
     Output('subclass_vs_school_type', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -286,7 +286,7 @@ def update_graph(trigger, data):
     Output('subclass_sector_affiliation', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -336,7 +336,7 @@ def update_graph(trigger, data):
     Output('subclass_heatmap', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -422,7 +422,7 @@ def update_graph(trigger, data):
     Output('subclass_clustered', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -486,7 +486,7 @@ def update_graph(trigger, data):
     Output('subclass_clustered_tracks', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -556,7 +556,7 @@ def update_graph(trigger, data):
     Output('top_offering_percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
@@ -594,7 +594,7 @@ def update_graph(trigger, data):
     Output('top_track_percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    prevent_initial_call=True
+    # prevent_initial_call=True
 )
 
 def update_graph(trigger, data):
