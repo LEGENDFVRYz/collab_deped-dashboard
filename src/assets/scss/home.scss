@@ -18,7 +18,7 @@
         .section_title {
             color: $text-color-1;
         }
-
+        
         .overview-layer-1 {
             display: flex;
             flex: 1;
@@ -221,7 +221,7 @@
             .learner-profiles {
                 display: flex;
                 flex-direction: column;
-                flex: 1.2;
+                flex: 1.3;
                 gap: 0.5em;
                 
                 .lp-content {
@@ -237,7 +237,7 @@
                         
                         .lp-graph {
                             display: flex;
-                            flex: 1.5;
+                            flex: 1.35;
 
                             .lp-graph-desc {
                                 display: flex;
@@ -254,28 +254,75 @@
                                     display: flex;
                                     flex-direction: column;
                                     flex: 1;
-                                    align-items: center;
-                                    color: $text-color-2;
+                                    align-self: center;
+
+                                    span {
+                                        font-size: 17px;
+                                        font-family: "Inter Bold";
+                                        color: $text-color-2;
+                                    }
 
                                     .gap-percentage {
                                         display: flex;
-                                        gap: 0.5em;
+                                        gap: 0.25em;
 
-                                        .gap-percentage {
+                                        // .img {
+                                        //     width: 30px;
+                                        //     height: 30px;
+                                        // }
 
+                                        .up-icon {
+                                            display: flex;
+                                            align-self: center;
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+
+                                        .percentage {
+                                            font-size: 29px;
+                                            font-family: "Inter Extra Bold";
+                                            color: $primary-color-2;
                                         }
                                     }
 
-                                    .text-1 {
+                                    .greater-div {
+                                        display: flex;
+                                        gap: 0.25em;
 
+                                        .greater {
+                                            display: flex;
+                                            // flex: 1;
+                                            padding: 0.05em 0.3em ;
+    
+                                            &.male-dominant {
+                                              color: $white;
+                                              background-color: $primary-shades-extra;
+                                            }
+                                        
+                                            &.female-dominant {
+                                              color: $white;
+                                              background-color: $secondary-shades-extra;
+                                            }
+                                        }
                                     }
+                                    
 
-                                    .text-2 {
+                                    .lesser-div {
+                                        display: flex;
+                                        gap: 0.25em;
 
-                                    }
+                                        .lesser {
+                                            display: flex;
+                                            flex: 1;
 
-                                    .text-3 {
-
+                                            &.male-less-dominant {
+                                                color: $primary-shades-extra;
+                                            }
+                                        
+                                            &.female-less-dominant {
+                                                color: $secondary-shades-extra;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -359,6 +406,24 @@
                     .lp-graph-2 {
                         display: flex;
                         flex: 1;
+
+                        .lp-tracks-strands {
+                            display: flex;
+                            flex-direction: column;
+                            flex: 1;
+
+                            .lp-upper {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 2.5;
+                            }   
+
+                            .lp-lower {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 1;
+                            }
+                        }
                     }
                 }
             }
@@ -367,51 +432,36 @@
         .overview-layer-3 {
             display: flex;
             flex: 1;
-            min-height: 340px;
+            min-height: 420px;
 
             .school-system-composition {
                 display: flex;
                 flex-direction: column;
-                flex: 1.4;
+                flex: 1;
                 gap: 0.5em;
     
                 .ssc-content {
                     display: flex;
                     flex: 1;
-                    gap: 0.5em;
+                    gap: 1em;
     
                     .ssc-content-1 {
                         display: flex;
                         flex-direction: column;
                         flex: 1;
-                        gap: 0.5em;
+                        gap: 1em;
     
-                        .ssc-info-graph {
+                        .ssc-info {
                             display: flex;
-                            flex: 1.5;
-                            gap: 0.5em;
-    
-                            .ssc-info {
-                                display: flex;
-                                flex: 1;
-                            }
-    
-                            .ssc-graph {
-                                display: flex;
-                                flex: 1.5;
-    
-                                .graph{
-                                    flex: 1;
-                                }
-                            }
+                            flex: 1;
                         }
-    
+
                         .ssc-table {
                             display: flex;
                             flex: 2;
 
                             .ssc-table-header {
-                                display: flex;
+                                display: none;
                                 flex: 1;
                                 justify-content: space-between;
                                 padding: 0em 6em 0em 1em;
@@ -422,6 +472,17 @@
                     .ssc-content-2 {
                         display: flex;
                         flex: 1;
+
+                        .sector-graph-title {
+                            color: $text-color-1;
+                            text-align: center;
+                            padding: 0.25em 0.5em;
+                        }
+                    }
+
+                    .ssc-content-3 {
+                        display: flex;
+                        flex: 1.3 ;
                     }
                 }
             }

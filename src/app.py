@@ -1,22 +1,28 @@
-import plotly.express as px
 import dash
-from dash import Dash, dcc, html, Output, Input
+from dash import Dash, dcc, html
 from src.server import server
-import pandas as pd
-# from src.data import dataframe
+from src.server import cache
+from src.data import enrollment_db_engine
 
 # Callbacks
 from src.utils import activeTab_callback
-# from src.utils import filter_menu_callback
+
+# important part
+# from src.data import enrollment_db_engine, smart_filter
+
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
+cache.init_app(app.server)
 
 
+# Main File Content
 app.layout = html.Div(
     children=[
-        dcc.Store(id="active-tab", data="", storage_type="local"),  # Store clicked tab
-        dcc.Location(id="url"),  # Gets the current pathname
+        dcc.Store(id="active-tab", data="", storage_type="session"),  # Store clicked tab
+        dcc.Store(id="chart-trigger", data=False, storage_type="session"),
+        dcc.Store(id="base-trigger", data=False, storage_type="session"),
+        dcc.Location(id="url", refresh=False),  # Gets the current pathname
         
         # Navigation style
         html.Div([
@@ -44,29 +50,31 @@ app.layout = html.Div(
                         dcc.Link([
                                 html.Div([html.Img(src="/assets/images/icons_navigation/analytics-white.svg")], className='light icon'),
                                 html.Div([html.Img(src="/assets/images/icons_navigation/analytics-blue.svg")], className='dark icon'),
-                                html.Div(['Analytical Tools'], className='text')
+                                html.Div(['Enrollment Insights'], className='text')
                             ], href='/analytics', className='overview nav-btn'),
                     ], className='main-tab'),
+                    
                     html.Div([
                         html.Div([
-                                html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Location")
-                                    ], id='location', className='tab-btn'),
-                                html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Senior High")
-                                    ], id='senior-high', className='tab-btn'),
-                                html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Subclassification")
-                                    ], id='subclass', className='tab-btn'),
-                                html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Offering")
-                                    ], id='offering', className='tab-btn'),
-                            ], className='tabs-menu-ctn')    
-                        ], className='tabs-menu')
+                            html.Div([
+                                html.A("by Location")
+                            ], id='location', className='tab-btn'),      
+
+                            html.Div([
+                                html.A("by Tracks and Strands")
+                            ], id='senior-high', className='tab-btn'),
+
+                            html.Div([
+                                html.A("by Subclassification")
+                            ], id='subclass', className='tab-btn'),
+                            
+                            html.Div([
+                                html.A("by Program Offerings")
+                            ], id='offering', className='tab-btn'),
+                            html.Div([], className="animation"),
+                        ], className='tabs-menu-ctn'),
+                        html.Div([], className="tabs-scroll"), 
+                    ], className='tabs-menu')
                     
                 ], id='nav-2', className='item-ctn'),
                 
@@ -76,20 +84,23 @@ app.layout = html.Div(
                         dcc.Link([
                                 html.Div([html.Img(src="/assets/images/icons_navigation/school-level-1-white.svg")], className='light icon'),
                                 html.Div([html.Img(src="/assets/images/icons_navigation/school-level-1-blue.svg")], className='dark icon'),
-                                html.Div(['School-level'], className='text')
+                                html.Div(['School Profile'], className='text')
                             ], href='/school-level', className='overview nav-btn'),
                     ], className='main-tab'),
+                    
                     html.Div([
                             html.Div([
                                 html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Analysis")
-                                    ], className='tab-btn'),
+                                    # html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
+                                    html.A("Analysis")
+                                ], id='analysis', className='tab-btn'),
                                 html.Div([
-                                        html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
-                                        html.A("Comparizon")
-                                    ], className='tab-btn'),
-                            ], className='tabs-menu-ctn')  
+                                    # html.Img(src="/assets/images/icons_navigation/nav-tab-map-icon.svg"),
+                                    html.A("Comparison"),
+                                ], id='comparison', className='tab-btn'),
+                                html.Div([], className="animation"),
+                            ], className='tabs-menu-ctn'),
+                            html.Div([], className="tabs-scroll"), 
                         ], className='tabs-menu')
                 ], id='nav-3', className='item-ctn'),
             ], className='menu-section'),
@@ -139,11 +150,11 @@ app.layout = html.Div(
                 ], className='ctn')
             ], className='account-section')
         ], className='navigation'),
-                
         
         
         # output: layout pages
         html.Div([
+            
             # dcc.Location(id="url", refresh=False),
             dash.page_container
         ], className='content-wrapper')

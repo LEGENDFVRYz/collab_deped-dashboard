@@ -1,15 +1,14 @@
 from dash import html, dcc
 from src.components.card import Card
 
-## IMPORTED CHARTS
-from src.utils.reports.offering_chart import sample_chart
-from src.utils.reports.offering_chart import number_of_schools_mcoc_chart,gender_distribution_chart,ranked_mcoc_chart,region_stacked_chart, indicator_chart
+## Chart Callbacks
+from src.utils.reports import offering_chart
 
 
-"""
-    Template For Rendering the Program Offering Reports:
+# """
+#     Template For Rendering the Program Offering Reports:
     
-"""
+# """
 
 
 def render_offering_filter():
@@ -31,12 +30,19 @@ def render_offering_filter():
                             #########################################
                             
                             ## SAMPLE, REMOVE IT
-                            dcc.Graph(
-                                id="offering_number-of-schools",
-                                figure=number_of_schools_mcoc_chart,
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"}
-                            )
+                            # dcc.Loading(
+                                # id="loading-graph",
+                                # type="default",
+                                # children=
+                                html.Div([],id='offering_number-of-schools',)
+                            # ),
+                            
+                            # dcc.Graph(
+                            #     id="offering_number-of-schools",
+                            #     figure=number_of_schools_mcoc_chart,
+                            #     config={"responsive": True},
+                            #     style={"width": "100%", "height": "100%"}
+                            # )
                             
                         ], margin=False, padding='0.25em')], className='plot-a'),
                         
@@ -48,12 +54,19 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: Gender Distribution Aross MCOC types
                                 #########################################
-                                dcc.Graph(
-                                    id="offering_gender-distribution",
-                                    figure=gender_distribution_chart,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                )
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                    # children=
+                                    html.Div([],id='offering_gender-distribution',)
+                                # ),
+                                
+                                # dcc.Graph(
+                                #     id="offering_gender-distribution",
+                                #     figure=gender_distribution_chart,
+                                #     config={"responsive": True},
+                                #     style={"width": "100%", "height": "100%"}
+                                # )
                             
                             ], margin=False)], className='plot-b-top'),
                             
@@ -62,12 +75,19 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: MCOC Types Ranked by Total Student Enrollment
                                 #########################################
-                                dcc.Graph(
-                                    id="offering_ranked-mcoc",
-                                    figure=ranked_mcoc_chart,
-                                    config={"responsive": True},
-                                    style={"width": "100%", "height": "100%"}
-                                )
+                                # dcc.Loading(
+                                #     id="loading-graph",
+                                #     type="default",
+                                    # children=
+                                    html.Div([],id='offering_ranked-mcoc',)
+                                # ),
+                                
+                                # dcc.Graph(
+                                #     id="offering_ranked-mcoc",
+                                #     figure=ranked_mcoc_chart,
+                                #     config={"responsive": True},
+                                #     style={"width": "100%", "height": "100%"}
+                                # )
                             ], margin=False)], className='plot-b-bot'),
                         ], className='plot-b'),
                     ], className='plot-content plot-box'),
@@ -82,12 +102,19 @@ def render_offering_filter():
                             #########################################
                             ## INDICATOR: Locations with the Highest and Lowest Number of Offerings
                             #########################################
-                            dcc.Graph(
-                                id="offering_location-extremes",
-                                figure=indicator_chart,
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"}
-                )
+                            # dcc.Loading(
+                            #         id="loading-graph",
+                            #         type="default",
+                            #         children=
+                                    html.Div([],id='offering_location-extremes',)
+                            # ),
+                            
+                            # dcc.Graph(
+                            #     id="offering_location-extremes",
+                            #     figure=indicator_chart,
+                            #     config={"responsive": True},
+                            #     style={"width": "100%", "height": "100%"}
+                            # )
                         
                         ], margin=False)], className='plot-a'),
                         
@@ -96,7 +123,12 @@ def render_offering_filter():
                             #########################################
                             ## INSERT PLOT: Number of MCOC Offerings per Location by School Level
                             #########################################
-                            
+                            # dcc.Loading(
+                            #         id="loading-graph",
+                            #         type="default",
+                            #         children=
+                                    html.Div([],id='offering_mcoc-offerings-per-loc',)
+                            # ),
                         
                         ], margin=False)], className='plot-b'),
                     ], className='plot-content plot-box')
@@ -129,6 +161,12 @@ def render_offering_filter():
                             #########################################
                             ## INDICATOR: Total Number of Enrollees Across All MCOC Types
                             #########################################
+                            # dcc.Loading(
+                            #         id="loading-graph",
+                            #         type="default",
+                            #         children=
+                                    html.Div([],id='offering_enrollees_num',)
+                            # ),
                             
                             
                         ], margin=False)], className='plot-sec-a'),
@@ -138,8 +176,12 @@ def render_offering_filter():
                             #########################################
                             ## INSERT PLOT: Enrollment Distribution by Grade Level
                             #########################################
-                            
-                            
+                            # dcc.Loading(
+                            #         id="loading-graph",
+                            #         type="default",
+                            #         children=
+                                    html.Div([],id='offering_enroll_dist',)
+                            # ),
                         ], margin=False)], className='plot-sec-b'),
                     ], className='plot-content plot-box')
                 ], className='plot-bottom-section plot-sec-wrap'),
