@@ -115,14 +115,14 @@ def update_graph(trigger, data):
         title_font_size=18,
         title_font_color='#3C6382',
         title_x=0.5,
-        margin=dict(l=20, r=20, t=50, b=80),
+        margin=dict(l=20, r=20, t=50, b=20),
         height=450,
         plot_bgcolor='#FFFFFF',
         font=dict(family='Inter, sans-serif', color='#3C6382'),
         legend=dict(
             orientation='h',
             yanchor='bottom',
-            y=-0.2,
+            y=-0.5,
             xanchor='center',
             x=0.5,
             title=None,
@@ -152,14 +152,11 @@ def update_graph(trigger, data):
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-
-    # 2. Group by mod_coc and gender, then sum student counts
+    
     gender_distribution_mcoc = FILTERED_DATA.groupby(['mod_coc', 'gender'])['counts'].sum().reset_index()
 
-    # 3. Standardize gender labels
     gender_distribution_mcoc['gender'] = gender_distribution_mcoc['gender'].str.title().replace({'M': 'Male', 'F': 'Female'})
 
-    # 4. Bar chart setup
     gender_distribution_chart = px.bar(
         gender_distribution_mcoc,
         x='mod_coc',
@@ -168,8 +165,8 @@ def update_graph(trigger, data):
         barmode='group',
         title='Gender Distribution Across Program Offerings',
         color_discrete_map={
-            'Male': '#5DB7FF',     # Primary color
-            'Female': '#FF5B72'    # Secondary color
+            'Male': '#5DB7FF',     
+            'Female': '#FF5B72'    
         },
         labels={
             'mod_coc': 'Program Offering',
@@ -178,7 +175,6 @@ def update_graph(trigger, data):
         }
     )
 
-    # 5. Update layout to match your pie chart style
     gender_distribution_chart.update_layout(
         autosize=True,
         xaxis_title='Program Offering',
@@ -196,15 +192,13 @@ def update_graph(trigger, data):
             y=1,
             xanchor='left',
             yanchor='top',
-            bgcolor='rgba(0,0,0,0)',   # Transparent background
-            bordercolor='rgba(0,0,0,0)',  # No border
+            bgcolor='rgba(0,0,0,0)',   
+            bordercolor='rgba(0,0,0,0)', 
         )
     )
 
-    # 6. Optional: format y-axis ticks with commas
-    gender_distribution_chart.update_yaxes(tickformat=',')
+    gender_distribution_chart.update_yaxes(tickformat='.0s')
 
-    # 7. Display the chart
     gender_distribution_chart
     
     return dcc.Graph(figure=gender_distribution_chart)
@@ -227,14 +221,9 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    # 2. Group data by mod_coc and sum student counts
     mcoc_enrollment = FILTERED_DATA.groupby('mod_coc')['counts'].sum().reset_index()
 
-    # 3. Sort by counts in descending order
     mcoc_enrollment_sorted = mcoc_enrollment.sort_values(by='counts', ascending=False)
-
-    # 4. Create a ranked horizontal bar chart with custom blue shades 
-    custom_blues = ['#A8E8FF', '#5DB7FF', '#369EFF', '#037DEE', '#04508c']
 
     ranked_mcoc_chart = px.bar(
         mcoc_enrollment_sorted,
@@ -242,8 +231,6 @@ def update_graph(trigger, data):
         y='mod_coc',
         orientation='h',
         title='MCOC Types Ranked by Total Student Enrollment',
-        color='counts',
-        color_continuous_scale=custom_blues,  # Custom blue gradient, no white
         labels={
             'mod_coc': 'MCOC Type',
             'counts': 'Total Students'
@@ -251,24 +238,23 @@ def update_graph(trigger, data):
         hover_data={'mod_coc': False, 'counts': True}
     )
 
-    # 5. Add a border around the bars using a subtle darker blue
     ranked_mcoc_chart.update_traces(
-        marker_line_color='#3C6382',
-        marker_line_width=1
+        marker_color='#5DB7FF',
+        showlegend=False,
     )
 
-    # 6. Layout and design adjustments for uniform styling
     ranked_mcoc_chart.update_layout(
+        showlegend=False,
         autosize=True,
         title={
             'text': 'MCOC Types Ranked by Total Student Enrollment',
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 26, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 20, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
         xaxis_title='Number of Students',
         yaxis_title='Programs',
-        font=dict(family='Inter, sans-serif', color='#3C6382'),
+        font=dict(family='Inter, sans-serif', size=14, color='#3C6382'), 
         margin={"l": 40, "r": 40, "t": 60, "b": 40},
         height=500,
         yaxis={'categoryorder': 'total ascending'},
@@ -276,13 +262,11 @@ def update_graph(trigger, data):
             showgrid=True,
             gridcolor='rgba(0,0,0,0.05)',
             zeroline=False,
-            tickformat=','
+            tickformat='.0s'
         ),
-        plot_bgcolor='#FFFFFF'  # Pure white plot area to contrast with bar color
+        plot_bgcolor='#FFFFFF' 
     )
 
-
-    # 7. Display the final chart
     ranked_mcoc_chart
     
     return dcc.Graph(figure=ranked_mcoc_chart)
@@ -371,7 +355,6 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    # 2. Create a new column for school level based on grade
     FILTERED_DATA['school_level'] = FILTERED_DATA['grade'].apply(
         lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6'] else 
                 ('JHS' if x in ['G7', 'G8', 'G9', 'G10'] else 'SHS')
@@ -409,13 +392,13 @@ def update_graph(trigger, data):
             'text': 'Number of Schools per Region by School Level',
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 24, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 20, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
-        font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
+        font={'family': 'Inter, sans-serif', 'size': 12, 'color': '#3C6382'},
         xaxis_title='Region',
         yaxis_title='Total Number of Schools',
         legend_title='School Level',
-        margin=dict(l=40, r=40, t=60, b=100),
+        margin=dict(l= 10, r=10, t=60, b=10),
         height=550,
         xaxis=dict(
             tickangle=45,
@@ -423,21 +406,22 @@ def update_graph(trigger, data):
             gridcolor='rgba(0,0,0,0.05)'
         ),
         legend=dict(
-            x=1.02,
-            y=0.5,
-            xanchor='left',
-            yanchor='middle',
+            orientation='h',
+            yanchor='bottom',
+            y=-0.5,
+            xanchor='center',
+            x=0.4,
+            title=None,
+            font=dict(size=14),
         ),
         plot_bgcolor='#FFFFFF'
     )
 
-    # 6. Add white borders between stacked segments for clarity
     region_stacked_chart.update_traces(
         marker_line_color='#FFFFFF',
         marker_line_width=2
     )
 
-    # 7. Display the final chart
     region_stacked_chart
     
     return dcc.Graph(figure=region_stacked_chart)
@@ -453,16 +437,14 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- INDICATOR: Locations with the Highest and Lowest Number of Offerings
 # #################################################################################
-
 @callback(
     Output('offering_location-extremes', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
 )
-
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     FILTERED_DATA['school_level'] = FILTERED_DATA['grade'].apply(
         lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6']
@@ -480,28 +462,47 @@ def update_graph(trigger, data):
     high_low_combined = pd.concat([
         highest.assign(rank='Highest'),
         lowest.assign(rank='Lowest')
-    ])
+    ], ignore_index=True)
 
     indicator_chart = go.Figure()
 
+    indicator_chart.add_annotation(
+        text="HIGHEST",
+        x=0.5,
+        y=1.19,
+        showarrow=False,
+        font={'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        xref="paper",
+        yref="paper"
+    )
+
+    indicator_chart.add_annotation(
+        text="LOWEST",
+        x=0.5,
+        y=0.52,
+        showarrow=False,
+        font={'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        xref="paper",
+        yref="paper"
+    )
+
     for _, row in high_low_combined.iterrows():
+        row_position = 0 if row['rank'] == 'Highest' else 1
+        column_position = 0 if row['school_level'] == 'ELEM' else (1 if row['school_level'] == 'JHS' else 2)
+
+        title_text = f"<b>{row['school_level']}</b><br><span style='font-size:14px'>{row['region']}</span>"
+
         indicator_chart.add_trace(go.Indicator(
             mode='number',
             value=row['counts'],
-            title={
-                'text': f"<b>{row['school_level']}</b><br><span style='font-size:13px'>{row['rank']} in {row['region']}</span>"
-            },
+            title={'text': title_text},
             number={
-                'valueformat': ',',
-                'font': {'color': '#3C6382'}
+                'valueformat': '.2s',
+                'font': {'color': '#3C6382', 'family': 'Inter, sans-serif', 'size': 40}
             },
-            domain={
-                'row': 0 if row['rank'] == 'Highest' else 1,
-                'column': 0 if row['school_level'] == 'ELEM' else (1 if row['school_level'] == 'JHS' else 2)
-            }
+            domain={'row': row_position, 'column': column_position}
         ))
 
-    # 8. Layout setup (2 rows: Highest and Lowest, 3 columns: ELEM, JHS, SHS)
     indicator_chart.update_layout(
         grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
         template="plotly_white",
@@ -510,19 +511,13 @@ def update_graph(trigger, data):
             'text': "Regions with Highest and Lowest Offerings per School Level",
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 22, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
         font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
-        margin={"l": 50, "r": 50, "t": 80, "b": 50},
+        margin={"l": 50, "r": 50, "t": 160, "b": 80},
         plot_bgcolor='#FFFFFF'
     )
-
-    indicator_chart
-    
     return dcc.Graph(figure=indicator_chart)
-
-
-
 
 # #################################################################################
 
