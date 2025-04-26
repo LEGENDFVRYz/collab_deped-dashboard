@@ -283,9 +283,9 @@ def update_graph(trigger, data):
 
     sector_chart.update_layout(
         autosize=True,
-        title_font=dict(size=20, family='Arial', color='#3C6382'),
+        title_font=dict(size=20, family='Inter, sans-serif', color='#3C6382'),
         title_x=0.5,
-        font=dict(family='Arial', size=14, color='#3C6382'),
+        font=dict(family='Inter, sans-serif', size=14, color='#3C6382'),
         plot_bgcolor='rgba(255,255,255,0.5)',
         margin=dict(l=50, r=30, t=70, b=60),
        legend=dict(
