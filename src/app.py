@@ -1,5 +1,7 @@
 import dash
 from dash import Dash, dcc, html
+from dash import Input, Output, State
+import dash_bootstrap_components as dbc
 from src.server import server
 from src.server import cache
 from src.data import enrollment_db_engine
@@ -23,6 +25,19 @@ app.layout = html.Div(
         dcc.Store(id="chart-trigger", data=False, storage_type="session"),
         dcc.Store(id="base-trigger", data=False, storage_type="session"),
         dcc.Location(id="url", refresh=False),  # Gets the current pathname
+        
+        dbc.Modal(
+            [
+                dbc.ModalHeader(dbc.ModalTitle("Header"), close_button=True),
+                dbc.ModalBody("Modal content here"),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id="close", className="ms-auto", n_clicks=0)
+                ),
+            ],
+            id="modal",
+            is_open=False,
+        ),
+        
         
         # Navigation style
         html.Div([
@@ -136,6 +151,7 @@ app.layout = html.Div(
             ], className='settings-section'),
             
             html.Div([
+                # ACCOUNT LOGIN OR PROFILE
                 html.Div([
                     html.Div([
                             html.Img(src="/assets/images/icons_navigation/jaeroorette.jpg")
@@ -144,9 +160,11 @@ app.layout = html.Div(
                             html.Div([html.H4('April Kim Zurc')], className='Username'),
                             html.Div(['aprkimzurc@gmail.com'], className='email'),
                         ], className='details'),
-                    html.Div([
+                    html.A([
+                        html.Div([
                             html.Img(src="/assets/images/icons_navigation/more-2-fill-1.svg"),
-                        ], className='more-btn')
+                        ], className='more-btn'),
+                    ], id='more-btn', n_clicks=0),
                 ], className='ctn')
             ], className='account-section')
         ], className='navigation'),
@@ -161,6 +179,18 @@ app.layout = html.Div(
     ],
     className= "app-container"
 )
+
+
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("more-btn", "n_clicks"), Input("close", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
 
 # Run the script
 if __name__ == '__main__':
