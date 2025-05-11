@@ -36,10 +36,11 @@ layout = html.Div([
                             html.Div([
                                 Card([
                                     html.Div([
-                                        # html.Div([
-                                        #     html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
-                                        #     html.H1(f"{total_enrollees:,}", className="total-text"),
-                                        # ], className='icon-and-text'),
+                                        # INDICATORS
+                                        html.Div([
+                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
+                                            html.H1("", id="total-text", className="total-text"),
+                                        ], className='icon-and-text'),
                                         html.Div([
                                             html.Span("", className="year-marker"),
                                             html.Span("Academic Year 2023-2024", className="year-text"),
@@ -267,7 +268,6 @@ layout = html.Div([
                                     ),
                                 ], margin=False)
                             ], className="ssc-table"),
-                            
                         ], className="ssc-content-1"),
                         
                         html.Div([

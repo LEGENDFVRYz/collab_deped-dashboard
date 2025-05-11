@@ -131,15 +131,28 @@ def update_graph(pathname):
 # shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=False)
 # shs_df
 
-# es_count = BASE_DF[BASE_DF['school-level'] == 'ELEM']['counts'].sum()
-# jhs_count = BASE_DF[BASE_DF['school-level'] == 'JHS']['counts'].sum()
-# shs_count = BASE_DF[BASE_DF['school-level'] == 'SHS']['counts'].sum()
+@callback(
+    Output('total-text', 'children'),
+    Input('base-trigger', 'data'),
+    prevent_initial_call=True
+)
+def update_indicator(pathname):
 
-# total_enrollees = es_count + jhs_count + shs_count
-# total_enrollees
+    BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
+    BASE_DF[['grade', 'counts']]
 
-# total_enrollees_formatted = smart_truncate_number(total_enrollees)
-# total_enrollees_formatted
+    BASE_DF['school-level'] = BASE_DF['grade'].apply(
+        lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else (
+            'SHS' if x in ['G11', 'G12'] else 'ELEM')
+    )
+    
+    es_count = BASE_DF[BASE_DF['school-level'] == 'ELEM']['counts'].sum()
+    jhs_count = BASE_DF[BASE_DF['school-level'] == 'JHS']['counts'].sum()
+    shs_count = BASE_DF[BASE_DF['school-level'] == 'SHS']['counts'].sum()
+
+    total_enrollees = es_count + jhs_count + shs_count
+    
+    return f"{total_enrollees:,}"
 
 # ## -- INDICATORS: Most and Least active school level
 # most_active =   query.loc[query['counts'].idxmax()]

@@ -490,3 +490,74 @@ body{
             }
         }
     }
+
+
+
+// MODALS STYLINGS
+
+#login-modal{
+    #login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem;
+
+        #login-logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        #login-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0em 2em;
+        
+            label {
+                margin-top: 0.5rem;
+                margin-bottom: 0.25rem;
+            }
+        
+            input {
+                padding: 0.5rem;
+                font-size: 1rem;
+                margin-bottom: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+        
+            button {
+                margin-top: 1rem;
+                padding: 0.5rem;
+                font-size: 1rem;
+                border: none;
+                border-radius: 4px;
+                background-color: #007bff;
+                color: white;
+                cursor: pointer;
+        
+                &:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+        
+        #login-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        
+            a {
+                text-decoration: none;
+                color: #007bff;
+        
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
