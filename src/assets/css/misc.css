@@ -1,0 +1,27 @@
+@import '../fonts/stylesheet.css';
+.unauth {
+  width: 100%;
+  height: 100%;
+}
+.unauth .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 1em;
+  padding: 1em;
+}
+.unauth .content .response-tag {
+  font-size: 2.5em;
+  font-weight: bolder;
+  color: #04508c;
+}
+.unauth .content .response-short {
+  font-size: large;
+}
+.unauth .content .response-reco {
+  padding-top: 1em;
+  font-size: large;
+  font-weight: bolder;
+}/*# sourceMappingURL=misc.css.map */
