@@ -74,17 +74,18 @@ def login_user(identifier: str, password: str):
     ).first()
 
     if user and user.password and user.password.password_hash == hashed_pw:
-        print(f"Login successful for user: {user.username}")
+        # print(f"Login successful for user: {user.username}")
         session.close()
         return user
     else:
-        print("Login failed: Invalid credentials.")
+        # print("Login failed: Invalid credentials.")
         session.close()
         return None
 
 # Run for testing
 if __name__ == "__main__":
     authentication_db()
+    
     # Try logging in
     login_user("jdoe", "test123")          # Login with username
     login_user("jdoe@example.com", "test123")  # Login with email
