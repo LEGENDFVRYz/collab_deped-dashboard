@@ -213,6 +213,48 @@
                         .gld-info {
                             display: flex;
                             flex: 1;
+
+                            .gld-populated {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                color: $text-color-1;
+
+                                .gld-pop-title {
+                                    text-align: center;
+                                    font-size: 0.9em;
+                                }
+
+                                .gld-grade {
+                                    font-family: "Inter Bold";
+                                    text-align: center;
+                                    font-size: 1.25em;
+                                }
+
+                                .gld-student-count {
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding: 0.25em;
+                                    border-radius: 0.5em;
+                                    color: $white;
+                                    
+                                    &.most { background-color: $secondary-color-2; }
+                                    &.least { background-color: $primary-color-2; }
+
+                                    .gld-count {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1em;
+                                    }
+
+                                    .gld-student-text {
+                                        font-family: "Inter Medium Italic";
+                                        text-align: center;
+                                        font-size: 0.7em;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -411,17 +453,22 @@
                             display: flex;
                             flex-direction: column;
                             flex: 1;
+                            color: $text-color-1;
 
                             .lp-upper {
                                 display: flex;
                                 flex-direction: column;
-                                flex: 2.5;
+                                flex: 2;
                             }   
 
                             .lp-lower {
                                 display: flex;
                                 flex-direction: column;
                                 flex: 1;
+
+                                .lp-strand-break {
+                                    font-family: "Inter Italic";
+                                }
                             }
                         }
                     }
@@ -432,7 +479,7 @@
         .overview-layer-3 {
             display: flex;
             flex: 1;
-            min-height: 420px;
+            min-height: 400px;
 
             .school-system-composition {
                 display: flex;
@@ -454,6 +501,49 @@
                         .ssc-info {
                             display: flex;
                             flex: 1;
+
+                            .ssc-school-detail {
+                                display:flex;
+                                flex-direction: column;
+                                flex: 1;
+                                justify-content: space-between;
+                                padding: 0em 0.5em;
+                                color: $white;
+
+                                .ssc-icon-and-text {
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    gap: 0.75em;
+    
+                                    img {
+                                        width: 45px;
+                                        height: 45px;
+                                        filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+                                    }
+    
+                                    .total-school-icon {
+                                        display: flex;
+                                        align-self: center;
+                                    }
+    
+                                    .total-school-text {
+                                        font-family: "Inter Bold";
+                                        font-size: 3em;
+                                        // font-weight: bold;
+                                        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                                    }
+                                }
+    
+                                .ssc-indicator {
+                                    display: flex;
+    
+                                    .ssc-desc-text {
+                                        font-family: "Inter Bold";
+                                        font-size: 18px;
+                                    }
+                                }
+                            }
+
                         }
 
                         .ssc-table {
@@ -475,7 +565,7 @@
 
                         .sector-graph-title {
                             color: $text-color-1;
-                            text-align: center;
+                            text-align: start;
                             padding: 0.25em 0.5em;
                         }
                     }
@@ -483,6 +573,100 @@
                     .ssc-content-3 {
                         display: flex;
                         flex: 1.3 ;
+
+                        .ssc-container {
+                            display: flex;
+                            flex: 1;
+                            flex-direction: column;
+
+                            .offering-graph-title {
+                                color: $text-color-1;
+                                text-align: start;
+                                padding: 0.25em 0.5em;
+                            }
+
+                            .program-offering-graph {
+                                display: flex;
+                                flex: 1;
+                                gap: 0.75em;
+
+                                .percent-legend-container {
+                                    display: flex;
+                                    flex: 1;
+                                    flex-direction: column;
+                                    justify-content: space-evenly;
+
+                                    .program-offering-percentage {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 0.25em;
+                                        // flex: 1;
+
+                                        .shs-percent-text {
+                                            color: $white;
+                                            background-color: #FFBF5F;
+                                            font-size: 2.5em;
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                                        }
+
+                                        .shs-desc-text {
+                                            color: $text-color-1;
+                                            font-size: 1em;
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                        }
+                                    }
+
+                                    .program-offering-legend {
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 0.75em;
+                                        border: 1px solid #ADDBFF;
+                                        border-radius: 0.5em;
+                                        gap: 4px;
+
+                                        .legend-label {
+                                            display: flex;
+                                            flex: 1;
+                                            gap: 8px;
+
+                                            .legend-color {
+                                                display: flex;
+                                                align-self: center;
+                                                border-radius: 2px;
+                                                width: 12px;
+                                                height: 12px;
+
+                                                &.es { background-color: $primary-color-2; }
+                                                &.jhs { background-color: #FE4761; }
+                                                &.shs { background-color: #FFBF5F; }
+                                                &.purees { background-color: #002242; }
+                                                &.purejhs { background-color: #004386; }
+                                                &.pureshs { background-color: #0162C2; }
+                                                &.esjhs { background-color: #1E90FF; }
+                                                &.jhsshs { background-color: #5AB6FF; }
+                                                &.alloffer { background-color: #E2F2FF; }
+                                            }
+
+                                            .legend-text {
+                                                align-self: center;
+                                                font-size: 10px;
+                                                color: $text-color-2;
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                                .home_program_offering {
+                                    display: flex;
+                                    flex: 1.5;
+                                }
+                            }
+                        }
+
                     }
                 }
             }
