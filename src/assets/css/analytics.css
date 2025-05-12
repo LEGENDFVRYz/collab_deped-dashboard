@@ -41,7 +41,6 @@
   transition: display 2s ease-in-out, opacity 0.2s ease-in-out;
   height: 80vh;
   overflow-y: auto;
-  flex: 2;
 }
 .analytics-page .content-section #filter-section::-webkit-scrollbar {
   width: 0.5em;
