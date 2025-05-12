@@ -93,6 +93,7 @@ def update_graph(trigger, data):
         labels={'counts': 'Number of Enrollees', 'region': 'Region', 'gender': 'Gender'},
         color_discrete_map=brand_colors
     )
+    
 
     # Step 4: Calculate total per region for annotations
     region_totals = gender_region.groupby('region')['counts'].sum().reset_index()
@@ -120,6 +121,7 @@ def update_graph(trigger, data):
         margin=dict(l=80, r=20, t=20, b=40),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
+        barcornerradius=3,
     )
     gender_region_fig
 
@@ -133,79 +135,8 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- CHART: enrollment density (students per location)
 # #################################################################################
-# # enrollment_density_chart = []
 
-# import pandas as pd
-# import plotly.express as px
-# import json
-# from geojson_rewind import rewind
-# # Load your enrollment data
-# # FILTERED_DF is already provided
-# # FILTERED_DF = pd.read_csv("your_filtered_df.csv")  # if from CSV
-
-# # ## -- This only a temporary dataframe for testing your charts, you can change it
-# FILTERED_DF = dataframe = auto_extract(['counts', 'region', 'brgy'], is_specific=False)
-# FILTERED_DF[['region', 'province', 'division', 'district', 'municipality', 'brgy', 'counts']]
-
-
-# # Load GeoJSON (municipality level for PH)
-# with open("/Users/marke/Downloads/country.0.1.json") as f:
-#     geojson = json.load(f)
-
-# geojson = rewind(geojson, rfc7946=False)
-
-# # Print all REGION names in GeoJSON
-# geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
-# print(set(geo_regions))
-
-# # Print all region names in your DF
-# print(set(FILTERED_DF['region']))
-
-
-# region_name_map = {
-#     'Region I': 'Region I (Ilocos Region)',
-#     'Region II': 'Region II (Cagayan Valley)',
-#     'Region III': 'Region III (Central Luzon)',
-#     'Region IV-A': 'Region IV-A (CALABARZON)',
-#     'Region IV-B': 'Region IV-B (MIMAROPA)',
-#     'Region V': 'Region V (Bicol Region)',
-#     'Region VI': 'Region VI (Western Visayas)',
-#     'Region VII': 'Region VII (Central Visayas)',
-#     'Region VIII': 'Region VIII (Eastern Visayas)',
-#     'Region IX': 'Region IX (Zamboanga Peninsula)',
-#     'Region X': 'Region X (Northern Mindanao)',
-#     'Region XI': 'Region XI (Davao Region)',
-#     'Region XII': 'Region XII (SOCCSKSARGEN)',
-#     'Region XIII': 'Region XIII (Caraga)',
-#     'NCR': 'National Capital Region (NCR)',
-#     'CAR': 'Cordillera Administrative Region (CAR)',
-#     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)',  # or ARMM depending on version
-#     # Add others if needed
-# }
-# # Map region names to GeoJSON-compatible names
-# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
-# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])  # remove rows without mapping
-
-# # Plot the map
-# fig = px.choropleth(
-#     FILTERED_DF,
-#     geojson=geojson,
-#     locations='geo_region',
-#     featureidkey='properties.adm1_en',
-#     color='counts',
-#     hover_name='region',
-#     hover_data=['province', 'counts'],
-#     color_continuous_scale='Viridis',
-# )
-
-# fig.update_geos(fitbounds="locations", visible=False)
-# fig.update_layout(title="Enrollment by Region", margin={"r":0,"t":30,"l":0,"b":0})
-# fig
-
-
-
-
-#################################################################################
+# #################################################################################
 
 
 
@@ -287,30 +218,30 @@ def update_graph(trigger, data):
         title="Student Enrollment by School Sector per Region"
     )
 
-    # 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
+# 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
     sector_chart.update_layout(
-        title_font=dict(size=20, family='Arial', color='#3C6382'),
-        title_x=0.5,
-        font=dict(family='Arial', size=14, color='#3C6382'),
-        paper_bgcolor='#F0F0F0',
-        plot_bgcolor='rgba(255,255,255,0.5)',
-        margin=dict(l=50, r=30, t=70, b=60),
-        legend=dict(
-            title='School Sector',
-            font=dict(size=14),
-            x=1, y=1,
-            xanchor='right', yanchor='top',
-            bgcolor='rgba(0,0,0,0)',
-            bordercolor='rgba(0,0,0,0)'
-        ),
-        xaxis=dict(showgrid=False, tickangle=-45),
-        yaxis=dict(
-            showgrid=False,
-            tickformat='.1s',
-            tickprefix=''
-        ),
-        bargap=0.1
-    )
+    title_font=dict(size=20, family='Inter', color='#3C6382'),
+    title_x=0.5,
+    font=dict(family='Inter', size=14, color='#3C6382'),
+    paper_bgcolor='#F0F0F0',
+    plot_bgcolor='rgba(255,255,255,0.5)',
+    margin=dict(l=50, r=30, t=70, b=60),
+    legend=dict(
+        title='School Sector',
+        font=dict(size=14),
+        x=1, y=1,
+        xanchor='right', yanchor='top',
+        bgcolor='rgba(0,0,0,0)',
+        bordercolor='rgba(0,0,0,0)'
+    ),
+    xaxis=dict(showgrid=False, tickangle=-45),
+    yaxis=dict(
+        showgrid=False,
+        tickformat='.1s',
+        tickprefix=''
+    ),
+    bargap=0.1
+)
 
     # 7. Add a bold white border to each segment
     sector_chart.update_traces(
@@ -489,6 +420,11 @@ def update_graph(trigger, data):
     # Step 1: Group by school and region, summing the counts
     aggregated_df = FILTERED_DATA.groupby(['name', 'region'], as_index=False)['counts'].sum()
 
+    
+# --- INSERT THIS to filter out schools with 0 enrollees ---
+    aggregated_df = aggregated_df[aggregated_df['counts'] > 0]
+
+    
     # Step 2: Get the school with highest and lowest total enrollees
     max_row = aggregated_df.loc[aggregated_df['counts'].idxmax()]
     min_row = aggregated_df.loc[aggregated_df['counts'].idxmin()]
@@ -500,31 +436,34 @@ def update_graph(trigger, data):
         columnorder=[1, 2, 3],
         columnwidth=[80, 40, 50],
 
-        header=dict(
-            values=["School Name", "Region", "Total Enrollees"],
-            fill_color='#EA6074',
-            align='left',
-            font=dict(family='Inter', color='#9DADBD', size=13),
-            line_color='white',
-            height=40  # header height
-        ),
-        cells=dict(
-            values=[
-                highest_lowest2['name'].apply(lambda x: f"{x}\n"),
-                highest_lowest2['region'],
-                highest_lowest2['counts']
-            ],
-            fill_color='#F8C6CD',
-            align='left',
-            font=dict(family='Inter', color='#667889', size=13),
-            height=100  # fixed cell height
-        )
-    )])
+    header=dict(
+        values=["School Name", "Region", "Total Enrollees"],
+        fill_color='#E6F2FB',
+        align='left',
+        font=dict(family='Inter', color='#04508c', size=12),
+        line_color='#B0C4DE',
+        height=40  # header height
+    ),
+    cells=dict(
+        values=[
+            highest_lowest2['name'].apply(lambda x: f"{x}\n"),
+            highest_lowest2['region'],
+            highest_lowest2['counts']
+        ],
+        fill_color=['#FFFFFF', '#F7FAFC'],
+        align='left',
+        font=dict(family='Inter', color='#3C6382', size=12),
+        line_color='#D3D3D3',
+        height=90  # fixed cell height
+    )
+)])
 
     hi_low_fig.update_layout(
-        font=dict(family='Inter', color='#667889', size=13),
         autosize=True,
-        margin={"l": 8, "r": 8, "t": 15, "b": 0},
+        
+        margin=dict(l=0, r=0, t=0, b=0),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
     )
 
     hi_low_fig
