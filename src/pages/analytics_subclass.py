@@ -308,20 +308,20 @@ def render_subclass_filter():
                                     html.Div(className="row", children=[
                                         html.Div(className="col", children=[
                                             Card([
-                                                html.H6("Top 'All Offering' Subclass"),
+                                                html.H6("Top 'All Offering' by Subclass"),
                                                 html.Span([], id="top_offering_subclass", className="subclass-percentage"),
-                                                html.Span([], id="top_offering_percentage", className="subclass-percentage"),
-                                                html.H6("schools offering all programs"),
+                                                html.Span([], id="top_offering_percentage", className="subclass-percentage-value"),
+                                                # html.P("schools offering all programs", className="sub-text"),
                                             ], margin=False)
                                         ]),
                                     ]),
                                     html.Div(className="row", children=[
                                         html.Div(className="col", children=[
                                             Card([
-                                                html.H6("Top SHS Track Coverage Subclass"),
+                                                html.H6("Top SHS Track Coverage by Subclass"),
                                                 html.Span([], id="top_track_subclass", className="subclass-percentage"),
-                                                html.Span([], id="top_track_percentage", className="subclass-percentage"),
-                                                html.H6("track coverage"),
+                                                html.Span([], id="top_track_percentage", className="subclass-percentage-value"),
+                                                # html.P("track coverage", className="sub-text"),
                                             ], margin=False)
                                         ]),
                                     ]),

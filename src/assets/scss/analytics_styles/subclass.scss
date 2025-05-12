@@ -167,16 +167,42 @@
                                 flex: 1;
                             }
                         }
-                        .subclass-program-last-cards {
-                            display: flex;
-                            flex-direction: column;
-                            flex: 1;
-                            gap: 0.5em;
+                        // .subclass-program-last-cards {
+                        //     display: flex;
+                        //     flex-direction: column;
+                        //     flex: 1;
+                        //     gap: 0.5em;
 
-                            .subclass-program-indicator {
+                        .subclass-enroll-ind {
+                            display: flex;
+                            flex: 1; 
+                            flex-direction: column;
+                            justify-self: stretch;
+                            box-sizing: border-box;
+
+                            .subclass-percentage {
                                 display: flex;
-                                flex: 1;
+                                justify-content: center;
+                                font-family: "Inter Semi Bold";
+                                font-size: 0.75em;
+                                color: $text-color-3;
                             }
+
+                            .subclass-percentage-value {
+                                display: flex;
+                                justify-content: center;
+                                font-family: "Inter Bold";
+                                font-size: 1em;
+                                color: $text-color-3;
+                            }
+
+                            // .sub-text {
+                            //     display: flex;
+                            //     justify-content: center;
+                            //     font-family: "Inter Medium Italic";
+                            //     font-size: 0.6em;
+                            //     color: $text-color-3;
+                            // }
                         }
                     }
                 }
