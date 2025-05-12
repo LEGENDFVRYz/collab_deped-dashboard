@@ -197,14 +197,14 @@ def update_graph(trigger, data):
     student_school_ratio.update_layout(
         xaxis_title='Number of Enrolled Students',
         yaxis_title='Number of Schools',
-        margin={"l": 0, "r": 0, "t": 0, "b": 50},
-        scattermode="group",
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+        #scattermode="group",
         legend={
-            'title': {'text': "Subclassifications", 'font': {'color': '#667889'}},
+            'title': {'text': "Subclass", 'font': {'color': '#667889'}},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -20, 
-            'xanchor': 'left',
+            'y': -0.4, 
+            'xanchor': 'center',
             'x': 0.5 
         }
     )
@@ -262,13 +262,12 @@ def update_graph(trigger, data):
             'font': {'color': '#667889'},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -0.2, 
-            'xanchor': 'left',
+            'y': -0.3, 
+            'xanchor': 'center',
             'x': 0.5 
         },
         margin=dict(l=0, r=0, t=0, b=40),
         autosize=True,
-        #width=600,
     )
     subclass_vs_school_type
     
@@ -296,6 +295,7 @@ def update_graph(trigger, data):
         school_count=('beis_id', 'nunique'),
         total_enrollees=('counts', 'sum')
     ).reset_index()
+    subclass_df4 = subclass_df4[(subclass_df4['school_count'] > 0) & (subclass_df4['total_enrollees'] > 0)]
     subclass_df4.sort_values(by='sub_class', inplace=True)
 
     sector_affiliation = go.Figure(data=[go.Table(
@@ -376,14 +376,6 @@ def update_graph(trigger, data):
 
     # Update layout for improved visuals
     subclass_heatmap.update_layout(
-        title=dict(
-            text='Regional Distribution of Schools',
-            font=dict(
-                family='Inter Bold',
-                size=14,
-                color='#04508c'
-            )
-        ),
         xaxis=dict(
             tickangle=45,
             tickfont=dict(size=9),
@@ -534,7 +526,7 @@ def update_graph(trigger, data):
             title='',
             tickfont=dict(size=10, family='Inter Medium')
         ),
-        showlegend=True,  # Display legend for clarity
+        showlegend=False,  # Display legend for clarity
         legend_title=None,  # Remove legend title (sub_class)
         font=dict(size=11, family='Inter Medium'),
         autosize=True,
