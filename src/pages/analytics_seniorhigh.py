@@ -28,7 +28,7 @@ def render_seniorhigh_filter():
                                 # distribution of enrollees per track
                                 #########################################
                                 ## Sample Use of Charts, Remove this After
-                                html.H4("Distribution of SHS Enrollees per Track", className="dpt-graph-title"),
+                                html.H4("Distribution of SHS Enrollees per Track", style={"textAlign": "center", "color": "#3C6382"}),
                                 # dcc.Loading(
                                 #     id="loading-graph",
                                 #     type="default",
@@ -76,7 +76,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # gender distribution
-                                    html.H4("Distribution by Strand and Gender", className="dsg-graph-title"),
+                                    html.H4("Distribution by Strand and Gender", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
@@ -102,6 +102,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # differences in the number of schools offering each track
+                                    html.H4("Number of Schools Offering Each Track by Sector", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
@@ -117,7 +118,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # which SHS tracks are least offered but in high demand
-                                    html.H4("Relationship between Student Demand and Track Supply", className="rsdts-graph-title"),
+                                    html.H4("Relationship between Student Demand and Track Supply", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
