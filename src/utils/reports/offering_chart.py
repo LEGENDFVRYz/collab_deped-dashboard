@@ -457,7 +457,7 @@ def update_graph(trigger, data):
     highest = grouped.loc[grouped.groupby('school_level')['counts'].idxmax()].reset_index(drop=True)
     lowest = grouped.loc[grouped.groupby('school_level')['counts'].idxmin()].reset_index(drop=True)
 
-    high_low_combined = pd.concat([
+    high_low_combined = pd.concat([ 
         highest.assign(rank='Highest'),
         lowest.assign(rank='Lowest')
     ], ignore_index=True)
@@ -468,13 +468,13 @@ def update_graph(trigger, data):
     indicator_chart.add_annotation(
         text="<b>HIGHEST</b>",
         x=0.5, y=1.10, showarrow=False,
-        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#1B4F72'},
         xref="paper", yref="paper"
     )
     indicator_chart.add_annotation(
         text="<b>LOWEST</b>",
         x=0.5, y=0.47, showarrow=False,
-        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#1B4F72'},
         xref="paper", yref="paper"
     )
 
@@ -483,15 +483,17 @@ def update_graph(trigger, data):
         row_position = 0 if row['rank'] == 'Highest' else 1
         column_position = {'ELEM': 0, 'JHS': 1, 'SHS': 2}.get(row['school_level'], 2)
 
-        title_text = f"<b>{row['school_level']}</b><br><span style='font-size:13px; font-style:italic'>{row['region']}</span>"
+        icon = '🏫' if row['school_level'] == 'ELEM' else ('📚' if row['school_level'] == 'JHS' else '🎓')
+        region_text = f"<span style='font-size:12px; color:#7B8788'>{row['region']}</span>"
+        title_text = f"<b>{icon} {row['school_level']}</b><br>{region_text}"
 
         indicator_chart.add_trace(go.Indicator(
             mode='number',
             value=row['counts'],
             title={'text': title_text},
-            number={
+            number={ 
                 'valueformat': '.2s',
-                'font': {'size': 44, 'color': '#3C6382'}
+                'font': {'size': 42, 'color': '#1B4F72'}
             },
             domain={'row': row_position, 'column': column_position}
         ))
@@ -502,16 +504,17 @@ def update_graph(trigger, data):
         height=500,
         margin={"l": 40, "r": 40, "t": 140, "b": 60},
         title={
-            'text': "<b>Regions with Highest and Lowest Offerings per School Level</b>",
+            'text': "<b>Regions with Highest and Lowest Offerings <br>per School Level</b>",
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#1B4F72'}
         },
         plot_bgcolor="#FFFFFF",
         font={'family': 'Inter, sans-serif', 'size': 13, 'color': '#3C6382'}
     )
 
     return dcc.Graph(figure=indicator_chart)
+
 
 # #################################################################################
 
