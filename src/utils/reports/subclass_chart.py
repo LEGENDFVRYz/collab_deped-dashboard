@@ -203,7 +203,7 @@ def update_graph(trigger, data):
             'title': {'text': "Subclass", 'font': {'color': '#667889'}},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -3, 
+            'y': -0.4, 
             'xanchor': 'center',
             'x': 0.5 
         }
@@ -262,13 +262,12 @@ def update_graph(trigger, data):
             'font': {'color': '#667889'},
             'orientation': 'h', 
             'yanchor': 'bottom',
-            'y': -0.5, 
+            'y': -0.3, 
             'xanchor': 'center',
             'x': 0.5 
         },
         margin=dict(l=0, r=0, t=0, b=40),
         autosize=True,
-        #width=600,
     )
     subclass_vs_school_type
     
@@ -377,14 +376,6 @@ def update_graph(trigger, data):
 
     # Update layout for improved visuals
     subclass_heatmap.update_layout(
-        title=dict(
-            text='Regional Distribution of Schools',
-            font=dict(
-                family='Inter Bold',
-                size=14,
-                color='#04508c'
-            )
-        ),
         xaxis=dict(
             tickangle=45,
             tickfont=dict(size=9),
@@ -535,7 +526,7 @@ def update_graph(trigger, data):
             title='',
             tickfont=dict(size=10, family='Inter Medium')
         ),
-        showlegend=True,  # Display legend for clarity
+        showlegend=False,  # Display legend for clarity
         legend_title=None,  # Remove legend title (sub_class)
         font=dict(size=11, family='Inter Medium'),
         autosize=True,

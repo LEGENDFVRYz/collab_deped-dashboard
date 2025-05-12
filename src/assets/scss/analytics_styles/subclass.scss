@@ -32,20 +32,32 @@
                     flex: 1;
                     min-height: 300px;
                 }
-
-                .subclass-enroll-middle {
-                    display: flex;
-                    flex: 1;
-                    flex-wrap: wrap;
-                    justify-content: space-evenly;
-                    gap: 0.5em;
+/*
+                .subclass-carousel-container{
+                    $card-width: 40px;
+                    $card-gap: 1px;
+                    $visible-cards: 3;
+                    $total-cards: 9;
+                    width: calc(#{$card-width} * #{$visible-cards} + #{$card-gap} * (#{$visible-cards} - 1));
+                    overflow: hidden;
+                    margin: 0 auto;
+                    position: relative;
+                    
+                    .carousel-track {
+                        display: flex;
+                        gap: $card-gap;
+                        width: calc(#{$card-width} * #{$total-cards} + #{$card-gap} * (#{$total-cards} - 1));
+                        transition: transform 0.3s ease;
+                    }
 
                     .subclass-enroll-ind {
                         display: flex;
-                        flex: 1; 
                         flex-direction: column;
-                        justify-self: stretch;
+                        align-items: center;
                         box-sizing: border-box;
+                        flex: 0 0 $card-width;
+                        will-change: transform;
+                        padding: 1px;
 
                         .sei-label {
                             display: flex;
@@ -71,42 +83,23 @@
                             color: $text-color-3;
                         }
                     }
-
-                    .subclass-col1 {
-                        display: flex;
-                        //flex: 1;
-                        flex-direction: column;
-                        gap: 0.5em;
-
-                        .subclass-enroll-scatter {
-                            display: flex;
-                            flex: 4.25;
+                    // Carousel navigation buttons
+                    .carousel-button {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background-color: rgba(255, 255, 255, 0.8);
+                        border: none;
+                        cursor: pointer;
+                        z-index: 10;
+                        &.prev {
+                            left: 10px;
                         }
-                        .subclass-row {
-                            display: flex;
-                            flex: 1;
-                            gap: 0.5em;
-
-                            .subclass-enroll-ind {
-                                display: flex;
-                                flex: 1; 
-                            }
+                        &.next {
+                            right: 10px;
                         }
                     }
-
-                    .subclass-col2 {
-                        display: flex;
-                        flex: 1;
-                        flex-direction: column;
-                        height: 100%;
-                        gap: 0.5em;
-
-                        .subclass-enroll-ind {
-                            display: flex;
-                            flex: 1; 
-                        }
-                    }
-                }
+                }*/
             }
     
             .subclass-right-content {
@@ -140,7 +133,7 @@
 
                         .subclass-dist-avail-graph-2 {
                             display: flex;
-                            flex: 1.5;
+                            flex: 1;
                         }
                     }
                 }
