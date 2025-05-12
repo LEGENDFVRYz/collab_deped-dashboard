@@ -279,6 +279,12 @@ body{
                     cursor: pointer;
                 }
             }
+
+            // .item-ctn.disabled{
+            //     pointer-events: none !important;
+            //     cursor: not-allowed !important;
+            //     opacity: 0.6 !important;
+            // }
         }
 
         .settings-section{
@@ -387,45 +393,70 @@ body{
             margin-top: 0.5em;
             margin-bottom: 1em;
 
-            .ctn{
+            .ctn-wrap{
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 margin: 0 auto;
-                padding: 0.5em 1em;
+                padding: 0.75em 1em;
                 background-color: $bluish-white;
                 border-radius: 0.5em;
                 width: 16em;
+                gap: 0.75em;
 
-                .display-picture{
+                .acc-details{
                     display: flex;
-                    flex-direction: column;
-                    align-self: center;
-                    padding-right: 0.5em;
-                    img {
-                        width: 3em;
-                        height: 3em;
-                        border-radius: 50%; /* Makes it circular */
-                        object-fit: cover;
+                    flex-direction: row;
+
+                    .display-picture{
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+                        padding-right: 0.5em;
+                        img {
+                            width: 3em;
+                            height: 3em;
+                            border-radius: 50%; /* Makes it circular */
+                            object-fit: cover;
+                        }
+                    }
+                    .details{
+                        flex: 1;
+                        color: $text-color-1;
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+    
+                        .email{
+                            font-size: 0.75em;
+                        }
+                    }
+                    #more-btn {
+                        transition: transform 0.3s ease-in-out;
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+                    
+                        width: 1.75em;
+                        cursor: pointer;
                     }
                 }
-                .details{
-                    flex: 1;
-                    color: $text-color-1;
-                    display: flex;
-                    flex-direction: column;
-                    align-self: center;
 
-                    .email{
-                        font-size: 0.75em;
+                #acc-opts{
+                    display: none;  // DEFAULT
+                    padding: 0em 1em;
+
+                    .setting-btn{
+                        padding: 0.5em 0em;
+                        width: 100%;
+
+                        color: $off-white;
+                        text-align: center;
+                        background-color: $primary-color-1;
+                        border-radius: 0.5em;
+
+                        cursor: pointer;
+                        user-select: none;  
                     }
-                }
-                .more-btn{
-                    display: flex;
-                    flex-direction: column;
-                    align-self: center;
-
-                    width: 1.5em;
-                    cursor: pointer;
                 }
             }
         }

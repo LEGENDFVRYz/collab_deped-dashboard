@@ -295,44 +295,66 @@ body {
   margin-top: 0.5em;
   margin-bottom: 1em;
 }
-.app-container .account-section .ctn {
+.app-container .account-section .ctn-wrap {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 0 auto;
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
   background-color: #EFF3F6;
   border-radius: 0.5em;
   width: 16em;
+  gap: 0.75em;
 }
-.app-container .account-section .ctn .display-picture {
+.app-container .account-section .ctn-wrap .acc-details {
+  display: flex;
+  flex-direction: row;
+}
+.app-container .account-section .ctn-wrap .acc-details .display-picture {
   display: flex;
   flex-direction: column;
   align-self: center;
   padding-right: 0.5em;
 }
-.app-container .account-section .ctn .display-picture img {
+.app-container .account-section .ctn-wrap .acc-details .display-picture img {
   width: 3em;
   height: 3em;
   border-radius: 50%; /* Makes it circular */
   -o-object-fit: cover;
      object-fit: cover;
 }
-.app-container .account-section .ctn .details {
+.app-container .account-section .ctn-wrap .acc-details .details {
   flex: 1;
   color: #3C6382;
   display: flex;
   flex-direction: column;
   align-self: center;
 }
-.app-container .account-section .ctn .details .email {
+.app-container .account-section .ctn-wrap .acc-details .details .email {
   font-size: 0.75em;
 }
-.app-container .account-section .ctn .more-btn {
+.app-container .account-section .ctn-wrap .acc-details #more-btn {
+  transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 1.5em;
+  width: 1.75em;
   cursor: pointer;
+}
+.app-container .account-section .ctn-wrap #acc-opts {
+  display: none;
+  padding: 0em 1em;
+}
+.app-container .account-section .ctn-wrap #acc-opts .setting-btn {
+  padding: 0.5em 0em;
+  width: 100%;
+  color: #F0F0F0;
+  text-align: center;
+  background-color: #04508c;
+  border-radius: 0.5em;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .content-wrapper {

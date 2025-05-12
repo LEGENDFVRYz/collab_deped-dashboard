@@ -55,7 +55,7 @@ def update_graph(pathname):
     #     return dash.no_update
     
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF[['grade', 'counts']]
+    BASE_DF = BASE_DF[['grade', 'counts']]
 
     order = ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12']
 
@@ -65,10 +65,14 @@ def update_graph(pathname):
     )
 
     query = BASE_DF.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
+    query = query[query['counts'] != 0]
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
     query = query.sort_values('grade')
     query['formatted_counts'] = query['counts'].apply(smart_truncate_number)
-
+    
+    # print(query['formatted_counts'])
+    # print(query.head())
+    
     fig = px.bar(
         query, 
         x="counts", 
