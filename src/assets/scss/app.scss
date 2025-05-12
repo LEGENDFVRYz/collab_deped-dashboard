@@ -486,9 +486,49 @@ body{
                     margin: 0 auto;
 
                     .page-header{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: baseline;
+                        justify-content: space-between;
+
                         padding: 0em 1em 1em 1em;
                         h1{
                             color: $primary-color-1;
+                        }
+
+
+
+                        .page-controls{
+                            // flex: 1;
+                            display: flex;
+                            flex-direction: row;
+                            gap: 1em;
+                            // align-items: end;
+
+                            #year-toggle-box{
+                                // // flex: 1;
+                                display: flex;
+                                align-items: center;
+                                // width: 7.5em;
+                                height: 100%;
+
+                                // // align-items: center;
+                                // // justify-items: center;
+                                // // align-self: center;
+                                gap: 0.5em;
+                                user-select: none;
+                                // height: 1em;
+                                
+                                #year-toggle{
+                                    cursor: pointer;
+
+                                    img{
+                                        height: 1.5em;
+                                        width: 1.5em;
+    
+                                    }
+                                }
+                            }
                         }
                     }
 

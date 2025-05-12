@@ -200,3 +200,13 @@ def render_location_filter():
             ], className='plot-right-section'), 
             
         ], className='plotted-location-report render-plot')
+    
+    
+
+def new_location_filter():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            "NEWW location"
+            
+        ], className='plotted-location-report render-plot')

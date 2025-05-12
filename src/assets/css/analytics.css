@@ -13,13 +13,6 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.analytics-page .page-header {
-  display: flex;
-  flex-direction: row;
-}
-.analytics-page .page-header .headerr {
-  flex: 1;
-}
 .analytics-page .page-header #analytics-back-box #analytics-back-btn {
   display: none;
   background-color: #037DEE;

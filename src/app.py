@@ -28,6 +28,7 @@ app.layout = html.Div(
         dcc.Store(id="active-tab", data="", storage_type="session"),  # Store clicked tab
         dcc.Store(id="chart-trigger", data=False, storage_type="session"),
         dcc.Store(id="base-trigger", data=False, storage_type="session"),
+        dcc.Store(id="is-all-year", data=False, storage_type="session"),
         
         dcc.Store(id="rotation-state", data=False),  # stores toggle state
         
@@ -340,6 +341,29 @@ def rotate_div(n_clicks, rotated):
     }
     return style, new_state
 
+
+##################### YEAR CONTROLS #####################
+@app.callback(
+    Output("is-all-year", "data"),
+    Input("year-toggle", "n_clicks"),
+    State("is-all-year", "data"),
+    prevent_initial_call=True
+)
+def toggle_year_scope(n_clicks, is_all_year):
+    return not is_all_year
+    
+
+
+@app.callback(
+    Output("year-scope", "children"),
+    Input("is-all-year", "data"),
+    prevent_initial_call=True
+)
+def toggle_year_scope(state):
+    if state:
+        return "All Year"
+    else:
+        return "Latest Year"
 
 
 ##################### RENDERING BASED ON ROLE #####################

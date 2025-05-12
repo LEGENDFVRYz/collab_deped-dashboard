@@ -15,7 +15,7 @@ from src.utils import saved_tabs_analytics
 
 
 ############################### PAGES ################################
-from src.pages.analytics_location import render_location_filter
+from src.pages.analytics_location import render_location_filter, new_location_filter
 from src.pages.analytics_seniorhigh import render_seniorhigh_filter
 from src.pages.analytics_subclass import render_subclass_filter
 from src.pages.analytics_offering import render_offering_filter
@@ -36,9 +36,26 @@ layout = html.Div([
     
     ## -- Standard: Page Content Header
     html.Div([
-        html.Div([html.H1('Analytical Tools')], className='headerr'),
-        html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+        html.Div([html.H1('Analytical Tools')]),
+
+        html.Div(
+            [
+                ## Year Mode Analysis:
+                html.Div([
+                    html.Div(["Latest Year"], id="year-scope"),
+                    html.Div([html.Img(src="/assets/images/control-switch-icon.svg")], id="year-toggle"),
+                ], id="year-toggle-box"),
+                
+                ## Filter options
+                html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+            ]
+        , className="page-controls")
     ], className='page-header'),
+    
+    # html.Div([
+    #     html.Div([html.H1('Analytical Tools')], className='headerr'),
+    #     html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+    # ], className='page-header'),
     
     ## -- Main Content: Start hereee
 
@@ -178,16 +195,24 @@ def check_display(data, div_style):
     # Input('hide-delay', 'n_intervals'),
     Input('sub-status-toggle', 'data'),
     Input('analytics-sub-tracker', 'data'),
+    Input("is-all-year", "data"),
     prevent_initial_call='initial_duplicate'  
 )
-def render_after_fade(n, data):
+def render_after_fade(n, data, scope):
     opt = ["Location", "Senior High", "Subclassification", "Offering"]
     pages = [
         render_location_filter, render_seniorhigh_filter, render_subclass_filter, render_offering_filter
     ]
+    new_pages = [
+        new_location_filter, None, None, None
+    ]
+    
     for i, choices in enumerate(opt):
         if data == choices:
-            return pages[i](), "rendered"
+            if scope:
+                return pages[i](), "rendered"
+            else:
+                return new_pages[i](), "rendered"
         
     return pages[0](), "rendered"
 

@@ -4,12 +4,6 @@
   height: 100%;
   display: flex;
 }
-.school-level-page .page-header {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-}
 .school-level-page .page-header .search-bar {
   display: flex;
   height: 2em;
