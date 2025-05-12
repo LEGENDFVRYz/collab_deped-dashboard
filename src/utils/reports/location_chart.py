@@ -93,6 +93,7 @@ def update_graph(trigger, data):
         labels={'counts': 'Number of Enrollees', 'region': 'Region', 'gender': 'Gender'},
         color_discrete_map=brand_colors
     )
+    
 
     # Step 4: Calculate total per region for annotations
     region_totals = gender_region.groupby('region')['counts'].sum().reset_index()
@@ -120,6 +121,7 @@ def update_graph(trigger, data):
         margin=dict(l=80, r=20, t=20, b=40),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
+        barcornerradius=3,
     )
     gender_region_fig
 
@@ -127,176 +129,12 @@ def update_graph(trigger, data):
 
 #################################################################################
 
-# import pandas as pd
-# import plotly.express as px
-# import plotly.io as pio
-# import json
-# from geojson_rewind import rewind
-
-# # Set default renderer
-# pio.renderers.default = 'browser'
-
-# # Load enrollment data (your `auto_extract` method)
-# FILTERED_DF = auto_extract(['counts', 'region', 'brgy'], is_specific=False)
-# FILTERED_DF = FILTERED_DF[['region', 'province', 'division', 'district', 'municipality', 'brgy', 'counts']]
-
-# # REGION NAME MAP to match GeoJSON country.0.1
-# # region_name_map = {
-# #     'Region I': 'Region I (Ilocos Region)',
-# #     'Region II': 'Region II (Cagayan Valley)',
-# #     'Region III': 'Region III (Central Luzon)',
-# #     'Region IV-A': 'Region IV-A (CALABARZON)',
-# #     'Region IV-B': 'Region IV-B (MIMAROPA)',
-# #     'Region V': 'Region V (Bicol Region)',
-# #     'Region VI': 'Region VI (Western Visayas)',
-# #     'Region VII': 'Region VII (Central Visayas)',
-# #     'Region VIII': 'Region VIII (Eastern Visayas)',
-# #     'Region IX': 'Region IX (Zamboanga Peninsula)',
-# #     'Region X': 'Region X (Northern Mindanao)',
-# #     'Region XI': 'Region XI (Davao Region)',
-# #     'Region XII': 'Region XII (SOCCSKSARGEN)',
-# #     'Region XIII': 'Region XIII (Caraga)',
-# #     'NCR': 'National Capital Region (NCR)',
-# #     'CAR': 'Cordillera Administrative Region (CAR)',
-# #     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)'
-# # }
-
-# region_name_map = {
-#     'Region I': 'Ilocos Region (Region I)',
-#     'Region II': 'Cagayan Valley (Region II)',
-#     'Region III': 'Central Luzon (Region III)',
-#     'Region IV-A': 'CALABARZON (Region IV-A)',
-#     'Region IV-B': 'MIMAROPA (Region IV-B)',
-#     'Region V': 'Bicol Region (Region V)',
-#     'Region VI': 'Western Visayas (Region VI)',
-#     'Region VII': 'Central Visayas (Region VII)',
-#     'Region VIII': 'Eastern Visayas (Region VIII)',
-#     'Region IX': 'Zamboanga Peninsula (Region IX)',
-#     'Region X': 'Northern Mindanao (Region X)',
-#     'Region XI': 'Davao Region (Region XI)',
-#     'Region XII': 'SOCCSKSARGEN (Region XII)',
-#     'Region XIII': 'Caraga (Region XIII)',
-#     'NCR': 'National Capital Region (NCR)',
-#     'CAR': 'Cordillera Administrative Region (CAR)',
-#     'BARMM': 'Autonomous Region in Muslim Mindanao (ARMM)'
-# }
-
-# # Map geo_region for region-level maps
-# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
-# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])
-
-# # Clean province names (ensure matching format)
-# FILTERED_DF['province'] = FILTERED_DF['province'].apply(
-#     lambda x: ', '.join(sorted(set(map(str.strip, x.split(','))))
-# ))
-
-# # Load the province-level GeoJSON
-# with open("/Users/marke/Downloads/Provinces.json") as f:
-#     geojson = json.load(f)
-
-# # Optional: Check GeoJSON provinces
-# geo_provinces = {f['properties']['PROVINCE'] for f in geojson['features']}
-# print("Provinces in GeoJSON:", geo_provinces)
-# print("Provinces in DF:", set(FILTERED_DF['province']))
-
-# # Group data by province for aggregation (in case of duplicates)
-# grouped = FILTERED_DF.groupby(['province', 'region']).agg({'counts': 'sum'}).reset_index()
-
-# # Choropleth by PROVINCE
-# fig = px.choropleth(
-#     grouped,
-#     geojson=geojson,
-#     locations='province',
-#     featureidkey='properties.PROVINCE',
-#     color='counts',
-#     hover_name='province',
-#     hover_data={'region': True, 'counts': True},
-#     color_continuous_scale='Viridis'
-# )
-
-# fig.update_geos(fitbounds="locations", visible=False)
-# fig.update_layout(
-#     title="Enrollment by Province",
-#     margin={"r":0,"t":30,"l":0,"b":0}
-# )
-# fig.show()
 
 
 
 # #################################################################################
 # ##  --- CHART: enrollment density (students per location)
 # #################################################################################
-# # enrollment_density_chart = []
-
-# import pandas as pd
-# import plotly.express as px
-# import json
-# from geojson_rewind import rewind
-# # Load your enrollment data
-# # FILTERED_DF is already provided
-# # FILTERED_DF = pd.read_csv("your_filtered_df.csv")  # if from CSV
-
-# # ## -- This only a temporary dataframe for testing your charts, you can change it
-# FILTERED_DF = dataframe = auto_extract(['counts', 'region', 'brgy'], is_specific=False)
-# FILTERED_DF[['region', 'province', 'division', 'district', 'municipality', 'brgy', 'counts']]
-
-
-# # Load GeoJSON (municipality level for PH)
-# with open("/Users/marke/Downloads/country.0.1.json") as f:
-#     geojson = json.load(f)
-
-# geojson = rewind(geojson, rfc7946=False)
-
-# # Print all REGION names in GeoJSON
-# geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
-# print(set(geo_regions))
-
-# # Print all region names in your DF
-# print(set(FILTERED_DF['region']))
-
-
-# region_name_map = {
-#     'Region I': 'Region I (Ilocos Region)',
-#     'Region II': 'Region II (Cagayan Valley)',
-#     'Region III': 'Region III (Central Luzon)',
-#     'Region IV-A': 'Region IV-A (CALABARZON)',
-#     'Region IV-B': 'Region IV-B (MIMAROPA)',
-#     'Region V': 'Region V (Bicol Region)',
-#     'Region VI': 'Region VI (Western Visayas)',
-#     'Region VII': 'Region VII (Central Visayas)',
-#     'Region VIII': 'Region VIII (Eastern Visayas)',
-#     'Region IX': 'Region IX (Zamboanga Peninsula)',
-#     'Region X': 'Region X (Northern Mindanao)',
-#     'Region XI': 'Region XI (Davao Region)',
-#     'Region XII': 'Region XII (SOCCSKSARGEN)',
-#     'Region XIII': 'Region XIII (Caraga)',
-#     'NCR': 'National Capital Region (NCR)',
-#     'CAR': 'Cordillera Administrative Region (CAR)',
-#     'BARMM': 'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)',  # or ARMM depending on version
-#     # Add others if needed
-# }
-# # Map region names to GeoJSON-compatible names
-# FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
-# FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])  # remove rows without mapping
-
-# # Plot the map
-# fig = px.choropleth(
-#     FILTERED_DF,
-#     geojson=geojson,
-#     locations='geo_region',
-#     featureidkey='properties.adm1_en',
-#     color='counts',
-#     hover_name='region',
-#     hover_data=['province', 'counts'],
-#     color_continuous_scale='Viridis',
-# )
-
-# fig.update_geos(fitbounds="locations", visible=False)
-# fig.update_layout(title="Enrollment by Region", margin={"r":0,"t":30,"l":0,"b":0})
-# fig.show()
-
-
-
 
 # #################################################################################
 
@@ -582,6 +420,11 @@ def update_graph(trigger, data):
     # Step 1: Group by school and region, summing the counts
     aggregated_df = FILTERED_DATA.groupby(['name', 'region'], as_index=False)['counts'].sum()
 
+    
+# --- INSERT THIS to filter out schools with 0 enrollees ---
+    aggregated_df = aggregated_df[aggregated_df['counts'] > 0]
+
+    
     # Step 2: Get the school with highest and lowest total enrollees
     max_row = aggregated_df.loc[aggregated_df['counts'].idxmax()]
     min_row = aggregated_df.loc[aggregated_df['counts'].idxmin()]
@@ -595,10 +438,10 @@ def update_graph(trigger, data):
 
     header=dict(
         values=["School Name", "Region", "Total Enrollees"],
-        fill_color='#EA6074',
+        fill_color='#E6F2FB',
         align='left',
-        font=dict(family='Inter', color='#9DADBD', size=13),
-        line_color='white',
+        font=dict(family='Inter', color='#04508c', size=12),
+        line_color='#B0C4DE',
         height=40  # header height
     ),
     cells=dict(
@@ -607,17 +450,20 @@ def update_graph(trigger, data):
             highest_lowest2['region'],
             highest_lowest2['counts']
         ],
-        fill_color='#F8C6CD',
+        fill_color=['#FFFFFF', '#F7FAFC'],
         align='left',
-        font=dict(family='Inter', color='#667889', size=13),
+        font=dict(family='Inter', color='#3C6382', size=12),
+        line_color='#D3D3D3',
         height=90  # fixed cell height
     )
 )])
 
     hi_low_fig.update_layout(
-        font=dict(family='Inter', color='#667889', size=13),
         autosize=True,
-        margin={"l": 8, "r": 8, "t": 15, "b": 0},
+        
+        margin=dict(l=0, r=0, t=0, b=0),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
     )
 
     hi_low_fig
