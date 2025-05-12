@@ -34,3 +34,101 @@
         }
     }
 }
+
+
+
+// DASH APP RESPONSE STYLINGS
+.app-settings{
+    width: 100%;
+    height: 100%;
+    
+    .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .content-wrap{
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+
+            .drop-section{
+                flex: 2;
+
+                h3{
+                    padding-bottom: 1em;
+                }
+
+                #upload-data {
+
+
+                    width: 100%;
+                    height: 40%;
+                    // line-height: 180px;
+                    border-width: 1px;
+                    border-style: dashed;
+                    border-radius: 5px;
+                    text-align: center;
+                    
+                    div{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        // gap: 0.25em;
+
+                        flex: 1;
+                        height: 100%;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        cursor: pointer;
+                        font-weight: bolder;
+                        color: $primary-color-1;
+                    }
+                }
+
+                #upload-status{
+                    margin-top: 1em;
+                    padding: 1em 2em;
+                    background-color: $primary-shades-11;
+                    border-radius: 0.5em;
+                    color: $text-color-2;
+                }
+
+                #output-upload{
+                    flex: 1;
+                }
+
+                .confirm-upload{
+                    display: flex;
+                    align-self: end;
+
+                    #push-upload{
+                        padding: 1em 2em;
+                        border: 0;
+                        border-radius: 2em;
+                        font-size: 1;
+                        font-family: 'Inter Medium';
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        background-color: $primary-color-2;
+                        color: $white;
+                    }
+
+                    #push-upload:hover{
+                        background-color: $primary-shades-4;
+                    }
+                    #push-upload:active{
+                        background-color: $primary-color-2;
+                    }
+                }
+            }
+    
+            .report-section{
+                flex: 3;
+            }
+        }
+    }
+}
