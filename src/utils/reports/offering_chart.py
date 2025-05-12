@@ -351,7 +351,6 @@ def update_graph(trigger, data):
     State('filtered_values', 'data'),
     # prevent_initial_call=True
 )
-
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
@@ -361,7 +360,6 @@ def update_graph(trigger, data):
     )
 
     FILTERED_DATA['grade'] = FILTERED_DATA['grade'].astype(str).str.upper().str.strip()
-
 
     region_schools_df = FILTERED_DATA[FILTERED_DATA['school_level'] != 'UNKNOWN']
 
@@ -398,7 +396,7 @@ def update_graph(trigger, data):
         xaxis_title='Region',
         yaxis_title='Total Number of Schools',
         legend_title='School Level',
-        margin=dict(l= 10, r=10, t=60, b=10),
+        margin=dict(l=10, r=10, t=60, b=10),
         height=550,
         xaxis=dict(
             tickangle=45,
@@ -414,7 +412,12 @@ def update_graph(trigger, data):
             title=None,
             font=dict(size=14),
         ),
-        plot_bgcolor='#FFFFFF'
+        plot_bgcolor='#FFFFFF',
+        yaxis=dict(
+            type='log',  # Set y-axis to logarithmic scale
+            tickvals=[10, 100, 1000, 10000, 50000],  # Custom tick values
+            ticktext=["10", "100", "1K", "10K", "50K"],  # Custom tick labels
+        )
     )
 
     region_stacked_chart.update_traces(
@@ -422,12 +425,7 @@ def update_graph(trigger, data):
         marker_line_width=2
     )
 
-    region_stacked_chart
-    
     return dcc.Graph(figure=region_stacked_chart)
-
-
-
 
 
 # #################################################################################
