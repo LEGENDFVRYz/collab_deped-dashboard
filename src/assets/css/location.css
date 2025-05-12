@@ -40,27 +40,13 @@
   text-align: center;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section {
+  min-height: 10%;
   display: flex;
   flex-direction: row;
   gap: 0.5em;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .plot-b-box1 {
   flex: 2;
-<<<<<<< HEAD
-  padding-top: 0.5em;
-  display: flex;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .hle-graph-title {
-  color: #3C6382;
-  text-align: center;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 0.5em;
-=======
->>>>>>> 15aaf3f4dcd5ebd12df15cc68e0b4f860670e7e4
   padding-top: 0.5em;
   display: flex;
 }
@@ -88,7 +74,6 @@
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label {
   display: flex;
   justify-content: space-between;
-  flex: 1;
   overflow: visible;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label .label_total_enrollees, #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label .label_total_schools {
@@ -134,59 +119,7 @@
   font-size: 9px;
   color: #3C6382;
 }
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 {
-  display: flex;
-  flex: 1;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  color: #04508c;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-  overflow: visible;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label .label_total_enrollees, #plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label .label_total_schools {
-  color: #3C6382;
-  font-family: "Inter Semi Bold";
-  font-size: 15px;
-  padding-top: 1.5em;
-  width: 10px;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .total_label img {
-  width: 40px;
-  height: 50px;
-  padding: 0px;
-  align-self: flex-end;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .glevel-count {
-  display: flex;
-  justify-content: space-between;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .glevel-count .glevel-marker {
-  display: flex;
-  align-self: center;
-  border-radius: 0.5em;
-  width: 10px;
-  height: 30px;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .glevel-count .glevel-marker.enrollees {
-  background-color: #04508c;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .glevel-count .glevel-marker.schools {
-  background-color: #04508c;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .glevel-count .truncated_total_enrollees {
-  display: flex;
-  justify-content: flex-end;
-  font-family: "Inter Bold";
-  font-size: 2.3em;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .raw_total_enrollees {
+#plot-content.rendered .plotted-location-report .plot-left-section .plot-top-section .track-box .plot-b-section .ns-sub-detail .plot-b-box2 .total_enrollees .raw_total_schools {
   display: flex;
   justify-content: flex-end;
   font-family: "Inter Medium Italic";
@@ -194,11 +127,7 @@
   color: #3C6382;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-bottom-section {
-  flex: 1;
-}
-#plot-content.rendered .plotted-location-report .plot-left-section .plot-bottom-section .spr-graph-title {
-  color: #3C6382;
-  text-align: center;
+  flex: 5;
 }
 #plot-content.rendered .plotted-location-report .plot-left-section .plot-bottom-section .spr-graph-title {
   color: #3C6382;
@@ -211,7 +140,7 @@
   gap: 1em;
 }
 #plot-content.rendered .plotted-location-report .plot-right-section .plot-top-section {
-  flex: 3;
+  flex: 2;
 }
 #plot-content.rendered .plotted-location-report .plot-right-section .plot-bottom-section {
   flex: 2;
