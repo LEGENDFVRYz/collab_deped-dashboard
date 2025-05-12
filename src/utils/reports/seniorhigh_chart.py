@@ -641,7 +641,7 @@ def update_graph(trigger, data):
 # #################################################################################
 
 @callback(
-    Output('shs_offer_range', 'children'),
+    Output('seniorhigh_offer_range', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
