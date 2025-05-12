@@ -98,7 +98,7 @@ def update_graph(trigger, data):
         names='mod_coc',
         values='school_count',
         hole=0.45,
-        title='Number of Schools by Program Offerings',
+        title='<b>Number of Schools by Program Offerings</b>',
         color_discrete_sequence=number_of_schools_mcoc_colors
     )
 
@@ -163,7 +163,7 @@ def update_graph(trigger, data):
         y='counts',
         color='gender',
         barmode='group',
-        title='Gender Distribution Across Program Offerings',
+        title='<b>Gender Distribution Across Program Offerings</b>',
         color_discrete_map={
             'Male': '#5DB7FF',     
             'Female': '#FF5B72'    
@@ -230,7 +230,7 @@ def update_graph(trigger, data):
         x='counts',
         y='mod_coc',
         orientation='h',
-        title='MCOC Types Ranked by Total Student Enrollment',
+        title='<b>MCOC Types Ranked by Total Student Enrollment</b>',
         labels={
             'mod_coc': 'MCOC Type',
             'counts': 'Total Students'
@@ -247,10 +247,10 @@ def update_graph(trigger, data):
         showlegend=False,
         autosize=True,
         title={
-            'text': 'MCOC Types Ranked by Total Student Enrollment',
+            'text': '<b>MCOC Types Ranked by Total Student Enrollment</b>',
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 20, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
         xaxis_title='Number of Students',
         yaxis_title='Programs',
@@ -320,7 +320,7 @@ def update_graph(trigger, data):
         grade_enrollment,
         x='grade',
         y='counts',
-        title='Enrollment Distribution by Grade Level',
+        title='<b>Enrollment Distribution by Grade Level</b>',
         labels={'grade': 'Grade Level', 'counts': 'Number of Enrollees'},
         text='counts'
     )
@@ -373,7 +373,7 @@ def update_graph(trigger, data):
         y='beis_id',
         color='school_level',
         barmode='stack',
-        title='Number of Schools per Region by School Level',
+        title='<b>Number of Schools per Region by School Level</b>',
         color_discrete_map={
             'ELEM': '#FF899A',
             'JHS': '#E11C38',
@@ -389,10 +389,10 @@ def update_graph(trigger, data):
     region_stacked_chart.update_layout(
         autosize=True,
         title={
-            'text': 'Number of Schools per Region by School Level',
+            'text': '<b>Number of Schools per Region by School Level</b>',
             'x': 0.5,
             'xanchor': 'center',
-            'font': {'size': 20, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
+            'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
         font={'family': 'Inter, sans-serif', 'size': 12, 'color': '#3C6382'},
         xaxis_title='Region',
@@ -441,7 +441,6 @@ def update_graph(trigger, data):
     Output('offering_location-extremes', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
-    # prevent_initial_call=True
 )
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
@@ -455,7 +454,6 @@ def update_graph(trigger, data):
     FILTERED_DATA = FILTERED_DATA[FILTERED_DATA['school_level'] != 'UNKNOWN']
 
     grouped = FILTERED_DATA.groupby(['school_level', 'region'])['counts'].sum().reset_index()
-
     highest = grouped.loc[grouped.groupby('school_level')['counts'].idxmax()].reset_index(drop=True)
     lowest = grouped.loc[grouped.groupby('school_level')['counts'].idxmin()].reset_index(drop=True)
 
@@ -466,31 +464,26 @@ def update_graph(trigger, data):
 
     indicator_chart = go.Figure()
 
+    # Section headers
     indicator_chart.add_annotation(
-        text="HIGHEST",
-        x=0.5,
-        y=1.19,
-        showarrow=False,
-        font={'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
-        xref="paper",
-        yref="paper"
+        text="<b>HIGHEST</b>",
+        x=0.5, y=1.10, showarrow=False,
+        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        xref="paper", yref="paper"
+    )
+    indicator_chart.add_annotation(
+        text="<b>LOWEST</b>",
+        x=0.5, y=0.47, showarrow=False,
+        font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
+        xref="paper", yref="paper"
     )
 
-    indicator_chart.add_annotation(
-        text="LOWEST",
-        x=0.5,
-        y=0.52,
-        showarrow=False,
-        font={'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'},
-        xref="paper",
-        yref="paper"
-    )
-
+    # Add indicators
     for _, row in high_low_combined.iterrows():
         row_position = 0 if row['rank'] == 'Highest' else 1
-        column_position = 0 if row['school_level'] == 'ELEM' else (1 if row['school_level'] == 'JHS' else 2)
+        column_position = {'ELEM': 0, 'JHS': 1, 'SHS': 2}.get(row['school_level'], 2)
 
-        title_text = f"<b>{row['school_level']}</b><br><span style='font-size:14px'>{row['region']}</span>"
+        title_text = f"<b>{row['school_level']}</b><br><span style='font-size:13px; font-style:italic'>{row['region']}</span>"
 
         indicator_chart.add_trace(go.Indicator(
             mode='number',
@@ -498,7 +491,7 @@ def update_graph(trigger, data):
             title={'text': title_text},
             number={
                 'valueformat': '.2s',
-                'font': {'color': '#3C6382', 'family': 'Inter, sans-serif', 'size': 40}
+                'font': {'size': 44, 'color': '#3C6382'}
             },
             domain={'row': row_position, 'column': column_position}
         ))
@@ -506,17 +499,18 @@ def update_graph(trigger, data):
     indicator_chart.update_layout(
         grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
         template="plotly_white",
-        autosize=True,
+        height=500,
+        margin={"l": 40, "r": 40, "t": 140, "b": 60},
         title={
-            'text': "Regions with Highest and Lowest Offerings per School Level",
+            'text': "<b>Regions with Highest and Lowest Offerings per School Level</b>",
             'x': 0.5,
             'xanchor': 'center',
             'font': {'size': 16, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
-        font={'family': 'Inter, sans-serif', 'size': 14, 'color': '#3C6382'},
-        margin={"l": 50, "r": 50, "t": 160, "b": 80},
-        plot_bgcolor='#FFFFFF'
+        plot_bgcolor="#FFFFFF",
+        font={'family': 'Inter, sans-serif', 'size': 13, 'color': '#3C6382'}
     )
+
     return dcc.Graph(figure=indicator_chart)
 
 # #################################################################################
