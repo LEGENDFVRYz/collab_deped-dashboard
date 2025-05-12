@@ -187,6 +187,45 @@
   display: flex;
   flex: 1;
 }
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #3C6382;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-pop-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-grade {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-student-count {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-student-count.most {
+  background-color: #E11C38;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-student-count.least {
+  background-color: #037DEE;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-student-count .gld-count {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1em;
+}
+.home-page .content .overview-layer-2 .grade-level-dynamics .gld-content .gld-info-cards .gld-info .gld-populated .gld-student-count .gld-student-text {
+  font-family: "Inter Medium Italic";
+  text-align: center;
+  font-size: 0.7em;
+}
 .home-page .content .overview-layer-2 .learner-profiles {
   display: flex;
   flex-direction: column;
@@ -222,22 +261,15 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-<<<<<<< HEAD
-  align-items: center;
-=======
   align-self: center;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc span {
   font-size: 17px;
   font-family: "Inter Bold";
->>>>>>> 15aaf3f4dcd5ebd12df15cc68e0b4f860670e7e4
   color: #667889;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage {
   display: flex;
-<<<<<<< HEAD
-  gap: 0.5em;
-=======
   gap: 0.25em;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .gap-percentage .up-icon {
@@ -280,7 +312,6 @@
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-graph .lp-graph-desc .lp-desc .lesser-div .lesser.female-less-dominant {
   color: #FF5B72;
->>>>>>> 15aaf3f4dcd5ebd12df15cc68e0b4f860670e7e4
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-1 .lp-info-cards {
   display: flex;
@@ -357,21 +388,25 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  color: #3C6382;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands .lp-upper {
   display: flex;
   flex-direction: column;
-  flex: 2.5;
+  flex: 2;
 }
 .home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands .lp-lower {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
+.home-page .content .overview-layer-2 .learner-profiles .lp-content .lp-graph-2 .lp-tracks-strands .lp-lower .lp-strand-break {
+  font-family: "Inter Italic";
+}
 .home-page .content .overview-layer-3 {
   display: flex;
   flex: 1;
-  min-height: 420px;
+  min-height: 400px;
 }
 .home-page .content .overview-layer-3 .school-system-composition {
   display: flex;
@@ -394,6 +429,40 @@
   display: flex;
   flex: 1;
 }
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  padding: 0em 0.5em;
+  color: #FFFFFF;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-icon-and-text {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-icon-and-text img {
+  width: 45px;
+  height: 45px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-icon-and-text .total-school-icon {
+  display: flex;
+  align-self: center;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-icon-and-text .total-school-text {
+  font-family: "Inter Bold";
+  font-size: 3em;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-indicator {
+  display: flex;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-info .ssc-school-detail .ssc-indicator .ssc-desc-text {
+  font-family: "Inter Bold";
+  font-size: 18px;
+}
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-1 .ssc-table {
   display: flex;
   flex: 2;
@@ -410,10 +479,106 @@
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-2 .sector-graph-title {
   color: #3C6382;
-  text-align: center;
+  text-align: start;
   padding: 0.25em 0.5em;
 }
 .home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 {
   display: flex;
   flex: 1.3;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .offering-graph-title {
+  color: #3C6382;
+  text-align: start;
+  padding: 0.25em 0.5em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph {
+  display: flex;
+  flex: 1;
+  gap: 0.75em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-percentage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-percentage .shs-percent-text {
+  color: #FFFFFF;
+  background-color: #FFBF5F;
+  font-size: 2.5em;
+  font-family: "Inter Bold";
+  text-align: center;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-percentage .shs-desc-text {
+  color: #3C6382;
+  font-size: 1em;
+  font-family: "Inter Bold";
+  text-align: center;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75em;
+  border: 1px solid #ADDBFF;
+  border-radius: 0.5em;
+  gap: 4px;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color {
+  display: flex;
+  align-self: center;
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.es {
+  background-color: #037DEE;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.jhs {
+  background-color: #FE4761;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.shs {
+  background-color: #FFBF5F;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.purees {
+  background-color: #002242;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.purejhs {
+  background-color: #004386;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.pureshs {
+  background-color: #0162C2;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.esjhs {
+  background-color: #1E90FF;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.jhsshs {
+  background-color: #5AB6FF;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-color.alloffer {
+  background-color: #E2F2FF;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .percent-legend-container .program-offering-legend .legend-label .legend-text {
+  align-self: center;
+  font-size: 10px;
+  color: #667889;
+}
+.home-page .content .overview-layer-3 .school-system-composition .ssc-content .ssc-content-3 .ssc-container .program-offering-graph .home_program_offering {
+  display: flex;
+  flex: 1.5;
 }/*# sourceMappingURL=home.css.map */
