@@ -1,6 +1,6 @@
 import dis
 import dash
-from dash import Dash, dcc, html
+from dash import Dash, dcc, html, callback_context
 from dash import Input, Output, State
 import dash_bootstrap_components as dbc
 
@@ -24,10 +24,13 @@ cache.init_app(app.server)
 # Main File Content
 app.layout = html.Div(
     children=[
-        dcc.Store(id='user-data', data={}, storage_type="session"),
+        dcc.Store(id='user-data', data={}, storage_type="local"),
         dcc.Store(id="active-tab", data="", storage_type="session"),  # Store clicked tab
         dcc.Store(id="chart-trigger", data=False, storage_type="session"),
         dcc.Store(id="base-trigger", data=False, storage_type="session"),
+        
+        dcc.Store(id="rotation-state", data=False),  # stores toggle state
+        
         dcc.Location(id="url", refresh=True),  # Gets the current pathname
         
         # MODAL: Login inputs
@@ -183,27 +186,38 @@ app.layout = html.Div(
                     dcc.Link([
                             html.Div([html.Img(src="/assets/images/icons_navigation/settings-1-fill.svg")], className='light icon'),
                             html.Div([html.Img(src="/assets/images/icons_navigation/settings-1.svg")], className='dark icon'),
-                            html.Div(['Settings'], className='text')
+                            html.Div(['App Settings'], className='text')
                         ], href='/settings', className='overview nav-btn'),
                 ], id='opt-3', className='item-ctn'),
             ], className='settings-section'),
             
             html.Div([
-                # ACCOUNT LOGIN OR PROFILE
                 html.Div([
+
                     html.Div([
-                            html.Img(src="/assets/images/icons_navigation/jaeroorette.jpg")
-                        ], className='display-picture'),
-                    html.Div([
-                            html.Div([html.H4('Guest')], className='Username', id='username-holder'),
-                            html.Div(['Public Account Mode'], className='email', id='email-holder'),
-                        ], className='details'),
-                    html.A([
+                        # ACCOUNT LOGIN OR PROFILE
                         html.Div([
-                            html.Img(src="/assets/images/icons_navigation/more-2-fill-1.svg"),
-                        ], className='more-btn'),
-                    ], id='more-btn', n_clicks=0),
-                ], className='ctn')
+                                html.Img(src="/assets/images/guest-icon.svg")
+                            ], className='display-picture'),
+                        html.Div([
+                                html.Div([html.H4('Guest')], className='Username', id='username-holder'),
+                                html.Div(['Public Account Mode'], className='email', id='email-holder'),
+                            ], className='details'),
+                        # html.A([
+                            html.Div([
+                                html.Img(src="/assets/images/icons_navigation/more-2-fill-1.svg"),
+                            ], id='more-btn'),
+                        # ], id='more-btn', n_clicks=0),
+                    ], className='acc-details'),
+                
+                    html.Div([
+                        html.Div(['LOGIN'], id='login-call', className='setting-btn'),
+                        html.Div(['LOG OUT'], id='logout-call', className='setting-btn'),
+                    ], id='acc-opts'),
+                    
+                ], className='ctn-wrap')
+                
+                
             ], className='account-section')
         ], className='navigation'),
         
@@ -213,7 +227,7 @@ app.layout = html.Div(
             
             # dcc.Location(id="url", refresh=False),
             dash.page_container
-        ], className='content-wrapper')
+        ], className='content-wrapper', id='content-render')
     ],
     className= "app-container"
 )
@@ -223,7 +237,7 @@ app.layout = html.Div(
 
 @app.callback(
     Output("login-modal", "is_open"),
-    Input("more-btn", "n_clicks"),
+    Input("login-call", "n_clicks"),
     # Input("close", "n_clicks"),
     State("login-modal", "is_open"),
 )
@@ -238,25 +252,28 @@ def toggle_modal(n1, is_open):
     Output('url', 'pathname'),  # ✅ THIS TRIGGERS A PAGE CHANGE
     Output("user-data", "data"),
     Input("login-button", "n_clicks"),
+    Input("login-password", "n_submit"),
     State("login-username", "value"),
     State("login-password", "value"),
     prevent_initial_call=True
 )
-def get_login_details(n_clicks, identifier, password):
-    user = login_user(identifier, password)
-    if user:
-        session['user_id'] = user.id
-        session['username'] = user.username
-        session['role'] = user.role
-        print(session)
-        return '/', {
-            'username': user.username,
-            'email': user.email,
-            'name': user.full_name,
-            'role': user.role
-        }
-    else:
-        return dash.no_update, dash.no_update
+def get_login_details(n_clicks, n_submit, identifier, password):
+    triggered_id = callback_context.triggered[0]['prop_id'].split('.')[0]
+    
+    if triggered_id in ["login-button", "login-password"]:
+        user = login_user(identifier, password)
+        if user:
+            session['user_id'] = user.id
+            session['username'] = user.username
+            session['role'] = user.role
+            # print(session)
+            return '/', {
+                'username': user.username,
+                'email': user.email,
+                'name': user.full_name,
+                'role': user.role
+            }
+    return dash.no_update, dash.no_update
     
 
 @app.callback(
@@ -266,25 +283,105 @@ def get_login_details(n_clicks, identifier, password):
     prevent_initial_call=True
 )
 def get_login_details(user_info):
+    # print(user_info)
     if user_info:
         return html.H4(f"{user_info['name']}"), user_info["email"]
+    return html.H4(f"Guest"), "Public Account Mode"
+
+
+############################ LOGOUT CALLBACKS ############################
+
+@app.callback(
+    Output("user-data", "data", True),          
+    Output("url", "href"),                
+    Input("logout-call", "n_clicks"),
+    prevent_initial_call=True
+)
+def logout(trigger):
+    if trigger:
+        session.clear()  # clears all session data
+        # print(session)
+        return {}, "/"   # or "/login" if you have a login page
     return dash.no_update, dash.no_update
 
 
-
-############# RENDERING BASED ON ROLE #####################
+##################### ACCOUNT SETTING COLLAPSE #####################
 @app.callback(
+    Output("acc-opts", "style"),
+    Input("more-btn", "n_clicks"),
+    State("acc-opts", "style"),
+    prevent_initial_call=True
+)
+def toggle_collapse(n_clicks, current_style):
+    # Default to showing if no style has been set yet
+    if not current_style or current_style.get("display") == "none":
+        return {"display": "flex"}
+    else:
+        return {"display": "none"}
+
+
+@app.callback(
+    Output("more-btn", "style"),
+    Output("rotation-state", "data"),
+    Input("more-btn", "n_clicks"),
+    State("rotation-state", "data"),
+    prevent_initial_call=True
+)
+def rotate_div(n_clicks, rotated):
+    new_state = not rotated
+    style = {
+        "transition": "transform 0.3s ease-in-out",
+        "display": "flex",
+        "flexDirection": "column",
+        "alignSelf": "center",
+        "width": "1.75em",
+        "cursor": "pointer",
+        "transform": "rotate(180deg)" if new_state else "rotate(0deg)"
+    }
+    return style, new_state
+
+
+
+##################### RENDERING BASED ON ROLE #####################
+@app.callback(
+    Output("nav-2", "style"),
     Output("nav-3", "style"),
-    Input("user-data", "data"),
+    Output("opt-3", "style", True),
+    Output("login-call", "style"),
+    Output("logout-call", "style"),
+    Input("url", "pathname"),
     prevent_initial_call=True
 )
 def display_limitations(user):
-    role = user.get("role", "guest")
+    role = session.get("role", "guest")
     
+    # Pre-definded Styles
+    disabled =  { "pointerEvents": "none",  "cursor": "not-allowed",  "opacity": 0.6 }
+    noshow = {"display": "none"}
+
+    # print(session)
     if role == "admin":
-        return {'display': 'none'}
+        return dash.no_update, dash.no_update, dash.no_update, noshow, dash.no_update,
     elif role == "guest":
-        return dash.no_update
+        return disabled, disabled, noshow, dash.no_update, noshow
+
+
+
+##################### PROTECTING PAGES BASED ON ROLE #####################
+@app.callback(
+    Output("content-render", "children"),
+    Input("url", "pathname")
+)
+def route_protected_pages(pathname):
+    # print("????")
+    role = session.get("role", "guest")
+    
+    # RESTRICTED
+    if pathname in ("/school-level", "/settings", "/analytical"):
+        if role != "admin":
+            return dcc.Location(href="/unauthorized", id="redirect-unauth")
+    return dash.no_update
+
 
 # Run the script
 if __name__ == '__main__':
