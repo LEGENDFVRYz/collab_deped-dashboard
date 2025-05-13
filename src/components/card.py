@@ -8,10 +8,10 @@ from dash import html
 """
 
 
-def Card(children=[], margin=True, padding='1em', gradient=False, **kwargs):
+def Card(children=[], margin=True, padding='1em', gradient=False, bg='#ffffff', **kwargs):
     # Styles: Box Container
     margin = '0.5em' if margin else '0em'
-    background = 'linear-gradient(to bottom right, #037DEE, #41B6FF, #007EE2)' if gradient else '#ffffff'
+    background = 'linear-gradient(to bottom right, #037DEE, #41B6FF, #007EE2)' if gradient else bg
     
     
     box_styles = {
