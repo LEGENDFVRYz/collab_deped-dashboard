@@ -1,3 +1,5 @@
+from enum import auto
+from turtle import title
 import numpy as np
 import pandas as pd
 import dash
@@ -945,7 +947,6 @@ def update_choropleth_map(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    # 2. Aggregate counts by region and sector, then sort so smaller sectors stack on top
     sector_enrollment = (
         FILTERED_DATA
         .groupby(['region', 'sector'])['counts']
@@ -953,43 +954,37 @@ def update_graph(trigger, data):
         .reset_index()
     )
 
-    # Sort within each region by counts ascending (smallest on top in stack)
     sector_enrollment = (
         sector_enrollment
         .sort_values(['region', 'counts'], ascending=[True, True])
     )
 
-    # 3. Define chronological region order (DepEd standard)
     region_order = [
         'CAR', 'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
         'Region IV-B', 'Region V', 'Region VI', 'Region VII', 'Region VIII',
         'Region IX', 'Region X', 'Region XI', 'Region XII', 'CARAGA', 'BARMM'
     ]
 
-    # Enforce this order on the data
     sector_enrollment['region'] = pd.Categorical(
         sector_enrollment['region'],
         categories=region_order,
         ordered=True
     )
 
-    # 4. Define exact sector order and use red shades from your palette
     sector_order  = ['Public', 'Private', 'SUCs/LUCs', 'PSO']
     sector_colors = {
-        'Public':    '#930F22',  # Dark red
-        'Private':   '#E11C38',  # Mid red
-        'SUCs/LUCs': '#FF5B72',  # Light red
-        'PSO':       '#FF899A'   # Pinkish red
+        'Public':    '#930F22',
+        'Private':   '#E11C38',  
+        'SUCs/LUCs': '#FF5B72',  
+        'PSO':       '#FF899A'   
     }
 
-    # Enforce sector order to control stacking
     sector_enrollment['sector'] = pd.Categorical(
         sector_enrollment['sector'],
         categories=sector_order,
         ordered=True
     )
 
-    # 5. Build the stacked bar chart
     sector_chart = px.bar(
         sector_enrollment,
         x='region',
@@ -1004,12 +999,10 @@ def update_graph(trigger, data):
         labels={
             'region': 'Region',
             'counts': 'Number of Students',
-            'sector': 'School Sector'
+            'sector': 'School Sector',
         },
-        title="Student Enrollment by School Sector per Region"
     )
 
-# 6. Uniform styling with y-axis tickformat as "4M", "5M", etc.
     sector_chart.update_layout(
     title_font=dict(size=20, family='Inter', color='#3C6382'),
     title_x=0.5,
@@ -1035,13 +1028,11 @@ def update_graph(trigger, data):
     
 )
 
-    # 7. Add a bold white border to each segment
     sector_chart.update_traces(
         marker_line_color='#FFFFFF',
         marker_line_width=2
     )
 
-    # 8. Display the chart
     sector_chart
 
     return dcc.Graph(figure=sector_chart)

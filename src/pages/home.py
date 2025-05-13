@@ -36,10 +36,10 @@ layout = html.Div([
                             html.Div([
                                 Card([
                                     html.Div([
-                                        # html.Div([
-                                        #     html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
-                                        #     html.H1(f"{total_enrollees:,}", className="total-text"),
-                                        # ], className='icon-and-text'),
+                                        html.Div([
+                                            html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
+                                            html.H1([], id="total-text", className="total-text"),
+                                        ], className='icon-and-text'),
                                         html.Div([
                                             html.Span("", className="year-marker"),
                                             html.Span("Academic Year 2023-2024", className="year-text"),
@@ -54,40 +54,43 @@ layout = html.Div([
                             html.Div([
                                 html.Div([
                                     Card([
-                                        # html.Div([
-                                        #     html.Div([
-                                        #         html.Span("", className="glevel-marker es"),
-                                        #         html.H1(f"{total_es_count_formatted}", className="count-text"),
-                                        #     ], className="glevel-count"),
-                                        #     html.Span(f"{total_es_count:,} enrollees", className="full-count-text"),
-                                        #     html.Span("Elementary", className="desc-text"),
-                                        # ], className="ns-sub-cards"),
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker es"),
+                                                html.H1([], id="es-text-formatted", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="es-text", className="full-count-text"),
+                                            html.Span("Elementary", className="desc-text"),
+                                        ], className="ns-sub-cards"),
                                     ], margin=False)
                                 ], className="ns-indicator"),
+                                
                                 html.Div([
                                     Card([
-                                        # html.Div([
-                                        #     # html.Div([
-                                        #     #     html.Span("", className="glevel-marker jhs"),
-                                        #     #     html.H1(f"{total_jhs_count_formatted}", className="count-text"),
-                                        #     # ], className="glevel-count"),
-                                        #     html.Span(f"{total_jhs_count:,} enrollees", className="full-count-text"),
-                                        #     html.Span("Junior High School", className="desc-text"),
-                                        # ], className="ns-sub-cards"),
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker jhs"),
+                                                html.H1([], id="jhs-text-formatted", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="jhs-text", className="full-count-text"),
+                                            html.Span("Junior High School", className="desc-text"),
+                                        ], className="ns-sub-cards"),
                                     ], margin=False)
                                 ], className="ns-indicator"),
+                                
                                 html.Div([
                                     Card([
-                                        # html.Div([
-                                        #     html.Div([
-                                        #         html.Span("", className="glevel-marker shs"),
-                                        #         html.H1(f"{total_shs_count_formatted}", className="count-text"),
-                                        #     ], className="glevel-count"),
-                                        #     html.Span(f"{total_shs_count:,} enrollees", className="full-count-text"),
-                                        #     html.Span("Senior High School", className="desc-text"),
-                                        # ], className="ns-sub-cards"),
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker shs"),
+                                                html.H1([], id="shs-text-formatted", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="shs-text", className="full-count-text"),
+                                            html.Span("Senior High School", className="desc-text"),
+                                        ], className="ns-sub-cards"),
                                     ], margin=False)
                                 ], className="ns-indicator")
+                                
                             ], className="ns-sub-detail"),
                         ], className="ns-details"),
                     
@@ -95,8 +98,8 @@ layout = html.Div([
                             Card([
                                 html.H4(["Regional Distribution"], className="ns-graph-title"),
                                 dcc.Graph(id="home_regional_distribution", figure={},
-                                            config={"responsive": True},
-                                            style={"width": "100%", "height": "100%"}
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
                                 ),
                             ], margin=False)
                         ], className="ns-graph")
@@ -127,12 +130,33 @@ layout = html.Div([
                         ], className="gld-graph"),
                         
                         html.Div([
+                            
                             html.Div([
-                                Card([], margin=False)
+                                Card([
+                                    html.Div([
+                                        html.Span("Most Populated", className="gld-pop-title"),
+                                        html.Span([], id="highest-grade", className="gld-grade"),
+                                        html.Div([
+                                            html.Span([], id="highest-count", className="gld-count"),
+                                            html.Span("students", className="gld-student-text"),
+                                        ], className="gld-student-count most"),
+                                    ], className="gld-populated"),
+                                ], margin=False)
                             ], className="gld-info"),
+                            
                             html.Div([
-                                Card([], margin=False)
+                                Card([
+                                    html.Div([
+                                        html.Span("Least Populated", className="gld-pop-title"),
+                                        html.Span([], id="lowest-grade", className="gld-grade"),
+                                        html.Div([
+                                            html.Span([], id="lowest-count", className="gld-count"),
+                                            html.Span("students", className="gld-student-text"),
+                                        ], className="gld-student-count least"),
+                                    ], className="gld-populated"),
+                                ], margin=False)
                             ], className="gld-info"),
+                            
                         ],className="gld-info-cards"),
                         
                     ], className="gld-content"),
@@ -153,19 +177,19 @@ layout = html.Div([
                                                     style={"width": "100%", "height": "100%"}
                                         ),
                                         html.Div([
-                                            # html.Div([
-                                            #     html.Img(src="/assets/images/icons_navigation/up-green.svg", className="up-icon"),
-                                            #     html.Span(f"{gender_gap}%", className="percentage"),
-                                            # ], className="gap-percentage"),
-                                            # html.Div([
-                                            #     html.Span("more"),
-                                            #     html.Span(f"{greater_gender}", className=f"greater {'male-dominant' if greater_gender == 'MALE' else 'female-dominant'}"),
-                                            # ], className="greater-div"),
-                                            # html.Span("enrollees"),
-                                            # html.Div([
-                                            #     html.Span("than"),
-                                            #     html.Span(f"{lesser_gender}", className=f"lesser {'male-less-dominant' if lesser_gender == 'MALE' else 'female-less-dominant'}"),
-                                            # ], className="lesser-div"),
+                                            html.Div([
+                                                html.Img(src="/assets/images/icons_navigation/up-green.svg", className="up-icon"),
+                                                html.Span([], id="gender-gap", className="percentage"),
+                                            ], className="gap-percentage"),
+                                            html.Div([
+                                                html.Span("more"),
+                                                html.Span(id="greater-gender", className="greater")
+                                            ], className="greater-div"),
+                                            html.Span("enrollees"),
+                                            html.Div([
+                                                html.Span("than"),
+                                                html.Span(id="lesser-gender", className="lesser")
+                                            ], className="lesser-div"),
                                         ], className="lp-desc"),
                                     ], className="lp-graph-desc"),
                                 ], margin=False)
@@ -174,33 +198,33 @@ layout = html.Div([
                             html.Div([
                                 html.Div([
                                     Card([
-                                        # html.Div([
-                                        #     html.Div([
-                                        #         html.Span("", className="gender-marker female"),
-                                        #         html.H1(f"{total_female_count_formatted}", className="count-text"),
-                                        #     ], className="gender-count"),
-                                        #     html.Span(f"{total_female_count:,} students", className="full-count-text"),
-                                        #     html.Div([
-                                        #         html.Span("Female Students", className="desc-text female"),
-                                        #         html.Img(src="/assets/images/icons_navigation/female.svg"),
-                                        #     ], className="desc-n-icon"),
-                                        # ], className="lp-sub-cards"),
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="gender-marker female"),
+                                                html.H1([], id="total-female-count-formatted", className="count-text"),
+                                            ], className="gender-count"),
+                                            html.Span([], id="total-female-count", className="full-count-text"),
+                                            html.Div([
+                                                html.Span("Female Students", className="desc-text female"),
+                                                html.Img(src="/assets/images/icons_navigation/female.svg"),
+                                            ], className="desc-n-icon"),
+                                        ], className="lp-sub-cards"),
                                     ], margin=False, padding="1em 1em 0.25em 1em"),
                                 ], className="lp-indicator"),
                                 
                                 html.Div([
                                     Card([
-                                        # html.Div([
-                                        #     html.Div([
-                                        #         html.Span("", className="gender-marker male"),
-                                        #         html.H1(f"{total_male_count_formatted}", className="count-text"),
-                                        #     ], className="gender-count"),
-                                        #     html.Span(f"{total_male_count:,} students", className="full-count-text"),
-                                        #     html.Div([
-                                        #         html.Span("Male Students", className="desc-text male"),
-                                        #         html.Img(src="/assets/images/icons_navigation/male.svg"),
-                                        #     ], className="desc-n-icon"),
-                                        # ], className="lp-sub-cards"),
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="gender-marker male"),
+                                                html.H1([], id="total-male-count-formatted", className="count-text"),
+                                            ], className="gender-count"),
+                                            html.Span([], id="total-male-count", className="full-count-text"),
+                                            html.Div([
+                                                html.Span("Male Students", className="desc-text male"),
+                                                html.Img(src="/assets/images/icons_navigation/male.svg"),
+                                            ], className="desc-n-icon"),
+                                        ], className="lp-sub-cards"),
                                     ], margin=False, padding="1em 1em 0.25em 1em"),
                                 ], className="lp-indicator"),
                             ],className="lp-info-cards"), 
@@ -220,9 +244,9 @@ layout = html.Div([
                                     ], className="lp-upper"),
                                     
                                     html.Div([
-                                        html.Hr(),
+                                        html.Div([html.Hr()] , style={'paddingTop': '8px', 'paddingBottom': '8px', 'color': '#E9E8E8'}),
                                         html.H5("Academic Track"),
-                                        html.H6("Strand Breakdown"),
+                                        html.H6("Strand Breakdown", className="lp-strand-break"),
                                         dcc.Graph(id="home_shs_strands", figure={},
                                                 config={"responsive": True},
                                                 style={"width": "100%", "height": "100%"}
@@ -249,8 +273,15 @@ layout = html.Div([
                             
                             html.Div([
                                 Card([
-                                    # html.Div([html.H3(f"{number_of_schools_formatted}")], className='header'),
-                                    # html.Div([html.Span(f"{number_of_schools:,} schools", className="text-center"),], className='indicator'),
+                                    html.Div([
+                                        html.Div([
+                                            html.Img(src="/assets/images/icons_navigation/school-count.svg", className="total-school-icon"),
+                                            html.H1([], id="number-of-schools", className="total-school-text"),
+                                        ], className='ssc-icon-and-text'),
+                                        html.Div([
+                                            html.Span("Total Number of Schools", className="ssc-desc-text"),
+                                        ], className='ssc-indicator'),
+                                    ], className="ssc-school-detail"),
                                 ], margin=False, gradient=True)
                             ], className="ssc-info"),
                             
@@ -262,8 +293,8 @@ layout = html.Div([
                                         html.H6("Student Count"),
                                     ], className="ssc-table-header"),
                                     dcc.Graph(id="ssc-subclass-table", figure={},
-                                                    config={"responsive": True},
-                                                    style={"width": "100%", "height": "100%"}
+                                            config={"responsive": True},
+                                            style={"width": "100%", "height": "100%"}
                                     ),
                                 ], margin=False)
                             ], className="ssc-table"),
@@ -272,20 +303,79 @@ layout = html.Div([
                         
                         html.Div([
                             Card([
+                                html.H4(["School Distribution Across Sectors"], className="sector-graph-title"),
                                 dcc.Graph(id="home_school_number_per_sector", figure={},
-                                                config={"responsive": True},
-                                                style={"width": "100%", "height": "100%"}
+                                        config={"responsive": True},
+                                        style={"width": "100%", "height": "100%"}
                                 ),
                             ], margin=False),
                         ], className="ssc-content-2"),
                         
                         html.Div([
                             Card([
-                                dcc.Graph(id="home_program_offering", figure={},
-                                        config={"responsive": True},
-                                        style={"width": "100%", "height": "100%"}
-                                ),
+                                html.Div([  
+                                    html.H4(["School Distribution by Program Offering"], className="offering-graph-title"),
+                                    
+                                    html.Div([
+                                        
+                                        html.Div([
+                                            html.Div([
+                                                html.Span([], id="shs-percentage", className="shs-percent-text"),
+                                                html.Span("of schools offers Senior High School", className="shs-desc-text"),
+                                            ], className="program-offering-percentage"),
+                                            
+                                            html.Div([
+                                                html.Div([
+                                                    html.Span("", className="legend-color es"),
+                                                    html.Span("Elementary", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color jhs"),
+                                                    html.Span("Junior High School", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color shs"),
+                                                    html.Span("Senior High School", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([html.Hr()] , style={'paddingTop': '8px', 'paddingBottom': '8px', 'color': '#E9E8E8'}),
+                                                html.Div([
+                                                    html.Span("", className="legend-color purees"),
+                                                    html.Span("Purely ES", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color purejhs"),
+                                                    html.Span("Purely JHS", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color pureshs"),
+                                                    html.Span("Purely SHS", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color esjhs"),
+                                                    html.Span("ES with JHS", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color jhsshs"),
+                                                    html.Span("JHS with SHS", className="legend-text"),
+                                                ], className="legend-label"),
+                                                html.Div([
+                                                    html.Span("", className="legend-color alloffer"),
+                                                    html.Span("All Offering", className="legend-text"),
+                                                ], className="legend-label"),
+                                            ], className="program-offering-legend"),
+                                            
+                                        ], className = "percent-legend-container"),
+                                        
+                                        dcc.Graph(id="home_program_offering", figure={},
+                                                config={"responsive": True},
+                                                style={"width": "100%", "height": "100%"},
+                                                className="home_program_offering"
+                                        ),
+                                    ], className="program-offering-graph"),
+                                    
+                                ], className="ssc-container"),
                             ], margin=False),
+                            
                         ], className="ssc-content-3"),
                         
                     ], className="ssc-content"),  

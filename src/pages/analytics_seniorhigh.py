@@ -28,6 +28,7 @@ def render_seniorhigh_filter():
                                 # distribution of enrollees per track
                                 #########################################
                                 ## Sample Use of Charts, Remove this After
+                                html.H4("Distribution of SHS Enrollees per Track", style={"textAlign": "center", "color": "#3C6382"}),
                                 # dcc.Loading(
                                 #     id="loading-graph",
                                 #     type="default",
@@ -49,7 +50,7 @@ def render_seniorhigh_filter():
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                        html.Div([],id='seniorhigh_ratio_enrollment',)
+                                    html.Div([],id='seniorhigh_ratio_enrollment',)
                                     # ),
                                     # dcc.Graph(id="seniorhigh_ratio_enrollment", className="seniorhigh_ratio_enrollment", figure=seniorhigh_ratio_enrollment,
                                     #         config={"responsive": True},
@@ -64,7 +65,7 @@ def render_seniorhigh_filter():
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                        html.Div([],id='seniorhigh_most_least_enrolled',)
+                                    html.Div([],id='seniorhigh_most_least_enrolled',)
                                     # ),
                                     # dcc.Graph(id="seniorhigh_most_least_enrolled", className="seniorhigh_most_least_enrolled", figure=seniorhigh_most_least_enrolled,
                                         # config={"responsive": True},
@@ -75,6 +76,7 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # gender distribution
+                                    html.H4("Distribution by Strand and Gender", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
@@ -85,6 +87,7 @@ def render_seniorhigh_filter():
                                     #     config={"responsive": True},
                                     #     style={"width": "100%", "height": "100%"}
                                     # ),
+
                                 ], margin=False),
                             ], className="shs-enrollment-graph"),
                             
@@ -99,11 +102,12 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # differences in the number of schools offering each track
+                                    html.H4("Number of Schools Offering Each Track by Sector", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                        html.Div([],id='seniorhigh_school_offering_per_track_by_sector',)
+                                    html.Div([],id='seniorhigh_school_offering_per_track_by_sector',)
                                     # ),
                                     # dcc.Graph(id="seniorhigh_school_offering_per_track_by_sector", className="seniorhigh_school_offering_per_track_by_sector", figure=seniorhigh_school_offering_per_track_by_sector,
                                     #     config={"responsive": True},
@@ -114,11 +118,12 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # which SHS tracks are least offered but in high demand
+                                    html.H4("Relationship between Student Demand and Track Supply", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                        html.Div([],id='seniorhigh_least_offered_high_demand',)
+                                    html.Div([],id='seniorhigh_least_offered_high_demand',)
                                     # ),
                                     
                                     # dcc.Graph(id="seniorhigh_least_offered_high_demand", className="seniorhigh_least_offered_high_demand", figure=seniorhigh_least_offered_high_demand,
