@@ -1,3 +1,5 @@
+from tkinter import font
+from turtle import title
 from numpy import append
 from sqlalchemy import create_engine
 import pandas as pd
@@ -154,9 +156,168 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
 if __name__ == '__main__':
     # df = auto_extract(['region'], is_specific=False)
     df = auto_extract(['year', 'sub_class', 'counts'], is_specific=True)
-    df.head()
+
+    # # Grouped Line Chart
+    # df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
+
+    # custom_colors = {
+    # 'DOST Managed': '#4F0A14',
+    # 'DepEd Managed': '#710E1C',
+    # 'LUC Managed': '#921224',
+    # 'Local International School': '#B4162D',
+    # 'Non-Sectrian': '#D61B35',
+    # 'Other GA Managed': '#E63E56',
+    # 'SUC Managed': '#EA6074',
+    # 'School Abroad': '#EF8292',
+    # 'Sectarian': '#F3A4AF',
+    # }
+
+
+    # df_grouped['year'] = pd.Categorical(
+    #     df_grouped['year'],
+    #     categories=sorted(df_grouped['year'].unique()),
+    #     ordered=True
+    # )
+
+    # fig = px.line(
+    #     df_grouped,
+    #     x='year',
+    #     y='counts',
+    #     color='sub_class',
+    #     markers=True,
+    #     title='Annual Enrollment Trends per Subclass',
+    #     color_discrete_map=custom_colors,
+    # )
+
+    # fig.update_layout(
+    #     title=dict(
+    #         text='Annual Enrollment Trends per Subclass',
+    #         font=dict(
+    #             family= 'Inter Bold',
+    #             size=20,
+    #             color='#3C6382'
+    #         ),
+    #     ),
+    #     xaxis_title='Year',
+    #     yaxis_title='Total Enrollees',
+    #     legend_title='Subclass'
+    # )
+    
+    # # Line Chart with Percentage Change since Slope Chart wont show if only one year is available
+    # df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
+
+    # df_grouped = df_grouped.sort_values(['sub_class', 'year'])
+    # df_grouped['pct_change'] = df_grouped.groupby('sub_class')['counts'].pct_change() * 100
+
+    # df_grouped['pct_change'] = df_grouped['pct_change'].fillna(0)
+
+    # fig = px.line(
+    #     df_grouped,
+    #     x='year',
+    #     y='pct_change',
+    #     color='sub_class',
+    #     markers=True,
+    #     title='Annual Enrollment Growth Rate by School Subclassification',
+    #     labels={'pct_change': 'Percent Change (%)'}
+    # )
+
+    # if df_grouped['year'].nunique() == 1:
+    #     fig.update_layout(
+    #         title={
+    #             'text': 'Annual Enrollment Growth Rate by School Subclassification<br><sup>(Only one year available — growth set to 0%)</sup>',
+    #             'x': 0.5
+    #         }
+    #     )
+
+    # fig.update_layout(
+    #     xaxis_title='Year',
+    #     yaxis_title='Percent Change in Enrollment (%)',
+    #     legend_title='Subclass'
+    # )
+
+    # #Slope Chart
+    # df['year'] = df['year'].astype(str)
+
+    # df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
+
+    # pivot_df = df_grouped.pivot(index='sub_class', columns='year', values='counts')
+
+    # if pivot_df.shape[1] != 2:
+    #     raise ValueError("Slope chart requires exactly two years of data.")
+
+    # pivot_df = pivot_df.reset_index()
+    # pivot_df_melted = pivot_df.melt(id_vars='sub_class', var_name='year', value_name='enrollment')
+
+    # fig = px.line(
+    #     pivot_df_melted,
+    #     x='year',
+    #     y='enrollment',
+    #     color='sub_class',
+    #     markers=True,
+    #     line_group='sub_class',
+    #     title='Enrollment % Change Between Two Years (Slope Chart)'
+    # )
+
+    # fig.update_layout(
+    #     xaxis_title='Year',
+    #     yaxis_title='Enrollment Count',
+    #     legend_title='Subclass',
+    #     showlegend=True
+    # )
+
+
+    # # Boxplot
+    # df['year'] = df['year'].astype(str)  
+    # df['sub_class'] = df['sub_class'].astype(str)  
+ 
+    # df_grouped = df.groupby(['sub_class', 'year'], as_index=False)['counts'].sum()
+
+    # custom_colors = {
+    # 'DOST Managed': '#4F0A14',
+    # 'DepEd Managed': '#710E1C',
+    # 'LUC Managed': '#921224',
+    # 'Local International School': '#B4162D',
+    # 'Non-Sectrian': '#D61B35',
+    # 'Other GA Managed': '#E63E56',
+    # 'SUC Managed': '#EA6074',
+    # 'School Abroad': '#EF8292',
+    # 'Sectarian': '#F3A4AF',
+    # }
+
+    # fig = px.box(
+    #     df_grouped,
+    #     x='sub_class',
+    #     y='counts',
+    #     color='sub_class',
+    #     title='Enrollment Spread by Subclassification',
+    #     points='all',  
+    #     labels={'counts': 'Total Enrollment', 'sub_class': 'School Subclassification'},
+    #     color_discrete_map=custom_colors,
+    # )
+
+    # fig.update_layout(
+    #     title_font_color='#3C6382',  
+    #     # xaxis_title='School Subclassification',
+    #     yaxis_title='Total Enrollment per Year',
+    #     legend_title='Subclassification',
+    #     font=dict(color='#667889'), 
+    #     title_font=dict(color='#3C6382', size=20),
+    # )
+
     # Grouped Line Chart
     df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
+
+    custom_colors = {
+        'DOST Managed': '#4F0A14',
+        'DepEd Managed': '#710E1C',
+        'LUC Managed': '#921224',
+        'Local International School': '#B4162D',
+        'Non-Sectrian': '#D61B35',
+        'Other GA Managed': '#E63E56',
+        'SUC Managed': '#EA6074',
+        'School Abroad': '#EF8292',
+        'Sectarian': '#F3A4AF',
+    }
 
     df_grouped['year'] = pd.Categorical(
         df_grouped['year'],
@@ -170,21 +331,54 @@ if __name__ == '__main__':
         y='counts',
         color='sub_class',
         markers=True,
-        title='Annual Enrollment Trends per Subclass'
+        title='Annual Enrollment Trends per Subclass',
+        color_discrete_map=custom_colors,
     )
 
     fig.update_layout(
-        xaxis_title='Year',
-        yaxis_title='Total Enrollment Count',
-        legend_title='Subclass'
+        title=dict(
+            text='Annual Enrollment Trends per Subclass',
+            font=dict(
+                family='Inter Bold',
+                size=20,
+                color='#3C6382'
+            ),
+        ),
+        xaxis_title=dict(
+            text='Year',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        yaxis_title=dict(
+            text='Total Enrollees',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        legend_title=dict(
+            text='Subclass',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        font=dict(
+            family='Inter',
+            size=12,
+            color='#667889'
+        )
     )
-    
 
+    # Line Chart with Percentage Change
     df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
-
     df_grouped = df_grouped.sort_values(['sub_class', 'year'])
     df_grouped['pct_change'] = df_grouped.groupby('sub_class')['counts'].pct_change() * 100
-
     df_grouped['pct_change'] = df_grouped['pct_change'].fillna(0)
 
     fig = px.line(
@@ -201,21 +395,50 @@ if __name__ == '__main__':
         fig.update_layout(
             title={
                 'text': 'Annual Enrollment Growth Rate by School Subclassification<br><sup>(Only one year available — growth set to 0%)</sup>',
-                'x': 0.5
+                'x': 0.5,
+                'font': dict(
+                    family='Inter Bold',
+                    size=20,
+                    color='#3C6382'
+                )
             }
         )
 
     fig.update_layout(
-        xaxis_title='Year',
-        yaxis_title='Percent Change in Enrollment (%)',
-        legend_title='Subclass'
+        xaxis_title=dict(
+            text='Year',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        yaxis_title=dict(
+            text='Percent Change in Enrollment (%)',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        legend_title=dict(
+            text='Subclass',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        font=dict(
+            family='Inter',
+            size=12,
+            color='#667889'
+        )
     )
 
-    #Slope Chart
+    # Slope Chart
     df['year'] = df['year'].astype(str)
-
     df_grouped = df.groupby(['year', 'sub_class'], as_index=False)['counts'].sum()
-
     pivot_df = df_grouped.pivot(index='sub_class', columns='year', values='counts')
 
     if pivot_df.shape[1] != 2:
@@ -235,17 +458,48 @@ if __name__ == '__main__':
     )
 
     fig.update_layout(
-        xaxis_title='Year',
-        yaxis_title='Enrollment Count',
-        legend_title='Subclass',
+        title=dict(
+            font=dict(
+                family='Inter Bold',
+                size=20,
+                color='#3C6382'
+            )
+        ),
+        xaxis_title=dict(
+            text='Year',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        yaxis_title=dict(
+            text='Enrollment Count',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        legend_title=dict(
+            text='Subclass',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        font=dict(
+            family='Inter',
+            size=12,
+            color='#667889'
+        ),
         showlegend=True
     )
 
-
     # Boxplot
-    df['year'] = df['year'].astype(str)  
-    df['sub_class'] = df['sub_class'].astype(str)  
- 
+    df['year'] = df['year'].astype(str)
+    df['sub_class'] = df['sub_class'].astype(str)
     df_grouped = df.groupby(['sub_class', 'year'], as_index=False)['counts'].sum()
 
     fig = px.box(
@@ -254,15 +508,48 @@ if __name__ == '__main__':
         y='counts',
         color='sub_class',
         title='Enrollment Spread by Subclassification',
-        points='all',  
-        labels={'counts': 'Total Enrollment', 'sub_class': 'School Subclassification'}
+        points='all',
+        labels={'counts': 'Total Enrollment', 'sub_class': 'School Subclassification'},
+        color_discrete_map=custom_colors,
     )
 
     fig.update_layout(
-        xaxis_title='School Subclassification',
-        yaxis_title='Total Enrollment per Year',
-        legend_title='Subclassification'
+        title=dict(
+            font=dict(
+                family='Inter Bold',
+                size=20,
+                color='#3C6382'
+            )
+        ),
+        xaxis_title=dict(
+            text='School Subclassification',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        yaxis_title=dict(
+            text='Total Enrollment per Year',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        legend_title=dict(
+            text='Subclassification',
+            font=dict(
+                family='Inter Medium',
+                size=14,
+                color='#667889'
+            )
+        ),
+        font=dict(
+            family='Inter',
+            size=12,
+            color='#667889'
+        )
     )
-
 
 
