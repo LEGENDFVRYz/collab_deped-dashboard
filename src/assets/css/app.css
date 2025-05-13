@@ -30,15 +30,18 @@ body {
   z-index: 1;
 }
 .app-container .navigation .brand-section {
-  margin-bottom: 1em;
+  padding-top: 3em;
+  padding-bottom: 3em;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 6em;
 }
 .app-container .navigation .brand-section h2 {
   color: #04508c;
+}
+.app-container .navigation .brand-section img {
+  width: 10em;
 }
 .app-container .navigation .menu-section {
   display: flex;

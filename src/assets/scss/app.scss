@@ -43,16 +43,21 @@ body{
         z-index: 1; 
 
         .brand-section{
-            margin-bottom: 1em;
+            padding-top: 3em;
+            padding-bottom: 3em;
             text-align: center;
             
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 6em;
+            // height: 9em;
             
             h2{
                 color: $primary-color-1;
+            }
+            img{
+                width: 10em;
+
             }
         }
 
