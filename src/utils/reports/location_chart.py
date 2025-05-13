@@ -279,14 +279,20 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
+    # Cleaning
+    clean_df = FILTERED_DATA[FILTERED_DATA['grade'].isin(['G11', 'G12'])]
+    clean_df['track'] = clean_df['track'].cat.remove_unused_categories()
+    
     # Step 2: Group and SUM the 'counts' for track-level heatmap
-    track_data = FILTERED_DATA.groupby(['region', 'track'])['counts'].sum().reset_index()
+    track_data = clean_df.groupby(['region', 'track'])['counts'].sum().reset_index()
     track_pivot = track_data.pivot(index='track', columns='region', values='counts').fillna(0)
 
     # Step 3: Group and SUM the 'counts' for strand-level heatmap
-    strand_data = FILTERED_DATA.groupby(['region', 'strand'])['counts'].sum().reset_index()
+    clean_df = clean_df[clean_df['strand'] != '__NaN__']
+    clean_df['strand'] = clean_df['strand'].cat.remove_unused_categories()
+    strand_data = clean_df.groupby(['region', 'strand'])['counts'].sum().reset_index()
     strand_pivot = strand_data.pivot(index='strand', columns='region', values='counts').fillna(0)
-
+    
     # Step 4: Create subplots
     heatmap_fig = make_subplots(
         rows=2, cols=1,
@@ -410,13 +416,13 @@ def update_graph(trigger, data):
 )
 
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     # Step 1: Group by school and region, summing the counts
     aggregated_df = FILTERED_DATA.groupby(['name', 'region'], as_index=False)['counts'].sum()
 
     
-# --- INSERT THIS to filter out schools with 0 enrollees ---
+    # --- INSERT THIS to filter out schools with 0 enrollees ---
     aggregated_df = aggregated_df[aggregated_df['counts'] > 0]
 
     
@@ -431,38 +437,47 @@ def update_graph(trigger, data):
         columnorder=[1, 2, 3],
         columnwidth=[80, 40, 50],
 
-    header=dict(
-        values=["School Name", "Region", "Total Enrollees"],
-        fill_color='#E6F2FB',
-        align='left',
-        font=dict(family='Inter', color='#04508c', size=12),
-        line_color='#B0C4DE',
-        height=40  # header height
-    ),
-    cells=dict(
-        values=[
-            highest_lowest2['name'].apply(lambda x: f"{x}\n"),
-            highest_lowest2['region'],
-            highest_lowest2['counts']
-        ],
-        fill_color=['#FFFFFF', '#F7FAFC'],
-        align='left',
-        font=dict(family='Inter', color='#3C6382', size=12),
-        line_color='#D3D3D3',
-        height=90  # fixed cell height
-    )
-)])
+        header=dict(
+            values=["School Name", "Region", "Total Enrollees"],
+            fill_color='#E6F2FB',
+            align='left',
+            font=dict(family='Inter', color='#04508c', size=12),
+            line_color='#B0C4DE',
+            height=40  # header height
+        ),
+        cells=dict(
+            values=[
+                highest_lowest2['name'].apply(lambda x: f"{x}\n"),
+                highest_lowest2['region'],
+                highest_lowest2['counts']
+            ],
+            fill_color=['#FFFFFF', '#F7FAFC'],
+            align='left',
+            font=dict(family='Inter', color='#3C6382', size=12),
+            line_color='#D3D3D3',
+            height=90  # fixed cell height
+        )
+    )])
 
     hi_low_fig.update_layout(
-        autosize=True,
-        
+        # autosize=True, 
+        height=220,
         margin=dict(l=0, r=0, t=0, b=0),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
     )
-
-    hi_low_fig
     
-    return dcc.Graph(figure=hi_low_fig)
+    return dcc.Graph(
+        figure=hi_low_fig,
+        config={
+            "responsive": True,
+            # "staticPlot": True  # disables zoom, pan, hover, etc.
+        },
+        style={
+            "width": "100%",
+            # "height": "200px",     # fixed height to prevent overflow
+            # "overflow": "hidden"   # ensure no scroll
+        }
+    )
 
 # #################################################################################
