@@ -175,7 +175,13 @@ def render_location_filter():
                         #########################################
                         ## INSERT PLOT: enrollment density (students per location)
                         #########################################
-                        
+                        html.H4(["Enrollment Density"], className="ed-graph-title"),
+                        # dcc.Loading(
+                        #     id="loading-graph",
+                        #     type="default",
+                            html.Div(id='location_choropleth-map')
+                        # ),
+
                         
                         ], margin=False)], className='plot-content')
                 ], className='plot-top-section plot-sec-wrap'),

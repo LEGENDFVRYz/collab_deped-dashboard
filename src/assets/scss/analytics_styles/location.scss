@@ -43,7 +43,10 @@
                     flex-direction: column;
 
                     .plot-a-section{
-                        flex: 1;
+                        min-height: 10%;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0.5em;
                     }
 
                     .edrg-graph-title {
@@ -179,10 +182,20 @@
 
             .plot-top-section{  
                 flex: 2;
+
+                .ed-graph-title {
+                        color: $text-color-1;
+                        text-align: center;
+                    }
             }
 
             .plot-bottom-section{
                 flex: 2;
+
+                .ss-graph-title {
+                        color: $text-color-1;
+                        text-align: center;
+                    }
             }
         }
     }
