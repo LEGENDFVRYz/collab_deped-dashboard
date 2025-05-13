@@ -67,6 +67,7 @@ from src.utils.extras_utils import smart_truncate_number
 
 @callback(
     Output('location_enrollees-distribution-per-location', 'children'),
+    Output('edrg-graph-title', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -74,60 +75,139 @@ from src.utils.extras_utils import smart_truncate_number
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = FILTERED_DATA[['brgy', 'municipality', 'district', 'division', 'province', 'region', 'counts', 'gender']]
     # print("triggered dispilinr")
-    # Step 1: Group by region and gender
-    gender_region = FILTERED_DATA.groupby(['region', 'gender'])['counts'].sum().reset_index()
+    
+    ## LOCATION SCOPE
+    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+    tag = "default"
+    min_loc = 5
 
+    for i, loc in enumerate(locs[1:]):
+        if loc in data:
+            min_loc = i
+            break
+
+    loc_scope = locs[min_loc]
+    
+    
+    ## TITLE
+    # try:
+    #     values = data.get(locs[min_loc + 1], [])
+    #     if len(values) > 1:
+    #         tag = ["Distribution Breakdown for the ", html.Span(["Chosen Location"], className="lfury-highlight"),]
+    #     else:
+    #         tag = ["Distribution Breakdown by ", html.Span([f"{loc_scope.capitalize()} of {values[0]}"], className="lfury-highlight")]
+    # except (IndexError, KeyError, TypeError):
+    #     tag = ["Distribution Breakdown by ", html.Span([f"{loc_scope.capitalize()} of {values[0]}"], className="lfury-highlight")]
+    
+    try:
+        values = data.get(locs[min_loc + 1], [])
+        if len(values) > 1:
+            tag = [
+                "Distribution Breakdown for the ",
+                html.Span([" Chosen Location "], className="lfury-highlight"),
+            ]
+        else:
+            tag = [
+                "Distribution Breakdown by ",
+                html.Span([f" {loc_scope.capitalize()} of {values[0]} "], className="lfury-highlight"),
+            ]
+    except (IndexError, KeyError, TypeError):
+        # Fall back to a default string or empty value
+        tag = [
+            "Distribution Breakdown by ",
+            html.Span([f" {loc_scope.capitalize()} of Philippines "], className="lfury-highlight"),
+        ]
+    
+    # Step 1: Group by region and gender
+    total_counts = FILTERED_DATA.groupby(loc_scope)['counts'].sum().reset_index()
+    total_counts = total_counts.sort_values(by='counts', ascending=True)
+
+    # Step 2: Group by region and gender, and calculate counts
+    gender_region = FILTERED_DATA.groupby([loc_scope, 'gender'])['counts'].sum().reset_index()
+
+    # Step 3: Ensure that the 'loc_scope' in gender_region has the same ordering as in total_counts
+    gender_region[loc_scope] = pd.Categorical(
+        gender_region[loc_scope], 
+        categories=total_counts[loc_scope].tolist(), 
+        ordered=True
+    )
+    
+    # Step 4: Optionally, sort gender_region based on the ordered loc_scope categories
+    gender_region = gender_region.sort_values(by=loc_scope)
+    
     # Step 2: Define brand colors
     brand_colors = {
         'M': '#5DB7FF',
-        'F': '#FF5B72'
+        # 'F': '#FF5B72',
+        'F': '#e11c38',
     }
 
     # Step 3: Create the stacked bar chart
     gender_region_fig = px.bar(
         gender_region,
         x='counts',
-        y='region',
+        y=loc_scope,
         color='gender',
         orientation='h',
         barmode='stack',
-        labels={'counts': 'Number of Enrollees', 'region': 'Region', 'gender': 'Gender'},
+        labels={
+            'counts': 'Number of Enrollees',
+            # Removed 'region' label to prevent it from auto-setting y-axis title
+            'gender': 'Gender'
+        },
         color_discrete_map=brand_colors
     )
     
-
     # Step 4: Calculate total per region for annotations
-    region_totals = gender_region.groupby('region')['counts'].sum().reset_index()
+    region_totals = gender_region.groupby(loc_scope)['counts'].sum().reset_index()
 
-    # Step 5: Add truncated total annotations using your function
+    # Step 5: Add truncated total annotations
     for _, row in region_totals.iterrows():
-        short_text = smart_truncate_number(row['counts'])  # Your custom truncation
+        short_text = smart_truncate_number(row['counts'])  # Your truncation logic
         gender_region_fig.add_annotation(
             x=row['counts'] + 1,
-            y=row['region'],
+            y=row[loc_scope],
             text=short_text,
-            hovertext=str(row['counts']),  # Full raw number on hover
+            hovertext=str(row['counts']),
             showarrow=False,
-            font=dict(color="#04508c", size=12),
+            font=dict(color="#667889", family='Inter Bold'),
             xanchor="left",
-            yanchor="middle"
+            yanchor="middle",
         )
 
-    # Step 6: Customize layout
+    # Step 6: Customize layout (explicitly clear y-axis title)
     gender_region_fig.update_layout(
+        yaxis=dict(
+            automargin=True,
+            title=None,
+            ticksuffix="   "
+        ),
+        xaxis=dict(
+            showline=True,
+            linecolor='black',   # or any visible color like '#667889'
+            linewidth=1          # optional, default is 1
+        ),
+        legend=dict(
+            orientation="h",       # horizontal layout
+            yanchor="top",         # anchor from top of legend box
+            y=-0.15,                # position legend below x-axis label
+            xanchor="center",      # center the legend horizontally
+            x=0.5,                 # center relative to plot width
+        ),
         xaxis_title="Number of Students",
-        yaxis_title="Region",
+        yaxis_title="",  # Remove the default "Region" title
         legend_title="Gender",
+        # tickpadding=10,
         font=dict(color="#667889", family='Inter'),
-        margin=dict(l=80, r=20, t=20, b=40),
+        margin=dict(l=0, r=20, t=20, b=20),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        barcornerradius=3,
+        barcornerradius=6,
     )
-    gender_region_fig
 
-    return dcc.Graph(figure=gender_region_fig)
+    return dcc.Graph(figure=gender_region_fig), tag
 
 #################################################################################
 
@@ -156,29 +236,42 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
+    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+
+    min_loc = 5
+
+    for i, loc in enumerate(locs[1:]):
+        if loc in data:
+            min_loc = i
+            break
+
+    loc_scope = locs[min_loc]
+    
+    
+    
     sector_enrollment = (
         FILTERED_DATA
-        .groupby(['region', 'sector'])['counts']
+        .groupby([loc_scope, 'sector'])['counts']
         .sum()
         .reset_index()
     )
 
     sector_enrollment = (
         sector_enrollment
-        .sort_values(['region', 'counts'], ascending=[True, True])
+        .sort_values([loc_scope, 'counts'], ascending=[True, True])
     )
 
-    region_order = [
-        'CAR', 'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
-        'MIMAROPA', 'Region V', 'Region VI', 'Region VII', 'Region VIII',
-        'Region IX', 'Region X', 'Region XI', 'Region XII', 'CARAGA', 'BARMM'
-    ]
+    # region_order = [
+    #     'CAR', 'NCR', 'Region I', 'Region II', 'Region III', 'Region IV-A',
+    #     'Region IV-B', 'Region V', 'Region VI', 'Region VII', 'Region VIII',
+    #     'Region IX', 'Region X', 'Region XI', 'Region XII', 'CARAGA', 'BARMM'
+    # ]
 
-    sector_enrollment['region'] = pd.Categorical(
-        sector_enrollment['region'],
-        categories=region_order,
-        ordered=True
-    )
+    # sector_enrollment['region'] = pd.Categorical(
+    #     sector_enrollment['region'],
+    #     categories=region_order,
+    #     ordered=True
+    # )
 
     sector_order  = ['Public', 'Private', 'SUCs/LUCs', 'PSO']
     sector_colors = {
@@ -196,17 +289,17 @@ def update_graph(trigger, data):
 
     sector_chart = px.bar(
         sector_enrollment,
-        x='region',
+        x=loc_scope,
         y='counts',
         color='sector',
         barmode='stack',
         category_orders={
-            'region': region_order,
+            # 'region': region_order,
             'sector': sector_order
         },
         color_discrete_map=sector_colors,
         labels={
-            'region': 'Region',
+            loc_scope: loc_scope.capitalize(),
             'counts': 'Number of Students',
             'sector': 'School Sector',
         },
@@ -245,8 +338,6 @@ def update_graph(trigger, data):
         marker_line_width=2
     )
 
-    sector_chart
-
     return dcc.Graph(figure=sector_chart)
 
 # #################################################################################
@@ -275,23 +366,33 @@ def update_graph(trigger, data):
     State('filtered_values', 'data'),
     # prevent_initial_call=True
 )
-
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
+    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+
+    min_loc = 5
+
+    for i, loc in enumerate(locs[1:]):
+        if loc in data:
+            min_loc = i
+            break
+
+    loc_scope = locs[min_loc]
+    
     # Cleaning
     clean_df = FILTERED_DATA[FILTERED_DATA['grade'].isin(['G11', 'G12'])]
     clean_df['track'] = clean_df['track'].cat.remove_unused_categories()
     
     # Step 2: Group and SUM the 'counts' for track-level heatmap
-    track_data = clean_df.groupby(['region', 'track'])['counts'].sum().reset_index()
-    track_pivot = track_data.pivot(index='track', columns='region', values='counts').fillna(0)
+    track_data = clean_df.groupby([loc_scope, 'track'])['counts'].sum().reset_index()
+    track_pivot = track_data.pivot(index='track', columns=loc_scope, values='counts').fillna(0)
 
     # Step 3: Group and SUM the 'counts' for strand-level heatmap
     clean_df = clean_df[clean_df['strand'] != '__NaN__']
     clean_df['strand'] = clean_df['strand'].cat.remove_unused_categories()
-    strand_data = clean_df.groupby(['region', 'strand'])['counts'].sum().reset_index()
-    strand_pivot = strand_data.pivot(index='strand', columns='region', values='counts').fillna(0)
+    strand_data = clean_df.groupby([loc_scope, 'strand'])['counts'].sum().reset_index()
+    strand_pivot = strand_data.pivot(index='strand', columns=loc_scope, values='counts').fillna(0)
     
     # Step 4: Create subplots
     heatmap_fig = make_subplots(
@@ -355,6 +456,41 @@ def update_graph(trigger, data):
 # #################################################################################
 
 @callback(
+    Output('raw-average-enrollees', 'children'),
+    Output('truncated-average-enrollees', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+
+    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+
+    min_loc = 5
+
+    for i, loc in enumerate(locs[1:]):
+        if loc in data:
+            min_loc = i
+            break
+
+    loc_scope = locs[min_loc]
+    
+    FILTERED_DATA = FILTERED_DATA[[loc_scope, 'counts']]
+    df_grouped = FILTERED_DATA.groupby(loc_scope, as_index=False)['counts'].sum()
+
+    # Median enrollees per school
+    median_enrollees_per_school = int(df_grouped['counts'].median())
+    
+    truncated_total_enrollees = smart_truncate_number(median_enrollees_per_school)
+
+    return f"{median_enrollees_per_school:,} average enrollees", truncated_total_enrollees
+
+
+
+
+@callback(
     Output('raw-total-enrollees', 'children'),
     Output('truncated-total-enrollees', 'children'),
     Input('chart-trigger', 'data'),
@@ -368,6 +504,15 @@ def update_graph(trigger, data):
     raw_total_enrollees = FILTERED_DATA['counts'].sum()
     truncated_total_enrollees = smart_truncate_number(raw_total_enrollees)
 
+    # # get the median
+    # median_enrolless = FILTERED_DATA['counts'].median()
+    
+    # # Filter and compute ratio of enrollees below the median
+    # below_median_sum = FILTERED_DATA[FILTERED_DATA['counts'] < median_enrolless]['counts'].sum()
+
+    # # Ratio of enrollees below 50%
+    # ratio_below_50 = below_median_sum / raw_total_enrollees if raw_total_enrollees > 0 else 0
+        
     raw_total_enrollees
     truncated_total_enrollees
     
@@ -398,7 +543,7 @@ def update_graph(trigger, data):
     raw_total_schools
     truncated_total_schools
     
-    return f"{raw_total_schools:,} enrollees", truncated_total_schools
+    return f"{raw_total_schools:,} schools", truncated_total_schools
 
 # #################################################################################
 
