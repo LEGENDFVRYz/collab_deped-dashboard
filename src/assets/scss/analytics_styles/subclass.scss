@@ -100,48 +100,49 @@
                                 flex: 1;
                                 gap: 0.5em;
 
+                                .subclass-inner{
+                                    display: flex;
+                                    flex: 1;
+                                    gap: 0.5em;
+                                    justify-content: space-between;
+                                }
+
                                 .percentage-label{
                                     display: flex;
                                     flex: 1;
                                     align-items: center;
                                     justify-content: center;
-                                    font-size: 0.5em;
+                                    font-size: 0.8em;
                                     font-weight: 600;
-                                    color: $text-color-1;
+                                    color: #667889;;
                                 }
 
                                 .percentage-subclass{
                                     display: flex;
                                     flex: 1;
-                                    align-items: center;
-                                    justify-content: center;
+                                    align-items: right;
+                                    justify-content: right;
                                     font-size: 1em;
                                     font-weight: 600;
-                                    color: $text-color-1;
+                                    color: #3C6382;
 
                                 }
-
-                                .percentage-marker{
-                                    display: flex;
-                                    flex: 1;
-                                    justify-content: space-between;
-
-                                    .percentage-marker-ind{
-                                            align-self: center;
-                                            border-radius: 0.5em;
-                                            width: 10px;
-                                            height: 30px;
-                                            color: $secondary-shades-2;
-                                    }
+                                .percentage-marker-ind{
+                                        align-self: center;
+                                        border-radius: 0.5em;
+                                        width: 10px;
+                                        height: 100%;
+                                        background-color: #FE4761;
                                 }
+
                                 .percentage-value{
                                     display: flex;
                                     flex: 1;
-                                    align-items: center;
-                                    justify-content: center;
+                                    align-items: right;
+                                    justify-content: right;
                                     font-size: 1.5em;
                                     font-weight: 600;
-                                   color: $text-color-1;
+                                   color: #04508c;
                                 }
 
                             }

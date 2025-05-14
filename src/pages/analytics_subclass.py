@@ -91,7 +91,7 @@ def render_subclass_filter():
                                                         html.Span([], 
                                                         className="percentage-marker-ind"),
                                                         html.Span([], id="top_offering_percentage", className="percentage-value")
-                                                    ],className="percentage-marker"),
+                                                    ], className="subclass-inner"),
                                                 ], className="subclass-card-center")
                                             ], margin=False)
                                         ])
@@ -102,7 +102,11 @@ def render_subclass_filter():
                                                 html.Div([
                                                     html.H6("Top SHS Track Coverage by Subclass", className="percentage-label"),
                                                     html.Span([], id="top_track_subclass", className="percentage-subclass"),
-                                                    html.Span([], id="top_track_percentage", className="percentage-value")
+                                                    html.Div([
+                                                        html.Span([], 
+                                                        className="percentage-marker-ind"),
+                                                        html.Span([], id="top_track_percentage", className="percentage-value")
+                                                    ], className="subclass-inner"),
                                                 ], className="subclass-card-center")
                                             ], margin=False)
 
