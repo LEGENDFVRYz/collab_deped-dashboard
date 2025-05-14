@@ -276,20 +276,38 @@ def update_graph(trigger, data):
     Output('subclass_student_school_ratio', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
+    State('is-all-year', 'data'),
     # prevent_initial_call=True
 )
-def update_graph(trigger, data):
+def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
-    subclass_df1 = (
-        FILTERED_DATA.groupby('sub_class', observed=True)
-        .agg(
-            school_count=('beis_id', 'nunique'),
-            counts=('counts', 'sum'),  
+    if mode:
+        subclass_df1 = (
+            FILTERED_DATA.groupby(['sub_class', 'year'], observed=True)
+            .agg(
+                school_count=('beis_id', 'nunique'),
+                counts=('counts', 'sum'),
+            )
+            .groupby('sub_class', observed=True)
+            .agg(
+                school_count=('school_count', 'mean'),  # average number of schools across years
+                counts=('counts', 'mean'),              # average enrollment counts across years
+            )
+            .reset_index()
         )
-        .reset_index()
-    )
+    else:
+        subclass_df1 = (
+            FILTERED_DATA.groupby('sub_class', observed=True)
+            .agg(
+                school_count=('beis_id', 'nunique'),
+                counts=('counts', 'sum'),
+            )
+            .reset_index()
+        )
 
+    
+    
     student_school_ratio = px.scatter(subclass_df1, 
         x="counts", 
         y="school_count",
