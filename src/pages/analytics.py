@@ -16,9 +16,9 @@ from src.utils import saved_tabs_analytics
 
 ############################### PAGES ################################
 from src.pages.analytics_location import render_location_filter, new_location_filter
-from src.pages.analytics_seniorhigh import render_seniorhigh_filter
-from src.pages.analytics_subclass import render_subclass_filter
-from src.pages.analytics_offering import render_offering_filter
+from src.pages.analytics_seniorhigh import render_seniorhigh_filter, new_location_shs
+from src.pages.analytics_subclass import render_subclass_filter, new_subclass_offering
+from src.pages.analytics_offering import render_offering_filter, new_location_offering
 from src.components.addons_filter import Addons_filter
 
 
@@ -203,7 +203,7 @@ def render_after_fade(n, data, scope):
         render_location_filter, render_seniorhigh_filter, render_subclass_filter, render_offering_filter
     ]
     new_pages = [
-        new_location_filter, None, None, None
+        new_location_filter, new_location_shs, new_subclass_offering, new_location_offering
     ]
     
     for i, choices in enumerate(opt):

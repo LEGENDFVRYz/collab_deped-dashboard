@@ -203,3 +203,13 @@ def render_seniorhigh_filter():
                 
             ], className="shs-content"),
         ], className='plotted-seniorhigh-report render-plot')
+    
+    
+    
+def new_location_shs():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            "NEWW shs"
+            
+        ], className='plotted-seniorhigh-report render-plot')

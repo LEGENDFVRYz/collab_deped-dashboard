@@ -159,3 +159,13 @@ def render_offering_filter():
             ], className="offering-content"),  
             
         ], className='plotted-offering-report render-plot')
+
+
+
+def new_location_offering():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            "NEWW offering"
+            
+        ], className='plotted-offering-report render-plot')

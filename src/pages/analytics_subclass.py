@@ -216,3 +216,13 @@ def render_subclass_filter():
                 
             ], className="subclass-content"),
         ], className='plotted-subclass-report render-plot')
+    
+    
+    
+def new_subclass_offering():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            "NEWW subclass"
+            
+        ], className='plotted-location-report render-plot')
