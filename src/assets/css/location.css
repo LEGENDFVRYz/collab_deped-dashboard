@@ -145,6 +145,10 @@
 #plot-content.rendered .plotted-location-report .plot-right-section .plot-top-section {
   flex: 2;
 }
+#plot-content.rendered .plotted-location-report .plot-right-section .plot-top-section .ed-graph-title {
+  color: #3C6382;
+  text-align: center;
+}
 #plot-content.rendered .plotted-location-report .plot-right-section .plot-bottom-section {
   flex: 2;
 }

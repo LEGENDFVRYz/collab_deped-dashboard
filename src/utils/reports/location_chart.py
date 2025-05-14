@@ -1,5 +1,6 @@
 from enum import auto
 from turtle import title
+# from networkx import center
 import numpy as np
 import pandas as pd
 import dash
@@ -17,6 +18,7 @@ from src.data import enrollment_db_engine, smart_filter
 
 # Extra Utilities
 from src.utils.extras_utils import smart_truncate_number
+
 
 
 """
@@ -127,7 +129,7 @@ def update_graph(trigger, data):
         margin=dict(l=80, r=20, t=20, b=40),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        barcornerradius=3,
+        # barcornerradius=3,
     )
     gender_region_fig
 
@@ -141,193 +143,491 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- CHART: enrollment density (students per location)
 # #################################################################################
-
-import json
-import pandas as pd
-import plotly.express as px
-from dash import dcc, Output, Input, State, callback
-from geojson_rewind import rewind
-
-# Mapping of provinces to regions (use full GeoJSON naming format)
-province_to_region = {
-    # Region I
-    "PANGASINAN": "Region I (Ilocos Region)",
-    "ILOCOS NORTE": "Region I (Ilocos Region)",
-    "ILOCOS SUR": "Region I (Ilocos Region)",
-    "LA UNION": "Region I (Ilocos Region)",
-
-    # CAR
-    "ABRA": "Cordillera Administrative Region (CAR)",
-    "APAYAO": "Cordillera Administrative Region (CAR)",
-    "BENGUET": "Cordillera Administrative Region (CAR)",
-    "IFUGAO": "Cordillera Administrative Region (CAR)",
-    "KALINGA": "Cordillera Administrative Region (CAR)",
-    "MOUNTAIN PROVINCE": "Cordillera Administrative Region (CAR)",
-
-    # Region II
-    "CAGAYAN": "Region II (Cagayan Valley)",
-    "ISABELA": "Region II (Cagayan Valley)",
-    "NUEVA VIZCAYA": "Region II (Cagayan Valley)",
-    "QUIRINO": "Region II (Cagayan Valley)",
-    "BATANES": "Region II (Cagayan Valley)",
-
-    # Region III
-    "AURORA": "Region III (Central Luzon)",
-    "BATAAN": "Region III (Central Luzon)",
-    "BULACAN": "Region III (Central Luzon)",
-    "NUEVA ECIJA": "Region III (Central Luzon)",
-    "PAMPANGA": "Region III (Central Luzon)",
-    "TARLAC": "Region III (Central Luzon)",
-    "ZAMBALES": "Region III (Central Luzon)",
-
-    # Region IV-A
-    "BATANGAS": "Region IV-A (CALABARZON)",
-    "CAVITE": "Region IV-A (CALABARZON)",
-    "LAGUNA": "Region IV-A (CALABARZON)",
-    "QUEZON": "Region IV-A (CALABARZON)",
-    "RIZAL": "Region IV-A (CALABARZON)",
-
-    # MIMAROPA
-    "MARINDUQUE": "MIMAROPA Region",
-    "OCCIDENTAL MINDORO": "MIMAROPA Region",
-    "ORIENTAL MINDORO": "MIMAROPA Region",
-    "PALAWAN": "MIMAROPA Region",
-    "ROMBLON": "MIMAROPA Region",
-
-    # Region V
-    "ALBAY": "Region V (Bicol Region)",
-    "CAMARINES NORTE": "Region V (Bicol Region)",
-    "CAMARINES SUR": "Region V (Bicol Region)",
-    "CATANDUANES": "Region V (Bicol Region)",
-    "MASBATE": "Region V (Bicol Region)",
-    "SORSOGON": "Region V (Bicol Region)",
-
-    # Region VI
-    "AKLAN": "Region VI (Western Visayas)",
-    "ANTIQUE": "Region VI (Western Visayas)",
-    "CAPIZ": "Region VI (Western Visayas)",
-    "GUIMARAS": "Region VI (Western Visayas)",
-    "ILOILO": "Region VI (Western Visayas)",
-    "NEGROS OCCIDENTAL": "Region VI (Western Visayas)",
-
-    # Region VII
-    "BOHOL": "Region VII (Central Visayas)",
-    "CEBU": "Region VII (Central Visayas)",
-    "NEGROS ORIENTAL": "Region VII (Central Visayas)",
-    "SIQUIJOR": "Region VII (Central Visayas)",
-
-    # Region VIII
-    "BILIRAN": "Region VIII (Eastern Visayas)",
-    "EASTERN SAMAR": "Region VIII (Eastern Visayas)",
-    "LEYTE": "Region VIII (Eastern Visayas)",
-    "NORTHERN SAMAR": "Region VIII (Eastern Visayas)",
-    "SOUTHERN LEYTE": "Region VIII (Eastern Visayas)",
-    "WESTERN SAMAR": "Region VIII (Eastern Visayas)",
-
-    # Region IX
-    "ZAMBOANGA DEL NORTE": "Region IX (Zamboanga Peninsula)",
-    "ZAMBOANGA DEL SUR": "Region IX (Zamboanga Peninsula)",
-    "ZAMBOANGA SIBUGAY": "Region IX (Zamboanga Peninsula)",
-
-    # Region X
-    "BUKIDNON": "Region X (Northern Mindanao)",
-    "CAMIGUIN": "Region X (Northern Mindanao)",
-    "LANAO DEL NORTE": "Region X (Northern Mindanao)",
-    "MISAMIS OCCIDENTAL": "Region X (Northern Mindanao)",
-    "MISAMIS ORIENTAL": "Region X (Northern Mindanao)",
-
-    # Region XI
-    "COMPOSTELA VALLEY": "Region XI (Davao Region)",
-    "DAVAO DEL NORTE": "Region XI (Davao Region)",
-    "DAVAO DEL SUR": "Region XI (Davao Region)",
-    "DAVAO OCCIDENTAL": "Region XI (Davao Region)",
-    "DAVAO ORIENTAL": "Region XI (Davao Region)",
-
-    # Region XII
-    "NORTH COTABATO": "Region XII (SOCCSKSARGEN)",
-    "SOUTH COTABATO": "Region XII (SOCCSKSARGEN)",
-    "SULTAN KUDARAT": "Region XII (SOCCSKSARGEN)",
-    "SARANGANI": "Region XII (SOCCSKSARGEN)",
-    "CITY OF COTABATO": "Region XII (SOCCSKSARGEN)",
-    "CITY OF ISABELA": "Region XII (SOCCSKSARGEN)",
-
-    # Region XIII (Caraga)
-    "AGUSAN DEL NORTE": "Region XIII (Caraga)",
-    "AGUSAN DEL SUR": "Region XIII (Caraga)",
-    "SURIGAO DEL NORTE": "Region XIII (Caraga)",
-    "SURIGAO DEL SUR": "Region XIII (Caraga)",
-    "DINAGAT ISLANDS": "Region XIII (Caraga)",
-
-    # BARMM
-    "BASILAN": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
-    "LANAO DEL SUR": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
-    "MAGUINDANAO": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
-    "SULU": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
-    "TAWI-TAWI": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
-
-    # NCR
-    "MANILA, NCR, FIRST DISTRICT": "National Capital Region (NCR)",
-    "NCR SECOND DISTRICT": "National Capital Region (NCR)",
-    "NCR THIRD DISTRICT": "National Capital Region (NCR)",
-    "NCR FOURTH DISTRICT": "National Capital Region (NCR)",
-}
-
 @callback(
     Output('location_choropleth-map', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
 )
-def update_choropleth_map(trigger, data):
-    # 1. Filter and group by province
-    df = smart_filter(data, enrollment_db_engine)
-    df['region_name'] = df['province'].map(province_to_region)
-    df = df.dropna(subset=['region_name'])
-    df = df.groupby('region_name', as_index=False)['counts'].sum()
+def update_province_choropleth_map(trigger, data):
+    FILTERED_DF = smart_filter(data, enrollment_db_engine)
+    
 
-    # 2. Load and rewind GeoJSON
-    with open("/Users/marke/Downloads/country.0.001.json") as f:
-        geojson = json.load(f)
-    geojson = rewind(geojson, rfc7946=False)
+    FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
 
-    # 3. Create Choropleth
+    unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    for province in unique_provinces:
+        print(province)    
+        
+        # Print for debug
+    unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    print("Provinces in DataFrame:", len(unique_provinces))
+    for province in sorted(unique_provinces):
+        print(province)
+
+    # Folder where all region-wise GeoJSON files are stored
+    geojson_folder = "/Users/marke/Downloads/low/"
+    geojson_files = [
+        "provdists-region-100000000.0.001",
+        "provdists-region-1000000000.0.001",
+        "provdists-region-1100000000.0.001",
+        "provdists-region-1200000000.0.001",
+        "provdists-region-1300000000.0.001",
+        "provdists-region-1400000000.0.001",
+        "provdists-region-1600000000.0.001",
+        "provdists-region-1700000000.0.001",
+        "provdists-region-1900000000.0.001",
+        "provdists-region-200000000.0.001",
+        "provdists-region-300000000.0.001",
+        "provdists-region-400000000.0.001",
+        "provdists-region-500000000.0.001",
+        "provdists-region-600000000.0.001",
+        "provdists-region-700000000.0.001",
+        "provdists-region-800000000.0.001",
+        "provdists-region-900000000.0.001",
+    ]
+
+    # Combine all province GeoJSONs into one FeatureCollection
+    all_features = []
+    for filename in geojson_files:
+        filepath = os.path.join(geojson_folder, filename + ".json")
+        with open(filepath) as f:
+            geo = json.load(f)
+            geo = rewind(geo, rfc7946=False)  # Ensure proper winding
+            all_features.extend(geo['features'])
+
+    combined_geojson = {
+        "type": "FeatureCollection",
+        "features": all_features
+    }
+
+    # Extract province names from GeoJSON
+    geo_provinces = [feature['properties']['adm2_en'] for feature in combined_geojson['features']]
+    print("Provinces in GeoJSON:", len(set(geo_provinces)))
+    print("Provinces in DataFrame:", set(FILTERED_DF['province']))
+
+
+    # Normalize casing and whitespace
+    FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
+    geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
+
+
+    # Keep only matching provinces
+    FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
+    
+    # 4. Plotly Choropleth
     map_chart = px.choropleth(
-        df,
-        geojson=geojson,
-        locations='region_name',
-        featureidkey='properties.adm1_en',
+        FILTERED_DF,
+        geojson=combined_geojson,
+        locations='normalized_province',
+        featureidkey='properties.adm2_en',
         color='counts',
         hover_name=None,
         hover_data=None,
         color_continuous_scale='Viridis',
+        
     )
-
+    
     map_chart.update_traces(
         hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
     )
 
+
     map_chart.update_geos(
         visible=False,
-        showcountries=False,
-        showcoastlines=False,
+        # showcountries=False,
+        # showcoastlines=False,
         showland=True,
-        fitbounds="locations",
+        fitbounds="locations",        # Ensures focus on actual geojson features
+        center = {'lat':12.8797, 'lon':121.7740},
         resolution=50,
-        lataxis_range=[4, 22],
-        lonaxis_range=[115, 128],
+        lataxis_range=[4, 21],        # Latitude range for PH
+        lonaxis_range=[115, 128],  # Longitude range for PH
     )
 
+
+
     map_chart.update_layout(
+        # title="Enrollment by Region",
+        # title_font=dict(size=20, family='Inter', color='#3C6382'),
+        # title_x=0.5,
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
-        paper_bgcolor='black',
+        paper_bgcolor='white',
         plot_bgcolor='rgba(0,0,0,0)',
         coloraxis_showscale=False,
+        # dragmode=False,
     )
+
 
     return dcc.Graph(
         figure=map_chart,
         style={'width': '100%', 'height': '100%'},
-        config={'responsive': True}
+        config={
+            'responsive': True,
+            # 'scrollZoom': False,      # Disable scroll zooming
+            # 'displayModeBar': False,  # Hide the mode bar with zoom/pan controls
+            # 'doubleClick': False,     # Disable double-click zooming
+            # 'showAxisDragHandles': False,  # Disable axis drag handles
+            # 'showTips': False,        # Disable hover tips on modebar
+        }
     )
+
+
+
+# import os
+# import json
+# import plotly.express as px
+# from dash import dcc, Output, Input, State, callback
+# # from utils import smart_filter
+# from geojson_rewind import rewind
+
+# @callback(
+#     Output('location_choropleth-map', 'children'),
+#     Input('chart-trigger', 'data'),
+#     State('filtered_values', 'data'),
+# )
+# def update_municipality_choropleth_map(trigger, data):
+#     # 1. Filter the DataFrame
+#     FILTERED_DF = smart_filter(data, enrollment_db_engine)
+#     FILTERED_DF = FILTERED_DF.groupby('municipality', as_index=False)['counts'].sum()
+
+#     # 2. Load and combine all municipality-level GeoJSON files
+#     geojson_folder = "src/assets/geojson/municipalities"
+#     geojson_files = [
+#   "municities-provdist-1001300000.0.001.json",
+#   "municities-provdist-1001800000.0.001.json",
+#   "municities-provdist-1003500000.0.001.json",
+#   "municities-provdist-1004200000.0.001.json",
+#   "municities-provdist-1004300000.0.001.json",
+#   "municities-provdist-102800000.0.001.json",
+#   "municities-provdist-102900000.0.001.json",
+#   "municities-provdist-103300000.0.001.json",
+#   "municities-provdist-105500000.0.001.json",
+#   "municities-provdist-1102300000.0.001.json",
+#   "municities-provdist-1102400000.0.001.json",
+#   "municities-provdist-1102500000.0.001.json",
+#   "municities-provdist-1108200000.0.001.json",
+#   "municities-provdist-1108600000.0.001.json",
+#   "municities-provdist-1204700000.0.001.json",
+#   "municities-provdist-1206300000.0.001.json",
+#   "municities-provdist-1206500000.0.001.json",
+#   "municities-provdist-1208000000.0.001.json",
+#   "municities-provdist-1303900000.0.001.json",
+#   "municities-provdist-1307400000.0.001.json",
+#   "municities-provdist-1307500000.0.001.json",
+#   "municities-provdist-1307600000.0.001.json",
+#   "municities-provdist-1400100000.0.001.json",
+#   "municities-provdist-1401100000.0.001.json",
+#   "municities-provdist-1402700000.0.001.json",
+#   "municities-provdist-1403200000.0.001.json",
+#   "municities-provdist-1404400000.0.001.json",
+#   "municities-provdist-1408100000.0.001.json",
+#   "municities-provdist-1600200000.0.001.json",
+#   "municities-provdist-1600300000.0.001.json",
+#   "municities-provdist-1606700000.0.001.json",
+#   "municities-provdist-1606800000.0.001.json",
+#   "municities-provdist-1608500000.0.001.json",
+#   "municities-provdist-1704000000.0.001.json",
+#   "municities-provdist-1705100000.0.001.json",
+#   "municities-provdist-1705200000.0.001.json",
+#   "municities-provdist-1705300000.0.001.json",
+#   "municities-provdist-1705900000.0.001.json",
+#   "municities-provdist-1900700000.0.001.json",
+#   "municities-provdist-1903600000.0.001.json",
+#   "municities-provdist-1906600000.0.001.json",
+#   "municities-provdist-1907000000.0.001.json",
+#   "municities-provdist-1908700000.0.001.json",
+#   "municities-provdist-1908800000.0.001.json",
+#   "municities-provdist-1909900000.0.001.json",
+#   "municities-provdist-200900000.0.001.json",
+#   "municities-provdist-201500000.0.001.json",
+#   "municities-provdist-203100000.0.001.json",
+#   "municities-provdist-205000000.0.001.json",
+#   "municities-provdist-205700000.0.001.json",
+#   "municities-provdist-300800000.0.001.json",
+#   "municities-provdist-301400000.0.001.json",
+#   "municities-provdist-304900000.0.001.json",
+#   "municities-provdist-305400000.0.001.json",
+#   "municities-provdist-306900000.0.001.json",
+#   "municities-provdist-307100000.0.001.json",
+#   "municities-provdist-307700000.0.001.json",
+#   "municities-provdist-401000000.0.001.json",
+#   "municities-provdist-402100000.0.001.json",
+#   "municities-provdist-403400000.0.001.json",
+#   "municities-provdist-405600000.0.001.json",
+#   "municities-provdist-405800000.0.001.json",
+#   "municities-provdist-500500000.0.001.json",
+#   "municities-provdist-501600000.0.001.json",
+#   "municities-provdist-501700000.0.001.json",
+#   "municities-provdist-502000000.0.001.json",
+#   "municities-provdist-504100000.0.001.json",
+#   "municities-provdist-506200000.0.001.json",
+#   "municities-provdist-600400000.0.001.json",
+#   "municities-provdist-600600000.0.001.json",
+#   "municities-provdist-601900000.0.001.json",
+#   "municities-provdist-603000000.0.001.json",
+#   "municities-provdist-604500000.0.001.json",
+#   "municities-provdist-607900000.0.001.json",
+#   "municities-provdist-701200000.0.001.json",
+#   "municities-provdist-702200000.0.001.json",
+#   "municities-provdist-704600000.0.001.json",
+#   "municities-provdist-706100000.0.001.json",
+#   "municities-provdist-802600000.0.001.json",
+#   "municities-provdist-803700000.0.001.json",
+#   "municities-provdist-804800000.0.001.json",
+#   "municities-provdist-806000000.0.001.json",
+#   "municities-provdist-806400000.0.001.json",
+#   "municities-provdist-807800000.0.001.json",
+#   "municities-provdist-907200000.0.001.json",
+#   "municities-provdist-907300000.0.001.json",
+#   "municities-provdist-908300000.0.001.json",
+#   "municities-provdist-990100000.0.001.json"
+
+
+#     ]
+
+#     combined_features = []
+
+#     for file in geojson_files:
+#         path = os.path.join(geojson_folder, file)
+#         with open(path) as f:
+#             gj = json.load(f)
+#             combined_features.extend(gj['features'])
+
+#     geojson = {
+#         "type": "FeatureCollection",
+#         "features": combined_features
+#     }
+
+#     geojson = rewind(geojson, rfc7946=False)
+
+#     # 3. Plot the Choropleth Map
+#     map_chart = px.choropleth(
+#         FILTERED_DF,
+#         geojson=geojson,
+#         locations='municipality',
+#         featureidkey='adm3_en',
+#         color='counts',
+#         hover_name=None,
+#         hover_data=None,
+#         color_continuous_scale='Viridis',
+#     )
+
+#     map_chart.update_traces(
+#         hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
+#     )
+
+#     map_chart.update_geos(
+#         visible=False,
+#         showland=True,
+#         fitbounds="locations",
+#         center={'lat': 12.8797, 'lon': 121.7740},
+#         resolution=50,
+#         lataxis_range=[4, 21],
+#         lonaxis_range=[115, 128],
+#     )
+
+#     map_chart.update_layout(
+#         margin={"r": 0, "t": 0, "l": 0, "b": 0},
+#         paper_bgcolor='white',
+#         plot_bgcolor='rgba(0,0,0,0)',
+#         coloraxis_showscale=False,
+#     )
+
+#     return dcc.Graph(
+#         figure=map_chart,
+#         style={'width': '100%', 'height': '100%'},
+#         config={
+#             'responsive': True,
+#         }
+#     )
+
+
+# import json
+# import pandas as pd
+# import plotly.express as px
+# from dash import dcc, Output, Input, State, callback
+# from geojson_rewind import rewind
+
+# # Mapping of provinces to regions (use full GeoJSON naming format)
+# province_to_region = {
+#     # Region I
+#     "PANGASINAN": "Region I (Ilocos Region)",
+#     "ILOCOS NORTE": "Region I (Ilocos Region)",
+#     "ILOCOS SUR": "Region I (Ilocos Region)",
+#     "LA UNION": "Region I (Ilocos Region)",
+
+#     # CAR
+#     "ABRA": "Cordillera Administrative Region (CAR)",
+#     "APAYAO": "Cordillera Administrative Region (CAR)",
+#     "BENGUET": "Cordillera Administrative Region (CAR)",
+#     "IFUGAO": "Cordillera Administrative Region (CAR)",
+#     "KALINGA": "Cordillera Administrative Region (CAR)",
+#     "MOUNTAIN PROVINCE": "Cordillera Administrative Region (CAR)",
+
+#     # Region II
+#     "CAGAYAN": "Region II (Cagayan Valley)",
+#     "ISABELA": "Region II (Cagayan Valley)",
+#     "NUEVA VIZCAYA": "Region II (Cagayan Valley)",
+#     "QUIRINO": "Region II (Cagayan Valley)",
+#     "BATANES": "Region II (Cagayan Valley)",
+
+#     # Region III
+#     "AURORA": "Region III (Central Luzon)",
+#     "BATAAN": "Region III (Central Luzon)",
+#     "BULACAN": "Region III (Central Luzon)",
+#     "NUEVA ECIJA": "Region III (Central Luzon)",
+#     "PAMPANGA": "Region III (Central Luzon)",
+#     "TARLAC": "Region III (Central Luzon)",
+#     "ZAMBALES": "Region III (Central Luzon)",
+
+#     # Region IV-A
+#     "BATANGAS": "Region IV-A (CALABARZON)",
+#     "CAVITE": "Region IV-A (CALABARZON)",
+#     "LAGUNA": "Region IV-A (CALABARZON)",
+#     "QUEZON": "Region IV-A (CALABARZON)",
+#     "RIZAL": "Region IV-A (CALABARZON)",
+
+#     # MIMAROPA
+#     "MARINDUQUE": "MIMAROPA Region",
+#     "OCCIDENTAL MINDORO": "MIMAROPA Region",
+#     "ORIENTAL MINDORO": "MIMAROPA Region",
+#     "PALAWAN": "MIMAROPA Region",
+#     "ROMBLON": "MIMAROPA Region",
+
+#     # Region V
+#     "ALBAY": "Region V (Bicol Region)",
+#     "CAMARINES NORTE": "Region V (Bicol Region)",
+#     "CAMARINES SUR": "Region V (Bicol Region)",
+#     "CATANDUANES": "Region V (Bicol Region)",
+#     "MASBATE": "Region V (Bicol Region)",
+#     "SORSOGON": "Region V (Bicol Region)",
+
+#     # Region VI
+#     "AKLAN": "Region VI (Western Visayas)",
+#     "ANTIQUE": "Region VI (Western Visayas)",
+#     "CAPIZ": "Region VI (Western Visayas)",
+#     "GUIMARAS": "Region VI (Western Visayas)",
+#     "ILOILO": "Region VI (Western Visayas)",
+#     "NEGROS OCCIDENTAL": "Region VI (Western Visayas)",
+
+#     # Region VII
+#     "BOHOL": "Region VII (Central Visayas)",
+#     "CEBU": "Region VII (Central Visayas)",
+#     "NEGROS ORIENTAL": "Region VII (Central Visayas)",
+#     "SIQUIJOR": "Region VII (Central Visayas)",
+
+#     # Region VIII
+#     "BILIRAN": "Region VIII (Eastern Visayas)",
+#     "EASTERN SAMAR": "Region VIII (Eastern Visayas)",
+#     "LEYTE": "Region VIII (Eastern Visayas)",
+#     "NORTHERN SAMAR": "Region VIII (Eastern Visayas)",
+#     "SOUTHERN LEYTE": "Region VIII (Eastern Visayas)",
+#     "WESTERN SAMAR": "Region VIII (Eastern Visayas)",
+
+#     # Region IX
+#     "ZAMBOANGA DEL NORTE": "Region IX (Zamboanga Peninsula)",
+#     "ZAMBOANGA DEL SUR": "Region IX (Zamboanga Peninsula)",
+#     "ZAMBOANGA SIBUGAY": "Region IX (Zamboanga Peninsula)",
+
+#     # Region X
+#     "BUKIDNON": "Region X (Northern Mindanao)",
+#     "CAMIGUIN": "Region X (Northern Mindanao)",
+#     "LANAO DEL NORTE": "Region X (Northern Mindanao)",
+#     "MISAMIS OCCIDENTAL": "Region X (Northern Mindanao)",
+#     "MISAMIS ORIENTAL": "Region X (Northern Mindanao)",
+
+#     # Region XI
+#     "COMPOSTELA VALLEY": "Region XI (Davao Region)",
+#     "DAVAO DEL NORTE": "Region XI (Davao Region)",
+#     "DAVAO DEL SUR": "Region XI (Davao Region)",
+#     "DAVAO OCCIDENTAL": "Region XI (Davao Region)",
+#     "DAVAO ORIENTAL": "Region XI (Davao Region)",
+
+#     # Region XII
+#     "NORTH COTABATO": "Region XII (SOCCSKSARGEN)",
+#     "SOUTH COTABATO": "Region XII (SOCCSKSARGEN)",
+#     "SULTAN KUDARAT": "Region XII (SOCCSKSARGEN)",
+#     "SARANGANI": "Region XII (SOCCSKSARGEN)",
+#     "CITY OF COTABATO": "Region XII (SOCCSKSARGEN)",
+#     "CITY OF ISABELA": "Region XII (SOCCSKSARGEN)",
+
+#     # Region XIII (Caraga)
+#     "AGUSAN DEL NORTE": "Region XIII (Caraga)",
+#     "AGUSAN DEL SUR": "Region XIII (Caraga)",
+#     "SURIGAO DEL NORTE": "Region XIII (Caraga)",
+#     "SURIGAO DEL SUR": "Region XIII (Caraga)",
+#     "DINAGAT ISLANDS": "Region XIII (Caraga)",
+
+#     # BARMM
+#     "BASILAN": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
+#     "LANAO DEL SUR": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
+#     "MAGUINDANAO": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
+#     "SULU": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
+#     "TAWI-TAWI": "Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)",
+
+#     # NCR
+#     "MANILA, NCR, FIRST DISTRICT": "National Capital Region (NCR)",
+#     "NCR SECOND DISTRICT": "National Capital Region (NCR)",
+#     "NCR THIRD DISTRICT": "National Capital Region (NCR)",
+#     "NCR FOURTH DISTRICT": "National Capital Region (NCR)",
+# }
+
+# @callback(
+#     Output('location_choropleth-map', 'children'),
+#     Input('chart-trigger', 'data'),
+#     State('filtered_values', 'data'),
+# )
+# def update_choropleth_map(trigger, data):
+#     # 1. Filter and group by province
+#     df = smart_filter(data, enrollment_db_engine)
+#     df['region_name'] = df['province'].map(province_to_region)
+#     df = df.dropna(subset=['region_name'])
+#     df = df.groupby('region_name', as_index=False)['counts'].sum()
+
+#     # 2. Load and rewind GeoJSON
+#     with open("/Users/marke/Downloads/country.0.001.json") as f:
+#         geojson = json.load(f)
+#     geojson = rewind(geojson, rfc7946=False)
+
+#     # 3. Create Choropleth
+#     map_chart = px.choropleth(
+#         df,
+#         geojson=geojson,
+#         locations='region_name',
+#         featureidkey='properties.adm1_en',
+#         color='counts',
+#         hover_name=None,
+#         hover_data=None,
+#         color_continuous_scale='Viridis',
+#     )
+
+#     map_chart.update_traces(
+#         hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
+#     )
+
+#     map_chart.update_geos(
+#         visible=False,
+#         showcountries=False,
+#         showcoastlines=False,
+#         showland=True,
+#         fitbounds="geojson",
+#         resolution=50,
+#         lataxis_range=[4, 22],
+#         lonaxis_range=[115, 128],
+#     )
+
+#     map_chart.update_layout(
+#         margin={"r": 0, "t": 0, "l": 0, "b": 0},
+#         paper_bgcolor='black',
+#         plot_bgcolor='rgba(0,0,0,0)',
+#         coloraxis_showscale=False,
+#     )
+
+#     return dcc.Graph(
+#         figure=map_chart,
+#         style={'width': '100%', 'height': '100%'},
+#         config={'responsive': True}
+#     )
 
 
 # ####regions
@@ -342,7 +642,7 @@ def update_choropleth_map(trigger, data):
 #     FILTERED_DF = FILTERED_DF.groupby('region', as_index=False)['counts'].sum()
 
 #     # 2. GeoJSON (PH admin boundaries)
-#     with open("/Users/marke/Downloads/country.0.001.json") as f:
+#     with open("src/assets/geojson/region/country.0.001.json") as f:
 #         geojson = json.load(f)
 
 #     geojson = rewind(geojson, rfc7946=False)
@@ -391,13 +691,14 @@ def update_choropleth_map(trigger, data):
 
 #     map_chart.update_geos(
 #         visible=False,
-#         showcountries=False,
-#         showcoastlines=False,
+#         # showcountries=False,
+#         # showcoastlines=False,
 #         showland=True,
 #         fitbounds="locations",        # Ensures focus on actual geojson features
+#         center = {'lat':12.8797, 'lon':121.7740},
 #         resolution=50,
-#         lataxis_range=[4, 22],        # Latitude range for PH
-#         lonaxis_range=[115, 128],     # Longitude range for PH
+#         lataxis_range=[4, 21],        # Latitude range for PH
+#         lonaxis_range=[115, 128],  # Longitude range for PH
 #     )
 
 
@@ -407,18 +708,26 @@ def update_choropleth_map(trigger, data):
 #         # title_font=dict(size=20, family='Inter', color='#3C6382'),
 #         # title_x=0.5,
 #         margin={"r": 0, "t": 0, "l": 0, "b": 0},
-#         paper_bgcolor='black',
+#         paper_bgcolor='white',
 #         plot_bgcolor='rgba(0,0,0,0)',
 #         coloraxis_showscale=False,
+#         # dragmode=False,
 #     )
 
 #     return dcc.Graph(
 #         figure=map_chart,
 #         style={'width': '100%', 'height': '100%'},
-#         config={'responsive': True}
+#         config={
+#             'responsive': True,
+#             # 'scrollZoom': False,      # Disable scroll zooming
+#             # 'displayModeBar': False,  # Hide the mode bar with zoom/pan controls
+#             # 'doubleClick': False,     # Disable double-click zooming
+#             # 'showAxisDragHandles': False,  # Disable axis drag handles
+#             # 'showTips': False,        # Disable hover tips on modebar
+#         }
 #     )
 
-#####province
+###province
 
 # from dash import dcc, callback, Input, Output, State
 # import plotly.express as px
@@ -438,7 +747,7 @@ def update_choropleth_map(trigger, data):
 #     FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
 
 #     # 2. Load and combine GeoJSON files
-#     geojson_folder = "/Users/marke/Downloads/"
+#     geojson_folder = "src/assets/geojson/provinces"
 #     geojson_files = [
 #         "provdists-region-100000000.0.1",
 #         "provdists-region-1000000000.0.1",
@@ -720,21 +1029,21 @@ def update_choropleth_map(trigger, data):
 #     )
 
 #     map_chart.update_geos(
-#         visible=False,
-#         showcountries=False,
-#         showcoastlines=False,
-#         showland=True,
-#         fitbounds="locations",
-#         resolution=50,
-#         lataxis_range=[4, 22],
-#         lonaxis_range=[115, 128],
+        # visible=False,
+        # showcountries=False,
+        # showcoastlines=False,
+        # showland=True,
+        # fitbounds="locations",
+        # resolution=50,
+        # lataxis_range=[4, 22],
+        # lonaxis_range=[115, 128],
 #     )
 
 #     map_chart.update_layout(
-#         margin={"r": 0, "t": 0, "l": 0, "b": 0},
-#         paper_bgcolor='black',
-#         plot_bgcolor='rgba(0,0,0,0)',
-#         coloraxis_showscale=False,
+        # margin={"r": 0, "t": 0, "l": 0, "b": 0},
+        # paper_bgcolor='black',
+        # plot_bgcolor='rgba(0,0,0,0)',
+        # coloraxis_showscale=False,
 #     )
 
 #     return dcc.Graph(
@@ -936,7 +1245,6 @@ def update_choropleth_map(trigger, data):
 # #################################################################################
 # ##  --- CHART: school sectors
 # #################################################################################
-
 @callback(
     Output('location_school_sectors', 'children'),
     Input('chart-trigger', 'data'),
@@ -997,36 +1305,39 @@ def update_graph(trigger, data):
         },
         color_discrete_map=sector_colors,
         labels={
-            'region': 'Region',
-            'counts': 'Number of Students',
-            'sector': 'School Sector',
+            'region': ' Region',
+            'counts': ' Number of Students',
+            'sector': ' School Sector',
         },
     )
 
     sector_chart.update_layout(
-    title_font=dict(size=20, family='Inter', color='#3C6382'),
-    title_x=0.5,
-    font=dict(family='Inter', size=14, color='#3C6382'),
-    paper_bgcolor='#F0F0F0',
-    plot_bgcolor='rgba(255,255,255,0.5)',
-    margin=dict(l=50, r=30, t=70, b=60),
-    legend=dict(
-        title='School Sector',
-        font=dict(size=14),
-        x=1, y=1,
-        xanchor='right', yanchor='top',
-        bgcolor='rgba(0,0,0,0)',
-        bordercolor='rgba(0,0,0,0)'
-    ),
-    xaxis=dict(showgrid=False, tickangle=-45),
-    yaxis=dict(
-        showgrid=False,
-        tickformat='.1s',
-        tickprefix=''
-    ),
-    bargap=0.1
-    
-)
+        autosize=True,
+        title_font=dict(size=20, family='Inter, sans-serif', color='#3C6382'),
+        title_x=0.5,
+        font=dict(family='Inter, sans-serif', size=10, color='#04508c'),
+        plot_bgcolor='white',
+        margin=dict(l=50, r=30, t=70, b=60),
+        legend=dict(
+            title=None,
+            orientation='h',          
+            yanchor='top',
+            y=1.15,                 
+            xanchor='center',
+            x=0.5,                         
+            font=dict(size=12),
+            bgcolor='white',
+            bordercolor='red'
+        ),
+
+        xaxis=dict(showgrid=False, tickangle=-45),
+        yaxis=dict(
+            showgrid=False,
+            tickformat='.1s',
+            tickprefix=''
+        ),
+        bargap=0.1
+    )
 
     sector_chart.update_traces(
         marker_line_color='#FFFFFF',
@@ -1105,6 +1416,9 @@ def update_graph(trigger, data):
                 "#074889", "#0C6DC1", "#1389F0", "#00CCFF", 
                 "#00F2FF", "#89FE2A", "#F9F521", "#FFB700"
             ],
+            hovertemplate='Region: %{x}<br>Track: %{y}<br>Enrollees: %{z}',
+            # colorbar=dict(title="Students Enrolled"),
+            zmin=0,
             # colorbar=dict(title="Students Enrolled")
         ),
         row=1, col=1
@@ -1120,7 +1434,9 @@ def update_graph(trigger, data):
                 "#074889", "#0C6DC1", "#1389F0", "#00CCFF", 
                 "#00F2FF", "#89FE2A", "#F9F521", "#FFB700"
             ],
-            showscale=False  # Only show one colorbar
+            showscale=False,
+            hovertemplate='Region: %{x}<br>Strand: %{y}<br>Enrollees: %{z}',
+            zmin=0, # Only show one colorbar
         ),
         row=2, col=1
     )
@@ -1129,7 +1445,8 @@ def update_graph(trigger, data):
     heatmap_fig.update_layout(
         height=400,
         width=600,
-        xaxis2=dict(title="Region", tickangle=45),
+        font=dict(size=10, color="#04508c"),
+        xaxis2=dict(title="Region", tickangle=-45),
         yaxis=dict(title="Track"),
         yaxis2=dict(title="Strand"),
         margin=dict(l=20, r=20, t=40, b=20)

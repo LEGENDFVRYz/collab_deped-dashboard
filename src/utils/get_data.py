@@ -3,13 +3,17 @@ from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
 
-# import json
-# import os
-# import plotly.express as px
-# from geojson_rewind import rewind
-# import pandas as pd
-# import plotly.io as pio
+import json
+import os
+import plotly.express as px
+from geojson_rewind import rewind
+import pandas as pd
+import plotly.io as pio
+from fuzzywuzzy import process
 
+
+
+# from src.utils.extras_utils import smart_truncate_number
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from config import project_root
@@ -152,16 +156,233 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['region'], is_specific=False)
+    df = auto_extract(['province', 'counts'], is_specific=False)
     df
     
-    ############################################ PROVINCE
-    # # Set Plotly renderer
-    # pio.renderers.default = "browser"
+    # FILTERED_DF = auto_extract(['province', 'counts'], is_specific=False)
+    # FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+
+    # unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    # for province in unique_provinces:
+    #     print(province)    
+        
+    #     # Print for debug
+    # unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    # print("Provinces in DataFrame:", len(unique_provinces))
+    # for province in sorted(unique_provinces):
+    #     print(province)
+
+    # # Folder where all region-wise GeoJSON files are stored
+    # geojson_folder = "/Users/marke/Downloads/lowres/"
+    # geojson_files = [
+    #     "provinces-region-ph010000000.0.001",
+    #     "provinces-region-ph020000000.0.001",
+    #     "provinces-region-ph030000000.0.001",
+    #     "provinces-region-ph040000000.0.001",
+    #     "provinces-region-ph050000000.0.001",
+    #     "provinces-region-ph060000000.0.001",
+    #     "provinces-region-ph070000000.0.001",
+    #     "provinces-region-ph080000000.0.001",
+    #     "provinces-region-ph090000000.0.001",
+    #     "provinces-region-ph100000000.0.001",
+    #     "provinces-region-ph110000000.0.001",
+    #     "provinces-region-ph120000000.0.001",
+    #     "provinces-region-ph130000000.0.001",
+    #     "provinces-region-ph140000000.0.001",
+    #     "provinces-region-ph150000000.0.001",
+    #     "provinces-region-ph160000000.0.001",
+    #     "provinces-region-ph170000000.0.001",
+    #     "provinces-region-ph180000000.0.001",
+    # ]
+
+    # # Combine all province GeoJSONs into one FeatureCollection
+    # all_features = []
+    # for filename in geojson_files:
+    #     filepath = os.path.join(geojson_folder, filename + ".json")
+    #     with open(filepath) as f:
+    #         geo = json.load(f)
+    #         geo = rewind(geo, rfc7946=False)  # Ensure proper winding
+    #         all_features.extend(geo['features'])
+
+    # combined_geojson = {
+    #     "type": "FeatureCollection",
+    #     "features": all_features
+    # }
+
+    # # Extract province names from GeoJSON
+    # geo_provinces = [feature['properties']['ADM2_EN'] for feature in combined_geojson['features']]
+    # print("Provinces in GeoJSON:", len(set(geo_provinces)))
+    # print("Provinces in DataFrame:", set(FILTERED_DF['province']))
+
+
+    # # Normalize casing and whitespace
+    # FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
+    # geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
+
+
+    # # Keep only matching provinces
+    # FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
+    
+    # # 4. Plotly Choropleth
+    # map_chart = px.choropleth(
+    #     FILTERED_DF,
+    #     geojson=combined_geojson,
+    #     locations='normalized_province',
+    #     featureidkey='properties.ADM2_EN',
+    #     color='counts',
+    #     hover_name=None,
+    #     hover_data=None,
+    #     color_continuous_scale='Viridis',
+        
+    # )
+    
+    # map_chart.update_traces(
+    #     hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
+    # )
+
+
+    # map_chart.update_geos(
+    #     visible=False,
+    #     # showcountries=False,
+    #     # showcoastlines=False,
+    #     showland=True,
+    #     fitbounds="locations",        # Ensures focus on actual geojson features
+    #     center = {'lat':12.8797, 'lon':121.7740},
+    #     resolution=50,
+    #     lataxis_range=[4, 21],        # Latitude range for PH
+    #     lonaxis_range=[115, 128],  # Longitude range for PH
+    # )
+
+
+
+    # map_chart.update_layout(
+    #     # title="Enrollment by Region",
+    #     # title_font=dict(size=20, family='Inter', color='#3C6382'),
+    #     # title_x=0.5,
+    #     margin={"r": 0, "t": 0, "l": 0, "b": 0},
+    #     paper_bgcolor='white',
+    #     plot_bgcolor='rgba(0,0,0,0)',
+    #     coloraxis_showscale=False,
+    #     # dragmode=False,
+    # )
+
+    # FILTERED_DF = smart_filter(data, enrollment_db_engine)
+    # FILTERED_DF = auto_extract(['province', 'counts'], is_specific=False)
+    # FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+
+    # unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    # for province in unique_provinces:
+    #     print(province)    
+        
+    #     # Print for debug
+    # unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    # print("Provinces in DataFrame:", len(unique_provinces))
+    # for province in sorted(unique_provinces):
+    #     print(province)
+
+    # # Folder where all region-wise GeoJSON files are stored
+    # geojson_folder = "/Users/marke/Downloads/"
+    # geojson_files = [
+    #     "provdists-region-100000000.0.001",
+    #     "provdists-region-1000000000.0.001",
+    #     "provdists-region-1100000000.0.001",
+    #     "provdists-region-1200000000.0.001",
+    #     "provdists-region-1300000000.0.001",
+    #     "provdists-region-1400000000.0.001",
+    #     "provdists-region-1600000000.0.001",
+    #     "provdists-region-1700000000.0.001",
+    #     "provdists-region-1900000000.0.001",
+    #     "provdists-region-200000000.0.001",
+    #     "provdists-region-300000000.0.001",
+    #     "provdists-region-400000000.0.001",
+    #     "provdists-region-500000000.0.001",
+    #     "provdists-region-600000000.0.001",
+    #     "provdists-region-700000000.0.001",
+    #     "provdists-region-800000000.0.001",
+    #     "provdists-region-900000000.0.001",
+    # ]
+
+    # # Combine all province GeoJSONs into one FeatureCollection
+    # all_features = []
+    # for filename in geojson_files:
+    #     filepath = os.path.join(geojson_folder, filename + ".json")
+    #     with open(filepath) as f:
+    #         geo = json.load(f)
+    #         geo = rewind(geo, rfc7946=False)  # Ensure proper winding
+    #         all_features.extend(geo['features'])
+
+    # combined_geojson = {
+    #     "type": "FeatureCollection",
+    #     "features": all_features
+    # }
+
+    # # Extract province names from GeoJSON
+    # geo_provinces = [feature['properties']['adm2_en'] for feature in combined_geojson['features']]
+    # print("Provinces in GeoJSON:", len(set(geo_provinces)))
+    # print("Provinces in DataFrame:", set(FILTERED_DF['province']))
+
+
+    # # Normalize casing and whitespace
+    # FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
+    # geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
+
+
+    # # Keep only matching provinces
+    # FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
+    
+    # # 4. Plotly Choropleth
+    # map_chart = px.choropleth(
+    #     FILTERED_DF,
+    #     geojson=combined_geojson,
+    #     locations='normalized_province',
+    #     featureidkey='properties.adm2_en',
+    #     color='counts',
+    #     hover_name=None,
+    #     hover_data=None,
+    #     color_continuous_scale='Viridis',
+        
+    # )
+    
+    # map_chart.update_traces(
+    #     hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
+    # )
+
+
+    # map_chart.update_geos(
+    #     visible=False,
+    #     # showcountries=False,
+    #     # showcoastlines=False,
+    #     showland=True,
+    #     fitbounds="locations",        # Ensures focus on actual geojson features
+    #     center = {'lat':12.8797, 'lon':121.7740},
+    #     resolution=50,
+    #     lataxis_range=[4, 21],        # Latitude range for PH
+    #     lonaxis_range=[115, 128],  # Longitude range for PH
+    # )
+
+
+
+    # map_chart.update_layout(
+    #     # title="Enrollment by Region",
+    #     # title_font=dict(size=20, family='Inter', color='#3C6382'),
+    #     # title_x=0.5,
+    #     margin={"r": 0, "t": 0, "l": 0, "b": 0},
+    #     paper_bgcolor='white',
+    #     plot_bgcolor='rgba(0,0,0,0)',
+    #     coloraxis_showscale=False,
+    #     # dragmode=False,
+    # )
+
+
+
 
     # # Load your province-level data (replace this with actual loading logic)
     # FILTERED_DF = auto_extract(['counts', 'province'], is_specific=True)
     # FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+
+    # unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    # for province in unique_provinces:
+    #     print(province)    
 
     # # Folder where all region-wise GeoJSON files are stored
     # geojson_folder = "/Users/marke/Downloads/"
@@ -204,108 +425,20 @@ if __name__ == '__main__':
     # print("Provinces in GeoJSON:", set(geo_provinces))
     # print("Provinces in DataFrame:", set(FILTERED_DF['province']))
 
-    # # Full province name mapping
-    # province_name_map = {
-    #     'Abra': 'ABRA',
-    #     'Agusan del Norte': 'AGUSAN DEL NORTE',
-    #     'Agusan del Sur': 'AGUSAN DEL SUR',
-    #     'Aklan': 'AKLAN',
-    #     'Albay': 'ALBAY',
-    #     'Antique': 'ANTIQUE',
-    #     'Apayao': 'APAYAO',
-    #     'Aurora': 'AURORA',
-    #     'Basilan': 'BASILAN',
-    #     'Bataan': 'BATAAN',
-    #     'Batanes': 'BATANES',
-    #     'Batangas': 'BATANGAS',
-    #     'Benguet': 'BENGUET',
-    #     'Biliran': 'BILIRAN',
-    #     'Bohol': 'BOHOL',
-    #     'Bukidnon': 'BUKIDNON',
-    #     'Bulacan': 'BULACAN',
-    #     'Cagayan': 'CAGAYAN',
-    #     'Camarines Norte': 'CAMARINES NORTE',
-    #     'Camarines Sur': 'CAMARINES SUR',
-    #     'Camiguin': 'CAMIGUIN',
-    #     'Capiz': 'CAPIZ',
-    #     'Catanduanes': 'CATANDUANES',
-    #     'Cavite': 'CAVITE',
-    #     'Cebu': 'CEBU',
-    #     'Compostela Valley': 'COMPOSTELA VALLEY',
-    #     'Davao de Oro': 'COMPOSTELA VALLEY',
-    #     'Davao del Norte': 'DAVAO DEL NORTE',
-    #     'Davao del Sur': 'DAVAO DEL SUR',
-    #     'Davao Occidental': 'DAVAO OCCIDENTAL',
-    #     'Davao Oriental': 'DAVAO ORIENTAL',
-    #     'Dinagat Islands': 'DINAGAT ISLANDS',
-    #     'Eastern Samar': 'EASTERN SAMAR',
-    #     'Guimaras': 'GUIMARAS',
-    #     'Ifugao': 'IFUGAO',
-    #     'Ilocos Norte': 'ILOCOS NORTE',
-    #     'Ilocos Sur': 'ILOCOS SUR',
-    #     'Iloilo': 'ILOILO',
-    #     'Isabela': 'ISABELA',
-    #     'Kalinga': 'KALINGA',
-    #     'La Union': 'LA UNION',
-    #     'Laguna': 'LAGUNA',
-    #     'Lanao del Norte': 'LANAO DEL NORTE',
-    #     'Lanao del Sur': 'LANAO DEL SUR',
-    #     'Leyte': 'LEYTE',
-    #     'Maguindanao del Norte': 'MAGUINDANAO',
-    #     'Maguindanao del Sur': 'MAGUINDANAO',
-    #     'Marinduque': 'MARINDUQUE',
-    #     'Masbate': 'MASBATE',
-    #     'Mountain Province': 'MOUNTAIN PROVINCE',
-    #     'Misamis Occidental': 'MISAMIS OCCIDENTAL',
-    #     'Misamis Oriental': 'MISAMIS ORIENTAL',
-    #     'Northern Samar': 'NORTHERN SAMAR',
-    #     'Nueva Ecija': 'NUEVA ECIJA',
-    #     'Nueva Vizcaya': 'NUEVA VIZCAYA',
-    #     'Occidental Mindoro': 'OCCIDENTAL MINDORO',
-    #     'Oriental Mindoro': 'ORIENTAL MINDORO',
-    #     'Palawan': 'PALAWAN',
-    #     'Pampanga': 'PAMPANGA',
-    #     'Pangasinan': 'PANGASINAN',
-    #     'Quezon': 'QUEZON',
-    #     'Quirino': 'QUIRINO',
-    #     'Rizal': 'RIZAL',
-    #     'Romblon': 'ROMBLON',
-    #     'Samar': 'WESTERN SAMAR',
-    #     'Sarangani': 'SARANGANI',
-    #     'Siquijor': 'SIQUIJOR',
-    #     'Sorsogon': 'SORSOGON',
-    #     'South Cotabato': 'SOUTH COTABATO',
-    #     'Southern Leyte': 'SOUTHERN LEYTE',
-    #     'Sultan Kudarat': 'SULTAN KUDARAT',
-    #     'Sulu': 'SULU',
-    #     'Surigao del Norte': 'SURIGAO DEL NORTE',
-    #     'Surigao del Sur': 'SURIGAO DEL SUR',
-    #     'Tarlac': 'TARLAC',
-    #     'Tawi-Tawi': 'TAWI-TAWI',
-    #     'Zambales': 'ZAMBALES',
-    #     'Zamboanga del Norte': 'ZAMBOANGA DEL NORTE',
-    #     'Zamboanga del Sur': 'ZAMBOANGA DEL SUR',
-    #     'Zamboanga Sibugay': 'ZAMBOANGA SIBUGAY',
-    #     'NCR, Second District (Not a Province)': 'NCR   SECOND DISTRICT',
-    #     'NCR, Third District (Not a Province)': 'NCR   THIRD DISTRICT',
-    #     'NCR, Fourth District (Not a Province)': 'NCR   FOURTH DISTRICT',
-    #     'NCR, City of Manila, First District (Not a Province)': 'MANILA, NCR,  FIRST DISTRICT ',
-    #     'City of Isabela (Not a Province)': 'CITY OF ISABELA',
-    #     'City of Cotabato': 'CITY OF COTABATO',
-    # }
 
-    # # Map DF province names to GeoJSON
-    # inverse_map = {v: k for k, v in province_name_map.items()}
-    # FILTERED_DF['geo_province'] = FILTERED_DF['province'].map(inverse_map).fillna(FILTERED_DF['province'])
+    # # Normalize casing and whitespace
+    # FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
+    # geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
 
-    # # Drop rows where geo_province not in GeoJSON
-    # FILTERED_DF = FILTERED_DF[FILTERED_DF['geo_province'].isin(geo_provinces)]
+
+    # # Keep only matching provinces
+    # FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
 
     # # Plot choropleth
     # map_chart = px.choropleth(
     #     FILTERED_DF,
     #     geojson=combined_geojson,
-    #     locations='geo_province',
+    #     locations='normalized_province',  # changed from 'geo_province'
     #     featureidkey='properties.adm2_en',
     #     color='counts',
     #     hover_name='province',
@@ -313,71 +446,175 @@ if __name__ == '__main__':
     #     color_continuous_scale='Viridis',
     # )
 
+
     # map_chart.update_geos(fitbounds="locations", visible=False)
     # map_chart.update_layout(title="Enrollment by Province", margin={"r": 0, "t": 30, "l": 0, "b": 0})
     # map_chart.show(renderer="browser")
 
-    
-    
-  ############################3 REGION  
-#     pio.renderers.default = "browser"
-    
-# # Load your enrollment data
-# # This is a temporary dataframe for testing charts
-#     FILTERED_DF = auto_extract(['counts', 'region'], is_specific=True)
-#     FILTERED_DF = FILTERED_DF.groupby('region', as_index=False)['counts'].sum()
 
-#     # Load GeoJSON (municipality level for PH)
-#     with open("/Users/marke/Downloads/country.0.001.json") as f:
-#         geojson = json.load(f)
+# ###########################3municipality
+#     # Load and group your municipality-level data
+#     FILTERED_DF = auto_extract(['counts', 'municipality'], is_specific=True)
+#     FILTERED_DF = FILTERED_DF.groupby('municipality', as_index=False)['counts'].sum()
 
-#     geojson = rewind(geojson, rfc7946=False)
+    # # Print for debug
+    # unique_municipalities = FILTERED_DF['municipality'].drop_duplicates().tolist()
+    # print("Municipalities in DataFrame:", len(unique_municipalities))
+    # for municipality in sorted(unique_municipalities):
+    #     print(municipality)
 
-#     # Print all REGION names in GeoJSON
-#     geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
-#     print(set(geo_regions))
+#     # Load all municipality-level GeoJSONs
+#     geojson_folder = "/Users/marke/Downloads/"
+#     geojson_files = [
+#         "municities-provdist-1001300000.0.001",
+#         "municities-provdist-1001800000.0.001",
+#         "municities-provdist-1003500000.0.001",
+#         "municities-provdist-1004200000.0.001",
+#         "municities-provdist-1004300000.0.001",
+#         "municities-provdist-102800000.0.001",
+#         "municities-provdist-102900000.0.001",
+#         "municities-provdist-103300000.0.001",
+#         "municities-provdist-105500000.0.001",
+#         "municities-provdist-1102300000.0.001",
+#         "municities-provdist-1102400000.0.001",
+#         "municities-provdist-1102500000.0.001",
+#         "municities-provdist-1108200000.0.001",
+#         "municities-provdist-1108600000.0.001",
+#         "municities-provdist-1204700000.0.001",
+#         "municities-provdist-1206300000.0.001",
+#         "municities-provdist-1206500000.0.001",
+#         "municities-provdist-1208000000.0.001",
+#         "municities-provdist-1303900000.0.001",
+#         "municities-provdist-1307400000.0.001",
+#         "municities-provdist-1307500000.0.001",
+#         "municities-provdist-1307600000.0.001",
+#         "municities-provdist-1400100000.0.001",
+#         "municities-provdist-1401100000.0.001",
+#         "municities-provdist-1402700000.0.001",
+#         "municities-provdist-1403200000.0.001",
+#         "municities-provdist-1404400000.0.001",
+#         "municities-provdist-1408100000.0.001",
+#         "municities-provdist-1600200000.0.001",
+#         "municities-provdist-1600300000.0.001",
+#         "municities-provdist-1606700000.0.001",
+#         "municities-provdist-1606800000.0.001",
+#         "municities-provdist-1608500000.0.001",
+#         "municities-provdist-1704000000.0.001",
+#         "municities-provdist-1705100000.0.001",
+#         "municities-provdist-1705200000.0.001",
+#         "municities-provdist-1705300000.0.001",
+#         "municities-provdist-1705900000.0.001",
+#         "municities-provdist-1900700000.0.001",
+#         "municities-provdist-1903600000.0.001",
+#         "municities-provdist-1906600000.0.001",
+#         "municities-provdist-1907000000.0.001",
+#         "municities-provdist-1908700000.0.001",
+#         "municities-provdist-1908800000.0.001",
+#         "municities-provdist-1909900000.0.001",
+#         "municities-provdist-200900000.0.001",
+#         "municities-provdist-201500000.0.001",
+#         "municities-provdist-203100000.0.001",
+#         "municities-provdist-205000000.0.001",
+#         "municities-provdist-205700000.0.001",
+#         "municities-provdist-300800000.0.001",
+#         "municities-provdist-301400000.0.001",
+#         "municities-provdist-304900000.0.001",
+#         "municities-provdist-305400000.0.001",
+#         "municities-provdist-306900000.0.001",
+#         "municities-provdist-307100000.0.001",
+#         "municities-provdist-307700000.0.001",
+#         "municities-provdist-401000000.0.001",
+#         "municities-provdist-402100000.0.001",
+#         "municities-provdist-403400000.0.001",
+#         "municities-provdist-405600000.0.001",
+#         "municities-provdist-405800000.0.001",
+#         "municities-provdist-500500000.0.001",
+#         "municities-provdist-501600000.0.001",
+#         "municities-provdist-501700000.0.001",
+#         "municities-provdist-502000000.0.001",
+#         "municities-provdist-504100000.0.001",
+#         "municities-provdist-506200000.0.001",
+#         "municities-provdist-600400000.0.001",
+#         "municities-provdist-600600000.0.001",
+#         "municities-provdist-601900000.0.001",
+#         "municities-provdist-603000000.0.001",
+#         "municities-provdist-604500000.0.001",
+#         "municities-provdist-607900000.0.001",
+#         "municities-provdist-701200000.0.001",
+#         "municities-provdist-702200000.0.001",
+#         "municities-provdist-704600000.0.001",
+#         "municities-provdist-706100000.0.001",
+#         "municities-provdist-802600000.0.001",
+#         "municities-provdist-803700000.0.001",
+#         "municities-provdist-804800000.0.001",
+#         "municities-provdist-806000000.0.001",
+#         "municities-provdist-806400000.0.001",
+#         "municities-provdist-807800000.0.001",
+#         "municities-provdist-907200000.0.001",
+#         "municities-provdist-907300000.0.001",
+#         "municities-provdist-908300000.0.001",
+#         "municities-provdist-990100000.0.001"
+#     ]
 
-#     # Print all region names in your DF
-#     print(set(FILTERED_DF['region']))
+#     # Combine features
+#     all_features = []
+#     for filename in geojson_files:
+#         filepath = os.path.join(geojson_folder, filename + ".json")
+#         with open(filepath) as f:
+#             geo = json.load(f)
+            
+#             if geo.get("type") == "FeatureCollection":
+#                 all_features.extend(geo["features"])
+            
+#             elif geo.get("type") == "Feature":
+#                 all_features.append(geo)
 
-#     region_name_map = {
-#         'Region I': 'Region I (Ilocos Region)',
-#         'Region II': 'Region II (Cagayan Valley)',
-#         'Region III': 'Region III (Central Luzon)',
-#         'Region IV-A': 'Region IV-A (CALABARZON)',
-#         'Region IV-B': 'MIMAROPA Region',
-#         'Region V': 'Region V (Bicol Region)',
-#         'Region VI': 'Region VI (Western Visayas)',
-#         'Region VII': 'Region VII (Central Visayas)',
-#         'Region VIII': 'Region VIII (Eastern Visayas)',
-#         'Region IX': 'Region IX (Zamboanga Peninsula)',
-#         'Region X': 'Region X (Northern Mindanao)',
-#         'Region XI': 'Region XI (Davao Region)',
-#         'Region XII': 'Region XII (SOCCSKSARGEN)',
-#         'CARAGA': 'Region XIII (Caraga)',
-#         'NCR': 'National Capital Region (NCR)',
-#         'CAR': 'Cordillera Administrative Region (CAR)',
-#         'BARMM': 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)',
+#             elif geo.get("type") == "GeometryCollection":
+#                 for geometry in geo.get("geometries", []):
+#                     feature = {
+#                         "type": "Feature",
+#                         "geometry": geometry,
+#                         "properties": {}  # Empty properties; customize if needed
+#                     }
+#                     all_features.append(feature)
+            
+#             else:
+#                 print(f"⚠️ Unexpected GeoJSON type in {filename}.json → {geo.get('type')}")
+
+
+#     combined_geojson = {
+#         "type": "FeatureCollection",
+#         "features": all_features
 #     }
 
-#     # Map region names to GeoJSON-compatible names
-#     FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
-#     FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])
+#     # Extract municipality names from GeoJSON
+#     geo_municipalities = [feature['properties']['adm3_en'] for feature in combined_geojson['features'] if feature['properties'].get('adm3_en')]
 
-#     # Plot the map
+#     print("Municipalities in GeoJSON:", len(set(geo_municipalities)))
+#     print("Sample GeoJSON names:", sorted(set(geo_municipalities))[:10])
+
+#     # Normalize names for better matching
+#     FILTERED_DF['normalized_municipality'] = FILTERED_DF['municipality'].str.strip().str.title()
+#     geo_municipalities_normalized = [m.strip().title() for m in geo_municipalities if m]
+
+#     # Keep only those present in GeoJSON
+#     FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_municipality'].isin(geo_municipalities_normalized)]
+
+#     # Plot choropleth
 #     map_chart = px.choropleth(
 #         FILTERED_DF,
-#         geojson=geojson,
-#         locations='geo_region',
-#         featureidkey='properties.adm1_en',
+#         geojson=combined_geojson,
+#         locations='normalized_municipality',
+#         featureidkey='properties.adm3_en',
 #         color='counts',
-#         hover_name='region',
+#         hover_name='municipality',
 #         hover_data=['counts'],
 #         color_continuous_scale='Viridis',
 #     )
 
 #     map_chart.update_geos(fitbounds="locations", visible=False)
-#     map_chart.update_layout(title="Enrollment by Region", margin={"r": 0, "t": 30, "l": 0, "b": 0})
+#     map_chart.update_layout(title="Enrollment by Municipality", margin={"r": 0, "t": 30, "l": 0, "b": 0})
 #     map_chart.show(renderer="browser")
 
+    
 
