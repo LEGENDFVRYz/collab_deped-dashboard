@@ -1,4 +1,5 @@
 import time
+from turtle import title
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -7,6 +8,7 @@ from dash import dcc, callback, Output, Input, State, Patch
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
+from src.utils.extras_utils import smart_truncate_number
 
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 # from config import project_root
@@ -85,55 +87,123 @@ from src.data import enrollment_db_engine, smart_filter
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    
+    # Extract and group
+    grouped_by_offering = FILTERED_DATA.groupby("mod_coc")['beis_id'].nunique().reset_index(name="counts")
+    
+    # Drop duplicate schools
+    cleaned_FILTERED_DF = FILTERED_DATA.drop_duplicates(subset='beis_id')
+    
+    # total_school_count = len(cleaned_FILTERED_DF)
+    # shs_percentage = f"{(shs_total / total_school_count * 100):.1f}%" if total_school_count else "0%"
 
-    number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
-    number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
+    # Order inner donut
+    desired_order = [
+        'Purely ES',
+        'Purely JHS',
+        'Purely SHS',
+        'ES and JHS',
+        'JHS with SHS',
+        'All Offering'
+    ]
+    
+    inner_color_map = {
+        'Purely ES': '#002242',
+        'Purely JHS': '#004386',
+        'Purely SHS': '#0162C2',
+        'ES and JHS': '#5EAFFF',
+        'JHS with SHS': '#ADDBFF',
+        'All Offering': '#E2F2FF'
+    }
 
-    number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='school_count', ascending=False)
-
-    number_of_schools_mcoc_colors = ['#04508c', '#037DEE', '#369EFF', '#930F22', '#E11C38', '#FF899A']
-
-    number_of_schools_mcoc_chart = px.pie(
-        number_of_schools_mcoc_sorted,
-        names='mod_coc',
-        values='school_count',
-        hole=0.45,
-        title='<b>Number of Schools by Program Offerings</b>',
-        color_discrete_sequence=number_of_schools_mcoc_colors
+    grouped_by_offering['mod_coc'] = pd.Categorical(
+        grouped_by_offering['mod_coc'], categories=desired_order, ordered=True
     )
+    grouped_by_offering = grouped_by_offering.sort_values('mod_coc')
 
-    number_of_schools_mcoc_chart.update_traces(
-        textposition='inside',
-        textinfo='label+value',
-        textfont=dict(size=14, color='white'),
-        hovertemplate='<b>%{label}</b><br>Schools: %{value:,}<extra></extra>'
-    )
+    inner_labels = grouped_by_offering['mod_coc']
+    inner_values = grouped_by_offering['counts']
+    inner_colors = inner_labels.map(inner_color_map)
+    
+    number_of_schools_mcoc_chart = go.Figure()
+    
+    number_of_schools_mcoc_chart.add_trace(go.Pie(
+        labels=inner_labels,
+        values=inner_values,
+        hole=0.43,
+        direction='clockwise',
+        rotation=90,
+        sort=False,
+        textinfo='none',
+        marker=dict(colors=inner_colors, line=dict(color='#3C6382', width=0)),
+        domain={'x': [0,1], 'y': [0,1]},
+        name='Level',
+        legendgroup='Education Level',
+    ))
 
+    # Layout
     number_of_schools_mcoc_chart.update_layout(
+        showlegend=False,
         autosize=True,
-        showlegend=True,
-        title_font_size=18,
-        title_font_color='#3C6382',
-        title_x=0.5,
-        margin=dict(l=20, r=20, t=50, b=20),
-        height=450,
-        plot_bgcolor='#FFFFFF',
-        font=dict(family='Inter, sans-serif', color='#3C6382'),
+        margin=dict(t=0, b=0, l=0, r=0),
         legend=dict(
-            orientation='h',
+            orientation='h',        # horizontal legend
             yanchor='bottom',
-            y=-0.5,
+            y=-0.2,
             xanchor='center',
-            x=0.5,
-            title=None,
-            font=dict(size=14),
+            x=0.5                   # center horizontally
         )
     )
-
-
-    number_of_schools_mcoc_chart
     
-    return dcc.Graph(figure=number_of_schools_mcoc_chart)
+    number_of_schools_mcoc_chart
+
+    # number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
+    # number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
+
+    # number_of_schools_mcoc_sorted = number_of_schools_mcoc.sort_values(by='school_count', ascending=False)
+
+    # number_of_schools_mcoc_colors = ['#04508c', '#037DEE', '#369EFF', '#930F22', '#E11C38', '#FF899A']
+
+    # number_of_schools_mcoc_chart = px.pie(
+    #     number_of_schools_mcoc_sorted,
+    #     names='mod_coc',
+    #     values='school_count',
+    #     hole=0.45,
+    #     # title='<b>Number of Schools by Program Offerings</b>',
+    #     color_discrete_sequence=number_of_schools_mcoc_colors
+    # )
+
+    # number_of_schools_mcoc_chart.update_traces(
+    #     textposition='inside',
+    #     textinfo='label+value',
+    #     textfont=dict(size=14, color='white'),
+    #     hovertemplate='<b>%{label}</b><br>Schools: %{value:,}<extra></extra>'
+    # )
+
+    # number_of_schools_mcoc_chart.update_layout(
+    #     autosize=True,
+    #     showlegend=True,
+    #     title_font_size=18,
+    #     title_font_color='#3C6382',
+    #     title_x=0.5,
+    #     margin=dict(l=0, r=0, t=0, b=0),
+    #     plot_bgcolor='#FFFFFF',
+    #     font=dict(family='Inter, sans-serif', color='#3C6382'),
+    #     legend=dict(
+    #         orientation='h',
+    #         yanchor='bottom',
+    #         y=-0.5,
+    #         xanchor='center',
+    #         x=0.5,
+    #         title=None,
+    #         font=dict(size=14),
+    #     )
+    # )
+
+
+    # number_of_schools_mcoc_chart
+    
+    return dcc.Graph(figure=number_of_schools_mcoc_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -163,7 +233,7 @@ def update_graph(trigger, data):
         y='counts',
         color='gender',
         barmode='group',
-        title='<b>Gender Distribution Across Program Offerings</b>',
+        # title='<b>Gender Distribution Across Program Offerings</b>',
         color_discrete_map={
             'Male': '#5DB7FF',     
             'Female': '#FF5B72'    
@@ -177,23 +247,39 @@ def update_graph(trigger, data):
 
     gender_distribution_chart.update_layout(
         autosize=True,
-        xaxis_title='Program Offering',
-        yaxis_title='Number of Students',
+        # xaxis_title='Program Offering',
+        # yaxis_title='Number of Students',
         title_font_size=18,
         title_font_color='#3C6382',
         title_x=0.5,
         plot_bgcolor='rgba(255, 255, 255, 0.5)',
         font=dict(family='Inter, sans-serif', color='#3C6382'),
-        margin={"l": 20, "r": 20, "t": 50, "b": 20},
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+        xaxis=dict(
+            title=None,
+            tickangle=-45,
+            tickfont=dict(size=11),
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1
+        ),
+        yaxis=dict(
+            title=None,
+            tickfont=dict(size=11),
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1
+        ),
         legend=dict(
             title='Gender',
-            font=dict(size=14),
-            x=1.05,
-            y=1,
-            xanchor='left',
-            yanchor='top',
-            bgcolor='rgba(0,0,0,0)',   
-            bordercolor='rgba(0,0,0,0)', 
+            font=dict(size=10),
+            orientation='h',      # horizontal layout
+            yanchor='bottom',
+            y=1.02,               # slightly above the plot
+            xanchor='center',
+            x=0.5,                # centered horizontally
+            bgcolor='rgba(0,0,0,0)',
+            bordercolor='rgba(0,0,0,0)',
         )
     )
 
@@ -201,7 +287,7 @@ def update_graph(trigger, data):
 
     gender_distribution_chart
     
-    return dcc.Graph(figure=gender_distribution_chart)
+    return dcc.Graph(figure=gender_distribution_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -230,7 +316,7 @@ def update_graph(trigger, data):
         x='counts',
         y='mod_coc',
         orientation='h',
-        title='<b>MCOC Types Ranked by Total Student Enrollment</b>',
+        # title='<b>MCOC Types Ranked by Total Student Enrollment</b>',
         labels={
             'mod_coc': 'MCOC Type',
             'counts': 'Total Students'
@@ -247,29 +333,35 @@ def update_graph(trigger, data):
         showlegend=False,
         autosize=True,
         title={
-            'text': '<b>MCOC Types Ranked by Total Student Enrollment</b>',
+            # 'text': '<b>MCOC Types Ranked by Total Student Enrollment</b>',
             'x': 0.5,
             'xanchor': 'center',
             'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
-        xaxis_title='Number of Students',
-        yaxis_title='Programs',
+        # xaxis_title='Number of Students',
+        # yaxis_title='Programs',
         font=dict(family='Inter, sans-serif', size=14, color='#3C6382'), 
-        margin={"l": 40, "r": 40, "t": 60, "b": 40},
-        height=500,
-        yaxis={'categoryorder': 'total ascending'},
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
+        yaxis=dict(
+            categoryorder='total ascending',
+            title=None,
+            tickfont=dict(size=11),
+            ticksuffix="  "
+        ),
         xaxis=dict(
             showgrid=True,
             gridcolor='rgba(0,0,0,0.05)',
             zeroline=False,
-            tickformat='.0s'
+            tickformat='.0s',
+            title=None,
+            tickfont=dict(size=11),
         ),
         plot_bgcolor='#FFFFFF' 
     )
 
     ranked_mcoc_chart
     
-    return dcc.Graph(figure=ranked_mcoc_chart)
+    return dcc.Graph(figure=ranked_mcoc_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 
 # #################################################################################
@@ -305,6 +397,10 @@ def update_graph(trigger, data):
 
 @callback(
     Output('offering_enroll_dist', 'children'),
+    Output('offering-highest-grade', 'children'),
+    Output('offering-highest-count', 'children'),
+    Output('offering-lowest-grade', 'children'),
+    Output('offering-lowest-count', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -312,34 +408,131 @@ def update_graph(trigger, data):
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    
+    order = ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12']
 
-    grade_enrollment = FILTERED_DATA.groupby('grade')['counts'].sum().reset_index()
-    grade_enrollment
+    FILTERED_DATA['school-level'] = FILTERED_DATA['grade'].apply(
+        lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else (
+            'SHS' if x in ['G11', 'G12'] else 'ELEM')
+    )
+
+    query = FILTERED_DATA.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
+    query = query[query['counts'] != 0]
+    query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
+    query = query.sort_values('grade')
+    query['formatted_counts'] = query['counts'].apply(smart_truncate_number)
+    
+    grade_name_map = {
+        'K': 'Kindergarten',
+        'G1': 'Grade 1',
+        'G2': 'Grade 2',
+        'G3': 'Grade 3',
+        'G4': 'Grade 4',
+        'G5': 'Grade 5',
+        'G6': 'Grade 6',
+        'ES NG': 'ES NG',
+        'G7': 'Grade 7',
+        'G8': 'Grade 8',
+        'G9': 'Grade 9',
+        'G10': 'Grade 10',
+        'JHS NG': 'JHS NG',
+        'G11': 'Grade 11',
+        'G12': 'Grade 12',
+    }
+
+    query['renamed-grade'] = query['grade'].map(grade_name_map)
+    
+    # Get extremes
+    highest = query.loc[query['counts'].idxmax()]
+    lowest = query.loc[query['counts'].idxmin()]
+    
+    highest_grade = highest["renamed-grade"]
+    highest_count = highest["counts"]
+    lowest_grade = lowest["renamed-grade"]
+    lowest_count = lowest["counts"]
+
+    # print(query['formatted_counts'])
+    # print(query.head())
 
     offering_enroll_dist = px.bar(
-        grade_enrollment,
-        x='grade',
-        y='counts',
-        title='<b>Enrollment Distribution by Grade Level</b>',
-        labels={'grade': 'Grade Level', 'counts': 'Number of Enrollees'},
-        text='counts'
+        query, 
+        x="counts", 
+        y="grade",
+        text="formatted_counts",
+        orientation='h',
+        custom_data=['school-level'],
+        color='school-level',
+        color_discrete_map={
+            'ELEM': '#037DEE', 
+            'JHS': '#FE4761', 
+            'SHS': '#FFBF5F'
+        }
     )
 
     offering_enroll_dist.update_traces(
         textposition='outside',
-        marker_color='#EA6074' 
+        cliponaxis=False,
+        textfont=dict(size=8, color="#04508c"),
+        hovertemplate='Education Level: %{customdata[0]}<br>Enrollees: %{x}<br>Grade-level: %{y}',
     )
 
     offering_enroll_dist.update_layout(
-        xaxis_title='Grade Level',
-        yaxis_title='Number of Enrollees',
-        uniformtext_minsize=8,
-        uniformtext_mode='hide'
+        autosize=True,
+        margin={"l": 8, "r": 8, "t": 8, "b": 8},
+        paper_bgcolor='rgba(0, 0, 0, 0)',
+        plot_bgcolor='rgba(0, 0, 0, 0)',
+        yaxis=dict(
+            automargin=True,
+            title=None,
+            tickfont=dict(size=9, color="#9DADBD"),
+            ticksuffix="  "
+        ),
+        xaxis=dict(
+            automargin=True,
+            title=None,
+            visible=False,
+            categoryorder='array',
+            categoryarray=order
+        ),
+        legend=dict(
+            title=None,
+            orientation="h",
+            yanchor="bottom",
+            y=1.025,
+            xanchor="center",
+            x=0.45
+        )
     )
+
+    return (dcc.Graph(figure=offering_enroll_dist, config={"responsive": True}, style={"width": "100%", "height": "100%"}), highest_grade, f"{highest_count:,}", lowest_grade, f"{lowest_count:,}")
+
+    # grade_enrollment = FILTERED_DATA.groupby('grade')['counts'].sum().reset_index()
+    # grade_enrollment
+
+    # offering_enroll_dist = px.bar(
+    #     grade_enrollment,
+    #     x='grade',
+    #     y='counts',
+    #     # title='<b>Enrollment Distribution by Grade Level</b>',
+    #     labels={'grade': 'Grade Level', 'counts': 'Number of Enrollees'},
+    #     text='counts'
+    # )
+
+    # offering_enroll_dist.update_traces(
+    #     textposition='outside',
+    #     marker_color='#EA6074' 
+    # )
+
+    # offering_enroll_dist.update_layout(
+    #     xaxis_title='Grade Level',
+    #     yaxis_title='Number of Enrollees',
+    #     uniformtext_minsize=8,
+    #     uniformtext_mode='hide'
+    # )
     
-    offering_enroll_dist
+    # offering_enroll_dist
     
-    return dcc.Graph(figure=offering_enroll_dist)
+    # return dcc.Graph(figure=offering_enroll_dist, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 # ##  --- CHART: Number of MCOC Offerings per Location by School Level
@@ -371,11 +564,11 @@ def update_graph(trigger, data):
         y='beis_id',
         color='school_level',
         barmode='stack',
-        title='<b>Number of Schools per Region by School Level</b>',
+        # title='<b>Number of Schools per Region by School Level</b>',
         color_discrete_map={
-            'ELEM': '#FF899A',
+            'ELEM': '#930F22',
             'JHS': '#E11C38',
-            'SHS': '#930F22'
+            'SHS': '#FF899A',
         },
         labels={
             'region': 'Region',
@@ -387,45 +580,54 @@ def update_graph(trigger, data):
     region_stacked_chart.update_layout(
         autosize=True,
         title={
-            'text': '<b>Number of Schools per Region by School Level</b>',
+            # 'text': '<b>Number of Schools per Region by School Level</b>',
             'x': 0.5,
             'xanchor': 'center',
             'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#3C6382'}
         },
         font={'family': 'Inter, sans-serif', 'size': 12, 'color': '#3C6382'},
-        xaxis_title='Region',
-        yaxis_title='Total Number of Schools',
+        # xaxis_title='Region',
+        # yaxis_title='Total Number of Schools',
         legend_title='School Level',
-        margin=dict(l=10, r=10, t=60, b=10),
-        height=550,
+        margin=dict(l=0, r=0, t=0, b=0),
         xaxis=dict(
-            tickangle=45,
+            tickangle=-45,
             showgrid=True,
-            gridcolor='rgba(0,0,0,0.05)'
+            # gridcolor='rgba(0,0,0,0.05)',
+            title=None,
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1,
+            tickfont=dict(size=11),
         ),
         legend=dict(
             orientation='h',
             yanchor='bottom',
             y=-0.5,
             xanchor='center',
-            x=0.4,
+            x=0.5,
             title=None,
-            font=dict(size=14),
+            font=dict(size=13),
         ),
         plot_bgcolor='#FFFFFF',
         yaxis=dict(
+            title=None,
             type='log',  # Set y-axis to logarithmic scale
             tickvals=[10, 100, 1000, 10000, 50000],  # Custom tick values
             ticktext=["10", "100", "1K", "10K", "50K"],  # Custom tick labels
-        )
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1,
+            tickfont=dict(size=11),
+        ),
     )
 
     region_stacked_chart.update_traces(
-        marker_line_color='#FFFFFF',
-        marker_line_width=2
+        # marker_line_color='#FFFFFF',
+        marker_line_width=0
     )
 
-    return dcc.Graph(figure=region_stacked_chart)
+    return dcc.Graph(figure=region_stacked_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 
 # #################################################################################
@@ -465,7 +667,7 @@ def update_graph(trigger, data):
     # Section headers
     indicator_chart.add_annotation(
         text="<b>HIGHEST</b>",
-        x=0.5, y=1.10, showarrow=False,
+        x=0.5, y=1, showarrow=False,
         font={'size': 16, 'family': 'Inter, sans-serif', 'color': '#1B4F72'},
         xref="paper", yref="paper"
     )
@@ -499,10 +701,9 @@ def update_graph(trigger, data):
     indicator_chart.update_layout(
         grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
         template="plotly_white",
-        height=500,
-        margin={"l": 40, "r": 40, "t": 140, "b": 60},
+        margin={"l": 0, "r": 0, "t": 0, "b": 0},
         title={
-            'text': "<b>Regions with Highest and Lowest Offerings <br>per School Level</b>",
+            # 'text': "<b>Regions with Highest and Lowest Offerings <br>per School Level</b>",
             'x': 0.5,
             'xanchor': 'center',
             'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#1B4F72'}
@@ -511,7 +712,7 @@ def update_graph(trigger, data):
         font={'family': 'Inter, sans-serif', 'size': 13, 'color': '#3C6382'}
     )
 
-    return dcc.Graph(figure=indicator_chart)
+    return dcc.Graph(figure=indicator_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 
 # #################################################################################
@@ -574,10 +775,14 @@ def update_graph(trigger, data):
         )
     )])
 
-    table_fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
+    # table_fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
 
-    table_fig
+    table_fig.update_layout(
+        autosize=True,
+        margin=dict(l=0, r=0, t=0, b=0),  # Remove margins
+        height=None,  # Let container control the height
+    )
     
-    return dcc.Graph(figure=table_fig)
+    return dcc.Graph(figure=table_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################

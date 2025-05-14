@@ -5,7 +5,7 @@ import os, sys
 
 # import json
 # import os
-# import plotly.express as px
+import plotly.express as px
 # from geojson_rewind import rewind
 # import pandas as pd
 # import plotly.io as pio
@@ -152,8 +152,62 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['region'], is_specific=False)
-    df
+    df = auto_extract(['track, strand, counts'], is_specific=False)
+    
+    # Group data by track and sector, counting unique schools
+    filtered_data_df = df[df['counts'] != 0]
+    cleaned_df = filtered_data_df[filtered_data_df['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    school_count = filtered_data_df.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')
+
+    # Compute total school count per track to determine sort order
+    track_order = (
+        school_count.groupby('track')['school_count']
+        .sum()
+        .sort_values(ascending=False)
+        .index.tolist()
+    )
+
+    # Create horizontal stacked bar chart with sorted track order
+    seniorhigh_school_offering_per_track_by_sector = px.bar(
+        school_count,
+        x='school_count',
+        y='track',
+        color='sector',
+        orientation='h',
+        labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
+        color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
+        category_orders={'track': track_order},
+        title="Number of Schools Offering Each Track by Sector"
+    )
+
+    # Update layout
+    seniorhigh_school_offering_per_track_by_sector.update_layout(
+        title={
+            'text': "Number of Schools<br>Offering Each Track by Sector",
+            'x': 0.5,
+            'font': {'color': '#3C6382', 'size': 14}
+        },
+        xaxis={
+            'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
+            'tickfont': {'color': '#667889'},
+            'tickformat': '~s',
+            'tickangle': 0
+        },
+        yaxis={
+            'title': {'text': "Track", 'font': {'color': '#667889'}},
+            'tickfont': {'color': '#667889'}
+        },
+        legend={
+            'title': {'text': "Sector", 'font': {'color': '#667889'}},
+            'font': {'color': '#667889'}
+        },
+        bargap=0.6,
+        autosize=True,
+        margin=dict(l=80, r=40, t=60, b=40)
+    )
+    
+    seniorhigh_school_offering_per_track_by_sector
     
     ############################################ PROVINCE
     # # Set Plotly renderer
