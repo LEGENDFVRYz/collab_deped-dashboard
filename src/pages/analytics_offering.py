@@ -29,7 +29,7 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: Number of Schools by MCOC Type
                                 #########################################
-                                html.H4(["Number of Schools by Program Offerings"], className="offering-title"),
+                                html.H4(["Number of Schools by Program Offerings"], style={"textAlign": "center"}, className="offering-title"),
                                 html.Div([
                                     html.Div([],id='offering_number-of-schools',),
                                     html.Div([
@@ -144,8 +144,68 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: ...
                                 #########################################
-                                html.H4(["Regions with Highest and Lowest Offerings per School Level"], className="offering-title"),
-                                html.Div([],id='offering_location-extremes',)
+                                html.H4(["Regions with Highest and Lowest Enrollment per School Level"], className="offering-title"),
+                                # html.Div([],id='offering_location-extremes',),
+
+                                html.Div([
+                                    # Highest cards with arrow-right-up-fill.svg
+                                    html.Div([
+                                        html.Span("ELEM:", className="offering-label"),
+                                        html.Span([], id='offering-highest-elem', className="offering-value"),
+                                        html.Div([ 
+                                            html.Img(src="/assets/images/icons_navigation/arrow-right-up-fill.svg", className="offering-highest-icon"),
+                                            html.Span([], id='offering-highest-elem-count', className="offering-count")
+                                        ],className="offering-count-wrapper"),
+                                    ], className="offering-card offering-highest"),
+
+                                    html.Div([
+                                        html.Span("JHS:", className="offering-label"),
+                                        html.Span([], id='offering-highest-jhs', className="offering-value"),
+                                        html.Div([    
+                                            html.Img(src="/assets/images/icons_navigation/arrow-right-up-fill.svg", className="offering-highest-icon"),
+                                            html.Span([], id='offering-highest-jhs-count', className="offering-count")
+                                        ],className="offering-count-wrapper"),      
+                                    ], className="offering-card offering-highest"),
+
+                                    html.Div([
+                                        html.Span("SHS:", className="offering-label"),
+                                        html.Span([], id='offering-highest-shs', className="offering-value"),
+                                        html.Div([    
+                                            html.Img(src="/assets/images/icons_navigation/arrow-right-up-fill.svg", className="offering-highest-icon"),
+                                            html.Span([], id='offering-highest-shs-count', className="offering-count")
+                                        ],className="offering-count-wrapper"),
+                                    ], className="offering-card offering-highest"),
+
+                                    # Lowest cards with arrow-left-down-fill.svg
+                                    html.Div([
+                                        html.Span("ELEM:", className="offering-label"),
+                                        html.Span([], id='offering-lowest-elem', className="offering-value"),
+                                        html.Div([    
+                                            html.Img(src="/assets/images/icons_navigation/arrow-left-down-fill.svg", className="offering-lowest-icon"),
+                                            html.Span([], id='offering-lowest-elem-count', className="offering-count")
+                                        ],className="offering-count-wrapper"),
+                                    ], className="offering-card offering-lowest"),
+
+                                    html.Div([
+                                        html.Span("JHS:", className="offering-label"),
+                                        html.Span([], id='offering-lowest-jhs', className="offering-value"),
+                                        html.Div([    
+                                            html.Img(src="/assets/images/icons_navigation/arrow-left-down-fill.svg", className="offering-lowest-icon"),
+                                            html.Span([], id='offering-lowest-jhs-count', className="offering-count")
+                                        ], className="offering-count-wrapper"),
+                                    ], className="offering-card offering-lowest"),
+
+                                    html.Div([
+                                        html.Span("SHS:", className="offering-label"),
+                                        html.Span([], id='offering-lowest-shs', className="offering-value"),
+                                        html.Div([    
+                                            html.Img(src="/assets/images/icons_navigation/arrow-left-down-fill.svg", className="offering-lowest-icon"),
+                                            html.Span([], id='offering-lowest-shs-count', className="offering-count")
+                                        ], className="offering-count-wrapper"),
+                                    ], className="offering-card offering-lowest"),
+                                ], className="offering-location-details"),
+
+      
                             ], margin=False)], className='offering-geographic-graph'),
                             
                         ], className='offering-geographic-content'),
