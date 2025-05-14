@@ -1049,6 +1049,11 @@ def update_chart(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
     FILTERED_DATA = FILTERED_DATA[['beis_id', 'sub_class', 'counts', 'year']]
     
+    oldest_year = FILTERED_DATA['year'].min()
+    latest_year = FILTERED_DATA['year'].max()
+
+    FILTERED_DATA = FILTERED_DATA[FILTERED_DATA['year'].isin([oldest_year, latest_year])]
+    
     query = (
         FILTERED_DATA.groupby(['year', 'sub_class'])
         .agg(
@@ -1201,10 +1206,11 @@ def update_chart(trigger, data):
     # prevent_initial_call=True
 )
 def update_graph(trigger, data):
+    # Apply filter and select needed columns
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
     FILTERED_DATA = FILTERED_DATA[['beis_id', 'sub_class', 'counts', 'year']]
 
-    # Step 1: Group by sub_class and year
+    # Step 1: Group by sub_class and year, count unique schools
     grouped = (
         FILTERED_DATA.groupby(['sub_class', 'year'])
         .agg(school_count=('beis_id', 'nunique'))
@@ -1219,13 +1225,15 @@ def update_graph(trigger, data):
         .sort_values('avg_school_count', ascending=False)
     )
 
-    # Assign colors based on sorted order
+    # Round for display purposes
+    subclass_df1['avg_school_count'] = subclass_df1['avg_school_count'].round(0)
+
+    # Assign custom colors
     color_palette = ['#012C53','#023F77','#02519B','#0264BE',
                     '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8']
-    # If more subclasses than colors, cycle or interpolate as needed
     subclass_df1['color'] = color_palette[:len(subclass_df1)]
 
-    # Apply simplified naming
+    # Apply simplified subclass naming
     simplified_labels = {
         'DOST Managed': 'DOST',
         'LUC Managed': 'LUC',
@@ -1234,32 +1242,35 @@ def update_graph(trigger, data):
         'School Abroad': 'Abroad',
         'SUC Managed': 'SUC',
         'DepED Managed': 'DepED'
-        # Add more mappings if needed
     }
     subclass_df1['sub_class'] = subclass_df1['sub_class'].map(
         simplified_labels
-    ).fillna(subclass_df1['sub_class'])  # fallback if no match
-    
-    
+    ).fillna(subclass_df1['sub_class'])
+
+    # Create bar chart using avg_school_count
     total_schools_per_subclass = px.bar(
         subclass_df1,
-        x='school_count',
+        x='avg_school_count',
         y='sub_class',
-        labels={'sub_class': '', 'school_count': 'Number of Schools'},  # Remove "Subclass" label
-        text='school_count',
+        labels={'sub_class': '', 'avg_school_count': 'Number of Schools'},
+        text='avg_school_count',
         color='sub_class',
         color_discrete_map=dict(zip(subclass_df1['sub_class'], subclass_df1['color']))
     )
 
+    # Format chart layout
     total_schools_per_subclass.update_xaxes(type='log')
     total_schools_per_subclass.update_layout(
         autosize=True,
         margin={"l": 0, "r": 0, "t": 0, "b": 0},
         yaxis=dict(showticklabels=True),
-        xaxis_title='',  # Explicitly remove x-axis title
-        showlegend=False
+        xaxis_title='',
+        showlegend=False,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
     )
-        
+
+    # Return wrapped figure
     return dcc.Graph(
         figure=total_schools_per_subclass,
         config={"responsive": True},

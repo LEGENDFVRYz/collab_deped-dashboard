@@ -188,12 +188,13 @@
   text-align: center;
 }
 #plot-content.rendered .plotted-location-reporttt {
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: row;
+  gap: 1em;
 }
 #plot-content.rendered .plotted-location-reporttt .plot-left-section {
-  flex: 1;
+  flex: 3;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -201,10 +202,132 @@
 #plot-content.rendered .plotted-location-reporttt .plot-left-section .plt {
   flex: 1;
 }
-#plot-content.rendered .plotted-location-reporttt .plot-right-section {
-  flex: 1;
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .mainnnn {
+  flex: 2;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+  padding: 0em 0.5em;
+  color: #FFFFFF;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .icon-and-text {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .icon-and-text img {
+  width: 45px;
+  height: 45px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .icon-and-text .total-icon {
+  display: flex;
+  align-self: center;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .icon-and-text .total-text {
+  font-family: "Inter Bold";
+  font-size: 2.3em;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .academic-year {
+  display: flex;
+  width: 300px;
+  background: linear-gradient(to right, #005599, #2FA6FA);
+  border-radius: 0.5em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .academic-year .year-marker {
+  background-color: #FFFFFF;
+  border-radius: 0.5em;
+  width: 6px;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .academic-year .year-text {
+  display: flex;
+  font-size: 12px;
+  padding: 0.25em 1em 0.25em 1em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-card-1 .desc-text {
+  font-family: "Inter Bold";
+  font-size: 14px;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #04508c;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count {
+  display: flex;
+  justify-content: space-between;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker {
+  display: flex;
+  align-self: center;
+  border-radius: 0.5em;
+  width: 10px;
+  height: 30px;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.es {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.jhs {
+  background-color: #FE4761;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count .glevel-marker.shs {
+  background-color: #FFBF5F;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .glevel-count .count-text {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Inter Bold";
+  font-size: 2.3em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .full-count-text {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Inter Medium Italic";
+  font-size: 9px;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards .desc-text {
+  color: #3C6382;
+  font-family: "Inter";
+  font-size: 12px;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards #high-tag-loc, #plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-main-detail .ns-indicator .ns-sub-cards #low-tag-loc {
+  font-family: "Inter Semi Bold";
+  font-weight: bolder;
+  padding-top: 1em;
+  font-size: 16px;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .ns-details .ns-sub-detail {
+  display: flex;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-right-section {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
   gap: 1em;
 }
 #plot-content.rendered .plotted-location-reporttt .plot-right-section .plot-top-section {

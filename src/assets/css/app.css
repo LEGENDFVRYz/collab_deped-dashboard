@@ -41,7 +41,7 @@ body {
   color: #04508c;
 }
 .app-container .navigation .brand-section img {
-  width: 10em;
+  width: 9em;
 }
 .app-container .navigation .menu-section {
   display: flex;
@@ -450,6 +450,18 @@ body {
 #login-modal #login-container #login-logo {
   font-size: 2rem;
   font-weight: bold;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#login-modal #login-container #login-logo h2 {
+  color: #04508c;
+}
+#login-modal #login-container #login-logo img {
+  width: 9em;
 }
 #login-modal #login-container #login-form {
   display: flex;

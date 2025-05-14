@@ -1,5 +1,6 @@
 from enum import auto
 from turtle import title
+from unicodedata import category
 import numpy as np
 import pandas as pd
 import dash
@@ -627,3 +628,158 @@ def update_graph(trigger, data):
     )
 
 # #################################################################################
+
+
+@callback(
+    Output('enrollment-by-years', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+    
+    df = FILTERED_DATA[['brgy', 'municipality', 'district', 'division', 'province', 'region', 'counts', 'year']]
+    
+    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+    min_loc = 5
+
+    for i, loc in enumerate(locs[1:]):
+        if loc in data:
+            min_loc = i
+            break
+
+    loc_scope = locs[min_loc]
+
+    df['year'] = df['year'].astype(str)
+    df_grouped = df.groupby([loc_scope, 'year'], as_index=False)['counts'].sum()
+
+    sorted_regions = sorted(df_grouped[loc_scope].unique())
+    df_grouped[loc_scope] = pd.Categorical(df_grouped[loc_scope], categories=sorted_regions, ordered=True)
+    df_grouped = df_grouped.sort_values(by=[loc_scope, 'year'])
+
+    changes_chart = px.line(
+        df_grouped,
+        x='year',
+        y='counts',
+        color=loc_scope,
+        markers=True
+    )
+
+    changes_chart.update_layout(
+        title=None,
+        xaxis_title="Year",
+        yaxis_title=None,
+        xaxis=dict(type='category'),
+        margin=dict(t=20, b=20),
+    )
+
+    return dcc.Graph(
+        figure=changes_chart,
+        config={"responsive": True},
+        style={"width": "100%", "marginBottom": "10px"}
+    )
+
+
+@callback(
+    Output('total-enrollment-by-year', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+    
+    df = FILTERED_DATA[['region', 'counts', 'year']]
+    national_enrollment = df.groupby('year', as_index=False)['counts'].sum()
+
+    enrollment_bar = px.bar(
+        national_enrollment,
+        x='year',
+        y='counts',
+    )
+
+    enrollment_bar.update_layout(
+        title=None,
+        xaxis_title="Academic Year",
+        yaxis_title=None,
+        bargap=0.2,
+        xaxis=dict(type='category'),
+        margin=dict(t=20, b=20),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+    )
+
+    return dcc.Graph(
+        figure=enrollment_bar,
+        config={"responsive": True},
+        style={"width": "100%"}
+    )
+
+
+
+
+
+@callback(
+    Output('highest-avg-enroll', 'children'),
+    Output('year-text', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+    
+    # Extract required columns
+    FILTERED_DF = FILTERED_DATA[['region', 'year', 'counts']]
+
+    # Aggregate by year
+    yearly_counts = FILTERED_DF.groupby('year')['counts'].sum()
+
+    # Get highest year and value
+    highest_year = yearly_counts.idxmax()
+    highest_value = yearly_counts.max()
+
+    # Optional: truncate number if needed
+    truncated_highest_value = smart_truncate_number(highest_value)
+
+    # Optional: print or return
+    return f"{truncated_highest_value} Students", f"Academic Year {highest_year} - {highest_year+1}"
+
+
+
+
+@callback(
+    Output('high-avg-enroll', 'children'),
+    Output('low-avg-enroll', 'children'),
+    Output('high-tag-loc', 'children'),
+    Output('low-tag-loc', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+    
+    # Extract required columns
+    FILTERED_DF = FILTERED_DATA[['region', 'year', 'counts']]
+
+    # Group by region and year, then compute total enrollments per year per region
+    region_yearly_counts = FILTERED_DF.groupby(['region', 'year'])['counts'].sum().reset_index()
+
+    # Now compute the average enrollment over the years for each region
+    region_avg_enrollment = region_yearly_counts.groupby('region')['counts'].mean()
+
+    # Find region with highest and lowest average enrollment
+    highest_avg_region = region_avg_enrollment.idxmax()
+    highest_avg_value = region_avg_enrollment.max()
+
+    lowest_avg_region = region_avg_enrollment.idxmin()
+    lowest_avg_value = region_avg_enrollment.min()
+
+    # Truncate values if needed
+    truncated_highest_avg = smart_truncate_number(highest_avg_value)
+    truncated_lowest_avg = smart_truncate_number(lowest_avg_value)
+
+    # Output (or return these values)
+    return f"{truncated_highest_avg}", f"{truncated_lowest_avg}", f"{highest_avg_region}", f"{lowest_avg_region}"

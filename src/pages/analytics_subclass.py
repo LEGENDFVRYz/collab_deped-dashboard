@@ -239,8 +239,8 @@ def new_subclass_offering():
                                 html.H3(["Look at the School Situation..."], className="label"),
                                 
                                 html.Div([
-                                    html.Div([],id='subclass_total_schools_per_subclass'),
                                     html.Div([],id='subclass_student_school_ratio', className='chart-ctn-sc'),
+                                    html.Div([],id='subclass_total_schools_per_subclass'),
                                 ], className="plot-wrap")
                                 
                             ], margin=False)

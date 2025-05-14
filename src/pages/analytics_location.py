@@ -203,10 +203,10 @@ def render_location_filter():
                         html.Div([
                             html.H3(["Geographic Distribution"], className='label'),
                             html.Div([Card([
-                                #########################################
-                                ## INSERT PLOT: enrollment density (students per location)
-                                #########################################
-                                
+                                    #########################################
+                                    ## INSERT PLOT: enrollment density (students per location)
+                                    #########################################
+                                    
                                 
                                 ], margin=False)], className='plot-content')
                         ], className='plot-top-section plot-sec-wrap'),
@@ -297,16 +297,123 @@ def new_location_filter():
             ## LEFT SECTION
             html.Div([
                 
-                html.Div([], className='plt-top plt'),
-                html.Div([], className='plt-mid plt'),
-                html.Div([], className='plt-bot plt'),
+                html.Div(
+                    [
+                        html.Div([
+                            html.Div([
+                                html.Div([
+                                    
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
+                                                html.H1([], id="highest-avg-enroll", className="total-text"),
+                                            ], className='icon-and-text'),
+                                            html.Div([
+                                                html.Span("", className="year-marker"),
+                                                html.Span("Academic Year 2023-2024", className="year-text", id="year-text"),
+                                            ], className='academic-year'),
+                                            html.Div([
+                                                html.Span("Peak Enrollment Accross Years", className="desc-text"),
+                                            ], className='indicator'),
+                                        ], className="ns-card-1"),
+                                    ], margin=False, padding="1em", gradient=True),
+                                ], className='mainnnn'),
+                                
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker es"),
+                                                html.H1([], id="high-avg-enroll", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="esss-text", className="full-count-text"),
+                                            html.Span([], id="high-tag-loc"),
+                                            html.Span("Highest Average", className="desc-text"),
+                                        ], className="ns-sub-cards"),
+                                    ], margin=False)
+                                ], className="ns-indicator"),
+                                
+                                
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker jhs"),
+                                                html.H1([], id="low-avg-enroll", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="jhs-text", className="full-count-text"),
+                                            html.Span([], id="low-tag-loc"),
+                                            html.Span("Lowest Average", className="desc-text"),
+                                        ], className="ns-sub-cards"),
+                                    ], margin=False)
+                                ], className="ns-indicator"),
+                                
+                            ], className="ns-main-detail"),
+                            
+                            # html.Div([
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker es"),
+                            #                     html.H1([], id="es-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="es-text", className="full-count-text"),
+                            #                 html.Span("Elementary", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator"),
+                                
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker jhs"),
+                            #                     html.H1([], id="jhs-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="jhs-text", className="full-count-text"),
+                            #                 html.Span("Junior High School", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator"),
+                                
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker shs"),
+                            #                     html.H1([], id="shs-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="shs-text", className="full-count-text"),
+                            #                 html.Span("Senior High School", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator")
+                                
+                            # ], className="ns-sub-detail"),
+                        ], className="ns-details"),
+                    ]
+                , className='plt-top plt'),
+                
+                html.Div(Card(
+                    [
+                        html.Div([html.Div([], id='enrollment-by-years'),], className='plt-mid plt'),
+                        html.Div([html.Div([], id='total-enrollment-by-year'),], className='plt-bot plt'),
+                    ]
+                , margin=False), className='year-analysis'),
+                
                 
             ], className='plot-left-section'),
             
             ## RIGHT SECTION
             html.Div([
-                
-                
+                Card(
+                    [
+                        
+                        
+                    ]
+                , margin=False)
             ], className='plot-right-section'),
             
         ], className='plotted-location-reporttt render-plot')
