@@ -195,7 +195,6 @@
 }
 .analytics-page .content-section .right-content #plot-content {
   display: flex;
-  padding: 0.5em 0em;
   flex: 1;
 }
 .analytics-page .content-section .right-content #plot-content #plot-filtered-page {

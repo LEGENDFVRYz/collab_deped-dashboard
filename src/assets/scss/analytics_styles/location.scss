@@ -239,6 +239,41 @@
         }
     }
 
+
+    .plotted-location-reporttt{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+
+        .plot-left-section{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .plt{
+                flex: 1;
+            }
+        }
+
+
+        .plot-right-section{
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .plot-top-section{  
+                flex: 2;
+            }
+
+            .plot-bottom-section{
+                flex: 2;
+            }
+        }
+    }
+
     #edrg-graph-title{
         color: $text-color-2;
         font-size: 1.25em;

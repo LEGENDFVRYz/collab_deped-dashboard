@@ -187,6 +187,32 @@
   color: #3C6382;
   text-align: center;
 }
+#plot-content.rendered .plotted-location-reporttt {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-left-section .plt {
+  flex: 1;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-right-section .plot-top-section {
+  flex: 2;
+}
+#plot-content.rendered .plotted-location-reporttt .plot-right-section .plot-bottom-section {
+  flex: 2;
+}
 #plot-content.rendered #edrg-graph-title {
   color: #667889;
   font-size: 1.25em;

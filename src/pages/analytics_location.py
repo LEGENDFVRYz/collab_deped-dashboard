@@ -295,6 +295,18 @@ def new_location_filter():
     return html.Div(
         children=[
             ## LEFT SECTION
-            "NEWW location"
+            html.Div([
+                
+                html.Div([], className='plt-top plt'),
+                html.Div([], className='plt-mid plt'),
+                html.Div([], className='plt-bot plt'),
+                
+            ], className='plot-left-section'),
             
-        ], className='plotted-location-report render-plot')
+            ## RIGHT SECTION
+            html.Div([
+                
+                
+            ], className='plot-right-section'),
+            
+        ], className='plotted-location-reporttt render-plot')
