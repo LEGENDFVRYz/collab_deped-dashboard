@@ -216,48 +216,71 @@ def render_location_filter():
                         
                         ## BOTTOM SECTION
                         html.Div([
-                            html.H3(["Strand/Track Preferences"], className='label'),
+                            html.H3(["Selection Report..."], className='label'),
                             html.Div([Card([
-                                #########################################
-                                ## INSERT PLOT: Strand preferences per region
-                                #########################################
-                                html.H4(["Strand and Track Preferences per Region"], className="spr-graph-title"), 
-                                
-                                # dcc.Loading(
-                                #     id="loading-graph",
-                                #     type="default",
-                                #     children=
-                                    html.Div([
-                                    ],id='track-preference-heatmap')
-                                # )
-                                # dcc.Graph(
-                                #     id="track-preference-heatmap",
-                                #     # figure=heatmap_fig,
-                                #     config={"responsive": True},
-                                #     style={"width": "100%", "height": "100%", "display": "none"}
-                                # )
+                                html.Div([
+                                    
+                                    html.Div(
+                                        [
+                                            #########################################
+                                            ## INSERT PLOT: Strand preferences per region
+                                            #########################################
+                                            html.H4(["By Strand and Track Preferences"], className="spr-graph-title"), 
+                                            
+                                            # dcc.Loading(
+                                            #     id="loading-graph",
+                                            #     type="default",
+                                            #     children=
+                                                html.Div([
+                                                ],id='track-preference-heatmap')
+                                            # )
+                                            # dcc.Graph(
+                                            #     id="track-preference-heatmap",
+                                            #     # figure=heatmap_fig,
+                                            #     config={"responsive": True},
+                                            #     style={"width": "100%", "height": "100%", "display": "none"}
+                                            # )
+                                        ]
+                                    , className='plt-loc-top'),
+                                    
+                                    html.Div(
+                                        [
+                                            #########################################
+                                            ## INSERT PLOT: school sectors
+                                            #########################################
+                                            html.H4(["By School Sector"], className="spr-graph-title"), 
+                                            # dcc.Loading(
+                                            #     id="loading-graph",
+                                            #     type="default",
+                                            #     children=
+                                                html.Div([], id='location_school_sectors',)
+                                            # ),
+                                        ]
+                                    , className='plt-loc-bot'),
+                                    
+                                ], className='plttt'),
 
-                                
-                            ], margin=False)], className='plot-content')
+                            ], margin=False, padding='1.5em')], className='plot-content')
                         ], className='plot-bottom-section plot-sec-wrap'),
                         
-                        ## BOT SECTION
-                        html.Div([
-                            html.H3(["School Type Analysis"], className='label'),
-                            html.Div([Card([
-                                #########################################
-                                ## INSERT PLOT: school sectors
-                                #########################################
-                                html.H4(["Student Enrollment by School Sector per Region"], className="ss-graph-title"), 
-                                # dcc.Loading(
-                                #     id="loading-graph",
-                                #     type="default",
-                                #     children=
-                                    html.Div([], id='location_school_sectors',)
-                                # ),
+                        
+                        # ## BOT SECTION
+                        # html.Div([
+                        #     html.H3(["School Type Analysis"], className='label'),
+                        #     html.Div([Card([
+                        #         #########################################
+                        #         ## INSERT PLOT: school sectors
+                        #         #########################################
+                        #         html.H4(["Student Enrollment by School Sector per Region"], className="ss-graph-title"), 
+                        #         # dcc.Loading(
+                        #         #     id="loading-graph",
+                        #         #     type="default",
+                        #         #     children=
+                        #             html.Div([], id='location_school_sectors',)
+                        #         # ),
                                 
-                            ], margin=False)], className='plot-content')
-                        ], className='plot-bottom-section plot-sec-wrap'),
+                        #     ], margin=False)], className='plot-content')
+                        # ], className='plot-bottom-section plot-sec-wrap'),
                         
                     ], className="rev-right"),
 

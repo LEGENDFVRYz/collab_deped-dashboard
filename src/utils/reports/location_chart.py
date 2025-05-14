@@ -307,25 +307,28 @@ def update_graph(trigger, data):
 
     sector_chart.update_layout(
         autosize=True,
-        title_font=dict(size=20, family='Inter, sans-serif', color='#3C6382'),
-        title_x=0.5,
+        title=None,  # Remove the main chart title
         font=dict(family='Inter, sans-serif', size=14, color='#3C6382'),
         plot_bgcolor='rgba(255,255,255,0.5)',
         margin=dict(l=50, r=30, t=70, b=60),
         legend=dict(
             title=None,
-            orientation='h',          
+            orientation='h',
             yanchor='bottom',
-            y=-0.9,                 
+            y=-0.9,
             xanchor='center',
-            x=0.5,                         
+            x=0.5,
             font=dict(size=14),
             bgcolor='rgba(0,0,0,0)',
             bordercolor='rgba(0,0,0,0)'
         ),
-
-        xaxis=dict(showgrid=False, tickangle=-45),
+        xaxis=dict(
+            title=None,         # Remove x-axis title
+            showgrid=False,
+            tickangle=-45
+        ),
         yaxis=dict(
+            title=None,         # Remove y-axis title
             showgrid=False,
             tickformat='.1s',
             tickprefix=''
@@ -435,15 +438,12 @@ def update_graph(trigger, data):
     heatmap_fig.update_layout(
         height=400,
         width=600,
-        title_text="Student Enrollment",
-        xaxis2=dict(title="Region", tickangle=45),
-        yaxis=dict(title="Track"),
-        yaxis2=dict(title="Strand"),
+        title_text=None,
+        xaxis2=dict(title=None, tickangle=45),
+        yaxis=dict(title=None),
+        yaxis2=dict(title=None),
         margin=dict(l=20, r=20, t=40, b=20)
     )
-
-    # Step 6: Show the figure
-    heatmap_fig
 
     return dcc.Graph(figure=heatmap_fig)
 

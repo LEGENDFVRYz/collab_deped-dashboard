@@ -20,6 +20,13 @@
             }
             .plot-content{
                 flex: 1;
+                display: flex;
+
+                .plttt{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
 
