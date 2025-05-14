@@ -121,11 +121,11 @@ def update_graph(trigger, data):
         ]
     
     # Step 1: Group by region and gender
-    total_counts = FILTERED_DATA.groupby(loc_scope)['counts'].sum().reset_index()
+    total_counts = FILTERED_DATA.groupby(loc_scope, observed=True)['counts'].sum().reset_index()
     total_counts = total_counts.sort_values(by='counts', ascending=True)
 
     # Step 2: Group by region and gender, and calculate counts
-    gender_region = FILTERED_DATA.groupby([loc_scope, 'gender'])['counts'].sum().reset_index()
+    gender_region = FILTERED_DATA.groupby([loc_scope, 'gender'], observed=True)['counts'].sum().reset_index()
 
     # Step 3: Ensure that the 'loc_scope' in gender_region has the same ordering as in total_counts
     gender_region[loc_scope] = pd.Categorical(
@@ -161,7 +161,7 @@ def update_graph(trigger, data):
     )
     
     # Step 4: Calculate total per region for annotations
-    region_totals = gender_region.groupby(loc_scope)['counts'].sum().reset_index()
+    region_totals = gender_region.groupby(loc_scope, observed=True)['counts'].sum().reset_index()
 
     # Step 5: Add truncated total annotations
     for _, row in region_totals.iterrows():
@@ -251,7 +251,7 @@ def update_graph(trigger, data):
     
     sector_enrollment = (
         FILTERED_DATA
-        .groupby([loc_scope, 'sector'])['counts']
+        .groupby([loc_scope, 'sector'], observed=True)['counts']
         .sum()
         .reset_index()
     )
@@ -384,17 +384,18 @@ def update_graph(trigger, data):
     loc_scope = locs[min_loc]
     
     # Cleaning
-    clean_df = FILTERED_DATA[FILTERED_DATA['grade'].isin(['G11', 'G12'])]
+    clean_df = FILTERED_DATA[FILTERED_DATA['grade'].isin(['G11', 'G12'])].copy()
+    # clean_df['track'] = clean_df['track'].cat.remove_unused_categories()
     clean_df['track'] = clean_df['track'].cat.remove_unused_categories()
     
     # Step 2: Group and SUM the 'counts' for track-level heatmap
-    track_data = clean_df.groupby([loc_scope, 'track'])['counts'].sum().reset_index()
+    track_data = clean_df.groupby([loc_scope, 'track'], observed=True)['counts'].sum().reset_index()
     track_pivot = track_data.pivot(index='track', columns=loc_scope, values='counts').fillna(0)
 
     # Step 3: Group and SUM the 'counts' for strand-level heatmap
     clean_df = clean_df[clean_df['strand'] != '__NaN__']
     clean_df['strand'] = clean_df['strand'].cat.remove_unused_categories()
-    strand_data = clean_df.groupby([loc_scope, 'strand'])['counts'].sum().reset_index()
+    strand_data = clean_df.groupby([loc_scope, 'strand'], observed=True)['counts'].sum().reset_index()
     strand_pivot = strand_data.pivot(index='strand', columns=loc_scope, values='counts').fillna(0)
     
     # Step 4: Create subplots
@@ -478,7 +479,7 @@ def update_graph(trigger, data):
     loc_scope = locs[min_loc]
     
     FILTERED_DATA = FILTERED_DATA[[loc_scope, 'counts']]
-    df_grouped = FILTERED_DATA.groupby(loc_scope, as_index=False)['counts'].sum()
+    df_grouped = FILTERED_DATA.groupby(loc_scope, as_index=False, observed=True)['counts'].sum()
 
     # Median enrollees per school
     median_enrollees_per_school = int(df_grouped['counts'].median())

@@ -282,7 +282,7 @@ def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     subclass_df1 = (
-        FILTERED_DATA.groupby('sub_class')
+        FILTERED_DATA.groupby('sub_class', observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),  
@@ -366,7 +366,7 @@ def update_graph(trigger, n_clicks, data):
     
     # Grouped DataFrames
     subclass_df1 = (
-        FILTERED_DATA.groupby('sub_class')
+        FILTERED_DATA.groupby('sub_class', observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),
@@ -385,7 +385,7 @@ def update_graph(trigger, n_clicks, data):
 
     # Group and convert 'type' to ordered category
     df_by_type = (
-        FILTERED_DATA.groupby(['sub_class', 'type'])
+        FILTERED_DATA.groupby(['sub_class', 'type'], observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),
@@ -408,7 +408,7 @@ def update_graph(trigger, n_clicks, data):
 
     # Group and convert 'mod_coc' to ordered category
     df_by_modcoc = (
-        FILTERED_DATA.groupby(['sub_class', 'mod_coc'])
+        FILTERED_DATA.groupby(['sub_class', 'mod_coc'], observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),
@@ -559,7 +559,7 @@ def update_graph(trigger, n_clicks, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
-    subclass_df4 = FILTERED_DATA.groupby(['sub_class', 'sector']).agg(
+    subclass_df4 = FILTERED_DATA.groupby(['sub_class', 'sector'], observed=True).agg(
         school_count=('beis_id', 'nunique'),
         total_enrollees=('counts', 'sum')
     ).reset_index()
