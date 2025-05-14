@@ -142,7 +142,7 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
         # List of column names
         columns_to_convert = ['gender', 'sector', 'sub_class', 'type', 'mod_coc',
                               'region', 'province', 'division', 'district',
-                              'track', 'strand', 'grade', 'year']  
+                              'track', 'strand', 'grade']  
 
         for col in columns_to_convert:
             dataframe[col] = dataframe[col].astype('category')
