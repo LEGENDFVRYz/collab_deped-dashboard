@@ -43,16 +43,21 @@ body{
         z-index: 1; 
 
         .brand-section{
-            margin-bottom: 1em;
+            padding-top: 3em;
+            padding-bottom: 3em;
             text-align: center;
             
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 6em;
+            // height: 9em;
             
             h2{
                 color: $primary-color-1;
+            }
+            img{
+                width: 10em;
+
             }
         }
 
@@ -128,6 +133,7 @@ body{
                     }
                     .text{
                         color: $white;
+                        font-family: "Inter Bold";
                     }
                 }
 
@@ -484,6 +490,17 @@ body{
                     flex-direction: column;
                     max-width: 120em; // not final
                     margin: 0 auto;
+
+                    // DEFAULT STYLES
+                    .lfury-highlight {
+                        color: $white; 
+                        background-color: #FFBF5F; 
+                        font-size: 1em; 
+                        font-family: "Inter Bold"; 
+                        text-align: center; 
+                        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                        padding: 0.25em 0.75em;
+                    }
 
                     .page-header{
                         display: flex;

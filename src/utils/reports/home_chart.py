@@ -47,13 +47,17 @@ def trigger_base_charts(pathname, base_status):
 
 @callback(
     Output('home-enrollment-per-region', 'figure'),
+    Output('highest-grade', 'children'),
+    Output('highest-count', 'children'),
+    Output('lowest-grade', 'children'),
+    Output('lowest-count', 'children'),
     Input('base-trigger', 'data'),
     prevent_initial_call=True
 )
 def update_graph(pathname):
     # if pathname != "/":
     #     return dash.no_update
-    
+
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['grade', 'counts']]
 
@@ -64,15 +68,44 @@ def update_graph(pathname):
             'SHS' if x in ['G11', 'G12'] else 'ELEM')
     )
 
-    query = BASE_DF.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
+    query = BASE_DF.groupby(['school-level','grade'], as_index=False, observed=True)[['counts']].sum()
     query = query[query['counts'] != 0]
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
     query = query.sort_values('grade')
     query['formatted_counts'] = query['counts'].apply(smart_truncate_number)
     
+    grade_name_map = {
+        'K': 'Kindergarten',
+        'G1': 'Grade 1',
+        'G2': 'Grade 2',
+        'G3': 'Grade 3',
+        'G4': 'Grade 4',
+        'G5': 'Grade 5',
+        'G6': 'Grade 6',
+        'ES NG': 'ES NG',
+        'G7': 'Grade 7',
+        'G8': 'Grade 8',
+        'G9': 'Grade 9',
+        'G10': 'Grade 10',
+        'JHS NG': 'JHS NG',
+        'G11': 'Grade 11',
+        'G12': 'Grade 12',
+    }
+
+    query['renamed-grade'] = query['grade'].map(grade_name_map)
+    
+    # Get extremes
+    highest = query.loc[query['counts'].idxmax()]
+    lowest = query.loc[query['counts'].idxmin()]
+    
+    highest_grade = highest["renamed-grade"]
+    highest_count = highest["counts"]
+    lowest_grade = lowest["renamed-grade"]
+    lowest_count = lowest["counts"]
+
     # print(query['formatted_counts'])
     # print(query.head())
-    
+
     fig = px.bar(
         query, 
         x="counts", 
@@ -84,7 +117,7 @@ def update_graph(pathname):
         color_discrete_map={
             'ELEM': '#037DEE', 
             'JHS': '#FE4761', 
-            'SHS': '#FFBF5F'    
+            'SHS': '#FFBF5F'
         }
     )
 
@@ -127,7 +160,7 @@ def update_graph(pathname):
     patched_fig["data"] = fig.data
     patched_fig["layout"] = fig.layout
 
-    return patched_fig
+    return patched_fig, highest_grade, f"{highest_count:,}", lowest_grade, f"{lowest_count:,}"
 
 
 # #########################################################################################
@@ -137,6 +170,13 @@ def update_graph(pathname):
 
 @callback(
     Output('total-text', 'children'),
+    Output('es-text', 'children'),
+    Output('jhs-text', 'children'),
+    Output('shs-text', 'children'),
+    Output('es-text-formatted', 'children'),
+    Output('jhs-text-formatted', 'children'),
+    Output('shs-text-formatted', 'children'),
+    Output('number-of-schools', 'children'),
     Input('base-trigger', 'data'),
     prevent_initial_call=True
 )
@@ -150,13 +190,23 @@ def update_indicator(pathname):
             'SHS' if x in ['G11', 'G12'] else 'ELEM')
     )
     
+    number_of_schools = BASE_DF['beis_id'].nunique()
+    
     es_count = BASE_DF[BASE_DF['school-level'] == 'ELEM']['counts'].sum()
+    es_count_formatted = smart_truncate_number(es_count)
+    
     jhs_count = BASE_DF[BASE_DF['school-level'] == 'JHS']['counts'].sum()
+    jhs_count_formatted = smart_truncate_number(jhs_count)
+    
     shs_count = BASE_DF[BASE_DF['school-level'] == 'SHS']['counts'].sum()
+    shs_count_formatted = smart_truncate_number(shs_count)
 
     total_enrollees = es_count + jhs_count + shs_count
     
-    return f"{total_enrollees:,}"
+    return (f"{total_enrollees:,}", f"{es_count:,} enrollees",
+            f"{jhs_count:,} enrollees", f"{shs_count:,} enrollees",
+            es_count_formatted, jhs_count_formatted, shs_count_formatted,
+            f"{number_of_schools:,}")
 
 # ## -- INDICATORS: Most and Least active school level
 # most_active =   query.loc[query['counts'].idxmax()]
@@ -227,53 +277,53 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[["sector", "counts"]]
+    BASE_DF = BASE_DF[["sector", "beis_id"]]
     
+    # Drop duplicates to count each school only once per sector
+    BASE_DF = BASE_DF.drop_duplicates(subset=["sector", "beis_id"])
+    sector_counts = BASE_DF.groupby("sector", observed=True)["beis_id"].count().reset_index(name="count")
+    sector_counts["formatted_count"] = sector_counts["count"].apply(smart_truncate_number)
+    sector_counts = sector_counts.sort_values(by="count", ascending=False)
     
-    # Extract and group data
-    grouped_by_sectors = BASE_DF.groupby("sector")
-    sector_counts = grouped_by_sectors.size().reset_index(name="count")
 
     # Initialize Charts
     home_school_number_per_sector = px.bar(
         sector_counts,
         x="sector",
         y="count",
-        text="count",
+        text="formatted_count",
         orientation="v",
-        color="sector",  # use sector to apply multiple colors
+        color="sector",
         color_discrete_sequence=["#B4162D", "#D61B35", "#E63E56", "#EA6074"]
     )
 
     home_school_number_per_sector.update_traces(
         textposition="outside",
-        textfont=dict(size=10, color="#04508c"),  # edit font size and color here
+        textfont=dict(size=8, color="#04508c"),
     )
 
     home_school_number_per_sector.update_layout(
         autosize=True,
         margin={"l": 10, "r": 10, "t": 10, "b": 10},
-        plot_bgcolor="#ECF8FF",   # Plot area background
+        plot_bgcolor="#ECF8FF",
         xaxis=dict(
             showticklabels=True,
             title=None,
-            tickfont=dict(size=10, color="#3C6382")
+            tickfont=dict(size=11, color="#035199")
         ),
         yaxis=dict(
             type='log',
-            tickvals=[10, 100, 1000, 10000, 50000],  # Customize based on your data range
+            tickvals=[10, 100, 1000, 10000, 50000],
             ticktext=["10", "100", "1K", "10K", "50K"],
             showticklabels=True,
             title=None,
             showgrid=False,
-            tickfont=dict(size=10, color="#3C6382")
+            tickfont=dict(size=9, color="#667889"),
         ),
-        showlegend=False  # Optional: remove legend if not needed
+        showlegend=False 
     )
 
     
-    
-
     # Patch
     sector_patch = Patch()
     sector_patch["data"] = home_school_number_per_sector.data
@@ -288,6 +338,15 @@ def update_graph(base_trigger):
 
 @callback(
     Output('home_gender_distribution', 'figure'),
+    Output('total-female-count', 'children'),
+    Output('total-male-count', 'children'),
+    Output('total-female-count-formatted', 'children'),
+    Output('total-male-count-formatted', 'children'),
+    Output('greater-gender', 'children'),
+    Output('greater-gender', 'className'),
+    Output('lesser-gender', 'children'),
+    Output('lesser-gender', 'className'),
+    Output('gender-gap', 'children'),
     Input('base-trigger', 'data'),
     prevent_initial_call=True
 )
@@ -299,7 +358,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['gender', 'counts']]
 
     # Group data
-    grouped_by_gender = BASE_DF.groupby(['gender'], as_index=False)['counts'].sum()
+    grouped_by_gender = BASE_DF.groupby(['gender'], as_index=False, observed=True)['counts'].sum()
     colors = ['#FF5B72', '#5DB7FF']
 
     # Create half-donut chart
@@ -310,7 +369,8 @@ def update_graph(base_trigger):
         direction='clockwise',
         sort=False,
         textfont=dict(size=12, color='black'),
-        marker=dict(colors=colors)
+        marker=dict(colors=colors),
+        textinfo='none',
     ))
 
     # Update layout
@@ -321,7 +381,7 @@ def update_graph(base_trigger):
             text='Gender<br>Distribution',
             x=0.5,
             y=0.5,
-            font=dict(color='#3C6382', size=15),
+            font=dict(color='#3C6382', size=15, family='Inter'),
             align='center',
             showarrow=False
         )],
@@ -332,21 +392,36 @@ def update_graph(base_trigger):
     total_male_count = grouped_by_gender.loc[grouped_by_gender['gender'] == 'M', 'counts'].values[0]
     total_female_count = grouped_by_gender.loc[grouped_by_gender['gender'] == 'F', 'counts'].values[0]
 
-    # total_male_count_formatted = smart_truncate_number(total_male_count)
-    # total_female_count_formatted = smart_truncate_number(total_female_count)
+    total_male_count_formatted = smart_truncate_number(total_male_count)
+    total_female_count_formatted = smart_truncate_number(total_female_count)
 
     # Calculate gender gap
     if total_male_count > total_female_count:
         gender_gap = ((total_male_count - total_female_count) / total_female_count) * 100
-        # greater_gender = "MALE"
-        # lesser_gender = "FEMALE"
+        greater_gender = "MALE"
+        lesser_gender = "FEMALE"
     elif total_female_count > total_male_count:
         gender_gap = ((total_female_count - total_male_count) / total_male_count) * 100
-        # greater_gender = "FEMALE"
-        # lesser_gender = "MALE"
+        greater_gender = "FEMALE"
+        lesser_gender = "MALE"
     else:
         gender_gap = 0
-        # greater_gender = lesser_gender = "EQUAL"
+        greater_gender = lesser_gender = "EQUAL"
+        
+    if greater_gender == "MALE":
+        greater_gender_class = "greater male-dominant"
+        lesser_gender_class = ""
+    elif greater_gender == "FEMALE":
+        greater_gender_class = "greater female-dominant"
+    else:
+        greater_gender_class = "greater equal-gender"
+        
+    if lesser_gender == "MALE":
+        lesser_gender_class = "lesser male-less-dominant"
+    elif lesser_gender == "FEMALE":
+        lesser_gender_class = "lesser female-less-dominant"
+    else:
+        lesser_gender_class = "lesser equal-gender"
 
     gender_gap = round(gender_gap, 2)
 
@@ -356,9 +431,10 @@ def update_graph(base_trigger):
     patched_gender_fig["layout"] = gender_fig.layout
 
     # Return patch in callback
-    return patched_gender_fig
-
-
+    return (patched_gender_fig, f"{total_female_count:,} students",
+            f"{total_male_count:,} students", total_female_count_formatted,
+            total_female_count_formatted, greater_gender, greater_gender_class,
+            lesser_gender, lesser_gender_class, f"{gender_gap}%")
 
 
 # # ----------------------------------------------------------
@@ -378,7 +454,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['region', 'counts']]
     
     # Extract and process data
-    enrollees_per_region = BASE_DF.groupby(['region'], as_index=False)["counts"].sum()
+    enrollees_per_region = BASE_DF.groupby(['region'], as_index=False, observed=True)["counts"].sum()
     enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
 
     # Define consistent region order
@@ -457,7 +533,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['beis_id', 'sub_class', 'counts']]
     
     subclass_df1 = (
-        BASE_DF.groupby(['sub_class'])
+        BASE_DF.groupby(['sub_class'], observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),
@@ -507,7 +583,7 @@ def update_graph(base_trigger):
         header=dict(
             values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
             fill_color='#E6F2FB',
-            font=dict(color='#04508c', size=12, family="Arial"),
+            font=dict(color='#04508c', size=12, family="Inter"),
             align='left',
             line_color='#B0C4DE',
             height=28
@@ -519,7 +595,7 @@ def update_graph(base_trigger):
                 subclass_df1['counts']
             ],
             fill_color=[['#FFFFFF', '#F7FAFC'] * (len(subclass_df1) // 2 + 1)],
-            font=dict(color='#3C6382', size=11, family="Arial"),
+            font=dict(color='#3C6382', size=11, family="Inter"),
             align='left',
             line_color='#D3D3D3',
             height=24
@@ -552,6 +628,7 @@ def update_graph(base_trigger):
 
 @callback(
     Output('home_program_offering', 'figure'),
+    Output('shs-percentage', 'children'),
     Input('base-trigger', 'data'),
     prevent_initial_call=True
 )
@@ -560,10 +637,10 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['mod_coc', 'counts']]
+    BASE_DF = BASE_DF[['beis_id', 'mod_coc']]
     
     # Extract and group
-    grouped_by_offering = BASE_DF.groupby("mod_coc").size().reset_index(name="counts")
+    grouped_by_offering = BASE_DF.groupby("mod_coc", observed=True)['beis_id'].nunique().reset_index(name="counts")
 
     # Flags for outer donut totals
     grouped_by_offering['has_ES'] = grouped_by_offering['mod_coc'].str.contains('ES', case=False, na=False) | \
@@ -577,6 +654,12 @@ def update_graph(base_trigger):
     es_total = grouped_by_offering.loc[grouped_by_offering['has_ES'], 'counts'].sum()
     jhs_total = grouped_by_offering.loc[grouped_by_offering['has_JHS'], 'counts'].sum()
     shs_total = grouped_by_offering.loc[grouped_by_offering['has_SHS'], 'counts'].sum()
+    
+    # Drop duplicate schools
+    cleaned_BASE_DF = BASE_DF.drop_duplicates(subset='beis_id')
+    
+    total_school_count = len(cleaned_BASE_DF)
+    shs_percentage = f"{(shs_total / total_school_count * 100):.1f}%" if total_school_count else "0%"
 
     program_totals = pd.DataFrame({
         'program': ['ES', 'JHS', 'SHS'],
@@ -657,9 +740,9 @@ def update_graph(base_trigger):
 
     # Layout
     home_program_offering.update_layout(
-        showlegend=True,
+        showlegend=False,
         autosize=True,
-        margin=dict(t=20, b=20, l=20, r=20),
+        margin=dict(t=0, b=0, l=0, r=0),
         legend=dict(
             orientation='v',
             yanchor='middle',
@@ -675,7 +758,7 @@ def update_graph(base_trigger):
     program_patch["layout"] = home_program_offering.layout
 
     # Return in callback
-    return program_patch
+    return program_patch, shs_percentage
 
 
 # # ----------------------------------------------------------
@@ -690,11 +773,12 @@ def update_graph(base_trigger):
     # if base_trigger != "/":
     #     return dash.no_update
 
-    BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['track', 'counts']]
+    BASE_DF = smart_filter({}, _engine=enrollment_db_engine)[['track', 'counts']]
     
     # Extract and group data
-    grouped_by_tracks = BASE_DF.groupby(["track"], as_index=False)["counts"].sum()
+    grouped_by_tracks = BASE_DF.groupby(["track"], as_index=False, observed=True)["counts"].sum()
+    grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
+    grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
     grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
 
     # Create bar chart
@@ -710,7 +794,7 @@ def update_graph(base_trigger):
     # Update layout
     home_shs_tracks.update_layout(
         autosize=True,
-        margin=dict(t=10, b=10, l=10, r=10),
+        margin=dict(t=10, b=10, l=0, r=0),
         plot_bgcolor='#ECF8FF',
         showlegend=False,
         xaxis=dict(
@@ -719,6 +803,9 @@ def update_graph(base_trigger):
             showgrid=False,
         ),
         yaxis=dict(
+            type='log',
+            tickvals=[10000, 100000, 1000000, 2000000],
+            ticktext=["10K", "100K", "1M", "2M"],
             tickfont=dict(size=8, color="#3C6382"),
             title=None,
             showgrid=True,
@@ -760,13 +847,21 @@ def update_graph(base_trigger):
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['strand', 'counts']]
 
-    # Data extraction and cleaning
     BASE_DF = BASE_DF[BASE_DF['strand'] != '__NaN__']
 
     # Group and sort
-    grouped_by_strands = BASE_DF.groupby(["strand"], as_index=False)["counts"].sum()
+    grouped_by_strands = BASE_DF.groupby(["strand"], as_index=False, observed=True)["counts"].sum()
     grouped_by_strands = grouped_by_strands.sort_values(by="counts", ascending=False)
     grouped_by_strands["category"] = "SHS Strands"
+    grouped_by_strands['formatted_counts'] = grouped_by_strands['counts'].apply(smart_truncate_number)
+    
+    strand_color_map = {
+        'STEM': '#06D974',
+        'GAS': '#FFBF5F',
+        'ABM': '#037DEE',
+        'HUMSS': '#FE4761',
+        'PBM': '#04508C'
+    }
 
     # Create horizontal stacked bar chart
     home_shs_strands = px.bar(
@@ -775,9 +870,9 @@ def update_graph(base_trigger):
         y="category",
         color="strand",
         orientation="h",
-        text="counts",
+        text="formatted_counts",
         hover_name="strand",
-        color_discrete_sequence=px.colors.qualitative.Set3,
+        color_discrete_map=strand_color_map,
     )
 
     # Update layout
@@ -786,7 +881,7 @@ def update_graph(base_trigger):
         height=None,
         width=None,
         autosize=True,
-        margin=dict(t=10, b=10, l=10, r=10),
+        margin=dict(t=0, b=0, l=0, r=0),
         showlegend=False,
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
@@ -830,4 +925,3 @@ def update_graph(base_trigger):
 
     # Return inside callback
     return patched_shs_strands
-

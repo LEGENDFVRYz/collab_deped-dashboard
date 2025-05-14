@@ -85,7 +85,7 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 # DataDash Brand Mark
-                html.H2("DATA DASHBOARD")
+                html.Img(src="/assets/images/Department_of_Education_(DepEd).svg")
             ], className='brand-section'),
             
             html.Div([

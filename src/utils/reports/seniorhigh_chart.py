@@ -1,4 +1,5 @@
 import time
+from turtle import title
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -7,6 +8,7 @@ from dash import dcc, callback, Output, Input, State
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
+from src.utils.extras_utils import smart_truncate_number
 
 
 # """
@@ -86,52 +88,54 @@ from src.data import enrollment_db_engine, smart_filter
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    # Group and prepare the data
-    enrollees_distribution = FILTERED_DATA.groupby(['track'])['counts'].sum().reset_index()
-    # Sort in descending order
-    enrollees_distribution = enrollees_distribution.sort_values(by='counts', ascending=True)
+    # Extract and group data
+    grouped_by_tracks = FILTERED_DATA.groupby(["track"], as_index=False)["counts"].sum()
+    grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
+    grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
+    grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
 
-    # Create the horizontal bar chart
+    # Create bar chart
     seniorhigh_distri_per_track = px.bar(
-        enrollees_distribution,
-        x='counts',
-        y='track',
-        orientation='h',
-        labels={'counts': 'Number of Students', 'track': 'Track', 'color': '#667889'}
+        grouped_by_tracks,
+        x="track",
+        y="counts",
+        color="track",
+        text="counts_truncated",
+        color_discrete_sequence=["#B4162D", "#D61B35", "#E63E56", "#EA6074"]
     )
 
-    # Update layout to ensure all y-axis labels show
+    # Update layout
     seniorhigh_distri_per_track.update_layout(
-        bargap=0.2,
         autosize=True,
-        margin=dict(l=80, r=10, t=50, b=10),  
-        title={
-            'text': 'Distribution of SHS Enrollees per Track',
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {
-                'size': 14,
-                'color': '#3C6382'
-            },
-        },
+        margin=dict(t=0, b=0, l=0, r=0),
+        plot_bgcolor='#ECF8FF',
+        showlegend=False,
+        xaxis=dict(
+            tickfont=dict(size=8, color="#3C6382"),
+            title=None,
+            showgrid=False,
+        ),
         yaxis=dict(
-            automargin=True,
-            tickfont=dict(size=12),
+            type='log',
+            tickvals=[10000, 100000, 1000000, 2000000],
+            ticktext=["10K", "100K", "1M", "2M"],
+            tickfont=dict(size=8, color="#3C6382"),
+            title=None,
+            showgrid=True,
+            gridcolor='#D2EBFF',
+            ticksuffix="  ",
         ),
     )
 
-    # Keep layout responsive
-    seniorhigh_distri_per_track.update_layout(
-        uirevision='true',
+    # Update traces
+    seniorhigh_distri_per_track.update_traces(
+        textposition='outside',
+        insidetextanchor='middle',
+        textfont=dict(size=8, color="#04508c"),
+        hovertemplate='Track: %{x}<br>Count: %{y}<extra></extra>',
     )
-
-    # Change the color of the bars
-    seniorhigh_distri_per_track.update_traces(marker_color='#EF8292')
-
-    # Display the chart
-    seniorhigh_distri_per_track
     
-    return dcc.Graph(figure=seniorhigh_distri_per_track)
+    return dcc.Graph(figure=seniorhigh_distri_per_track, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -143,6 +147,10 @@ def update_graph(trigger, data):
 # #################################################################################
 @callback(
     Output('seniorhigh_ratio_enrollment', 'children'),
+    Output('acad-count', 'children'),
+    Output('non-acad-count', 'children'),
+    Output('acad-percentage', 'children'),
+    Output('non-acad-percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -157,32 +165,50 @@ def update_graph(trigger, data):
     # Get the acad_count and non_acad_count
     acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
     non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()
+    total = acad_count + non_acad_count
 
-    # Create the Donut Chart
+    # Labels and values for visual half-donut effect
+    labels = ['Academic', 'Non-Academic', 'Total']
+    values = [acad_count, non_acad_count, total]
+    colors = ['#037DEE', '#E11C38', '#FFFFFF'] 
+
+    # Manually calculate true percentages
+    true_percentages = [
+        f"{(acad_count / (total)) * 100:.1f}%",
+        f"{(non_acad_count / (total)) * 100:.1f}%",
+        ""
+    ]
+    
+    acad_percentage = f"{(acad_count / (total)) * 100:.1f}%",
+    non_acad_percentage = f"{(non_acad_count / (total)) * 100:.1f}%",
+
+    # Create Figure
     seniorhigh_ratio_enrollment = go.Figure(
         data=[go.Pie(
-            labels=['Academic', 'Non-Academic'],
-            values=[acad_count, non_acad_count],
-            hole=0.7,  
-            marker=dict(colors=['#5DB7FF', '#FF5B72']),
+            labels=labels,
+            values=values,
+            hole=0.7,
+            marker=dict(colors=colors),
             textinfo='none',
-            hoverinfo='label+value+percent',
+            hoverinfo='skip',  # disable default
+            customdata=true_percentages,
+            hovertemplate="%{label}<br>%{value} students<br>%{customdata}<extra></extra>",
             direction='clockwise',
             sort=False,
-            domain={'x': [0, 1], 'y': [0, 1]},
+            rotation=270,
+            domain={'x': [0, 1], 'y': [0, 1]}
         )]
     )
 
-    # Update layout for true maximization
     seniorhigh_ratio_enrollment.update_layout(
         autosize=True,
-        margin=dict(t=0, r=0, b=0, l=0),  
+        margin=dict(t=0, r=0, b=20, l=10),
         showlegend=False,
         annotations=[
             dict(
-                text="Academic<br>vs.<br>Non-Academic",
-                x=0.5, y=0.5,
-                font=dict(size=12, color='#3C6382'),  
+                text="Academic vs.<br>Non-Academic",
+                x=0.5, y=0.6,
+                font=dict(size=15, color='#3C6382'),
                 showarrow=False,
                 align='center',
                 xanchor='center',
@@ -190,9 +216,9 @@ def update_graph(trigger, data):
             )
         ]
     )
-    seniorhigh_ratio_enrollment
-    
-    return dcc.Graph(figure=seniorhigh_ratio_enrollment)
+        
+    return (dcc.Graph(figure=seniorhigh_ratio_enrollment, config={"responsive": True}, style={"width": "100%", "height": "200%"},),
+            f"{acad_count:,}", f"{non_acad_count:,}", acad_percentage, non_acad_percentage)
 
 # #################################################################################
 
@@ -211,9 +237,8 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    # Filter out "__NaN__" and actual NaN values from 'strand'
-    cleaned_df = FILTERED_DATA[~FILTERED_DATA['strand'].isin(['__NaN__'])]
-    cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     # Group and find the most and least populated strands
     track_counts = cleaned_df.groupby('strand')['counts'].sum().reset_index()
@@ -265,7 +290,7 @@ def update_graph(trigger, data):
     
     seniorhigh_most_least_enrolled
     
-    return dcc.Graph(figure=seniorhigh_most_least_enrolled)
+    return dcc.Graph(figure=seniorhigh_most_least_enrolled, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -276,6 +301,10 @@ def update_graph(trigger, data):
 # #################################################################################
 @callback(
     Output('seniorhigh_gender_distri', 'children'),
+    Output('shs-highest-strand', 'children'),
+    Output('shs-highest-count', 'children'),
+    Output('shs-lowest-strand', 'children'),
+    Output('shs-lowest-count', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -285,8 +314,8 @@ def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
     # Remove "__NaN__" and actual NaN values from 'strand'
-    cleaned_df = FILTERED_DATA[~FILTERED_DATA['strand'].isin(['__NaN__'])]
-    cleaned_df = cleaned_df[cleaned_df['strand'].notna()]
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     # Group the cleaned data by 'strand' and 'gender'
     track_gender = cleaned_df.groupby(['strand', 'gender'])['counts'].sum().reset_index()
@@ -298,8 +327,15 @@ def update_graph(trigger, data):
         .sort_values(ascending=False)
         .index.tolist()
     )
+    
+    strand_totals = track_gender.groupby('strand')['counts'].sum()
+    
+    highest_strand = strand_totals.idxmax()
+    highest_count = strand_totals.max()
+    lowest_strand = strand_totals.idxmin()
+    lowest_count = strand_totals.min()
 
-    # Create the horizontal bar chart with sorted strand order
+    # Create the horizontal bar chart with sorted strand totals
     seniorhigh_gender_distri = px.bar(
         track_gender,
         x='counts',
@@ -309,32 +345,46 @@ def update_graph(trigger, data):
         orientation='h',
         barmode='group',
         labels={'strand': 'Strand', 'counts': 'Number of Students', 'gender': 'Gender'},
-        color_discrete_sequence=['#5DB7FF', '#FF5B72']
+        color_discrete_sequence=['#FF5B72', '#5DB7FF']
     )
 
     # Update layout to maximize chart space and reduce label sizes
     seniorhigh_gender_distri.update_layout(
         autosize=True,
-        margin=dict(l=60, r=10, t=50, b=20),
-        title={
-            'text': "Distribution by<br>Strand and Gender",
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {'color': '#3C6382', 'size': 14}
-        },
-        xaxis={
-            'title': {'text': "Number of Students", 'font': {'color': '#667889', 'size': 11}},
-            'tickfont': {'color': '#667889', 'size': 10},
-        },
-        yaxis={
-            'title': {'text': "Strand", 'font': {'color': '#667889', 'size': 11}},
-            'tickfont': {'color': '#667889', 'size': 10},
-            'automargin': True
-        },
-        legend={
-            'title': {'text': "Gender", 'font': {'color': '#667889', 'size': 10}},
-            'font': {'color': '#667889', 'size': 10}
-        },
+        margin=dict(l=0, r=0, t=0, b=0),
+        title=None,
+        xaxis= dict(
+            title=None,
+            tickfont=dict(color='#667889', size=10),
+        ),
+        yaxis=dict(
+            title=None,
+            tickfont=dict(color='#667889', size=10),
+        ),
+        legend=dict(
+            title='Gender',
+            font=dict(size=10),
+            orientation='h',      # horizontal layout
+            yanchor='bottom',
+            y=1.02,               # slightly above the plot
+            xanchor='center',
+            x=0.5,                # centered horizontally
+            bgcolor='rgba(0,0,0,0)',
+            bordercolor='rgba(0,0,0,0)',
+        ),
+        # annotations=[
+        #     dict(
+        #         text="Gender",
+        #         x=0.5,
+        #         y=1.12,  # Position above legend
+        #         xref="paper",
+        #         yref="paper",
+        #         showarrow=False,
+        #         font=dict(size=10, color="#667889"),
+        #         xanchor='center'
+        #     )
+        # ],
+        
         bargap=0.3,
         bargroupgap=0.05,
         uirevision='true',
@@ -342,7 +392,13 @@ def update_graph(trigger, data):
     
     seniorhigh_gender_distri
     
-    return dcc.Graph(figure=seniorhigh_gender_distri)
+    return (
+        dcc.Graph(figure=seniorhigh_gender_distri, config={"responsive": True}, style={"width": "100%", "height": "100%"}),
+        highest_strand,
+        f"{highest_count:,}",
+        lowest_strand,
+        f"{lowest_count:,}"
+    )
 
 # #################################################################################
 
@@ -362,7 +418,9 @@ def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
     # Group data by track and sector, counting unique schools
-    filtered_data_df = FILTERED_DATA[FILTERED_DATA['counts'] != 0]
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    filtered_data_df = cleaned_df[cleaned_df['counts'] != 0]
     school_count = filtered_data_df.groupby(['track', 'sector'])['beis_id'].nunique().reset_index(name='school_count')
 
     # Compute total school count per track to determine sort order
@@ -383,38 +441,42 @@ def update_graph(trigger, data):
         labels={'school_count': 'Number of Schools', 'track': 'Track', 'sector': 'Sector'},
         color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
         category_orders={'track': track_order},
-        title="Number of Schools Offering Each Track by Sector"
     )
 
     # Update layout
     seniorhigh_school_offering_per_track_by_sector.update_layout(
-        title={
-            'text': "Number of Schools<br>Offering Each Track by Sector",
-            'x': 0.5,
-            'font': {'color': '#3C6382', 'size': 14}
-        },
-        xaxis={
-            'title': {'text': "Number of Schools", 'font': {'color': '#667889'}},
-            'tickfont': {'color': '#667889'},
-            'tickformat': '~s',
-            'tickangle': 0
-        },
-        yaxis={
-            'title': {'text': "Track", 'font': {'color': '#667889'}},
-            'tickfont': {'color': '#667889'}
-        },
-        legend={
-            'title': {'text': "Sector", 'font': {'color': '#667889'}},
-            'font': {'color': '#667889'}
-        },
-        bargap=0.6,
         autosize=True,
-        margin=dict(l=80, r=40, t=60, b=40)
+        title=None,
+        xaxis=dict(
+            title=None,
+            tickfont=dict(color="#667889"),
+            tickformat="~s",
+            tickangle=0
+        ),
+        yaxis=dict(
+            title=None,
+            tickfont=dict(color="#667889")
+        ),
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.3,  # Adjust as needed to avoid clipping
+            xanchor='center',
+            x=0.5,
+            title=dict(
+                text="Sector",
+                font=dict(color="#667889")
+            ),
+            font=dict(color="#667889")
+        ),
+        bargap=0.3,
+        margin=dict(l=0, r=0, t=0, b=0)
     )
     
+    seniorhigh_school_offering_per_track_by_sector.update_traces(marker_line_width=0)
     seniorhigh_school_offering_per_track_by_sector
     
-    return dcc.Graph(figure=seniorhigh_school_offering_per_track_by_sector)
+    return dcc.Graph(figure=seniorhigh_school_offering_per_track_by_sector, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -433,8 +495,11 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    
     # Group by track to get supply and demand
-    grouped = FILTERED_DATA.groupby('track').agg(
+    grouped = cleaned_df.groupby('track').agg(
         offerings=('beis_id', 'count'),    
         total_demand=('counts', 'sum')    
     ).reset_index()
@@ -459,20 +524,23 @@ def update_graph(trigger, data):
     # Update layout for full responsiveness and clean space usage
     seniorhigh_least_offered_high_demand.update_layout(
         autosize=True,
-        margin=dict(l=60, r=100, t=80, b=60),
-        title={
-            'text': 'Relationship between<br>Student Demand and Track Supply',
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {'color': '#3C6382', 'size': 16}
-        },
+        margin=dict(l=0, r=0, t=0, b=0),
+        # title={
+        #     'text': 'Relationship between<br>Student Demand and Track Supply',
+        #     'x': 0.5,
+        #     'xanchor': 'center',
+        #     'font': {'color': '#3C6382', 'size': 16}
+        # },
+        title=None,
         xaxis=dict(
-            title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
+            # title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
+            title=None,
             tickfont=dict(color='#667889'),
             automargin=True
         ),
         yaxis=dict(
-            title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
+            # title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
+            title=None,
             tickfont=dict(color='#667889'),
             automargin=True
         ),
@@ -489,7 +557,7 @@ def update_graph(trigger, data):
     
     seniorhigh_least_offered_high_demand
     
-    return dcc.Graph(figure=seniorhigh_least_offered_high_demand)
+    return dcc.Graph(figure=seniorhigh_least_offered_high_demand, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -508,13 +576,11 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    schooloffer_region = FILTERED_DATA[
-        FILTERED_DATA['strand'].notna() & 
-        (FILTERED_DATA['strand'] != '__NaN__')
-    ]
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     # Step 1: Filter only rows where counts > 0
-    valid_offers = schooloffer_region[schooloffer_region['counts'] > 0]
+    valid_offers = cleaned_df[cleaned_df['counts'] > 0]
 
     # Step 2: Drop duplicates so that each school only counts once per strand-region
     valid_offers_unique = valid_offers.drop_duplicates(subset=['beis_id', 'region', 'strand'])
@@ -544,18 +610,34 @@ def update_graph(trigger, data):
         zmax=heatmap_pivot.values.max()
     )
 
-    # Step 7: Layout tweaks
     heatmap_fig.update_layout(
-        title="Number of Schools Offering SHS Strands per Region",
-        xaxis_title="Region",
-        yaxis_title="SHS Strand",
-        xaxis=dict(tickangle=45),
-        margin={"l": 40, "r": 40, "t": 50, "b": 40}
+        title=None,
+        margin=dict(l=0, r=0, t=0, b=0),  # Add bottom space for color bar
+        autosize=True,
+        xaxis=dict(
+            title=None,
+            tickangle=-45,
+            tickfont=dict(size=10, color="#667889")
+        ),
+        yaxis=dict(
+            title=None,
+            tickfont=dict(size=10, color="#667889")
+        ),
+        coloraxis_colorbar=dict(
+            orientation='v',      # vertical (default)
+            title="",             
+            thickness=12,         # thinner bar
+            len=1.5,
+            x=1.01,               # slightly to the right of the heatmap
+            xanchor='left',
+            y=0.5,                # center vertically
+            yanchor='middle'
+        )
     )
-
-    heatmap_fig
     
-    return dcc.Graph(figure=heatmap_fig)
+    heatmap_fig.update_coloraxes(showscale=True)
+    
+    return dcc.Graph(figure=heatmap_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -574,30 +656,18 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    # Filter out rows with NaN or "__NaN__" in 'strand'
-    FILTERED_byprevalent = FILTERED_DATA[
-        FILTERED_DATA['strand'].notna() &
-        (FILTERED_DATA['strand'] != '__NaN__')
-    ]
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     # Calculate total counts per grade (if needed elsewhere)
-    grade_enrollment2 = FILTERED_DATA.groupby('grade')['counts'].sum().reset_index()
+    grade_enrollment2 = cleaned_df.groupby('grade')['counts'].sum().reset_index()
 
     # Merge counts with strand + sector
-    merged = FILTERED_byprevalent.copy()
-    merged['counts'] = FILTERED_DATA['counts']
+    merged = cleaned_df.copy()
+    merged['counts'] = cleaned_df['counts']
 
     # Group by strand and sector
     grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
-
-    # Smart number formatting
-    def smart_truncate_number(num):
-        if num >= 1_000_000:
-            return f"{num/1_000_000:.1f}M"
-        elif num >= 1_000:
-            return f"{num/1_000:.1f}K"
-        else:
-            return str(num)
 
     grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
@@ -611,26 +681,46 @@ def update_graph(trigger, data):
         y='counts',
         color='sector',
         barmode='group',
-        title='Prevalence of SHS Strands by Sector (Based on Student Count)',
+        # title='Prevalence of SHS Strands by Sector (Based on Student Count)',
         labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
         color_discrete_sequence=blue_shades,
         text='counts_text'
     )
 
     # Set text and layout options
-    prevalent_tracks_fig.update_traces(textposition='outside')
+    prevalent_tracks_fig.update_traces(
+        textposition="outside",
+        textfont=dict(size=8, color="#04508c"),
+    )
 
     prevalent_tracks_fig.update_layout(
-        xaxis_tickangle=-45,
-        legend_title='Sector',
-        xaxis_title='SHS Strand',
-        yaxis_title='Number of Students',
-        margin=dict(l=60, r=40, t=60, b=60)
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.2,  # Adjust vertically; try -0.4 or -0.2 if needed
+            xanchor='center',
+            x=0.5,
+            title="Sector",
+            font=dict(size=12)
+        ),
+        title=None,
+        # xaxis_title='SHS Strand',
+        # yaxis_title='Number of Students',
+        margin=dict(l=0, r=0, t=0, b=0),
+        xaxis=dict(
+            title=None,
+        ),
+        yaxis=dict(
+            type='log',
+            tickvals=[100, 1000, 10000, 100000, 500000, 1000000],
+            ticktext=["100", "1000", "10K", "100K", "500K", "1M"],
+            title=None,
+        )
     )
 
     prevalent_tracks_fig
 
-    return dcc.Graph(figure=prevalent_tracks_fig)
+    return dcc.Graph(figure=prevalent_tracks_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
 
@@ -641,27 +731,27 @@ def update_graph(trigger, data):
 # #################################################################################
 
 @callback(
-    Output('shs_offer_range', 'children'),
+    Output('seniorhigh_offer_range', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
 )
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-
-    track_counts = FILTERED_DATA.groupby('type')['strand'].nunique().reset_index()
-    track_counts.columns = ['School Type', 'Number of strand']
+    
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     blue_shades = ['#012C53', '#023F77', '#02519B', '#0264BE', '#0377E2']
 
-    track_counts = FILTERED_DATA.groupby('type')['strand'].nunique().reset_index()
+    track_counts = cleaned_df.groupby('type')['strand'].nunique().reset_index()
     track_counts.columns = ['School Type', 'Number of strand']
 
     shs_offer_range = px.bar(
         track_counts,
         x='School Type',
         y='Number of strand',
-        title='Number of SHS Strand Offered by Mother Schools vs Annexes',
+        # title='Number of SHS Strand Offered by Mother Schools vs Annexes',
         color='School Type',
         text='Number of strand',
         color_discrete_sequence=blue_shades
@@ -670,16 +760,22 @@ def update_graph(trigger, data):
     shs_offer_range.update_traces(textposition='outside')
 
     shs_offer_range.update_layout(
-        xaxis_title='School Type',
-        yaxis_title='Number of Strand Offered',
+        # xaxis_title='School Type',
+        # yaxis_title='Number of Strand Offered',
         uniformtext_minsize=8,
         uniformtext_mode='hide',
-        showlegend=False
+        showlegend=False,
+        margin=dict(l=0, r=0, t=0, b=0),
+        xaxis=dict(
+            title=None,
+        ),
+        yaxis=dict(
+            title=None,
+        )
     )
 
     shs_offer_range
     
-    return dcc.Graph(figure=shs_offer_range)
+    return dcc.Graph(figure=shs_offer_range, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
-

@@ -3,6 +3,14 @@ from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
 
+# import json
+# import os
+import plotly.express as px
+# from geojson_rewind import rewind
+# import pandas as pd
+# import plotly.io as pio
+
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from config import project_root
 
@@ -144,5 +152,232 @@ def auto_extract(requested_columns:list, is_specific=True, distinct=False) -> pd
         
     
 if __name__ == '__main__':
-    df = auto_extract(['counts'], is_specific=False)
+    df = auto_extract(['region'], is_specific=False)
     df
+    
+    ############################################ PROVINCE
+    # # Set Plotly renderer
+    # pio.renderers.default = "browser"
+
+    # # Load your province-level data (replace this with actual loading logic)
+    # FILTERED_DF = auto_extract(['counts', 'province'], is_specific=True)
+    # FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+
+    # # Folder where all region-wise GeoJSON files are stored
+    # geojson_folder = "/Users/marke/Downloads/"
+    # geojson_files = [
+    #     "provdists-region-100000000.0.001",
+    #     "provdists-region-1000000000.0.001",
+    #     "provdists-region-1100000000.0.001",
+    #     "provdists-region-1200000000.0.001",
+    #     "provdists-region-1300000000.0.001",
+    #     "provdists-region-1400000000.0.001",
+    #     "provdists-region-1600000000.0.001",
+    #     "provdists-region-1700000000.0.001",
+    #     "provdists-region-1900000000.0.001",
+    #     "provdists-region-200000000.0.001",
+    #     "provdists-region-300000000.0.001",
+    #     "provdists-region-400000000.0.001",
+    #     "provdists-region-500000000.0.001",
+    #     "provdists-region-600000000.0.001",
+    #     "provdists-region-700000000.0.001",
+    #     "provdists-region-800000000.0.001",
+    #     "provdists-region-900000000.0.001",
+    # ]
+
+    # # Combine all province GeoJSONs into one FeatureCollection
+    # all_features = []
+    # for filename in geojson_files:
+    #     filepath = os.path.join(geojson_folder, filename + ".json")
+    #     with open(filepath) as f:
+    #         geo = json.load(f)
+    #         geo = rewind(geo, rfc7946=False)  # Ensure proper winding
+    #         all_features.extend(geo['features'])
+
+    # combined_geojson = {
+    #     "type": "FeatureCollection",
+    #     "features": all_features
+    # }
+
+    # # Extract province names from GeoJSON
+    # geo_provinces = [feature['properties']['adm2_en'] for feature in combined_geojson['features']]
+    # print("Provinces in GeoJSON:", set(geo_provinces))
+    # print("Provinces in DataFrame:", set(FILTERED_DF['province']))
+
+    # # Full province name mapping
+    # province_name_map = {
+    #     'Abra': 'ABRA',
+    #     'Agusan del Norte': 'AGUSAN DEL NORTE',
+    #     'Agusan del Sur': 'AGUSAN DEL SUR',
+    #     'Aklan': 'AKLAN',
+    #     'Albay': 'ALBAY',
+    #     'Antique': 'ANTIQUE',
+    #     'Apayao': 'APAYAO',
+    #     'Aurora': 'AURORA',
+    #     'Basilan': 'BASILAN',
+    #     'Bataan': 'BATAAN',
+    #     'Batanes': 'BATANES',
+    #     'Batangas': 'BATANGAS',
+    #     'Benguet': 'BENGUET',
+    #     'Biliran': 'BILIRAN',
+    #     'Bohol': 'BOHOL',
+    #     'Bukidnon': 'BUKIDNON',
+    #     'Bulacan': 'BULACAN',
+    #     'Cagayan': 'CAGAYAN',
+    #     'Camarines Norte': 'CAMARINES NORTE',
+    #     'Camarines Sur': 'CAMARINES SUR',
+    #     'Camiguin': 'CAMIGUIN',
+    #     'Capiz': 'CAPIZ',
+    #     'Catanduanes': 'CATANDUANES',
+    #     'Cavite': 'CAVITE',
+    #     'Cebu': 'CEBU',
+    #     'Compostela Valley': 'COMPOSTELA VALLEY',
+    #     'Davao de Oro': 'COMPOSTELA VALLEY',
+    #     'Davao del Norte': 'DAVAO DEL NORTE',
+    #     'Davao del Sur': 'DAVAO DEL SUR',
+    #     'Davao Occidental': 'DAVAO OCCIDENTAL',
+    #     'Davao Oriental': 'DAVAO ORIENTAL',
+    #     'Dinagat Islands': 'DINAGAT ISLANDS',
+    #     'Eastern Samar': 'EASTERN SAMAR',
+    #     'Guimaras': 'GUIMARAS',
+    #     'Ifugao': 'IFUGAO',
+    #     'Ilocos Norte': 'ILOCOS NORTE',
+    #     'Ilocos Sur': 'ILOCOS SUR',
+    #     'Iloilo': 'ILOILO',
+    #     'Isabela': 'ISABELA',
+    #     'Kalinga': 'KALINGA',
+    #     'La Union': 'LA UNION',
+    #     'Laguna': 'LAGUNA',
+    #     'Lanao del Norte': 'LANAO DEL NORTE',
+    #     'Lanao del Sur': 'LANAO DEL SUR',
+    #     'Leyte': 'LEYTE',
+    #     'Maguindanao del Norte': 'MAGUINDANAO',
+    #     'Maguindanao del Sur': 'MAGUINDANAO',
+    #     'Marinduque': 'MARINDUQUE',
+    #     'Masbate': 'MASBATE',
+    #     'Mountain Province': 'MOUNTAIN PROVINCE',
+    #     'Misamis Occidental': 'MISAMIS OCCIDENTAL',
+    #     'Misamis Oriental': 'MISAMIS ORIENTAL',
+    #     'Northern Samar': 'NORTHERN SAMAR',
+    #     'Nueva Ecija': 'NUEVA ECIJA',
+    #     'Nueva Vizcaya': 'NUEVA VIZCAYA',
+    #     'Occidental Mindoro': 'OCCIDENTAL MINDORO',
+    #     'Oriental Mindoro': 'ORIENTAL MINDORO',
+    #     'Palawan': 'PALAWAN',
+    #     'Pampanga': 'PAMPANGA',
+    #     'Pangasinan': 'PANGASINAN',
+    #     'Quezon': 'QUEZON',
+    #     'Quirino': 'QUIRINO',
+    #     'Rizal': 'RIZAL',
+    #     'Romblon': 'ROMBLON',
+    #     'Samar': 'WESTERN SAMAR',
+    #     'Sarangani': 'SARANGANI',
+    #     'Siquijor': 'SIQUIJOR',
+    #     'Sorsogon': 'SORSOGON',
+    #     'South Cotabato': 'SOUTH COTABATO',
+    #     'Southern Leyte': 'SOUTHERN LEYTE',
+    #     'Sultan Kudarat': 'SULTAN KUDARAT',
+    #     'Sulu': 'SULU',
+    #     'Surigao del Norte': 'SURIGAO DEL NORTE',
+    #     'Surigao del Sur': 'SURIGAO DEL SUR',
+    #     'Tarlac': 'TARLAC',
+    #     'Tawi-Tawi': 'TAWI-TAWI',
+    #     'Zambales': 'ZAMBALES',
+    #     'Zamboanga del Norte': 'ZAMBOANGA DEL NORTE',
+    #     'Zamboanga del Sur': 'ZAMBOANGA DEL SUR',
+    #     'Zamboanga Sibugay': 'ZAMBOANGA SIBUGAY',
+    #     'NCR, Second District (Not a Province)': 'NCR   SECOND DISTRICT',
+    #     'NCR, Third District (Not a Province)': 'NCR   THIRD DISTRICT',
+    #     'NCR, Fourth District (Not a Province)': 'NCR   FOURTH DISTRICT',
+    #     'NCR, City of Manila, First District (Not a Province)': 'MANILA, NCR,  FIRST DISTRICT ',
+    #     'City of Isabela (Not a Province)': 'CITY OF ISABELA',
+    #     'City of Cotabato': 'CITY OF COTABATO',
+    # }
+
+    # # Map DF province names to GeoJSON
+    # inverse_map = {v: k for k, v in province_name_map.items()}
+    # FILTERED_DF['geo_province'] = FILTERED_DF['province'].map(inverse_map).fillna(FILTERED_DF['province'])
+
+    # # Drop rows where geo_province not in GeoJSON
+    # FILTERED_DF = FILTERED_DF[FILTERED_DF['geo_province'].isin(geo_provinces)]
+
+    # # Plot choropleth
+    # map_chart = px.choropleth(
+    #     FILTERED_DF,
+    #     geojson=combined_geojson,
+    #     locations='geo_province',
+    #     featureidkey='properties.adm2_en',
+    #     color='counts',
+    #     hover_name='province',
+    #     hover_data=['counts'],
+    #     color_continuous_scale='Viridis',
+    # )
+
+    # map_chart.update_geos(fitbounds="locations", visible=False)
+    # map_chart.update_layout(title="Enrollment by Province", margin={"r": 0, "t": 30, "l": 0, "b": 0})
+    # map_chart.show(renderer="browser")
+
+    
+    
+  ############################3 REGION  
+#     pio.renderers.default = "browser"
+    
+# # Load your enrollment data
+# # This is a temporary dataframe for testing charts
+#     FILTERED_DF = auto_extract(['counts', 'region'], is_specific=True)
+#     FILTERED_DF = FILTERED_DF.groupby('region', as_index=False)['counts'].sum()
+
+#     # Load GeoJSON (municipality level for PH)
+#     with open("/Users/marke/Downloads/country.0.001.json") as f:
+#         geojson = json.load(f)
+
+#     geojson = rewind(geojson, rfc7946=False)
+
+#     # Print all REGION names in GeoJSON
+#     geo_regions = [feature['properties']['adm1_en'] for feature in geojson['features']]
+#     print(set(geo_regions))
+
+#     # Print all region names in your DF
+#     print(set(FILTERED_DF['region']))
+
+#     region_name_map = {
+#         'Region I': 'Region I (Ilocos Region)',
+#         'Region II': 'Region II (Cagayan Valley)',
+#         'Region III': 'Region III (Central Luzon)',
+#         'Region IV-A': 'Region IV-A (CALABARZON)',
+#         'Region IV-B': 'MIMAROPA Region',
+#         'Region V': 'Region V (Bicol Region)',
+#         'Region VI': 'Region VI (Western Visayas)',
+#         'Region VII': 'Region VII (Central Visayas)',
+#         'Region VIII': 'Region VIII (Eastern Visayas)',
+#         'Region IX': 'Region IX (Zamboanga Peninsula)',
+#         'Region X': 'Region X (Northern Mindanao)',
+#         'Region XI': 'Region XI (Davao Region)',
+#         'Region XII': 'Region XII (SOCCSKSARGEN)',
+#         'CARAGA': 'Region XIII (Caraga)',
+#         'NCR': 'National Capital Region (NCR)',
+#         'CAR': 'Cordillera Administrative Region (CAR)',
+#         'BARMM': 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)',
+#     }
+
+#     # Map region names to GeoJSON-compatible names
+#     FILTERED_DF['geo_region'] = FILTERED_DF['region'].map(region_name_map)
+#     FILTERED_DF = FILTERED_DF.dropna(subset=['geo_region'])
+
+#     # Plot the map
+#     map_chart = px.choropleth(
+#         FILTERED_DF,
+#         geojson=geojson,
+#         locations='geo_region',
+#         featureidkey='properties.adm1_en',
+#         color='counts',
+#         hover_name='region',
+#         hover_data=['counts'],
+#         color_continuous_scale='Viridis',
+#     )
+
+#     map_chart.update_geos(fitbounds="locations", visible=False)
+#     map_chart.update_layout(title="Enrollment by Region", margin={"r": 0, "t": 30, "l": 0, "b": 0})
+#     map_chart.show(renderer="browser")
+
+
