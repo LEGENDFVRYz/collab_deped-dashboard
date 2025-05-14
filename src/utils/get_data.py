@@ -5,7 +5,7 @@ import os, sys
 
 # import json
 # import os
-# import plotly.express as px
+import plotly.express as px
 # from geojson_rewind import rewind
 # import pandas as pd
 # import plotly.io as pio

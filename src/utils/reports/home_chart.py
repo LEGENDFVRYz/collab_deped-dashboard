@@ -583,7 +583,7 @@ def update_graph(base_trigger):
         header=dict(
             values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
             fill_color='#E6F2FB',
-            font=dict(color='#04508c', size=12, family="Arial"),
+            font=dict(color='#04508c', size=12, family="Inter"),
             align='left',
             line_color='#B0C4DE',
             height=28
@@ -595,7 +595,7 @@ def update_graph(base_trigger):
                 subclass_df1['counts']
             ],
             fill_color=[['#FFFFFF', '#F7FAFC'] * (len(subclass_df1) // 2 + 1)],
-            font=dict(color='#3C6382', size=11, family="Arial"),
+            font=dict(color='#3C6382', size=11, family="Inter"),
             align='left',
             line_color='#D3D3D3',
             height=24
@@ -847,7 +847,6 @@ def update_graph(base_trigger):
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['strand', 'counts']]
 
-    # Data extraction and cleaning
     BASE_DF = BASE_DF[BASE_DF['strand'] != '__NaN__']
 
     # Group and sort

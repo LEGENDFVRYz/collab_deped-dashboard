@@ -15,176 +15,147 @@ def render_offering_filter():
     return html.Div(
         children=[
             
-            ## LEFT SECTION
             html.Div([
                 
-                ## TOP SECTION
+                ## LAYER 1
                 html.Div([
-                    html.Div(["Program Offering Overview"], className='label'),
+                    
                     html.Div([
-                        
-                        ## PLOT A
-                        html.Div([Card([
-                            #########################################
-                            ## INSERT PLOT: Number of Schools by MCOC Type
-                            #########################################
-                            
-                            ## SAMPLE, REMOVE IT
-                            # dcc.Loading(
-                                # id="loading-graph",
-                                # type="default",
-                                # children=
-                                html.Div([],id='offering_number-of-schools',)
-                            # ),
-                            
-                            # dcc.Graph(
-                            #     id="offering_number-of-schools",
-                            #     figure=number_of_schools_mcoc_chart,
-                            #     config={"responsive": True},
-                            #     style={"width": "100%", "height": "100%"}
-                            # )
-                            
-                        ], margin=False, padding='0.25em')], className='plot-a'),
-                        
-                        ## PLOT B
+                        html.H3("Program Offering Overview", className="section_title"),
                         html.Div([
                             
-                            ## PLOT B - TOP
+                            ## PLOT A
+                            html.Div([Card([
+                                #########################################
+                                ## INSERT PLOT: Number of Schools by MCOC Type
+                                #########################################
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([
+                                    html.Div([],id='offering_number-of-schools',),
+                                    html.Div([
+                                        html.Span("Purely ES"),
+                                        html.Span("Purely JHS"),
+                                        html.Span("Purely SHS"),
+                                        html.Span("ES and JHS"),
+                                        html.Span("JHS with SHS"),
+                                        html.Span("All Offerings"),
+                                    ], className="offering-ind-container"),
+                                ], className="offering-overview-graph-cont"),
+                            ], margin=False)], className='offering-overview-graph first'),
+                            
+                            ## PLOT B
                             html.Div([Card([
                                 #########################################
                                 ## INSERT PLOT: Gender Distribution Aross MCOC types
                                 #########################################
-                                # dcc.Loading(
-                                #     id="loading-graph",
-                                #     type="default",
-                                    # children=
-                                    html.Div([],id='offering_gender-distribution',)
-                                # ),
-                                
-                                # dcc.Graph(
-                                #     id="offering_gender-distribution",
-                                #     figure=gender_distribution_chart,
-                                #     config={"responsive": True},
-                                #     style={"width": "100%", "height": "100%"}
-                                # )
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_gender-distribution',)
+                            ], margin=False)], className='offering-overview-graph second'),
                             
-                            ], margin=False)], className='plot-b-top'),
-                            
-                            ## PLOT B - BOT
+                            ## PLOT C
                             html.Div([Card([
                                 #########################################
                                 ## INSERT PLOT: MCOC Types Ranked by Total Student Enrollment
                                 #########################################
-                                # dcc.Loading(
-                                #     id="loading-graph",
-                                #     type="default",
-                                    # children=
-                                    html.Div([],id='offering_ranked-mcoc',)
-                                # ),
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_ranked-mcoc',)
+                            ], margin=False)], className='offering-overview-graph third'),
+                            
+                        ], className='offering-overview-content'),
+                    ], className='offering-overview'),
+                
+                ], className='plot-layer-1'),
+                
+                ## LAYER 2
+                html.Div([
+                    
+                    html.Div([
+                        html.H3("Geographic Distribution", className="section_title"),
+                        html.Div([
+                            
+                            ## PLOT A
+                            html.Div([Card([
+                                #########################################
+                                ## INSERT PLOT: ...
+                                #########################################
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_mcoc-offerings-per-loc',)
+                            ], margin=False)], className='offering-geographic-graph'),
+                            
+                            ## PLOT B
+                            html.Div([Card([
+                                #########################################
+                                ## INSERT PLOT: ...
+                                #########################################
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_location-extremes',)
+                            ], margin=False)], className='offering-geographic-graph'),
+                            
+                        ], className='offering-geographic-content'),
+                    ], className='offering-geographic'),
+                    
+                ], className='plot-layer-2'), 
+                
+                #LAYER 3
+                html.Div([
+                    html.Div([
+                        html.H3("Grade-level Overview", className="section_title"),
+                        html.Div([
+                            
+                            # PLOT A
+                            html.Div([
                                 
-                                # dcc.Graph(
-                                #     id="offering_ranked-mcoc",
-                                #     figure=ranked_mcoc_chart,
-                                #     config={"responsive": True},
-                                #     style={"width": "100%", "height": "100%"}
-                                # )
-                            ], margin=False)], className='plot-b-bot'),
-                        ], className='plot-b'),
-                    ], className='plot-content plot-box'),
-                ], className='plot-top-section plot-sec-wrap'),
-                
-                ## BOTTOM SECTION
-                html.Div([
-                    html.Div(["Location-Based Analysis"], className='label'),
-                    html.Div([
-                        ## PLOT A
-                        html.Div([Card([
-                            #########################################
-                            ## INDICATOR: Locations with the Highest and Lowest Number of Offerings
-                            #########################################
-                            # dcc.Loading(
-                            #         id="loading-graph",
-                            #         type="default",
-                            #         children=
-                                    html.Div([],id='offering_location-extremes',)
-                            # ),
+                                html.Div([
+                                    Card([
+                                        html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                        html.Div([],id='offering_enroll_dist',)   
+                                    ], margin=False),
+                                ], className="offering-g1-graph"),
+                                
+                                html.Div([
+                                    html.Div([
+                                        Card([
+                                            html.Div([
+                                            html.Span("Most Populated", className="offering-pop-title"),
+                                            html.Span([], id="offering-highest-grade", className="offering-grade"),
+                                            html.Div([
+                                                html.Span([], id="offering-highest-count", className="offering-count"),
+                                                html.Span("students", className="offering-student-text"),
+                                            ], className="offering-student-count most"),
+                                    ], className="offering-populated"),
+                                            
+                                        ], margin=False),
+                                    ], className="offering-info"),
+                                    
+                                    html.Div([
+                                        Card([
+                                            html.Div([
+                                                html.Span("Least Populated", className="offering-pop-title"),
+                                                html.Span([], id="offering-lowest-grade", className="offering-grade"),
+                                                html.Div([
+                                                    html.Span([], id="offering-lowest-count", className="offering-count"),
+                                                    html.Span("students", className="offering-student-text"),
+                                                ], className="offering-student-count least"),
+                                            ], className="offering-populated"),
+                                        ], margin=False),
+                                    ], className="offering-info"),
+                                ], className="offering-info-cards"),
+                            ], className="offering-group-1"),
                             
-                            # dcc.Graph(
-                            #     id="offering_location-extremes",
-                            #     figure=indicator_chart,
-                            #     config={"responsive": True},
-                            #     style={"width": "100%", "height": "100%"}
-                            # )
-                        
-                        ], margin=False)], className='plot-a'),
-                        
-                        ## PLOT B
-                        html.Div([Card([
-                            #########################################
-                            ## INSERT PLOT: Number of MCOC Offerings per Location by School Level
-                            #########################################
-                            # dcc.Loading(
-                            #         id="loading-graph",
-                            #         type="default",
-                            #         children=
-                                    html.Div([],id='offering_mcoc-offerings-per-loc',)
-                            # ),
-                        
-                        ], margin=False)], className='plot-b'),
-                    ], className='plot-content plot-box')
-                ], className='plot-bottom-section plot-sec-wrap'),
-            ], className='plot-left-section'),
-            
-            
-            ## RIGHT SECTION
-            html.Div([
-                
-                ## TOP SECTION
-                html.Div([
-                    html.Div(["Geographic Distribution"], className='label'),
-                    html.Div([Card([
-                        #########################################
-                        ## INSERT PLOT: Geographic Distribution of Program Offerings
-                        #########################################
-                        
-                        
-                    ], margin=False)], className='plot-content')
-                ], className='plot-top-section plot-sec-wrap'),
-                
-                ## BOT SECTION
-                html.Div([
-                    html.Div(["Enrollment Overview"], className='label'),
-                    html.Div([
-                        
-                        ## PLOT A
-                        html.Div([Card([
-                            #########################################
-                            ## INDICATOR: Total Number of Enrollees Across All MCOC Types
-                            #########################################
-                            # dcc.Loading(
-                            #         id="loading-graph",
-                            #         type="default",
-                            #         children=
-                                    html.Div([],id='offering_enrollees_num',)
-                            # ),
+                            ## PLOT B
+                            html.Div([Card([
+                                #########################################
+                                ## INSERT PLOT: ...
+                                #########################################
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_enrollees_num',)
+                            ], margin=False)], className='offering-group-2'),
                             
-                            
-                        ], margin=False)], className='plot-sec-a'),
-
-                        ## PLOT B
-                        html.Div([Card([
-                            #########################################
-                            ## INSERT PLOT: Enrollment Distribution by Grade Level
-                            #########################################
-                            # dcc.Loading(
-                            #         id="loading-graph",
-                            #         type="default",
-                            #         children=
-                                    html.Div([],id='offering_enroll_dist',)
-                            # ),
-                        ], margin=False)], className='plot-sec-b'),
-                    ], className='plot-content plot-box')
-                ], className='plot-bottom-section plot-sec-wrap'),
-            ], className='plot-right-section'),    
+                        ], className='offering-grade-level-content'),
+                    ], className='offering-grade-level'),
+                    
+                ], className='plot-layer-3') 
+                
+            ], className="offering-content"),  
             
         ], className='plotted-offering-report render-plot')
