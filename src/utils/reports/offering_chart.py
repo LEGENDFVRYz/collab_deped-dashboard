@@ -723,66 +723,68 @@ def update_graph(trigger, data):
 # ##  --- INDICATOR: Total Number of Enrollees Across All MCOC Types
 # #################################################################################
 
+from plotly import graph_objects as go
+
 @callback(
-    Output('offering_enrollees_num', 'children'),
+    Output('fig_offering', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
 )
-
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
-    grouped_by_MCOC= FILTERED_DATA.groupby('mod_coc', as_index=False)['counts'].sum()
-    grouped_by_MCOC
+    # Step 1: Map mod_coc to number of offerings
+    offering_map = {
+    'Purely ES': 'Single Level Only',
+    'Purely JHS': 'Single Level Only',
+    'Purely SHS': 'Single Level Only',
+    'ES and JHS': 'Two Levels (Partial K–12)',
+    'JHS with SHS': 'Two Levels (Partial K–12)',
+    'All Offering': 'Complete K–12'
+    }
+    FILTERED_DATA['offerings'] = FILTERED_DATA['mod_coc'].map(offering_map)
 
-    total_All_Offering = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "All Offering", 'counts'].values[0]
-    total_All_Offering = (total_All_Offering)
+    # Step 2: Group by school and calculate total enrollment and offerings
+    school_group = FILTERED_DATA.groupby('beis_id').agg({
+        'counts': 'sum',
+        'offerings': 'first'  # assumes each school has a single mod_coc value
+    }).reset_index()
 
-    total_ES_JHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "ES and JHS", 'counts'].values[0]
-    total_ES_JHS = (total_ES_JHS)
+    # Step 3: Group by number of offerings and calculate average enrollment
+    avg_enrollment = school_group.groupby('offerings')['counts'].mean().reset_index()
+    avg_enrollment.columns = ['Number of Offerings', 'Average Enrollment per School']
 
-    total_JHS_SHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "JHS with SHS", 'counts'].values[0]
-    total_JHS_SHS = (total_JHS_SHS)
+    # Define a gradient color scale from light to full #FFBF5F (orange)
+    gradient_colors = ['#FFE5B4', '#FFD183', '#FFBF5F']  # Light to full tone
+    num_bars = len(avg_enrollment)
+    colors = gradient_colors if num_bars <= 3 else [
+        f'rgba(255,191,95,{opacity})' for opacity in 
+        [round(0.5 + 0.5 * (i / (num_bars - 1)), 2) for i in range(num_bars)]
+    ]
 
-    total_Pure_ES = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely ES", 'counts'].values[0]
-    total_Pure_ES = (total_Pure_ES)
-
-    total_Pure_JHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely JHS", 'counts'].values[0]
-    total_Pure_JHS = (total_Pure_JHS)
-
-    total_Pure_SHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely SHS", 'counts'].values[0]
-    total_Pure_SHS = (total_Pure_SHS)
-
-    mod_coc_categories = ["All Offering", "ES and JHS", "JHS with SHS", "Purely ES", "Purely JHS", "Purely SHS"]
-    counts = [total_All_Offering, total_ES_JHS, total_JHS_SHS, total_Pure_ES, total_Pure_JHS, total_Pure_SHS]
-
-    header_color = '#74B8F6'       
-    cell_color = '#D6E9FA'        
-
-    table_fig = go.Figure(data=[go.Table(
-        header=dict(
-            values=["<b>Modified COC (Offering)</b>", "<b>Total</b>"],
-            fill_color=header_color,
-            font=dict(color='white', size=14),
-            align='left'
-        ),
-        cells=dict(
-            values=[mod_coc_categories, counts],
-            fill_color=cell_color,
-            font=dict(color='black', size=12),
-            align='left'
+    # Step 4: Plot using go.Bar
+    fig_offering = go.Figure(
+        data=go.Bar(
+            x=avg_enrollment['Number of Offerings'],
+            y=avg_enrollment['Average Enrollment per School'],
+            text=avg_enrollment['Average Enrollment per School'].round(1),
+            textposition='auto',
+            marker_color=colors
         )
-    )])
-
-    # table_fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
-
-    table_fig.update_layout(
-        autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),  # Remove margins
-        height=None,  # Let container control the height
     )
-    
-    return dcc.Graph(figure=table_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+    # Layout styling
+    fig_offering.update_layout(
+        title=None,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis_title='Number of Offerings',
+        yaxis_title='Avg Enrollment',
+    )
+
+    return dcc.Graph(figure=fig_offering, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+
 
 # #################################################################################
