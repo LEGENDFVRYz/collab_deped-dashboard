@@ -1,3 +1,4 @@
+from re import sub
 import time
 import numpy as np
 import pandas as pd
@@ -417,82 +418,39 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    
-#     # Ensure the dataframe is filtered to include only the required columns
-#     mcoc_df = FILTERED_DATA[['mod_coc', 'counts', 'sub_class']]
-
-#     # Group by 'mod_coc' and 'sub_class' to aggregate the counts
-#     mcoc_grouped = mcoc_df.groupby(['mod_coc', 'sub_class']).sum().reset_index()
-
-#     # Capitalize each word in 'sub_class' for the legend
-#     mcoc_grouped['sub_class'] = mcoc_grouped['sub_class'].str.title()
-
-#     # Revert the counts back to numeric for plotting
-#     mcoc_grouped['counts_numeric'] = mcoc_grouped['counts'].apply(
-#         lambda count: float(count.replace('M', 'e6').replace('K', 'e3')) if isinstance(count, str) else count
-#     )
-
-#     # Create the clustered bar chart
-#     subclass_clustered = px.bar(
-#         mcoc_grouped,
-#         x='mod_coc',
-#         y='counts_numeric',
-#         color='sub_class',
-#         title='Course Offerings',
-#         labels={'counts_numeric': '', 'mod_coc': 'mod_coc'},
-#         category_orders={'sub_class': sorted(mcoc_grouped['sub_class'].unique())},
-#         barmode='group'
-#     )
-
-#     # Customize the layout further using update_layout
-#     subclass_clustered.update_layout(
-#         title="Clustered Bar Chart for mod_coc vs. Sub_Class",
-#         xaxis=dict(
-#             title="mod_coc",  # Label for the x-axis
-#             tickangle=45,  # Rotate x-axis ticks for better readability
-#             tickmode='array',
-#             tickvals=mcoc_grouped['mod_coc'].unique(),  # Ensure all mod_coc values are shown
-#         ),
-#         yaxis=dict(
-#             title="Counts (in millions or thousands)",  # Label for the y-axis
-#             tickformat=".1f",  # Format y-axis ticks to show one decimal place
-#         ),
-#         legend_title="Sub Class",  # Title for the legend
-#         barmode='group',  # Ensure bars are grouped
-#         margin=dict(l=50, r=50, t=50, b=100),  # Set margins for the chart for better spacing
-#     )
-
-#     return dcc.Graph(figure=subclass_clustered)
-
 def update_graph(trigger, data):
+
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     # Filter to necessary columns
-    mcoc_df = FILTERED_DATA[['mod_coc', 'sub_class', 'beis_id']]
+    mcoc_df = FILTERED_DATA[['mod_coc', 'sub_class', 'beis_id']].copy()
 
-    # Capitalize and truncate for clean labels
-    mcoc_df['sub_class'] = mcoc_df['sub_class'].str.title().str.slice(0, 15)
+    # Clean labels (removing sentence case transformation)
     mcoc_df['mod_coc'] = mcoc_df['mod_coc'].str.slice(0, 20)
+    mcoc_df['sub_class'] = mcoc_df['sub_class'].str.slice(0, 30)
 
-    # Count unique 'beis_id' per (mod_coc, sub_class) to get the number of schools
+    # Count unique 'beis_id' per (mod_coc, sub_class)
     mcoc_grouped = (
         mcoc_df.groupby(['mod_coc', 'sub_class'])
-        .agg(school_count=('beis_id', 'nunique'))  # Count unique schools (beis_id)
+        .agg(school_count=('beis_id', 'nunique'))
         .reset_index()
     )
 
-    # Get top 3 sub_classes by total school count
-    top_subclasses = (
-        mcoc_grouped.groupby('sub_class')['school_count']
-        .sum()
-        .nlargest(3)
-        .index
-    )
+    # Define color map
+    custom_colors = {
+        'DOST Managed': '#4F0A14',
+        'DepEd Managed': '#930F22',
+        'LUC Managed': '#921224',
+        'Local International School': '#B4162D',
+        'Non-Sectrian': '#D61B35',
+        'Other GA Managed': '#E63E56',
+        'SUC Managed': '#EA6074',
+        'School Abroad': '#EF8292',
+        'Sectarian': '#F3A4AF',
+    }
 
-    # Filter to top 3 only
-    mcoc_grouped = mcoc_grouped[mcoc_grouped['sub_class'].isin(top_subclasses)]
+    # Ensure all subclasses are present in the category order
+    subclass_order = list(custom_colors.keys())
 
     # Create the horizontal bar chart
     subclass_clustered = px.bar(
@@ -502,25 +460,32 @@ def update_graph(trigger, data):
         color='sub_class',
         title='Number of Schools per Course Offering',
         labels={'school_count': 'Number of Schools', 'mod_coc': 'Course Offering'},
-        category_orders={'sub_class': sorted(top_subclasses)},
-        barmode='group',
-        orientation='h'
+        orientation='h',
+        color_discrete_map=custom_colors,
+        category_orders={'sub_class': subclass_order}
     )
 
-    # Update layout with shortened counts (using SI format like 1k)
+    # Layout customization
     subclass_clustered.update_layout(
         title="Course Offerings by Subclass",
         title_font=dict(family='Inter Bold', size=14, color='#04508c'),
         xaxis=dict(
             title="Number of Schools",
-            tickformat="~s",  
+            tickformat="~s"
         ),
         yaxis=dict(
             title="Course Offering",
             categoryorder='total ascending',
         ),
-        legend_title="Top Subclass",
-        legend_title_font=dict(family='Inter Semi Bold', size=13, color='#667889'),
+        legend_title=dict(
+            text="School Subclassification",
+            font=dict(family='Inter Semi Bold', size=13, color='#667889')
+        ),
+        font=dict(
+            family='Inter',
+            size=12,
+            color='#667889'
+        ),
         margin=dict(l=100, r=50, t=50, b=50),
     )
 
@@ -548,117 +513,102 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 
-# def update_graph(trigger, data):
-#     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    
-#     # Filter the dataframe to include only SHS tracks and subclasses
-#     shs_tracks_df = FILTERED_DATA[['track', 'sub_class']]
-
-#     # Remove rows with missing values in 'track' or 'sub_class'
-#     shs_tracks_df = shs_tracks_df.dropna(subset=['track', 'sub_class'])
-
-#     # Group by 'track' and 'sub_class' and count the entries
-#     shs_tracks_grouped = shs_tracks_df.groupby(['track', 'sub_class']).size().reset_index(name='counts')
-
-#     # Capitalize each word in 'sub_class' for the legend
-#     shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.title()
-
-#     # Truncate 'track' and 'sub_class' values for better readability
-#     shs_tracks_grouped['track'] = shs_tracks_grouped['track'].str.slice(0, 20)
-#     shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.slice(0, 15)
-
-#     # Create a clustered bar chart for SHS tracks and subclasses
-#     subclass_clustered_tracks = px.bar(
-#         shs_tracks_grouped,
-#         x='track',
-#         y='counts',
-#         color='sub_class',
-#         barmode='group',
-#         title='Enrollment in SHS Tracks Across Subclass'
-#     )
-
-#     # Update chart layout for improved readability
-#     subclass_clustered_tracks.update_layout(
-#         title=dict(
-#             text='SHS Tracks Enrollment',
-#             font=dict(family='Inter Bold', size=14, color='#04508c'),
-#             x=0  # Left align the title
-#         ),
-#         xaxis=dict(
-#             title='',
-#             tickangle=45,
-#             tickfont=dict(size=10, family='Inter Medium')
-#         ),
-#         yaxis=dict(
-#             title='',
-#             tickfont=dict(size=10, family='Inter Medium')
-#         ),
-#         showlegend=True,  # Display legend for clarity
-#         legend_title=None,  # Remove legend title (sub_class)
-#         font=dict(size=11, family='Inter Medium'),
-#         autosize=True,
-#         margin={"l": 50, "r": 10, "t": 50, "b": 40}  # Adjust margins
-#     )
-        
-#     return dcc.Graph(figure=subclass_clustered_tracks)
-
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
-    # Keep only necessary columns and drop rows with missing values
-    shs_tracks_df = FILTERED_DATA[['track', 'sub_class']].dropna(subset=['track', 'sub_class'])
+    # Create a copy for cleaning to keep original data intact
+    cleaned_df = FILTERED_DATA.copy()
 
-    # Group by 'track' and 'sub_class', then count enrollments
-    shs_tracks_grouped = (
-        shs_tracks_df
-        .groupby(['track', 'sub_class'])
-        .size()
-        .reset_index(name='enrollment_count')
+    # Drop rows with actual NaN values in key columns
+    cleaned_df = cleaned_df.dropna(subset=['track', 'sub_class', 'counts'])
+
+    # Standardize and clean 'sub_class' and 'track' text
+    cleaned_df['sub_class'] = cleaned_df['sub_class'].astype(str).str.strip().str.slice(0, 25)
+    cleaned_df['track'] = cleaned_df['track'].astype(str).str.strip().str.slice(0, 25)
+
+    # Drop rows where subclass or track equals string '__NaN__' (ensure case consistency)
+    cleaned_df = cleaned_df[
+        (cleaned_df['sub_class'] != '__NaN__') & 
+        (cleaned_df['track'] != '__NaN__')
+    ]
+
+    # Ensure 'counts' is numeric, drop non-numeric and zero values
+    cleaned_df['counts'] = pd.to_numeric(cleaned_df['counts'], errors='coerce')
+    cleaned_df = cleaned_df[cleaned_df['counts'].notna() & (cleaned_df['counts'] > 0)]
+
+    # Aggregate enrollment counts by track and subclass
+    aggregated_df = (
+        cleaned_df.groupby(['track', 'sub_class'], as_index=False)['counts']
+        .sum()
     )
 
-    # Capitalize and truncate for readability
-    shs_tracks_grouped['track'] = shs_tracks_grouped['track'].str.slice(0, 20)
-    shs_tracks_grouped['sub_class'] = shs_tracks_grouped['sub_class'].str.title().str.slice(0, 15)
+    # Check if any NaN values exist after aggregation and drop them
+    aggregated_df = aggregated_df.dropna(subset=['track', 'sub_class', 'counts'])
 
-    # Create the clustered bar chart
+    # Define the custom color map with new colors
+    custom_colors = {
+        'DOST Managed': '#4F0A14',
+        'DepEd Managed': '#4F0A14',
+        'LUC Managed': '#921224',
+        'Local International School': '#B4162D',
+        'Non-Sectrian': '#D61B35',
+        'Other GA Managed': '#E63E56',
+        'SUC Managed': '#EA6074',
+        'School Abroad': '#EF8292',
+        'Sectarian': '#F3A4AF',
+    }
+
+    # Ensure all subclasses are present in the category order (with a new name for the variable)
+    sub_class_display_order = list(custom_colors.keys())
+
+    # Create the grouped bar chart with the new custom color map and specified subclass order
     subclass_clustered_tracks = px.bar(
-        shs_tracks_grouped,
+        aggregated_df,
         x='track',
-        y='enrollment_count',
+        y='counts',
         color='sub_class',
         barmode='group',
-        title='SHS Tracks Enrollment by Subclass'
+        title='SHS Enrollment by Track',
+        labels={'track': 'SHS Track', 'counts': 'Total Enrollees'},
+        color_discrete_map=custom_colors,  # Apply the new custom color map here
+        category_orders={'sub_class': sub_class_display_order}  # Apply subclass order here
     )
 
-    # Update layout for clarity and short number formatting
+    # Update layout and styling for the graph
     subclass_clustered_tracks.update_layout(
-        title=dict(
-            text='SHS Tracks Enrollment',
-            font=dict(family='Inter Bold', size=14, color='#04508c'),
-            x=0  # Left-align the title
+        legend=dict(
+            title='Subclass',
+            itemsizing='constant',
+            traceorder='normal',
+            font=dict(family='Inter', size=12, color='#667889'),
+            title_font=dict(family='Inter Semi Bold', size=13, color='#667889')
         ),
-        xaxis=dict(
-            title='',
-            tickangle=45,
-            tickfont=dict(size=10, family='Inter Medium')
+        legend_title=dict(
+            text='Subclass',
+            font=dict(family='Inter Semi Bold', size=13, color='#667889')
         ),
-        yaxis=dict(
-            title='Enrollment Count',
-            tickfont=dict(size=10, family='Inter Medium'),
-            tickformat='~s'  
-        ),
-        showlegend=True,
-        legend_title=None,
-        font=dict(size=11, family='Inter Medium'),
-        autosize=True,
-        margin={"l": 50, "r": 10, "t": 50, "b": 40}
+        title_font=dict(family='Inter Bold', size=18, color='#04508c'),
+        xaxis_title='SHS Track',
+        yaxis_title='Total Enrollees',
+        font=dict(family='Inter', size=12, color='#667889'),
+        margin=dict(l=60, r=40, t=60, b=60)
     )
 
     return dcc.Graph(figure=subclass_clustered_tracks)
 
 
-
-
+    #    # # Define consistent subclass color mapping
+    # subclass_colors = {
+    #     'DOST Managed': '#4F0A14',
+    #     'DepEd Managed': '#710E1C',
+    #     'LUC Managed': '#921224',
+    #     'Local International': '#B4162D',
+    #     'Non-Sectarian': '#D61B35',
+    #     'Other GA Managed': '#E63E56',
+    #     'SUC Managed': '#EA6074',
+    #     'School Abroad': '#EF8292',
+    #     'Sectarian': '#F3A4AF',
+    # }
 
 # #################################################################################
 

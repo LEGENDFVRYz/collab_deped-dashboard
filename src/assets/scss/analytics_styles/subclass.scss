@@ -1,16 +1,15 @@
-// Import default styles
+
 @import "../variables";
-@import '../../fonts/stylesheet.css';
+@import "../../fonts/stylesheet.css";
 
-
-#plot-content.rendered{
+#plot-content.rendered {
     .plotted-subclass-report {
         width: 100%;
         height: 100%;
         display: flex;
-    
+
         .subclass-content {
-            display: flex;            
+            display: flex;
             flex: 1;
             gap: 1em;
 
@@ -24,7 +23,6 @@
                 display: flex;
                 flex-direction: column;
                 flex: 1;
-                flex: 1;
                 gap: 0.5em;
 
                 .subclass-enroll-graph {
@@ -32,76 +30,8 @@
                     flex: 1;
                     min-height: 300px;
                 }
-/*
-                .subclass-carousel-container{
-                    $card-width: 40px;
-                    $card-gap: 1px;
-                    $visible-cards: 3;
-                    $total-cards: 9;
-                    width: calc(#{$card-width} * #{$visible-cards} + #{$card-gap} * (#{$visible-cards} - 1));
-                    overflow: hidden;
-                    margin: 0 auto;
-                    position: relative;
-                    
-                    .carousel-track {
-                        display: flex;
-                        gap: $card-gap;
-                        width: calc(#{$card-width} * #{$total-cards} + #{$card-gap} * (#{$total-cards} - 1));
-                        transition: transform 0.3s ease;
-                    }
-
-                    .subclass-enroll-ind {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        box-sizing: border-box;
-                        flex: 0 0 $card-width;
-                        will-change: transform;
-                        padding: 1px;
-
-                        .sei-label {
-                            display: flex;
-                            justify-content: center;
-                            font-family: "Inter Semi Bold";
-                            font-size: 0.5em;
-                            color: $text-color-1;
-                        }
-
-                        .sei-count {
-                            display: flex;
-                            justify-content: center;
-                            font-family: "Inter Bold";
-                            font-size: 0.8em;
-                            color: $text-color-1;
-                        }
-
-                        .sei-text {
-                            display: flex;
-                            justify-content: center;
-                            font-family: "Inter Medium Italic";
-                            font-size: 0.5em;
-                            color: $text-color-3;
-                        }
-                    }
-                    // Carousel navigation buttons
-                    .carousel-button {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        background-color: rgba(255, 255, 255, 0.8);
-                        border: none;
-                        cursor: pointer;
-                        z-index: 10;
-                        &.prev {
-                            left: 10px;
-                        }
-                        &.next {
-                            right: 10px;
-                        }
-                    }
-                }*/
             }
-    
+
             .subclass-right-content {
                 display: flex;
                 flex-direction: column;
@@ -125,12 +55,8 @@
                         flex: 1;
                         gap: 0.5em;
                         min-height: 300px;
-                        
-                        .subclass-dist-avail-graph-1 {
-                            display: flex;
-                            flex: 1;
-                        }
 
+                        .subclass-dist-avail-graph-1,
                         .subclass-dist-avail-graph-2 {
                             display: flex;
                             flex: 1;
@@ -154,53 +80,78 @@
                             flex-direction: column;
                             flex: 3;
                             gap: 0.5em;
-                            
+
                             .subclass-program-graph {
                                 display: flex;
                                 flex: 1;
                                 min-height: 300px;
                             }
                         }
-                        // .subclass-program-last-cards {
-                        //     display: flex;
-                        //     flex-direction: column;
-                        //     flex: 1;
-                        //     gap: 0.5em;
 
-                        .subclass-enroll-ind {
+                        .subclass-percentage{
                             display: flex;
-                            flex: 1; 
                             flex-direction: column;
-                            justify-self: stretch;
-                            box-sizing: border-box;
+                            flex: 1;
+                            gap: 0.5em;
 
-                            .subclass-percentage {
+                            .subclass-card-center{
                                 display: flex;
-                                justify-content: center;
-                                font-family: "Inter Semi Bold";
-                                font-size: 0.75em;
-                                color: $text-color-3;
-                            }
+                                flex-direction: column;
+                                flex: 1;
+                                gap: 0.5em;
 
-                            .subclass-percentage-value {
-                                display: flex;
-                                justify-content: center;
-                                font-family: "Inter Bold";
-                                font-size: 1em;
-                                color: $text-color-3;
-                            }
+                                .percentage-label{
+                                    display: flex;
+                                    flex: 1;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 0.5em;
+                                    font-weight: 600;
+                                    color: $text-color-1;
+                                }
 
-                            // .sub-text {
-                            //     display: flex;
-                            //     justify-content: center;
-                            //     font-family: "Inter Medium Italic";
-                            //     font-size: 0.6em;
-                            //     color: $text-color-3;
-                            // }
+                                .percentage-subclass{
+                                    display: flex;
+                                    flex: 1;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 1em;
+                                    font-weight: 600;
+                                    color: $text-color-1;
+
+                                }
+
+                                .percentage-marker{
+                                    display: flex;
+                                    flex: 1;
+                                    justify-content: space-between;
+
+                                    .percentage-marker-ind{
+                                            align-self: center;
+                                            border-radius: 0.5em;
+                                            width: 10px;
+                                            height: 30px;
+                                            color: $secondary-shades-2;
+                                    }
+                                }
+                                .percentage-value{
+                                    display: flex;
+                                    flex: 1;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 1.5em;
+                                    font-weight: 600;
+                                   color: $text-color-1;
+                                }
+
+                            }
                         }
-                    }
+
+                    }    
+
                 }
             }
-        }   
+        }
     }
 }
+
