@@ -78,6 +78,118 @@
                                     flex-direction: column;
 
                                 }
+                                .offering-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(2, 1fr); // 2 columns
+                                    gap: 1rem;
+                                }
+
+                                .offering-card {
+                                    border-radius: 1rem;
+                                    padding: 0.75rem;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    color: white;
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                }
+
+                                .offering-label {
+                                    font-size: 0.85rem;
+                                    margin-bottom: 0.45rem;
+                                }
+
+                                .offering-percentage {
+                                    position: relative;
+                                    padding-left: 1rem; 
+                                    font-size: 1.75rem;
+                                    border-radius: 20px; 
+                                    font-family: "Inter Bold"
+                                }
+
+                                .offering-percentage::before {
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    height: 30px;
+                                    width: 7px;
+                                    background-color: rgba(255, 255, 255); 
+                                    border-radius: 20px; 
+                                }
+
+
+                                .offering-count {
+                                    font-size: 0.70rem;
+                                    text-align: right;
+                                    align-self: flex-start;
+                                    color: rgba(255, 255, 255);
+                                }
+
+                                .light-blue .offering-count {
+                                    color: #003972; 
+                                }
+
+                                .lightest-blue .offering-count {
+                                    color: #003972;
+                                }
+
+                                .white .offering-count {
+                                    color: #003972; 
+                                }
+
+                                .light-blue .offering-percentage {
+                                    color: #003972; 
+                                }
+
+                                .lightest-blue .offering-percentage {
+                                    color: #003972;
+                                }
+
+                                .light-blue .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .lightest-blue .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .white .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .white .offering-percentage {
+                                    color: #003972; 
+                                }
+
+                                .dark-blue {
+                                    background-color: #002242;
+                                }
+
+                                .medium-blue {
+                                    background-color: #004386;
+                                }
+
+                                .medium-light-blue {
+                                    background-color: #0162C2;
+                                }
+
+                                .light-blue {
+                                    background-color: #5EAFFF;
+                                    color: #003972;
+                                }
+
+                                .lightest-blue {
+                                    background-color: #ADDBFF;
+                                    color: #003972;
+                                }
+
+                                .white {
+                                    background-color: #E2F2FF;
+                                    color: #003972;
+                                }
+
+
+
 
                             }
                         }
@@ -153,6 +265,83 @@
                         display: flex;
                         flex: 1;
                         gap: 1em;
+
+
+                    .offering-location-details {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 1rem;
+                        padding: 1rem 0;
+                        }
+
+                        .offering-card {
+                        border-radius: 1rem;
+                        padding: 1rem;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        background-color: transparent;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                        }
+
+                        .offering-highest {
+                        border: 4px solid #003972;
+                        color: #003972;
+                        }
+
+
+                        .offering-lowest {
+                        border: 4px solid #e11c38;
+                        color: #e11c38;
+                        }
+
+                        .offering-label,
+                        .offering-value,
+                        .offering-count {
+                        font-size: 1rem;
+                        color: inherit;
+                        }
+
+                        .offering-value {
+                        font-size: 1.5rem;
+                        font-family: "Inter Bold"
+                        }
+
+                        .offering-count {
+                            font-size: 1rem;
+                            display: inline-flex;      
+                            align-items: center;        
+                            gap: 0.3rem;
+                            color: inherit;
+                            vertical-align: middle;     
+                        }
+
+                        .offering-highest-icon,
+                        .offering-lowest-icon {
+                            width: 2remm;
+                            height: 2rem;
+                            top: 9px;  
+                            object-fit: contain;
+                        }
+
+
+                        .offering-highest-icon {
+                            filter: invert(21%) sepia(66%) saturate(4662%) hue-rotate(191deg) brightness(92%) contrast(89%);
+ 
+                        }
+
+                        .offering-lowest-icon {
+                            filter: invert(29%) sepia(93%) saturate(7470%) hue-rotate(349deg) brightness(96%) contrast(104%);
+
+                        }
+
+                        .offering-count-wrapper{
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 0.5em;
+                        }
+
 
                         .offering-geographic-graph {
                             display: flex;

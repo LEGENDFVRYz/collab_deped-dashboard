@@ -81,6 +81,18 @@ from src.utils.extras_utils import smart_truncate_number
 
 @callback(
     Output('offering_number-of-schools', 'children'),
+    Output('purely-es-count', 'children'),
+    Output('purely-es-percentage', 'children'),
+    Output('purely-jhs-count', 'children'),
+    Output('purely-jhs-percentage', 'children'),
+    Output('purely-shs-count', 'children'),
+    Output('purely-shs-percentage', 'children'),
+    Output('es-and-jhs-count', 'children'),
+    Output('es-and-jhs-percentage', 'children'),
+    Output('jhs-with-shs-count', 'children'),
+    Output('jhs-with-shs-percentage', 'children'),
+    Output('all-offering-count', 'children'),
+    Output('all-offering-percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -95,8 +107,30 @@ def update_graph(trigger, data):
     # Drop duplicate schools
     cleaned_FILTERED_DF = FILTERED_DATA.drop_duplicates(subset='beis_id')
     
-    # total_school_count = len(cleaned_FILTERED_DF)
-    # shs_percentage = f"{(shs_total / total_school_count * 100):.1f}%" if total_school_count else "0%"
+    # Total unique schools
+    total_school_count = len(cleaned_FILTERED_DF)
+
+    # Count by school type (mod_coc)
+    level_counts = cleaned_FILTERED_DF['mod_coc'].value_counts()
+
+    # Extract counts safely
+    purely_es_count = level_counts.get('Purely ES', 0)
+    purely_jhs_count = level_counts.get('Purely JHS', 0)
+    purely_shs_count = level_counts.get('Purely SHS', 0)
+    es_and_jhs_count = level_counts.get('ES and JHS', 0)
+    jhs_with_shs_count = level_counts.get('JHS with SHS', 0)
+    all_offering_count = level_counts.get('All Offering', 0)
+
+    # Percentages
+    def percent(count):
+        return f"{(count / total_school_count * 100):.1f}%" if total_school_count else "0%"
+
+    purely_es_percentage = percent(purely_es_count)
+    purely_jhs_percentage = percent(purely_jhs_count)
+    purely_shs_percentage = percent(purely_shs_count)
+    es_and_jhs_percentage = percent(es_and_jhs_count)
+    jhs_with_shs_percentage = percent(jhs_with_shs_count)
+    all_offering_percentage = percent(all_offering_count)
 
     # Order inner donut
     desired_order = [
@@ -157,6 +191,23 @@ def update_graph(trigger, data):
     )
     
     number_of_schools_mcoc_chart
+    
+    return (
+        dcc.Graph(
+        figure=number_of_schools_mcoc_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"}),
+        f"{purely_es_count} schools",
+        purely_es_percentage,
+        f"{purely_jhs_count} schools",
+        purely_jhs_percentage,
+        f"{purely_shs_count} schools",
+        purely_shs_percentage,
+        f"{es_and_jhs_count} schools",
+        es_and_jhs_percentage,
+        f"{jhs_with_shs_count} schools",
+        jhs_with_shs_percentage,
+        f"{all_offering_count} schools",
+        all_offering_percentage,
+    )
 
     # number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
     # number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
@@ -657,30 +708,65 @@ def update_graph(trigger, data):
 # ##  --- INDICATOR: Locations with the Highest and Lowest Number of Offerings
 # #################################################################################
 @callback(
-    Output('offering_location-extremes', 'children'),
+    Output('offering-highest-elem', 'children'),
+    Output('offering-highest-jhs', 'children'),
+    Output('offering-highest-shs', 'children'),
+    Output('offering-highest-elem-count', 'children'),
+    Output('offering-highest-jhs-count', 'children'),
+    Output('offering-highest-shs-count', 'children'),
+    Output('offering-lowest-elem', 'children'),
+    Output('offering-lowest-jhs', 'children'),
+    Output('offering-lowest-shs', 'children'),
+    Output('offering-lowest-elem-count', 'children'),
+    Output('offering-lowest-jhs-count', 'children'),
+    Output('offering-lowest-shs-count', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
 )
 def update_graph(trigger, data):
+    # Apply smart filter
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
+    # Derive school level
     FILTERED_DATA['school_level'] = FILTERED_DATA['grade'].apply(
         lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6']
         else ('JHS' if x in ['G7', 'G8', 'G9', 'G10']
         else ('SHS' if x in ['G11', 'G12'] else 'UNKNOWN'))
     )
-
     FILTERED_DATA = FILTERED_DATA[FILTERED_DATA['school_level'] != 'UNKNOWN']
 
+    # Group by region and school level
     grouped = FILTERED_DATA.groupby(['school_level', 'region'])['counts'].sum().reset_index()
+
+    # Get highest and lowest by level
     highest = grouped.loc[grouped.groupby('school_level')['counts'].idxmax()].reset_index(drop=True)
     lowest = grouped.loc[grouped.groupby('school_level')['counts'].idxmin()].reset_index(drop=True)
 
-    high_low_combined = pd.concat([ 
+    high_low_combined = pd.concat([
         highest.assign(rank='Highest'),
         lowest.assign(rank='Lowest')
     ], ignore_index=True)
 
+    # Function to extract values safely
+    def get_by_level(df, level, rank='Highest'):
+        row = df[(df['school_level'] == level) & (df['rank'] == rank)]
+        if not row.empty:
+            region = row.iloc[0]['region']
+            count = row.iloc[0]['counts']
+            return region, f"{count:,}"
+        else:
+            return "N/A", "0"
+
+    # Extract all values
+    highest_elem, count_highest_elem = get_by_level(high_low_combined, 'ELEM', 'Highest')
+    highest_jhs, count_highest_jhs = get_by_level(high_low_combined, 'JHS', 'Highest')
+    highest_shs, count_highest_shs = get_by_level(high_low_combined, 'SHS', 'Highest')
+
+    lowest_elem, count_lowest_elem = get_by_level(high_low_combined, 'ELEM', 'Lowest')
+    lowest_jhs, count_lowest_jhs = get_by_level(high_low_combined, 'JHS', 'Lowest')
+    lowest_shs, count_lowest_shs = get_by_level(high_low_combined, 'SHS', 'Lowest')
+
+    # Create indicator chart
     indicator_chart = go.Figure()
 
     # Section headers
@@ -697,7 +783,6 @@ def update_graph(trigger, data):
         xref="paper", yref="paper"
     )
 
-    # Add indicators
     for _, row in high_low_combined.iterrows():
         row_position = 0 if row['rank'] == 'Highest' else 1
         column_position = {'ELEM': 0, 'JHS': 1, 'SHS': 2}.get(row['school_level'], 2)
@@ -710,28 +795,42 @@ def update_graph(trigger, data):
             mode='number',
             value=row['counts'],
             title={'text': title_text},
-            number={ 
+            number={
                 'valueformat': '.2s',
                 'font': {'size': 42, 'color': '#1B4F72'}
             },
             domain={'row': row_position, 'column': column_position}
         ))
 
+    # Layout settings
     indicator_chart.update_layout(
         grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
         template="plotly_white",
-        margin={"l": 0, "r": 0, "t": 0, "b": 0},
-        title={
-            # 'text': "<b>Regions with Highest and Lowest Offerings <br>per School Level</b>",
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#1B4F72'}
-        },
+        margin=dict(l=10, r=10, t=30, b=10),
         plot_bgcolor="#FFFFFF",
         font={'family': 'Inter, sans-serif', 'size': 13, 'color': '#3C6382'}
     )
 
-    return dcc.Graph(figure=indicator_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+    # Return all values to outputs
+    return (
+        highest_elem,
+        highest_jhs,
+        highest_shs,
+
+        count_highest_elem,
+        count_highest_jhs,
+        count_highest_shs,
+
+        lowest_elem,
+        lowest_jhs,
+        lowest_shs,
+
+        count_lowest_elem,
+        count_lowest_jhs,
+        count_lowest_shs
+    )
+
 
 
 # #################################################################################
