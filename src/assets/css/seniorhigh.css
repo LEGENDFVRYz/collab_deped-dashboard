@@ -6,56 +6,192 @@
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content {
   display: flex;
-  flex: 1;
-  gap: 1em;
-}
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content {
-  display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 1em;
+  gap: 2em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content h3 {
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 {
+  display: flex;
+  flex: 1;
+  min-height: 420px;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment {
   display: flex;
   flex-direction: column;
   flex: 1.5;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-dist-graph {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-dist-graph {
+  display: flex;
+  flex: 1.25;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-dist-graph .shs-track-dist-title {
+  color: #3C6382;
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-dist-graph #seniorhigh_distri_per_track {
   display: flex;
   flex: 1;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-lower {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut {
   display: flex;
   flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container #seniorhigh_ratio_enrollment {
+  display: flex;
+  flex: 1.5;
+  overflow: hidden;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-academic {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-enrollment .shs-enrollment-lower .shs-enrollment-graph {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-non-academic {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right {
+  display: flex;
+  flex: 1.5;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-gender-dist-title {
+  color: #3C6382;
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content #seniorhigh_gender_distri {
+  display: flex;
+  flex: 2;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .shs-population-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content #seniorhigh_most_least_enrolled {
   display: flex;
   flex: 1;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 {
+  display: flex;
+  min-height: 360px;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail .shs-track-avail-content {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content {
   display: flex;
   flex: 1;
-  gap: 0.5em;
+  gap: 1em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-left-content .shs-track-avail .shs-track-avail-content .shs-track-avail-graph {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content .shs-track-avail-graph {
   display: flex;
   flex: 1;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-right-content {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content .shs-track-avail-graph .shs-school-track-title, #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content .shs-track-avail-graph .shs-high-demand-title {
+  color: #3C6382;
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content .shs-track-avail-graph #seniorhigh_school_offering_per_track_by_sector {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail .shs-track-avail-content .shs-track-avail-graph #seniorhigh_least_offered_high_demand {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 {
+  display: flex;
+  flex: 1;
+  min-height: 420px;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-right-content .shs-region-sector-graph {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph {
+  display: flex;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph.sector-1 {
+  flex: 1.6;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph.sector-2 {
+  flex: 1;
+  flex-direction: column;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-region-sector-upper {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-region-sector-lower {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-offers-title, #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-prevalent-title, #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-range-title {
+  color: #3C6382;
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph #seniorhigh_shs_offers {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph #seniorhigh_prevalent_tracks {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph #seniorhigh_offer_range {
   display: flex;
   flex: 1;
 }/*# sourceMappingURL=seniorhigh.css.map */

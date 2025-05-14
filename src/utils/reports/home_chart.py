@@ -68,7 +68,7 @@ def update_graph(pathname):
             'SHS' if x in ['G11', 'G12'] else 'ELEM')
     )
 
-    query = BASE_DF.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
+    query = BASE_DF.groupby(['school-level','grade'], as_index=False, observed=True)[['counts']].sum()
     query = query[query['counts'] != 0]
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
     query = query.sort_values('grade')
@@ -281,7 +281,7 @@ def update_graph(base_trigger):
     
     # Drop duplicates to count each school only once per sector
     BASE_DF = BASE_DF.drop_duplicates(subset=["sector", "beis_id"])
-    sector_counts = BASE_DF.groupby("sector")["beis_id"].count().reset_index(name="count")
+    sector_counts = BASE_DF.groupby("sector", observed=True)["beis_id"].count().reset_index(name="count")
     sector_counts["formatted_count"] = sector_counts["count"].apply(smart_truncate_number)
     sector_counts = sector_counts.sort_values(by="count", ascending=False)
     
@@ -358,7 +358,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['gender', 'counts']]
 
     # Group data
-    grouped_by_gender = BASE_DF.groupby(['gender'], as_index=False)['counts'].sum()
+    grouped_by_gender = BASE_DF.groupby(['gender'], as_index=False, observed=True)['counts'].sum()
     colors = ['#FF5B72', '#5DB7FF']
 
     # Create half-donut chart
@@ -454,7 +454,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['region', 'counts']]
     
     # Extract and process data
-    enrollees_per_region = BASE_DF.groupby(['region'], as_index=False)["counts"].sum()
+    enrollees_per_region = BASE_DF.groupby(['region'], as_index=False, observed=True)["counts"].sum()
     enrollees_per_region["counts_label"] = enrollees_per_region["counts"].apply(smart_truncate_number)
 
     # Define consistent region order
@@ -533,7 +533,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['beis_id', 'sub_class', 'counts']]
     
     subclass_df1 = (
-        BASE_DF.groupby(['sub_class'])
+        BASE_DF.groupby(['sub_class'], observed=True)
         .agg(
             school_count=('beis_id', 'nunique'),
             counts=('counts', 'sum'),
@@ -583,7 +583,7 @@ def update_graph(base_trigger):
         header=dict(
             values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
             fill_color='#E6F2FB',
-            font=dict(color='#04508c', size=12, family="Arial"),
+            font=dict(color='#04508c', size=12, family="Inter"),
             align='left',
             line_color='#B0C4DE',
             height=28
@@ -595,7 +595,7 @@ def update_graph(base_trigger):
                 subclass_df1['counts']
             ],
             fill_color=[['#FFFFFF', '#F7FAFC'] * (len(subclass_df1) // 2 + 1)],
-            font=dict(color='#3C6382', size=11, family="Arial"),
+            font=dict(color='#3C6382', size=11, family="Inter"),
             align='left',
             line_color='#D3D3D3',
             height=24
@@ -640,7 +640,7 @@ def update_graph(base_trigger):
     BASE_DF = BASE_DF[['beis_id', 'mod_coc']]
     
     # Extract and group
-    grouped_by_offering = BASE_DF.groupby("mod_coc")['beis_id'].nunique().reset_index(name="counts")
+    grouped_by_offering = BASE_DF.groupby("mod_coc", observed=True)['beis_id'].nunique().reset_index(name="counts")
 
     # Flags for outer donut totals
     grouped_by_offering['has_ES'] = grouped_by_offering['mod_coc'].str.contains('ES', case=False, na=False) | \
@@ -776,7 +776,7 @@ def update_graph(base_trigger):
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)[['track', 'counts']]
     
     # Extract and group data
-    grouped_by_tracks = BASE_DF.groupby(["track"], as_index=False)["counts"].sum()
+    grouped_by_tracks = BASE_DF.groupby(["track"], as_index=False, observed=True)["counts"].sum()
     grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
     grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
     grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
@@ -847,11 +847,10 @@ def update_graph(base_trigger):
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     BASE_DF = BASE_DF[['strand', 'counts']]
 
-    # Data extraction and cleaning
     BASE_DF = BASE_DF[BASE_DF['strand'] != '__NaN__']
 
     # Group and sort
-    grouped_by_strands = BASE_DF.groupby(["strand"], as_index=False)["counts"].sum()
+    grouped_by_strands = BASE_DF.groupby(["strand"], as_index=False, observed=True)["counts"].sum()
     grouped_by_strands = grouped_by_strands.sort_values(by="counts", ascending=False)
     grouped_by_strands["category"] = "SHS Strands"
     grouped_by_strands['formatted_counts'] = grouped_by_strands['counts'].apply(smart_truncate_number)

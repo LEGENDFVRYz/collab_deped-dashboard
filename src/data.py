@@ -17,7 +17,7 @@ from config import project_root
 enrollment_db_engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
 print("DATABASE CALLED")
 
-@cache.memoize()
+@cache.memoize(timeout=3600)
 def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
     try:
         print("QUERYINGGG...")
@@ -38,7 +38,7 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
                 'province' :lambda x: f":province_{x}",
                 'division' :lambda x: f":division_{x}",
                 'district' :lambda x: f":district_{x}",
-                'minicipality' :lambda x: f":municipality_{x}",
+                'municipality' :lambda x: f":municipality_{x}",
                 'brgy' :lambda x: f":district_{x}"
         }
         
@@ -71,7 +71,8 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
 
                     first_query += f"\nAND {col_key} IN ({placeholders})"
         
-
+        # print(first_query)
+        
         # JOIN: first_query + location detailes
         region_query = f"""SELECT * FROM (
             {first_query}
@@ -79,13 +80,14 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
         LEFT JOIN sch_local USING (local_id)
         WHERE 1=1
         """
-        if any(key in filter_info for key in ['region', 'province', 'division', 'district']):
+        if any(key in filter_info for key in ['region', 'province', 'division', 'district', 'municipality', 'brgy']):
             for col_key, value in filter_info.items():
                 if col_key in ['region', 'province', 'division', 'district', 'municipality', 'brgy']:
                     ## LOCATION
                     placeholders = ', '.join([second_scope[col_key](i) for i in range(len(value))])
+                    print(placeholders)
                     params = {**params, **{second_scope[col_key](i)[1:]: v for i, v in enumerate(value)}}
-                    
+                    print(params)
                     region_query += f"\nAND {col_key} IN ({placeholders})"
         
         
@@ -158,35 +160,12 @@ def get_engine():
     
     
 if __name__ == '__main__':
-    sample = {
-    # "type": [
-    #     "Mother School",
-    #     # "No Annexes"
-    # ],
-    # "gender": "M",
-    # "sector": [
-    #     "Private"
-    # ],
-    # "sub_class": [
-    #     "Sectarian"
-    # ],
-    # "track": [
-    #     "TVL"
-    # ],
-    # "mod_coc": "All Offering",
-    # "grade": [
-    #     "G1", "G2"
-    # ],
-    # "region": [
-    #     "CARAGA",
-    # ],
-    # "province": [
-    #     "DINAGAT ISLANDS"
-    # ],
-    # "division": [
-    #     "Dinagat Island"
-    # ]
-    }
+    sample = {}
     
     df = smart_filter(sample)
-    df
+    
+    df = df[['region', 'counts']]
+    
+    df_grouped = df.groupby('region', as_index=False)['counts'].sum()
+    
+    

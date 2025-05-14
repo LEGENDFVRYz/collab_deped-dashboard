@@ -3,17 +3,13 @@ from sqlalchemy import create_engine
 import pandas as pd
 import os, sys
 
-import json
-import os
+# import json
+# import os
 import plotly.express as px
-from geojson_rewind import rewind
-import pandas as pd
-import plotly.io as pio
-from fuzzywuzzy import process
+# from geojson_rewind import rewind
+# import pandas as pd
+# import plotly.io as pio
 
-
-
-# from src.utils.extras_utils import smart_truncate_number
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from config import project_root

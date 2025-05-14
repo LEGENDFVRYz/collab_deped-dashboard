@@ -22,97 +22,285 @@
             }
         }
         
-        // PLOTTING THE CONTENTS
-        .plot-left-section{
-            flex: 4;
-
+        .offering-content {
             display: flex;
             flex-direction: column;
-            gap: 1em;
+            flex: 1;
+            gap: 2em;
 
-            .plot-top-section{
-                flex: 4;
+            h3,h4 {
+                color: $text-color-1;
 
+                &.offering-title {
+                    padding: 0.5em;
+                }
+            }
+
+            .plot-layer-1 {
                 display: flex;
-                flex-direction: column;
-                
-                .plot-box{
-                    flex: 1;
-                    display: flex;
-                    flex-direction: row;
-
-                    gap: 0.5em;
-
-                    .plot-a{
-                        flex: 1;
-                    }
-                    .plot-b{
-                        flex: 1;
-
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.5em;
-
-                        .plot-b-top{
-                            flex: 1;
-                        }
-                        .plot-b-bot{
-                            flex: 1;
-                        }
-                    }
-                }
-            }
-
-            .plot-bottom-section{
-                flex: 3;
-
-                .plot-box{
-                    flex: 1;
-                    display: flex;
-                    flex-direction: row;
-
-                    gap: 0.5em;
-
-                    .plot-a{
-                        flex: 1;
-                    }
-                    .plot-b{
-                        flex: 1;
-                    }
-                }
-            }
-        }
-
-
-        .plot-right-section{
-            flex: 2;
-
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-
-            .plot-top-section{
                 flex: 1;
-            }
+                min-height: 360px;
+                gap: 2em;
 
-            .plot-bottom-section{
-                flex: 1;
-
-                .plot-box{
-                    flex: 1;
+                .offering-overview {
                     display: flex;
                     flex-direction: column;
-
+                    flex: 1;
                     gap: 0.5em;
 
-                    .plot-sec-a{
-                        min-height: 40%;
-                    }
-                    .plot-sec-b{
+                    .offering-overview-content {
+                        display: flex;
                         flex: 1;
+                        gap: 1em;
+
+                        .offering-overview-graph {
+                            display: flex;
+
+                            flex: 1;
+
+                            &.first {flex: 1.75;}
+                            &.second {flex: 1;}
+                            &.third {flex: 1;}
+
+                            #offering_number-of-schools, #offering_gender-distribution, #offering_ranked-mcoc {
+                                display: flex;
+                                flex: 1;
+                            }
+
+                            .offering-overview-graph-cont {
+                                display: flex;
+                                flex: 1;
+                                gap: 2em;
+ 
+                                .offering-ind-container {
+                                    display: flex;
+                                    flex: 1;
+                                    flex-direction: column;
+
+                                }
+
+                            }
+                        }
+                    }
+                }
+    
+                // .plot-top-section{
+                //     flex: 4;
+    
+                //     display: flex;
+                //     flex-direction: column;
+                    
+                //     .plot-box{
+                //         flex: 1;
+                //         display: flex;
+                //         flex-direction: row;
+    
+                //         gap: 0.5em;
+    
+                //         .plot-a{
+                //             flex: 1;
+                //         }
+                //         .plot-b{
+                //             flex: 1;
+    
+                //             display: flex;
+                //             flex-direction: column;
+                //             gap: 0.5em;
+    
+                //             .plot-b-top{
+                //                 flex: 1;
+                //             }
+                //             .plot-b-bot{
+                //                 flex: 1;
+                //             }
+                //         }
+                //     }
+                // }
+    
+                // .plot-bottom-section{
+                //     flex: 3;
+    
+                //     .plot-box{
+                //         flex: 1;
+                //         display: flex;
+                //         flex-direction: row;
+    
+                //         gap: 0.5em;
+    
+                //         .plot-a{
+                //             flex: 1;
+                //         }
+                //         .plot-b{
+                //             flex: 1;
+                //         }
+                //     }
+                // }
+            }
+    
+            .plot-layer-2 {
+                display: flex;
+                flex: 1;
+                min-height: 360px;
+                gap: 2em;
+
+                .offering-geographic {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .offering-geographic-content {
+                        display: flex;
+                        flex: 1;
+                        gap: 1em;
+
+                        .offering-geographic-graph {
+                            display: flex;
+                            flex: 1;
+
+                            #offering_mcoc-offerings-per-loc, #offering_location-extremes {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+                    }
+                }
+                
+    
+                // .plot-top-section{
+                //     flex: 1;
+                // }
+    
+                // .plot-bottom-section{
+                //     flex: 1;
+    
+                //     .plot-box{
+                //         flex: 1;
+                //         display: flex;
+                //         flex-direction: column;
+    
+                //         gap: 0.5em;
+    
+                //         .plot-sec-a{
+                //             min-height: 40%;
+                //         }
+                //         .plot-sec-b{
+                //             flex: 1;
+                //         }
+                //     }
+                // }
+            }
+    
+            .plot-layer-3 {
+                display: flex;
+                flex: 1;
+                min-height: 400px;
+                gap: 2em;
+
+                .offering-grade-level {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    gap: 0.5em;
+
+                    .offering-grade-level-content {
+                        display: flex;
+                        flex: 1;
+                        gap: 1em;
+
+                        .offering-group-1 {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+
+                            .offering-g1-graph {
+                                display: flex;
+                                flex: 2.75;
+
+                                #offering_enroll_dist {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .offering-info-cards {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 1;
+                                gap: 0.5em;
+            
+                                .offering-info {
+                                    display: flex;
+                                    flex: 1;
+
+                                    .offering-populated {
+                                        display: flex;
+                                        flex: 1;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        color: $text-color-1;
+
+                                        .offering-pop-title {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .offering-grade {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1.25em;
+                                        }
+
+                                        .offering-student-count {
+                                            display: flex;
+                                            flex-direction: column;
+                                            padding: 0.25em;
+                                            border-radius: 0.5em;
+                                            color: $white;
+                                            
+                                            &.most { background-color: $secondary-color-2; }
+                                            &.least { background-color: $primary-color-2; }
+
+                                            .offering-count {
+                                                font-family: "Inter Bold";
+                                                text-align: center;
+                                                font-size: 1em;
+                                            }
+
+                                            .offering-student-text {
+                                                font-family: "Inter Medium Italic";
+                                                text-align: center;
+                                                font-size: 0.7em;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .offering-group-2 {
+                            display: flex;
+                            flex: 1.3;
+
+                            #offering_enrollees_num {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+
+                        // .offering-grade-level-graph {
+                        //     display: flex;
+                        //     flex: 1;
+
+                        //     #offering_mcoc-offerings-per-loc, #offering_location-extremes {
+                        //         display: flex;
+                        //         flex: 1;
+                        //     }
+                        // }
                     }
                 }
             }
         }
+        // PLOTTING THE CONTENTS
     }
 }
