@@ -13,6 +13,19 @@
             flex: 1;
             gap: 1em;
 
+            #log-button-sc{
+                color: $white; 
+                background-color: #FFBF5F;
+                border-radius: 50em;
+                font-size: 1em; 
+                font-family: "Inter Bold"; 
+                text-align: center; 
+                text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                padding: 0.25em 1em;
+                user-select: none;
+                cursor: pointer;
+            }
+
             .subclass-graph-title {
                 color: $text-color-1;
                 padding: 0.50em;
@@ -30,6 +43,74 @@
                     flex: 1;
                     min-height: 300px;
                 }
+// /*
+//                 .subclass-carousel-container{
+//                     $card-width: 40px;
+//                     $card-gap: 1px;
+//                     $visible-cards: 3;
+//                     $total-cards: 9;
+//                     width: calc(#{$card-width} * #{$visible-cards} + #{$card-gap} * (#{$visible-cards} - 1));
+//                     overflow: hidden;
+//                     margin: 0 auto;
+//                     position: relative;
+                    
+//                     .carousel-track {
+//                         display: flex;
+//                         gap: $card-gap;
+//                         width: calc(#{$card-width} * #{$total-cards} + #{$card-gap} * (#{$total-cards} - 1));
+//                         transition: transform 0.3s ease;
+//                     }
+
+//                     .subclass-enroll-ind {
+//                         display: flex;
+//                         flex-direction: column;
+//                         align-items: center;
+//                         box-sizing: border-box;
+//                         flex: 0 0 $card-width;
+//                         will-change: transform;
+//                         padding: 1px;
+
+//                         .sei-label {
+//                             display: flex;
+//                             justify-content: center;
+//                             font-family: "Inter Semi Bold";
+//                             font-size: 0.5em;
+//                             color: $text-color-1;
+//                         }
+
+//                         .sei-count {
+//                             display: flex;
+//                             justify-content: center;
+//                             font-family: "Inter Bold";
+//                             font-size: 0.8em;
+//                             color: $text-color-1;
+//                         }
+
+//                         .sei-text {
+//                             display: flex;
+//                             justify-content: center;
+//                             font-family: "Inter Medium Italic";
+//                             font-size: 0.5em;
+//                             color: $text-color-3;
+//                         }
+//                     }
+//                     // Carousel navigation buttons
+//                     .carousel-button {
+//                         position: absolute;
+//                         top: 50%;
+//                         transform: translateY(-50%);
+//                         background-color: rgba(255, 255, 255, 0.8);
+//                         border: none;
+//                         cursor: pointer;
+//                         z-index: 10;
+//                         &.prev {
+//                             left: 10px;
+//                         }
+//                         &.next {
+//                             right: 10px;
+//                         }
+//                     }
+//                 }*/
             }
 
             .subclass-right-content {
@@ -42,24 +123,37 @@
                     display: flex;
                     flex-direction: column;
                     flex: 1;
-                    gap: 0.5em;
+                    gap: 1em;
 
                     .subclass-dist-avail-graph {
                         display: flex;
                         flex: 1;
-                        min-height: 300px;
+                        min-height: 450px;
                     }
 
                     .subclass-dist-avail-lower {
                         display: flex;
                         flex: 1;
                         gap: 0.5em;
-                        min-height: 300px;
-
-                        .subclass-dist-avail-graph-1,
-                        .subclass-dist-avail-graph-2 {
+                        // min-height: 250px;
+                        
+                        .subclass-dist-avail-graph-1 {
                             display: flex;
                             flex: 1;
+                            padding: 1em;
+                        }
+
+                        .subclass-dist-avail-graph-2 {
+                            display: flex;
+                            flex: 2;
+                            min-height: 400px;
+                            // height: 50em;
+                            // display: none;
+                        }
+                        .subclass-dist-avail-graph-2ss{
+                            display: flex;
+                            flex: 1;
+                            height: 30em;
                         }
                     }
                 }
@@ -85,10 +179,79 @@
                                 display: flex;
                                 flex: 1;
                                 min-height: 300px;
+
+                                .subdist-wrap{
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex: 1;
+                                    gap: 0.1em;
+                                    
+                                    .tag-wrap{
+                                        display: flex;
+                                        flex: 1;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        align-items: center;
+                                        gap: 1em;
+
+                                        #max-sc-dist {
+                                            color: $white; 
+                                            background-color: #9ACBF8;
+                                            font-size: 4em; 
+                                            font-family: 'Inter Medium', sans-serif;
+                                            font-weight: bold;
+                                            text-align: center; 
+                                            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                                            padding: 0.25em 0.75em;
+                                            border-radius: 100em;
+                                        }
+
+                                        #name-max-sc-dist{
+                                            color: $primary-shades-2; 
+                                            font-size: 2em;
+                                            font-family: 'Inter Bold';
+                                        }
+
+                                        #max-sc-dist-value{
+                                            color: $text-color-2; 
+                                            font-size: 1.25em;
+                                            font-family: 'Inter Medium';
+                                        }
+                                    }
+
+                                    .subclass_distrib_by_subclass{
+                                        flex: 1;
+                                        display: flex;
+                                    }
+                                    
+                                    .detailed-sc{
+                                        flex-direction: column;
+                                        text-align: center;
+                                        padding: 1em 0em;
+                                        border-left: 1px;
+                                        // display: none;
+
+                                        // .tag{
+                                        //     // text-align: center;
+                                        //     // display: flex;
+                                        //     // align-items: center;
+                                        // }
+
+                                        #others_subclass_distrib_by_subclass{
+                                            flex: 1;
+                                        }
+
+                                    }
+                                }
                             }
                         }
+                        // .subclass-program-last-cards {
+                        //     display: flex;
+                        //     flex-direction: column;
+                        //     flex: 1;
+                        //     gap: 0.5em;
 
-                        .subclass-percentage{
+                        .subclass-enroll-ind {
                             display: flex;
                             flex-direction: column;
                             flex: 1;
@@ -152,6 +315,16 @@
 
                 }
             }
+        }
+
+        .subclass_student_school_ratio{
+            display: flex;
+            flex: 1;
+        }
+
+        .chart-ctn-sc{
+            display: flex;
+            flex: 1;
         }
     }
 }

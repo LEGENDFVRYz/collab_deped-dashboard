@@ -117,16 +117,16 @@ layout = html.Div([
                     
                     html.Div([
                         html.Div([
-                        Card([
-                        ## -- GRAPH: Total Enrollment Count per School Level
-                            html.H4(["Grade-level Distribution"], className="gld-graph-title"), 
-                            dcc.Graph(
-                                id='home-enrollment-per-region',
-                                config={"responsive": True},
-                                style={"width": "100%", "height": "100%"},
-                                figure={},  # Initialize with empty figure
-                            ),
-                        ], margin=False)  
+                            Card([
+                            ## -- GRAPH: Total Enrollment Count per School Level
+                                html.H4(["Grade-level Distribution"], className="gld-graph-title"), 
+                                dcc.Graph(
+                                    id='home-enrollment-per-region',
+                                    config={"responsive": True},
+                                    style={"width": "100%", "height": "100%"},
+                                    figure={},  # Initialize with empty figure
+                                ),
+                            ], margin=False)  
                         ], className="gld-graph"),
                         
                         html.Div([

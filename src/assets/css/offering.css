@@ -14,74 +14,171 @@
 #plot-content.rendered .plotted-offering-report .plot-sec-wrap .plot-content {
   flex: 1;
 }
-#plot-content.rendered .plotted-offering-report .plot-left-section {
-  flex: 4;
+#plot-content.rendered .plotted-offering-report .offering-content {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content h3, #plot-content.rendered .plotted-offering-report .offering-content h4 {
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-offering-report .offering-content h3.offering-title, #plot-content.rendered .plotted-offering-report .offering-content h4.offering-title {
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 {
+  display: flex;
+  flex: 1;
+  min-height: 360px;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content {
+  display: flex;
+  flex: 1;
   gap: 1em;
 }
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section {
-  flex: 4;
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph {
   display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph.first {
+  flex: 1.75;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph.second {
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph.third {
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph #offering_number-of-schools, #plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph #offering_gender-distribution, #plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph #offering_ranked-mcoc {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph .offering-overview-graph-cont {
+  display: flex;
+  flex: 1;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-1 .offering-overview .offering-overview-content .offering-overview-graph .offering-overview-graph-cont .offering-ind-container {
+  display: flex;
+  flex: 1;
   flex-direction: column;
 }
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section .plot-box {
-  flex: 1;
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 {
   display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section .plot-box .plot-a {
   flex: 1;
+  min-height: 360px;
+  gap: 2em;
 }
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section .plot-box .plot-b {
-  flex: 1;
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 .offering-geographic {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section .plot-box .plot-b .plot-b-top {
-  flex: 1;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-top-section .plot-box .plot-b .plot-b-bot {
-  flex: 1;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-bottom-section {
-  flex: 3;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-bottom-section .plot-box {
-  flex: 1;
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 .offering-geographic .offering-geographic-content {
   display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-bottom-section .plot-box .plot-a {
   flex: 1;
-}
-#plot-content.rendered .plotted-offering-report .plot-left-section .plot-bottom-section .plot-box .plot-b {
-  flex: 1;
-}
-#plot-content.rendered .plotted-offering-report .plot-right-section {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
   gap: 1em;
 }
-#plot-content.rendered .plotted-offering-report .plot-right-section .plot-top-section {
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 .offering-geographic .offering-geographic-content .offering-geographic-graph {
+  display: flex;
   flex: 1;
 }
-#plot-content.rendered .plotted-offering-report .plot-right-section .plot-bottom-section {
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 .offering-geographic .offering-geographic-content .offering-geographic-graph #offering_mcoc-offerings-per-loc, #plot-content.rendered .plotted-offering-report .offering-content .plot-layer-2 .offering-geographic .offering-geographic-content .offering-geographic-graph #offering_location-extremes {
+  display: flex;
   flex: 1;
 }
-#plot-content.rendered .plotted-offering-report .plot-right-section .plot-bottom-section .plot-box {
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 {
+  display: flex;
   flex: 1;
+  min-height: 400px;
+  gap: 2em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 0.5em;
 }
-#plot-content.rendered .plotted-offering-report .plot-right-section .plot-bottom-section .plot-box .plot-sec-a {
-  min-height: 40%;
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
 }
-#plot-content.rendered .plotted-offering-report .plot-right-section .plot-bottom-section .plot-box .plot-sec-b {
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-g1-graph {
+  display: flex;
+  flex: 2.75;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-g1-graph #offering_enroll_dist {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-pop-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-grade {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-student-count {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-student-count.most {
+  background-color: #E11C38;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-student-count.least {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-student-count .offering-count {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-1 .offering-info-cards .offering-info .offering-populated .offering-student-count .offering-student-text {
+  font-family: "Inter Medium Italic";
+  text-align: center;
+  font-size: 0.7em;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-2 {
+  display: flex;
+  flex: 1.3;
+}
+#plot-content.rendered .plotted-offering-report .offering-content .plot-layer-3 .offering-grade-level .offering-grade-level-content .offering-group-2 #offering_enrollees_num {
+  display: flex;
   flex: 1;
 }/*# sourceMappingURL=offering.css.map */
