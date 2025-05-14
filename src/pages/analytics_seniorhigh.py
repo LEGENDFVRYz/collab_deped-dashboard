@@ -56,14 +56,18 @@ def render_seniorhigh_filter():
                                             html.Div([],id='seniorhigh_ratio_enrollment',),
                                             html.Div([
                                                 html.Div([
-                                                    html.Span("Academic"),
-                                                    html.Span([], id="acad-count"),
-                                                    html.Span([], id="acad-percentage"),
+                                                    html.Span("Academic", className="shs-acad-title"),
+                                                    html.Div([
+                                                        html.Span([], id="acad-count", className="shs-count-text"),
+                                                        html.Span([], id="acad-percentage", className="shs-percentage-text"),
+                                                    ], className="shs-container upper"),                                                    
                                                 ], className="shs-academic"),
                                                 html.Div([
-                                                    html.Span("Non-academic"),
-                                                    html.Span([], id="non-acad-count"),
-                                                    html.Span([], id="non-acad-percentage"),
+                                                    html.Span("Non-academic", className="shs-acad-title"),
+                                                    html.Div([
+                                                        html.Span([], id="non-acad-count", className="shs-count-text"),
+                                                        html.Span([], id="non-acad-percentage", className="shs-percentage-text"),
+                                                    ], className="shs-container lower"),                                                    
                                                 ], className="shs-non-academic"),
                                             ], className="seniorhigh_ratio_enrollment_ind")
                                         ], className="shs-donut-container")
@@ -86,16 +90,20 @@ def render_seniorhigh_filter():
                                         
                                         html.Div([
                                             html.Div([
-                                                html.Span("Most Populated"),
-                                                html.Span([], id="shs-highest-strand"),
-                                                html.Span([], id="shs-highest-count"),
-                                                html.Span("students"),
+                                                html.Span("Most Populated", className="mps-pop-title"),
+                                                html.Span([], id="shs-highest-strand", className="mps-strand"),
+                                                html.Div([
+                                                    html.Span([], id="shs-highest-count", className="mps-count"),
+                                                    html.Span("students", className="mps-student-text"),
+                                                ], className="mps-student-count most")                                                
                                             ], className="shs-population-container"),
                                             html.Div([
-                                                html.Span("Least Populated"),
-                                                html.Span([], id="shs-lowest-strand"),
-                                                html.Span([], id="shs-lowest-count"),
-                                                html.Span("students"),
+                                                html.Span("Least Populated", className="mps-pop-title"),
+                                                html.Span([], id="shs-lowest-strand", className="mps-strand"),
+                                                html.Div([
+                                                    html.Span([], id="shs-lowest-count", className="mps-count"),
+                                                    html.Span("students", className="mps-student-text"),
+                                                ], className="mps-student-count least")                                                
                                             ], className="shs-population-container")
                                         ], className="shs-population")
                                         

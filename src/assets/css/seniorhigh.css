@@ -80,6 +80,32 @@
   flex-direction: column;
   gap: 0.5em;
 }
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-acad-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-count-text {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-percentage-text {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower {
+  background-color: #E11C38;
+}
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right {
   display: flex;
   flex: 1.5;
@@ -106,6 +132,38 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-pop-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-strand {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count.most {
+  background-color: #E11C38;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count.least {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count .mps-count {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count .mps-student-text {
+  font-family: "Inter Medium Italic";
+  text-align: center;
+  font-size: 0.7em;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content #seniorhigh_most_least_enrolled {
   display: flex;
