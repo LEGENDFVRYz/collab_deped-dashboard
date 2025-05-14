@@ -312,8 +312,8 @@ def update_graph(trigger, data):
         font=dict(family='Inter, sans-serif', size=14, color='#3C6382'),
         plot_bgcolor='rgba(255,255,255,0.5)',
         margin=dict(l=50, r=30, t=70, b=60),
-       legend=dict(
-           title=None,
+        legend=dict(
+            title=None,
             orientation='h',          
             yanchor='bottom',
             y=-0.9,                 
