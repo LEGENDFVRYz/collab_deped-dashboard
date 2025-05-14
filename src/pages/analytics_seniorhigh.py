@@ -209,7 +209,109 @@ def render_seniorhigh_filter():
 def new_location_shs():
     return html.Div(
         children=[
-            ## LEFT SECTION
-            "NEWW shs"
+                        ## options
+            html.Div([
+                # LAYER 1
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.Div([
+                                Card([
+                                    html.H4(["Enrollment Growth Across Senior High School Tracks"], className="shs-title"),
+                                    html.Div([], id="seniorhigh_year_over_year"),
+                                ], margin=False),
+                            ], className="shs-enrollment-left year"),
+                            html.Div([
+                                html.Div([
+                                    Card([
+                                        html.H4(["Senior High Tracks Distribution"], className="shs-track-dist-title"),
+                                        html.Div([],id='seniorhigh_distri_per_track', )
+                                    ], margin=False),
+                                ], className="shs-enrollment-upper"),
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([],id='seniorhigh_ratio_enrollment',),
+                                            html.Div([
+                                                html.Div([
+                                                    html.Span("Academic"),
+                                                    html.Span([], id="acad-count"),
+                                                    html.Span([], id="acad-percentage"),
+                                                ], className="shs-academic"),
+                                                html.Div([
+                                                    html.Span("Non-academic"),
+                                                    html.Span([], id="non-acad-count"),
+                                                    html.Span([], id="non-acad-percentage"),
+                                                ], className="shs-non-academic"),
+                                            ], className="seniorhigh_ratio_enrollment_ind")
+                                        ], className="shs-donut-container")
+                                    ], margin=False),
+                                ], className="shs-enrollment-lower"),
+                            ], className="shs-enrollment-right year"),
+                        ], className="shs-enrollment-content"),
+                    ], className="shs-enrollment"),
+                ], className="shs-layer-1"),
+                
+                # LAYER 2
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            Card([
+                                html.H4(["Yearly Shifts in Enrollment by Strand"], className="shs-title"),
+                                html.Div([], id="seniorhigh_enrollment_comparison_per_strand"),
+                            ], margin=False),
+                        ], className="shs-track-left"),
+                        html.Div([
+                            Card([
+                                html.H4(["Popularity of SHS Strands by Gender Through the Years"], className="shs-title"),
+                                html.Div([], id="seniorhigh_humms")
+                            ], margin=False),
+                        ], className="shs-track-right"),
+                    ], className="shs-track-content"),
+                    
+                ], className="shs-layer-2"),
+                
+                html.Div([
+                    html.H3("Popularity of SHS Strands by Gender Through the Years"),
+                    html.Div([
+                        html.Div([
+                            Card([
+                                html.H4("HUMSS Strand"),
+                                html.Div([], id="seniorhigh_humms"),
+                            ], margin=False),
+                        ], className="group-1"),
+                        html.Div([
+                            html.Div([
+                                Card([
+                                    html.H4("STEM Strand"),
+                                    html.Div([], id="seniorhigh_stem"),
+                            ], margin=False),
+                            ], className="group-2-upper"),
+                            html.Div([
+                                Card([
+                                    html.H4("GAS Strand"),
+                                    html.Div([], id="seniorhigh_gas"),
+                            ], margin=False),
+                            ], className="group-2-lower"),
+                        ], className="group-2"),
+                        html.Div([
+                            html.Div([
+                                Card([
+                                    html.H4("ABM Strand"),
+                                    html.Div([], id="seniorhigh_abm"),
+                            ], margin=False),
+                            ], className="group-3-upper"),
+                            html.Div([
+                                Card([
+                                    html.H4("PBM Strand"),
+                                    html.Div([], id="seniorhigh_pbm"),
+                            ], margin=False),
+                            ], className="group-3-lower"),
+                        ], className="group-3"),
+                    
+                    ], className="shs-layer-3-content"),
+                ], className="shs-layer-3 year"),
+                
+            ], className="shs-content"),
             
         ], className='plotted-seniorhigh-report render-plot')

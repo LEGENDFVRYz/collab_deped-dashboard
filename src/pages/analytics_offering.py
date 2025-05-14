@@ -165,7 +165,89 @@ def render_offering_filter():
 def new_location_offering():
     return html.Div(
         children=[
-            ## LEFT SECTION
-            "NEWW offering"
-            
-        ], className='plotted-offering-report render-plot')
+            html.Div([
+                
+                html.Div([
+                    
+                    html.Div([
+                        html.Div([
+                            html.Div([
+                                html.Div([
+                                    Card([
+                                    
+                                    ], margin=False),
+                                ], className="offering-parts"),
+                                html.Div([
+                                    Card([
+                                    
+                                    ], margin=False),
+                                ], className="offering-parts"),
+                            ], className="offering-left-upper"),
+                            html.Div([
+                                Card([
+                                    html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                    html.Div([], id="offering_newschools_chart")
+                                ], margin=False),
+                            ], className="offering-left-lower"),
+                        ], className="offering-l1-left"),
+                        html.Div([
+                            Card([
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([],id='offering_ranked-mcoc',)
+                            ], margin=False),
+                        ], className="offering-l1-right"),
+                    ], className="offering-l1-content"),
+                ], className="offering-layer-1"),
+                
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            Card([
+                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.Div([], id="school_level_area_chart"),
+                            ], margin=False)
+                        ], className="offering-l2-left"),
+                        html.Div([
+                            
+                            html.Div([
+                                Card([
+                                    html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                    html.Div([],id='offering_enroll_dist',)   
+                                ], margin=False),
+                            ], className="offering-g1-graph"),
+                            
+                            html.Div([
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                        html.Span("Most Populated", className="offering-pop-title"),
+                                        html.Span([], id="offering-highest-grade", className="offering-grade"),
+                                        html.Div([
+                                            html.Span([], id="offering-highest-count", className="offering-count"),
+                                            html.Span("students", className="offering-student-text"),
+                                        ], className="offering-student-count most"),
+                                ], className="offering-populated"),
+                                        
+                                    ], margin=False),
+                                ], className="offering-info"),
+                                
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Span("Least Populated", className="offering-pop-title"),
+                                            html.Span([], id="offering-lowest-grade", className="offering-grade"),
+                                            html.Div([
+                                                html.Span([], id="offering-lowest-count", className="offering-count"),
+                                                html.Span("students", className="offering-student-text"),
+                                            ], className="offering-student-count least"),
+                                        ], className="offering-populated"),
+                                    ], margin=False),
+                                ], className="offering-info"),
+                            ], className="offering-info-cards"),
+                            
+                        ], className="offering-l2-right"),
+                    ], className="offering-l2-content")
+                ], className="offering-layer-2"),
+                
+            ], className="offering-content"),
+        ], className='plotted-offering-report-year render-plot')

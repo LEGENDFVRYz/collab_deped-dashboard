@@ -36,7 +36,7 @@ layout = html.Div([
     
     ## -- Standard: Page Content Header
     html.Div([
-        html.Div([html.H1('Analytical Tools')]),
+        html.Div([html.H1('Enrollment Insights')]),
 
         html.Div(
             [

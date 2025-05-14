@@ -18,6 +18,11 @@
             h3 {
                 color: $text-color-1;
             }
+
+            h4 {
+                color: $text-color-1;
+                padding: 0.5em;
+            }
             
             .shs-layer-1 {
                 display: flex;
@@ -42,6 +47,15 @@
                             flex-direction: column;
                             gap: 1em;
 
+                            &.year {
+                                flex: 1.5;
+                            }
+
+                            #seniorhigh_year_over_year {
+                                display: flex;
+                                flex: 1;
+                            }
+
                             .shs-enrollment-dist-graph {
                                 display: flex;
                                 flex: 1.25;
@@ -58,6 +72,100 @@
                             }
 
                             .shs-enrollment-donut {
+                                display: flex;
+                                flex: 1;
+
+                                .shs-donut-container {
+                                    display: flex;
+                                    flex: 1;
+                                    gap: 0.5em;
+
+                                    #seniorhigh_ratio_enrollment {
+                                        display: flex;
+                                        flex: 1.15;
+                                        overflow: hidden;
+                                    }
+    
+                                    .seniorhigh_ratio_enrollment_ind {
+                                        display: flex;
+                                        flex: 1;
+                                        flex-direction: column;
+                                        justify-content: space-around;
+
+                                        .shs-academic {
+                                            display: flex;
+                                            flex: 1;
+                                            flex-direction: column;
+                                            gap: 0.5em;
+                                        }
+
+                                        .shs-non-academic {
+                                            display: flex;
+                                            flex: 1;
+                                            flex-direction: column;
+                                            gap: 0.5em;
+                                        }
+                                    }
+                                }
+                                
+                            }
+
+                        }
+
+                        .shs-enrollment-right {
+                            display: flex;
+                            flex: 1.5;
+
+                            &.year {
+                                flex-direction: column;
+                                flex: 1;
+                                gap: 1em;
+                            }
+
+                            .shs-gender-dist-title {
+                                color: $text-color-1;
+                                padding: 0.5em;
+                            }
+
+                            .shs-right-content {
+                                display: flex;
+                                flex: 1;
+                                gap: 1em;
+
+                                #seniorhigh_gender_distri {
+                                    display: flex;
+                                    flex: 2;
+                                }
+
+                                .shs-population {
+                                    display: flex;
+                                    flex: 1;
+                                    flex-direction: column;
+
+                                    .shs-population-container {
+                                        display: flex;
+                                        flex: 1;
+                                        flex-direction: column;
+                                    }
+                                }
+                                
+                                #seniorhigh_most_least_enrolled {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .shs-enrollment-upper {
+                                display: flex;
+                                flex: 1.25;
+
+                                #seniorhigh_distri_per_track {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .shs-enrollment-lower {
                                 display: flex;
                                 flex: 1;
 
@@ -93,46 +201,6 @@
                                         }
                                     }
                                 }
-                                
-                            }
-
-                        }
-
-                        .shs-enrollment-right {
-                            display: flex;
-                            flex: 1.5;
-
-                            .shs-gender-dist-title {
-                                color: $text-color-1;
-                                padding: 0.5em;
-                            }
-
-                            .shs-right-content {
-                                display: flex;
-                                flex: 1;
-                                gap: 1em;
-
-                                #seniorhigh_gender_distri {
-                                    display: flex;
-                                    flex: 2;
-                                }
-
-                                .shs-population {
-                                    display: flex;
-                                    flex: 1;
-                                    flex-direction: column;
-
-                                    .shs-population-container {
-                                        display: flex;
-                                        flex: 1;
-                                        flex-direction: column;
-                                    }
-                                }
-                                
-                                #seniorhigh_most_least_enrolled {
-                                    display: flex;
-                                    flex: 1;
-                                }
                             }
                         }
                     }
@@ -143,6 +211,33 @@
                 display: flex;
                 min-height: 360px;
                 gap: 2em;
+
+                .shs-track-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 1em;
+
+                    .shs-track-left {
+                        display: flex;
+                        flex: 1;
+
+                        #seniorhigh_enrollment_comparison_per_strand {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+    
+                    .shs-track-right {
+                        display: none;
+                        flex: 1;
+
+                        #seniorhigh_humms {
+                            display: none;
+                            flex: 1;
+                        }
+                    }
+                }
+
 
                 .shs-track-avail {
                     display: flex;
@@ -182,7 +277,84 @@
                 display: flex;
                 flex: 1;
                 min-height: 420px;
-                gap: 2em;
+                gap: 1em;
+
+                &.year {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
+                    min-height: 500px;
+                    
+                    .shs-layer-3-content {
+                        display: flex;
+                        flex: 1;
+                        gap: 1em;
+
+                        .group-1 {
+                            display: flex;
+                            flex: 1;
+
+                            #seniorhigh_humms {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+
+                        .group-2 {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+                            flex-direction: column;
+
+                            .group-2-upper {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_stem {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .group-2-lower {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_gas {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+                        }
+
+                        .group-3 {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+                            flex-direction: column;
+
+                            .group-3-upper {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_abm {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .group-3-lower {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_pbm {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .shs-region-sector {
                     display: flex;

@@ -303,4 +303,167 @@
         }
         // PLOTTING THE CONTENTS
     }
+
+    .plotted-offering-report-year {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+
+        .offering-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 2em;
+
+            h4 {
+                color: $text-color-1;
+                padding: 0.5em;
+            }
+
+            .offering-layer-1 {
+                display: flex;
+                flex: 1;
+                min-height: 450px;
+                flex-direction: column;
+                gap: 2em;
+                
+                .offering-l1-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 2em;
+
+                    .offering-l1-left {
+                        display: flex;
+                        flex: 1.25;
+                        gap: 1em;
+                        flex-direction: column;
+
+                        .offering-left-upper {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+
+                            .offering-parts {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+
+                        .offering-left-lower {
+                            display: flex;
+                            flex: 2.5; 
+
+                            #offering_newschools_chart {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+                    }
+
+                    .offering-l1-right {
+                        display: flex;
+                        flex: 1;
+
+                        #offering_ranked-mcoc {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+                }
+            }
+
+            .offering-layer-2 {
+                display: flex;
+                flex: 1;
+                min-height: 360px;
+                gap: 2em;
+
+                .offering-l2-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 2em;
+
+                    .offering-l2-left {
+                        display: flex;
+                        flex: 1.1;
+
+                        #school_level_area_chart {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+
+                    .offering-l2-right {
+                        display: flex;
+                        flex: 1;
+                        gap: 1em;
+
+                        .offering-g1-graph {
+                            display: flex;
+                            flex: 2.75;
+
+                            #offering_enroll_dist {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+
+                        .offering-info-cards {
+                            display: flex;
+                            flex-direction: column;
+                            flex: 1;
+                            gap: 0.5em;
+        
+                            .offering-info {
+                                display: flex;
+                                flex: 1;
+
+                                .offering-populated {
+                                    display: flex;
+                                    flex: 1;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    color: $text-color-1;
+
+                                    .offering-pop-title {
+                                        text-align: center;
+                                        font-size: 0.9em;
+                                    }
+
+                                    .offering-grade {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1.25em;
+                                    }
+
+                                    .offering-student-count {
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 0.25em;
+                                        border-radius: 0.5em;
+                                        color: $white;
+                                        
+                                        &.most { background-color: $secondary-color-2; }
+                                        &.least { background-color: $primary-color-2; }
+
+                                        .offering-count {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1em;
+                                        }
+
+                                        .offering-student-text {
+                                            font-family: "Inter Medium Italic";
+                                            text-align: center;
+                                            font-size: 0.7em;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
