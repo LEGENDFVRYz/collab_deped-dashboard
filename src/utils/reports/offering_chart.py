@@ -80,6 +80,18 @@ from src.utils.extras_utils import smart_truncate_number
 
 @callback(
     Output('offering_number-of-schools', 'children'),
+    Output('purely-es-count', 'children'),
+    Output('purely-es-percentage', 'children'),
+    Output('purely-jhs-count', 'children'),
+    Output('purely-jhs-percentage', 'children'),
+    Output('purely-shs-count', 'children'),
+    Output('purely-shs-percentage', 'children'),
+    Output('es-and-jhs-count', 'children'),
+    Output('es-and-jhs-percentage', 'children'),
+    Output('jhs-with-shs-count', 'children'),
+    Output('jhs-with-shs-percentage', 'children'),
+    Output('all-offering-count', 'children'),
+    Output('all-offering-percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -94,8 +106,30 @@ def update_graph(trigger, data):
     # Drop duplicate schools
     cleaned_FILTERED_DF = FILTERED_DATA.drop_duplicates(subset='beis_id')
     
-    # total_school_count = len(cleaned_FILTERED_DF)
-    # shs_percentage = f"{(shs_total / total_school_count * 100):.1f}%" if total_school_count else "0%"
+    # Total unique schools
+    total_school_count = len(cleaned_FILTERED_DF)
+
+    # Count by school type (mod_coc)
+    level_counts = cleaned_FILTERED_DF['mod_coc'].value_counts()
+
+    # Extract counts safely
+    purely_es_count = level_counts.get('Purely ES', 0)
+    purely_jhs_count = level_counts.get('Purely JHS', 0)
+    purely_shs_count = level_counts.get('Purely SHS', 0)
+    es_and_jhs_count = level_counts.get('ES and JHS', 0)
+    jhs_with_shs_count = level_counts.get('JHS with SHS', 0)
+    all_offering_count = level_counts.get('All Offering', 0)
+
+    # Percentages
+    def percent(count):
+        return f"{(count / total_school_count * 100):.1f}%" if total_school_count else "0%"
+
+    purely_es_percentage = percent(purely_es_count)
+    purely_jhs_percentage = percent(purely_jhs_count)
+    purely_shs_percentage = percent(purely_shs_count)
+    es_and_jhs_percentage = percent(es_and_jhs_count)
+    jhs_with_shs_percentage = percent(jhs_with_shs_count)
+    all_offering_percentage = percent(all_offering_count)
 
     # Order inner donut
     desired_order = [
@@ -156,6 +190,23 @@ def update_graph(trigger, data):
     )
     
     number_of_schools_mcoc_chart
+    
+    return (
+        dcc.Graph(
+        figure=number_of_schools_mcoc_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"}),
+        f"{purely_es_count} schools",
+        purely_es_percentage,
+        f"{purely_jhs_count} schools",
+        purely_jhs_percentage,
+        f"{purely_shs_count} schools",
+        purely_shs_percentage,
+        f"{es_and_jhs_count} schools",
+        es_and_jhs_percentage,
+        f"{jhs_with_shs_count} schools",
+        jhs_with_shs_percentage,
+        f"{all_offering_count} schools",
+        all_offering_percentage,
+    )
 
     # number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
     # number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)

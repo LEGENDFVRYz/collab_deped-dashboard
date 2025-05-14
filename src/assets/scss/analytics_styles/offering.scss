@@ -78,6 +78,120 @@
                                     flex-direction: column;
 
                                 }
+                                .offering-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(2, 1fr); // 2 columns
+                                    gap: 1rem;
+                                }
+
+                                .offering-card {
+                                    border-radius: 1rem;
+                                    padding: 0.75rem;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    color: white;
+                                    font-weight: bold;
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                }
+
+                                .offering-label {
+                                    font-size: 0.85rem;
+                                    margin-bottom: 0.45rem;
+                                }
+
+                                .offering-percentage {
+                                    position: relative;
+                                    padding-left: 1rem; 
+                                    font-size: 1.75rem;
+                                    font-weight: bold;
+                                    border-radius: 20px; 
+                                }
+
+                                .offering-percentage::before {
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    height: 30px;
+                                    width: 7px;
+                                    background-color: rgba(255, 255, 255); 
+                                    border-radius: 20px; 
+                                }
+
+
+                                .offering-count {
+                                    font-size: 0.70rem;
+                                    text-align: right;
+                                    align-self: flex-start;
+                                    font-weight: normal;
+                                    color: rgba(255, 255, 255);
+                                }
+
+                                .light-blue .offering-count {
+                                    color: #003972; 
+                                }
+
+                                .lightest-blue .offering-count {
+                                    color: #003972;
+                                }
+
+                                .white .offering-count {
+                                    color: #003972; 
+                                }
+
+                                .light-blue .offering-percentage {
+                                    color: #003972; 
+                                }
+
+                                .lightest-blue .offering-percentage {
+                                    color: #003972;
+                                }
+
+                                .light-blue .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .lightest-blue .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .white .offering-percentage::before {
+                                    background-color: #003972; 
+                                }
+
+                                .white .offering-percentage {
+                                    color: #003972; 
+                                }
+
+                                .dark-blue {
+                                    background-color: #002242;
+                                }
+
+                                .medium-blue {
+                                    background-color: #004386;
+                                }
+
+                                .medium-light-blue {
+                                    background-color: #0162C2;
+                                }
+
+                                .light-blue {
+                                    background-color: #5EAFFF;
+                                    color: #003972;
+                                }
+
+                                .lightest-blue {
+                                    background-color: #ADDBFF;
+                                    color: #003972;
+                                }
+
+                                .white {
+                                    background-color: #E2F2FF;
+                                    color: #003972;
+                                }
+
+
+
 
                             }
                         }
