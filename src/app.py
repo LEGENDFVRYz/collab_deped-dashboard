@@ -250,7 +250,7 @@ def toggle_modal(n1, is_open):
 
 
 @app.callback(
-    Output('url', 'pathname'),  # ✅ THIS TRIGGERS A PAGE CHANGE
+    Output("url", "href", True),      # ✅ THIS TRIGGERS A PAGE CHANGE
     Output("user-data", "data"),
     Input("login-button", "n_clicks"),
     Input("login-password", "n_submit"),
