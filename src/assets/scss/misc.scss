@@ -51,6 +51,7 @@
             flex: 1;
             display: flex;
             flex-direction: row;
+            gap: 1em;
 
             .drop-section{
                 flex: 2;
@@ -128,6 +129,8 @@
     
             .report-section{
                 flex: 3;
+                display: flex;
+                gap: 1em;
             }
         }
     }

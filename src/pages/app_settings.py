@@ -3,9 +3,11 @@ import base64
 import os, sys
 from dash import dcc, html
 from dash import Input, Output, State, callback
+from pipelines.log_store import log_messages
 
 # --  Shared Components
 from src.components.card import Card
+from pipelines.pipeline import mine_data
 
 
 
@@ -47,7 +49,33 @@ layout = html.Div([
                 , padding='1.5em')], className='drop-section'),
                 
                 ## REPORT UPLOADING AND CONTROLS
-                html.Div([], className='report-section'),
+                html.Div(
+                    [
+                        # html.Div([
+                            dcc.Interval(id="log-interval", interval=1000, n_intervals=0, disabled=False),
+                            html.Pre(
+                                id="log-output",
+                                style={
+                                    "whiteSpace": "pre-wrap",
+                                    "border": "1px solid #ccc",
+                                    "padding": "20px",
+                                    "backgroundColor": "#f9f9f9",
+                                    "color": "#333",  # dark gray text
+                                    "fontFamily": "monospace",
+                                    "fontSize": "14px",
+                                    "borderRadius": "5px",
+                                    "flex": "1",
+                                    "overflowY": "auto",
+                                    "maxHeight": "700px",  # corrected syntax
+                                    "minHeight": "150px",
+                                    "display": "flex",
+                                    "flexDirection": "column",
+                                }
+                            )
+                        # ])
+                        
+                    ]
+                , className='report-section'),
             
             ], className='content-wrap')
         ]
@@ -103,7 +131,19 @@ def upload_file(n_clicks, contents, filenames):
             f.write(base64.b64decode(data))
         saved_files.append(filename)
 
+    mine_data()
+
     return (
         html.Ul([html.Li(f"✅ {name} uploaded to /src/data") for name in saved_files]),
         "✅ File(s) uploaded!"
     )
+    
+    
+
+
+@callback(
+    Output("log-output", "children"),
+    Input("log-interval", "n_intervals")
+)
+def update_log(n):
+    return "\n".join(log_messages)
