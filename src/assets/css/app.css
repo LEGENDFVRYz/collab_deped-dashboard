@@ -105,6 +105,7 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn.active .nav-btn .text {
   color: #FFFFFF;
+  font-family: "Inter Bold";
 }
 .app-container .navigation .menu-section .item-ctn.active .tabs-menu {
   display: flex;

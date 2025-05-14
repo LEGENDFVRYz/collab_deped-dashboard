@@ -14,6 +14,12 @@
 }
 #plot-content.rendered .plotted-location-report .plot-sec-wrap .plot-content {
   flex: 1;
+  display: flex;
+}
+#plot-content.rendered .plotted-location-report .plot-sec-wrap .plot-content .plttt {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 #plot-content.rendered .plotted-location-report .revlov-top {
   display: flex;

@@ -118,7 +118,6 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # differences in the number of schools offering each track
-                                    html.H4("Number of Schools Offering Each Track by Sector", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",
@@ -135,7 +134,6 @@ def render_seniorhigh_filter():
                             html.Div([
                                 Card([
                                     # which SHS tracks are least offered but in high demand
-                                    html.H4("Relationship between Student Demand and Track Supply", style={"textAlign": "center", "color": "#3C6382"}),
                                     # dcc.Loading(
                                     #     id="loading-graph",
                                     #     type="default",

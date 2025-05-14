@@ -86,11 +86,7 @@ from src.utils.extras_utils import smart_truncate_number
 )
 
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
-    
-    # Exclude "__NaN__" values in 'track'
-    FILTERED_DATA['track'] = FILTERED_DATA['track'].astype(str).str.strip()
-    FILTERED_DATA = FILTERED_DATA[(FILTERED_DATA['track'].str.upper() != '__NAN__') & (FILTERED_DATA['track'].notna())]
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
     # Extract and group data
     grouped_by_tracks = FILTERED_DATA.groupby(["track"], as_index=False)["counts"].sum()
@@ -141,7 +137,6 @@ def update_graph(trigger, data):
     
     return dcc.Graph(figure=seniorhigh_distri_per_track, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
-
 # #################################################################################
 
 
@@ -150,7 +145,6 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Ratio enrollment in Academic vs. non-Academic tracks
 # #################################################################################
-
 @callback(
     Output('seniorhigh_ratio_enrollment', 'children'),
     Output('acad-count', 'children'),
@@ -233,7 +227,6 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Most and least enrolled  (strand)
 # #################################################################################
-
 @callback(
     Output('seniorhigh_most_least_enrolled', 'children'),
     Input('chart-trigger', 'data'),
@@ -247,13 +240,10 @@ def update_graph(trigger, data):
     cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
     cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
-    # Group and sort by counts
-    track_counts = FILTERED_DATA.groupby('strand')['counts'].sum().reset_index()
-    sorted_tracks = track_counts.sort_values('counts', ascending=True)
-
-    # Safely get most and least populated strands
-    most_populated = sorted_tracks.sort_values('counts', ascending=False).iloc[0]
-    least_populated = sorted_tracks.iloc[0]
+    # Group and find the most and least populated strands
+    track_counts = cleaned_df.groupby('strand')['counts'].sum().reset_index()
+    most_populated = track_counts.sort_values('counts', ascending=False).iloc[0]
+    least_populated = track_counts.sort_values('counts', ascending=True).iloc[0]
 
     # Data for tables
     most_populated_table = go.Table(
@@ -309,7 +299,6 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Gender Distribution
 # #################################################################################
-
 @callback(
     Output('seniorhigh_gender_distri', 'children'),
     Output('shs-highest-strand', 'children'),
@@ -329,7 +318,7 @@ def update_graph(trigger, data):
     cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
 
     # Group the cleaned data by 'strand' and 'gender'
-    track_gender = FILTERED_DATA.groupby(['strand', 'gender'])['counts'].sum().reset_index()
+    track_gender = cleaned_df.groupby(['strand', 'gender'])['counts'].sum().reset_index()
 
     # Calculate total counts per strand to determine sort order
     strand_order = (
@@ -358,9 +347,6 @@ def update_graph(trigger, data):
         labels={'strand': 'Strand', 'counts': 'Number of Students', 'gender': 'Gender'},
         color_discrete_sequence=['#FF5B72', '#5DB7FF']
     )
-    
-    seniorhigh_gender_distri.update_traces(width=0.2)
-
 
     # Update layout to maximize chart space and reduce label sizes
     seniorhigh_gender_distri.update_layout(
@@ -403,6 +389,7 @@ def update_graph(trigger, data):
         bargroupgap=0.05,
         uirevision='true',
     )
+    
     seniorhigh_gender_distri
     
     return (
@@ -413,17 +400,13 @@ def update_graph(trigger, data):
         f"{lowest_count:,}"
     )
 
-
-
-
-#################################################################################
+# #################################################################################
 
 
 
 # #################################################################################
 # ##  --- Differences in the number of schools offering each track
 # #################################################################################
-
 @callback(
     Output('seniorhigh_school_offering_per_track_by_sector', 'children'),
     Input('chart-trigger', 'data'),
@@ -433,10 +416,6 @@ def update_graph(trigger, data):
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    
-    # Filter out "__NaN__" and actual NaN values from 'track'
-    FILTERED_DATA['track'] = FILTERED_DATA['track'].astype(str).str.strip()
-    FILTERED_DATA = FILTERED_DATA[(FILTERED_DATA['track'].str.upper() != '__NAN__') & (FILTERED_DATA['track'].notna())]
     
     # Group data by track and sector, counting unique schools
     cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
@@ -452,7 +431,6 @@ def update_graph(trigger, data):
         .index.tolist()
     )
 
-
     # Create horizontal stacked bar chart with sorted track order
     seniorhigh_school_offering_per_track_by_sector = px.bar(
         school_count,
@@ -464,9 +442,6 @@ def update_graph(trigger, data):
         color_discrete_sequence=['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8'],
         category_orders={'track': track_order},
     )
-    
-    seniorhigh_school_offering_per_track_by_sector.update_traces(width=0.2)
-
 
     # Update layout
     seniorhigh_school_offering_per_track_by_sector.update_layout(
@@ -510,7 +485,6 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- Which SHS tracks are least offered but in high demand
 # #################################################################################
-
 @callback(
     Output('seniorhigh_least_offered_high_demand', 'children'),
     Input('chart-trigger', 'data'),
@@ -577,11 +551,10 @@ def update_graph(trigger, data):
             yanchor='middle',
             y=0.5,
             xanchor='left',
-            x=1.02  
+            x=1.02  # Slightly closer so it doesn't eat into the space
         )
     )
-
-    # Display the chart
+    
     seniorhigh_least_offered_high_demand
     
     return dcc.Graph(figure=seniorhigh_least_offered_high_demand, config={"responsive": True}, style={"width": "100%", "height": "100%"})
@@ -806,4 +779,3 @@ def update_graph(trigger, data):
     return dcc.Graph(figure=shs_offer_range, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
-
