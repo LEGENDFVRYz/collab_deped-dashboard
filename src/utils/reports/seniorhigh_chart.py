@@ -115,10 +115,9 @@ def update_graph(trigger, data, mode):
     seniorhigh_distri_per_track.update_layout(
         autosize=True,
         margin=dict(t=0, b=0, l=0, r=0),
-        plot_bgcolor='#ECF8FF',
         showlegend=False,
         xaxis=dict(
-            tickfont=dict(size=8, color="#3C6382"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             title=None,
             showgrid=False,
         ),
@@ -126,7 +125,7 @@ def update_graph(trigger, data, mode):
             type='log',
             tickvals=[10000, 100000, 1000000, 2000000],
             ticktext=["10K", "100K", "1M", "2M"],
-            tickfont=dict(size=8, color="#3C6382"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             title=None,
             showgrid=True,
             gridcolor='#D2EBFF',
@@ -138,7 +137,7 @@ def update_graph(trigger, data, mode):
     seniorhigh_distri_per_track.update_traces(
         textposition='outside',
         insidetextanchor='middle',
-        textfont=dict(size=8, color="#04508c"),
+        textfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         hovertemplate='Track: %{x}<br>Count: %{y}<extra></extra>',
     )
     
@@ -222,9 +221,9 @@ def update_graph(trigger, data, mode):
         showlegend=False,
         annotations=[
             dict(
-                text="Academic vs.<br>Non-Academic",
-                x=0.5, y=0.68,
-                font=dict(size=15, color='#3C6382'),
+                text="<b>Academic vs.<br>Non-Academic<b>",
+                x=0.5, y=0.6,
+                font=dict(size=16, color="#3C6382", family="Inter Bold, Inter, sans-serif"),
                 showarrow=False,
                 align='center',
                 xanchor='center',
@@ -371,15 +370,15 @@ def update_graph(trigger, data):
         title=None,
         xaxis= dict(
             title=None,
-            tickfont=dict(color='#667889', size=10),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(color='#667889', size=10),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         ),
         legend=dict(
             title='Gender',
-            font=dict(size=10),
+            font=dict(size=10, color="#667889", family="Inter, sans-serif"),
             orientation='h',      # horizontal layout
             yanchor='bottom',
             y=1.02,               # slightly above the plot
@@ -465,13 +464,13 @@ def update_graph(trigger, data):
         title=None,
         xaxis=dict(
             title=None,
-            tickfont=dict(color="#667889"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             tickformat="~s",
             tickangle=0
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(color="#667889")
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif")
         ),
         legend=dict(
             orientation='h',
@@ -481,9 +480,9 @@ def update_graph(trigger, data):
             x=0.5,
             title=dict(
                 text="Sector",
-                font=dict(color="#667889")
+                font=dict(size=10, color="#667889", family="Inter, sans-serif")
             ),
-            font=dict(color="#667889")
+            font=dict(size=10, color="#667889", family="Inter, sans-serif")
         ),
         bargap=0.3,
         margin=dict(l=0, r=0, t=0, b=0)
@@ -508,70 +507,65 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 
+
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    
-    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
-    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
-    
-    # Group by track to get supply and demand
-    grouped = cleaned_df.groupby('track').agg(
-        offerings=('beis_id', 'count'),    
-        total_demand=('counts', 'sum')    
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+   
+    # Clean the 'track' column
+    FILTERED_DATA['track'] = FILTERED_DATA['track'].astype(str).str.strip()
+    FILTERED_DATA = FILTERED_DATA[
+        (FILTERED_DATA['track'].str.upper() != '__NAN__') & (FILTERED_DATA['track'].notna())
+    ]
+
+
+    # Group by track to get offerings (supply) and total student demand
+    grouped = FILTERED_DATA.groupby('track').agg(
+        offerings=('beis_id', 'count'),
+        total_demand=('counts', 'sum')
     ).reset_index()
 
-    # Define custom color palette
-    custom_colors = ['#00CCFF', '#1389F0', '#0C6DC1', '#074889']
-
-    # Create the scatter plot
+    # Create the bubble chart (scatter with size)
     seniorhigh_least_offered_high_demand = px.scatter(
         grouped,
         x='offerings',
-        y='total_demand',
-        color='track',
+        y='track',
+        size='total_demand',
+        size_max=50,
         labels={
             'offerings': 'Number of Offerings (Supply)',
             'total_demand': 'Student Demand',
-            'track': 'SHS Track',
-        },
-        color_discrete_sequence=custom_colors
+            'track': 'SHS Track'
+        }
     )
 
-    # Update layout for full responsiveness and clean space usage
+
+    # Set all markers to the same color manually
+    seniorhigh_least_offered_high_demand.update_traces(marker=dict(color='#0264BE'))
+
+
+    # Update layout to remove legend and apply custom styles
     seniorhigh_least_offered_high_demand.update_layout(
         autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),
-        # title={
-        #     'text': 'Relationship between<br>Student Demand and Track Supply',
-        #     'x': 0.5,
-        #     'xanchor': 'center',
-        #     'font': {'color': '#3C6382', 'size': 16}
-        # },
-        title=None,
+        height=None, 
+        width=None,
         xaxis=dict(
-            # title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
             title=None,
-            tickfont=dict(color='#667889'),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             automargin=True
         ),
-        yaxis=dict(
-            # title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
-            title=None,
-            tickfont=dict(color='#667889'),
+        yaxis=dict( 
+            title=None,           
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
+            categoryorder='total ascending',
             automargin=True
         ),
-        legend=dict(
-            title=dict(text='SHS Track', font=dict(color='#667889')),
-            font=dict(color='#667889'),
-            orientation='v',
-            yanchor='middle',
-            y=0.5,
-            xanchor='left',
-            x=1.02  # Slightly closer so it doesn't eat into the space
-        )
+        showlegend=False,
+        margin=dict(l=0, r=0, t=0, b=0)
     )
-    
+   
+    # Displays the chart.
     seniorhigh_least_offered_high_demand
+
     
     return dcc.Graph(figure=seniorhigh_least_offered_high_demand, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 

@@ -97,13 +97,40 @@
                                             flex: 1;
                                             flex-direction: column;
                                             gap: 0.5em;
-                                        }
+                                        }                                
 
                                         .shs-non-academic {
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
                                             gap: 0.5em;
+                                        }
+
+                                        .shs-acad-title {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-count-text {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1.25em;
+                                        }
+
+                                        .shs-percentage-text {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-container {
+                                            display: flex;
+                                            flex-direction: column;
+                                            padding: 0.25em;
+                                            border-radius: 0.5em;
+                                            color: $white;
+
+                                            &.upper { background-color: $primary-color-2; }
+                                            &.lower { background-color: $secondary-color-2; }
                                         }
                                     }
                                 }
@@ -147,6 +174,42 @@
                                         flex: 1;
                                         flex-direction: column;
                                     }
+
+                                    .mps-pop-title {
+                                        text-align: center;
+                                        font-size: 0.9em;
+                                    }
+
+                                    .mps-strand {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1.25em;
+                                    }
+
+                                    .mps-student-count {
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 0.25em;
+                                        border-radius: 0.5em;
+                                        color: $white;
+                                    
+                                        &.most { background-color: $secondary-color-2; }
+                                        &.least { background-color: $primary-color-2; }
+
+                                    .mps-count {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1em;
+                                    }
+
+                                    .mps-student-text {
+                                        font-family: "Inter Medium Italic";
+                                        text-align: center;
+                                        font-size: 0.7em;
+                                    }
+                                    }
+
+
                                 }
                                 
                                 #seniorhigh_most_least_enrolled {
