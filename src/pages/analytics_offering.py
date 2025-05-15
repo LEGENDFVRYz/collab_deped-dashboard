@@ -224,7 +224,7 @@ def render_offering_filter():
                                 
                                 html.Div([
                                     Card([
-                                        html.H4(["Enrollment by Grade Level and Offering"], className="offering-title"),
+                                        html.H4(["Grade-level Distribution"], className="offering-title"),
                                         html.Div([],id='offering_enroll_dist',)   
                                     ], margin=False),
                                 ], className="offering-g1-graph"),

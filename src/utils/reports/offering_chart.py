@@ -488,6 +488,7 @@ def update_graph(trigger, data, mode):
             FILTERED_DATA.groupby(['year', 'school-level', 'grade'], as_index=False)['counts'].sum()
             .groupby(['school-level', 'grade'], as_index=False)['counts'].mean()
         )
+        query = query[query['counts'] != 0]
         query['counts'] = query['counts'].round(0).astype(int)
 
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
@@ -896,11 +897,13 @@ def update_graph(trigger, data):
 
     # Layout styling
     fig_offering.update_layout(
+        autosize=True,
         title=None,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         xaxis_title='Number of Offerings',
         yaxis_title='Avg Enrollment',
+        margin=dict(t=0, b=0, l=0, r=0),
     )
 
     return dcc.Graph(figure=fig_offering, config={"responsive": True}, style={"width": "100%", "height": "100%"})
