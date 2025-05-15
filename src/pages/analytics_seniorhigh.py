@@ -83,15 +83,18 @@ def render_seniorhigh_filter():
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                    html.H4(["Gender Distribution Across Academic Strands"], className="shs-gender-dist-title"),
                                     html.Div([
-                                        html.Div([], id='seniorhigh_gender_distri',),
+                                        html.Div([
+                                            html.H4(["Gender Distribution Across Academic Strands"], className="shs-gender-dist-title"),
+                                            html.Div([], id='seniorhigh_gender_distri',),
+                                        ], className="shs-title-graph"),
                                         # html.Div([],id='seniorhigh_most_least_enrolled',)
                                         
                                         html.Div([
                                             html.Div([
                                                 html.Span("Most Populated", className="mps-pop-title"),
-                                                html.Span([], id="shs-highest-strand", className="mps-strand"),
+                                                html.Div([html.Hr()] , style={'padding': '3px', 'color': '#E9E8E8'}),
+                                                html.Span([], id="shs-highest-strand", className="mps-strand high"),
                                                 html.Div([
                                                     html.Span([], id="shs-highest-count", className="mps-count"),
                                                     html.Span("students", className="mps-student-text"),
@@ -99,7 +102,8 @@ def render_seniorhigh_filter():
                                             ], className="shs-population-container"),
                                             html.Div([
                                                 html.Span("Least Populated", className="mps-pop-title"),
-                                                html.Span([], id="shs-lowest-strand", className="mps-strand"),
+                                                html.Div([html.Hr()] , style={'padding': '3px', 'color': '#E9E8E8'}),
+                                                html.Span([], id="shs-lowest-strand", className="mps-strand low"),
                                                 html.Div([
                                                     html.Span([], id="shs-lowest-count", className="mps-count"),
                                                     html.Span("students", className="mps-student-text"),

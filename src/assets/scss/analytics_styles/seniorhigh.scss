@@ -191,42 +191,66 @@
                             }
 
 
-
-                            .shs-gender-dist-title {
-                                color: $text-color-1;
-                                padding: 0.5em;
-                            }
-
                             .shs-right-content {
                                 display: flex;
                                 flex: 1;
                                 gap: 1em;
 
-                                #seniorhigh_gender_distri {
+                                .shs-title-graph {
                                     display: flex;
-                                    flex: 2;
+                                    flex: 2.5;
+                                    flex-direction: column;
+
+                                    .shs-gender-dist-title {
+                                        color: $text-color-1;
+                                        padding: 0.5em;
+                                    }
+    
+                                    #seniorhigh_gender_distri {
+                                        display: flex;
+                                        flex: 2;
+                                    }
                                 }
 
                                 .shs-population {
                                     display: flex;
                                     flex: 1;
                                     flex-direction: column;
+                                    gap: 1em;
 
                                     .shs-population-container {
                                         display: flex;
                                         flex: 1;
                                         flex-direction: column;
+                                        justify-content: space-around;
+                                        padding: 1em;
+                                        background-color: #F5F5F5;
+                                        border: $text-color-2;
+                                        border-radius: 0.5em;
                                     }
 
                                     .mps-pop-title {
+                                        font-family: "Inter Bold";
                                         text-align: center;
-                                        font-size: 0.9em;
+                                        font-size: 0.8em;
+                                        color: $text-color-1;
                                     }
 
                                     .mps-strand {
                                         font-family: "Inter Bold";
                                         text-align: center;
-                                        font-size: 1.25em;
+                                        font-size: 1.65em;
+                                        color: $white;
+                                        border-radius: 0.5em;
+                                        padding: 0.25em;
+
+                                        &.high {
+                                            background-color: $secondary-color-2;
+                                        }
+
+                                        &.low {
+                                            background-color: $text-color-2;
+                                        }
                                     }
 
                                     .mps-student-count {
@@ -234,23 +258,22 @@
                                         flex-direction: column;
                                         padding: 0.25em;
                                         border-radius: 0.5em;
-                                        color: $white;
                                     
-                                        &.most { background-color: $secondary-color-2; }
-                                        &.least { background-color: $primary-color-2; }
+                                        &.most { color: $secondary-color-2; }
+                                        &.least { color: $text-color-2; }
 
                                     .mps-count {
                                         font-family: "Inter Bold";
                                         text-align: center;
-                                        font-size: 1em;
+                                        font-size: 1.5em;
                                     }
 
                                     .mps-student-text {
                                         font-family: "Inter Medium Italic";
                                         text-align: center;
-                                        font-size: 0.7em;
+                                        font-size: 0.9em;
                                     }
-                                    }
+                                }
 
 
                                 }

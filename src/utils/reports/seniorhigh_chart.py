@@ -187,7 +187,7 @@ def update_graph(trigger, data, mode):
     total = acad_count + non_acad_count
 
     # Labels and values for visual half-donut effect
-    labels = ['Academic', 'Non-Academic', 'Total']
+    labels = ['Academic', 'Non-academic', 'Total']
     values = [acad_count, non_acad_count, total]
     colors = ['#037DEE', '#E11C38', '#FFFFFF'] 
 
@@ -225,7 +225,7 @@ def update_graph(trigger, data, mode):
         showlegend=False,
         annotations=[
             dict(
-                text="<b>Academic vs.<br>Non-Academic<b>",
+                text="<b>Academic vs.<br>Non-academic<b>",
                 x=0.5, y=0.64,
                 font=dict(size=16, color="#3C6382", family="Inter Bold, Inter, sans-serif"),
                 showarrow=False,
