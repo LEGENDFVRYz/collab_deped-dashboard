@@ -24,6 +24,70 @@ def render_location_filter():
                         html.Div([
                             # html.H3(["Enrollees per Location"], className='label'),
                             html.Div([
+                                ## PLOT B
+                                html.Div([
+                                    
+                                    html.Div([
+                                        html.Div([
+                                        Card([
+                                            html.Div([
+                                                html.Div([
+                                                    html.Span("", className="hi-glevel-marker hi-enrollees"),
+                                                    html.Img(src="/assets/images/icons_navigation/person-white.svg"),
+                                                    html.H1([], id="truncated-average-enrollees", className="hi-truncated_total_enrollees"),
+                                                ], className="hi-glevel-count"),
+                                                html.Span([], id="raw-average-enrollees", className="hi-raw_total_enrollees"),
+                                                html.Div([
+                                                    html.Span("Average Enrollees", className="hi-label_total_enrollees"),
+                                                    
+                                                ], className="hi-total_label")
+                                            ], className="hi-total_enrollees"),    
+                                        ], margin=False, bg='#0072e8', gradient=True)
+                                    ], className="plot-b-box2"),
+                                        
+                                        html.Div([
+                                            Card([
+                                                html.Div([
+                                                    html.Div([
+                                                        html.Span("", className="glevel-marker enrollees"),
+                                                        html.Img(src="/assets/images/icons_navigation/person-blue.svg"),
+                                                        html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"),
+                                                    ], className="glevel-count"),
+                                                    html.Span([], id="raw-total-enrollees", className="raw_total_enrollees"),
+                                                    html.Div([
+                                                        html.Span("Total Enrollees", className="label_total_enrollees"),
+                                                        
+                                                    ], className="total_label")
+                                                    
+                                                ], className="total_enrollees"),    
+                                            ], margin=False, bg='##ECF8FF')
+                                        ], className="plot-b-box2"),
+
+                                        html.Div([
+                                            Card([
+                                                html.Div([
+                                                    html.Div([
+                                                        html.Span("", className="glevel-marker schools"),
+                                                        html.Img(src="/assets/images/icons_navigation/school-blue.svg"),
+                                                        html.H1([], id="truncated-total-schools", className="truncated_total_schools"),
+                                                    ], className="glevel-count"),
+                                                    html.Span([], id="raw-total-schools", className="raw_total_schools"),
+                                                    html.Div([
+                                                        html.Span("Total Schools", className="label_total_schools"),
+                                                        
+                                                    ], className="total_label")
+                                                ], className="total_enrollees"),
+                                            ], margin=False, bg='##ECF8FF')
+                                        ], className="plot-b-box2"),
+                                    ], className="ns-sub-detail"),
+                                    
+                                    html.Div([
+                                        
+                                        
+                                        
+                                    ], className="lfury"),
+                                
+                                ], className='plot-b-section'),
                                 
                                 ## PLOT A
                                 html.Div([
@@ -71,71 +135,7 @@ def render_location_filter():
                                     
                                 ], className='plot-a-section'),
                                 
-                                ## PLOT B
-                                html.Div([
-                                    
-                                    html.Div([
-                                        html.Div([
-                                            Card([
-                                                html.Div([
-                                                    html.Div([
-                                                        html.Span("", className="glevel-marker enrollees"),
-                                                        # html.Img(src="/assets/images/icons_navigation/person-blue.svg", className="total-enrollees-icon"),
-                                                        html.H1([], id="truncated-average-enrollees", className="truncated_total_enrollees"),
-                                                    ], className="glevel-count"),
-                                                    html.Span([], id="raw-average-enrollees", className="raw_total_enrollees"),
-                                                    html.Div([
-                                                        html.Span("Median Enrollees", className="label_total_enrollees"),
-                                                        html.Img(src="/assets/images/icons_navigation/person-white.svg"),
-                                                    ], className="total_label")
-                                                    
-                                                ], className="total_enrollees"),    
-                                            ], margin=False, bg='#0072e8')
-                                        ], className="plot-b-box2"),
-                                        
-                                        html.Div([
-                                            Card([
-                                                html.Div([
-                                                    html.Div([
-                                                        html.Span("", className="glevel-marker enrollees"),
-                                                        # html.Img(src="/assets/images/icons_navigation/person-blue.svg", className="total-enrollees-icon"),
-                                                        html.H1([], id="truncated-total-enrollees", className="truncated_total_enrollees"),
-                                                    ], className="glevel-count"),
-                                                    html.Span([], id="raw-total-enrollees", className="raw_total_enrollees"),
-                                                    html.Div([
-                                                        html.Span("Total Enrollees", className="label_total_enrollees"),
-                                                        html.Img(src="/assets/images/icons_navigation/person-white.svg"),
-                                                    ], className="total_label")
-                                                    
-                                                ], className="total_enrollees"),    
-                                            ], margin=False, bg='#74B8F6')
-                                        ], className="plot-b-box2"),
-
-                                        html.Div([
-                                            Card([
-                                                html.Div([
-                                                    html.Div([
-                                                        html.Span("", className="glevel-marker schools"),
-                                                        # html.Img(src="/assets/images/icons_navigation/school-blue.svg", className="total-schools-icon"),
-                                                        html.H1([], id="truncated-total-schools", className="truncated_total_schools"),
-                                                    ], className="glevel-count"),
-                                                    html.Span([], id="raw-total-schools", className="raw_total_schools"),
-                                                    html.Div([
-                                                        html.Span("Total Schools", className="label_total_schools"),
-                                                        html.Img(src="/assets/images/icons_navigation/school-white.svg"),
-                                                    ], className="total_label")
-                                                ], className="total_enrollees"),
-                                            ], margin=False, bg='#74B8F6')
-                                        ], className="plot-b-box2"),
-                                    ], className="ns-sub-detail"),
-                                    
-                                    html.Div([
-                                        
-                                        
-                                        
-                                    ], className="lfury"),
                                 
-                                ], className='plot-b-section'),
                             ], className='track-box plot-content')
                         ], className='plot-top-section plot-sec-wrap'),
                         
@@ -171,7 +171,6 @@ def render_location_filter():
                     ## RIGHT SECTION
                     html.Div([
                         
-
                         
                         # ## BOT SECTION
                         # html.Div([
@@ -203,10 +202,11 @@ def render_location_filter():
                         html.Div([
                             html.H3(["Geographic Distribution"], className='label'),
                             html.Div([Card([
-                                #########################################
-                                ## INSERT PLOT: enrollment density (students per location)
-                                #########################################
-                                
+                                    #########################################
+                                    ## INSERT PLOT: enrollment density (students per location)
+                                    #########################################
+                                    html.Div([], id='cloroplet')
+
                                 
                                 ], margin=False)], className='plot-content')
                         ], className='plot-top-section plot-sec-wrap'),
@@ -216,7 +216,7 @@ def render_location_filter():
                         
                         ## BOTTOM SECTION
                         html.Div([
-                            html.H3(["Selection Report..."], className='label'),
+                            html.H3(["Student Preferences"], className='label'),
                             html.Div([Card([
                                 html.Div([
                                     
@@ -288,3 +288,132 @@ def render_location_filter():
             , className="revlov-bot"),
             
         ], className='plotted-location-report render-plot')
+    
+    
+
+def new_location_filter():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            html.Div([
+                
+                html.Div(
+                    [
+                        html.Div([
+                            html.Div([
+                                html.Div([
+                                    
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Img(src="/assets/images/icons_navigation/person-white.svg", className="total-icon"),
+                                                html.H1([], id="highest-avg-enroll", className="total-text"),
+                                            ], className='icon-and-text'),
+                                            html.Div([
+                                                html.Span("", className="year-marker"),
+                                                html.Span("Academic Year 2023-2024", className="year-text", id="year-text"),
+                                            ], className='academic-year'),
+                                            html.Div([
+                                                html.Span("Peak Enrollment Accross Years", className="desc-text"),
+                                            ], className='indicator'),
+                                        ], className="ns-card-1"),
+                                    ], margin=False, padding="1em", gradient=True),
+                                ], className='mainnnn'),
+                                
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker es"),
+                                                html.H1([], id="high-avg-enroll", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="esss-text", className="full-count-text"),
+                                            html.Span([], id="high-tag-loc"),
+                                            html.Span("Highest Average", className="desc-text"),
+                                        ], className="ns-sub-cards"),
+                                    ], margin=False)
+                                ], className="ns-indicator"),
+                                
+                                
+                                html.Div([
+                                    Card([
+                                        html.Div([
+                                            html.Div([
+                                                html.Span("", className="glevel-marker jhs"),
+                                                html.H1([], id="low-avg-enroll", className="count-text"),
+                                            ], className="glevel-count"),
+                                            html.Span([], id="jhs-text", className="full-count-text"),
+                                            html.Span([], id="low-tag-loc"),
+                                            html.Span("Lowest Average", className="desc-text"),
+                                        ], className="ns-sub-cards"),
+                                    ], margin=False)
+                                ], className="ns-indicator"),
+                                
+                            ], className="ns-main-detail"),
+                            
+                            # html.Div([
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker es"),
+                            #                     html.H1([], id="es-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="es-text", className="full-count-text"),
+                            #                 html.Span("Elementary", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator"),
+                                
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker jhs"),
+                            #                     html.H1([], id="jhs-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="jhs-text", className="full-count-text"),
+                            #                 html.Span("Junior High School", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator"),
+                                
+                            #     html.Div([
+                            #         Card([
+                            #             html.Div([
+                            #                 html.Div([
+                            #                     html.Span("", className="glevel-marker shs"),
+                            #                     html.H1([], id="shs-text-formatted", className="count-text"),
+                            #                 ], className="glevel-count"),
+                            #                 html.Span([], id="shs-text", className="full-count-text"),
+                            #                 html.Span("Senior High School", className="desc-text"),
+                            #             ], className="ns-sub-cards"),
+                            #         ], margin=False)
+                            #     ], className="ns-indicator")
+                                
+                            # ], className="ns-sub-detail"),
+                        ], className="ns-details"),
+                    ]
+                , className='plt-top plt'),
+                
+                html.Div(Card(
+                    [
+                        html.Div([html.Div([], id='enrollment-by-years'),], className='plt-mid plt'),
+                        html.Div([html.Div([], id='total-enrollment-by-year'),], className='plt-bot plt'),
+                    ]
+                , margin=False), className='year-analysis'),
+                
+                
+            ], className='plot-left-section'),
+            
+            ## RIGHT SECTION
+            html.Div([
+                Card(
+                    [
+                        html.Div([], id='cloroplet')
+                        
+                    ]
+                , margin=False)
+            ], className='plot-right-section'),
+            
+        ], className='plotted-location-reporttt render-plot')

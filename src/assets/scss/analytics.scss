@@ -9,9 +9,9 @@
 
     // FILTER MENU
     button{
-        padding: 1em 2em;
+        padding: 0.35em 1.8em;
         border: 0;
-        border-radius: 2em;
+        border-radius: 0.5em;
         font-size: 1;
         font-family: 'Inter Medium';
         cursor: pointer;
@@ -19,20 +19,28 @@
     }
 
     .page-header{
-        display: flex;
-        flex-direction: row;
+        // display: flex;
+        // flex-direction: row;
 
-        .headerr{
-            flex: 1;
-        }
+        // .headerr{
+        //     flex: 1;
+        // }
 
         #analytics-back-box{
             
             
             #analytics-back-btn{
+                font-size: 1.1em;
                 display: none;
                 background-color: $primary-color-2;
                 color: $white;
+                align-items: center;
+
+                img {
+                    width: 27px;
+                    height: 27px;
+                    padding-right: 7px;
+                }
             }
             #analytics-back-btn:hover{
                 background-color: $primary-shades-4;
@@ -274,18 +282,19 @@
         }
 
         .right-content {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
+            // display: flex;
+            // flex-direction: column;
+            // flex: 1;
 
+            height: 80vh;
             overflow-y: auto;
-            overflow-x: hidden;
+            overflow-x: hidden; 
 
             #plot-content{
                 display: flex;
                 // justify-content: center;
                 // align-items: center;
-                padding: 0.5em 0em;
+                // padding: 0.5em 0em;
                 flex: 1;
 
                 

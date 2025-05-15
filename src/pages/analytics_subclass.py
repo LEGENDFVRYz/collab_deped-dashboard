@@ -206,3 +206,67 @@ def render_subclass_filter():
                 
             ], className="subclass-content"),
         ], className='plotted-subclass-report render-plot')
+    
+    
+    
+def new_subclass_offering():
+    return html.Div(
+        children=[
+            ## LEFT SECTION
+            html.Div([
+                
+                html.Div(
+                    [
+                        
+                    ]
+                , className='plt-top plt'),
+                
+                html.Div(
+                    [
+                        html.Div([
+                            Card([
+                                # total schools per subclass
+                                html.H3(["Look at the School Situation..."], className="label"),
+                                
+                                html.Div([
+                                    html.Div([],id='subclass_student_school_ratio', className='chart-ctn-sc'),
+                                    html.Div([],id='subclass_total_schools_per_subclass'),
+                                ], className="plot-wrap")
+                                
+                            ], margin=False)
+                        ], className="subclass-enroll-graph"),
+                    ]
+                , className='plt-bot plt'),
+                
+            ], className='plot-left-section'),
+            
+            ## RIGHT SECTION
+            html.Div([
+                Card([
+                    
+                    html.H3(["Enrollment Trends Per Subclassification"], className='label'),
+                    
+                    html.Div([
+                        
+                        html.Div(
+                            [
+                                ## annual enrollment trends per subclass
+                                html.Div([], id='subclass-annual-trends'),
+                                
+                            ]
+                        , className='plot-top-section'),
+                        
+                        html.Div(
+                            [
+                                ## growth rate of enrollment among school
+                                html.Div([], id='subclass-growth-rate'),
+                                
+                            ]
+                        , className='plot-bottom-section')
+                        
+                        
+                    ], className="plot-wrap")
+                ], margin=False)
+            ], className='plot-right-section'),
+            
+        ], className='plotted-subclass-reporttt render-plot')

@@ -43,8 +43,8 @@ body{
         z-index: 1; 
 
         .brand-section{
-            padding-top: 3em;
-            padding-bottom: 3em;
+            padding-top: 1.75em;
+            padding-bottom: 1.75em;
             text-align: center;
             
             display: flex;
@@ -56,7 +56,7 @@ body{
                 color: $primary-color-1;
             }
             img{
-                width: 10em;
+                width: 9em;
 
             }
         }
@@ -111,7 +111,7 @@ body{
                         }
                         .text{
                             padding-left: 1em;
-                            color: $primary-color-1;
+                            color: $text-color-1;
                             
                             display: flex;
                             align-self: center;
@@ -285,6 +285,12 @@ body{
                     cursor: pointer;
                 }
             }
+
+            // .item-ctn.disabled{
+            //     pointer-events: none !important;
+            //     cursor: not-allowed !important;
+            //     opacity: 0.6 !important;
+            // }
         }
 
         .settings-section{
@@ -393,45 +399,70 @@ body{
             margin-top: 0.5em;
             margin-bottom: 1em;
 
-            .ctn{
+            .ctn-wrap{
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 margin: 0 auto;
-                padding: 0.5em 1em;
+                padding: 0.75em 1em;
                 background-color: $bluish-white;
                 border-radius: 0.5em;
                 width: 16em;
+                gap: 0.75em;
 
-                .display-picture{
+                .acc-details{
                     display: flex;
-                    flex-direction: column;
-                    align-self: center;
-                    padding-right: 0.5em;
-                    img {
-                        width: 3em;
-                        height: 3em;
-                        border-radius: 50%; /* Makes it circular */
-                        object-fit: cover;
+                    flex-direction: row;
+
+                    .display-picture{
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+                        padding-right: 0.5em;
+                        img {
+                            width: 3em;
+                            height: 3em;
+                            border-radius: 50%; /* Makes it circular */
+                            object-fit: cover;
+                        }
+                    }
+                    .details{
+                        flex: 1;
+                        color: $text-color-1;
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+    
+                        .email{
+                            font-size: 0.75em;
+                        }
+                    }
+                    #more-btn {
+                        transition: transform 0.3s ease-in-out;
+                        display: flex;
+                        flex-direction: column;
+                        align-self: center;
+                    
+                        width: 1.75em;
+                        cursor: pointer;
                     }
                 }
-                .details{
-                    flex: 1;
-                    color: $text-color-1;
-                    display: flex;
-                    flex-direction: column;
-                    align-self: center;
 
-                    .email{
-                        font-size: 0.75em;
+                #acc-opts{
+                    display: none;  // DEFAULT
+                    padding: 0em 1em;
+
+                    .setting-btn{
+                        padding: 0.5em 0em;
+                        width: 100%;
+
+                        color: $off-white;
+                        text-align: center;
+                        background-color: $primary-color-1;
+                        border-radius: 0.5em;
+
+                        cursor: pointer;
+                        user-select: none;  
                     }
-                }
-                .more-btn{
-                    display: flex;
-                    flex-direction: column;
-                    align-self: center;
-
-                    width: 1.5em;
-                    cursor: pointer;
                 }
             }
         }
@@ -472,9 +503,56 @@ body{
                     }
 
                     .page-header{
+                        display: flex;
+                        flex-direction: row;
+                        align-content: baseline;
+                        justify-content: space-between;
+
                         padding: 0em 1em 1em 1em;
                         h1{
                             color: $primary-color-1;
+                        }
+
+
+
+                        .page-controls{
+                            // flex: 1;
+                            display: flex;
+                            flex-direction: row;
+                            gap: 1em;
+                            // align-items: end;
+
+                            #year-toggle-box{
+                                // // flex: 1;
+                                display: flex;
+                                align-items: center;
+                                // width: 7.5em;
+                                height: 100%;
+
+                                // // align-items: center;
+                                // // justify-items: center;
+                                // // align-self: center;
+                                gap: 0.5em;
+                                user-select: none;
+                                // height: 1em;
+
+                                #year-scope {
+                                    color: $primary-color-1;
+                                    font-family: "Inter Bold";
+                                }
+                                
+                                #year-toggle{
+                                    cursor: pointer;
+                                    display: flex;
+                                    align-self: center;
+
+                                    img{
+                                        height: 1.5em;
+                                        width: 1.5em;
+    
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -507,3 +585,90 @@ body{
             }
         }
     }
+
+
+
+// MODALS STYLINGS
+
+#login-modal{
+    #login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem;
+
+        #login-logo {
+            font-size: 2rem;
+            font-weight: bold;
+
+            padding-top: 3em;
+            padding-bottom: 3em;
+            text-align: center;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // height: 9em;
+            
+            h2{
+                color: $primary-color-1;
+            }
+            img{
+                width: 9em;
+            }
+        }
+        
+        #login-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0em 2em;
+        
+            label {
+                margin-top: 0.5rem;
+                margin-bottom: 0.25rem;
+            }
+        
+            input {
+                padding: 0.5rem;
+                font-size: 1rem;
+                margin-bottom: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+        
+            button {
+                margin-top: 1rem;
+                padding: 0.5rem;
+                font-size: 1rem;
+                border: none;
+                border-radius: 4px;
+                background-color: #007bff;
+                color: white;
+                cursor: pointer;
+        
+                &:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+        
+        #login-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        
+            a {
+                text-decoration: none;
+                color: #007bff;
+        
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+

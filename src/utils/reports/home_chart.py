@@ -584,7 +584,7 @@ def update_graph(base_trigger):
             values=["<b>Subclassification</b>", "<b>School Count</b>", "<b>Student Count</b>"],
             fill_color='#E6F2FB',
             font=dict(color='#04508c', size=12, family="Inter"),
-            align='left',
+            align='center',
             line_color='#B0C4DE',
             height=28
         ),
@@ -595,7 +595,7 @@ def update_graph(base_trigger):
                 subclass_df1['counts']
             ],
             fill_color=[['#FFFFFF', '#F7FAFC'] * (len(subclass_df1) // 2 + 1)],
-            font=dict(color='#3C6382', size=11, family="Inter"),
+            font=dict(color='#3C6382', size=11, family="Arial"),
             align='left',
             line_color='#D3D3D3',
             height=24

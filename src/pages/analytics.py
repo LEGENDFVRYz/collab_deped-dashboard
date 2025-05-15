@@ -15,10 +15,10 @@ from src.utils import saved_tabs_analytics
 
 
 ############################### PAGES ################################
-from src.pages.analytics_location import render_location_filter
-from src.pages.analytics_seniorhigh import render_seniorhigh_filter
-from src.pages.analytics_subclass import render_subclass_filter
-from src.pages.analytics_offering import render_offering_filter
+from src.pages.analytics_location import render_location_filter, new_location_filter
+from src.pages.analytics_seniorhigh import render_seniorhigh_filter, new_location_shs
+from src.pages.analytics_subclass import render_subclass_filter, new_subclass_offering
+from src.pages.analytics_offering import render_offering_filter, new_location_offering
 from src.components.addons_filter import Addons_filter
 
 
@@ -36,9 +36,30 @@ layout = html.Div([
     
     ## -- Standard: Page Content Header
     html.Div([
-        html.Div([html.H1('Analytical Tools')], className='headerr'),
-        html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+        html.Div([html.H1('Enrollment Insights')]),
+
+        html.Div(
+            [
+                ## Year Mode Analysis:
+                html.Div([
+                    html.Div(["Latest Year"], id="year-scope"),
+                    html.Div([html.Img(src="/assets/images/control-switch-icon.svg")], id="year-toggle"),
+                ], id="year-toggle-box"),
+                
+                ## Filter options
+                html.Div([
+                    html.Button([
+                        html.Img(src="/assets/images/icons_navigation/filter.svg"),
+                        'Filter'
+                    ], id='analytics-back-btn', n_clicks=0)],id="analytics-back-box"),
+            ]
+        , className="page-controls")
     ], className='page-header'),
+    
+    # html.Div([
+    #     html.Div([html.H1('Analytical Tools')], className='headerr'),
+    #     html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+    # ], className='page-header'),
     
     ## -- Main Content: Start hereee
 
@@ -118,6 +139,7 @@ layout = html.Div([
 @callback(
     Output('filter-section', 'style', allow_duplicate=True),
     Output('analytics-back-btn', 'style', allow_duplicate=True),
+    Output('plot-content', 'style'),
     # Output('placeholder', 'style', allow_duplicate=True),
     # Output('hide-delay', 'disabled'),
     Input('proceed-btn', 'n_clicks'),
@@ -129,12 +151,12 @@ def handle_hide(n_clicks, back_clicks):
     triggered_id = ctx.triggered_id
     
     if triggered_id == 'proceed-btn':
-        return {'display': 'none'}, {'display': 'flex'}
+        return {'display': 'none'}, {'display': 'flex'}, {'display': 'flex'}
 
     if triggered_id == 'analytics-back-btn':
-        return {'display': 'flex'}, {'display': 'none'},
+        return {'display': 'flex'}, {'display': 'none'}, {'display': 'none'}
     
-    return dash.no_update, dash.no_update
+    return dash.no_update, dash.no_update, dash.no_update
 
 
 @callback(
@@ -177,16 +199,24 @@ def check_display(data, div_style):
     # Input('hide-delay', 'n_intervals'),
     Input('sub-status-toggle', 'data'),
     Input('analytics-sub-tracker', 'data'),
+    Input("is-all-year", "data"),
     prevent_initial_call='initial_duplicate'  
 )
-def render_after_fade(n, data):
+def render_after_fade(n, data, scope):
     opt = ["Location", "Senior High", "Subclassification", "Offering"]
     pages = [
         render_location_filter, render_seniorhigh_filter, render_subclass_filter, render_offering_filter
     ]
+    new_pages = [
+        new_location_filter, new_location_shs, new_subclass_offering, new_location_offering
+    ]
+    
     for i, choices in enumerate(opt):
         if data == choices:
-            return pages[i](), "rendered"
+            if scope:
+                return pages[i](), "rendered"
+            else:
+                return new_pages[i](), "rendered"
         
     return pages[0](), "rendered"
 

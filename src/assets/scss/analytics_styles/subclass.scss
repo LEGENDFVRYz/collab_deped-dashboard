@@ -327,5 +327,83 @@
             flex: 1;
         }
     }
-}
 
+    .plotted-subclass-reporttt{
+        display: flex;
+        gap: 1em;
+
+        // =============
+        .label{
+            padding-bottom: 0.5em;
+            color: $text-color-1;
+        }
+
+
+        .plot-left-section{
+            order: 2;
+
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            // gap: 1em;
+
+            .plt{
+                flex: 1;
+
+                .subclass-enroll-graph{
+                    display: flex;
+                    flex: 1;
+                    min-height: 300px;
+                }
+            }
+
+            .plot-wrap{
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+                #subclass_total_schools_per_subclass, #subclass_student_school_ratio{
+                    flex: 1;
+                }
+            }
+
+            // Charts
+            .subclass-enroll-graph {
+                display: flex;
+                flex: 1;
+                min-height: 300px;
+            }
+
+            .subclass-dist-avail-graph-2 {
+                display: flex;
+                flex: 1;
+                min-height: 400px;
+                // height: 50em;
+                // display: none;
+            }
+        }
+
+        .plot-right-section{
+            order: 1;
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .plot-wrap{
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+                .plot-top-section{
+                    flex: 1;
+                }
+    
+                .plot-bottom-section{
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

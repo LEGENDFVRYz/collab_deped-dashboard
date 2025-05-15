@@ -13,6 +13,10 @@
 #plot-content.rendered .plotted-seniorhigh-report .shs-content h3 {
   color: #3C6382;
 }
+#plot-content.rendered .plotted-seniorhigh-report .shs-content h4 {
+  color: #3C6382;
+  padding: 0.5em;
+}
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 {
   display: flex;
   flex: 1;
@@ -35,6 +39,13 @@
   flex: 1;
   flex-direction: column;
   gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left.year {
+  flex: 1.5;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left #seniorhigh_year_over_year {
+  display: flex;
+  flex: 1;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-dist-graph {
   display: flex;
@@ -59,7 +70,7 @@
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container #seniorhigh_ratio_enrollment {
   display: flex;
-  flex: 1.5;
+  flex: 1.15;
   overflow: hidden;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind {
@@ -72,28 +83,94 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-academic .shs-acad-title {
+  text-align: start;
+  color: #3C6382;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-non-academic {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-non-academic .shs-acad-title {
+  text-align: start;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-acad-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-count-text {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-percentage-text {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container {
+  display: flex;
+  padding: 0.35em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+  justify-content: space-between;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper .shs-count-text {
+  color: #FFFFFF;
+  padding-left: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper .shs-percentage-text {
+  color: #037DEE;
+  background-color: #FFFFFF;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  font-family: "Inter Bold";
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower {
+  background-color: #E11C38;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower .shs-count-text {
+  color: #FFFFFF;
+  padding-left: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-left .shs-enrollment-donut .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower .shs-percentage-text {
+  color: #E11C38;
+  background-color: #FFFFFF;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  font-family: "Inter Bold";
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right {
   display: flex;
   flex: 1.5;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-gender-dist-title {
-  color: #3C6382;
-  padding: 0.5em;
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right.year {
+  flex-direction: column;
+  flex: 1;
+  gap: 1em;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content {
   display: flex;
   flex: 1;
   gap: 1em;
 }
-#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content #seniorhigh_gender_distri {
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-title-graph {
+  display: flex;
+  flex: 2.5;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-title-graph .shs-gender-dist-title {
+  color: #3C6382;
+  padding: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-title-graph #seniorhigh_gender_distri {
   display: flex;
   flex: 2;
 }
@@ -101,20 +178,185 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: 1em;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .shs-population-container {
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: space-around;
+  padding: 1em;
+  background-color: #F5F5F5;
+  border: 1px solid #3C6382;
+  border-radius: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-pop-title {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 0.8em;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-strand {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.65em;
+  color: #FFFFFF;
+  border-radius: 0.5em;
+  padding: 0.25em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-strand.high {
+  background-color: #E11C38;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-strand.low {
+  background-color: #667889;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em;
+  border-radius: 0.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count.most {
+  color: #E11C38;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count.least {
+  color: #667889;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count .mps-count {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.5em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content .shs-population .mps-student-count .mps-student-text {
+  font-family: "Inter Medium Italic";
+  text-align: center;
+  font-size: 0.9em;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-right-content #seniorhigh_most_least_enrolled {
   display: flex;
   flex: 1;
 }
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-upper {
+  display: flex;
+  flex: 1.25;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-upper #seniorhigh_distri_per_track {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container #seniorhigh_ratio_enrollment {
+  display: flex;
+  flex: 1.15;
+  overflow: hidden;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-academic {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-academic .shs-acad-title {
+  text-align: start;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-non-academic {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-non-academic .shs-acad-title {
+  text-align: start;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-acad-title {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-count-text {
+  font-family: "Inter Bold";
+  text-align: center;
+  font-size: 1.25em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-percentage-text {
+  text-align: center;
+  font-size: 0.9em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container {
+  display: flex;
+  padding: 0.35em;
+  border-radius: 0.5em;
+  color: #FFFFFF;
+  justify-content: space-between;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper {
+  background-color: #037DEE;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper .shs-count-text {
+  color: #FFFFFF;
+  padding-left: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.upper .shs-percentage-text {
+  color: #037DEE;
+  background-color: #FFFFFF;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  font-family: "Inter Bold";
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower {
+  background-color: #E11C38;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower .shs-count-text {
+  color: #FFFFFF;
+  padding-left: 0.15em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-1 .shs-enrollment .shs-enrollment-content .shs-enrollment-right .shs-enrollment-lower .shs-donut-container .seniorhigh_ratio_enrollment_ind .shs-container.lower .shs-percentage-text {
+  color: #E11C38;
+  background-color: #FFFFFF;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  font-family: "Inter Bold";
+}
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 {
   display: flex;
   min-height: 360px;
   gap: 2em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-content .shs-track-left {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-content .shs-track-left #seniorhigh_enrollment_comparison_per_strand {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-content .shs-track-right {
+  display: none;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-content .shs-track-right #seniorhigh_humms {
+  display: none;
+  flex: 1;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-2 .shs-track-avail {
   display: flex;
@@ -147,7 +389,70 @@
   display: flex;
   flex: 1;
   min-height: 420px;
-  gap: 2em;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 500px;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-1 {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-1 #seniorhigh_humms {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-2 {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-2 .group-2-upper {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-2 .group-2-upper #seniorhigh_stem {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-2 .group-2-lower {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-2 .group-2-lower #seniorhigh_gas {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-3 {
+  display: flex;
+  flex: 1;
+  gap: 1em;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-3 .group-3-upper {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-3 .group-3-upper #seniorhigh_abm {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-3 .group-3-lower {
+  display: flex;
+  flex: 1;
+}
+#plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3.year .shs-layer-3-content .group-3 .group-3-lower #seniorhigh_pbm {
+  display: flex;
+  flex: 1;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector {
   display: flex;
@@ -176,7 +481,7 @@
   flex: 1;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-region-sector-lower {
-  display: flex;
+  display: none;
   flex: 1;
 }
 #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-offers-title, #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-prevalent-title, #plot-content.rendered .plotted-seniorhigh-report .shs-content .shs-layer-3 .shs-region-sector .shs-region-sector-content .shs-region-sector-graph .shs-range-title {

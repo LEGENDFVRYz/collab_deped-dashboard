@@ -17,9 +17,25 @@ dash.register_page(__name__, path="/", suppress_callback_exceptions=True)
 
 layout = html.Div([
     ## -- Standard: Page Content Header
+        ## -- Standard: Page Content Header
     html.Div([
-        html.H1('Overview')
+        html.Div([html.H1('Overview')]),
+
+        html.Div(
+            [
+                ## Year Mode Analysis:
+                html.Div([
+                    html.Div(["Latest Year"], id="year-scope"),
+                    html.Div([html.Img(src="/assets/images/control-switch-icon.svg")], id="year-toggle"),
+                ], id="year-toggle-box")
+            ]
+        , className="page-controls")
     ], className='page-header'),
+    
+    
+    # html.Div([
+    #     html.H1('Overview')
+    # ], className='page-header'),
     
     dcc.Loading([
         html.Div([], id="render-base"),
@@ -298,7 +314,6 @@ layout = html.Div([
                                     ),
                                 ], margin=False)
                             ], className="ssc-table"),
-                            
                         ], className="ssc-content-1"),
                         
                         html.Div([

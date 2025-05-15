@@ -30,8 +30,8 @@ body {
   z-index: 1;
 }
 .app-container .navigation .brand-section {
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
   text-align: center;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@ body {
   color: #04508c;
 }
 .app-container .navigation .brand-section img {
-  width: 10em;
+  width: 9em;
 }
 .app-container .navigation .menu-section {
   display: flex;
@@ -89,7 +89,7 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn .main-tab .nav-btn .text {
   padding-left: 1em;
-  color: #04508c;
+  color: #3C6382;
   display: flex;
   align-self: center;
   font-size: 1em;
@@ -299,44 +299,66 @@ body {
   margin-top: 0.5em;
   margin-bottom: 1em;
 }
-.app-container .account-section .ctn {
+.app-container .account-section .ctn-wrap {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 0 auto;
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
   background-color: #EFF3F6;
   border-radius: 0.5em;
   width: 16em;
+  gap: 0.75em;
 }
-.app-container .account-section .ctn .display-picture {
+.app-container .account-section .ctn-wrap .acc-details {
+  display: flex;
+  flex-direction: row;
+}
+.app-container .account-section .ctn-wrap .acc-details .display-picture {
   display: flex;
   flex-direction: column;
   align-self: center;
   padding-right: 0.5em;
 }
-.app-container .account-section .ctn .display-picture img {
+.app-container .account-section .ctn-wrap .acc-details .display-picture img {
   width: 3em;
   height: 3em;
   border-radius: 50%; /* Makes it circular */
   -o-object-fit: cover;
      object-fit: cover;
 }
-.app-container .account-section .ctn .details {
+.app-container .account-section .ctn-wrap .acc-details .details {
   flex: 1;
   color: #3C6382;
   display: flex;
   flex-direction: column;
   align-self: center;
 }
-.app-container .account-section .ctn .details .email {
+.app-container .account-section .ctn-wrap .acc-details .details .email {
   font-size: 0.75em;
 }
-.app-container .account-section .ctn .more-btn {
+.app-container .account-section .ctn-wrap .acc-details #more-btn {
+  transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 1.5em;
+  width: 1.75em;
   cursor: pointer;
+}
+.app-container .account-section .ctn-wrap #acc-opts {
+  display: none;
+  padding: 0em 1em;
+}
+.app-container .account-section .ctn-wrap #acc-opts .setting-btn {
+  padding: 0.5em 0em;
+  width: 100%;
+  color: #F0F0F0;
+  text-align: center;
+  background-color: #04508c;
+  border-radius: 0.5em;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .content-wrapper {
@@ -370,10 +392,41 @@ body {
   padding: 0.25em 0.75em;
 }
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header {
+  display: flex;
+  flex-direction: row;
+  align-content: baseline;
+  justify-content: space-between;
   padding: 0em 1em 1em 1em;
 }
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header h1 {
   color: #04508c;
+}
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0.5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-scope {
+  color: #04508c;
+  font-family: "Inter Bold";
+}
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-toggle {
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+}
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-toggle img {
+  height: 1.5em;
+  width: 1.5em;
 }
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) {
   max-height: 80vh;
@@ -391,4 +444,71 @@ body {
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container > div:nth-of-type(2) .content::-webkit-scrollbar-thumb {
   background-color: #90a0cf;
   border-radius: 0.25em;
+}
+
+#login-modal #login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+#login-modal #login-container #login-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#login-modal #login-container #login-logo h2 {
+  color: #04508c;
+}
+#login-modal #login-container #login-logo img {
+  width: 9em;
+}
+#login-modal #login-container #login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0em 2em;
+}
+#login-modal #login-container #login-form label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+#login-modal #login-container #login-form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#login-modal #login-container #login-form button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+#login-modal #login-container #login-form button:hover {
+  background-color: #0056b3;
+}
+#login-modal #login-container #login-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+#login-modal #login-container #login-links a {
+  text-decoration: none;
+  color: #007bff;
+}
+#login-modal #login-container #login-links a:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=app.css.map */

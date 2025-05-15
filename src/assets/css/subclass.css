@@ -175,4 +175,62 @@
 #plot-content.rendered .plotted-subclass-report .chart-ctn-sc {
   display: flex;
   flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt {
+  display: flex;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-subclass-reporttt .label {
+  padding-bottom: 0.5em;
+  color: #3C6382;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section {
+  order: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .plt {
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .plt .subclass-enroll-graph {
+  display: flex;
+  flex: 1;
+  min-height: 300px;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .plot-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .plot-wrap #subclass_total_schools_per_subclass, #plot-content.rendered .plotted-subclass-reporttt .plot-left-section .plot-wrap #subclass_student_school_ratio {
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .subclass-enroll-graph {
+  display: flex;
+  flex: 1;
+  min-height: 300px;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-left-section .subclass-dist-avail-graph-2 {
+  display: flex;
+  flex: 1;
+  min-height: 400px;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-right-section {
+  order: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-right-section .plot-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-right-section .plot-wrap .plot-top-section {
+  flex: 1;
+}
+#plot-content.rendered .plotted-subclass-reporttt .plot-right-section .plot-wrap .plot-bottom-section {
+  flex: 1;
 }/*# sourceMappingURL=subclass.css.map */

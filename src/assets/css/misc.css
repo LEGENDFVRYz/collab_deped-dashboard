@@ -1,0 +1,106 @@
+@import '../fonts/stylesheet.css';
+.unauth {
+  width: 100%;
+  height: 100%;
+}
+.unauth .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 1em;
+  padding: 1em;
+}
+.unauth .content .response-tag {
+  font-size: 2.5em;
+  font-weight: bolder;
+  color: #04508c;
+}
+.unauth .content .response-short {
+  font-size: large;
+}
+.unauth .content .response-reco {
+  padding-top: 1em;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.app-settings {
+  width: 100%;
+  height: 100%;
+}
+.app-settings .content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app-settings .content .content-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+.app-settings .content .content-wrap .drop-section {
+  flex: 2;
+}
+.app-settings .content .content-wrap .drop-section h3 {
+  padding-bottom: 1em;
+}
+.app-settings .content .content-wrap .drop-section #upload-data {
+  width: 100%;
+  height: 40%;
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 5px;
+  text-align: center;
+}
+.app-settings .content .content-wrap .drop-section #upload-data div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+.app-settings .content .content-wrap .drop-section #upload-data a {
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bolder;
+  color: #04508c;
+}
+.app-settings .content .content-wrap .drop-section #upload-status {
+  margin-top: 1em;
+  padding: 1em 2em;
+  background-color: #E6F2FD;
+  border-radius: 0.5em;
+  color: #667889;
+}
+.app-settings .content .content-wrap .drop-section #output-upload {
+  flex: 1;
+}
+.app-settings .content .content-wrap .drop-section .confirm-upload {
+  display: flex;
+  align-self: end;
+}
+.app-settings .content .content-wrap .drop-section .confirm-upload #push-upload {
+  padding: 1em 2em;
+  border: 0;
+  border-radius: 2em;
+  font-size: 1;
+  font-family: "Inter Medium";
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #037DEE;
+  color: #FFFFFF;
+}
+.app-settings .content .content-wrap .drop-section .confirm-upload #push-upload:hover {
+  background-color: #0264BE;
+}
+.app-settings .content .content-wrap .drop-section .confirm-upload #push-upload:active {
+  background-color: #037DEE;
+}
+.app-settings .content .content-wrap .report-section {
+  flex: 3;
+  display: flex;
+  gap: 1em;
+}/*# sourceMappingURL=misc.css.map */

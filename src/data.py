@@ -15,12 +15,12 @@ from config import project_root
 
 # Database Engine
 enrollment_db_engine = create_engine(f"sqlite:///{project_root / 'database/processed/sql/enrollment_data.db'}", echo=False)
-print("DATABASE CALLED")
+# print("DATABASE CALLED")
 
 @cache.memoize(timeout=3600)
 def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
     try:
-        print("QUERYINGGG...")
+        # print("QUERYINGGG...")
         
         # Base query (JOIN: enrollment and sch_info)
         first_query = "SELECT * FROM enrollment LEFT JOIN sch_info USING(beis_id) WHERE 1=1"  
@@ -133,7 +133,7 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
             ) USING (enroll_id, beis_id, gender)
         """
         
-        print('DONED... ANG QUERY')
+        # print('DONED... ANG QUERY')
         # print(main_query)
         # print("params:\n", params)
         
@@ -142,12 +142,12 @@ def smart_filter(filter_info={}, _engine=enrollment_db_engine) -> pd.DataFrame:
         # List of column names
         columns_to_convert = ['gender', 'sector', 'sub_class', 'type', 'mod_coc',
                               'region', 'province', 'division', 'district',
-                              'track', 'strand', 'grade', 'year']  
+                              'track', 'strand', 'grade']  
 
         for col in columns_to_convert:
             dataframe[col] = dataframe[col].astype('category')
         
-        print('Pandarette finished...')
+        # print('Pandarette finished...')
         return dataframe
         
     except Exception as e:

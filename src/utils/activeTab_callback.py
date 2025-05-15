@@ -23,7 +23,7 @@ def update_active_tab(pathname):
     Output("nav-2", "className"),
     Output("nav-3", "className"),
     Output("opt-1", "className"),
-    Output("opt-2", "className"),
+    # Output("opt-2", "className"),
     Output("opt-3", "className"),
     Input("active-tab", "data")  # Get the stored route
 )
@@ -33,6 +33,6 @@ def restore_active_tab(activeTab):
         "item-ctn active" if activeTab == "/analytics" else "item-ctn",
         "item-ctn active" if activeTab == "/school-level" else "item-ctn",
         "item-ctn active" if activeTab == "/updates" else "item-ctn",
-        "item-ctn active" if activeTab == "/help" else "item-ctn",
+        # "item-ctn active" if activeTab == "/help" else "item-ctn",
         "item-ctn active" if activeTab == "/settings" else "item-ctn",
     ]
