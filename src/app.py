@@ -14,7 +14,10 @@ from src.utils import activeTab_callback
 
 # Initialize DB
 from src.data import enrollment_db_engine
+from src.enroll_db import initialize_db
 authentication_db()
+initialize_db()
+
 
 # Main Applications
 app = Dash(__name__, server=server, use_pages=True, suppress_callback_exceptions=True)
@@ -29,6 +32,7 @@ app.layout = html.Div(
         dcc.Store(id="chart-trigger", data=False, storage_type="session"),
         dcc.Store(id="base-trigger", data=False, storage_type="session"),
         dcc.Store(id="is-all-year", data=False, storage_type="session"),
+        dcc.Store(id="year-toggle-clicks", data=0, storage_type="session"),
         
         dcc.Store(id="rotation-state", data=False),  # stores toggle state
         
@@ -41,7 +45,7 @@ app.layout = html.Div(
                 dbc.ModalBody(
                     html.Div([
                         # Top: Logo area
-                        html.Div("LOGO HERE", id="login-logo"),
+                        html.Div([html.Img(src="/assets/images/Department_of_Education_(DepEd).svg")], id="login-logo"),
 
                         # Middle: Form inputs and login button
                         html.Div([
@@ -345,25 +349,24 @@ def rotate_div(n_clicks, rotated):
 ##################### YEAR CONTROLS #####################
 @app.callback(
     Output("is-all-year", "data"),
+    Output("year-toggle-clicks", "data"),
     Input("year-toggle", "n_clicks"),
     State("is-all-year", "data"),
+    State("year-toggle-clicks", "data"),
     prevent_initial_call=True
 )
-def toggle_year_scope(n_clicks, is_all_year):
-    return not is_all_year
-    
+def toggle_year_scope(n_clicks, is_all_year, prev_clicks):
+    if n_clicks is None or n_clicks == prev_clicks:
+        raise dash.exceptions.PreventUpdate
+    return not is_all_year, n_clicks
 
 
 @app.callback(
     Output("year-scope", "children"),
-    Input("is-all-year", "data"),
-    prevent_initial_call=True
+    Input("is-all-year", "data")
 )
-def toggle_year_scope(state):
-    if state:
-        return "All Year"
-    else:
-        return "Latest Year"
+def update_label(state):
+    return "All Year" if state else "Latest Year"
 
 
 ##################### RENDERING BASED ON ROLE #####################
