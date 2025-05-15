@@ -187,9 +187,7 @@
   background-color: #D3DDE5;
 }
 .analytics-page .content-section .right-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
 }

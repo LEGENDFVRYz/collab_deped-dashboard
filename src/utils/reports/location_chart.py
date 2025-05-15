@@ -1,5 +1,5 @@
 from enum import auto
-from turtle import title
+from turtle import title, width
 from unicodedata import category
 import numpy as np
 import pandas as pd
@@ -9,11 +9,25 @@ import plotly.graph_objects as go
 from dash import dcc, html, callback, Output, Input, State, Patch
 from plotly.subplots import make_subplots 
 
+import json
+from pathlib import Path
+import re, os, sys
+import plotly.express as px
+from geojson_rewind import rewind
+import pandas as pd
+import plotly.io as pio 
+from rapidfuzz import process, fuzz
+import unicodedata
+import re
+    
 # important part
 from src.data import enrollment_db_engine, smart_filter
 
 # Extra Utilities
 from src.utils.extras_utils import smart_truncate_number
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from src.config import project_root
 
 
 """
@@ -76,13 +90,13 @@ from src.utils.extras_utils import smart_truncate_number
 
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    FILTERED_DATA = FILTERED_DATA[['brgy', 'municipality', 'district', 'division', 'province', 'region', 'counts', 'gender']]
+    FILTERED_DATA = FILTERED_DATA[['beis_id', 'brgy', 'municipality', 'district', 'division', 'province', 'region', 'counts', 'gender']]
     # print("triggered dispilinr")
     
     ## LOCATION SCOPE
-    locs = ['brgy', 'municipality', 'district', 'division', 'province', 'region']
+    locs = ['beis_id', 'brgy', 'municipality', 'district', 'division', 'province', 'region']
     tag = "default"
-    min_loc = 5
+    min_loc = 6
 
     for i, loc in enumerate(locs[1:]):
         if loc in data:
@@ -783,3 +797,212 @@ def update_graph(trigger, data):
 
     # Output (or return these values)
     return f"{truncated_highest_avg}", f"{truncated_lowest_avg}", f"{highest_avg_region}", f"{lowest_avg_region}"
+
+
+
+
+@callback(
+    Output('cloroplet', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DF = smart_filter(data, enrollment_db_engine)
+    
+    # Extract required columns
+    # FILTERED_DF = FILTERED_DATA[['region', 'year', 'counts']]
+
+    
+    # FILTERED_DF = auto_extract(['province', 'counts'], is_specific=False)
+    FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+        
+        # Print for debug
+    unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+    print("Provinces in DataFrame:", len(unique_provinces))
+    for province in sorted(unique_provinces):
+        print(province)
+
+    # Folder where all region-wise GeoJSON files are stored
+    geojson_folder = project_root / "src/assets/_geojson/province"
+    
+    geojson_files = [
+        "provinces-region-ph010000000.0.001.json",
+        "provinces-region-ph020000000.0.001.json",
+        "provinces-region-ph030000000.0.001.json",
+        "provinces-region-ph040000000.0.001.json",
+        "provinces-region-ph050000000.0.001.json",
+        "provinces-region-ph060000000.0.001.json",
+        "provinces-region-ph070000000.0.001.json",
+        "provinces-region-ph080000000.0.001.json",
+        "provinces-region-ph090000000.0.001.json",
+        "provinces-region-ph100000000.0.001.json",
+        "provinces-region-ph110000000.0.001.json",
+        "provinces-region-ph120000000.0.001.json",
+        "provinces-region-ph130000000.0.001.json",
+        "provinces-region-ph140000000.0.001.json",
+        "provinces-region-ph150000000.0.001.json",
+        "provinces-region-ph160000000.0.001.json",
+        "provinces-region-ph170000000.0.001.json",
+        "provinces-region-ph180000000.0.001.json",
+
+    ]
+
+    # Combine all province GeoJSONs into one FeatureCollection
+    all_features = []
+    for filename in geojson_files:
+        filepath = os.path.join(geojson_folder, filename)
+        with open(filepath) as f:
+            geo = json.load(f)
+            geo = rewind(geo, rfc7946=False)
+            all_features.extend(geo['features'])
+
+    combined_geojson = {
+        "type": "FeatureCollection",
+        "features": all_features
+    }
+
+    # Extract province names from GeoJSON
+    geo_provinces = [feature['properties']['ADM2_EN'] for feature in combined_geojson['features']]
+    print("Provinces in GeoJSON:", len(set(geo_provinces)))
+    print("Provinces in DataFrame:", len(set(FILTERED_DF['province'])))
+
+    # Normalize for comparison
+    df_norm = {name.strip().title() for name in unique_provinces}
+    geo_norm = {name.strip().title() for name in geo_provinces}
+
+    # Find unmatched from DataFrame
+    unmatched = sorted(df_norm - geo_norm)
+
+    print("\n❌ Unmatched provinces from DataFrame not found in GeoJSON:")
+    for prov in unmatched:
+        print(f"- {prov}")
+
+    
+    def normalize_province(name):
+        if not name:
+            return ""
+        name = name.strip()
+
+        # Common fixes
+        name = name.replace("Ncr", "NCR")
+        name = re.sub(r"(?i)^city of\s+", "", name)
+        # name = re.sub(r",\s*NCR.*", "NCR", name)  # e.g., "Manila, NCR, First District" → "Manila NCR"
+        name = unicodedata.normalize('NFKD', name)
+        name = ''.join(c for c in name if not unicodedata.combining(c))
+        return name.title()
+
+    # Normalize both lists
+    df_normalized = [normalize_province(name) for name in unique_provinces]
+    geo_normalized = [normalize_province(name) for name in geo_provinces]
+
+    # Convert to sets
+    df_set = set(df_normalized)
+    geo_set = set(geo_normalized)
+
+    # Exact matches
+    matched = sorted(df_set & geo_set)
+    unmatched = sorted(df_set - geo_set)
+
+    print("\n✅ Matched provinces:")
+    for prov in matched:
+        print(f"  ✅ {prov}")
+
+    # Fuzzy match for unmatched
+    fuzzy_matches = []
+    for name in unmatched:
+        best_match, score, _ = process.extractOne(name, geo_set, scorer=fuzz.ratio)
+        if score >= 50:
+            fuzzy_matches.append((name, best_match, score))
+
+    # Output fuzzy matches
+    print("\n🔁 Fuzzy matched provinces:")
+    for original, matched, score in fuzzy_matches:
+        print(f"  🔁 {original} ↔ {matched} ({score}%)")
+
+    # Remaining unmatched after fuzzy match
+    fuzzy_matched_names = {original for original, _, _ in fuzzy_matches}
+    still_unmatched = sorted(set(unmatched) - fuzzy_matched_names)
+
+    print("\n❌ Still unmatched provinces:")
+    for prov in still_unmatched:
+        print(f"  ❌ {prov}")
+        
+        
+        # Step: Create mapping from fuzzy matches
+    fuzzy_match_dict_prov = {original: matched for original, matched, _ in fuzzy_matches}
+
+    # Step: Normalize and apply fuzzy match to province column in DF
+    FILTERED_DF['normalized_province'] = FILTERED_DF['province'].apply(normalize_province)
+
+    FILTERED_DF['final_province'] = FILTERED_DF['normalized_province'].apply(
+        lambda x: fuzzy_match_dict_prov.get(x, x)  # Use fuzzy match if exists, else use normalized
+    )
+
+    # Step: Normalize GeoJSON province names (no uppercasing)
+    geo_provinces_normalized_final = [normalize_province(p) for p in geo_provinces if p]
+
+    # Step: Filter DataFrame to matching provinces
+    FILTERED_DF = FILTERED_DF[
+        FILTERED_DF['final_province'].isin(geo_provinces_normalized_final)
+    ]
+
+    # Step: Print unmatched final provinces (optional debug)
+    unmatched_final = set(FILTERED_DF['final_province']) - set(geo_provinces_normalized_final)
+    if unmatched_final:
+        print("\n⚠️ Unmatched final provinces still not in GeoJSON:")
+        for p in sorted(unmatched_final):
+            print("  ❌", p)
+
+
+    # 4. Plotly Choropleth
+    map_chart = px.choropleth(
+        FILTERED_DF,
+        geojson=combined_geojson,
+        locations='final_province',
+        featureidkey='properties.ADM2_EN',
+        color='counts',
+        hover_name=None,
+        hover_data=None,
+        color_continuous_scale='Viridis',
+        
+    )
+    
+    map_chart.update_traces(
+        hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
+    )
+
+
+    map_chart.update_geos(
+        visible=False,
+        # showcountries=False,
+        # showcoastlines=False,
+        showland=True,
+        fitbounds="locations",        # Ensures focus on actual geojson features
+        center = {'lat':12.8797, 'lon':121.7740},
+        resolution=50,
+        lataxis_range=[4, 21],        # Latitude range for PH
+        lonaxis_range=[115, 128],  # Longitude range for PH
+    )
+
+
+
+    map_chart.update_layout(
+        # title="Enrollment by Region",
+        # title_font=dict(size=20, family='Inter', color='#3C6382'),
+        # title_x=0.5,
+        margin={"r": 0, "t": 0, "l": 0, "b": 0},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        coloraxis_showscale=False,
+        height=900,
+        width=700,
+        # dragmode=False,
+    )
+    
+    # map_chart.show(renderer="browser")
+    return dcc.Graph(
+        figure=map_chart,
+        config={"responsive": True},
+        # style={"width": "100%"}
+    )

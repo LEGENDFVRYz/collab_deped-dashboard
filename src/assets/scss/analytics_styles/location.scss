@@ -13,6 +13,7 @@
         .plot-sec-wrap{
             display: flex;
             flex-direction: column;
+            overflow: hidden;
 
             .label{
                 padding-bottom: 0.5em;

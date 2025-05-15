@@ -171,7 +171,6 @@ def render_location_filter():
                     ## RIGHT SECTION
                     html.Div([
                         
-
                         
                         # ## BOT SECTION
                         # html.Div([
@@ -206,7 +205,8 @@ def render_location_filter():
                                     #########################################
                                     ## INSERT PLOT: enrollment density (students per location)
                                     #########################################
-                                    
+                                    html.Div([], id='cloroplet')
+
                                 
                                 ], margin=False)], className='plot-content')
                         ], className='plot-top-section plot-sec-wrap'),
@@ -410,7 +410,7 @@ def new_location_filter():
             html.Div([
                 Card(
                     [
-                        
+                        html.Div([], id='cloroplet')
                         
                     ]
                 , margin=False)

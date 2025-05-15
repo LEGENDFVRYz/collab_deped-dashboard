@@ -284,6 +284,15 @@ def update_graph(trigger, data, mode):
 
     if mode:
         subclass_df1 = (
+            FILTERED_DATA.groupby('sub_class', observed=True)
+            .agg(
+                school_count=('beis_id', 'nunique'),
+                counts=('counts', 'sum'),
+            )
+            .reset_index()
+        )
+    else:
+        subclass_df1 = (
             FILTERED_DATA.groupby(['sub_class', 'year'], observed=True)
             .agg(
                 school_count=('beis_id', 'nunique'),
@@ -296,16 +305,6 @@ def update_graph(trigger, data, mode):
             )
             .reset_index()
         )
-    else:
-        subclass_df1 = (
-            FILTERED_DATA.groupby('sub_class', observed=True)
-            .agg(
-                school_count=('beis_id', 'nunique'),
-                counts=('counts', 'sum'),
-            )
-            .reset_index()
-        )
-
     
     
     student_school_ratio = px.scatter(subclass_df1, 
