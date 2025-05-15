@@ -788,7 +788,7 @@ def update_graph(base_trigger):
     # if base_trigger != "/":
     #     return dash.no_update
 
-    BASE_DF = smart_filter({}, _engine=enrollment_db_engine)[['track', 'counts']]
+    BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
     
     max_year = BASE_DF['year'].max()
     BASE_DF = BASE_DF[BASE_DF['year'] == max_year]

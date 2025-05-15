@@ -83,7 +83,12 @@
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year .year-text {
   display: flex;
   font-size: 12px;
-  padding: 0.25em 1em 0.25em 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year .year-text.first {
+  padding: 0.25em 0.25em 0.25em 1em;
+}
+.home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .academic-year .year-text.second {
+  padding: 0.25em 0.25em 0.25em 0em;
 }
 .home-page .content .overview-layer-1 .national-snapshot .ns-content .ns-details .ns-main-detail .ns-card-1 .desc-text {
   font-family: "Inter Bold";
