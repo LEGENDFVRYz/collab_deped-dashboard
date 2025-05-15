@@ -89,8 +89,10 @@ from src.utils.extras_utils import smart_truncate_number
 def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    grouped_by_tracks = FILTERED_DATA.groupby(["track"], as_index=False)["counts"].sum()
-    grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    
+    grouped_by_tracks = cleaned_df.groupby(["track"], as_index=False)["counts"].sum()
     
     # Extract and group data
     if mode:
@@ -177,6 +179,7 @@ def update_graph(trigger, data, mode):
     else:
         track_counts = cleaned_df.groupby(['year', 'track'])['counts'].sum().reset_index()
         track_counts = track_counts.groupby('track', as_index=False)['counts'].mean()
+        track_counts['counts'] = track_counts['counts'].round(0).astype(int)
         track_counts.rename(columns={'counts': 'student_count'}, inplace=True)
         
     acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
@@ -223,7 +226,7 @@ def update_graph(trigger, data, mode):
         annotations=[
             dict(
                 text="<b>Academic vs.<br>Non-Academic<b>",
-                x=0.5, y=0.6,
+                x=0.5, y=0.64,
                 font=dict(size=16, color="#3C6382", family="Inter Bold, Inter, sans-serif"),
                 showarrow=False,
                 align='center',

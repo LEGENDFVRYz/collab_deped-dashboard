@@ -78,7 +78,7 @@
                                 .shs-donut-container {
                                     display: flex;
                                     flex: 1;
-                                    gap: 0.5em;
+                                    gap: 1em;
 
                                     #seniorhigh_ratio_enrollment {
                                         display: flex;
@@ -96,14 +96,24 @@
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
                                         }                                
 
                                         .shs-non-academic {
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
                                         }
 
                                         .shs-acad-title {
@@ -124,13 +134,44 @@
 
                                         .shs-container {
                                             display: flex;
-                                            flex-direction: column;
-                                            padding: 0.25em;
+                                            padding: 0.35em;
                                             border-radius: 0.5em;
                                             color: $white;
+                                            justify-content: space-between;
 
-                                            &.upper { background-color: $primary-color-2; }
-                                            &.lower { background-color: $secondary-color-2; }
+                                            &.upper { 
+                                                background-color: $primary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $primary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+                                            &.lower {
+                                                background-color: $secondary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $secondary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
@@ -148,6 +189,8 @@
                                 flex: 1;
                                 gap: 1em;
                             }
+
+
 
                             .shs-gender-dist-title {
                                 color: $text-color-1;
@@ -239,7 +282,7 @@
 
                                     #seniorhigh_ratio_enrollment {
                                         display: flex;
-                                        flex: 1.5;
+                                        flex: 1.15;
                                         overflow: hidden;
                                     }
     
@@ -253,14 +296,82 @@
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
-                                        }
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }                                
 
                                         .shs-non-academic {
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }
+
+                                        .shs-acad-title {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-count-text {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1.25em;
+                                        }
+
+                                        .shs-percentage-text {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-container {
+                                            display: flex;
+                                            padding: 0.35em;
+                                            border-radius: 0.5em;
+                                            color: $white;
+                                            justify-content: space-between;
+
+                                            &.upper { 
+                                                background-color: $primary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $primary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+                                            &.lower {
+                                                background-color: $secondary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $secondary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+
                                         }
                                     }
                                 }

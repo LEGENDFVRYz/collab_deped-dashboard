@@ -242,14 +242,18 @@ def new_location_shs():
                                             html.Div([],id='seniorhigh_ratio_enrollment',),
                                             html.Div([
                                                 html.Div([
-                                                    html.Span("Academic"),
-                                                    html.Span([], id="acad-count"),
-                                                    html.Span([], id="acad-percentage"),
+                                                    html.Span("Academic", className="shs-acad-title"),
+                                                    html.Div([
+                                                        html.Span([], id="acad-count", className="shs-count-text"),
+                                                        html.Span([], id="acad-percentage", className="shs-percentage-text"),
+                                                    ], className="shs-container upper"),                                                    
                                                 ], className="shs-academic"),
                                                 html.Div([
-                                                    html.Span("Non-academic"),
-                                                    html.Span([], id="non-acad-count"),
-                                                    html.Span([], id="non-acad-percentage"),
+                                                    html.Span("Non-academic", className="shs-acad-title"),
+                                                    html.Div([
+                                                        html.Span([], id="non-acad-count", className="shs-count-text"),
+                                                        html.Span([], id="non-acad-percentage", className="shs-percentage-text"),
+                                                    ], className="shs-container lower"),                                                    
                                                 ], className="shs-non-academic"),
                                             ], className="seniorhigh_ratio_enrollment_ind")
                                         ], className="shs-donut-container")
