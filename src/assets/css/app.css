@@ -30,8 +30,8 @@ body {
   z-index: 1;
 }
 .app-container .navigation .brand-section {
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
   text-align: center;
   display: flex;
   align-items: center;
@@ -89,7 +89,7 @@ body {
 }
 .app-container .navigation .menu-section .item-ctn .main-tab .nav-btn .text {
   padding-left: 1em;
-  color: #04508c;
+  color: #3C6382;
   display: flex;
   align-self: center;
   font-size: 1em;
@@ -394,7 +394,7 @@ body {
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-content: baseline;
   justify-content: space-between;
   padding: 0em 1em 1em 1em;
 }
@@ -415,8 +415,14 @@ body {
      -moz-user-select: none;
           user-select: none;
 }
+.content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-scope {
+  color: #04508c;
+  font-family: "Inter Bold";
+}
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-toggle {
   cursor: pointer;
+  display: flex;
+  align-self: center;
 }
 .content-wrapper > div:nth-of-type(1) > div:nth-of-type(1) .container .page-header .page-controls #year-toggle-box #year-toggle img {
   height: 1.5em;

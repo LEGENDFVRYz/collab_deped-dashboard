@@ -5,18 +5,25 @@
   display: flex;
 }
 .analytics-page button {
-  padding: 1em 2em;
+  padding: 0.35em 1.8em;
   border: 0;
-  border-radius: 2em;
+  border-radius: 0.5em;
   font-size: 1;
   font-family: "Inter Medium";
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .analytics-page .page-header #analytics-back-box #analytics-back-btn {
+  font-size: 1.1em;
   display: none;
   background-color: #037DEE;
   color: #FFFFFF;
+  align-items: center;
+}
+.analytics-page .page-header #analytics-back-box #analytics-back-btn img {
+  width: 27px;
+  height: 27px;
+  padding-right: 7px;
 }
 .analytics-page .page-header #analytics-back-box #analytics-back-btn:hover {
   background-color: #0264BE;
