@@ -94,10 +94,11 @@ def update_graph(trigger, data, mode):
     
     # Extract and group data
     if mode:
-        grouped_by_tracks = grouped_by_tracks.groupby('track', as_index=False)['counts'].mean()
         grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
         grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
+        
     else:
+        grouped_by_tracks = grouped_by_tracks.groupby('track', as_index=False)['counts'].mean()
         grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
         grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
 
@@ -170,13 +171,13 @@ def update_graph(trigger, data, mode):
     cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
     
     if mode:
+        # Count the number of students in each 'track'
+        track_counts = cleaned_df.groupby(['track'])['counts'].sum().reset_index(name='student_count')
+        
+    else:
         track_counts = cleaned_df.groupby(['year', 'track'])['counts'].sum().reset_index()
         track_counts = track_counts.groupby('track', as_index=False)['counts'].mean()
         track_counts.rename(columns={'counts': 'student_count'}, inplace=True)
-        
-    else:
-        # Count the number of students in each 'track'
-        track_counts = cleaned_df.groupby(['track'])['counts'].sum().reset_index(name='student_count')
         
     acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
     non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()

@@ -361,12 +361,11 @@ def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
     if mode:
-        mcoc_enrollment = FILTERED_DATA.groupby(['year', 'mod_coc'])['counts'].sum().reset_index().groupby('mod_coc', as_index=False)['counts'].mean()
-
-    else:
         mcoc_enrollment = FILTERED_DATA.groupby('mod_coc')['counts'].sum().reset_index()
 
-    
+    else:
+        mcoc_enrollment = FILTERED_DATA.groupby(['year', 'mod_coc'])['counts'].sum().reset_index().groupby('mod_coc', as_index=False)['counts'].mean()
+
     mcoc_enrollment_sorted = mcoc_enrollment.sort_values(by='counts', ascending=False)
 
     ranked_mcoc_chart = px.bar(
@@ -476,18 +475,21 @@ def update_graph(trigger, data, mode):
     )
     
     if mode:
+        # Just group directly by school-level and grade
+        query = (
+            FILTERED_DATA.groupby(['school-level', 'grade'], as_index=False)['counts'].sum()
+        )
+        
+        query = query[query['counts'] != 0]
+        
+    else:
         # Group by year and school-level, grade, then average over years
         query = (
             FILTERED_DATA.groupby(['year', 'school-level', 'grade'], as_index=False)['counts'].sum()
             .groupby(['school-level', 'grade'], as_index=False)['counts'].mean()
         )
-    else:
-        # Just group directly by school-level and grade
-        query = (
-            FILTERED_DATA.groupby(['school-level', 'grade'], as_index=False)['counts'].sum()
-        )
+        query['counts'] = query['counts'].round(0).astype(int)
 
-    query = query[query['counts'] != 0]
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
     query = query.sort_values('grade')
     query['formatted_counts'] = query['counts'].apply(smart_truncate_number)
