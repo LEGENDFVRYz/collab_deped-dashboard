@@ -96,64 +96,76 @@
                                 .plot-b-box2 {
                                     display: flex;
                                     flex: 1;
+                                    border: 1px solid #CCD8E3;
+                                    border-radius: 8px;
                               
                                 .total_enrollees {
                                     display: flex;  
                                     flex-direction: column;
                                     flex: 1;
-                                    color: $white;
+                                    color: #04508c;
                                     font-family: "Inter Bold";
                                     font-weight: bold;
-                                    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+                                    // text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     
     
                                     .total_label{
                                         display: flex;
-                                        justify-content: space-between;
+                                        // justify-content: space-between;
                                         //flex: 1;
                                         overflow: visible;
     
                                         .label_total_enrollees, .label_total_schools {
-                                            color: $white;
+                                            color: #04508c;
                                             font-family: "Inter Bold";
-                                            font-size: 15px;
+                                            font-size: 20px;
                                             padding-top: 1.5em;
-                                            width: 10px;
+                                            // width: 10px;
                                             
                                           }
     
                                         img {
                                             width: 40px;
-                                            height: 50px;
+                                            height: 40px;
                                             padding: 0px;
-                                            align-self: flex-end;
+                                            align-items: start;
                                         }
                                     }
                                     
                                     
                                     
                                     .glevel-count {
-                                      display: flex;
-                                      justify-content: space-between;
-                                    
-                              
-                                      .glevel-marker {
                                         display: flex;
-                                        align-self: center;
-                                        border-radius: 0.5em;
-                                        width: 10px;
-                                        height: 30px;
+                                        // align-items: center;
+                                        justify-content: space-between;
+                                        gap: 10px;
+
+                                        img {
+                                            width: 40px;
+                                            height: 50px;
+                                            padding: 0px;
+                                            align-items: start;
+                                        }
+                                                                        
                               
-                                        &.enrollees { background-color: #04508c; } // Custom color for enrollees
-                                        &.schools { background-color: #04508c; } // Custom color for schools
+                                    //   .glevel-marker {
+                                    //     display: flex;
+                                    //     align-self: center;
+                                    //     border-radius: 0.5em;
+                                    //     width: 10px;
+                                    //     height: 30px;
+                              
+                                    //     &.enrollees { background-color: #04508c; } // Custom color for enrollees
+                                    //     &.schools { background-color: #04508c; } // Custom color for schools
                                         
-                                      }
+                                    //   }
                               
-                                      .truncated_total_enrollees {
+                                    .truncated_total_enrollees,
+                                    .truncated_total_schools {
                                         display: flex;
                                         justify-content: flex-end;
                                         font-family: "Inter Bold";
-                                        font-size: 2.3em;
+                                        font-size: 2.6em;
                                       }
                                     }
                                     
@@ -162,7 +174,7 @@
                                         justify-content: flex-end;
                                         font-family: "Inter Medium Italic";
                                         font-size: 12px;
-                                        color: $white;
+                                        color: #04508c;
                                       }
     
                                     .raw_total_schools {
@@ -170,11 +182,76 @@
                                         justify-content: flex-end;
                                         font-family: "Inter Medium Italic";
                                         font-size: 12px;
-                                        color: $white;
+                                        color: #04508c;
                                       }
     
                                   }
                                 }
+                                .hi-total_enrollees {
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex: 1;
+                                    color: $white;
+                                    font-family: "Inter Bold";
+                                    font-weight: bold;
+                                    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+                                    .hi-total_label {
+                                        display: flex;
+                                        // justify-content: space-between;
+
+                                        .hi-label_total_enrollees {
+                                            color: #ffffff;
+                                            font-family: "Inter Bold";
+                                            font-size: 20px;
+                                            padding-top: 1.5em;
+                                            // width: 10px;
+                                        }
+
+                                        
+                                    }
+
+                                    .hi-glevel-count {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        gap: 10px; /* optional: adds spacing */
+
+                                        img {
+                                            width: 40px;
+                                            height: 50px;
+                                            padding: 0px;
+                                            align-items: start;
+                                        }
+
+                                        // .hi-glevel-marker {
+                                        //     display: flex;
+                                        //     align-self: center;
+                                        //     border-radius: 0.5em;
+                                        //     width: 10px;
+                                        //     height: 30px;
+
+                                        //     &.hi-enrollees { background-color: #EFF3F6; } // Different color to stand out
+                                        // }
+
+                                        .hi-truncated_total_enrollees {
+                                            display: flex;
+                                            justify-content: flex-end;
+                                            font-family: "Inter Bold";
+                                            font-size: 3em;
+                                            color: #ffffff;
+                                        }
+                                    }
+
+                                    .hi-raw_total_enrollees {
+                                        display: flex;
+                                        justify-content: flex-end;
+                                        font-family: "Inter Medium Italic";
+                                        font-size: 13px;
+                                        color: #e0f7fa;
+                                    }
+                                }
+
                               }
                               
                             

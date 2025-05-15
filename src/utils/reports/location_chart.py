@@ -9,6 +9,9 @@ import plotly.graph_objects as go
 from dash import dcc, html, callback, Output, Input, State, Patch
 from plotly.subplots import make_subplots 
 import os
+from rapidfuzz import process, fuzz
+import unicodedata
+import re
 
 import json
 from geojson_rewind import rewind
@@ -150,7 +153,12 @@ def update_graph(trigger, data):
         'F': '#e11c38',
     }
 
-    # Step 3: Create the stacked bar chart
+    # Add dynamic text labels inside the bar segments
+    gender_region['text_label'] = gender_region['counts'].apply(smart_truncate_number)
+    totals = gender_region.groupby(loc_scope)['counts'].sum().reset_index()
+    totals['text'] = totals['counts'].apply(smart_truncate_number)
+    
+    
     gender_region_fig = px.bar(
         gender_region,
         x='counts',
@@ -158,30 +166,58 @@ def update_graph(trigger, data):
         color='gender',
         orientation='h',
         barmode='stack',
+        text='text_label',  # <- Set dynamic text
         labels={
             'counts': 'Number of Enrollees',
-            # Removed 'region' label to prevent it from auto-setting y-axis title
             'gender': 'Gender'
         },
         color_discrete_map=brand_colors
     )
     
-    # Step 4: Calculate total per region for annotations
-    region_totals = gender_region.groupby(loc_scope, observed=True)['counts'].sum().reset_index()
+    gender_region_fig.update_traces(
+        textposition='inside',
+        insidetextanchor='end',
+        textfont=dict(
+            color='white',
+            family='Inter Bold',
+            size=12
+        ),
+        cliponaxis=False
+    )
 
-    # Step 5: Add truncated total annotations
-    for _, row in region_totals.iterrows():
-        short_text = smart_truncate_number(row['counts'])  # Your truncation logic
-        gender_region_fig.add_annotation(
-            x=row['counts'] + 1,
-            y=row[loc_scope],
-            text=short_text,
-            hovertext=str(row['counts']),
-            showarrow=False,
-            font=dict(color="#667889", family='Inter Bold'),
-            xanchor="left",
-            yanchor="middle",
-        )
+    
+    # # Step 3: Create the stacked bar chart
+    # gender_region_fig = px.bar(
+    #     gender_region,
+    #     x='counts',
+    #     y=loc_scope,
+    #     color='gender',
+    #     orientation='h',
+    #     barmode='stack',
+    #     labels={
+    #         'counts': 'Number of Enrollees',
+    #         # Removed 'region' label to prevent it from auto-setting y-axis title
+    #         'gender': 'Gender'
+    #     },
+    #     color_discrete_map=brand_colors
+    # )
+    
+    # # Step 4: Calculate total per region for annotations
+    # region_totals = gender_region.groupby(loc_scope, observed=True)['counts'].sum().reset_index()
+
+    # # Step 5: Add truncated total annotations
+    # for _, row in region_totals.iterrows():
+    #     short_text = smart_truncate_number(row['counts'])  # Your truncation logic
+    #     gender_region_fig.add_annotation(
+    #         x=row['counts'] + 1,
+    #         y=row[loc_scope],
+    #         text=short_text,
+    #         hovertext=str(row['counts']),
+    #         showarrow=False,
+    #         font=dict(color="#667889", family='Inter Bold'),
+    #         xanchor="left",
+    #         yanchor="middle",
+    #     )
 
     # Step 6: Customize layout (explicitly clear y-axis title)
     gender_region_fig.update_layout(
@@ -223,90 +259,182 @@ def update_graph(trigger, data):
 # #################################################################################
 # ##  --- CHART: enrollment density (students per location)
 # #################################################################################
+
 @callback(
     Output('location_choropleth-map', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
 )
-def update_province_choropleth_map(trigger, data):
+def update_municipality_choropleth_map(trigger, data):
+    # 1. Filter the DataFrame
     FILTERED_DF = smart_filter(data, enrollment_db_engine)
-    
+    FILTERED_DF = FILTERED_DF.groupby('municipality', as_index=False)['counts'].sum()
 
-    FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+    unique_municipalities = FILTERED_DF['municipality'].drop_duplicates().tolist()
+    print("Municipalities in DataFrame:", len(unique_municipalities))
+    for municipality in sorted(unique_municipalities):
+        print(municipality)
 
-    unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
-    for province in unique_provinces:
-        print(province)    
-        
-        # Print for debug
-    unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
-    print("Provinces in DataFrame:", len(unique_provinces))
-    for province in sorted(unique_provinces):
-        print(province)
+    # ----------------------------------------------------
+    # 2. Load and Combine All GeoJSON Files
+    # ----------------------------------------------------
 
-    # Folder where all region-wise GeoJSON files are stored
-    geojson_folder = "/Users/marke/Downloads/low/"
+    geojson_folder = "/Users/marke/Downloads/muni/"
     geojson_files = [
-        "provdists-region-100000000.0.001",
-        "provdists-region-1000000000.0.001",
-        "provdists-region-1100000000.0.001",
-        "provdists-region-1200000000.0.001",
-        "provdists-region-1300000000.0.001",
-        "provdists-region-1400000000.0.001",
-        "provdists-region-1600000000.0.001",
-        "provdists-region-1700000000.0.001",
-        "provdists-region-1900000000.0.001",
-        "provdists-region-200000000.0.001",
-        "provdists-region-300000000.0.001",
-        "provdists-region-400000000.0.001",
-        "provdists-region-500000000.0.001",
-        "provdists-region-600000000.0.001",
-        "provdists-region-700000000.0.001",
-        "provdists-region-800000000.0.001",
-        "provdists-region-900000000.0.001",
+        "ABRA.geojson", "AGUSAN DEL NORTE.geojson", "AGUSAN DEL SUR.geojson", "AKLAN.geojson", "ALBAY.geojson",
+        "ANTIQUE.geojson", "APAYAO.geojson", "AURORA.geojson", "BASILAN.geojson", "BATAAN.geojson",
+        "BATANES.geojson", "BATANGAS.geojson", "BENGUET.geojson", "BILIRAN.geojson", "BOHOL.geojson",
+        "BUKIDNON.geojson", "BULACAN.geojson", "CAGAYAN.geojson", "CAMARINES NORTE.geojson", "CAMARINES SUR.geojson",
+        "CAMIGUIN.geojson", "CAPIZ.geojson", "CATANDUANES.geojson", "CAVITE.geojson", "CEBU.geojson",
+        "CITY OF ISABELA.geojson", "COMPOSTELA VALLEY.geojson", "DAVAO DEL NORTE.geojson", "DAVAO DEL SUR.geojson",
+        "DAVAO ORIENTAL.geojson", "DINAGAT ISLANDS.geojson", "EASTERN SAMAR.geojson", "FIRST DISTRICT.geojson",
+        "FOURTH DISTRICT.geojson", "GUIMARAS.geojson", "IFUGAO.geojson", "ILOCOS NORTE.geojson", "ILOCOS SUR.geojson",
+        "ILOILO.geojson", "ISABELA.geojson", "KALINGA.geojson", "LA UNION.geojson", "LAGUNA.geojson",
+        "LANAO DEL NORTE.geojson", "LANAO DEL SUR.geojson", "LEYTE.geojson", "MAGUINDANAO.geojson",
+        "MARINDUQUE.geojson", "MASBATE.geojson", "MISAMIS OCCIDENTAL.geojson", "MISAMIS ORIENTAL.geojson",
+        "MOUNTAIN PROVINCE.geojson", "NEGROS OCCIDENTAL.geojson", "NEGROS ORIENTAL.geojson", "NORTH COTABATO.geojson",
+        "NORTHERN SAMAR.geojson", "NUEVA ECIJA.geojson", "NUEVA VIZCAYA.geojson", "OCCIDENTAL MINDORO.geojson",
+        "ORIENTAL MINDORO.geojson", "PALAWAN.geojson", "PAMPANGA.geojson", "PANGASINAN.geojson", "QUEZON.geojson",
+        "QUIRINO.geojson", "RIZAL.geojson", "ROMBLON.geojson", "SAMAR (WESTERN SAMAR).geojson", "SARANGANI.geojson",
+        "SECOND DISTRICT.geojson", "SIQUIJOR.geojson", "SORSOGON.geojson", "SOUTH COTABATO.geojson",
+        "SOUTHERN LEYTE.geojson", "SULTAN KUDARAT.geojson", "SULU.geojson", "SURIGAO DEL NORTE.geojson",
+        "SURIGAO DEL SUR.geojson", "TARLAC.geojson", "TAWI-TAWI.geojson", "THIRD DISTRICT.geojson",
+        "ZAMBALES.geojson", "ZAMBOANGA DEL NORTE.geojson", "ZAMBOANGA DEL SUR.geojson", "ZAMBOANGA SIBUGAY.geojson"
     ]
 
-    # Combine all province GeoJSONs into one FeatureCollection
     all_features = []
+
     for filename in geojson_files:
-        filepath = os.path.join(geojson_folder, filename + ".json")
+        filepath = os.path.join(geojson_folder, filename)
         with open(filepath) as f:
             geo = json.load(f)
-            geo = rewind(geo, rfc7946=False)  # Ensure proper winding
-            all_features.extend(geo['features'])
+
+            if geo.get("type") == "FeatureCollection":
+                all_features.extend(geo["features"])
+            elif geo.get("type") == "Feature":
+                all_features.append(geo)
+            elif geo.get("type") == "GeometryCollection":
+                for geometry in geo.get("geometries", []):
+                    feature = {
+                        "type": "Feature",
+                        "geometry": geometry,
+                        "properties": {}
+                    }
+                    all_features.append(feature)
+            else:
+                print(f"Unexpected GeoJSON type in {filename} → {geo.get('type')}")
 
     combined_geojson = {
         "type": "FeatureCollection",
         "features": all_features
     }
 
-    # Extract province names from GeoJSON
-    geo_provinces = [feature['properties']['adm2_en'] for feature in combined_geojson['features']]
-    print("Provinces in GeoJSON:", len(set(geo_provinces)))
-    print("Provinces in DataFrame:", set(FILTERED_DF['province']))
+    geo_municipalities = [
+        feature['properties']['MUNICIPALI']
+        for feature in combined_geojson['features']
+        if feature['properties'].get('MUNICIPALI')
+    ]
 
+    print("Municipalities in GeoJSON:", len(set(geo_municipalities)))
+    print("Sample GeoJSON names:", sorted(set(geo_municipalities))[:10])
 
-    # Normalize casing and whitespace
-    FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
-    geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
+    # ----------------------------------------------------
+    # 3. Normalize Municipality Names
+    # ----------------------------------------------------
 
+    def normalize_municipality(name):
+        if not name:
+            return ""
+        name = re.sub(r"\s*\(.*?\)", "", name).strip()
+        if name.lower().startswith("city of "):
+            name = name[8:] + " City"
+        elif name.lower().startswith("city "):
+            name = name[5:] + " City"
+        elif name.lower().startswith("cityof "):
+            name = name[7:] + " City"
 
-    # Keep only matching provinces
-    FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
+        name = unicodedata.normalize('NFKD', name)
+        name = ''.join(c for c in name if not unicodedata.combining(c))
+        return name.title()
+
+    df_normalized = [normalize_municipality(m) for m in unique_municipalities]
+    geo_normalized = [normalize_municipality(m) for m in geo_municipalities if m]
+
+    df_set = set(df_normalized)
+    geo_set = set(geo_normalized)
+
+    # ----------------------------------------------------
+    # 4. Matching Municipality Names
+    # ----------------------------------------------------
+
+    matches = sorted(df_set & geo_set)
+
+    in_df_not_in_geo = sorted(df_set - geo_set)
+
+    fuzzy_matches = []
+    for name in in_df_not_in_geo:
+        best_match, score, _ = process.extractOne(name, geo_set, scorer=fuzz.ratio)
+        if score >= 70:
+            fuzzy_matches.append((name, best_match, score))
+
+    print("\n🔍 Fuzzy Matches (Score ≥ 85):")
+    for original, matched, score in fuzzy_matches:
+        print(f" 🔁 {original} ↔ {matched} ({score}%)")
+
+    fuzzy_matched_names = {name for name, _, _ in fuzzy_matches}
+    remaining_unmatched = sorted(df_set - geo_set - fuzzy_matched_names)
+
+    print(f"\n❌ Still Unmatched ({len(remaining_unmatched)}):")
+    for m in remaining_unmatched:
+        print(" ❌", m)
+
+    # ----------------------------------------------------
+    # 5. Filter DataFrame to Matching Municipalities Only
+    # ----------------------------------------------------
+    FILTERED_DF['normalized_municipality'] = FILTERED_DF['municipality'].apply(normalize_municipality)
     
-    # 4. Plotly Choropleth
+    geo_municipalities_normalized = [normalize_municipality(m) for m in geo_municipalities if m]
+
+    FILTERED_DF = FILTERED_DF[
+        FILTERED_DF['normalized_municipality'].isin(geo_municipalities_normalized)
+    ]
+    
+    # Create a dictionary for fuzzy matched names
+    fuzzy_match_dict = {original: matched for original, matched, _ in fuzzy_matches}
+
+    # Update the `FILTERED_DF` with the fuzzy matched names
+    FILTERED_DF['final_municipality'] = FILTERED_DF['normalized_municipality'].apply(
+        lambda name: fuzzy_match_dict.get(name, name)  # Use fuzzy match if available
+    )
+
+    # Update GeoJSON municipality names to match final municipality names
+    geo_municipalities_final = [fuzzy_match_dict.get(name, name) for name in geo_municipalities_normalized]
+
+    # Filter DataFrame to final municipalities
+    FILTERED_DF = FILTERED_DF[FILTERED_DF['final_municipality'].isin(geo_municipalities_final)]
+    FILTERED_DF['final_municipality'] = FILTERED_DF['final_municipality'].str.upper()
+    # FILTERED_DF['normalized_municipality'] = FILTERED_DF['normalized_municipality'].str.upper()
+
+    print(set(FILTERED_DF['final_municipality']) - {
+        feature['properties']['MUNICIPALI'] for feature in combined_geojson['features']
+    })
+
+    
+    # ----------------------------------------------------
+    # Plot Choropleth with the final municipalities
+    # ----------------------------------------------------
+
     map_chart = px.choropleth(
         FILTERED_DF,
         geojson=combined_geojson,
-        locations='normalized_province',
-        featureidkey='properties.adm2_en',
+        locations='municipality',
+        featureidkey='properties.MUNICIPALI',
         color='counts',
-        hover_name=None,
-        hover_data=None,
+        hover_name='final_municipality',
+        hover_data=['counts'],
         color_continuous_scale='Viridis',
-        
     )
-    
+
     map_chart.update_traces(
         hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
     )
@@ -336,8 +464,7 @@ def update_province_choropleth_map(trigger, data):
         coloraxis_showscale=False,
         # dragmode=False,
     )
-
-
+    
     return dcc.Graph(
         figure=map_chart,
         style={'width': '100%', 'height': '100%'},
@@ -350,177 +477,122 @@ def update_province_choropleth_map(trigger, data):
             # 'showTips': False,        # Disable hover tips on modebar
         }
     )
+    
 
-
-
-# import os
-# import json
-# import plotly.express as px
-# from dash import dcc, Output, Input, State, callback
-# # from utils import smart_filter
-# from geojson_rewind import rewind
 
 # @callback(
 #     Output('location_choropleth-map', 'children'),
 #     Input('chart-trigger', 'data'),
 #     State('filtered_values', 'data'),
 # )
-# def update_municipality_choropleth_map(trigger, data):
-#     # 1. Filter the DataFrame
+# def update_province_choropleth_map(trigger, data):
 #     FILTERED_DF = smart_filter(data, enrollment_db_engine)
-#     FILTERED_DF = FILTERED_DF.groupby('municipality', as_index=False)['counts'].sum()
+    
 
-#     # 2. Load and combine all municipality-level GeoJSON files
-#     geojson_folder = "src/assets/geojson/municipalities"
+#     FILTERED_DF = FILTERED_DF.groupby('province', as_index=False)['counts'].sum()
+
+#     unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+#     for province in unique_provinces:
+#         print(province)    
+        
+#         # Print for debug
+#     unique_provinces = FILTERED_DF['province'].drop_duplicates().tolist()
+#     print("Provinces in DataFrame:", len(unique_provinces))
+#     for province in sorted(unique_provinces):
+#         print(province)
+
+#     # Folder where all region-wise GeoJSON files are stored
+#     geojson_folder = "/Users/marke/Downloads/low/"
 #     geojson_files = [
-#   "municities-provdist-1001300000.0.001.json",
-#   "municities-provdist-1001800000.0.001.json",
-#   "municities-provdist-1003500000.0.001.json",
-#   "municities-provdist-1004200000.0.001.json",
-#   "municities-provdist-1004300000.0.001.json",
-#   "municities-provdist-102800000.0.001.json",
-#   "municities-provdist-102900000.0.001.json",
-#   "municities-provdist-103300000.0.001.json",
-#   "municities-provdist-105500000.0.001.json",
-#   "municities-provdist-1102300000.0.001.json",
-#   "municities-provdist-1102400000.0.001.json",
-#   "municities-provdist-1102500000.0.001.json",
-#   "municities-provdist-1108200000.0.001.json",
-#   "municities-provdist-1108600000.0.001.json",
-#   "municities-provdist-1204700000.0.001.json",
-#   "municities-provdist-1206300000.0.001.json",
-#   "municities-provdist-1206500000.0.001.json",
-#   "municities-provdist-1208000000.0.001.json",
-#   "municities-provdist-1303900000.0.001.json",
-#   "municities-provdist-1307400000.0.001.json",
-#   "municities-provdist-1307500000.0.001.json",
-#   "municities-provdist-1307600000.0.001.json",
-#   "municities-provdist-1400100000.0.001.json",
-#   "municities-provdist-1401100000.0.001.json",
-#   "municities-provdist-1402700000.0.001.json",
-#   "municities-provdist-1403200000.0.001.json",
-#   "municities-provdist-1404400000.0.001.json",
-#   "municities-provdist-1408100000.0.001.json",
-#   "municities-provdist-1600200000.0.001.json",
-#   "municities-provdist-1600300000.0.001.json",
-#   "municities-provdist-1606700000.0.001.json",
-#   "municities-provdist-1606800000.0.001.json",
-#   "municities-provdist-1608500000.0.001.json",
-#   "municities-provdist-1704000000.0.001.json",
-#   "municities-provdist-1705100000.0.001.json",
-#   "municities-provdist-1705200000.0.001.json",
-#   "municities-provdist-1705300000.0.001.json",
-#   "municities-provdist-1705900000.0.001.json",
-#   "municities-provdist-1900700000.0.001.json",
-#   "municities-provdist-1903600000.0.001.json",
-#   "municities-provdist-1906600000.0.001.json",
-#   "municities-provdist-1907000000.0.001.json",
-#   "municities-provdist-1908700000.0.001.json",
-#   "municities-provdist-1908800000.0.001.json",
-#   "municities-provdist-1909900000.0.001.json",
-#   "municities-provdist-200900000.0.001.json",
-#   "municities-provdist-201500000.0.001.json",
-#   "municities-provdist-203100000.0.001.json",
-#   "municities-provdist-205000000.0.001.json",
-#   "municities-provdist-205700000.0.001.json",
-#   "municities-provdist-300800000.0.001.json",
-#   "municities-provdist-301400000.0.001.json",
-#   "municities-provdist-304900000.0.001.json",
-#   "municities-provdist-305400000.0.001.json",
-#   "municities-provdist-306900000.0.001.json",
-#   "municities-provdist-307100000.0.001.json",
-#   "municities-provdist-307700000.0.001.json",
-#   "municities-provdist-401000000.0.001.json",
-#   "municities-provdist-402100000.0.001.json",
-#   "municities-provdist-403400000.0.001.json",
-#   "municities-provdist-405600000.0.001.json",
-#   "municities-provdist-405800000.0.001.json",
-#   "municities-provdist-500500000.0.001.json",
-#   "municities-provdist-501600000.0.001.json",
-#   "municities-provdist-501700000.0.001.json",
-#   "municities-provdist-502000000.0.001.json",
-#   "municities-provdist-504100000.0.001.json",
-#   "municities-provdist-506200000.0.001.json",
-#   "municities-provdist-600400000.0.001.json",
-#   "municities-provdist-600600000.0.001.json",
-#   "municities-provdist-601900000.0.001.json",
-#   "municities-provdist-603000000.0.001.json",
-#   "municities-provdist-604500000.0.001.json",
-#   "municities-provdist-607900000.0.001.json",
-#   "municities-provdist-701200000.0.001.json",
-#   "municities-provdist-702200000.0.001.json",
-#   "municities-provdist-704600000.0.001.json",
-#   "municities-provdist-706100000.0.001.json",
-#   "municities-provdist-802600000.0.001.json",
-#   "municities-provdist-803700000.0.001.json",
-#   "municities-provdist-804800000.0.001.json",
-#   "municities-provdist-806000000.0.001.json",
-#   "municities-provdist-806400000.0.001.json",
-#   "municities-provdist-807800000.0.001.json",
-#   "municities-provdist-907200000.0.001.json",
-#   "municities-provdist-907300000.0.001.json",
-#   "municities-provdist-908300000.0.001.json",
-#   "municities-provdist-990100000.0.001.json"
-
-
+#         "provdists-region-100000000.0.001",
+#         "provdists-region-1000000000.0.001",
+#         "provdists-region-1100000000.0.001",
+#         "provdists-region-1200000000.0.001",
+#         "provdists-region-1300000000.0.001",
+#         "provdists-region-1400000000.0.001",
+#         "provdists-region-1600000000.0.001",
+#         "provdists-region-1700000000.0.001",
+#         "provdists-region-1900000000.0.001",
+#         "provdists-region-200000000.0.001",
+#         "provdists-region-300000000.0.001",
+#         "provdists-region-400000000.0.001",
+#         "provdists-region-500000000.0.001",
+#         "provdists-region-600000000.0.001",
+#         "provdists-region-700000000.0.001",
+#         "provdists-region-800000000.0.001",
+#         "provdists-region-900000000.0.001",
 #     ]
 
-#     combined_features = []
+#     # Combine all province GeoJSONs into one FeatureCollection
+#     all_features = []
+#     for filename in geojson_files:
+#         filepath = os.path.join(geojson_folder, filename + ".json")
+#         with open(filepath) as f:
+#             geo = json.load(f)
+#             geo = rewind(geo, rfc7946=False)  # Ensure proper winding
+#             all_features.extend(geo['features'])
 
-#     for file in geojson_files:
-#         path = os.path.join(geojson_folder, file)
-#         with open(path) as f:
-#             gj = json.load(f)
-#             combined_features.extend(gj['features'])
-
-#     geojson = {
+#     combined_geojson = {
 #         "type": "FeatureCollection",
-#         "features": combined_features
+#         "features": all_features
 #     }
 
-#     geojson = rewind(geojson, rfc7946=False)
+#     # Extract province names from GeoJSON
+#     geo_provinces = [feature['properties']['adm2_en'] for feature in combined_geojson['features']]
+#     print("Provinces in GeoJSON:", len(set(geo_provinces)))
+#     print("Provinces in DataFrame:", set(FILTERED_DF['province']))
 
-#     # 3. Plot the Choropleth Map
+
+#     # Normalize casing and whitespace
+#     FILTERED_DF['normalized_province'] = FILTERED_DF['province'].str.strip().str.title()
+#     geo_provinces_normalized = [prov.strip().title() for prov in geo_provinces if prov]
+
+
+#     # Keep only matching provinces
+#     FILTERED_DF = FILTERED_DF[FILTERED_DF['normalized_province'].isin(geo_provinces_normalized)]
+    
+#     # 4. Plotly Choropleth
 #     map_chart = px.choropleth(
 #         FILTERED_DF,
-#         geojson=geojson,
-#         locations='municipality',
-#         featureidkey='adm3_en',
+#         geojson=combined_geojson,
+#         locations='normalized_province',
+#         featureidkey='properties.adm2_en',
 #         color='counts',
 #         hover_name=None,
 #         hover_data=None,
 #         color_continuous_scale='Viridis',
+        
 #     )
-
+    
 #     map_chart.update_traces(
 #         hovertemplate="<b>%{location}</b><br>Total Enrollment: %{z:,}<extra></extra>"
 #     )
 
+
 #     map_chart.update_geos(
 #         visible=False,
+#         # showcountries=False,
+#         # showcoastlines=False,
 #         showland=True,
-#         fitbounds="locations",
-#         center={'lat': 12.8797, 'lon': 121.7740},
+#         fitbounds="locations",        # Ensures focus on actual geojson features
+#         center = {'lat':12.8797, 'lon':121.7740},
 #         resolution=50,
-#         lataxis_range=[4, 21],
-#         lonaxis_range=[115, 128],
+#         lataxis_range=[4, 21],        # Latitude range for PH
+#         lonaxis_range=[115, 128],  # Longitude range for PH
 #     )
 
+
+
 #     map_chart.update_layout(
+#         # title="Enrollment by Region",
+#         # title_font=dict(size=20, family='Inter', color='#3C6382'),
+#         # title_x=0.5,
 #         margin={"r": 0, "t": 0, "l": 0, "b": 0},
 #         paper_bgcolor='white',
 #         plot_bgcolor='rgba(0,0,0,0)',
 #         coloraxis_showscale=False,
+#         # dragmode=False,
 #     )
-
-#     return dcc.Graph(
-#         figure=map_chart,
-#         style={'width': '100%', 'height': '100%'},
-#         config={
-#             'responsive': True,
-#         }
-#     )
-
 
 # import json
 # import pandas as pd
@@ -1417,28 +1489,30 @@ def update_graph(trigger, data):
             y=-0.9,
             xanchor='center',
             x=0.5,
-            font=dict(size=14),
+            font=dict(size=12),
             bgcolor='rgba(0,0,0,0)',
             bordercolor='rgba(0,0,0,0)'
         ),
         xaxis=dict(
             title=None,         # Remove x-axis title
             showgrid=False,
-            tickangle=-45
+            tickangle=-45,
+            tickfont=dict(size=10, color="#667889"),
         ),
         yaxis=dict(
             title=None,         # Remove y-axis title
             showgrid=False,
             tickformat='.1s',
-            tickprefix=''
+            tickprefix='',
+            tickfont=dict(size=10, color="#667889"),
         ),
         bargap=0.1
     )
 
-    sector_chart.update_traces(
-        marker_line_color='#FFFFFF',
-        marker_line_width=2
-    )
+    # sector_chart.update_traces(
+    #     marker_line_color='#FFFFFF',
+    #     marker_line_width=2
+    # )
 
     return dcc.Graph(figure=sector_chart)
 
@@ -1514,10 +1588,13 @@ def update_graph(trigger, data):
                 "#074889", "#0C6DC1", "#1389F0", "#00CCFF", 
                 "#00F2FF", "#89FE2A", "#F9F521", "#FFB700"
             ],
+            name='',  # <--- add this line
             hovertemplate='Region: %{x}<br>Track: %{y}<br>Enrollees: %{z}',
-            # colorbar=dict(title="Students Enrolled"),
+            colorbar=dict(
+                # title="Students Enrolled"
+                len=1.06
+                ),
             zmin=0,
-            # colorbar=dict(title="Students Enrolled")
         ),
         row=1, col=1
     )
@@ -1532,6 +1609,7 @@ def update_graph(trigger, data):
                 "#074889", "#0C6DC1", "#1389F0", "#00CCFF", 
                 "#00F2FF", "#89FE2A", "#F9F521", "#FFB700"
             ],
+            name='',  # <--- add this line
             showscale=False,
             hovertemplate='Region: %{x}<br>Strand: %{y}<br>Enrollees: %{z}',
             zmin=0, # Only show one colorbar
@@ -1544,9 +1622,9 @@ def update_graph(trigger, data):
         height=400,
         width=600,
         title_text=None,
-        xaxis2=dict(title=None, tickangle=45),
-        yaxis=dict(title=None),
-        yaxis2=dict(title=None),
+        xaxis2=dict(title=None, tickangle=-45, tickfont=dict(size=10, color="#9DADBD")),
+        yaxis=dict(title=None, tickfont=dict(size=10, color="#667889")),
+        yaxis2=dict(title=None,tickfont=dict(size=10, color="#667889")),
         margin=dict(l=20, r=20, t=40, b=20)
     )
 
@@ -1586,11 +1664,11 @@ def update_graph(trigger, data):
     df_grouped = FILTERED_DATA.groupby(loc_scope, as_index=False, observed=True)['counts'].sum()
 
     # Median enrollees per school
-    median_enrollees_per_school = int(df_grouped['counts'].median())
+    median_enrollees_per_school = int(df_grouped['counts'].mean())
     
     truncated_total_enrollees = smart_truncate_number(median_enrollees_per_school)
 
-    return f"{median_enrollees_per_school:,} average enrollees", truncated_total_enrollees
+    return f"{median_enrollees_per_school:,} enrollees", truncated_total_enrollees
 
 
 
