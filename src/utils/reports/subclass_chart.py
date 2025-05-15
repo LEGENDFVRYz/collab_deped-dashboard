@@ -2,6 +2,7 @@ import time
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import statsmodels.api as sm
 import plotly.graph_objects as go
 from dash import dcc, callback, Output, Input, State, Patch, html
 from plotly.subplots import make_subplots 
@@ -92,16 +93,38 @@ def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
     FILTERED_DATA = FILTERED_DATA[['sector', 'sub_class', 'counts']]
 
-    highlighted_classes = ['DepED Managed', 'Sectarian', 'Non-Sectarian']
+    #highlighted_classes = ['DepED Managed', 'Sectarian', 'Non-Sectarian']
     FILTERED_DATA['sub_class'] = FILTERED_DATA['sub_class'].astype('str')
     
     # Label others
-    FILTERED_DATA['sub_class_grouped'] = FILTERED_DATA['sub_class'].apply(
-        lambda x: x if x in highlighted_classes else 'Others'
-    )
+    #FILTERED_DATA['sub_class_grouped'] = FILTERED_DATA['sub_class'].apply(
+    #    lambda x: x if x in highlighted_classes else 'Others'
+    #)
     
+    ##
+    FILTERED_DATA = FILTERED_DATA.groupby('sub_class', as_index=False)['counts'].sum()
+    total_count = FILTERED_DATA['counts'].sum()
+
+    FILTERED_DATA['percentage'] = (FILTERED_DATA['counts'] / total_count) * 100
+    FILTERED_DATA['percentage'] = FILTERED_DATA['percentage'].round(2)
+
+    main = FILTERED_DATA[FILTERED_DATA['percentage'] >= 1].copy()
+    others = FILTERED_DATA[FILTERED_DATA['percentage'] < 1]
+
+    if not others.empty:
+        others_count = others['counts'].sum()
+        FILTERED_DATA['sub_class_grouped'] = FILTERED_DATA['sub_class'].apply(
+            lambda x: x if x in main['sub_class'].values else 'Others'
+        )
+        # Group by the new label and sum counts
+        grouped_data = FILTERED_DATA.groupby('sub_class_grouped', as_index=False)['counts'].sum()
+    else:
+        # Use main directly and rename for consistency
+        grouped_data = main[['sub_class', 'counts']].copy()
+        grouped_data = grouped_data.rename(columns={'sub_class': 'sub_class_grouped'})
+
+
     # --- Main Pie Chart ---
-    grouped_data = FILTERED_DATA.groupby('sub_class_grouped', as_index=False)['counts'].sum()
     
     total_counts = grouped_data['counts'].sum()
 
@@ -122,9 +145,15 @@ def update_graph(trigger, data):
         names='sub_class_grouped',
         color='sub_class_grouped',
         color_discrete_map={
-            'DepED Managed': '#023F77',
-            'Sectarian': '#9ACBF8',
-            'Non-Sectarian': '#0377E2',
+            'DOST Managed': '#012C53',                 # $primary-shades-1
+            'DepED Managed': '#023F77',                # $primary-shades-2
+            'LUC Managed': '#02519B',                  # $primary-shades-3
+            'Local International School': '#0264BE',   # $primary-shades-4
+            'Non-Sectarian': '#0377E2',                # $primary-shades-5
+            'Other GA Managed': '#2991F1',             # $primary-shades-6
+            'SUC Managed': '#4FA4F3',                  # $primary-shades-7
+            'School Abroad': '#74B8F6',                # $primary-shades-8
+            'Sectarian': '#9ACBF8',                    # $primary-shades-9
             'Others': '#CCCCCC'
         }
     )
@@ -190,7 +219,9 @@ def update_graph(trigger, data):
         x='counts',
         y='sub_class',
         orientation='h',
-        color_discrete_sequence=px.colors.qualitative.Pastel
+        color_discrete_sequence=['#023F77','#02519B','#0264BE',
+                                '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
+        #px.colors.qualitative.Pastel
     )
 
     others_bar.update_layout(
@@ -310,29 +341,31 @@ def update_graph(trigger, data, mode):
     student_school_ratio = px.scatter(subclass_df1, 
         x="counts", 
         y="school_count",
+        trendline="ols", 
+        trendline_scope="overall",
         color='sub_class',
         color_discrete_sequence=['#012C53','#023F77','#02519B','#0264BE',
                                 '#0377E2','#2991F1','#4FA4F3','#74B8F6','#9ACBF8'],
     )
     student_school_ratio.update_traces(marker=dict(size=12))
 
-    student_school_ratio.update_xaxes(
-        type='log',
-        showline=True,  # Show x-axis line
-        linecolor='black',  # Color of the x-axis line
-        linewidth=1  # Thickness of the x-axis line
-    )
-
-    student_school_ratio.update_yaxes(
-        type='log',
-        showline=True,  # Show y-axis line
-        linecolor='black',  # Color of the y-axis line
-        linewidth=1  # Thickness of the y-axis line
-    )
-
     student_school_ratio.update_layout(
         xaxis_title='Number of Enrolled Students',
         yaxis_title='Number of Schools',
+        xaxis=dict(
+            type='log',
+            showline=True,
+            linecolor='black',
+            linewidth=1,
+            tickvals=[100, 1000, 10000, 100000, 1000000, 10000000],
+            ticktext=["100", "1000", "10K", "100k", "1M", "10M"],
+        ),
+        yaxis=dict(
+            type='log',
+            showline=True,
+            linecolor='black',
+            linewidth=1,
+        ),
         margin={"l": 0, "r": 0, "t": 0, "b": 0},
         legend_title_text="",  # This removes the legend title
         legend={
@@ -375,7 +408,7 @@ def update_graph(trigger, n_clicks, data):
     # Check if the button is clicked an odd or even number of times
     if n_clicks % 2 == 0:
         xaxis_type = 'log'
-        xaxis_tag = " Logarithm ▼ "
+        xaxis_tag = " Logarithmic ▼ "
     else:
         xaxis_type = 'linear'
         xaxis_tag = " Linear ▼ "
@@ -496,9 +529,9 @@ def update_graph(trigger, n_clicks, data):
             x=subclass_df1['school_count'],
             y=subclass_df1['sub_class'],
             orientation='h',
-            text=subclass_df1['school_count'],
+            text=[f"<b>{val}</b>" for val in subclass_df1['school_count']],
             name="Total",
-            marker_color="#023f77",
+            marker_color="#04508c",
             showlegend=False
         ),
         row=1, col=3
@@ -598,10 +631,10 @@ def update_graph(trigger, data):
 
     sector_affiliation = go.Figure(data=[go.Table(
         header=dict(
-            values=["Subclass", "Sector", "No. of Schools", "Total Enrollees"],
-            fill_color='#EA6074',
+            values=["<b>Subclass</b>", "<b>Sector</b>", "<b>No. of Schools</b>", "<b>Total Enrollees</b>"],
+            fill_color='#74B8F6',
             align='left',
-            font=dict(size=12),
+            font=dict(size=12, family='Inter-Bold, sans-serif', color='#3C6382'),
             line=dict(width=1),
             height=40
         ),
@@ -612,9 +645,9 @@ def update_graph(trigger, data):
                 subclass_df4['school_count'],
                 subclass_df4['total_enrollees']
             ],
-            fill_color='#F8C6CD',
+            fill_color='#C0DFFB',
             align='left',
-            font=dict(size=12),
+            font=dict(size=12, family='Inter-Medium, sans-serif', color='#667889'),
             line=dict(width=1),
             height=35
         )

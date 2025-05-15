@@ -36,7 +36,7 @@ layout = html.Div([
     
     ## -- Standard: Page Content Header
     html.Div([
-        html.Div([html.H1('Analytical Tools')]),
+        html.Div([html.H1('Enrollment Insights')]),
 
         html.Div(
             [
@@ -47,7 +47,11 @@ layout = html.Div([
                 ], id="year-toggle-box"),
                 
                 ## Filter options
-                html.Div([html.Button('<== FILTER MENU', id='analytics-back-btn', n_clicks=0)], id="analytics-back-box"),
+                html.Div([
+                    html.Button([
+                        html.Img(src="/assets/images/icons_navigation/filter.svg"),
+                        'Filter'
+                    ], id='analytics-back-btn', n_clicks=0)],id="analytics-back-box"),
             ]
         , className="page-controls")
     ], className='page-header'),

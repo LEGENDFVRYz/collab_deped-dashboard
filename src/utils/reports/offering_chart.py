@@ -1,5 +1,6 @@
 import time
 from turtle import title
+from unicodedata import category
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -80,6 +81,18 @@ from src.utils.extras_utils import smart_truncate_number
 
 @callback(
     Output('offering_number-of-schools', 'children'),
+    Output('purely-es-count', 'children'),
+    Output('purely-es-percentage', 'children'),
+    Output('purely-jhs-count', 'children'),
+    Output('purely-jhs-percentage', 'children'),
+    Output('purely-shs-count', 'children'),
+    Output('purely-shs-percentage', 'children'),
+    Output('es-and-jhs-count', 'children'),
+    Output('es-and-jhs-percentage', 'children'),
+    Output('jhs-with-shs-count', 'children'),
+    Output('jhs-with-shs-percentage', 'children'),
+    Output('all-offering-count', 'children'),
+    Output('all-offering-percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -94,8 +107,30 @@ def update_graph(trigger, data):
     # Drop duplicate schools
     cleaned_FILTERED_DF = FILTERED_DATA.drop_duplicates(subset='beis_id')
     
-    # total_school_count = len(cleaned_FILTERED_DF)
-    # shs_percentage = f"{(shs_total / total_school_count * 100):.1f}%" if total_school_count else "0%"
+    # Total unique schools
+    total_school_count = len(cleaned_FILTERED_DF)
+
+    # Count by school type (mod_coc)
+    level_counts = cleaned_FILTERED_DF['mod_coc'].value_counts()
+
+    # Extract counts safely
+    purely_es_count = level_counts.get('Purely ES', 0)
+    purely_jhs_count = level_counts.get('Purely JHS', 0)
+    purely_shs_count = level_counts.get('Purely SHS', 0)
+    es_and_jhs_count = level_counts.get('ES and JHS', 0)
+    jhs_with_shs_count = level_counts.get('JHS with SHS', 0)
+    all_offering_count = level_counts.get('All Offering', 0)
+
+    # Percentages
+    def percent(count):
+        return f"{(count / total_school_count * 100):.1f}%" if total_school_count else "0%"
+
+    purely_es_percentage = percent(purely_es_count)
+    purely_jhs_percentage = percent(purely_jhs_count)
+    purely_shs_percentage = percent(purely_shs_count)
+    es_and_jhs_percentage = percent(es_and_jhs_count)
+    jhs_with_shs_percentage = percent(jhs_with_shs_count)
+    all_offering_percentage = percent(all_offering_count)
 
     # Order inner donut
     desired_order = [
@@ -156,6 +191,23 @@ def update_graph(trigger, data):
     )
     
     number_of_schools_mcoc_chart
+    
+    return (
+        dcc.Graph(
+        figure=number_of_schools_mcoc_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"}),
+        f"{purely_es_count} schools",
+        purely_es_percentage,
+        f"{purely_jhs_count} schools",
+        purely_jhs_percentage,
+        f"{purely_shs_count} schools",
+        purely_shs_percentage,
+        f"{es_and_jhs_count} schools",
+        es_and_jhs_percentage,
+        f"{jhs_with_shs_count} schools",
+        jhs_with_shs_percentage,
+        f"{all_offering_count} schools",
+        all_offering_percentage,
+    )
 
     # number_of_schools_mcoc = FILTERED_DATA.groupby('mod_coc')['beis_id'].nunique().reset_index()
     # number_of_schools_mcoc.rename(columns={'beis_id': 'school_count'}, inplace=True)
@@ -301,13 +353,18 @@ def update_graph(trigger, data):
     Output('offering_ranked-mcoc', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
+    State('is-all-year', 'data'),
     # prevent_initial_call=True
 )
 
-def update_graph(trigger, data):
+def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    mcoc_enrollment = FILTERED_DATA.groupby('mod_coc')['counts'].sum().reset_index()
+    if mode:
+        mcoc_enrollment = FILTERED_DATA.groupby('mod_coc')['counts'].sum().reset_index()
+
+    else:
+        mcoc_enrollment = FILTERED_DATA.groupby(['year', 'mod_coc'])['counts'].sum().reset_index().groupby('mod_coc', as_index=False)['counts'].mean()
 
     mcoc_enrollment_sorted = mcoc_enrollment.sort_values(by='counts', ascending=False)
 
@@ -403,10 +460,11 @@ def update_graph(trigger, data):
     Output('offering-lowest-count', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
+    State('is-all-year', 'data'),
     # prevent_initial_call=True
 )
 
-def update_graph(trigger, data):
+def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
     order = ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12']
@@ -415,9 +473,24 @@ def update_graph(trigger, data):
         lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else (
             'SHS' if x in ['G11', 'G12'] else 'ELEM')
     )
+    
+    if mode:
+        # Just group directly by school-level and grade
+        query = (
+            FILTERED_DATA.groupby(['school-level', 'grade'], as_index=False)['counts'].sum()
+        )
+        
+        query = query[query['counts'] != 0]
+        
+    else:
+        # Group by year and school-level, grade, then average over years
+        query = (
+            FILTERED_DATA.groupby(['year', 'school-level', 'grade'], as_index=False)['counts'].sum()
+            .groupby(['school-level', 'grade'], as_index=False)['counts'].mean()
+        )
+        query = query[query['counts'] != 0]
+        query['counts'] = query['counts'].round(0).astype(int)
 
-    query = FILTERED_DATA.groupby(['school-level','grade'], as_index=False)[['counts']].sum()
-    query = query[query['counts'] != 0]
     query['grade'] = pd.Categorical(query['grade'], categories=order, ordered=True)
     query = query.sort_values('grade')
     query['formatted_counts'] = query['counts'].apply(smart_truncate_number)
@@ -638,30 +711,65 @@ def update_graph(trigger, data):
 # ##  --- INDICATOR: Locations with the Highest and Lowest Number of Offerings
 # #################################################################################
 @callback(
-    Output('offering_location-extremes', 'children'),
+    Output('offering-highest-elem', 'children'),
+    Output('offering-highest-jhs', 'children'),
+    Output('offering-highest-shs', 'children'),
+    Output('offering-highest-elem-count', 'children'),
+    Output('offering-highest-jhs-count', 'children'),
+    Output('offering-highest-shs-count', 'children'),
+    Output('offering-lowest-elem', 'children'),
+    Output('offering-lowest-jhs', 'children'),
+    Output('offering-lowest-shs', 'children'),
+    Output('offering-lowest-elem-count', 'children'),
+    Output('offering-lowest-jhs-count', 'children'),
+    Output('offering-lowest-shs-count', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
 )
 def update_graph(trigger, data):
+    # Apply smart filter
     FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
+    # Derive school level
     FILTERED_DATA['school_level'] = FILTERED_DATA['grade'].apply(
         lambda x: 'ELEM' if x in ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6']
         else ('JHS' if x in ['G7', 'G8', 'G9', 'G10']
         else ('SHS' if x in ['G11', 'G12'] else 'UNKNOWN'))
     )
-
     FILTERED_DATA = FILTERED_DATA[FILTERED_DATA['school_level'] != 'UNKNOWN']
 
+    # Group by region and school level
     grouped = FILTERED_DATA.groupby(['school_level', 'region'])['counts'].sum().reset_index()
+
+    # Get highest and lowest by level
     highest = grouped.loc[grouped.groupby('school_level')['counts'].idxmax()].reset_index(drop=True)
     lowest = grouped.loc[grouped.groupby('school_level')['counts'].idxmin()].reset_index(drop=True)
 
-    high_low_combined = pd.concat([ 
+    high_low_combined = pd.concat([
         highest.assign(rank='Highest'),
         lowest.assign(rank='Lowest')
     ], ignore_index=True)
 
+    # Function to extract values safely
+    def get_by_level(df, level, rank='Highest'):
+        row = df[(df['school_level'] == level) & (df['rank'] == rank)]
+        if not row.empty:
+            region = row.iloc[0]['region']
+            count = row.iloc[0]['counts']
+            return region, f"{count:,}"
+        else:
+            return "N/A", "0"
+
+    # Extract all values
+    highest_elem, count_highest_elem = get_by_level(high_low_combined, 'ELEM', 'Highest')
+    highest_jhs, count_highest_jhs = get_by_level(high_low_combined, 'JHS', 'Highest')
+    highest_shs, count_highest_shs = get_by_level(high_low_combined, 'SHS', 'Highest')
+
+    lowest_elem, count_lowest_elem = get_by_level(high_low_combined, 'ELEM', 'Lowest')
+    lowest_jhs, count_lowest_jhs = get_by_level(high_low_combined, 'JHS', 'Lowest')
+    lowest_shs, count_lowest_shs = get_by_level(high_low_combined, 'SHS', 'Lowest')
+
+    # Create indicator chart
     indicator_chart = go.Figure()
 
     # Section headers
@@ -678,7 +786,6 @@ def update_graph(trigger, data):
         xref="paper", yref="paper"
     )
 
-    # Add indicators
     for _, row in high_low_combined.iterrows():
         row_position = 0 if row['rank'] == 'Highest' else 1
         column_position = {'ELEM': 0, 'JHS': 1, 'SHS': 2}.get(row['school_level'], 2)
@@ -691,28 +798,42 @@ def update_graph(trigger, data):
             mode='number',
             value=row['counts'],
             title={'text': title_text},
-            number={ 
+            number={
                 'valueformat': '.2s',
                 'font': {'size': 42, 'color': '#1B4F72'}
             },
             domain={'row': row_position, 'column': column_position}
         ))
 
+    # Layout settings
     indicator_chart.update_layout(
         grid={'rows': 2, 'columns': 3, 'pattern': "independent"},
         template="plotly_white",
-        margin={"l": 0, "r": 0, "t": 0, "b": 0},
-        title={
-            # 'text': "<b>Regions with Highest and Lowest Offerings <br>per School Level</b>",
-            'x': 0.5,
-            'xanchor': 'center',
-            'font': {'size': 18, 'family': 'Inter, sans-serif', 'color': '#1B4F72'}
-        },
+        margin=dict(l=10, r=10, t=30, b=10),
         plot_bgcolor="#FFFFFF",
         font={'family': 'Inter, sans-serif', 'size': 13, 'color': '#3C6382'}
     )
 
-    return dcc.Graph(figure=indicator_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+    # Return all values to outputs
+    return (
+        highest_elem,
+        highest_jhs,
+        highest_shs,
+
+        count_highest_elem,
+        count_highest_jhs,
+        count_highest_shs,
+
+        lowest_elem,
+        lowest_jhs,
+        lowest_shs,
+
+        count_lowest_elem,
+        count_lowest_jhs,
+        count_lowest_shs
+    )
+
 
 
 # #################################################################################
@@ -723,8 +844,76 @@ def update_graph(trigger, data):
 # ##  --- INDICATOR: Total Number of Enrollees Across All MCOC Types
 # #################################################################################
 
+from plotly import graph_objects as go
+
 @callback(
-    Output('offering_enrollees_num', 'children'),
+    Output('fig_offering', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+
+    # Step 1: Map mod_coc to number of offerings
+    offering_map = {
+    'Purely ES': 'Single Level Only',
+    'Purely JHS': 'Single Level Only',
+    'Purely SHS': 'Single Level Only',
+    'ES and JHS': 'Two Levels (Partial K–12)',
+    'JHS with SHS': 'Two Levels (Partial K–12)',
+    'All Offering': 'Complete K–12'
+    }
+    FILTERED_DATA['offerings'] = FILTERED_DATA['mod_coc'].map(offering_map)
+
+    # Step 2: Group by school and calculate total enrollment and offerings
+    school_group = FILTERED_DATA.groupby('beis_id').agg({
+        'counts': 'sum',
+        'offerings': 'first'  # assumes each school has a single mod_coc value
+    }).reset_index()
+
+    # Step 3: Group by number of offerings and calculate average enrollment
+    avg_enrollment = school_group.groupby('offerings')['counts'].mean().reset_index()
+    avg_enrollment.columns = ['Number of Offerings', 'Average Enrollment per School']
+
+    # Define a gradient color scale from light to full #FFBF5F (orange)
+    gradient_colors = ['#FFE5B4', '#FFD183', '#FFBF5F']  # Light to full tone
+    num_bars = len(avg_enrollment)
+    colors = gradient_colors if num_bars <= 3 else [
+        f'rgba(255,191,95,{opacity})' for opacity in 
+        [round(0.5 + 0.5 * (i / (num_bars - 1)), 2) for i in range(num_bars)]
+    ]
+
+    # Step 4: Plot using go.Bar
+    fig_offering = go.Figure(
+        data=go.Bar(
+            x=avg_enrollment['Number of Offerings'],
+            y=avg_enrollment['Average Enrollment per School'],
+            text=avg_enrollment['Average Enrollment per School'].round(1),
+            textposition='auto',
+            marker_color=colors
+        )
+    )
+
+    # Layout styling
+    fig_offering.update_layout(
+        autosize=True,
+        title=None,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis_title='Number of Offerings',
+        yaxis_title='Avg Enrollment',
+        margin=dict(t=0, b=0, l=0, r=0),
+    )
+
+    return dcc.Graph(figure=fig_offering, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+
+
+# #################################################################################
+
+@callback(
+    Output('offering_newschools_chart', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
     # prevent_initial_call=True
@@ -733,56 +922,157 @@ def update_graph(trigger, data):
 def update_graph(trigger, data):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
 
-    grouped_by_MCOC= FILTERED_DATA.groupby('mod_coc', as_index=False)['counts'].sum()
-    grouped_by_MCOC
+    # Count the number of *new* unique schools per year per program type
+    new_schools = FILTERED_DATA.drop_duplicates(subset=['beis_id', 'mod_coc']).groupby(['year', 'mod_coc']).size().reset_index(name='num_new_schools')
 
-    total_All_Offering = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "All Offering", 'counts'].values[0]
-    total_All_Offering = (total_All_Offering)
-
-    total_ES_JHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "ES and JHS", 'counts'].values[0]
-    total_ES_JHS = (total_ES_JHS)
-
-    total_JHS_SHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "JHS with SHS", 'counts'].values[0]
-    total_JHS_SHS = (total_JHS_SHS)
-
-    total_Pure_ES = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely ES", 'counts'].values[0]
-    total_Pure_ES = (total_Pure_ES)
-
-    total_Pure_JHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely JHS", 'counts'].values[0]
-    total_Pure_JHS = (total_Pure_JHS)
-
-    total_Pure_SHS = grouped_by_MCOC.loc[grouped_by_MCOC["mod_coc"] == "Purely SHS", 'counts'].values[0]
-    total_Pure_SHS = (total_Pure_SHS)
-
-    mod_coc_categories = ["All Offering", "ES and JHS", "JHS with SHS", "Purely ES", "Purely JHS", "Purely SHS"]
-    counts = [total_All_Offering, total_ES_JHS, total_JHS_SHS, total_Pure_ES, total_Pure_JHS, total_Pure_SHS]
-
-    header_color = '#74B8F6'       
-    cell_color = '#D6E9FA'        
-
-    table_fig = go.Figure(data=[go.Table(
-        header=dict(
-            values=["<b>Modified COC (Offering)</b>", "<b>Total</b>"],
-            fill_color=header_color,
-            font=dict(color='white', size=14),
-            align='left'
-        ),
-        cells=dict(
-            values=[mod_coc_categories, counts],
-            fill_color=cell_color,
-            font=dict(color='black', size=12),
-            align='left'
-        )
-    )])
-
-    # table_fig.update_layout(title_text="Total Number of Enrollees Across All MCOC Types")
-
-    table_fig.update_layout(
-        autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),  # Remove margins
-        height=None,  # Let container control the height
+    # Create a visually appealing line chart
+    newschools_chart = px.line(
+        new_schools,
+        x='year',
+        y='num_new_schools',
+        color='mod_coc',
+        markers=True,
+        line_shape='spline',  # Smooth curves
+        labels={
+            'year': 'Year',
+            'num_new_schools': 'Number of New Schools',
+            'mod_coc': 'Program Type'
+        },
+        color_discrete_sequence=px.colors.qualitative.Safe  # Soft, colorblind-friendly palette
     )
-    
-    return dcc.Graph(figure=table_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
-# #################################################################################
+    # Layout enhancements
+    newschools_chart.update_layout(
+        autosize=True,
+        margin=dict(l=0, r=0, t=0, b=0),
+        font=dict(family="Inter, sans-serif", size=12, color="#3C6382"),
+        legend=dict(
+            title=None,
+            orientation='h',
+            yanchor='bottom',
+            y=-0.3,
+            xanchor='center',
+            x=0.5,
+            font=dict(size=12)
+        ),
+        xaxis=dict(
+            title=None,
+            showgrid=True,
+            gridcolor='rgba(0,0,0,0.05)',
+            tickfont=dict(size=11),
+            linecolor='#3C6382',
+            linewidth=1,
+            type="category"
+        ),
+        yaxis=dict(
+            title=None,
+            showgrid=True,
+            gridcolor='rgba(0,0,0,0.05)',
+            tickfont=dict(size=11),
+            linecolor='#3C6382',
+            linewidth=1
+        ),
+        plot_bgcolor='#FFFFFF',
+    )
+
+    # Trace enhancements
+    newschools_chart.update_traces(
+        mode='lines+markers',
+        line=dict(width=3),
+        marker=dict(size=8, symbol='circle', line=dict(width=1, color='white')),
+        textposition='top center'
+    )
+
+    newschools_chart
+    
+    return dcc.Graph(figure=newschools_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+# #########################################################################################
+
+@callback(
+    Output('school_level_area_chart', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    # Ensure school-level column is already created
+    FILTERED_DATA['school-level'] = FILTERED_DATA['grade'].apply(
+        lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else (
+            'SHS' if x in ['G11', 'G12'] else 'ES')
+    )
+
+    # Convert year to numeric (in case it's not already)
+    FILTERED_DATA['year'] = pd.to_numeric(FILTERED_DATA['year'], errors='coerce').astype(int)
+
+    # Group by year and school-level, then sum the counts
+    grouped_school_level = FILTERED_DATA.groupby(['year', 'school-level'], as_index=False)['counts'].sum()
+
+    # Create the area chart
+    school_level_area_chart = px.area(
+        grouped_school_level,
+        x='year',
+        y='counts',
+        color='school-level',
+        line_group='school-level',
+        markers=True,
+        color_discrete_map={
+            'ES': '#930F22',   # Elementary
+            'JHS': '#E11C38',  # Junior High School
+            'SHS': '#FF899A'   # Senior High School
+        },
+        labels={
+            'year': 'Year',
+            'counts': 'Number of Students',
+            'school-level': 'School Level'
+        }
+    )
+
+    # Update layout for visual appeal
+    school_level_area_chart.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+    school_level_area_chart.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(color='#3C6382', family='Inter, sans-serif'),
+        legend=dict(
+            title='School Level',
+            orientation='h',
+            yanchor='bottom',
+            y=-0.3,
+            xanchor='center',
+            x=0.5,
+            font=dict(size=12)
+        ),
+        xaxis=dict(
+            title=None,
+            tickfont=dict(size=11),
+            linecolor="#3C6382",
+            linewidth=1,
+            type="category"
+        ),
+        yaxis=dict(
+            title=None,
+            tickfont=dict(size=11),
+            linecolor="#3C6382",
+            linewidth=1
+        ),
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
+
+    # To display in Dash
+    return dcc.Graph(figure=school_level_area_chart, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+
+# #########################################################################################
+# # ----------------------------------------------------------
+# shs_df = auto_extract(['strand', 'track', 'shs_grade', 'counts'], is_specific=False)
+# shs_df

@@ -18,6 +18,11 @@
             h3 {
                 color: $text-color-1;
             }
+
+            h4 {
+                color: $text-color-1;
+                padding: 0.5em;
+            }
             
             .shs-layer-1 {
                 display: flex;
@@ -41,6 +46,15 @@
                             flex: 1;
                             flex-direction: column;
                             gap: 1em;
+
+                            &.year {
+                                flex: 1.5;
+                            }
+
+                            #seniorhigh_year_over_year {
+                                display: flex;
+                                flex: 1;
+                            }
 
                             .shs-enrollment-dist-graph {
                                 display: flex;
@@ -68,7 +82,7 @@
 
                                     #seniorhigh_ratio_enrollment {
                                         display: flex;
-                                        flex: 1.5;
+                                        flex: 1.15;
                                         overflow: hidden;
                                     }
     
@@ -82,14 +96,82 @@
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
-                                        }
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }                                
 
                                         .shs-non-academic {
                                             display: flex;
                                             flex: 1;
                                             flex-direction: column;
-                                            gap: 0.5em;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }
+
+                                        .shs-acad-title {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-count-text {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1.25em;
+                                        }
+
+                                        .shs-percentage-text {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-container {
+                                            display: flex;
+                                            padding: 0.35em;
+                                            border-radius: 0.5em;
+                                            color: $white;
+                                            justify-content: space-between;
+
+                                            &.upper { 
+                                                background-color: $primary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $primary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+                                            &.lower {
+                                                background-color: $secondary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $secondary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
@@ -102,36 +184,219 @@
                             display: flex;
                             flex: 1.5;
 
-                            .shs-gender-dist-title {
-                                color: $text-color-1;
-                                padding: 0.5em;
+                            &.year {
+                                flex-direction: column;
+                                flex: 1;
+                                gap: 1em;
                             }
+
 
                             .shs-right-content {
                                 display: flex;
                                 flex: 1;
                                 gap: 1em;
 
-                                #seniorhigh_gender_distri {
+                                .shs-title-graph {
                                     display: flex;
-                                    flex: 2;
+                                    flex: 2.5;
+                                    flex-direction: column;
+
+                                    .shs-gender-dist-title {
+                                        color: $text-color-1;
+                                        padding: 0.5em;
+                                    }
+    
+                                    #seniorhigh_gender_distri {
+                                        display: flex;
+                                        flex: 2;
+                                    }
                                 }
 
                                 .shs-population {
                                     display: flex;
                                     flex: 1;
                                     flex-direction: column;
+                                    gap: 1em;
 
                                     .shs-population-container {
                                         display: flex;
                                         flex: 1;
                                         flex-direction: column;
+                                        justify-content: space-around;
+                                        padding: 1em;
+                                        background-color: #F5F5F5;
+                                        border: 1px solid $text-color-1;
+                                        border-radius: 0.5em;
                                     }
+
+                                    .mps-pop-title {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 0.8em;
+                                        color: $text-color-1;
+                                    }
+
+                                    .mps-strand {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1.65em;
+                                        color: $white;
+                                        border-radius: 0.5em;
+                                        padding: 0.25em;
+
+                                        &.high {
+                                            background-color: $secondary-color-2;
+                                        }
+
+                                        &.low {
+                                            background-color: $text-color-2;
+                                        }
+                                    }
+
+                                    .mps-student-count {
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding: 0.25em;
+                                        border-radius: 0.5em;
+                                    
+                                        &.most { color: $secondary-color-2; }
+                                        &.least { color: $text-color-2; }
+
+                                    .mps-count {
+                                        font-family: "Inter Bold";
+                                        text-align: center;
+                                        font-size: 1.5em;
+                                    }
+
+                                    .mps-student-text {
+                                        font-family: "Inter Medium Italic";
+                                        text-align: center;
+                                        font-size: 0.9em;
+                                    }
+                                }
+
+
                                 }
                                 
                                 #seniorhigh_most_least_enrolled {
                                     display: flex;
                                     flex: 1;
+                                }
+                            }
+
+                            .shs-enrollment-upper {
+                                display: flex;
+                                flex: 1.25;
+
+                                #seniorhigh_distri_per_track {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .shs-enrollment-lower {
+                                display: flex;
+                                flex: 1;
+
+                                .shs-donut-container {
+                                    display: flex;
+                                    flex: 1;
+                                    gap: 1em;
+
+                                    #seniorhigh_ratio_enrollment {
+                                        display: flex;
+                                        flex: 1.15;
+                                        overflow: hidden;
+                                    }
+    
+                                    .seniorhigh_ratio_enrollment_ind {
+                                        display: flex;
+                                        flex: 1;
+                                        flex-direction: column;
+                                        justify-content: space-around;
+
+                                        .shs-academic {
+                                            display: flex;
+                                            flex: 1;
+                                            flex-direction: column;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }                                
+
+                                        .shs-non-academic {
+                                            display: flex;
+                                            flex: 1;
+                                            flex-direction: column;
+                                            gap: 0.15em;
+
+                                            .shs-acad-title {
+                                                text-align: start;
+                                                color: $text-color-1;
+                                            }
+                                        }
+
+                                        .shs-acad-title {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-count-text {
+                                            font-family: "Inter Bold";
+                                            text-align: center;
+                                            font-size: 1.25em;
+                                        }
+
+                                        .shs-percentage-text {
+                                            text-align: center;
+                                            font-size: 0.9em;
+                                        }
+
+                                        .shs-container {
+                                            display: flex;
+                                            padding: 0.35em;
+                                            border-radius: 0.5em;
+                                            color: $white;
+                                            justify-content: space-between;
+
+                                            &.upper { 
+                                                background-color: $primary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $primary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+                                            &.lower {
+                                                background-color: $secondary-color-2;
+
+                                                .shs-count-text {
+                                                    color: $white;
+                                                    padding-left: 0.15em;
+                                                }
+
+                                                .shs-percentage-text {
+                                                    color: $secondary-color-2;
+                                                    background-color: $white;
+                                                    padding: 0.25em;
+                                                    border-radius: 0.25em;
+                                                    font-family: "Inter Bold";
+                                                }
+                                            }
+
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -143,6 +408,33 @@
                 display: flex;
                 min-height: 360px;
                 gap: 2em;
+
+                .shs-track-content {
+                    display: flex;
+                    flex: 1;
+                    gap: 1em;
+
+                    .shs-track-left {
+                        display: flex;
+                        flex: 1;
+
+                        #seniorhigh_enrollment_comparison_per_strand {
+                            display: flex;
+                            flex: 1;
+                        }
+                    }
+    
+                    .shs-track-right {
+                        display: none;
+                        flex: 1;
+
+                        #seniorhigh_humms {
+                            display: none;
+                            flex: 1;
+                        }
+                    }
+                }
+
 
                 .shs-track-avail {
                     display: flex;
@@ -182,7 +474,84 @@
                 display: flex;
                 flex: 1;
                 min-height: 420px;
-                gap: 2em;
+                gap: 1em;
+
+                &.year {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
+                    min-height: 500px;
+                    
+                    .shs-layer-3-content {
+                        display: flex;
+                        flex: 1;
+                        gap: 1em;
+
+                        .group-1 {
+                            display: flex;
+                            flex: 1;
+
+                            #seniorhigh_humms {
+                                display: flex;
+                                flex: 1;
+                            }
+                        }
+
+                        .group-2 {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+                            flex-direction: column;
+
+                            .group-2-upper {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_stem {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .group-2-lower {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_gas {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+                        }
+
+                        .group-3 {
+                            display: flex;
+                            flex: 1;
+                            gap: 1em;
+                            flex-direction: column;
+
+                            .group-3-upper {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_abm {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+
+                            .group-3-lower {
+                                display: flex;
+                                flex: 1;
+
+                                #seniorhigh_pbm {
+                                    display: flex;
+                                    flex: 1;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .shs-region-sector {
                     display: flex;
@@ -207,13 +576,14 @@
                             }
 
                             .shs-region-sector-lower {
-                                display: flex;
+                                display: none;
                                 flex: 1;
                             }
 
                             .shs-offers-title, .shs-prevalent-title, .shs-range-title {
                                 color: $text-color-1;
                                 padding: 0.5em;
+                        
                             }
     
                             #seniorhigh_shs_offers {

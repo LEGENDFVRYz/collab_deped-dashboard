@@ -9,9 +9,9 @@
 
     // FILTER MENU
     button{
-        padding: 1em 2em;
+        padding: 0.35em 1.8em;
         border: 0;
-        border-radius: 2em;
+        border-radius: 0.5em;
         font-size: 1;
         font-family: 'Inter Medium';
         cursor: pointer;
@@ -30,9 +30,17 @@
             
             
             #analytics-back-btn{
+                font-size: 1.1em;
                 display: none;
                 background-color: $primary-color-2;
                 color: $white;
+                align-items: center;
+
+                img {
+                    width: 27px;
+                    height: 27px;
+                    padding-right: 7px;
+                }
             }
             #analytics-back-btn:hover{
                 background-color: $primary-shades-4;

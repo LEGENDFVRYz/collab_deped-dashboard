@@ -43,8 +43,8 @@ body{
         z-index: 1; 
 
         .brand-section{
-            padding-top: 3em;
-            padding-bottom: 3em;
+            padding-top: 1.75em;
+            padding-bottom: 1.75em;
             text-align: center;
             
             display: flex;
@@ -111,7 +111,7 @@ body{
                         }
                         .text{
                             padding-left: 1em;
-                            color: $primary-color-1;
+                            color: $text-color-1;
                             
                             display: flex;
                             align-self: center;
@@ -505,7 +505,7 @@ body{
                     .page-header{
                         display: flex;
                         flex-direction: row;
-                        align-items: baseline;
+                        align-content: baseline;
                         justify-content: space-between;
 
                         padding: 0em 1em 1em 1em;
@@ -535,9 +535,16 @@ body{
                                 gap: 0.5em;
                                 user-select: none;
                                 // height: 1em;
+
+                                #year-scope {
+                                    color: $primary-color-1;
+                                    font-family: "Inter Bold";
+                                }
                                 
                                 #year-toggle{
                                     cursor: pointer;
+                                    display: flex;
+                                    align-self: center;
 
                                     img{
                                         height: 1.5em;

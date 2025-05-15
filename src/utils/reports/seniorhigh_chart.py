@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, callback, Output, Input, State
+from dash import dcc, callback, Output, Input, State 
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
@@ -82,17 +82,27 @@ from src.utils.extras_utils import smart_truncate_number
     Output('seniorhigh_distri_per_track', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
+    State('is-all-year', 'data')
     # prevent_initial_call=True
 )
 
-def update_graph(trigger, data):
+def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    
+    grouped_by_tracks = cleaned_df.groupby(["track"], as_index=False)["counts"].sum()
+    
     # Extract and group data
-    grouped_by_tracks = FILTERED_DATA.groupby(["track"], as_index=False)["counts"].sum()
-    grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
-    grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
-    grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
+    if mode:
+        grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
+        grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
+        
+    else:
+        grouped_by_tracks = grouped_by_tracks.groupby('track', as_index=False)['counts'].mean()
+        grouped_by_tracks = grouped_by_tracks.sort_values(by="counts", ascending=False)
+        grouped_by_tracks['counts_truncated'] = grouped_by_tracks['counts'].apply(smart_truncate_number)
 
     # Create bar chart
     seniorhigh_distri_per_track = px.bar(
@@ -108,10 +118,9 @@ def update_graph(trigger, data):
     seniorhigh_distri_per_track.update_layout(
         autosize=True,
         margin=dict(t=0, b=0, l=0, r=0),
-        plot_bgcolor='#ECF8FF',
         showlegend=False,
         xaxis=dict(
-            tickfont=dict(size=8, color="#3C6382"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             title=None,
             showgrid=False,
         ),
@@ -119,7 +128,7 @@ def update_graph(trigger, data):
             type='log',
             tickvals=[10000, 100000, 1000000, 2000000],
             ticktext=["10K", "100K", "1M", "2M"],
-            tickfont=dict(size=8, color="#3C6382"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             title=None,
             showgrid=True,
             gridcolor='#D2EBFF',
@@ -131,7 +140,7 @@ def update_graph(trigger, data):
     seniorhigh_distri_per_track.update_traces(
         textposition='outside',
         insidetextanchor='middle',
-        textfont=dict(size=8, color="#04508c"),
+        textfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         hovertemplate='Track: %{x}<br>Count: %{y}<extra></extra>',
     )
     
@@ -153,22 +162,32 @@ def update_graph(trigger, data):
     Output('non-acad-percentage', 'children'),
     Input('chart-trigger', 'data'),
     State('filtered_values', 'data'),
+    State('is-all-year', 'data')
     # prevent_initial_call=True
 )
 
-def update_graph(trigger, data):
+def update_graph(trigger, data, mode):
     FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
     
-    # Count the number of students in each 'track'
-    track_counts = FILTERED_DATA.groupby(['track'])['counts'].sum().reset_index(name='student_count')
-
-    # Get the acad_count and non_acad_count
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+    
+    if mode:
+        # Count the number of students in each 'track'
+        track_counts = cleaned_df.groupby(['track'])['counts'].sum().reset_index(name='student_count')
+        
+    else:
+        track_counts = cleaned_df.groupby(['year', 'track'])['counts'].sum().reset_index()
+        track_counts = track_counts.groupby('track', as_index=False)['counts'].mean()
+        track_counts['counts'] = track_counts['counts'].round(0).astype(int)
+        track_counts.rename(columns={'counts': 'student_count'}, inplace=True)
+        
     acad_count = track_counts.loc[track_counts['track'] == 'ACADEMIC', 'student_count'].sum()
     non_acad_count = track_counts.loc[track_counts['track'].isin(['TVL', 'ARTS', 'SPORTS']), 'student_count'].sum()
     total = acad_count + non_acad_count
 
     # Labels and values for visual half-donut effect
-    labels = ['Academic', 'Non-Academic', 'Total']
+    labels = ['Academic', 'Non-academic', 'Total']
     values = [acad_count, non_acad_count, total]
     colors = ['#037DEE', '#E11C38', '#FFFFFF'] 
 
@@ -187,7 +206,7 @@ def update_graph(trigger, data):
         data=[go.Pie(
             labels=labels,
             values=values,
-            hole=0.7,
+            hole=0.72,
             marker=dict(colors=colors),
             textinfo='none',
             hoverinfo='skip',  # disable default
@@ -196,19 +215,19 @@ def update_graph(trigger, data):
             direction='clockwise',
             sort=False,
             rotation=270,
-            domain={'x': [0, 1], 'y': [0, 1]}
+            domain={'x': [0, 1], 'y': [0.1, 1]}
         )]
     )
 
     seniorhigh_ratio_enrollment.update_layout(
         autosize=True,
-        margin=dict(t=0, r=0, b=20, l=10),
+        margin=dict(t=0, r=0, b=16, l=5),
         showlegend=False,
         annotations=[
             dict(
-                text="Academic vs.<br>Non-Academic",
-                x=0.5, y=0.6,
-                font=dict(size=15, color='#3C6382'),
+                text="<b>Academic vs.<br>Non-academic<b>",
+                x=0.5, y=0.64,
+                font=dict(size=16, color="#3C6382", family="Inter Bold, Inter, sans-serif"),
                 showarrow=False,
                 align='center',
                 xanchor='center',
@@ -355,15 +374,15 @@ def update_graph(trigger, data):
         title=None,
         xaxis= dict(
             title=None,
-            tickfont=dict(color='#667889', size=10),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(color='#667889', size=10),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
         ),
         legend=dict(
             title='Gender',
-            font=dict(size=10),
+            font=dict(size=10, color="#667889", family="Inter, sans-serif"),
             orientation='h',      # horizontal layout
             yanchor='bottom',
             y=1.02,               # slightly above the plot
@@ -449,13 +468,13 @@ def update_graph(trigger, data):
         title=None,
         xaxis=dict(
             title=None,
-            tickfont=dict(color="#667889"),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             tickformat="~s",
             tickangle=0
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(color="#667889")
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif")
         ),
         legend=dict(
             orientation='h',
@@ -465,9 +484,9 @@ def update_graph(trigger, data):
             x=0.5,
             title=dict(
                 text="Sector",
-                font=dict(color="#667889")
+                font=dict(size=10, color="#667889", family="Inter, sans-serif")
             ),
-            font=dict(color="#667889")
+            font=dict(size=10, color="#667889", family="Inter, sans-serif")
         ),
         bargap=0.3,
         margin=dict(l=0, r=0, t=0, b=0)
@@ -492,70 +511,65 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 
+
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
-    
-    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
-    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
-    
-    # Group by track to get supply and demand
-    grouped = cleaned_df.groupby('track').agg(
-        offerings=('beis_id', 'count'),    
-        total_demand=('counts', 'sum')    
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+   
+    # Clean the 'track' column
+    FILTERED_DATA['track'] = FILTERED_DATA['track'].astype(str).str.strip()
+    FILTERED_DATA = FILTERED_DATA[
+        (FILTERED_DATA['track'].str.upper() != '__NAN__') & (FILTERED_DATA['track'].notna())
+    ]
+
+
+    # Group by track to get offerings (supply) and total student demand
+    grouped = FILTERED_DATA.groupby('track').agg(
+        offerings=('beis_id', 'count'),
+        total_demand=('counts', 'sum')
     ).reset_index()
 
-    # Define custom color palette
-    custom_colors = ['#00CCFF', '#1389F0', '#0C6DC1', '#074889']
-
-    # Create the scatter plot
+    # Create the bubble chart (scatter with size)
     seniorhigh_least_offered_high_demand = px.scatter(
         grouped,
         x='offerings',
-        y='total_demand',
-        color='track',
+        y='track',
+        size='total_demand',
+        size_max=50,
         labels={
             'offerings': 'Number of Offerings (Supply)',
             'total_demand': 'Student Demand',
-            'track': 'SHS Track',
-        },
-        color_discrete_sequence=custom_colors
+            'track': 'SHS Track'
+        }
     )
 
-    # Update layout for full responsiveness and clean space usage
+
+    # Set all markers to the same color manually
+    seniorhigh_least_offered_high_demand.update_traces(marker=dict(color='#0264BE'))
+
+
+    # Update layout to remove legend and apply custom styles
     seniorhigh_least_offered_high_demand.update_layout(
         autosize=True,
-        margin=dict(l=0, r=0, t=0, b=0),
-        # title={
-        #     'text': 'Relationship between<br>Student Demand and Track Supply',
-        #     'x': 0.5,
-        #     'xanchor': 'center',
-        #     'font': {'color': '#3C6382', 'size': 16}
-        # },
-        title=None,
+        height=None, 
+        width=None,
         xaxis=dict(
-            # title=dict(text='Number of Offerings (Supply)', font=dict(color='#667889', size=12)),
             title=None,
-            tickfont=dict(color='#667889'),
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
             automargin=True
         ),
-        yaxis=dict(
-            # title=dict(text='Student Demand', font=dict(color='#667889', size=12)),
-            title=None,
-            tickfont=dict(color='#667889'),
+        yaxis=dict( 
+            title=None,           
+            tickfont=dict(size=10, color="#667889", family="Inter, sans-serif"),
+            categoryorder='total ascending',
             automargin=True
         ),
-        legend=dict(
-            title=dict(text='SHS Track', font=dict(color='#667889')),
-            font=dict(color='#667889'),
-            orientation='v',
-            yanchor='middle',
-            y=0.5,
-            xanchor='left',
-            x=1.02  # Slightly closer so it doesn't eat into the space
-        )
+        showlegend=False,
+        margin=dict(l=0, r=0, t=0, b=0)
     )
-    
+   
+    # Displays the chart.
     seniorhigh_least_offered_high_demand
+
     
     return dcc.Graph(figure=seniorhigh_least_offered_high_demand, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
@@ -612,7 +626,7 @@ def update_graph(trigger, data):
 
     heatmap_fig.update_layout(
         title=None,
-        margin=dict(l=0, r=0, t=0, b=0),  # Add bottom space for color bar
+        margin=dict(l=0, r=0, t=0, b=0),  # Slightly smaller bottom margin
         autosize=True,
         xaxis=dict(
             title=None,
@@ -621,23 +635,26 @@ def update_graph(trigger, data):
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(size=10, color="#667889")
+            tickfont=dict(size=10, color="#667889"),
+            ticksuffix="  "
         ),
         coloraxis_colorbar=dict(
-            orientation='v',      # vertical (default)
+            orientation='h',      # horizontal bar
             title="",             
-            thickness=12,         # thinner bar
-            len=1.5,
-            x=1.01,               # slightly to the right of the heatmap
-            xanchor='left',
-            y=0.5,                # center vertically
-            yanchor='middle'
+            thickness=12,         
+            len=1.0,
+            x=0.5,                # center horizontally
+            xanchor='center',
+            y=-0.1,               # closer to heatmap
+            yanchor='top'
         )
     )
     
     heatmap_fig.update_coloraxes(showscale=True)
     
     return dcc.Graph(figure=heatmap_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+
 
 # #################################################################################
 
@@ -654,7 +671,7 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
     cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
@@ -668,7 +685,6 @@ def update_graph(trigger, data):
 
     # Group by strand and sector
     grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
-
     grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
     # Define blue color shades
@@ -681,7 +697,6 @@ def update_graph(trigger, data):
         y='counts',
         color='sector',
         barmode='group',
-        # title='Prevalence of SHS Strands by Sector (Based on Student Count)',
         labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
         color_discrete_sequence=blue_shades,
         text='counts_text'
@@ -697,30 +712,27 @@ def update_graph(trigger, data):
         legend=dict(
             orientation='h',
             yanchor='bottom',
-            y=-0.2,  # Adjust vertically; try -0.4 or -0.2 if needed
+            y=-0.2,
             xanchor='center',
             x=0.5,
             title="Sector",
             font=dict(size=12)
         ),
         title=None,
-        # xaxis_title='SHS Strand',
-        # yaxis_title='Number of Students',
         margin=dict(l=0, r=0, t=0, b=0),
-        xaxis=dict(
-            title=None,
-        ),
+        xaxis=dict(title=None),
         yaxis=dict(
             type='log',
             tickvals=[100, 1000, 10000, 100000, 500000, 1000000],
             ticktext=["100", "1000", "10K", "100K", "500K", "1M"],
             title=None,
-        )
+        ),
+        plot_bgcolor='rgba(0,0,0,0)',  # Transparent plot area
+        paper_bgcolor='rgba(0,0,0,0)'  # Transparent figure background
     )
 
-    prevalent_tracks_fig
-
     return dcc.Graph(figure=prevalent_tracks_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
 
 # #################################################################################
 
@@ -779,3 +791,589 @@ def update_graph(trigger, data):
     return dcc.Graph(figure=shs_offer_range, config={"responsive": True}, style={"width": "100%", "height": "100%"})
 
 # #################################################################################
+# ##  --- year-over-year enrollment trend for each SHS track
+# #################################################################################
+
+@callback(
+    Output('seniorhigh_year_over_year', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
+
+    # Ensure 'year' is numeric and clean the data
+    FILTERED_DATA['year'] = pd.to_numeric(FILTERED_DATA['year'], errors='coerce')
+    FILTERED_DATA = FILTERED_DATA.dropna(subset=['year'])
+    FILTERED_DATA['year'] = FILTERED_DATA['year'].astype(int)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['track'] != '__NaN__']
+    cleaned_df['track'] = cleaned_df['track'].cat.remove_unused_categories()
+
+    # Group by year and track
+    grouped_df = cleaned_df.groupby(['year', 'track'], as_index=False)['counts'].sum()
+
+    # Custom colors
+    custom_colors = ['#02519B', '#0377E2', '#4FA4F3', '#9ACBF8']
+
+    # Create the line chart
+    seniorhigh_year_over_year = px.line(
+        grouped_df,
+        x='year',
+        y='counts',
+        color='track',
+        markers=True,
+        line_shape='spline',
+        color_discrete_sequence=custom_colors,
+        labels={
+            'year': 'Year',
+            'counts': 'Number of Students',
+            'track': 'Track'
+        }
+    )
+
+    # Apply visual enhancements
+    seniorhigh_year_over_year.update_traces(
+        mode='lines+markers',
+        line=dict(width=2),
+        marker=dict(size=8, symbol='circle', line=dict(width=1, color='white')),
+        textposition='top center'
+    )
+
+    # Update layout for visual clarity
+    seniorhigh_year_over_year.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(family='Inter, sans-serif', color='#667889', size=12),
+        legend=dict(
+            title=None,
+            orientation='h',
+            yanchor='bottom',
+            y=-0.2,
+            xanchor='center',
+            x=0.5,
+            font=dict(size=13)
+        ),
+        margin=dict(l=12, r=12, t=12, b=12),
+        xaxis=dict(
+            type='category',
+            tickfont=dict(size=11, color='#667889'),
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1,
+            title=None
+        ),
+        yaxis=dict(
+            tickformat="~s",
+            tickfont=dict(size=11, color='#667889'),
+            showline=True,
+            linecolor="#3C6382",
+            linewidth=1,
+            title=None,
+            ticksuffix="  ",
+        )
+    )
+    
+    return dcc.Graph(figure=seniorhigh_year_over_year, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+# #################################################################################
+# ##  --- enrollment comparison over the years (per strand)
+# #################################################################################
+
+@callback(
+    Output('seniorhigh_enrollment_comparison_per_strand', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    # Filter out null values.
+    FILTERED_DATA['year'] = pd.to_numeric(FILTERED_DATA['year'], errors='coerce')
+    FILTERED_DATA['strand'] = FILTERED_DATA['strand'].astype(str).str.strip()
+    FILTERED_DATA = FILTERED_DATA[(FILTERED_DATA['strand'].str.upper() != '__NAN__') & (FILTERED_DATA['strand'].notna())]  
+    FILTERED_DATA['year'] = FILTERED_DATA['year'].astype(int)
+
+    # Group by year and strand, summing the counts.
+    grouped_df = FILTERED_DATA.groupby(['year', 'strand'], as_index=False)['counts'].sum()
+
+    # Custom color palette
+    custom_colors = ['#4F0A14', '#921224', '#D61B35', '#EA6074', '#F3A4AF']
+
+    # Plotting the bar chart.
+    seniorhigh_enrollment_comparison_per_strand = px.bar(
+        grouped_df,
+        x='year',
+        y='counts',
+        color='strand',
+        barmode='group',
+        labels={
+            'year': 'Year',
+            'counts': 'Number of Enrollees',
+            'strand': 'Strands'
+        },
+        color_discrete_sequence=custom_colors
+    )
+
+
+    # Customize layout
+    seniorhigh_enrollment_comparison_per_strand.update_layout(
+        template='plotly_white',
+        autosize=True,
+        height=None,
+        width=None,
+        font=dict(color='#667889'),
+        legend=dict(title='Strands', font=dict(color='#667889')),
+        xaxis=dict(
+            type='category',
+            title_font=dict(color='#667889'),
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title_font=dict(color='#667889'),
+            tickfont=dict(color='#667889')
+        ),
+        margin=dict(l=10, r=10, t=40, b=10)
+    )
+    
+    seniorhigh_enrollment_comparison_per_strand
+    
+    return dcc.Graph(figure=seniorhigh_enrollment_comparison_per_strand, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+##### HUMMS
+
+@callback(
+    Output('seniorhigh_humms', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
+    
+    humms_df = cleaned_df[cleaned_df['strand'] == 'HUMSS']
+
+    # Group data by year and gender
+    grouped = humms_df.groupby(['year', 'gender'])['counts'].sum().reset_index()
+
+    # Custom color map
+    color_map = {
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
+    }
+
+
+    # Create the area chart
+    seniorhigh_humms = px.area(
+        grouped,
+        x='year',
+        y='counts',
+        color='gender',
+        labels={
+            'counts': 'Number of Enrollees',
+            'year': 'Year',
+            'gender': 'Gender'
+        },
+        color_discrete_map=color_map,
+        category_orders={"year": sorted(grouped["year"].unique())}
+    )
+
+
+    # Update layout
+    seniorhigh_humms.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(size=10, color="#667889", family="Inter, sans-serif"),
+        margin=dict(l=5, r=5, t=5, b=5),
+        showlegend=True,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.2,
+            xanchor='right',
+            x=1,
+            title=None,
+            font=dict(size=10, color="#667889")
+        ),
+        xaxis=dict(
+            type='category',
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        )
+    )
+    
+    seniorhigh_humms.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        # hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+
+    seniorhigh_humms
+    
+    return dcc.Graph(figure=seniorhigh_humms, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+##### STEM
+
+@callback(
+    Output('seniorhigh_stem', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
+    
+    stem_df = cleaned_df[cleaned_df['strand'] == 'STEM']
+
+    # Group data by year and gender
+    grouped = stem_df.groupby(['year', 'gender'])['counts'].sum().reset_index()
+
+    # Custom color map
+    color_map = {
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
+    }
+
+    # Create the area chart
+    seniorhigh_stem = px.area(
+        grouped,
+        x='year',
+        y='counts',
+        color='gender',
+        labels={
+            'counts': 'Number of Enrollees',
+            'year': 'Year',
+            'gender': 'Gender'
+        },
+        color_discrete_map=color_map,
+        category_orders={"year": sorted(grouped["year"].unique())}
+    )
+
+
+    # Update layout
+    seniorhigh_stem.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(size=10, color="#667889", family="Inter, sans-serif"),
+        margin=dict(l=5, r=5, t=5, b=5),
+        showlegend=True,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.4,
+            xanchor='right',
+            x=1,
+            title=None,
+            font=dict(size=10, color="#667889")
+        ),
+        xaxis=dict(
+            type='category',
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        )
+    )
+    
+    seniorhigh_stem.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        # hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+
+    seniorhigh_stem
+    
+    return dcc.Graph(figure=seniorhigh_stem, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+##### GAS
+
+@callback(
+    Output('seniorhigh_gas', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
+    
+    gas_df = cleaned_df[cleaned_df['strand'] == 'GAS']
+
+    # Group data by year and gender
+    grouped = gas_df.groupby(['year', 'gender'])['counts'].sum().reset_index()
+
+    # Custom color map
+    color_map = {
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
+    }
+
+    # Create the area chart
+    seniorhigh_gas = px.area(
+        grouped,
+        x='year',
+        y='counts',
+        color='gender',
+        labels={
+            'counts': 'Number of Enrollees',
+            'year': 'Year',
+            'gender': 'Gender'
+        },
+        color_discrete_map=color_map,
+        category_orders={"year": sorted(grouped["year"].unique())}
+    )
+
+
+    # Update layout
+    seniorhigh_gas.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(size=10, color="#667889", family="Inter, sans-serif"),
+        margin=dict(l=5, r=5, t=5, b=5),
+        showlegend=True,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.4,
+            xanchor='right',
+            x=1,
+            title=None,
+            font=dict(size=10, color="#667889")
+        ),
+        xaxis=dict(
+            type='category',
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        )
+    )
+    
+    seniorhigh_gas.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        # hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+
+    seniorhigh_gas
+    
+    return dcc.Graph(figure=seniorhigh_gas, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+##### ABM
+
+@callback(
+    Output('seniorhigh_abm', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
+    
+    abm_df = cleaned_df[cleaned_df['strand'] == 'ABM']
+
+    # Group data by year and gender
+    grouped = abm_df.groupby(['year', 'gender'])['counts'].sum().reset_index()
+
+    # Custom color map
+    color_map = {
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
+    }
+
+    # Create the area chart
+    seniorhigh_abm = px.area(
+        grouped,
+        x='year',
+        y='counts',
+        color='gender',
+        labels={
+            'counts': 'Number of Enrollees',
+            'year': 'Year',
+            'gender': 'Gender'
+        },
+        color_discrete_map=color_map,
+        category_orders={"year": sorted(grouped["year"].unique())}
+    )
+
+
+    # Update layout
+    seniorhigh_abm.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(size=10, color="#667889", family="Inter, sans-serif"),
+        margin=dict(l=5, r=5, t=5, b=5),
+        showlegend=True,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.4,
+            xanchor='right',
+            x=1,
+            title=None,
+            font=dict(size=10, color="#667889")
+        ),
+        xaxis=dict(
+            type='category',
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        )
+    )
+    
+    seniorhigh_abm.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        # hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+
+    seniorhigh_abm
+    
+    return dcc.Graph(figure=seniorhigh_abm, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+##### PBM
+
+@callback(
+    Output('seniorhigh_pbm', 'children'),
+    Input('chart-trigger', 'data'),
+    State('filtered_values', 'data'),
+    # prevent_initial_call=True
+)
+
+def update_graph(trigger, data):
+    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+
+    cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
+    cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
+    
+    pbm_df = cleaned_df[cleaned_df['strand'] == 'PBM']
+
+    # Group data by year and gender
+    grouped = pbm_df.groupby(['year', 'gender'])['counts'].sum().reset_index()
+
+    # Custom color map
+    color_map = {
+        'M': '#5DB7FF',
+        'F': '#FF5B72'
+    }
+
+    # Create the area chart
+    seniorhigh_pbm = px.area(
+        grouped,
+        x='year',
+        y='counts',
+        color='gender',
+        labels={
+            'counts': 'Number of Enrollees',
+            'year': 'Year',
+            'gender': 'Gender'
+        },
+        color_discrete_map=color_map,
+        category_orders={"year": sorted(grouped["year"].unique())}
+    )
+
+
+    # Update layout
+    seniorhigh_pbm.update_layout(
+        template='plotly_white',
+        autosize=True,
+        font=dict(size=10, color="#667889", family="Inter, sans-serif"),
+        margin=dict(l=5, r=5, t=5, b=5),
+        showlegend=True,
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=-0.4,
+            xanchor='right',
+            x=1,
+            title=None,
+            font=dict(size=10, color="#667889")
+        ),
+        xaxis=dict(
+            type='category',
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        ),
+        yaxis=dict(
+            title=None,
+            showline=True,
+            linewidth=1,
+            linecolor='black',
+            tickfont=dict(color='#667889')
+        )
+    )
+    
+    seniorhigh_pbm.update_traces(
+        mode='lines+markers',
+        marker=dict(size=8),
+        line=dict(width=3),
+        # hovertemplate='<b>Year</b>: %{x}<br><b>Count</b>: %{y}<br><b>Level</b>: %{legendgroup}<extra></extra>'
+    )
+
+
+    seniorhigh_pbm
+    
+    return dcc.Graph(figure=seniorhigh_pbm, config={"responsive": True}, style={"width": "100%", "height": "100%"})
