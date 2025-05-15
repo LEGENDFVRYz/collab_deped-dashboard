@@ -288,28 +288,28 @@ def new_location_offering():
                     
                     html.Div([
                         html.Div([
-                            html.Div([
-                                html.Div([
-                                    Card([
+                            # html.Div([
+                            #     html.Div([
+                            #         Card([
                                     
-                                    ], margin=False),
-                                ], className="offering-parts"),
-                                html.Div([
-                                    Card([
+                            #         ], margin=False),
+                            #     ], className="offering-parts"),
+                            #     html.Div([
+                            #         Card([
                                     
-                                    ], margin=False),
-                                ], className="offering-parts"),
-                            ], className="offering-left-upper"),
+                            #         ], margin=False),
+                            #     ], className="offering-parts"),
+                            # ], className="offering-left-upper"),
                             html.Div([
                                 Card([
-                                    html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                    html.H4(["Annual Expansion of Schools by Program Type"], className="offering-title"),
                                     html.Div([], id="offering_newschools_chart")
                                 ], margin=False),
                             ], className="offering-left-lower"),
                         ], className="offering-l1-left"),
                         html.Div([
                             Card([
-                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.H4(["Program Offerings Ranked by Total Student Enrollment"], className="offering-title"),
                                 html.Div([],id='offering_ranked-mcoc',)
                             ], margin=False),
                         ], className="offering-l1-right"),
@@ -320,7 +320,7 @@ def new_location_offering():
                     html.Div([
                         html.Div([
                             Card([
-                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                html.H4(["Yearly Breakdown of Enrollees Across Basic Education Levels"], className="offering-title"),
                                 html.Div([], id="school_level_area_chart"),
                             ], margin=False)
                         ], className="offering-l2-left"),
@@ -328,7 +328,7 @@ def new_location_offering():
                             
                             html.Div([
                                 Card([
-                                    html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                    html.H4(["Grade-Level Distribution"], className="offering-title"),
                                     html.Div([],id='offering_enroll_dist',)   
                                 ], margin=False),
                             ], className="offering-g1-graph"),

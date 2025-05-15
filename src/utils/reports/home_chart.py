@@ -59,7 +59,9 @@ def update_graph(pathname):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['grade', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
 
     order = ['K', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'ES NG', 'G7', 'G8', 'G9', 'G10', 'JHS NG', 'G11', 'G12']
 
@@ -177,13 +179,16 @@ def update_graph(pathname):
     Output('jhs-text-formatted', 'children'),
     Output('shs-text-formatted', 'children'),
     Output('number-of-schools', 'children'),
+    Output('max-year', 'children'),
     Input('base-trigger', 'data'),
     prevent_initial_call=True
 )
 def update_indicator(pathname):
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF[['grade', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
 
     BASE_DF['school-level'] = BASE_DF['grade'].apply(
         lambda x: 'JHS' if x in ['G7', 'G8', 'G9', 'G10', 'JHS NG'] else (
@@ -206,7 +211,7 @@ def update_indicator(pathname):
     return (f"{total_enrollees:,}", f"{es_count:,} enrollees",
             f"{jhs_count:,} enrollees", f"{shs_count:,} enrollees",
             es_count_formatted, jhs_count_formatted, shs_count_formatted,
-            f"{number_of_schools:,}")
+            f"{number_of_schools:,}", f"{max_year} - {max_year+1}")
 
 # ## -- INDICATORS: Most and Least active school level
 # most_active =   query.loc[query['counts'].idxmax()]
@@ -277,7 +282,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[["sector", "beis_id"]]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
     
     # Drop duplicates to count each school only once per sector
     BASE_DF = BASE_DF.drop_duplicates(subset=["sector", "beis_id"])
@@ -355,7 +362,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['gender', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
 
     # Group data
     grouped_by_gender = BASE_DF.groupby(['gender'], as_index=False, observed=True)['counts'].sum()
@@ -451,7 +460,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['region', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
     
     # Extract and process data
     enrollees_per_region = BASE_DF.groupby(['region'], as_index=False, observed=True)["counts"].sum()
@@ -530,7 +541,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['beis_id', 'sub_class', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
     
     subclass_df1 = (
         BASE_DF.groupby(['sub_class'], observed=True)
@@ -637,7 +650,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['beis_id', 'mod_coc']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
     
     # Extract and group
     grouped_by_offering = BASE_DF.groupby("mod_coc", observed=True)['beis_id'].nunique().reset_index(name="counts")
@@ -775,6 +790,9 @@ def update_graph(base_trigger):
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)[['track', 'counts']]
     
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
+    
     # Extract and group data
     grouped_by_tracks = BASE_DF.groupby(["track"], as_index=False, observed=True)["counts"].sum()
     grouped_by_tracks = grouped_by_tracks[grouped_by_tracks['track'] != '__NaN__']
@@ -845,7 +863,9 @@ def update_graph(base_trigger):
     #     return dash.no_update
 
     BASE_DF = smart_filter({}, _engine=enrollment_db_engine)
-    BASE_DF = BASE_DF[['strand', 'counts']]
+    
+    max_year = BASE_DF['year'].max()
+    BASE_DF = BASE_DF[BASE_DF['year'] == max_year]
 
     BASE_DF = BASE_DF[BASE_DF['strand'] != '__NaN__']
 

@@ -94,7 +94,14 @@
                                     .year-text {
                                         display: flex;
                                         font-size: 12px;
-                                        padding: 0.25em 1em 0.25em 1em;
+
+                                        &.first {
+                                            padding: 0.25em 0.25em 0.25em 1em;
+                                        }
+
+                                        &.second {
+                                            padding: 0.25em 0.25em 0.25em 0em;
+                                        }
                                     }
                                 }
 

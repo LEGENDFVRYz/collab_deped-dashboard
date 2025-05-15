@@ -58,7 +58,8 @@ layout = html.Div([
                                         ], className='icon-and-text'),
                                         html.Div([
                                             html.Span("", className="year-marker"),
-                                            html.Span("Academic Year 2023-2024", className="year-text"),
+                                            html.Span("Academic Year ", className="year-text first"),
+                                            html.Span([], id="max-year", className="year-text second"),
                                         ], className='academic-year'),
                                         html.Div([
                                             html.Span("Total Number of Enrollees", className="desc-text"),
