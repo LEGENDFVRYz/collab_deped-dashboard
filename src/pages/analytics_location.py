@@ -22,52 +22,6 @@ def render_location_filter():
                         
                         ## TOP SECTION
                         html.Div([
-                             ## PLOT A
-                                html.Div([
-                                    #########################################
-                                    ## INSERT PLOT: Distribution of enrollees per location 
-                                    #########################################
-                                    html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title", id="edrg-graph-title"),
-                                    # dcc.Loading(
-                                    #     id="loading-graph",
-                                    #     type="default",
-                                        # children=
-                                        html.Div([], id='location_enrollees-distribution-per-location',)
-                                    # )
-                                    
-                                    #                             dcc.Loading(
-                                    #     id="loading-graph",
-                                    #     type="circle",
-                                    #     children=html.Div(
-                                    #         children=html.Div(
-                                    #             style={
-                                    #                 "height": "200px",
-                                    #                 "width": "80%",
-                                    #                 "backgroundColor": "#e6e6e6",
-                                    #                 "borderRadius": "8px",
-                                    #                 # "animation": "pulse 1.5s infinite",
-                                    #             }
-                                    #         ),
-                                    #         id='graph-container',
-                                    #         style={
-                                    #             'display': 'flex',
-                                    #             'justifyContent': 'center',
-                                    #             'alignItems': 'center',
-                                    #             'height': '300px'
-                                    #         }
-                                    #     ),
-                                    #     style={'padding': '1em'}
-                                    # )
-
-                                    
-                                    # dcc.Graph(id="location_enrollees-distribution-per-location", 
-                                    #             # figure=gender_region_fig,
-                                    #             config={"responsive": True},
-                                    #             style={"width": "100%", "height": "100%"}
-                                    # )
-                                    
-                                ], className='plot-a-section'),
-                            
                             # html.H3(["Enrollees per Location"], className='label'),
                             html.Div([
                                 ## PLOT B
@@ -134,7 +88,54 @@ def render_location_filter():
                                     ], className="lfury"),
                                 
                                 ], className='plot-b-section'),
-                                                            
+                                
+                                ## PLOT A
+                                html.Div([
+                                    #########################################
+                                    ## INSERT PLOT: Distribution of enrollees per location 
+                                    #########################################
+                                    html.H4(["Enrollment Distribution by Gender"], className="edrg-graph-title", id="edrg-graph-title"),
+                                    # dcc.Loading(
+                                    #     id="loading-graph",
+                                    #     type="default",
+                                        # children=
+                                        html.Div([], id='location_enrollees-distribution-per-location',)
+                                    # )
+                                    
+                                    #                             dcc.Loading(
+                                    #     id="loading-graph",
+                                    #     type="circle",
+                                    #     children=html.Div(
+                                    #         children=html.Div(
+                                    #             style={
+                                    #                 "height": "200px",
+                                    #                 "width": "80%",
+                                    #                 "backgroundColor": "#e6e6e6",
+                                    #                 "borderRadius": "8px",
+                                    #                 # "animation": "pulse 1.5s infinite",
+                                    #             }
+                                    #         ),
+                                    #         id='graph-container',
+                                    #         style={
+                                    #             'display': 'flex',
+                                    #             'justifyContent': 'center',
+                                    #             'alignItems': 'center',
+                                    #             'height': '300px'
+                                    #         }
+                                    #     ),
+                                    #     style={'padding': '1em'}
+                                    # )
+
+                                    
+                                    # dcc.Graph(id="location_enrollees-distribution-per-location", 
+                                    #             # figure=gender_region_fig,
+                                    #             config={"responsive": True},
+                                    #             style={"width": "100%", "height": "100%"}
+                                    # )
+                                    
+                                ], className='plot-a-section'),
+                                
+                                
                             ], className='track-box plot-content')
                         ], className='plot-top-section plot-sec-wrap'),
                         
