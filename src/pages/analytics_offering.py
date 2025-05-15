@@ -224,7 +224,7 @@ def render_offering_filter():
                                 
                                 html.Div([
                                     Card([
-                                        html.H4(["Senior High Tracks Distribution"], className="offering-title"),
+                                        html.H4(["Enrollment by Grade Level and Offering"], className="offering-title"),
                                         html.Div([],id='offering_enroll_dist',)   
                                     ], margin=False),
                                 ], className="offering-g1-graph"),
@@ -264,8 +264,8 @@ def render_offering_filter():
                                 #########################################
                                 ## INSERT PLOT: ...
                                 #########################################
-                                html.H4(["Senior High Tracks Distribution"], className="offering-title"),
-                                html.Div([],id='offering_enrollees_num',)
+                                html.H4(["Average Enrollment of MCOC Offerings"], className="offering-title"),
+                                html.Div([],id='fig_offering',)
                             ], margin=False)], className='offering-group-2'),
                             
                         ], className='offering-grade-level-content'),

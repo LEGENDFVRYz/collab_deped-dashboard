@@ -172,7 +172,7 @@ def render_seniorhigh_filter():
                                     #     id="loading-graph",
                                     #     type="default",
                                     #     children=
-                                    html.H4(["Prevalence of SHS Strands by Sector (Based on Student Count)"], className="shs-prevalent-title"),
+                                    html.H4(["Prevalence of SHS Strands by Sector"], className="shs-prevalent-title"),
                                     html.Div([],id='seniorhigh_prevalent_tracks', className="seniorhigh_prevalent_tracks")
                                     # ),
                                 ], margin=False),
@@ -186,7 +186,7 @@ def render_seniorhigh_filter():
                                         #     id="loading-graph",
                                         #     type="default",
                                         #     children=
-                                        html.H4(["Heatmap"], className="shs-offers-title"),
+                                        html.H4(["SHS Strands per Region"], className="shs-offers-title"),
                                         html.Div([],id='seniorhigh_shs_offers',)
                                         # ),
                                     ], margin=False),
@@ -198,7 +198,7 @@ def render_seniorhigh_filter():
                                         #     id="loading-graph",
                                         #     type="default",
                                         #     children=
-                                        html.H4(["Number of SHS Strand Offered by Mother Schools vs Annexes"], className="shs-range-title"),
+                                        html.H4(["SHS Strands Offered by Mother Schools vs Annexes"], className="shs-range-title"),
                                         html.Div([],id='seniorhigh_offer_range',)
                                         # ),
                                     ], margin=False),

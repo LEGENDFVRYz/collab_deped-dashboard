@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, callback, Output, Input, State
+from dash import dcc, callback, Output, Input, State 
 
 # important part
 from src.data import enrollment_db_engine, smart_filter
@@ -623,7 +623,7 @@ def update_graph(trigger, data):
 
     heatmap_fig.update_layout(
         title=None,
-        margin=dict(l=0, r=0, t=0, b=0),  # Add bottom space for color bar
+        margin=dict(l=0, r=0, t=0, b=0),  # Slightly smaller bottom margin
         autosize=True,
         xaxis=dict(
             title=None,
@@ -632,23 +632,26 @@ def update_graph(trigger, data):
         ),
         yaxis=dict(
             title=None,
-            tickfont=dict(size=10, color="#667889")
+            tickfont=dict(size=10, color="#667889"),
+            ticksuffix="  "
         ),
         coloraxis_colorbar=dict(
-            orientation='v',      # vertical (default)
+            orientation='h',      # horizontal bar
             title="",             
-            thickness=12,         # thinner bar
-            len=1.5,
-            x=1.01,               # slightly to the right of the heatmap
-            xanchor='left',
-            y=0.5,                # center vertically
-            yanchor='middle'
+            thickness=12,         
+            len=1.0,
+            x=0.5,                # center horizontally
+            xanchor='center',
+            y=-0.1,               # closer to heatmap
+            yanchor='top'
         )
     )
     
     heatmap_fig.update_coloraxes(showscale=True)
     
     return dcc.Graph(figure=heatmap_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
+
 
 # #################################################################################
 
@@ -665,7 +668,7 @@ def update_graph(trigger, data):
     # prevent_initial_call=True
 )
 def update_graph(trigger, data):
-    FILTERED_DATA = smart_filter(data ,enrollment_db_engine)
+    FILTERED_DATA = smart_filter(data, enrollment_db_engine)
 
     cleaned_df = FILTERED_DATA[FILTERED_DATA['strand'] != '__NaN__']
     cleaned_df['strand'] = cleaned_df['strand'].cat.remove_unused_categories()
@@ -679,7 +682,6 @@ def update_graph(trigger, data):
 
     # Group by strand and sector
     grouped = merged.groupby(['strand', 'sector'])['counts'].sum().reset_index()
-
     grouped['counts_text'] = grouped['counts'].apply(smart_truncate_number)
 
     # Define blue color shades
@@ -692,7 +694,6 @@ def update_graph(trigger, data):
         y='counts',
         color='sector',
         barmode='group',
-        # title='Prevalence of SHS Strands by Sector (Based on Student Count)',
         labels={'strand': 'SHS Strand', 'counts': 'Number of Students', 'sector': 'School Sector'},
         color_discrete_sequence=blue_shades,
         text='counts_text'
@@ -708,30 +709,27 @@ def update_graph(trigger, data):
         legend=dict(
             orientation='h',
             yanchor='bottom',
-            y=-0.2,  # Adjust vertically; try -0.4 or -0.2 if needed
+            y=-0.2,
             xanchor='center',
             x=0.5,
             title="Sector",
             font=dict(size=12)
         ),
         title=None,
-        # xaxis_title='SHS Strand',
-        # yaxis_title='Number of Students',
         margin=dict(l=0, r=0, t=0, b=0),
-        xaxis=dict(
-            title=None,
-        ),
+        xaxis=dict(title=None),
         yaxis=dict(
             type='log',
             tickvals=[100, 1000, 10000, 100000, 500000, 1000000],
             ticktext=["100", "1000", "10K", "100K", "500K", "1M"],
             title=None,
-        )
+        ),
+        plot_bgcolor='rgba(0,0,0,0)',  # Transparent plot area
+        paper_bgcolor='rgba(0,0,0,0)'  # Transparent figure background
     )
 
-    prevalent_tracks_fig
-
     return dcc.Graph(figure=prevalent_tracks_fig, config={"responsive": True}, style={"width": "100%", "height": "100%"})
+
 
 # #################################################################################
 
