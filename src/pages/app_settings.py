@@ -4,6 +4,8 @@ import os, sys
 from dash import dcc, html
 from dash import Input, Output, State, callback
 from pipelines.log_store import log_messages
+from src.data import enrollment_db_engine, smart_filter
+from src.server import cache
 
 # --  Shared Components
 from src.components.card import Card
@@ -132,6 +134,7 @@ def upload_file(n_clicks, contents, filenames):
         saved_files.append(filename)
 
     mine_data()
+    cache.delete_memoized(smart_filter, filter_info={}, _engine=enrollment_db_engine)
 
     return (
         html.Ul([html.Li(f"✅ {name} uploaded to /src/data") for name in saved_files]),
